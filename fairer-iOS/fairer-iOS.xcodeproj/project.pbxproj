@@ -56,15 +56,95 @@
 		5227554E28B219DC0080DD65 /* fairer-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				5227554F28B219DC0080DD65 /* AppDelegate.swift */,
-				5227555128B219DC0080DD65 /* SceneDelegate.swift */,
-				5227555328B219DC0080DD65 /* ViewController.swift */,
-				5227555528B219DC0080DD65 /* Main.storyboard */,
-				5227555828B219E50080DD65 /* Assets.xcassets */,
-				5227555A28B219E50080DD65 /* LaunchScreen.storyboard */,
+				5227556C28B303370080DD65 /* Screens */,
+				5227556928B303170080DD65 /* Network */,
+				5227556428B302C00080DD65 /* Global */,
+				5227556328B3028A0080DD65 /* App */,
 				5227555D28B219E50080DD65 /* Info.plist */,
 			);
 			path = "fairer-iOS";
+			sourceTree = "<group>";
+		};
+		5227556328B3028A0080DD65 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5227555128B219DC0080DD65 /* SceneDelegate.swift */,
+				5227554F28B219DC0080DD65 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5227556428B302C00080DD65 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				5227556D28B3034B0080DD65 /* UIComponent */,
+				5227556728B302F20080DD65 /* Storyboards */,
+				5227556628B302DB0080DD65 /* Resource */,
+				5227556528B302D00080DD65 /* Extension */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		5227556528B302D00080DD65 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		5227556628B302DB0080DD65 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				5227555828B219E50080DD65 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		5227556728B302F20080DD65 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5227555528B219DC0080DD65 /* Main.storyboard */,
+				5227555A28B219E50080DD65 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		5227556928B303170080DD65 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5227556B28B3032A0080DD65 /* Service */,
+				5227556A28B303220080DD65 /* Models */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		5227556A28B303220080DD65 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5227556B28B3032A0080DD65 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		5227556C28B303370080DD65 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				5227555328B219DC0080DD65 /* ViewController.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		5227556D28B3034B0080DD65 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIComponent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
