@@ -13,6 +13,8 @@
 		5227555728B219DC0080DD65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5227555528B219DC0080DD65 /* Main.storyboard */; };
 		5227555928B219E50080DD65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5227555828B219E50080DD65 /* Assets.xcassets */; };
 		5227555C28B219E50080DD65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5227555A28B219E50080DD65 /* LaunchScreen.storyboard */; };
+		5227557028B3092A0080DD65 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 5227556F28B3092A0080DD65 /* GoogleSignIn */; };
+		5227557428B30AF90080DD65 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5227557328B30AF90080DD65 /* KakaoSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,7 @@
 		5227555828B219E50080DD65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5227555B28B219E50080DD65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5227555D28B219E50080DD65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5227557128B3095B0080DD65 /* fairer-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fairer-iOS.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5227557028B3092A0080DD65 /* GoogleSignIn in Frameworks */,
+				5227557428B30AF90080DD65 /* KakaoSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +61,7 @@
 		5227554E28B219DC0080DD65 /* fairer-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				5227557128B3095B0080DD65 /* fairer-iOS.entitlements */,
 				5227556C28B303370080DD65 /* Screens */,
 				5227556928B303170080DD65 /* Network */,
 				5227556428B302C00080DD65 /* Global */,
@@ -163,6 +169,10 @@
 			dependencies = (
 			);
 			name = "fairer-iOS";
+			packageProductDependencies = (
+				5227556F28B3092A0080DD65 /* GoogleSignIn */,
+				5227557328B30AF90080DD65 /* KakaoSDK */,
+			);
 			productName = "fairer-iOS";
 			productReference = 5227554C28B219DC0080DD65 /* fairer-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -191,6 +201,10 @@
 				Base,
 			);
 			mainGroup = 5227554328B219DC0080DD65;
+			packageReferences = (
+				5227556E28B3092A0080DD65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				5227557228B30AF90080DD65 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+			);
 			productRefGroup = 5227554D28B219DC0080DD65 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -365,6 +379,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "fairer-iOS/fairer-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -392,6 +407,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "fairer-iOS/fairer-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -436,6 +452,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5227556E28B3092A0080DD65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		5227557228B30AF90080DD65 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5227556F28B3092A0080DD65 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5227556E28B3092A0080DD65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		5227557328B30AF90080DD65 /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5227557228B30AF90080DD65 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5227554428B219DC0080DD65 /* Project object */;
 }
