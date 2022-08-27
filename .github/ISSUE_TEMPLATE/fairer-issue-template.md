@@ -1,5 +1,5 @@
 ---
-name: fairer Issus Template
+name: fairer Issue Template
 about: fairer 기본 이슈 템플릿
 title: "[FEAT]"
 labels: ''
