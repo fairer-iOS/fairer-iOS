@@ -14,7 +14,7 @@
 		39EEF66D28CBB59D00437654 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF66C28CBB59D00437654 /* UICollectionView+Extension.swift */; };
 		39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF66E28CBB5A600437654 /* NSObject+Extension.swift */; };
 		39EEF67128CBB5F600437654 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67028CBB5F600437654 /* Notification+Extension.swift */; };
-		39EEF67328CBB60B00437654 /* Excodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67228CBB60B00437654 /* Excodable+Extension.swift */; };
+		39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67228CBB60B00437654 /* Encodable+Extension.swift */; };
 		39EEF67528CBB61200437654 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67428CBB61200437654 /* String+Extension.swift */; };
 		39EEF67728CBB61600437654 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67628CBB61600437654 /* Date+Extension.swift */; };
 		39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67828CBB64500437654 /* UIButton+Extension.swift */; };
@@ -41,7 +41,7 @@
 		39EEF66C28CBB59D00437654 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		39EEF66E28CBB5A600437654 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		39EEF67028CBB5F600437654 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
-		39EEF67228CBB60B00437654 /* Excodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Excodable+Extension.swift"; sourceTree = "<group>"; };
+		39EEF67228CBB60B00437654 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		39EEF67428CBB61200437654 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		39EEF67628CBB61600437654 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		39EEF67828CBB64500437654 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 				39EEF66C28CBB59D00437654 /* UICollectionView+Extension.swift */,
 				39EEF66E28CBB5A600437654 /* NSObject+Extension.swift */,
 				39EEF67028CBB5F600437654 /* Notification+Extension.swift */,
-				39EEF67228CBB60B00437654 /* Excodable+Extension.swift */,
+				39EEF67228CBB60B00437654 /* Encodable+Extension.swift */,
 				39EEF67428CBB61200437654 /* String+Extension.swift */,
 				39EEF67628CBB61600437654 /* Date+Extension.swift */,
 				39EEF67828CBB64500437654 /* UIButton+Extension.swift */,
@@ -279,7 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39EEF68D28CBBA1B00437654 /* Model.swift in Sources */,
-				39EEF67328CBB60B00437654 /* Excodable+Extension.swift in Sources */,
+				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
 				39EEF66D28CBB59D00437654 /* UICollectionView+Extension.swift in Sources */,
 				39EEF67728CBB61600437654 /* Date+Extension.swift in Sources */,
