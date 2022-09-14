@@ -10,69 +10,69 @@ import UIKit
 extension UIColor {
     
     // MARK: - Brand Color
-    static var BlueLight: UIColor {
+    static var blueLight: UIColor {
         return UIColor(hex: "#00ECFF")
     }
-    static var Blue: UIColor {
+    static var blue: UIColor {
         return UIColor(hex: "#0C6DFF")
     }
-    static var BlueDark: UIColor {
+    static var blueDark: UIColor {
         return UIColor(hex: "#2100FF")
     }
     // MARK: - Positive
-    static var Positive0: UIColor {
+    static var positive0: UIColor {
         return UIColor(hex: "#F1F5FC")
     }
-    static var Positive10: UIColor {
+    static var positive10: UIColor {
         return UIColor(hex: "#E1EDFF")
     }
-    static var Positive20: UIColor {
+    static var positive20: UIColor {
         return UIColor(hex: "#74ABFD")
     }
     // MARK: - Normal
-    static var Normal0: UIColor {
+    static var normal0: UIColor {
         return UIColor(hex: "#F5F6F8")
     }
     // MARK: - Negative
-    static var Negative0: UIColor {
+    static var negative0: UIColor {
         return UIColor(hex: "#FFF8F9")
     }
-    static var Negative10: UIColor {
+    static var negative10: UIColor {
         return UIColor(hex: "#FFD2DD")
     }
-    static var Negative20: UIColor {
+    static var negative20: UIColor {
         return UIColor(hex: "#E93B65")
     }
     // MARK: - White
-    static var White: UIColor {
+    static var white: UIColor {
         return UIColor(hex: "#00ECFF")
     }
     // MARK: - Gray
-    static var Gray100: UIColor {
+    static var gray100: UIColor {
         return UIColor(hex: "#F2F2F2")
     }
-    static var Gray200: UIColor {
+    static var gray200: UIColor {
         return UIColor(hex: "##D9D9D9")
     }
-    static var Gray300: UIColor {
+    static var gray300: UIColor {
         return UIColor(hex: "#B3B3B3")
     }
-    static var Gray400: UIColor {
+    static var gray400: UIColor {
         return UIColor(hex: "#999999")
     }
-    static var Gray500: UIColor {
+    static var gray500: UIColor {
         return UIColor(hex: "#808080")
     }
-    static var Gray600: UIColor {
+    static var gray600: UIColor {
         return UIColor(hex: "#666666")
     }
-    static var Gray700: UIColor {
+    static var gray700: UIColor {
         return UIColor(hex: "#4D4D4D")
     }
-    static var Gray800: UIColor {
+    static var gray800: UIColor {
         return UIColor(hex: "#333333")
     }
-    static var Black: UIColor {
+    static var black: UIColor {
         return UIColor(hex: "#1A1A1A")
     }
 }
