@@ -31,6 +31,11 @@
 		5227555928B219E50080DD65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5227555828B219E50080DD65 /* Assets.xcassets */; };
 		5227557028B3092A0080DD65 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 5227556F28B3092A0080DD65 /* GoogleSignIn */; };
 		5227557428B30AF90080DD65 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5227557328B30AF90080DD65 /* KakaoSDK */; };
+		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
+		7E1F2E2E28D2168300A5744A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */; };
+		7E1F2E2F28D2168300A5744A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */; };
+		7E1F2E3028D2168300A5744A /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */; };
+		7E1F2E3128D2168300A5744A /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2D28D2168300A5744A /* Pretendard-Medium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +64,10 @@
 		5227555828B219E50080DD65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5227555D28B219E50080DD65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5227557128B3095B0080DD65 /* fairer-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fairer-iOS.entitlements"; sourceTree = "<group>"; };
+		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		7E1F2E2D28D2168300A5744A /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */,
 				5227557028B3092A0080DD65 /* GoogleSignIn in Frameworks */,
 				5227557428B30AF90080DD65 /* KakaoSDK in Frameworks */,
 			);
@@ -188,6 +198,7 @@
 		5227556628B302DB0080DD65 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				7E1F2E2628D212E000A5744A /* Fonts */,
 				5227555828B219E50080DD65 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -199,6 +210,17 @@
 				5227555328B219DC0080DD65 /* ViewController.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		7E1F2E2628D212E000A5744A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */,
+				7E1F2E2D28D2168300A5744A /* Pretendard-Medium.otf */,
+				7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */,
+				7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +242,7 @@
 			packageProductDependencies = (
 				5227556F28B3092A0080DD65 /* GoogleSignIn */,
 				5227557328B30AF90080DD65 /* KakaoSDK */,
+				7E1F2E2428D2123B00A5744A /* SnapKit */,
 			);
 			productName = "fairer-iOS";
 			productReference = 5227554C28B219DC0080DD65 /* fairer-iOS.app */;
@@ -252,6 +275,7 @@
 			packageReferences = (
 				5227556E28B3092A0080DD65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				5227557228B30AF90080DD65 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				7E1F2E2328D2123B00A5744A /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 5227554D28B219DC0080DD65 /* Products */;
 			projectDirPath = "";
@@ -267,7 +291,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1F2E2F28D2168300A5744A /* Pretendard-SemiBold.otf in Resources */,
+				7E1F2E3128D2168300A5744A /* Pretendard-Medium.otf in Resources */,
+				7E1F2E3028D2168300A5744A /* Pretendard-Bold.otf in Resources */,
 				5227555928B219E50080DD65 /* Assets.xcassets in Resources */,
+				7E1F2E2E28D2168300A5744A /* Pretendard-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +543,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		7E1F2E2328D2123B00A5744A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -527,6 +563,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5227557228B30AF90080DD65 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDK;
+		};
+		7E1F2E2428D2123B00A5744A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E1F2E2328D2123B00A5744A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
