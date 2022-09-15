@@ -52,7 +52,8 @@ final class MainButton: UIButton {
         titleLabel?.font = .title1
         setTitleColor(.white, for: .normal)
         setTitleColor(.white, for: .disabled)
-        setTitleColor(.gray800, for: .reserved)
+        setBackgroundColor(.blue, for: .normal)
+        setBackgroundColor(.gray200, for: .disabled)
     }
     
     private func setupAttribute() {
