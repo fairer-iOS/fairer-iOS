@@ -14,7 +14,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - property
     
     private let logoImage = UIImageView(image: ImageLiterals.imgLogo)
-    private let userButton: UIButton = {
+    private let profileButton: UIButton = {
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         button.setImage(UIImage(systemName: "person"), for: .normal)
@@ -43,7 +43,7 @@ final class HomeViewController: BaseViewController {
         super.setupNavigationBar()
 
         let logoView = makeBarButtonItem(with: logoImage)
-        let rightButton = makeBarButtonItem(with: userButton)
+        let rightButton = makeBarButtonItem(with: profileButton)
 
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
