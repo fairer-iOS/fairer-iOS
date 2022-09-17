@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: BaseViewController {
+    let userName: String = "고가혜"
     
     // MARK: - property
     
@@ -22,6 +23,14 @@ final class HomeViewController: BaseViewController {
         return button
     }()
     private let toolBarView = HomeViewControllerToolBar()
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "\(userName)님\n아직 집안일을 하지 않으셨네요."
+        label.font = .title1
+        label.applyColor(to: userName, with: .blue)
+        label.numberOfLines = 2
+        return label
+    }()
 
     // MARK: - life cycle
     
@@ -36,6 +45,12 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(76)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8)
+            $0.leading.equalToSuperview().inset(24)
         }
     }
     
