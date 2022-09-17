@@ -13,7 +13,7 @@ final class HomeViewControllerToolBar: UIView {
     
     // MARK: - property
     
-    private let addView: UIView = {
+    private let affairView: UIView = {
         let view = UIView()
         view.layer.borderColor = UIColor.gray200.cgColor
         view.layer.borderWidth = 1
@@ -21,14 +21,14 @@ final class HomeViewControllerToolBar: UIView {
         view.layer.cornerRadius = 22
         return view
     }()
-    private let addTextLabel: UILabel = {
+    private let affairLabel: UILabel = {
         let label = UILabel()
-        label.text = "집안일을 추가해보세요!"
+        label.text = "집안일을 추가해 보세요!"
         label.font = .caption1
         label.textColor = .gray400
         return label
     }()
-    private let addButton = UIImageView(image: UIImage(systemName: "plus"))
+    private let plusImage = UIImageView(image: UIImage(systemName: "plus"))
     
     // MARK: - init
     
@@ -42,19 +42,19 @@ final class HomeViewControllerToolBar: UIView {
     }
     
     private func render() {
-        self.addSubview(addView)
-        addView.snp.makeConstraints {
+        self.addSubview(affairView)
+        affairView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(44)
         }
-        addView.addSubview(addTextLabel)
-        addTextLabel.snp.makeConstraints {
+        affairView.addSubview(affairLabel)
+        affairLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
         }
-        addView.addSubview(addButton)
-        addButton.snp.makeConstraints {
+        affairView.addSubview(plusImage)
+        plusImage.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
         }
