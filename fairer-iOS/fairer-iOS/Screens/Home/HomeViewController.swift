@@ -31,6 +31,19 @@ final class HomeViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
+    private let houseImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .load(systemName: "house.fill")
+        imageView.tintColor = .gray400
+        return imageView
+    }()
+    private let homeGroupLabel: UILabel = {
+        let label = UILabel()
+        label.text = "즐거운 우리집"
+        label.font = .caption1
+        label.textColor = .gray400
+        return label
+    }()
     private let homeGroupCollectionView = HomeGroupCollectionView()
 
     // MARK: - life cycle
@@ -54,11 +67,23 @@ final class HomeViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(24)
         }
         
+        view.addSubview(houseImageView)
+        houseImageView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(24)
+        }
+        
+        view.addSubview(homeGroupLabel)
+        homeGroupLabel.snp.makeConstraints {
+            $0.leading.equalTo(houseImageView.snp.trailing).offset(4)
+            $0.centerY.equalTo(houseImageView.snp.centerY)
+        }
+        
         view.addSubview(homeGroupCollectionView)
         homeGroupCollectionView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
-            $0.height.equalTo(100)
+            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(8)
+            $0.height.equalTo(94)
         }
     }
     
