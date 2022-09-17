@@ -31,6 +31,7 @@ final class HomeViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
+    private let homeGroupCollectionView = HomeGroupCollectionView()
 
     // MARK: - life cycle
     
@@ -51,6 +52,13 @@ final class HomeViewController: BaseViewController {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8)
             $0.leading.equalToSuperview().inset(24)
+        }
+        
+        view.addSubview(homeGroupCollectionView)
+        homeGroupCollectionView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.height.equalTo(100)
         }
     }
     
