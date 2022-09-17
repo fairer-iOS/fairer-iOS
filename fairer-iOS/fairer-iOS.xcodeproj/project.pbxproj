@@ -25,6 +25,7 @@
 		39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF68628CBB81600437654 /* BaseCollectionViewCell.swift */; };
 		39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF68828CBB85C00437654 /* BaseTableViewCell.swift */; };
 		39EEF68D28CBBA1B00437654 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF68C28CBBA1B00437654 /* Model.swift */; };
+		39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12028D5A80400585B83 /* HomeViewController.swift */; };
 		5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227554F28B219DC0080DD65 /* AppDelegate.swift */; };
 		5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555128B219DC0080DD65 /* SceneDelegate.swift */; };
 		5227555428B219DC0080DD65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555328B219DC0080DD65 /* ViewController.swift */; };
@@ -57,6 +58,7 @@
 		39EEF68628CBB81600437654 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		39EEF68828CBB85C00437654 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		39EEF68C28CBBA1B00437654 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		39F1C12028D5A80400585B83 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5227554C28B219DC0080DD65 /* fairer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fairer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5227554F28B219DC0080DD65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5227555128B219DC0080DD65 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		39F1C11F28D5A7BC00585B83 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				39F1C12028D5A80400585B83 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		5227554328B219DC0080DD65 = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +217,7 @@
 		5227556C28B303370080DD65 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				39F1C11F28D5A7BC00585B83 /* Home */,
 				5227555328B219DC0080DD65 /* ViewController.swift */,
 			);
 			path = Screens;
@@ -313,6 +324,7 @@
 				39EEF67728CBB61600437654 /* Date+Extension.swift in Sources */,
 				39EEF66928CBB57F00437654 /* UIViewController+Extension.swift in Sources */,
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
+				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
 				39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
