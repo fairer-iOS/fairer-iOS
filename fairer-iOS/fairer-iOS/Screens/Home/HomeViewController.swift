@@ -27,6 +27,7 @@ final class HomeViewController: BaseViewController {
     
     override func configUI() {
         super.configUI()
+        setupToolBarGesture()
     }
     
     override func render() {
@@ -48,5 +49,20 @@ final class HomeViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = logoView
         navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    // MARK: - func
+    
+    private func setupToolBarGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))
+        toolBarView.addGestureRecognizer(tapGesture)
+    }
+    
+    // MARK: - selector
+    
+    @objc
+    private func addTapGesture() {
+        // FIXME: - 집안일 추가 뷰로 연결
+        print("tap")
     }
 }
