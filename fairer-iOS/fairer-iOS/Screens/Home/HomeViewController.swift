@@ -7,15 +7,13 @@
 
 import UIKit
 
+import SnapKit
+
 final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
-    private let logoImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.imgLogo
-        return imageView
-    }()
+    private let logoImage = UIImageView(image: ImageLiterals.imgLogo)
     private let userButton: UIButton = {
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
@@ -23,7 +21,8 @@ final class HomeViewController: BaseViewController {
         button.tintColor = .black
         return button
     }()
-    
+    private let toolBarView = HomeViewControllerToolBar()
+
     // MARK: - life cycle
     
     override func configUI() {
@@ -31,7 +30,12 @@ final class HomeViewController: BaseViewController {
     }
     
     override func render() {
-        
+        view.addSubview(toolBarView)
+        toolBarView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(76)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     override func setupNavigationBar() {
