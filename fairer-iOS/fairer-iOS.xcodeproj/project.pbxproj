@@ -28,6 +28,7 @@
 		39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12028D5A80400585B83 /* HomeViewController.swift */; };
 		39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12328D5C04F00585B83 /* HomeViewControllerToolBar.swift */; };
 		5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053828D6EFAF00355055 /* OnboardingNameViewController.swift */; };
+		5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053C28D7382900355055 /* UITextField+Extension.swift */; };
 		5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227554F28B219DC0080DD65 /* AppDelegate.swift */; };
 		5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555128B219DC0080DD65 /* SceneDelegate.swift */; };
 		5227555428B219DC0080DD65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555328B219DC0080DD65 /* ViewController.swift */; };
@@ -63,6 +64,7 @@
 		39F1C12028D5A80400585B83 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		39F1C12328D5C04F00585B83 /* HomeViewControllerToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerToolBar.swift; sourceTree = "<group>"; };
 		5205053828D6EFAF00355055 /* OnboardingNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNameViewController.swift; sourceTree = "<group>"; };
+		5205053C28D7382900355055 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		5227554C28B219DC0080DD65 /* fairer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fairer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5227554F28B219DC0080DD65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5227555128B219DC0080DD65 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				39EEF67628CBB61600437654 /* Date+Extension.swift */,
 				39EEF67828CBB64500437654 /* UIButton+Extension.swift */,
 				39EEF67A28CBB65000437654 /* UserDefault+Extension.swift */,
+				5205053C28D7382900355055 /* UITextField+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				39EEF66928CBB57F00437654 /* UIViewController+Extension.swift in Sources */,
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
+				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
 				39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
