@@ -36,6 +36,12 @@ final class OnboardingNameViewController: BaseViewController {
         textField.leftViewMode = .always
         return textField
     }()
+    private let nameDoneButton: MainButton = {
+        let button = MainButton()
+        button.title = "입력 완료"
+        button.isDisabled = true
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -46,7 +52,7 @@ final class OnboardingNameViewController: BaseViewController {
     override func render() {
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
-            $0.leading.trailing.equalTo(24)
+            $0.leading.equalTo(24)
             $0.top.equalToSuperview().offset(111)
         }
         
@@ -56,6 +62,13 @@ final class OnboardingNameViewController: BaseViewController {
             $0.trailing.equalTo(-24)
             $0.top.equalTo(nameLabel.snp.bottom).offset(16)
             $0.height.equalTo(58)
+        }
+        
+        view.addSubview(nameDoneButton)
+        nameDoneButton.snp.makeConstraints {
+            $0.leading.equalTo(24)
+            $0.trailing.equalTo(-24)
+            $0.bottom.equalToSuperview().offset(-36)
         }
     }
     
