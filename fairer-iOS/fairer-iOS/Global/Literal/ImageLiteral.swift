@@ -5,4 +5,29 @@
 //  Created by Mingwan Choi on 2022/09/10.
 //
 
-import Foundation
+import UIKit
+
+enum ImageLiterals {
+    
+    // MARK: - image
+
+    static var imgLogo: UIImage { .load(name: "fairerlogo")}
+}
+
+extension UIImage {
+    static func load(name: String) -> UIImage {
+        guard let image = UIImage(named: name, in: nil, compatibleWith: nil) else {
+            return UIImage()
+        }
+        image.accessibilityIdentifier = name
+        return image
+    }
+    
+    static func load(systemName: String) -> UIImage {
+        guard let image = UIImage(systemName: systemName, compatibleWith: nil) else {
+            return UIImage()
+        }
+        image.accessibilityIdentifier = systemName
+        return image
+    }
+}

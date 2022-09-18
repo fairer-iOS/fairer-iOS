@@ -45,14 +45,14 @@ extension UIColor {
     }
     // MARK: - White
     static var white: UIColor {
-        return UIColor(hex: "#00ECFF")
+        return UIColor(hex: "#FFFFFF")
     }
     // MARK: - Gray
     static var gray100: UIColor {
         return UIColor(hex: "#F2F2F2")
     }
     static var gray200: UIColor {
-        return UIColor(hex: "##D9D9D9")
+        return UIColor(hex: "#D9D9D9")
     }
     static var gray300: UIColor {
         return UIColor(hex: "#B3B3B3")
