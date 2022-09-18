@@ -46,6 +46,14 @@ final class OnboardingNameViewController: BaseViewController {
         button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
     }()
+    private let disableLabel: UILabel = {
+        let label = UILabel()
+        label.text = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
+        label.textColor = .negative20
+        label.font = .body2
+        label.layer.opacity = 0
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -80,6 +88,12 @@ final class OnboardingNameViewController: BaseViewController {
             $0.trailing.equalTo(-24)
             $0.bottom.equalToSuperview().offset(-36)
         }
+        
+        view.addSubview(disableLabel)
+        disableLabel.snp.makeConstraints {
+            $0.leading.equalTo(24)
+            $0.top.equalTo(nameTextField.snp.bottom).offset(8)
+        }
     }
     
     // MARK: - functions
@@ -89,6 +103,14 @@ final class OnboardingNameViewController: BaseViewController {
     }
     
     @objc private func didTapDoneButton() {
+        if nameTextField.text!.hasCharacters() {
+            nameTextField.layer.borderWidth = 0
+            disableLabel.layer.opacity = 0
+        } else {
+            nameTextField.layer.borderWidth = 1
+            nameTextField.layer.borderColor = UIColor.negative20.cgColor
+            disableLabel.layer.opacity = 1
+        }
         print(nameTextField.text!)
     }
     
@@ -132,6 +154,7 @@ extension OnboardingNameViewController : UITextFieldDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        nameTextField.layer.borderWidth = 0
         view.endEditing(true)
     }
 }
