@@ -17,7 +17,7 @@ final class OnboardingNameViewController: BaseViewController {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "이름을 입력해주세요."
+        label.text = TextLiteral.onboardingNameViewControllerNameLabel
         label.textColor = .gray800
         label.font = .h2
         return label
@@ -30,25 +30,25 @@ final class OnboardingNameViewController: BaseViewController {
         ]
         textField.backgroundColor = .normal0
         textField.font = .h3
-        textField.attributedPlaceholder = NSAttributedString(string: "예) 홍길동", attributes: attributes)
+        textField.attributedPlaceholder = NSAttributedString(string: TextLiteral.onboardingNameViewControllerTextFieldPlaceholder, attributes: attributes)
         textField.layer.cornerRadius = 8
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 58))
         textField.leftViewMode = .always
-        textField.setClearButton(with: ImageLiterals.textFieldClearButton, mode: .whileEditing)
+        textField.setClearButton()
         return textField
     }()
     private let nameDoneButton: MainButton = {
         let button = MainButton()
-        button.title = "입력 완료"
+        button.title = TextLiteral.onboardingNameViewControllerDoneButtonText
         button.isDisabled = true
         button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
     }()
     private let disableLabel: UILabel = {
         let label = UILabel()
-        label.text = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
+        label.text = TextLiteral.onboardingNameViewControllerDisableLabel
         label.textColor = .negative20
         label.font = .body2
         label.layer.opacity = 0
@@ -106,12 +106,15 @@ final class OnboardingNameViewController: BaseViewController {
         if nameTextField.text!.hasCharacters() {
             nameTextField.layer.borderWidth = 0
             disableLabel.layer.opacity = 0
+            
+            // TODO: - userdefault에 이름 저장
+            
         } else {
             nameTextField.layer.borderWidth = 1
             nameTextField.layer.borderColor = UIColor.negative20.cgColor
             disableLabel.layer.opacity = 1
+            nameDoneButton.isDisabled = true
         }
-        print(nameTextField.text!)
     }
     
     @objc private func keyboardWillShow(notification:NSNotification) {
