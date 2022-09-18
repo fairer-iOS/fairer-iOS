@@ -10,6 +10,9 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: BaseViewController {
+    
+    // TODO: - 추후 api연결 + UserDefault
+    
     let userName: String = "고가혜"
     
     // MARK: - property

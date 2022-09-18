@@ -19,9 +19,10 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
         imageView.tintColor = .black
         return imageView
     }()
-    let titleLable: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .caption2
+        label.textColor = .gray800
         label.textAlignment = .center
         return label
     }()
@@ -35,8 +36,8 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
             $0.bottom.equalToSuperview().inset(20)
         }
         
-        self.addSubview(titleLable)
-        titleLable.snp.makeConstraints {
+        self.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
             $0.top.equalTo(titleImage.snp.bottom).offset(0)
             $0.leading.trailing.equalToSuperview()
         }

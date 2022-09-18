@@ -67,7 +67,7 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        cell.titleLable.text = userList[indexPath.item]
+        cell.titleLabel.text = userList[indexPath.item]
         
         return cell
     }
