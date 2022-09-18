@@ -11,6 +11,8 @@ import SnapKit
 
 final class OnboardingNameViewController: BaseViewController {
     
+    private let nameMaxLength = 5
+    
     // MARK: - property
     
     private let nameLabel: UILabel = {
@@ -40,10 +42,20 @@ final class OnboardingNameViewController: BaseViewController {
         let button = MainButton()
         button.title = "입력 완료"
         button.isDisabled = true
+        let action = UIAction { _ in
+            print("메인 누름")
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegation()
+        hidekeyboardWhenTappedAround()
+    }
     
     override func configUI() {
         super.configUI()
@@ -72,7 +84,29 @@ final class OnboardingNameViewController: BaseViewController {
         }
     }
     
-    override func setupNavigationBar() {
-        super.setupNavigationBar()
+    // MARK: - functions
+    
+    private func setupDelegation() {
+        nameTextField.delegate = self
+    }
+}
+
+// MARK: - extension
+
+extension OnboardingNameViewController : UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        guard textField.text!.count < 5 else { return false }
+        return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {        
+        let hasText = nameTextField.hasText
+        nameDoneButton.isDisabled = !hasText
     }
 }
