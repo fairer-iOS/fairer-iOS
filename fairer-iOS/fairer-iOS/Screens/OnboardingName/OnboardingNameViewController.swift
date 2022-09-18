@@ -7,23 +7,35 @@
 
 import UIKit
 
-class OnboardingNameViewController: UIViewController {
+import SnapKit
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+final class OnboardingNameViewController: BaseViewController {
+    
+    // MARK: - property
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "이름을 입력해주세요."
+        label.textColor = .gray800
+        label.font = .h2
+        return label
+    }()
+    
+    // MARK: - life cycle
+    
+    override func configUI() {
+        super.configUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func render() {
+        view.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints {
+            $0.leading.trailing.equalTo(24)
+            $0.top.equalToSuperview().offset(111)
+        }
     }
-    */
-
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+    }
 }
