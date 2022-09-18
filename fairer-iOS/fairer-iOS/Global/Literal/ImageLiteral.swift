@@ -12,6 +12,7 @@ enum ImageLiterals {
     // MARK: - image
 
     static var imgLogo: UIImage { .load(name: "fairerlogo")}
+    static var textFieldClearButton: UIImage { .load(name: "clearbutton")}
 }
 
 extension UIImage {

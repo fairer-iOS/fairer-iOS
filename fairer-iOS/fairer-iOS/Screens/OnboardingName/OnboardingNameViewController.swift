@@ -36,16 +36,14 @@ final class OnboardingNameViewController: BaseViewController {
         textField.autocapitalizationType = .none
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 58))
         textField.leftViewMode = .always
+        textField.setClearButton(with: ImageLiterals.textFieldClearButton, mode: .whileEditing)
         return textField
     }()
     private let nameDoneButton: MainButton = {
         let button = MainButton()
         button.title = "입력 완료"
         button.isDisabled = true
-        let action = UIAction { _ in
-            print("메인 누름")
-        }
-        button.addAction(action, for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
     }()
     
@@ -54,7 +52,6 @@ final class OnboardingNameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegation()
-        hidekeyboardWhenTappedAround()
     }
     
     override func configUI() {
@@ -89,6 +86,10 @@ final class OnboardingNameViewController: BaseViewController {
     private func setupDelegation() {
         nameTextField.delegate = self
     }
+    
+    @objc private func didTapDoneButton() {
+        print(nameTextField.text!)
+    }
 }
 
 // MARK: - extension
@@ -105,8 +106,36 @@ extension OnboardingNameViewController : UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {        
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         let hasText = nameTextField.hasText
         nameDoneButton.isDisabled = !hasText
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+}
+
+extension UITextField {
+    func setClearButton(with image: UIImage, mode: UITextField.ViewMode) {
+        let button = UIButton()
+        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(UITextField.clear), for: .touchUpInside)
+        self.addTarget(self, action: #selector(UITextField.displayClearButton), for: .editingDidBegin)
+        self.addTarget(self, action: #selector(UITextField.displayClearButton), for: .editingChanged)
+        self.rightView = button
+        self.rightViewMode = mode
+    }
+    
+    @objc
+    private func displayClearButton() {
+        self.rightView?.isHidden = (self.text?.isEmpty) ?? true
+    }
+    
+    @objc
+    private func clear() {
+        self.text = ""
+        sendActions(for: .editingChanged)
     }
 }
