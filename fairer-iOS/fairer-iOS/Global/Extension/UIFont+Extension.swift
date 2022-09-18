@@ -24,7 +24,7 @@ extension UIFont {
         return font(.bold, ofSize: 24)
     }
     static var h2: UIFont {
-        return font(.bold, ofSize: 20)
+        return font(.semiBold, ofSize: 20)
     }
     static var h3: UIFont {
         return font(.medium, ofSize: 20)
