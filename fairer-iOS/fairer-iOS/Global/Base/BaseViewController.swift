@@ -18,6 +18,7 @@ class BaseViewController: UIViewController {
         render()
         configUI()
         setupNavigationPopGesture()
+        setupNavigationBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -30,7 +31,25 @@ class BaseViewController: UIViewController {
     }
     
     func configUI() {
+        view.backgroundColor = .white
+    }
+    
+    // MARK: - helper func
+    
+    func makeBarButtonItem<T: UIView>(with view: T) -> UIBarButtonItem {
+        return UIBarButtonItem(customView: view)
+    }
         
+    func setupNavigationBar() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        let appearance = UINavigationBarAppearance()
+        
+        appearance.shadowColor = .clear
+        appearance.backgroundColor = .white
+        
+        navigationBar.standardAppearance = appearance
+        navigationBar.compactAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func setupNavigationPopGesture() {
