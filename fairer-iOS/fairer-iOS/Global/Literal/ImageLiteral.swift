@@ -13,9 +13,30 @@ enum ImageLiterals {
 
     static var imgLogo: UIImage { .load(name: "fairerlogo")}
     
+    // MARK: - profile
+    
+    static var profileNone: UIImage { .load(name: "profilenone")}
+    static var profileBlue3: UIImage { .load(name: "profileblue3")}
+    static var profileBlue4: UIImage { .load(name: "profileblue4")}
+    static var profileOrange1: UIImage { .load(name: "profileorange1")}
+    static var profilePink1: UIImage { .load(name: "profilepink1")}
+    static var profilePink3: UIImage { .load(name: "profilepink3")}
+    static var profileOrange2: UIImage { .load(name: "profileorange2")}
+    static var profileYellow2: UIImage { .load(name: "profileyellow2")}
+    static var profileIndigo3: UIImage { .load(name: "profileindigo3")}
+    static var profilePurple1: UIImage { .load(name: "profilepurple1")}
+    static var profilePurple2: UIImage { .load(name: "profilepurple2")}
+    static var profilePurple3: UIImage { .load(name: "profilepurple3")}
+    static var profileGreen1: UIImage { .load(name: "profilegreen1")}
+    static var profileYellow1: UIImage { .load(name: "profileyellow1")}
+    static var profileGreen3: UIImage { .load(name: "profilegreen3")}
+    static var profileBlue1: UIImage { .load(name: "profileblue1")}
+    static var profileBlue2: UIImage { .load(name: "profileblue2")}
+    
     // MARK: - button
     
     static var textFieldClearButton: UIImage { .load(name: "clearbutton")}
+    static var navigationBarBackButton: UIImage { .load(name: "backbutton")}
 }
 
 extension UIImage {
