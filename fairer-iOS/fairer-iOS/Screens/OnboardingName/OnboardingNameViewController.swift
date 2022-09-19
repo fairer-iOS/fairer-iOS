@@ -39,7 +39,7 @@ final class OnboardingNameViewController: BaseViewController {
         textField.setClearButton()
         return textField
     }()
-    lazy var nameDoneButton: MainButton = {
+    private lazy var nameDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.onboardingNameViewControllerDoneButtonText
         button.isDisabled = true
