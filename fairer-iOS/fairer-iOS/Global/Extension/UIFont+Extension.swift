@@ -21,7 +21,7 @@ extension UIFont {
     
     // MARK: - H
     static var h1: UIFont {
-        return font(.bold, ofSize: 24)
+        return font(.semiBold, ofSize: 24)
     }
     static var h2: UIFont {
         return font(.semiBold, ofSize: 20)
