@@ -71,7 +71,7 @@ final class OnboardingNameViewController: BaseViewController {
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(24)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
         }
         
         view.addSubview(nameTextField)
