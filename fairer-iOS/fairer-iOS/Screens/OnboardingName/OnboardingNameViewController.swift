@@ -39,7 +39,7 @@ final class OnboardingNameViewController: BaseViewController {
         textField.setClearButton()
         return textField
     }()
-    private let nameDoneButton: MainButton = {
+    lazy var nameDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.onboardingNameViewControllerDoneButtonText
         button.isDisabled = true
@@ -70,28 +70,26 @@ final class OnboardingNameViewController: BaseViewController {
     override func render() {
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
-            $0.leading.equalTo(24)
-            $0.top.equalToSuperview().offset(111)
+            $0.leading.equalToSuperview().inset(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
         }
         
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints {
-            $0.leading.equalTo(24)
-            $0.trailing.equalTo(-24)
+            $0.leading.trailing.equalToSuperview().inset(24)
             $0.top.equalTo(nameLabel.snp.bottom).offset(16)
             $0.height.equalTo(58)
         }
         
         view.addSubview(nameDoneButton)
         nameDoneButton.snp.makeConstraints {
-            $0.leading.equalTo(24)
-            $0.trailing.equalTo(-24)
-            $0.bottom.equalToSuperview().offset(-36)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalToSuperview().inset(36)
         }
         
         view.addSubview(disableLabel)
         disableLabel.snp.makeConstraints {
-            $0.leading.equalTo(24)
+            $0.leading.equalToSuperview().inset(24)
             $0.top.equalTo(nameTextField.snp.bottom).offset(8)
         }
     }
@@ -117,7 +115,7 @@ final class OnboardingNameViewController: BaseViewController {
         }
     }
     
-    @objc private func keyboardWillShow(notification:NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
                 self.nameDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 20)
