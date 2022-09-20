@@ -27,7 +27,6 @@ final class OnboardingProfileGroupCollectionViewCell: BaseCollectionViewCell {
     }()
     private let checkCircleView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 30
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.blue.cgColor
         view.isHidden = true
@@ -41,13 +40,11 @@ final class OnboardingProfileGroupCollectionViewCell: BaseCollectionViewCell {
         profileImage.snp.makeConstraints {
             $0.top.bottom.width.height.equalToSuperview()
         }
-        
+
         self.addSubview(checkCircleView)
         checkCircleView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(-1)
-            $0.bottom.equalToSuperview().offset(1)
-            $0.leading.equalToSuperview().offset(-1)
-            $0.trailing.equalToSuperview().offset(1)
+            $0.width.height.equalToSuperview()
         }
+        checkCircleView.layer.cornerRadius = self.frame.width / 2
     }
 }
