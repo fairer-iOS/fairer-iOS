@@ -45,7 +45,7 @@ class OnboardingProfileViewController: BaseViewController {
     private lazy var profileDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.onboardingProfileViewControllerDoneButtonText
-        button.isDisabled = false
+        button.isDisabled = true
         button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
     }()
@@ -110,6 +110,9 @@ class OnboardingProfileViewController: BaseViewController {
 
 extension OnboardingProfileViewController: SelectedProfileImageViewDelegate {
     func showSelectedProfileImage(image: UIImage) {
+        if image != ImageLiterals.profileNone {
+            self.profileDoneButton.isDisabled = false
+        }
         self.selectedProfileImageView.image = image
     }
 }
