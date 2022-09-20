@@ -10,9 +10,6 @@ import UIKit
 import SnapKit
 
 final class OnboardingProfileGroupCollectionViewCell: BaseCollectionViewCell {
-    
-    // MARK: - property
-    
     override var isSelected: Bool {
         didSet {
             DispatchQueue.main.async {
@@ -20,6 +17,9 @@ final class OnboardingProfileGroupCollectionViewCell: BaseCollectionViewCell {
             }
         }
     }
+    
+    // MARK: - property
+    
     let profileImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.profileBlue3

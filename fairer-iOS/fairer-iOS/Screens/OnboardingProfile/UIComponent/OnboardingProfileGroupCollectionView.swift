@@ -9,6 +9,10 @@ import UIKit
 
 import SnapKit
 
+protocol SelectedProfileImageViewDelegate: AnyObject {
+    func showSelectedProfileImage(image: UIImage)
+}
+
 final class OnboardingProfileGroupCollectionView: BaseUIView {
     let profileList: [UIImage] = [ImageLiterals.profileBlue3, ImageLiterals.profileBlue4, ImageLiterals.profileOrange1, ImageLiterals.profilePink1, ImageLiterals.profilePink3, ImageLiterals.profileOrange2, ImageLiterals.profileYellow2, ImageLiterals.profileIndigo3, ImageLiterals.profilePurple1, ImageLiterals.profilePurple2, ImageLiterals.profilePurple3, ImageLiterals.profileGreen1, ImageLiterals.profileYellow1, ImageLiterals.profileGreen3, ImageLiterals.profileLightBlue1, ImageLiterals.profileLightBlue2]
     
@@ -22,10 +26,11 @@ final class OnboardingProfileGroupCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
-    
+    weak var delegate: SelectedProfileImageViewDelegate?
+    private lazy var selectedProfileName = ImageLiterals.profileNone
+
     // MARK: - property
     
-    private lazy var selectedProfileName = ImageLiterals.profileNone
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -53,20 +58,12 @@ final class OnboardingProfileGroupCollectionView: BaseUIView {
             $0.leading.trailing.top.bottom.equalToSuperview()
         }
     }
-    
-    // MARK: - functions
-    
-    private func getImageIndex(by name: UIImage) -> Int {
-        guard let index = profileList.firstIndex(of: name) else {
-            return 1
-        }
-        return index
-    }
 }
 
 extension OnboardingProfileGroupCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedProfileName = profileList[indexPath.item]
+        self.delegate?.showSelectedProfileImage(image: selectedProfileName)
     }
 }
 
@@ -78,15 +75,9 @@ extension OnboardingProfileGroupCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingProfileGroupCollectionViewCell.className, for: indexPath) as? OnboardingProfileGroupCollectionViewCell else {
             assert(false, "Wrong Cell")
-            
             return UICollectionViewCell()
         }
-        
-        let selectedImageIndex = getImageIndex(by: selectedProfileName)
-        if indexPath.item == selectedImageIndex {
-            cell.isSelected = true
-        }
-        
+        cell.isSelected = true
         cell.profileImage.image = profileList[indexPath.item]
         return cell
     }

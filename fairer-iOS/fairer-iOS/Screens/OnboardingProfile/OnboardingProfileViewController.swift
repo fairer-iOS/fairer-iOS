@@ -11,6 +11,8 @@ import SnapKit
 
 class OnboardingProfileViewController: BaseViewController {
     
+    private let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
+    
     // MARK: - property
     
     private let backButton: UIButton = {
@@ -40,7 +42,6 @@ class OnboardingProfileViewController: BaseViewController {
         label.textColor = .gray600
         return label
     }()
-    private let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
     private lazy var profileDoneButton: MainButton = {
         let button = MainButton()
         button.title = "선택 완료"
@@ -50,6 +51,11 @@ class OnboardingProfileViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        onboardingProfileGroupCollectionView.delegate = self
+    }
     
     override func render() {
         view.addSubview(profileLabel)
@@ -99,5 +105,11 @@ class OnboardingProfileViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+}
+
+extension OnboardingProfileViewController: SelectedProfileImageViewDelegate {
+    func showSelectedProfileImage(image: UIImage) {
+        self.selectedProfileImageView.image = image
     }
 }
