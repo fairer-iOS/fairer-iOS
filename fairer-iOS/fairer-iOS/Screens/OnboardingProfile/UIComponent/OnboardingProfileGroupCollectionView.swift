@@ -25,6 +25,7 @@ final class OnboardingProfileGroupCollectionView: BaseUIView {
     
     // MARK: - property
     
+    private lazy var selectedProfileName = ImageLiterals.profileNone
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -40,7 +41,7 @@ final class OnboardingProfileGroupCollectionView: BaseUIView {
         collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(cell: OnboardingProfileGroupCollectionViewCell.self,
-            forCellWithReuseIdentifier: OnboardingProfileGroupCollectionViewCell.className)
+                                forCellWithReuseIdentifier: OnboardingProfileGroupCollectionViewCell.className)
         return collectionView
     }()
     
@@ -52,9 +53,22 @@ final class OnboardingProfileGroupCollectionView: BaseUIView {
             $0.leading.trailing.top.bottom.equalToSuperview()
         }
     }
+    
+    // MARK: - functions
+    
+    private func getImageIndex(by name: UIImage) -> Int {
+        guard let index = profileList.firstIndex(of: name) else {
+            return 1
+        }
+        return index
+    }
 }
 
-extension OnboardingProfileGroupCollectionView: UICollectionViewDelegate { }
+extension OnboardingProfileGroupCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedProfileName = profileList[indexPath.item]
+    }
+}
 
 extension OnboardingProfileGroupCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -64,10 +78,16 @@ extension OnboardingProfileGroupCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingProfileGroupCollectionViewCell.className, for: indexPath) as? OnboardingProfileGroupCollectionViewCell else {
             assert(false, "Wrong Cell")
+            
             return UICollectionViewCell()
         }
-        cell.profileImage.image = profileList[indexPath.item]
         
+        let selectedImageIndex = getImageIndex(by: selectedProfileName)
+        if indexPath.item == selectedImageIndex {
+            cell.isSelected = true
+        }
+        
+        cell.profileImage.image = profileList[indexPath.item]
         return cell
     }
 }

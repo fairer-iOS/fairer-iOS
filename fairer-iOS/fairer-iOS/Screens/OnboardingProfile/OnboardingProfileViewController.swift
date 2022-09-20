@@ -74,13 +74,13 @@ class OnboardingProfileViewController: BaseViewController {
         view.addSubview(profileDoneButton)
         profileDoneButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.bottom.equalToSuperview().inset(50)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
         view.addSubview(onboardingProfileGroupCollectionView)
         onboardingProfileGroupCollectionView.snp.makeConstraints {
             $0.top.equalTo(collectionViewLabel.snp.bottom).offset(16)
-            $0.bottom.equalTo(profileDoneButton.snp.top).inset(-70)
+            $0.bottom.equalTo(profileDoneButton.snp.top)
             $0.leading.trailing.equalToSuperview()
         }
     }
@@ -100,5 +100,4 @@ class OnboardingProfileViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
     }
-    
 }
