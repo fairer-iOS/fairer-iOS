@@ -24,7 +24,7 @@ class OnboardingProfileViewController: BaseViewController {
     }()
     private let profileLabel: UILabel = {
         let label = UILabel()
-        label.text = "프로필 사진을 골라주세요."
+        label.text = TextLiteral.onboardingProfileViewControllerProfileLabel
         label.font = .h2
         label.textColor = .gray800
         return label
@@ -37,14 +37,14 @@ class OnboardingProfileViewController: BaseViewController {
     }()
     private let collectionViewLabel: UILabel = {
        let label = UILabel()
-        label.text = "기본 프로필 선택"
+        label.text = TextLiteral.onboardingProfileViewControllerCollectionViewLabel
         label.font = .title1
         label.textColor = .gray600
         return label
     }()
     private lazy var profileDoneButton: MainButton = {
         let button = MainButton()
-        button.title = "선택 완료"
+        button.title = TextLiteral.onboardingProfileViewControllerDoneButtonText
         button.isDisabled = false
         button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
