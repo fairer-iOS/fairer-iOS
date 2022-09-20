@@ -12,6 +12,7 @@ import SnapKit
 class OnboardingProfileViewController: BaseViewController {
     
     // MARK: - property
+    
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
@@ -29,7 +30,7 @@ class OnboardingProfileViewController: BaseViewController {
     private let selectedProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = ImageLiterals.profileBlue3
+        imageView.image = ImageLiterals.profileNone
         return imageView
     }()
     private let collectionViewLabel: UILabel = {
@@ -38,6 +39,14 @@ class OnboardingProfileViewController: BaseViewController {
         label.font = .title1
         label.textColor = .gray600
         return label
+    }()
+    private let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
+    private lazy var profileDoneButton: MainButton = {
+        let button = MainButton()
+        button.title = "선택 완료"
+        button.isDisabled = false
+        button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
+        return button
     }()
     
     // MARK: - life cycle
@@ -61,6 +70,25 @@ class OnboardingProfileViewController: BaseViewController {
             $0.top.equalTo(selectedProfileImageView.snp.bottom).offset(24)
             $0.leading.equalToSuperview().inset(24)
         }
+        
+        view.addSubview(profileDoneButton)
+        profileDoneButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalToSuperview().inset(50)
+        }
+        
+        view.addSubview(onboardingProfileGroupCollectionView)
+        onboardingProfileGroupCollectionView.snp.makeConstraints {
+            $0.top.equalTo(collectionViewLabel.snp.bottom).offset(16)
+            $0.bottom.equalTo(profileDoneButton.snp.top).inset(-70)
+            $0.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    // MARK: - functions
+    
+    @objc private func didTapDoneButton() {
+        print("버튼 누름")
     }
     
     override func setupNavigationBar() {

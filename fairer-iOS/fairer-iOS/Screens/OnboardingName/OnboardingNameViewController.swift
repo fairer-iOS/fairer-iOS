@@ -84,7 +84,7 @@ final class OnboardingNameViewController: BaseViewController {
         view.addSubview(nameDoneButton)
         nameDoneButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.bottom.equalToSuperview().inset(36)
+            $0.bottom.equalToSuperview().inset(50)
         }
         
         view.addSubview(disableLabel)

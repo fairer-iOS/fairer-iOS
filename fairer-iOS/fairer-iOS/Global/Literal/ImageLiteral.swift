@@ -30,8 +30,8 @@ enum ImageLiterals {
     static var profileGreen1: UIImage { .load(name: "profilegreen1")}
     static var profileYellow1: UIImage { .load(name: "profileyellow1")}
     static var profileGreen3: UIImage { .load(name: "profilegreen3")}
-    static var profileBlue1: UIImage { .load(name: "profileblue1")}
-    static var profileBlue2: UIImage { .load(name: "profileblue2")}
+    static var profileLightBlue1: UIImage { .load(name: "profilelightblue1")}
+    static var profileLightBlue2: UIImage { .load(name: "profilelightblue2")}
     
     // MARK: - button
     
