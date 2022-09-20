@@ -29,7 +29,7 @@ class OnboardingProfileViewController: BaseViewController {
     private let selectedProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = ImageLiterals.profileNone
+        imageView.image = ImageLiterals.profileBlue3
         return imageView
     }()
     private let collectionViewLabel: UILabel = {
