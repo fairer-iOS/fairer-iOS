@@ -14,6 +14,7 @@ final class HomeViewController: BaseViewController {
     // TODO: - 추후 api연결 + UserDefault
     
     let userName: String = "고가혜"
+    let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
     
     // MARK: - property
     
@@ -61,6 +62,7 @@ final class HomeViewController: BaseViewController {
     override func configUI() {
         super.configUI()
         setupToolBarGesture()
+        setHomeRuleLabel()
     }
     
     override func render() {
@@ -127,6 +129,23 @@ final class HomeViewController: BaseViewController {
     private func setupToolBarGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))
         toolBarView.addGestureRecognizer(tapGesture)
+    }
+    
+    private func setHomeRuleLabel() {
+        var index = 0
+        if ruleArray.isEmpty {
+            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
+        } else {
+            homeRuleView.homeRuleDescriptionLabel.text = ruleArray[index]
+            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+                guard let count = self?.ruleArray.count else { return }
+                self?.homeRuleView.homeRuleDescriptionLabel.text = self?.ruleArray[index]
+                index += 1
+                if index > count - 1 {
+                    index = 0
+                }
+            }
+        }
     }
     
     // MARK: - selector
