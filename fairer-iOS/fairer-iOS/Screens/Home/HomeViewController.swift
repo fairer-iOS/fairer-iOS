@@ -48,6 +48,7 @@ final class HomeViewController: BaseViewController {
         return label
     }()
     private let homeGroupCollectionView = HomeGroupCollectionView()
+    private let homeRuleView = HomeRuleView()
 
     // MARK: - life cycle
     
@@ -87,6 +88,12 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(homeGroupLabel.snp.bottom).offset(8)
             $0.height.equalTo(94)
+        }
+        
+        view.addSubview(homeRuleView)
+        homeRuleView.snp.makeConstraints {
+            $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(24)
         }
     }
     

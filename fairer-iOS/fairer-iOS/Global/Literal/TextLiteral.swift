@@ -19,4 +19,9 @@ enum TextLiteral {
     static let onboardingNameViewControllerTextFieldPlaceholder: String = "예) 홍길동"
     static let onboardingNameViewControllerDoneButtonText: String = "입력 완료"
     static let onboardingNameViewControllerDisableLabel: String = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
+    
+    // MARK: - HomeRuleView
+    
+    static let homeRuleViewRuleLabel: String = "규칙"
+    static let homeRuleViewRuleDescriptionLabel: String = "여기를 눌러 하우스의 규칙을 입력해주세요!"
 }
