@@ -49,6 +49,12 @@ final class HomeViewController: BaseViewController {
     }()
     private let homeGroupCollectionView = HomeGroupCollectionView()
     private let homeRuleView = HomeRuleView()
+    private let homeDivider: UIView = {
+        let view = UIView()
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.gray100.cgColor
+        return view
+    }()
 
     // MARK: - life cycle
     
@@ -94,6 +100,13 @@ final class HomeViewController: BaseViewController {
         homeRuleView.snp.makeConstraints {
             $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(24)
+        }
+        
+        view.addSubview(homeDivider)
+        homeDivider.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.top.equalTo(homeRuleView.snp.bottom).offset(16)
+            $0.height.equalTo(1)
         }
     }
     
