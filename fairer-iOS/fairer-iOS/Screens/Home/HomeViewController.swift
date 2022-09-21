@@ -59,6 +59,10 @@ final class HomeViewController: BaseViewController {
 
     // MARK: - life cycle
     
+    deinit {
+        print("HomeViewController deinit")
+    }
+    
     override func configUI() {
         super.configUI()
         setupToolBarGesture()
