@@ -37,6 +37,7 @@
 		5205054228D8620000355055 /* OnboardingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054128D8620000355055 /* OnboardingProfileViewController.swift */; };
 		5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054428D8624700355055 /* OnboardingProfileGroupCollectionView.swift */; };
 		5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054628D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift */; };
+		5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054A28DBF86700355055 /* SizeLiteral.swift */; };
 		5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227554F28B219DC0080DD65 /* AppDelegate.swift */; };
 		5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555128B219DC0080DD65 /* SceneDelegate.swift */; };
 		5227555428B219DC0080DD65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555328B219DC0080DD65 /* ViewController.swift */; };
@@ -81,6 +82,7 @@
 		5205054128D8620000355055 /* OnboardingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProfileViewController.swift; sourceTree = "<group>"; };
 		5205054428D8624700355055 /* OnboardingProfileGroupCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProfileGroupCollectionView.swift; sourceTree = "<group>"; };
 		5205054628D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProfileGroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		5205054A28DBF86700355055 /* SizeLiteral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeLiteral.swift; sourceTree = "<group>"; };
 		5227554C28B219DC0080DD65 /* fairer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fairer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5227554F28B219DC0080DD65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5227555128B219DC0080DD65 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		39EEF68028CBB7D000437654 /* Literal */ = {
 			isa = PBXGroup;
 			children = (
+				5205054A28DBF86700355055 /* SizeLiteral.swift */,
 				39EEF68128CBB7DE00437654 /* ImageLiteral.swift */,
 				5205053E28D76B0C00355055 /* TextLiteral.swift */,
 			);
@@ -398,6 +401,7 @@
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
 				5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */,
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
+				5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */,
 				39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
