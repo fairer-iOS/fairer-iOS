@@ -1,21 +1,16 @@
 //
-//  HomeGroupCollectionView.swift
+//  OnboardingProfileGroupCollectionView.swift
 //  fairer-iOS
 //
-//  Created by Mingwan Choi on 2022/09/17.
+//  Created by by 김유나 on 2022/09/19.
 //
 
 import UIKit
 
 import SnapKit
 
-protocol SelectedProfileImageViewDelegate: AnyObject {
-    func showSelectedProfileImage(image: UIImage)
-}
-
 final class OnboardingProfileGroupCollectionView: BaseUIView {
-    let profileList: [UIImage] = [ImageLiterals.profileBlue3, ImageLiterals.profileBlue4, ImageLiterals.profileOrange1, ImageLiterals.profilePink1, ImageLiterals.profilePink3, ImageLiterals.profileOrange2, ImageLiterals.profileYellow2, ImageLiterals.profileIndigo3, ImageLiterals.profilePurple1, ImageLiterals.profilePurple2, ImageLiterals.profilePurple3, ImageLiterals.profileGreen1, ImageLiterals.profileYellow1, ImageLiterals.profileGreen3, ImageLiterals.profileLightBlue1, ImageLiterals.profileLightBlue2]
-    
+    var didTappedImage: ((UIImage) -> ())?
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 33
         static let collectionVerticalSpacing: CGFloat = 16
@@ -26,7 +21,6 @@ final class OnboardingProfileGroupCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
-    weak var delegate: SelectedProfileImageViewDelegate?
     private lazy var selectedProfileName = ImageLiterals.profileNone
 
     // MARK: - property
@@ -55,21 +49,21 @@ final class OnboardingProfileGroupCollectionView: BaseUIView {
     override func render() {
         self.addSubview(collectionView)
         collectionView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }
 
 extension OnboardingProfileGroupCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedProfileName = profileList[indexPath.item]
-        self.delegate?.showSelectedProfileImage(image: selectedProfileName)
+        selectedProfileName = ImageLiterals.profileList[indexPath.item]
+        didTappedImage?(selectedProfileName)
     }
 }
 
 extension OnboardingProfileGroupCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return profileList.count
+        return ImageLiterals.profileList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,7 +72,7 @@ extension OnboardingProfileGroupCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.isSelected = true
-        cell.profileImage.image = profileList[indexPath.item]
+        cell.profileImage.image = ImageLiterals.profileList[indexPath.item]
         return cell
     }
 }

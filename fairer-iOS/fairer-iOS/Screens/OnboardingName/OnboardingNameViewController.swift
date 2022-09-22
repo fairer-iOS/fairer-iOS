@@ -71,25 +71,25 @@ final class OnboardingNameViewController: BaseViewController {
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(24)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(nameLabel.snp.bottom).offset(16)
             $0.height.equalTo(58)
         }
         
         view.addSubview(nameDoneButton)
         nameDoneButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
         view.addSubview(disableLabel)
         disableLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(nameTextField.snp.bottom).offset(8)
         }
     }

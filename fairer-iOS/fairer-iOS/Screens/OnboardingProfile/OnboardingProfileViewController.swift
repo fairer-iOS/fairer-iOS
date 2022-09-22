@@ -2,7 +2,7 @@
 //  OnboardingProfileViewController.swift
 //  fairer-iOS
 //
-//  Created by 김유나 on 2022/09/19.
+//  Created by by 김유나 on 2022/09/19.
 //
 
 import UIKit
@@ -10,8 +10,6 @@ import UIKit
 import SnapKit
 
 class OnboardingProfileViewController: BaseViewController {
-    
-    private let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
     
     // MARK: - property
     
@@ -42,6 +40,7 @@ class OnboardingProfileViewController: BaseViewController {
         label.textColor = .gray600
         return label
     }()
+    private let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
     private lazy var profileDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.onboardingProfileViewControllerDoneButtonText
@@ -54,14 +53,14 @@ class OnboardingProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        onboardingProfileGroupCollectionView.delegate = self
+        didTapImage()
     }
     
     override func render() {
         view.addSubview(profileLabel)
         profileLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(selectedProfileImageView)
@@ -74,12 +73,12 @@ class OnboardingProfileViewController: BaseViewController {
         view.addSubview(collectionViewLabel)
         collectionViewLabel.snp.makeConstraints {
             $0.top.equalTo(selectedProfileImageView.snp.bottom).offset(24)
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(profileDoneButton)
         profileDoneButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
@@ -106,13 +105,14 @@ class OnboardingProfileViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
     }
-}
-
-extension OnboardingProfileViewController: SelectedProfileImageViewDelegate {
-    func showSelectedProfileImage(image: UIImage) {
-        if image != ImageLiterals.profileNone {
-            self.profileDoneButton.isDisabled = false
+    
+    private func didTapImage() {
+        onboardingProfileGroupCollectionView.didTappedImage = { [weak self] image in
+            self?.selectedProfileImageView.image = image
+            guard let selectedImage = self?.selectedProfileImageView.image else { return }
+            if selectedImage != ImageLiterals.profileNone {
+                self?.profileDoneButton.isDisabled = false
+            }
         }
-        self.selectedProfileImageView.image = image
     }
 }

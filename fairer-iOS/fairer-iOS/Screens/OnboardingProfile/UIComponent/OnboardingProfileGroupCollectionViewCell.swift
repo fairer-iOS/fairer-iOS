@@ -38,7 +38,7 @@ final class OnboardingProfileGroupCollectionViewCell: BaseCollectionViewCell {
     override func render() {
         self.addSubview(profileImage)
         profileImage.snp.makeConstraints {
-            $0.top.bottom.width.height.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
 
         self.addSubview(checkCircleView)
