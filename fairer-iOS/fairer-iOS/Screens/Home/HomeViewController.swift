@@ -56,6 +56,7 @@ final class HomeViewController: BaseViewController {
         view.layer.borderColor = UIColor.gray100.cgColor
         return view
     }()
+    private let homeCalenderView = HomeCalendarView()
 
     // MARK: - life cycle
     
@@ -113,6 +114,14 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.top.equalTo(homeRuleView.snp.bottom).offset(16)
             $0.height.equalTo(1)
+        }
+        
+        view.addSubview(homeCalenderView)
+        homeCalenderView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(homeDivider.snp.bottom).offset(8)
+            // FIXME: - auto layout
+            $0.height.equalTo(116)
         }
     }
     
