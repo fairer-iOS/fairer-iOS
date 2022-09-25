@@ -112,7 +112,7 @@ final class HomeViewController: BaseViewController {
         homeDivider.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.top.equalTo(homeRuleView.snp.bottom).offset(16)
-            $0.height.equalTo(1)
+            $0.height.equalTo(2)
         }
     }
     
