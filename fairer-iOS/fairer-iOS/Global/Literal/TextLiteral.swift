@@ -25,4 +25,9 @@ enum TextLiteral {
     static let onboardingProfileViewControllerProfileLabel: String = "프로필 사진을 골라주세요."
     static let onboardingProfileViewControllerCollectionViewLabel: String = "기본 프로필 선택"
     static let onboardingProfileViewControllerDoneButtonText: String = "선택 완료"
+    
+    // MARK: - HomeRuleView
+    
+    static let homeRuleViewRuleLabel: String = "규칙"
+    static let homeRuleViewRuleDescriptionLabel: String = "여기를 눌러 하우스의 규칙을 입력해주세요!"
 }
