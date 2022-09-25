@@ -51,7 +51,7 @@ final class OnboardingNameViewController: BaseViewController {
         label.text = TextLiteral.onboardingNameViewControllerDisableLabel
         label.textColor = .negative20
         label.font = .body2
-        label.layer.opacity = 0
+        label.layer.isHidden = true
         return label
     }()
     
@@ -70,26 +70,26 @@ final class OnboardingNameViewController: BaseViewController {
     override func render() {
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
         }
         
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(nameLabel.snp.bottom).offset(16)
             $0.height.equalTo(58)
         }
         
         view.addSubview(nameDoneButton)
         nameDoneButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(24)
-            $0.bottom.equalToSuperview().inset(36)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
         view.addSubview(disableLabel)
         disableLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(nameTextField.snp.bottom).offset(8)
         }
     }
@@ -103,15 +103,15 @@ final class OnboardingNameViewController: BaseViewController {
     @objc private func didTapDoneButton() {
         if nameTextField.text!.hasCharacters() {
             nameTextField.layer.borderWidth = 0
-            disableLabel.layer.opacity = 0
+            disableLabel.isHidden = true
             
             // TODO: - userdefault에 이름 저장
             
         } else {
             nameTextField.layer.borderWidth = 1
             nameTextField.layer.borderColor = UIColor.negative20.cgColor
-            disableLabel.layer.opacity = 1
             nameDoneButton.isDisabled = true
+            disableLabel.isHidden = false
         }
     }
     
