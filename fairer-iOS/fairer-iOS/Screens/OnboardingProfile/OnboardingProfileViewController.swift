@@ -41,11 +41,11 @@ class OnboardingProfileViewController: BaseViewController {
         return label
     }()
     private let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
-    private lazy var profileDoneButton: MainButton = {
+    private var profileDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.onboardingProfileViewControllerDoneButtonText
         button.isDisabled = true
-        button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
+        button.addTarget(OnboardingProfileViewController.self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
     }()
     
