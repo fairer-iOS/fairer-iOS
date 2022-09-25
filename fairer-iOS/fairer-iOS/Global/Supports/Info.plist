@@ -31,5 +31,12 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>UIColor.white</string>
+		<key>UIImageName</key>
+		<string>fairerlogosplash</string>
+	</dict>
 </dict>
 </plist>
