@@ -10,15 +10,21 @@ import UIKit
 import SnapKit
 
 final class HomeCalendarView: BaseUIView {
+    var today = Date()
     
     // MARK: - property
     
-    private let calendarPicker: UIDatePicker = {
+    private lazy var calendarPicker: UIDatePicker = {
         let picker = UIDatePicker()
+        let action = UIAction { [weak self] _ in
+            self?.today = picker.date
+            picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .clear
+        }
         picker.datePickerMode = .date
         picker.locale = Locale(identifier: "ko_KR")
         picker.preferredDatePickerStyle = .compact
         picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .clear
+        picker.addAction(action, for: .valueChanged)
         return picker
     }()
     private let todayButton: UIButton = {
