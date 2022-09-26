@@ -10,8 +10,7 @@ import UIKit
 enum ImageLiterals {
     
     // MARK: - image
-
-    static var imgLogo: UIImage { .load(name: "fairerlogo")}
+    static var imgLogo: UIImage { .load(name: "fairerlogo") }
     
     // MARK: - button
     
