@@ -14,13 +14,16 @@ final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
     // MARK: - property
     let spaceImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .red
-        imageView.r
         return imageView
     }()
-    let spaceNameLabel: UILabel = {
-        let label = UILabel()
+    lazy var spaceNameLabel: SpaceNameLabel = {
+        let label = SpaceNameLabel()
+        label.backgroundColor = .white
         label.font = .title2
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 5
         return label
     }()
     
@@ -31,11 +34,10 @@ final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
         spaceImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
         self.addSubview(spaceNameLabel)
         spaceNameLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
-        
+        spaceNameLabel.layer.cornerRadius = 12
     }
 }

@@ -12,11 +12,11 @@ import SnapKit
 final class SelectHouseWorkSpaceCollectionView: BaseUIView {
     
     // FIXME - 더미 삭제
-    let spaceArray = ["spaceEntrance", "spaceLivingRoom", "spaceRestroom", "spaceOutside", "spaceRoom", "spaceKitchen"]
+    let spaceArray = ["현관", "거실", "화장실", "외부", "방", "부엌"]
     // FIXME
     private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 6.29
-        static let collectionVerticalSpacing: CGFloat = 6.52
+        static let collectionHorizontalSpacing: CGFloat = 0
+        static let collectionVerticalSpacing: CGFloat = 0
         static let cellWidth: CGFloat = 105
         static let cellHeight: CGFloat = 109
         static let collectionInsets = UIEdgeInsets(
