@@ -31,6 +31,7 @@
 		39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12728D5FD2500585B83 /* HomeGroupCollectionView.swift */; };
 		39F1C12A28D604B000585B83 /* HomeGroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12928D604B000585B83 /* HomeGroupCollectionViewCell.swift */; };
 		39F1C12C28D614D800585B83 /* BaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12B28D614D800585B83 /* BaseUIView.swift */; };
+		39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12F28DABDE900585B83 /* HomeRuleView.swift */; };
 		5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053828D6EFAF00355055 /* OnboardingNameViewController.swift */; };
 		5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053C28D7382900355055 /* UITextField+Extension.swift */; };
 		5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053E28D76B0C00355055 /* TextLiteral.swift */; };
@@ -77,6 +78,7 @@
 		39F1C12728D5FD2500585B83 /* HomeGroupCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGroupCollectionView.swift; sourceTree = "<group>"; };
 		39F1C12928D604B000585B83 /* HomeGroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		39F1C12B28D614D800585B83 /* BaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIView.swift; sourceTree = "<group>"; };
+		39F1C12F28DABDE900585B83 /* HomeRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRuleView.swift; sourceTree = "<group>"; };
 		5205053828D6EFAF00355055 /* OnboardingNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNameViewController.swift; sourceTree = "<group>"; };
 		5205053C28D7382900355055 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		5205053E28D76B0C00355055 /* TextLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLiteral.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				39F1C12328D5C04F00585B83 /* HomeViewControllerToolBar.swift */,
 				39F1C12728D5FD2500585B83 /* HomeGroupCollectionView.swift */,
 				39F1C12928D604B000585B83 /* HomeGroupCollectionViewCell.swift */,
+				39F1C12F28DABDE900585B83 /* HomeRuleView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
 				39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */,
 				39EEF67128CBB5F600437654 /* Notification+Extension.swift in Sources */,
+				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,
 				39F1C12C28D614D800585B83 /* BaseUIView.swift in Sources */,
