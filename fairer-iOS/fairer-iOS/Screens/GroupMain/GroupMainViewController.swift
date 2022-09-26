@@ -32,6 +32,18 @@ final class GroupMainViewController: BaseViewController {
         // TODO: - LoginView pull 받아서 lineheight extension 적용
         return label
     }()
+    private let houseMakeLabel: UILabel = {
+       let label = UILabel()
+        label.text = "집안일 하우스 생성"
+        label.font = .title1
+        label.textColor = .gray600
+        return label
+    }()
+    private let houseMakeButton: MainButton = {
+        let button = MainButton()
+        button.title = "집안일 하우스 만들기"
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -40,6 +52,18 @@ final class GroupMainViewController: BaseViewController {
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+        }
+        
+        view.addSubview(houseMakeLabel)
+        houseMakeLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(24)
+        }
+        
+        view.addSubview(houseMakeButton)
+        houseMakeButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(houseMakeLabel.snp.bottom).offset(16)
         }
     }
     
