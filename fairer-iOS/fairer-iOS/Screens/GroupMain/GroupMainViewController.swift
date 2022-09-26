@@ -11,6 +11,8 @@ import SnapKit
 
 final class GroupMainViewController: BaseViewController {
     
+    let userName: String = "고가혜"
+    
     // MARK: - property
     
     private let backButton: UIButton = {
@@ -20,12 +22,25 @@ final class GroupMainViewController: BaseViewController {
         button.tintColor = .gray800
         return button
     }()
-    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "안녕하세요. \(userName)님!\n새로 하우스를 만들거나 참여해주세요."
+        label.font = .h2
+        label.textColor = .gray800
+        label.applyColor(to: userName, with: .blue)
+        label.numberOfLines = 0
+        // TODO: - LoginView pull 받아서 lineheight extension 적용
+        return label
+    }()
     
     // MARK: - life cycle
     
     override func render() {
-        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+        }
     }
     
     // MARK: - functions
