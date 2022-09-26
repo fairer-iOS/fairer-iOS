@@ -27,6 +27,34 @@ final class LoginViewController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
+    private let googleButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.image = ImageLiterals.googleLogo
+        config.imagePlacement = .leading
+        config.baseForegroundColor = .gray800
+        var titleAttr = AttributedString.init("구글로 로그인")
+        titleAttr.font = .title1
+        config.attributedTitle = titleAttr
+        config.imagePadding = 8
+        let button = UIButton(configuration: config)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .white
+        return button
+    }()
+    private let appleButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.image = ImageLiterals.appleLogo
+        config.imagePlacement = .leading
+        config.baseForegroundColor = .white
+        var titleAttr = AttributedString.init("Apple로 로그인")
+        titleAttr.font = .title1
+        config.attributedTitle = titleAttr
+        config.imagePadding = 10
+        let button = UIButton(configuration: config)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .black
+        return button
+    }()
     
     // MARK: - lifecycle
     
@@ -45,6 +73,20 @@ final class LoginViewController: BaseViewController {
         loginLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(logoImage.snp.bottom).offset(30)
+        }
+        
+        view.addSubview(appleButton)
+        appleButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(50)
+        }
+        
+        view.addSubview(googleButton)
+        googleButton.snp.makeConstraints {
+            $0.bottom.equalTo(appleButton.snp.top).offset(-24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(50)
         }
     }
     
