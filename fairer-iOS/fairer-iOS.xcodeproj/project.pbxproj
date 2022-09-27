@@ -40,6 +40,7 @@
 		5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054628D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift */; };
 		5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054A28DBF86700355055 /* SizeLiteral.swift */; };
 		5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055328E1BF6700355055 /* GroupMainViewController.swift */; };
+		5205055828E1C50600355055 /* InfoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055728E1C50600355055 /* InfoLabelView.swift */; };
 		5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227554F28B219DC0080DD65 /* AppDelegate.swift */; };
 		5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555128B219DC0080DD65 /* SceneDelegate.swift */; };
 		5227555428B219DC0080DD65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555328B219DC0080DD65 /* ViewController.swift */; };
@@ -87,6 +88,7 @@
 		5205054628D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProfileGroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		5205054A28DBF86700355055 /* SizeLiteral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeLiteral.swift; sourceTree = "<group>"; };
 		5205055328E1BF6700355055 /* GroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMainViewController.swift; sourceTree = "<group>"; };
+		5205055728E1C50600355055 /* InfoLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabelView.swift; sourceTree = "<group>"; };
 		5227554C28B219DC0080DD65 /* fairer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fairer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5227554F28B219DC0080DD65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5227555128B219DC0080DD65 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				39EEF67D28CBB66F00437654 /* MainButton.swift */,
+				5205055728E1C50600355055 /* InfoLabelView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */,
 				39EEF68D28CBBA1B00437654 /* Model.swift in Sources */,
 				5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */,
+				5205055828E1C50600355055 /* InfoLabelView.swift in Sources */,
 				39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */,
 				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
