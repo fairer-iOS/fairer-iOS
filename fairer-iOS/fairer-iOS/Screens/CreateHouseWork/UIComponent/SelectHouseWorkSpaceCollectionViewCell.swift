@@ -12,10 +12,7 @@ import SnapKit
 final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
-    let spaceImageView: UIImageView = {
-        let imageView = UIImageView()
-        return imageView
-    }()
+    let spaceImageView = UIImageView()
     lazy var spaceNameLabel: SpaceNameLabel = {
         let label = SpaceNameLabel()
         label.backgroundColor = .white
@@ -34,10 +31,14 @@ final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
         spaceImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
         self.addSubview(spaceNameLabel)
         spaceNameLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
+    }
+    
+    override func configUI() {
         spaceNameLabel.layer.cornerRadius = 12
     }
 }
