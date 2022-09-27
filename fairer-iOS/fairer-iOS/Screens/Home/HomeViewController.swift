@@ -14,6 +14,7 @@ final class HomeViewController: BaseViewController {
     // TODO: - 추후 api연결 + UserDefault
     
     let userName: String = "고가혜"
+    let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
     
     // MARK: - property
     
@@ -48,12 +49,24 @@ final class HomeViewController: BaseViewController {
         return label
     }()
     private let homeGroupCollectionView = HomeGroupCollectionView()
+    private let homeRuleView = HomeRuleView()
+    private let homeDivider: UIView = {
+        let view = UIView()
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.gray100.cgColor
+        return view
+    }()
 
     // MARK: - life cycle
+    
+    deinit {
+        print("HomeViewController deinit")
+    }
     
     override func configUI() {
         super.configUI()
         setupToolBarGesture()
+        setHomeRuleLabel()
     }
     
     override func render() {
@@ -88,6 +101,19 @@ final class HomeViewController: BaseViewController {
             $0.top.equalTo(homeGroupLabel.snp.bottom).offset(8)
             $0.height.equalTo(94)
         }
+        
+        view.addSubview(homeRuleView)
+        homeRuleView.snp.makeConstraints {
+            $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(24)
+        }
+        
+        view.addSubview(homeDivider)
+        homeDivider.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.top.equalTo(homeRuleView.snp.bottom).offset(16)
+            $0.height.equalTo(2)
+        }
     }
     
     override func setupNavigationBar() {
@@ -107,6 +133,23 @@ final class HomeViewController: BaseViewController {
     private func setupToolBarGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))
         toolBarView.addGestureRecognizer(tapGesture)
+    }
+    
+    private func setHomeRuleLabel() {
+        var index = 0
+        if ruleArray.isEmpty {
+            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
+        } else {
+            homeRuleView.homeRuleDescriptionLabel.text = ruleArray[index]
+            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+                guard let count = self?.ruleArray.count else { return }
+                self?.homeRuleView.homeRuleDescriptionLabel.text = self?.ruleArray[index]
+                index += 1
+                if index > count - 1 {
+                    index = 0
+                }
+            }
+        }
     }
     
     // MARK: - selector

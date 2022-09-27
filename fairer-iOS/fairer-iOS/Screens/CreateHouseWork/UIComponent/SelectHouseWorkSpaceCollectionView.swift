@@ -25,6 +25,7 @@ final class SelectHouseWorkSpaceCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
+    
     // MARK: - property
 
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
@@ -67,11 +68,11 @@ extension SelectHouseWorkSpaceCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        //FIXME
+        
+        cell.index = indexPath.row
         cell.spaceImageView.image = .load(name: "\(spaceArray[indexPath.row])")
         cell.spaceNameLabel.text = spaceArray[indexPath.row]
+        
         return cell
     }
-    
-    
 }

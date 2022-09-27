@@ -21,7 +21,8 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     }()
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .caption2
+        // FIXME: - figma 디자인시스템 정리 후 수정되야함
+        label.font = .font(.regular, ofSize: 12)
         label.textColor = .gray800
         label.textAlignment = .center
         return label
