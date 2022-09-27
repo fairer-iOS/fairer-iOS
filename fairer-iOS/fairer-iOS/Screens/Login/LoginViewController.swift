@@ -13,11 +13,7 @@ final class LoginViewController: BaseViewController {
     
     // MARK: - property
     
-    private let logoImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.imgLogoLogin
-        return imageView
-    }()
+    private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -29,7 +25,7 @@ final class LoginViewController: BaseViewController {
     }()
     private let googleButton: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.image = ImageLiterals.googleLogo
+        config.image = ImageLiterals.imgGoogleLogo
         config.imagePlacement = .leading
         config.baseForegroundColor = .gray800
         var titleAttr = AttributedString.init("구글로 로그인")
@@ -43,7 +39,7 @@ final class LoginViewController: BaseViewController {
     }()
     private let appleButton: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.image = ImageLiterals.appleLogo
+        config.image = ImageLiterals.imgAppleLogo
         config.imagePlacement = .leading
         config.baseForegroundColor = .white
         var titleAttr = AttributedString.init("Apple로 로그인")
@@ -66,13 +62,13 @@ final class LoginViewController: BaseViewController {
         view.addSubview(logoImage)
         logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(239)
+            $0.centerY.equalToSuperview().offset(-50)
         }
         
         view.addSubview(loginLabel)
         loginLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(logoImage.snp.bottom).offset(30)
+            $0.centerY.equalToSuperview().offset(34)
         }
         
         view.addSubview(appleButton)
