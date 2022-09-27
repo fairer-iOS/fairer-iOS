@@ -12,8 +12,10 @@ enum ImageLiterals {
     // MARK: - image
 
     static var imgLogo: UIImage { .load(name: "fairerlogo")}
+    static var imgLogoLogin: UIImage { .load(name: "fairerlogologin")}
     static var imgLogoSplash: UIImage { .load(name: "fairerlogosplash")}
-    static var info: UIImage { .load(name: "info")}
+    static var imgAppleLogo: UIImage { .load(name: "applelogo")}
+    static var imgGoogleLogo: UIImage { .load(name: "googlelogo")}
     
     // MARK: - profile
     
