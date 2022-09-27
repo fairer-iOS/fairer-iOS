@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         //FIXME
-        let rootViewControoler = UINavigationController(rootViewController: CreateHouseWorkViewController())
+        let rootViewControoler = UINavigationController(rootViewController: HomeViewController())
         window?.rootViewController = rootViewControoler
         window?.makeKeyAndVisible()
     }
