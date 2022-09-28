@@ -12,9 +12,6 @@ import SnapKit
 final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
     
     var index: Int = 0
-    let spaceArray = ["현관", "거실", "화장실", "외부", "방", "부엌"]
-    //FIXME: 이미지 없던거 추가할것
-    let selectedSpaceArray = ["현관택", "거실택", "화장실택", "외부택", "방택", "방택"]
     
     // MARK: - property
     let spaceImageView = UIImageView()
@@ -51,10 +48,12 @@ final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                spaceImageView.image = UIImage(named: "\(selectedSpaceArray[index])")
+                spaceImageView.image = Space.allCases[index].selecteImage
+                print("selected\(index)")
             }
             else {
-                spaceImageView.image = UIImage(named: "\(spaceArray[index])")
+                spaceImageView.image = Space.allCases[index].normalImage
+                print("unselected\(index)")
             }
         }
     }
