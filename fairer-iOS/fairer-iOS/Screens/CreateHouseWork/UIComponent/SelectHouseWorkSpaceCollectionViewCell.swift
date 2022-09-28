@@ -49,11 +49,9 @@ final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
         didSet {
             if isSelected {
                 spaceImageView.image = Space.allCases[index].selecteImage
-                print("selected\(index)")
             }
             else {
                 spaceImageView.image = Space.allCases[index].normalImage
-                print("unselected\(index)")
             }
         }
     }

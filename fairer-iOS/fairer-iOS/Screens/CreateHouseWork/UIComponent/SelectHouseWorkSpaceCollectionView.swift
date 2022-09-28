@@ -68,53 +68,9 @@ extension SelectHouseWorkSpaceCollectionView: UICollectionViewDataSource {
         }
         
         cell.index = indexPath.row
-//        cell.spaceImageView.image = Space.allCases[indexPath.row].normalImage
-        cell.spaceImageView.image = ImageLiterals.imgEntrance
+        cell.spaceImageView.image = Space.allCases[indexPath.row].normalImage
         cell.spaceNameLabel.text = Space.allCases[indexPath.row].rawValue
         
         return cell
-    }
-}
-
-enum Space: String, CaseIterable {
-    case entrance = "현관"
-    case livingRoom = "거실"
-    case bathroom = "화장실"
-    case outside = "외부"
-    case room = "방"
-    case kitchen = "부엌"
-    
-    var normalImage: UIImage {
-        switch self {
-        case .entrance:
-            return ImageLiterals.imgEntrance
-        case .livingRoom:
-            return ImageLiterals.imgLivingRoom
-        case .bathroom:
-            return ImageLiterals.imgBathroom
-        case .outside:
-            return ImageLiterals.imgOutside
-        case .room:
-            return ImageLiterals.imgRoom
-        case .kitchen:
-            return ImageLiterals.imgKitchen
-        }
-    }
-    
-    var selecteImage: UIImage {
-        switch self {
-        case .entrance:
-            return ImageLiterals.imgSelectedEntrance
-        case .livingRoom:
-            return ImageLiterals.imgSelectedLivingRoom
-        case .bathroom:
-            return ImageLiterals.imgSelectedBathroom
-        case .outside:
-            return ImageLiterals.imgSelectedOutside
-        case .room:
-            return ImageLiterals.imgSelectedRoom
-        case .kitchen:
-            return ImageLiterals.imgKitchen //FIXME
-        }
     }
 }

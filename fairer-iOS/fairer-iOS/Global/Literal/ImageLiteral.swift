@@ -15,18 +15,18 @@ enum ImageLiterals {
     static var imgLogoSplash: UIImage { .load(name: "fairerlogosplash") }
     static var imgAppleLogo: UIImage { .load(name: "applelogo") }
     static var imgGoogleLogo: UIImage { .load(name: "googlelogo") }
-    static var imgEntrance: UIImage { .load(systemName: "entrance") }
-    static var imgBathroom: UIImage { .load(systemName: "bathroom") }
-    static var imgKitchen: UIImage { .load(systemName: "kitchen") }
-    static var imgLivingRoom: UIImage { .load(systemName: "livingRoom") }
-    static var imgOutside: UIImage { .load(systemName: "outside") }
-    static var imgRoom: UIImage { .load(systemName: "room") }
-    static var imgSelectedEntrance: UIImage { .load(systemName: "selectedEntrance") }
-    static var imgSelectedBathroom: UIImage { .load(systemName: "selectedBathroom") }
-//    static var imgSelectedKitchen: UIImage { .load(systemName: "selectedKitchen") }
-    static var imgSelectedLivingRoom: UIImage { .load(systemName: "selectedLivingRoom") }
-    static var imgSelectedOutside: UIImage { .load(systemName: "selectedOutside") }
-    static var imgSelectedRoom: UIImage { .load(systemName: "selectedRoom") }
+    static var imgEntrance: UIImage { .load(name: "entrance") }
+    static var imgBathroom: UIImage { .load(name: "bathroom") }
+    static var imgKitchen: UIImage { .load(name: "kitchen") }
+    static var imgLivingRoom: UIImage { .load(name: "livingRoom") }
+    static var imgOutside: UIImage { .load(name: "outside") }
+    static var imgRoom: UIImage { .load(name: "room") }
+    static var imgSelectedEntrance: UIImage { .load(name: "selectedEntrance") }
+    static var imgSelectedBathroom: UIImage { .load(name: "selectedBathroom") }
+//    static var imgSelectedKitchen: UIImage { .load(name: "selectedKitchen") }
+    static var imgSelectedLivingRoom: UIImage { .load(name: "selectedLivingRoom") }
+    static var imgSelectedOutside: UIImage { .load(name: "selectedOutside") }
+    static var imgSelectedRoom: UIImage { .load(name: "selectedRoom") }
     
     
     // MARK: - profile
