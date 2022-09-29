@@ -34,19 +34,19 @@ final class GroupMainViewController: BaseViewController {
     }()
     private let houseMakeLabel: UILabel = {
        let label = UILabel()
-        label.text = "집안일 하우스 생성"
+        label.text = TextLiteral.groupMainViewHouseMakeLabel
         label.font = .title1
         label.textColor = .gray600
         return label
     }()
     private let houseMakeButton: MainButton = {
         let button = MainButton()
-        button.title = "집안일 하우스 만들기"
+        button.title = TextLiteral.groupMainViewHouseMakeButtonText
         return button
     }()
     private let houseMakeInfo: InfoLabelView = {
         let view = InfoLabelView()
-        view.text = "개인 혹은 여러명이 집안일을 관리할 수 있는 하우스를\n만들 수 있습니다."
+        view.text = TextLiteral.groupMainViewHouseMakeInfoLabel
         view.imageColor = .gray200
         view.textColor = .gray600
         return view
@@ -59,14 +59,14 @@ final class GroupMainViewController: BaseViewController {
     }()
     private let houseEnterLabel: UILabel = {
        let label = UILabel()
-        label.text = "하우스 참여"
+        label.text = TextLiteral.groupMainViewHouseEnterLabel
         label.font = .title1
         label.textColor = .gray600
         return label
     }()
     private let houseEnterButton: UIButton = {
        let button = UIButton()
-        button.setTitle("집안일 하우스 참여하기", for: .normal)
+        button.setTitle(TextLiteral.groupMainViewHouseEnterButtonText, for: .normal)
         button.setTitleColor(UIColor.gray800, for: .normal)
         button.backgroundColor = .normal0
         button.titleLabel?.font = .title1
@@ -75,7 +75,7 @@ final class GroupMainViewController: BaseViewController {
     }()
     private let houseEnterInfo: InfoLabelView = {
         let view = InfoLabelView()
-        view.text = "기존에 만들어진 하우스에 참여하고 싶다면\n선택해주세요."
+        view.text = TextLiteral.groupMainViewHouseEnterInfoLabel
         view.imageColor = .gray200
         view.textColor = .gray600
         return view
@@ -87,7 +87,7 @@ final class GroupMainViewController: BaseViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
         }
         
         view.addSubview(houseMakeLabel)
@@ -125,7 +125,7 @@ final class GroupMainViewController: BaseViewController {
         view.addSubview(houseEnterButton)
         houseEnterButton.snp.makeConstraints {
             $0.top.equalTo(houseEnterLabel.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(56)
         }
         
@@ -135,17 +135,5 @@ final class GroupMainViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(44)
         }
-    }
-    
-    // MARK: - functions
-    
-    override func setupNavigationBar() {
-        super.setupNavigationBar()
-        
-        let backButton = makeBarButtonItem(with: backButton)
-        
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.largeTitleDisplayMode = .never
-        navigationItem.leftBarButtonItem = backButton
     }
 }

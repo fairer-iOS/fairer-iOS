@@ -16,6 +16,7 @@ enum ImageLiterals {
     static var imgLogoSplash: UIImage { .load(name: "fairerlogosplash")}
     static var imgAppleLogo: UIImage { .load(name: "applelogo")}
     static var imgGoogleLogo: UIImage { .load(name: "googlelogo")}
+    static var imgInfo: UIImage { .load(systemName: "info.circle.fill")}
     
     // MARK: - profile
     

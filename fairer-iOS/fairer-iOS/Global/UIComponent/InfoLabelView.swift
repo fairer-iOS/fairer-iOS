@@ -24,9 +24,10 @@ final class InfoLabelView: UIView {
     // MARK: - property
     
     private let infoImage: UIImageView = {
-        let imageView = UIImageView()
-        let imageConfig = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 13))
-        imageView.image = UIImage(systemName: "info.circle.fill", withConfiguration: imageConfig)
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 13, height: 13))
+//        let imageConfig = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 13))
+//        imageView.image = UIImage(systemName: "info.circle.fill", withConfiguration: imageConfig)
+        imageView.image = ImageLiterals.imgInfo
         return imageView
     }()
     private var infoText: UILabel = {
@@ -53,6 +54,7 @@ final class InfoLabelView: UIView {
         infoImage.snp.makeConstraints {
             $0.top.equalToSuperview().offset(3)
             $0.leading.equalToSuperview()
+            $0.width.height.equalTo(16)
         }
         
         self.addSubview(infoText)
