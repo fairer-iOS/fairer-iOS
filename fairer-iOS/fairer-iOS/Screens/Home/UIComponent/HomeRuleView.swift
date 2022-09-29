@@ -22,7 +22,6 @@ final class HomeRuleView: BaseUIView {
     }()
     let homeRuleDescriptionLabel: UILabel = {
         let label = UILabel()
-//        label.text = TextLiteral.homeRuleViewRuleDescriptionLabel
         label.font = .caption1
         label.textColor = .gray400
         return label
