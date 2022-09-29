@@ -47,14 +47,14 @@ final class HomeCalendarView: BaseUIView {
     override func render() {
         self.addSubview(calendarPicker)
         calendarPicker.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalToSuperview().inset(8)
             $0.width.equalTo(100)
         }
         
         self.addSubview(todayButton)
         todayButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(24)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(20)
             // FIXME: - 좋은 방법은 아닌 것 같음
             $0.width.equalTo(37)

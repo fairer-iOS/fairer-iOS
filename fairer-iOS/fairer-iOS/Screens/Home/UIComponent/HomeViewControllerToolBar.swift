@@ -44,7 +44,7 @@ final class HomeViewControllerToolBar: UIView {
     private func render() {
         self.addSubview(affairView)
         affairView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(44)
         }
