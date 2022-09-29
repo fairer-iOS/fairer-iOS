@@ -11,7 +11,6 @@ import SnapKit
 
 final class SelectHouseWorkSpaceCollectionView: BaseUIView {
     
-    // FIXME
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
         static let collectionVerticalSpacing: CGFloat = 0
