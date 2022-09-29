@@ -10,7 +10,9 @@ import UIKit
 import SnapKit
 
 class CreateWorkButtonView: UIView {
+    
     // MARK: - property
+    
     private let buttonTextLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.createWorkButtonViewButtonLabel
@@ -18,16 +20,17 @@ class CreateWorkButtonView: UIView {
         return label
     }()
     private let buttonArrowImageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+        let imageView = UIImageView()
         imageView.image = ImageLiterals.buttonArrowButton
         imageView.tintColor = .positive20
         return imageView
     }()
+    
     // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
-        configUI()
     }
     
     required init?(coder: NSCoder) {
@@ -46,9 +49,5 @@ class CreateWorkButtonView: UIView {
             $0.centerY.equalTo(buttonTextLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(16)
         }
-    }
-    
-    func configUI() {
-        
     }
 }
