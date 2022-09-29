@@ -34,19 +34,19 @@ final class GroupMainViewController: BaseViewController {
     }()
     private let houseMakeLabel: UILabel = {
        let label = UILabel()
-        label.text = TextLiteral.groupMainViewHouseMakeLabel
+        label.text = TextLiteral.groupMainViewControllerHouseMakeLabel
         label.font = .title1
         label.textColor = .gray600
         return label
     }()
     private let houseMakeButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.groupMainViewHouseMakeButtonText
+        button.title = TextLiteral.groupMainViewControllerHouseMakeButtonText
         return button
     }()
     private let houseMakeInfo: InfoLabelView = {
         let view = InfoLabelView()
-        view.text = TextLiteral.groupMainViewHouseMakeInfoLabel
+        view.text = TextLiteral.groupMainViewControllerHouseMakeInfoLabel
         view.imageColor = .gray200
         view.textColor = .gray600
         return view
@@ -59,14 +59,14 @@ final class GroupMainViewController: BaseViewController {
     }()
     private let houseEnterLabel: UILabel = {
        let label = UILabel()
-        label.text = TextLiteral.groupMainViewHouseEnterLabel
+        label.text = TextLiteral.groupMainViewControllerHouseEnterLabel
         label.font = .title1
         label.textColor = .gray600
         return label
     }()
     private let houseEnterButton: UIButton = {
        let button = UIButton()
-        button.setTitle(TextLiteral.groupMainViewHouseEnterButtonText, for: .normal)
+        button.setTitle(TextLiteral.groupMainViewControllerHouseEnterButtonText, for: .normal)
         button.setTitleColor(UIColor.gray800, for: .normal)
         button.backgroundColor = .normal0
         button.titleLabel?.font = .title1
@@ -75,7 +75,7 @@ final class GroupMainViewController: BaseViewController {
     }()
     private let houseEnterInfo: InfoLabelView = {
         let view = InfoLabelView()
-        view.text = TextLiteral.groupMainViewHouseEnterInfoLabel
+        view.text = TextLiteral.groupMainViewControllerHouseEnterInfoLabel
         view.imageColor = .gray200
         view.textColor = .gray600
         return view

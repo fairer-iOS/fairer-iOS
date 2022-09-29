@@ -31,13 +31,13 @@ enum TextLiteral {
     static let homeRuleViewRuleLabel: String = "규칙"
     static let homeRuleViewRuleDescriptionLabel: String = "여기를 눌러 하우스의 규칙을 입력해주세요!"
     
-    // MARK: - GroupMainView
+    // MARK: - GroupMainViewController
     
-    static let groupMainViewHouseMakeLabel: String = "집안일 하우스 생성"
-    static let groupMainViewHouseMakeButtonText: String = "집안일 하우스 만들기"
-    static let groupMainViewHouseMakeInfoLabel: String = "개인 혹은 여러명이 집안일을 관리할 수 있는 하우스를\n만들 수 있습니다."
-    static let groupMainViewHouseEnterLabel: String = "하우스 참여"
-    static let groupMainViewHouseEnterButtonText: String = "집안일 하우스 참여하기"
-    static let groupMainViewHouseEnterInfoLabel: String = "기존에 만들어진 하우스에 참여하고 싶다면\n선택해주세요."
+    static let groupMainViewControllerHouseMakeLabel: String = "집안일 하우스 생성"
+    static let groupMainViewControllerHouseMakeButtonText: String = "집안일 하우스 만들기"
+    static let groupMainViewControllerHouseMakeInfoLabel: String = "개인 혹은 여러명이 집안일을 관리할 수 있는 하우스를\n만들 수 있습니다."
+    static let groupMainViewControllerHouseEnterLabel: String = "하우스 참여"
+    static let groupMainViewControllerHouseEnterButtonText: String = "집안일 하우스 참여하기"
+    static let groupMainViewControllerHouseEnterInfoLabel: String = "기존에 만들어진 하우스에 참여하고 싶다면\n선택해주세요."
     
 }

@@ -25,8 +25,6 @@ final class InfoLabelView: UIView {
     
     private let infoImage: UIImageView = {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 13, height: 13))
-//        let imageConfig = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 13))
-//        imageView.image = UIImage(systemName: "info.circle.fill", withConfiguration: imageConfig)
         imageView.image = ImageLiterals.imgInfo
         return imageView
     }()
