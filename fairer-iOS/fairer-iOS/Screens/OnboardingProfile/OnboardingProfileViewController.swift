@@ -79,7 +79,7 @@ class OnboardingProfileViewController: BaseViewController {
         view.addSubview(profileDoneButton)
         profileDoneButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.mainButtonBottomPadding)
         }
         
         view.addSubview(onboardingProfileGroupCollectionView)

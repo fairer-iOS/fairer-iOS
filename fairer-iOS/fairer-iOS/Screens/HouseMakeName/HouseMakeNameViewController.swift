@@ -22,14 +22,14 @@ final class HouseMakeNameViewController: BaseViewController {
     }()
     private let writeNamePrimaryLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "하우스의 이름을 입력해주세요.", lineHeight: 28)
+        label.setTextWithLineHeight(text: TextLiteral.houseMakeNameViewControllerWriteNamePrimaryLabel, lineHeight: 28)
         label.font = .h2
         label.textColor = .gray800
         return label
     }()
     private let writeNameSecondaryLabel: UILabel = {
        let label = UILabel()
-        label.setTextWithLineHeight(text: "집의 특성을 잘 보여줄 수 있는 이름도 좋아요!", lineHeight: 26)
+        label.setTextWithLineHeight(text: TextLiteral.houseMakeNameViewControllerWriteNameSecondaryLabel, lineHeight: 26)
         label.font = .body1
         label.textColor = .gray400
         label.numberOfLines = 0
@@ -43,7 +43,7 @@ final class HouseMakeNameViewController: BaseViewController {
         ]
         textField.backgroundColor = .normal0
         textField.font = .h3
-        textField.attributedPlaceholder = NSAttributedString(string: "예) 즐거운 우리집", attributes: attributes)
+        textField.attributedPlaceholder = NSAttributedString(string: TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder, attributes: attributes)
         textField.layer.cornerRadius = 8
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
@@ -54,7 +54,7 @@ final class HouseMakeNameViewController: BaseViewController {
     }()
     private let disableLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.onboardingNameViewControllerDisableLabel
+        label.text = TextLiteral.houseMakeNameViewControllerDisableLabel
         label.textColor = .negative20
         label.font = .body2
         label.layer.isHidden = true
@@ -62,7 +62,7 @@ final class HouseMakeNameViewController: BaseViewController {
     }()
     private lazy var houseNameDoneButton: MainButton = {
         let button = MainButton()
-        button.title = "입력 완료"
+        button.title = TextLiteral.houseMakeNameViewControllerDoneButtonText
         button.isDisabled = true
         button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
@@ -105,7 +105,7 @@ final class HouseMakeNameViewController: BaseViewController {
         view.addSubview(houseNameDoneButton)
         houseNameDoneButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.mainButtonBottomPadding)
         }
     }
     
@@ -130,7 +130,7 @@ final class HouseMakeNameViewController: BaseViewController {
             houseNameTextField.layer.borderWidth = 0
             disableLabel.isHidden = true
             
-            // TODO: - userdefault에 이름 저장
+            // TODO: - userdefault에 하우스 이름 저장
             
         } else {
             houseNameTextField.layer.borderWidth = 1

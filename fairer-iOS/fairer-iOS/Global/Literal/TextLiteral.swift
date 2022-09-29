@@ -30,4 +30,12 @@ enum TextLiteral {
     
     static let homeRuleViewRuleLabel: String = "규칙"
     static let homeRuleViewRuleDescriptionLabel: String = "여기를 눌러 하우스의 규칙을 입력해주세요!"
+    
+    // MARK: - HouseMakeNameViewController
+    
+    static let houseMakeNameViewControllerWriteNamePrimaryLabel: String = "하우스의 이름을 입력해주세요."
+    static let houseMakeNameViewControllerWriteNameSecondaryLabel: String = "집의 특성을 잘 보여줄 수 있는 이름도 좋아요!"
+    static let houseMakeNameViewControllerTextFieldPlaceholder: String = "예) 즐거운 우리집"
+    static let houseMakeNameViewControllerDisableLabel: String = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
+    static let houseMakeNameViewControllerDoneButtonText: String = "입력 완료"
 }
