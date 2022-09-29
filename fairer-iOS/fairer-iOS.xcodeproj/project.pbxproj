@@ -32,6 +32,7 @@
 		39F1C12A28D604B000585B83 /* HomeGroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12928D604B000585B83 /* HomeGroupCollectionViewCell.swift */; };
 		39F1C12C28D614D800585B83 /* BaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12B28D614D800585B83 /* BaseUIView.swift */; };
 		39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12F28DABDE900585B83 /* HomeRuleView.swift */; };
+		39FABBDC28DB35020053EFD2 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FABBDB28DB35020053EFD2 /* HomeCalendarView.swift */; };
 		5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053828D6EFAF00355055 /* OnboardingNameViewController.swift */; };
 		5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053C28D7382900355055 /* UITextField+Extension.swift */; };
 		5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053E28D76B0C00355055 /* TextLiteral.swift */; };
@@ -79,6 +80,7 @@
 		39F1C12928D604B000585B83 /* HomeGroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		39F1C12B28D614D800585B83 /* BaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIView.swift; sourceTree = "<group>"; };
 		39F1C12F28DABDE900585B83 /* HomeRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRuleView.swift; sourceTree = "<group>"; };
+		39FABBDB28DB35020053EFD2 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
 		5205053828D6EFAF00355055 /* OnboardingNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNameViewController.swift; sourceTree = "<group>"; };
 		5205053C28D7382900355055 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		5205053E28D76B0C00355055 /* TextLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLiteral.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				39F1C12728D5FD2500585B83 /* HomeGroupCollectionView.swift */,
 				39F1C12928D604B000585B83 /* HomeGroupCollectionViewCell.swift */,
 				39F1C12F28DABDE900585B83 /* HomeRuleView.swift */,
+				39FABBDB28DB35020053EFD2 /* HomeCalendarView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
 				5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */,
 				39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */,
+				39FABBDC28DB35020053EFD2 /* HomeCalendarView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
 				39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */,
