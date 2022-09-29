@@ -38,4 +38,17 @@ enum TextLiteral {
     static let houseMakeNameViewControllerTextFieldPlaceholder: String = "예) 즐거운 우리집"
     static let houseMakeNameViewControllerDisableLabel: String = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
     static let houseMakeNameViewControllerDoneButtonText: String = "입력 완료"
+
+    // MARK: - GroupMainViewController
+    
+    static let groupMainViewControllerHouseMakeLabel: String = "집안일 하우스 생성"
+    static let groupMainViewControllerHouseMakeButtonText: String = "집안일 하우스 만들기"
+    static let groupMainViewControllerHouseMakeInfoLabel: String = "개인 혹은 여러명이 집안일을 관리할 수 있는 하우스를\n만들 수 있습니다."
+    static let groupMainViewControllerHouseEnterLabel: String = "하우스 참여"
+    static let groupMainViewControllerHouseEnterButtonText: String = "집안일 하우스 참여하기"
+    static let groupMainViewControllerHouseEnterInfoLabel: String = "기존에 만들어진 하우스에 참여하고 싶다면\n선택해주세요."
+    
+    // MARK: - HomeCalendarView
+    
+    static let homeCalendarViewTodayTitle: String = "오늘"
 }
