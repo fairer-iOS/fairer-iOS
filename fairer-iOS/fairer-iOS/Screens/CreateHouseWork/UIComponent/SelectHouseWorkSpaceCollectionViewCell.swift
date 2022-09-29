@@ -19,7 +19,6 @@ final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
         let label = SpaceNameLabel()
         label.backgroundColor = .white
         label.font = .title2
-        label.numberOfLines = 0
         label.textAlignment = .center
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 5
@@ -48,7 +47,7 @@ final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                spaceImageView.image = Space.allCases[index].selecteImage
+                spaceImageView.image = Space.allCases[index].selectedImage
             }
             else {
                 spaceImageView.image = Space.allCases[index].normalImage

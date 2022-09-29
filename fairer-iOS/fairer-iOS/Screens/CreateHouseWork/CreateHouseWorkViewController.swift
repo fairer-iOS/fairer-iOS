@@ -16,11 +16,6 @@ final class CreateHouseWorkViewController: BaseViewController {
     private let spaceCollectionView = SelectHouseWorkSpaceCollectionView()
     
     // MARK: - life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        render()
-        configUI()
-    }
     
     override func render() {
         view.addSubview(spaceCollectionView)

@@ -32,7 +32,7 @@ enum Space: String, CaseIterable {
         }
     }
     
-    var selecteImage: UIImage {
+    var selectedImage: UIImage {
         switch self {
         case .entrance:
             return ImageLiterals.imgSelectedEntrance
