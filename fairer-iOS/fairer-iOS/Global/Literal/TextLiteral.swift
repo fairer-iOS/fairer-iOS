@@ -30,4 +30,9 @@ enum TextLiteral {
     
     static let homeRuleViewRuleLabel: String = "규칙"
     static let homeRuleViewRuleDescriptionLabel: String = "여기를 눌러 하우스의 규칙을 입력해주세요!"
+    
+    // MARK: - CreateWorkButtonView
+    
+    static let createWorkButtonViewButtonLabel: String = "집안일 직접 입력하기"
+    static let createWorkButtonViewButtonArrowLabel: String = ">"
 }

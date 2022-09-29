@@ -51,6 +51,7 @@
 		7E1F2E2F28D2168300A5744A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */; };
 		7E1F2E3028D2168300A5744A /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */; };
 		7E1F2E3128D2168300A5744A /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2D28D2168300A5744A /* Pretendard-Medium.otf */; };
+		7EAFFF8628E57A410034560A /* CreateWorkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAFFF8528E57A410034560A /* CreateWorkButtonView.swift */; };
 		7EEE2FA028E449610067FA7B /* Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEE2F9F28E449610067FA7B /* Space.swift */; };
 		7EF87A3828E1A17800DFE353 /* SpaceNameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF87A3728E1A17800DFE353 /* SpaceNameLabel.swift */; };
 		7EFAA86E28DA032800737DF0 /* CreateHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFAA86D28DA032800737DF0 /* CreateHouseWorkViewController.swift */; };
@@ -103,6 +104,7 @@
 		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		7E1F2E2D28D2168300A5744A /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		7EAFFF8528E57A410034560A /* CreateWorkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkButtonView.swift; sourceTree = "<group>"; };
 		7EEE2F9F28E449610067FA7B /* Space.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Space.swift; sourceTree = "<group>"; };
 		7EF87A3728E1A17800DFE353 /* SpaceNameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceNameLabel.swift; sourceTree = "<group>"; };
 		7EFAA86D28DA032800737DF0 /* CreateHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseWorkViewController.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				7EFAA87028DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift */,
 				7EFAA87228DA088900737DF0 /* SelectHouseWorkSpaceCollectionViewCell.swift */,
 				7EF87A3728E1A17800DFE353 /* SpaceNameLabel.swift */,
+				7EAFFF8528E57A410034560A /* CreateWorkButtonView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */,
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
 				5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */,
+				7EAFFF8628E57A410034560A /* CreateWorkButtonView.swift in Sources */,
 				39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,

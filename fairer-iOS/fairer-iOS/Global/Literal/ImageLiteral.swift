@@ -54,6 +54,7 @@ enum ImageLiterals {
     
     static var textFieldClearButton: UIImage { .load(name: "clearbutton") }
     static var navigationBarBackButton: UIImage { .load(name: "backbutton") }
+    static var buttonArrowButton: UIImage { .load(systemName: "chevron.forward") }
 }
 
 extension UIImage {

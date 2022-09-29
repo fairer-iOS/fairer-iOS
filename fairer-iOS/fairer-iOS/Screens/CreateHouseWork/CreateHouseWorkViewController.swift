@@ -14,6 +14,13 @@ final class CreateHouseWorkViewController: BaseViewController {
     // MARK: - property
     
     private let spaceCollectionView = SelectHouseWorkSpaceCollectionView()
+    private let createWorkButtonView: CreateWorkButtonView = {
+        let view = CreateWorkButtonView()
+        view.layer.cornerRadius = 6
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.positive20.cgColor
+        return view
+    }()
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -26,8 +33,15 @@ final class CreateHouseWorkViewController: BaseViewController {
         view.addSubview(spaceCollectionView)
         spaceCollectionView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(224)
+        }
+        
+        view.addSubview(createWorkButtonView)
+        createWorkButtonView.snp.makeConstraints {
+            $0.top.equalTo(spaceCollectionView.snp.bottom).offset(30)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(42)
         }
     }
     
