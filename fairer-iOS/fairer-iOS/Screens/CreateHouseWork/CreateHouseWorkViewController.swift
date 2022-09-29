@@ -26,7 +26,7 @@ final class CreateHouseWorkViewController: BaseViewController {
         view.addSubview(spaceCollectionView)
         spaceCollectionView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(224)
         }
     }
