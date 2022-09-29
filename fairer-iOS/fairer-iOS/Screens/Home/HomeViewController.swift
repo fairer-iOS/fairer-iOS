@@ -56,6 +56,7 @@ final class HomeViewController: BaseViewController {
         view.layer.borderColor = UIColor.gray100.cgColor
         return view
     }()
+    private let homeCalenderView = HomeCalendarView()
 
     // MARK: - life cycle
     
@@ -80,13 +81,13 @@ final class HomeViewController: BaseViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8)
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(houseImageView)
         houseImageView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(homeGroupLabel)
@@ -105,14 +106,22 @@ final class HomeViewController: BaseViewController {
         view.addSubview(homeRuleView)
         homeRuleView.snp.makeConstraints {
             $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(homeDivider)
         homeDivider.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(homeRuleView.snp.bottom).offset(16)
             $0.height.equalTo(2)
+        }
+        
+        view.addSubview(homeCalenderView)
+        homeCalenderView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(homeDivider.snp.bottom).offset(8)
+            // FIXME: - auto layout
+            $0.height.equalTo(116)
         }
     }
     

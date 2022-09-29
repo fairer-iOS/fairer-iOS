@@ -27,6 +27,7 @@ enum ImageLiterals {
     static var imgSelectedLivingRoom: UIImage { .load(name: "selectedLivingRoom") }
     static var imgSelectedOutside: UIImage { .load(name: "selectedOutside") }
     static var imgSelectedRoom: UIImage { .load(name: "selectedRoom") }
+    static var imgInfo: UIImage { .load(systemName: "info.circle.fill") }
     
     
     // MARK: - profile
