@@ -23,7 +23,7 @@ enum ImageLiterals {
     static var imgRoom: UIImage { .load(name: "room") }
     static var imgSelectedEntrance: UIImage { .load(name: "selectedEntrance") }
     static var imgSelectedBathroom: UIImage { .load(name: "selectedBathroom") }
-//    static var imgSelectedKitchen: UIImage { .load(name: "selectedKitchen") }
+    static var imgSelectedKitchen: UIImage { .load(name: "selectedKitchen") }
     static var imgSelectedLivingRoom: UIImage { .load(name: "selectedLivingRoom") }
     static var imgSelectedOutside: UIImage { .load(name: "selectedOutside") }
     static var imgSelectedRoom: UIImage { .load(name: "selectedRoom") }

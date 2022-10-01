@@ -45,7 +45,7 @@ enum Space: String, CaseIterable {
         case .room:
             return ImageLiterals.imgSelectedRoom
         case .kitchen:
-            return ImageLiterals.imgKitchen //FIXME
+            return ImageLiterals.imgSelectedKitchen
         }
     }
 }
