@@ -35,6 +35,7 @@ enum TextLiteral {
     
     static let createWorkButtonViewButtonLabel: String = "집안일 직접 입력하기"
     static let createWorkButtonViewButtonArrowLabel: String = ">"
+    static let createWorkInfoLabel: String = "공간을 선택하면 세부 집안일이 나옵니다."
     
     // MARK: - GroupMainViewController
     

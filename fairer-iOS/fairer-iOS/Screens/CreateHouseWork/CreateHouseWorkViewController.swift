@@ -21,6 +21,13 @@ final class CreateHouseWorkViewController: BaseViewController {
         view.layer.borderColor = UIColor.positive20.cgColor
         return view
     }()
+    private let infoLabelView: InfoLabelView = {
+        let view = InfoLabelView()
+        view.text = TextLiteral.createWorkInfoLabel
+        view.imageColor = .gray200
+        view.textColor = .gray600
+        return view
+    }()
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -37,12 +44,20 @@ final class CreateHouseWorkViewController: BaseViewController {
             $0.height.equalTo(224)
         }
         
+        view.addSubview(infoLabelView)
+        infoLabelView.snp.makeConstraints {
+            $0.top.equalTo(spaceCollectionView.snp.bottom).offset(12)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
         view.addSubview(createWorkButtonView)
         createWorkButtonView.snp.makeConstraints {
-            $0.top.equalTo(spaceCollectionView.snp.bottom).offset(30)
+            $0.top.equalTo(infoLabelView.snp.bottom).offset(32)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
         }
+        
+
     }
     
     override func configUI() {
