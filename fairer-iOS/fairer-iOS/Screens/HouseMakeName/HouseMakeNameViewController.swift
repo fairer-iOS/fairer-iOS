@@ -35,21 +35,9 @@ final class HouseMakeNameViewController: BaseViewController {
         label.numberOfLines = 0
         return label
     }()
-    private let houseNameTextField: UITextField = {
-        let textField = UITextField()
-        let attributes = [
-            NSAttributedString.Key.font: UIFont.h3,
-            NSAttributedString.Key.foregroundColor: UIColor.gray400
-        ]
-        textField.backgroundColor = .normal0
-        textField.font = .h3
-        textField.attributedPlaceholder = NSAttributedString(string: TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder, attributes: attributes)
-        textField.layer.cornerRadius = 8
-        textField.autocorrectionType = .no
-        textField.autocapitalizationType = .none
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 58))
-        textField.leftViewMode = .always
-        textField.setClearButton()
+    private let houseNameTextField: TextField = {
+        let textField = TextField()
+        textField.myPlaceholder = TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder
         return textField
     }()
     private let disableLabel: UILabel = {
@@ -93,7 +81,6 @@ final class HouseMakeNameViewController: BaseViewController {
         houseNameTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(writeNameSecondaryLabel.snp.bottom).offset(SizeLiteral.componentPadding)
-            $0.height.equalTo(58)
         }
         
         view.addSubview(disableLabel)

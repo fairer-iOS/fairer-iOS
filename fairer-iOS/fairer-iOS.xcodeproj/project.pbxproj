@@ -50,6 +50,7 @@
 		5227557028B3092A0080DD65 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 5227556F28B3092A0080DD65 /* GoogleSignIn */; };
 		5227557428B30AF90080DD65 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5227557328B30AF90080DD65 /* KakaoSDK */; };
 		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
+		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
 		7E1F2E2E28D2168300A5744A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */; };
 		7E1F2E2F28D2168300A5744A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */; };
@@ -102,6 +103,7 @@
 		5227555D28B219E50080DD65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5227557128B3095B0080DD65 /* fairer-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fairer-iOS.entitlements"; sourceTree = "<group>"; };
 		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
+		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				39EEF67D28CBB66F00437654 /* MainButton.swift */,
 				5205055728E1C50600355055 /* InfoLabelView.swift */,
+				52EBF04A28EC291F0062EB41 /* TextField.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -253,8 +256,8 @@
 				5205055028DCB63D00355055 /* LoginViewController.swift */,
 			);
 			path = Login;
-            sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		5205055228E1BF5000355055 /* GroupMain */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +451,7 @@
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
 				5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */,
 				39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */,
+				52EBF04B28EC29200062EB41 /* TextField.swift in Sources */,
 				39FABBDC28DB35020053EFD2 /* HomeCalendarView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,

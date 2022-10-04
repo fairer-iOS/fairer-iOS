@@ -29,21 +29,9 @@ final class OnboardingNameViewController: BaseViewController {
         label.font = .h2
         return label
     }()
-    private let nameTextField: UITextField = {
-        let textField = UITextField()
-        let attributes = [
-            NSAttributedString.Key.font: UIFont.h3,
-            NSAttributedString.Key.foregroundColor: UIColor.gray400
-        ]
-        textField.backgroundColor = .normal0
-        textField.font = .h3
-        textField.attributedPlaceholder = NSAttributedString(string: TextLiteral.onboardingNameViewControllerTextFieldPlaceholder, attributes: attributes)
-        textField.layer.cornerRadius = 8
-        textField.autocorrectionType = .no
-        textField.autocapitalizationType = .none
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 58))
-        textField.leftViewMode = .always
-        textField.setClearButton()
+    private let nameTextField: TextField = {
+        let textField = TextField()
+        textField.myPlaceholder = TextLiteral.onboardingNameViewControllerTextFieldPlaceholder
         return textField
     }()
     private lazy var nameDoneButton: MainButton = {
@@ -85,7 +73,6 @@ final class OnboardingNameViewController: BaseViewController {
         nameTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(nameLabel.snp.bottom).offset(SizeLiteral.componentPadding)
-            $0.height.equalTo(58)
         }
         
         view.addSubview(nameDoneButton)
