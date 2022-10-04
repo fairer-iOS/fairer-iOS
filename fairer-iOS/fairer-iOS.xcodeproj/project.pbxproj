@@ -43,14 +43,15 @@
 		5205055128DCB63D00355055 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055028DCB63D00355055 /* LoginViewController.swift */; };
 		5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055328E1BF6700355055 /* GroupMainViewController.swift */; };
 		5205055828E1C50600355055 /* InfoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055728E1C50600355055 /* InfoLabelView.swift */; };
-		5205055128DCB63D00355055 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055028DCB63D00355055 /* LoginViewController.swift */; };
 		5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227554F28B219DC0080DD65 /* AppDelegate.swift */; };
 		5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555128B219DC0080DD65 /* SceneDelegate.swift */; };
 		5227555428B219DC0080DD65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555328B219DC0080DD65 /* ViewController.swift */; };
 		5227555928B219E50080DD65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5227555828B219E50080DD65 /* Assets.xcassets */; };
 		5227557028B3092A0080DD65 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 5227556F28B3092A0080DD65 /* GoogleSignIn */; };
 		5227557428B30AF90080DD65 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5227557328B30AF90080DD65 /* KakaoSDK */; };
+		522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E88FE28EC854C000C65C8 /* InviteCodeView.swift */; };
 		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
+		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
 		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
@@ -109,7 +110,9 @@
 		5227555828B219E50080DD65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5227555D28B219E50080DD65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5227557128B3095B0080DD65 /* fairer-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fairer-iOS.entitlements"; sourceTree = "<group>"; };
+		522E88FE28EC854C000C65C8 /* InviteCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeView.swift; sourceTree = "<group>"; };
 		5275397828EC2F78002D8280 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
 		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -280,14 +283,6 @@
 			path = GroupMain;
 			sourceTree = "<group>";
 		};
-		5205054F28DCB62800355055 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				5205055028DCB63D00355055 /* LoginViewController.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		5227554328B219DC0080DD65 = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +334,7 @@
 		5227556C28B303370080DD65 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5275397A28EC75EE002D8280 /* HouseInviteCode */,
 				7EFAA86C28DA02ED00737DF0 /* CreateHouseWork */,
 				52EBF04728E578700062EB41 /* HouseMakeName */,
 				5205055228E1BF5000355055 /* GroupMain */,
@@ -349,6 +345,23 @@
 				5227555328B219DC0080DD65 /* ViewController.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		522E88FD28EC84F3000C65C8 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				522E88FE28EC854C000C65C8 /* InviteCodeView.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		5275397A28EC75EE002D8280 /* HouseInviteCode */ = {
+			isa = PBXGroup;
+			children = (
+				522E88FD28EC84F3000C65C8 /* UIComponent */,
+				5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */,
+			);
+			path = HouseInviteCode;
 			sourceTree = "<group>";
 		};
 		52EBF04728E578700062EB41 /* HouseMakeName */ = {
@@ -498,6 +511,7 @@
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
+				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
 				5205055128DCB63D00355055 /* LoginViewController.swift in Sources */,
 				5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */,
@@ -516,6 +530,7 @@
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
 				7EFAA87328DA088900737DF0 /* SelectHouseWorkSpaceCollectionViewCell.swift in Sources */,
 				5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */,
+				5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */,
 				7EFAA86E28DA032800737DF0 /* CreateHouseWorkViewController.swift in Sources */,
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
