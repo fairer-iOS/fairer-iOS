@@ -13,13 +13,7 @@ class OnboardingProfileViewController: BaseViewController {
     
     // MARK: - property
     
-    private let backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        button.setImage(ImageLiterals.navigationBarBackButton, for: .normal)
-        button.tintColor = .gray800
-        return button
-    }()
+    private let backButton = BackButton()
     private let profileLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.onboardingProfileViewControllerProfileLabel
@@ -79,12 +73,12 @@ class OnboardingProfileViewController: BaseViewController {
         view.addSubview(profileDoneButton)
         profileDoneButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
         }
         
         view.addSubview(onboardingProfileGroupCollectionView)
         onboardingProfileGroupCollectionView.snp.makeConstraints {
-            $0.top.equalTo(collectionViewLabel.snp.bottom).offset(16)
+            $0.top.equalTo(collectionViewLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.bottom.equalTo(profileDoneButton.snp.top)
             $0.leading.trailing.equalToSuperview()
         }
