@@ -13,13 +13,7 @@ final class HouseMakeNameViewController: BaseViewController {
 
     // MARK: - property
 
-    private let backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        button.setImage(ImageLiterals.navigationBarBackButton, for: .normal)
-        button.tintColor = .gray800
-        return button
-    }()
+    private let backButton = BackButton()
     private let writeNamePrimaryLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.houseMakeNameViewControllerWriteNamePrimaryLabel, lineHeight: 28)

@@ -15,13 +15,7 @@ final class OnboardingNameViewController: BaseViewController {
     
     // MARK: - property
     
-    private let backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        button.setImage(ImageLiterals.navigationBarBackButton, for: .normal)
-        button.tintColor = .gray800
-        return button
-    }()
+    private let backButton = BackButton()
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.onboardingNameViewControllerNameLabel
