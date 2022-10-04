@@ -36,11 +36,11 @@
 		5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053828D6EFAF00355055 /* OnboardingNameViewController.swift */; };
 		5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053C28D7382900355055 /* UITextField+Extension.swift */; };
 		5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205053E28D76B0C00355055 /* TextLiteral.swift */; };
-		5205055128DCB63D00355055 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055028DCB63D00355055 /* LoginViewController.swift */; };
 		5205054228D8620000355055 /* OnboardingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054128D8620000355055 /* OnboardingProfileViewController.swift */; };
 		5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054428D8624700355055 /* OnboardingProfileGroupCollectionView.swift */; };
 		5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054628D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift */; };
 		5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205054A28DBF86700355055 /* SizeLiteral.swift */; };
+		5205055128DCB63D00355055 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055028DCB63D00355055 /* LoginViewController.swift */; };
 		5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055328E1BF6700355055 /* GroupMainViewController.swift */; };
 		5205055828E1C50600355055 /* InfoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055728E1C50600355055 /* InfoLabelView.swift */; };
 		5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227554F28B219DC0080DD65 /* AppDelegate.swift */; };
@@ -49,6 +49,9 @@
 		5227555928B219E50080DD65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5227555828B219E50080DD65 /* Assets.xcassets */; };
 		5227557028B3092A0080DD65 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 5227556F28B3092A0080DD65 /* GoogleSignIn */; };
 		5227557428B30AF90080DD65 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5227557328B30AF90080DD65 /* KakaoSDK */; };
+		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
+		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
+		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
 		7E1F2E2E28D2168300A5744A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */; };
 		7E1F2E2F28D2168300A5744A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */; };
@@ -86,11 +89,11 @@
 		5205053828D6EFAF00355055 /* OnboardingNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNameViewController.swift; sourceTree = "<group>"; };
 		5205053C28D7382900355055 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		5205053E28D76B0C00355055 /* TextLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLiteral.swift; sourceTree = "<group>"; };
-		5205055028DCB63D00355055 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5205054128D8620000355055 /* OnboardingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProfileViewController.swift; sourceTree = "<group>"; };
 		5205054428D8624700355055 /* OnboardingProfileGroupCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProfileGroupCollectionView.swift; sourceTree = "<group>"; };
 		5205054628D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProfileGroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		5205054A28DBF86700355055 /* SizeLiteral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeLiteral.swift; sourceTree = "<group>"; };
+		5205055028DCB63D00355055 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5205055328E1BF6700355055 /* GroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMainViewController.swift; sourceTree = "<group>"; };
 		5205055728E1C50600355055 /* InfoLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabelView.swift; sourceTree = "<group>"; };
 		5227554C28B219DC0080DD65 /* fairer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fairer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +103,9 @@
 		5227555828B219E50080DD65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5227555D28B219E50080DD65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5227557128B3095B0080DD65 /* fairer-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fairer-iOS.entitlements"; sourceTree = "<group>"; };
+		5275397828EC2F78002D8280 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
+		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -146,6 +152,8 @@
 			children = (
 				39EEF67D28CBB66F00437654 /* MainButton.swift */,
 				5205055728E1C50600355055 /* InfoLabelView.swift */,
+				52EBF04A28EC291F0062EB41 /* TextField.swift */,
+				5275397828EC2F78002D8280 /* BackButton.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -227,14 +235,6 @@
 			path = OnboardingName;
 			sourceTree = "<group>";
 		};
-		5205054F28DCB62800355055 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				5205055028DCB63D00355055 /* LoginViewController.swift */,
-			);
-			path = Login;
-            sourceTree = "<group>";
-        };
 		5205054028D861E300355055 /* OnboardingProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +251,14 @@
 				5205054628D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		5205054F28DCB62800355055 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5205055028DCB63D00355055 /* LoginViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		5205055228E1BF5000355055 /* GroupMain */ = {
@@ -312,6 +320,7 @@
 		5227556C28B303370080DD65 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				52EBF04728E578700062EB41 /* HouseMakeName */,
 				5205055228E1BF5000355055 /* GroupMain */,
 				5205054F28DCB62800355055 /* Login */,
 				5205054028D861E300355055 /* OnboardingProfile */,
@@ -320,6 +329,14 @@
 				5227555328B219DC0080DD65 /* ViewController.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		52EBF04728E578700062EB41 /* HouseMakeName */ = {
+			isa = PBXGroup;
+			children = (
+				52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */,
+			);
+			path = HouseMakeName;
 			sourceTree = "<group>";
 		};
 		7E1F2E2628D212E000A5744A /* Fonts */ = {
@@ -437,10 +454,12 @@
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
 				5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */,
 				39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */,
+				52EBF04B28EC29200062EB41 /* TextField.swift in Sources */,
 				39FABBDC28DB35020053EFD2 /* HomeCalendarView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
 				39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */,
+				5275397928EC2F78002D8280 /* BackButton.swift in Sources */,
 				39F1C12A28D604B000585B83 /* HomeGroupCollectionViewCell.swift in Sources */,
 				39EEF67528CBB61200437654 /* String+Extension.swift in Sources */,
 				5227555428B219DC0080DD65 /* ViewController.swift in Sources */,
@@ -450,6 +469,7 @@
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
 				39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */,
 				39EEF67128CBB5F600437654 /* Notification+Extension.swift in Sources */,
+				52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */,
 				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,

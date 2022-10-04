@@ -1,39 +1,38 @@
 //
-//  OnboardingNameViewController.swift
+//  HouseMakeNameViewController.swift
 //  fairer-iOS
 //
-//  Created by 김유나 on 2022/09/18.
+//  Created by 김유나 on 2022/09/29.
 //
 
 import UIKit
 
 import SnapKit
 
-final class OnboardingNameViewController: BaseViewController {
-    
-    private let nameMaxLength = 5
-    
+final class HouseMakeNameViewController: BaseViewController {
+
     // MARK: - property
-    
+
     private let backButton = BackButton()
-    private let nameLabel: UILabel = {
+    private let writeNamePrimaryLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.onboardingNameViewControllerNameLabel
-        label.textColor = .gray800
+        label.setTextWithLineHeight(text: TextLiteral.houseMakeNameViewControllerWriteNamePrimaryLabel, lineHeight: 28)
         label.font = .h2
+        label.textColor = .gray800
         return label
     }()
-    private let nameTextField: TextField = {
-        let textField = TextField()
-        textField.myPlaceholder = TextLiteral.onboardingNameViewControllerTextFieldPlaceholder
-        return textField
+    private let writeNameSecondaryLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.houseMakeNameViewControllerWriteNameSecondaryLabel, lineHeight: 26)
+        label.font = .body1
+        label.textColor = .gray400
+        label.numberOfLines = 0
+        return label
     }()
-    private lazy var nameDoneButton: MainButton = {
-        let button = MainButton()
-        button.title = TextLiteral.doneButtonText
-        button.isDisabled = true
-        button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
-        return button
+    private let houseNameTextField: TextField = {
+        let textField = TextField()
+        textField.myPlaceholder = TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder
+        return textField
     }()
     private let disableLabel: UILabel = {
         let label = UILabel()
@@ -43,6 +42,13 @@ final class OnboardingNameViewController: BaseViewController {
         label.layer.isHidden = true
         return label
     }()
+    private lazy var houseNameDoneButton: MainButton = {
+        let button = MainButton()
+        button.title = TextLiteral.doneButtonText
+        button.isDisabled = true
+        button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -51,34 +57,36 @@ final class OnboardingNameViewController: BaseViewController {
         setupDelegation()
         setupNotificationCenter()
     }
-    
-    override func configUI() {
-        super.configUI()
-    }
-    
+
     override func render() {
-        view.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints {
+        view.addSubview(writeNamePrimaryLabel)
+        writeNamePrimaryLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(28)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
         }
         
-        view.addSubview(nameTextField)
-        nameTextField.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(nameLabel.snp.bottom).offset(SizeLiteral.componentPadding)
+        view.addSubview(writeNameSecondaryLabel)
+        writeNameSecondaryLabel.snp.makeConstraints {
+            $0.top.equalTo(writeNamePrimaryLabel.snp.bottom)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(nameDoneButton)
-        nameDoneButton.snp.makeConstraints {
+        view.addSubview(houseNameTextField)
+        houseNameTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
+            $0.top.equalTo(writeNameSecondaryLabel.snp.bottom).offset(SizeLiteral.componentPadding)
         }
         
         view.addSubview(disableLabel)
         disableLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(nameTextField.snp.bottom).offset(8)
+            $0.top.equalTo(houseNameTextField.snp.bottom).offset(8)
+        }
+        
+        view.addSubview(houseNameDoneButton)
+        houseNameDoneButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
         }
     }
     
@@ -95,20 +103,20 @@ final class OnboardingNameViewController: BaseViewController {
     }
     
     private func setupDelegation() {
-        nameTextField.delegate = self
+        houseNameTextField.delegate = self
     }
     
     @objc private func didTapDoneButton() {
-        if nameTextField.text!.hasCharacters() {
-            nameTextField.layer.borderWidth = 0
+        if houseNameTextField.text!.hasCharacters() {
+            houseNameTextField.layer.borderWidth = 0
             disableLabel.isHidden = true
             
-            // TODO: - userdefault에 이름 저장
+            // TODO: - userdefault에 하우스 이름 저장
             
         } else {
-            nameTextField.layer.borderWidth = 1
-            nameTextField.layer.borderColor = UIColor.negative20.cgColor
-            nameDoneButton.isDisabled = true
+            houseNameTextField.layer.borderWidth = 1
+            houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
+            houseNameDoneButton.isDisabled = true
             disableLabel.isHidden = false
         }
     }
@@ -116,14 +124,14 @@ final class OnboardingNameViewController: BaseViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.nameDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 20)
+                self.houseNameDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 20)
             })
         }
     }
     
     @objc private func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            self.nameDoneButton.transform = .identity
+            self.houseNameDoneButton.transform = .identity
         })
     }
     
@@ -135,7 +143,7 @@ final class OnboardingNameViewController: BaseViewController {
 
 // MARK: - extension
 
-extension OnboardingNameViewController : UITextFieldDelegate {
+extension HouseMakeNameViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
@@ -143,17 +151,17 @@ extension OnboardingNameViewController : UITextFieldDelegate {
                 return true
             }
         }
-        guard textField.text!.count < 5 else { return false }
+        guard textField.text!.count < 10 else { return false }
         return true
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        let hasText = nameTextField.hasText
-        nameDoneButton.isDisabled = !hasText
+        let hasText = houseNameTextField.hasText
+        houseNameDoneButton.isDisabled = !hasText
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        nameTextField.layer.borderWidth = 0
+        houseNameTextField.layer.borderWidth = 0
         view.endEditing(true)
     }
 }

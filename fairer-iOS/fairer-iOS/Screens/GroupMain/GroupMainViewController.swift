@@ -15,13 +15,7 @@ final class GroupMainViewController: BaseViewController {
     
     // MARK: - property
     
-    private let backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        button.setImage(ImageLiterals.navigationBarBackButton, for: .normal)
-        button.tintColor = .gray800
-        return button
-    }()
+    private let backButton = BackButton()
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "안녕하세요. \(userName)님!\n새로 하우스를 만들거나 참여해주세요."
