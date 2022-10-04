@@ -13,6 +13,7 @@ final class HouseInviteCodeViewController: BaseViewController {
     
     let houseName: String = "즐거운 우리집"
     let inviteCode: String = "4D1AGE9HE362"
+    let validTime: Date = Date()
     
     // MARK: - property
     
@@ -45,6 +46,20 @@ final class HouseInviteCodeViewController: BaseViewController {
         view.code = inviteCode
         return view
     }()
+    private lazy var validTimeLabel: InfoLabelView = {
+        let view = InfoLabelView()
+        view.text = validTime.dateToKoreanString + "까지 유효한 코드"
+        view.textColor = .negative20
+        view.imageColor = .negative20
+        return view
+    }()
+    private lazy var codeInfoLabel: InfoLabelView = {
+        let view = InfoLabelView()
+        view.text = "초대 받은 사람은 해당 초대코드가 생성된 24시간 안에\n입력하셔야 합니다."
+        view.imageColor = .gray200
+        view.textColor = .gray600
+        return view
+    }()
     
     // MARK: - lifecycle
     
@@ -71,6 +86,19 @@ final class HouseInviteCodeViewController: BaseViewController {
         inviteCodeView.snp.makeConstraints {
             $0.top.equalTo(inviteCodeLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(validTimeLabel)
+        validTimeLabel.snp.makeConstraints {
+            $0.top.equalTo(inviteCodeView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(22)
+        }
+        
+        view.addSubview(codeInfoLabel)
+        codeInfoLabel.snp.makeConstraints {
+            $0.top.equalTo(validTimeLabel.snp.bottom).offset(8)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
