@@ -55,7 +55,7 @@ final class OnboardingNameViewController: BaseViewController {
     }()
     private let disableLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.onboardingNameViewControllerDisableLabel
+        label.text = TextLiteral.textFieldDisableSignLabel
         label.textColor = .negative20
         label.font = .body2
         label.layer.isHidden = true

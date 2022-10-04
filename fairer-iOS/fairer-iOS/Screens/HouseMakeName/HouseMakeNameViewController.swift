@@ -54,7 +54,7 @@ final class HouseMakeNameViewController: BaseViewController {
     }()
     private let disableLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.houseMakeNameViewControllerDisableLabel
+        label.text = TextLiteral.textFieldDisableSignLabel
         label.textColor = .negative20
         label.font = .body2
         label.layer.isHidden = true
