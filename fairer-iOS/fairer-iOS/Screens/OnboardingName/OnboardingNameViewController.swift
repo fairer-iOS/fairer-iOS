@@ -15,6 +15,13 @@ final class OnboardingNameViewController: BaseViewController {
     
     // MARK: - property
     
+    private let backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        button.setImage(ImageLiterals.navigationBarBackButton, for: .normal)
+        button.tintColor = .gray800
+        return button
+    }()
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.onboardingNameViewControllerNameLabel
@@ -41,7 +48,7 @@ final class OnboardingNameViewController: BaseViewController {
     }()
     private lazy var nameDoneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.onboardingNameViewControllerDoneButtonText
+        button.title = TextLiteral.doneButtonText
         button.isDisabled = true
         button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
@@ -71,20 +78,20 @@ final class OnboardingNameViewController: BaseViewController {
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
         }
         
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(nameLabel.snp.bottom).offset(16)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.height.equalTo(58)
         }
         
         view.addSubview(nameDoneButton)
         nameDoneButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.mainButtonBottomPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
         }
         
         view.addSubview(disableLabel)
@@ -95,6 +102,16 @@ final class OnboardingNameViewController: BaseViewController {
     }
     
     // MARK: - functions
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let backButton = makeBarButtonItem(with: backButton)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = backButton
+    }
     
     private func setupDelegation() {
         nameTextField.delegate = self

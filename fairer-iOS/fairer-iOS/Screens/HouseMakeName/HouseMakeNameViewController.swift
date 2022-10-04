@@ -28,7 +28,7 @@ final class HouseMakeNameViewController: BaseViewController {
         return label
     }()
     private let writeNameSecondaryLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.houseMakeNameViewControllerWriteNameSecondaryLabel, lineHeight: 26)
         label.font = .body1
         label.textColor = .gray400
@@ -62,7 +62,7 @@ final class HouseMakeNameViewController: BaseViewController {
     }()
     private lazy var houseNameDoneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.houseMakeNameViewControllerDoneButtonText
+        button.title = TextLiteral.doneButtonText
         button.isDisabled = true
         button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
@@ -92,7 +92,7 @@ final class HouseMakeNameViewController: BaseViewController {
         view.addSubview(houseNameTextField)
         houseNameTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(writeNameSecondaryLabel.snp.bottom).offset(16)
+            $0.top.equalTo(writeNameSecondaryLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.height.equalTo(58)
         }
         
@@ -105,7 +105,7 @@ final class HouseMakeNameViewController: BaseViewController {
         view.addSubview(houseNameDoneButton)
         houseNameDoneButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.mainButtonBottomPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
         }
     }
     

@@ -11,13 +11,12 @@ enum TextLiteral {
     
     // MARK: - AnyWhere
     
-    
+    static let doneButtonText: String = "입력 완료"
     
     // MARK: - OnboardingNameViewController
     
     static let onboardingNameViewControllerNameLabel: String = "이름을 입력해주세요."
     static let onboardingNameViewControllerTextFieldPlaceholder: String = "예) 홍길동"
-    static let onboardingNameViewControllerDoneButtonText: String = "입력 완료"
     static let onboardingNameViewControllerDisableLabel: String = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
     
     // MARK: - OnboardingProfileViewController
@@ -37,5 +36,4 @@ enum TextLiteral {
     static let houseMakeNameViewControllerWriteNameSecondaryLabel: String = "집의 특성을 잘 보여줄 수 있는 이름도 좋아요!"
     static let houseMakeNameViewControllerTextFieldPlaceholder: String = "예) 즐거운 우리집"
     static let houseMakeNameViewControllerDisableLabel: String = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
-    static let houseMakeNameViewControllerDoneButtonText: String = "입력 완료"
 }
