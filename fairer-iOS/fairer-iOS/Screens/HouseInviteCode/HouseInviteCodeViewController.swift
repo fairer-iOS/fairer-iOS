@@ -60,7 +60,7 @@ final class HouseInviteCodeViewController: BaseViewController {
         view.textColor = .gray600
         return view
     }()
-    private let copyCodeButton: UIButton = {
+    private lazy var copyCodeButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.image = ImageLiterals.imgCopyCode
         config.imagePlacement = .leading
@@ -72,6 +72,10 @@ final class HouseInviteCodeViewController: BaseViewController {
         let button = UIButton(configuration: config)
         button.layer.cornerRadius = 8
         button.backgroundColor = .positive10
+        let buttonAction = UIAction { [weak self] _ in
+            self?.touchUpToShowToast()
+        }
+        button.addAction(buttonAction, for: .touchUpInside)
         return button
     }()
     private let kakaoShareButton: UIButton = {
@@ -169,5 +173,38 @@ final class HouseInviteCodeViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func touchUpToShowToast() {
+        UIPasteboard.general.string = inviteCode
+        showToast()
+    }
+    
+    private func showToast() {
+        let toastLabel = UILabel()
+        toastLabel.text = "코드를 클립보드에 복사했습니다."
+        toastLabel.textColor = .white
+        toastLabel.font = .title2
+        toastLabel.backgroundColor = .gray700
+        toastLabel.textAlignment = .center
+        toastLabel.layer.cornerRadius = 8
+        toastLabel.clipsToBounds = true
+        toastLabel.alpha = 0
+        view.addSubview(toastLabel)
+        toastLabel.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(22)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(36)
+        }
+        UIView.animate(withDuration: 1.0, animations: {
+            toastLabel.alpha = 1.0
+        }, completion: { isCompleted in
+            UIView.animate(withDuration: 1.0, animations: {
+                toastLabel.alpha = 0
+            }, completion: { isCompleted in
+                toastLabel.removeFromSuperview()
+            })
+        })
+        
     }
 }
