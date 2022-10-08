@@ -60,6 +60,42 @@ final class HouseInviteCodeViewController: BaseViewController {
         view.textColor = .gray600
         return view
     }()
+    private let copyCodeButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.image = ImageLiterals.imgCopyCode
+        config.imagePlacement = .leading
+        config.baseForegroundColor = .blue
+        var titleAttr = AttributedString.init("코드 복사하기")
+        titleAttr.font = .title1
+        config.attributedTitle = titleAttr
+        config.imagePadding = 4
+        let button = UIButton(configuration: config)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .positive10
+        return button
+    }()
+    private let kakaoShareButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.image = ImageLiterals.imgKakaoShare
+        config.imagePlacement = .leading
+        config.baseForegroundColor = UIColor(red: 0.141, green: 0.051, blue: 0.047, alpha: 1)
+        var titleAttr = AttributedString.init("카카오톡 공유하기")
+        titleAttr.font = .title1
+        config.attributedTitle = titleAttr
+        config.imagePadding = 4
+        let button = UIButton(configuration: config)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = UIColor(red: 0.992, green: 0.945, blue: 0.38, alpha: 1)
+        return button
+    }()
+    private let skipButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("건너뛰기", for: .normal)
+        button.titleLabel?.font = .title1
+        button.setTitleColor(.gray800, for: .normal)
+        button.backgroundColor = .white
+        return button
+    }()
     
     // MARK: - lifecycle
     
@@ -99,6 +135,27 @@ final class HouseInviteCodeViewController: BaseViewController {
         codeInfoLabel.snp.makeConstraints {
             $0.top.equalTo(validTimeLabel.snp.bottom).offset(8)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(skipButton)
+        skipButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(56)
+        }
+        
+        view.addSubview(kakaoShareButton)
+        kakaoShareButton.snp.makeConstraints {
+            $0.bottom.equalTo(skipButton.snp.top).offset(-8)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(56)
+        }
+        
+        view.addSubview(copyCodeButton)
+        copyCodeButton.snp.makeConstraints {
+            $0.bottom.equalTo(kakaoShareButton.snp.top).offset(-8)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(56)
         }
     }
     
