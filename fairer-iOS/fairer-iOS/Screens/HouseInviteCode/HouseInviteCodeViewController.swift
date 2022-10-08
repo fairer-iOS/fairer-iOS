@@ -20,14 +20,14 @@ final class HouseInviteCodeViewController: BaseViewController {
     private let backButton = BackButton()
     private let houseInvitePrimaryLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "하우스에 사람을 초대해주세요.", lineHeight: 28)
+        label.setTextWithLineHeight(text: TextLiteral.houseInviteCodeViewControllerPrimaryLabel, lineHeight: 28)
         label.font = .h2
         label.textColor = .gray800
         return label
     }()
     private let houseInviteSecondaryLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "앞으로 함께 집안일을 관리할 가족, 친구, 룸메이트\n누구든 초대해주세요!", lineHeight: 26)
+        label.setTextWithLineHeight(text: TextLiteral.houseInviteCodeViewControllerSecondaryLabel, lineHeight: 26)
         label.numberOfLines = 0
         label.font = .body1
         label.textColor = .gray400
@@ -35,7 +35,7 @@ final class HouseInviteCodeViewController: BaseViewController {
     }()
     private lazy var inviteCodeLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(houseName)의 초대코드", lineHeight: 22)
+        label.setTextWithLineHeight(text: houseName + TextLiteral.houseInviteCodeViewControllerInviteCodeLabel, lineHeight: 22)
         label.font = .title1
         label.textColor = .gray600
         label.applyColor(to: houseName, with: .blue)
@@ -48,14 +48,14 @@ final class HouseInviteCodeViewController: BaseViewController {
     }()
     private lazy var validTimeLabel: InfoLabelView = {
         let view = InfoLabelView()
-        view.text = validTime.dateToKoreanString + "까지 유효한 코드"
+        view.text = validTime.dateToKoreanString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
         view.textColor = .negative20
         view.imageColor = .negative20
         return view
     }()
     private lazy var codeInfoLabel: InfoLabelView = {
         let view = InfoLabelView()
-        view.text = "초대 받은 사람은 해당 초대코드가 생성된 24시간 안에\n입력하셔야 합니다."
+        view.text = TextLiteral.houseInviteCodeViewControllerCodeInfoLabel
         view.imageColor = .gray200
         view.textColor = .gray600
         return view
@@ -65,7 +65,7 @@ final class HouseInviteCodeViewController: BaseViewController {
         config.image = ImageLiterals.imgCopyCode
         config.imagePlacement = .leading
         config.baseForegroundColor = .blue
-        var titleAttr = AttributedString.init("코드 복사하기")
+        var titleAttr = AttributedString.init(TextLiteral.houseInviteCodeViewControllerCopyCodeButtonText)
         titleAttr.font = .title1
         config.attributedTitle = titleAttr
         config.imagePadding = 4
@@ -83,7 +83,7 @@ final class HouseInviteCodeViewController: BaseViewController {
         config.image = ImageLiterals.imgKakaoShare
         config.imagePlacement = .leading
         config.baseForegroundColor = UIColor(red: 0.141, green: 0.051, blue: 0.047, alpha: 1)
-        var titleAttr = AttributedString.init("카카오톡 공유하기")
+        var titleAttr = AttributedString.init(TextLiteral.houseInviteCodeViewControllerKakaoShareButtonText)
         titleAttr.font = .title1
         config.attributedTitle = titleAttr
         config.imagePadding = 4
@@ -94,7 +94,7 @@ final class HouseInviteCodeViewController: BaseViewController {
     }()
     private let skipButton: UIButton = {
         let button = UIButton()
-        button.setTitle("건너뛰기", for: .normal)
+        button.setTitle(TextLiteral.houseInviteCodeViewControllerSkipButtonText, for: .normal)
         button.titleLabel?.font = .title1
         button.setTitleColor(.gray800, for: .normal)
         button.backgroundColor = .white
@@ -182,7 +182,7 @@ final class HouseInviteCodeViewController: BaseViewController {
     
     private func showToast() {
         let toastLabel = UILabel()
-        toastLabel.text = "코드를 클립보드에 복사했습니다."
+        toastLabel.text = TextLiteral.houseInviteCodeViewControllerCopyCodeToastLabel
         toastLabel.textColor = .white
         toastLabel.font = .title2
         toastLabel.backgroundColor = .gray700
