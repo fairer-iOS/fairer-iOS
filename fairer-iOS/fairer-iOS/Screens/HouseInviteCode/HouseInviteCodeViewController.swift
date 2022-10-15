@@ -13,7 +13,8 @@ final class HouseInviteCodeViewController: BaseViewController {
     
     let houseName: String = "즐거운 우리집"
     let inviteCode: String = "4D1AGE9HE362"
-    let validTime: Date = Date()
+    // FIXME: - 코드 유효 시간으로 변경
+    let validTime: Date = Calendar.current.date(byAdding: .hour, value: +1, to: Date())!
     
     // MARK: - property
     
@@ -60,48 +61,26 @@ final class HouseInviteCodeViewController: BaseViewController {
         view.textColor = .gray600
         return view
     }()
-    private lazy var copyCodeButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.image = ImageLiterals.imgCopyCode
-        config.imagePlacement = .leading
-        config.baseForegroundColor = .blue
-        var titleAttr = AttributedString.init(TextLiteral.houseInviteCodeViewControllerCopyCodeButtonText)
-        titleAttr.font = .title1
-        config.attributedTitle = titleAttr
-        config.imagePadding = 4
-        let button = UIButton(configuration: config)
-        button.layer.cornerRadius = 8
-        button.backgroundColor = .positive10
-        let buttonAction = UIAction { [weak self] _ in
-            self?.touchUpToShowToast()
-        }
-        button.addAction(buttonAction, for: .touchUpInside)
-        return button
+    private lazy var inviteCodeButtonView: InviteCodeButtonView = {
+        let view = InviteCodeButtonView()
+        view.code = inviteCode
+        return view
     }()
-    private let kakaoShareButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.image = ImageLiterals.imgKakaoShare
-        config.imagePlacement = .leading
-        config.baseForegroundColor = UIColor(red: 0.141, green: 0.051, blue: 0.047, alpha: 1)
-        var titleAttr = AttributedString.init(TextLiteral.houseInviteCodeViewControllerKakaoShareButtonText)
-        titleAttr.font = .title1
-        config.attributedTitle = titleAttr
-        config.imagePadding = 4
-        let button = UIButton(configuration: config)
-        button.layer.cornerRadius = 8
-        button.backgroundColor = UIColor(red: 0.992, green: 0.945, blue: 0.38, alpha: 1)
-        return button
-    }()
-    private let skipButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(TextLiteral.houseInviteCodeViewControllerSkipButtonText, for: .normal)
-        button.titleLabel?.font = .title1
-        button.setTitleColor(.gray800, for: .normal)
-        button.backgroundColor = .white
+    private let refreshCodeButton: MainButton = {
+        let button = MainButton()
+        button.title = "코드 재발급 받기"
+        button.isDisabled = false
+        button.isHidden = true
         return button
     }()
     
+    
     // MARK: - lifecycle
+    
+    override func configUI() {
+        super.configUI()
+        setupViewLayer()
+    }
     
     override func render() {
         view.addSubview(houseInvitePrimaryLabel)
@@ -141,25 +120,17 @@ final class HouseInviteCodeViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(skipButton)
-        skipButton.snp.makeConstraints {
+        view.addSubview(inviteCodeButtonView)
+        inviteCodeButtonView.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(56)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(184)
         }
         
-        view.addSubview(kakaoShareButton)
-        kakaoShareButton.snp.makeConstraints {
-            $0.bottom.equalTo(skipButton.snp.top).offset(-8)
+        view.addSubview(refreshCodeButton)
+        refreshCodeButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(56)
-        }
-        
-        view.addSubview(copyCodeButton)
-        copyCodeButton.snp.makeConstraints {
-            $0.bottom.equalTo(kakaoShareButton.snp.top).offset(-8)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(56)
         }
     }
     
@@ -175,36 +146,10 @@ final class HouseInviteCodeViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
-    private func touchUpToShowToast() {
-        UIPasteboard.general.string = inviteCode
-        showToast()
-    }
-    
-    private func showToast() {
-        let toastLabel = UILabel()
-        toastLabel.text = TextLiteral.houseInviteCodeViewControllerCopyCodeToastLabel
-        toastLabel.textColor = .white
-        toastLabel.font = .title2
-        toastLabel.backgroundColor = .gray700
-        toastLabel.textAlignment = .center
-        toastLabel.layer.cornerRadius = 8
-        toastLabel.clipsToBounds = true
-        toastLabel.alpha = 0
-        view.addSubview(toastLabel)
-        toastLabel.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(22)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(36)
+    private func setupViewLayer() {
+        if validTime < Date() {
+            inviteCodeButtonView.isHidden = true
+            refreshCodeButton.isHidden = false
         }
-        UIView.animate(withDuration: 1.0, animations: {
-            toastLabel.alpha = 1.0
-        }, completion: { isCompleted in
-            UIView.animate(withDuration: 1.0, animations: {
-                toastLabel.alpha = 0
-            }, completion: { isCompleted in
-                toastLabel.removeFromSuperview()
-            })
-        })
-        
     }
 }
