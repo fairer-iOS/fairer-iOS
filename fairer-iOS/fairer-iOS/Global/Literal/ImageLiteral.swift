@@ -10,6 +10,7 @@ import UIKit
 enum ImageLiterals {
     
     // MARK: - image
+    
     static var imgInfo: UIImage { .load(systemName: "info.circle.fill") }
     static var imgLogo: UIImage { .load(name: "fairerlogo") }
     static var imgLogoLogin: UIImage { .load(name: "fairerlogologin") }
@@ -28,6 +29,8 @@ enum ImageLiterals {
     static var imgSelectedLivingRoom: UIImage { .load(name: "selectedLivingRoom") }
     static var imgSelectedOutside: UIImage { .load(name: "selectedOutside") }
     static var imgSelectedRoom: UIImage { .load(name: "selectedRoom") }
+    static var imgCopyCode: UIImage { .load(name: "copycode") }
+    static var imgKakaoShare: UIImage { .load(name: "kakaoshare") }
     
     
     // MARK: - profile

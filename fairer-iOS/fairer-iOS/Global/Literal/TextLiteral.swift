@@ -48,4 +48,17 @@ enum TextLiteral {
     // MARK: - HomeCalendarView
     
     static let homeCalendarViewTodayTitle: String = "오늘"
+    
+    // MARK: - HouseInviteCodeViewController
+    
+    static let houseInviteCodeViewControllerPrimaryLabel: String = "하우스에 사람을 초대해주세요."
+    static let houseInviteCodeViewControllerSecondaryLabel: String = "앞으로 함께 집안일을 관리할 가족, 친구, 룸메이트\n누구든 초대해주세요!"
+    static let houseInviteCodeViewControllerInviteCodeLabel: String = "의 초대코드"
+    static let houseInviteCodeViewControllerValidTimeLabel: String = "까지 유효한 코드"
+    static let houseInviteCodeViewControllerCodeInfoLabel: String = "초대 받은 사람은 해당 초대코드가 생성된 24시간 안에\n입력하셔야 합니다."
+    static let houseInviteCodeViewControllerCopyCodeButtonText: String = "코드 복사하기"
+    static let houseInviteCodeViewControllerKakaoShareButtonText: String = "카카오톡 공유하기"
+    static let houseInviteCodeViewControllerSkipButtonText: String = "건너뛰기"
+    static let houseInviteCodeViewControllerCopyCodeToastLabel: String = "코드를 클립보드에 복사했습니다."
+    static let houseInviteCodeViewControllerRefreshButtonText: String = "코드 재발급 받기"
 }

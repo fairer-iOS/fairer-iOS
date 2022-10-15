@@ -19,4 +19,10 @@ extension Date {
         formatter.dateFormat = "yyyy.MM.dd"
         return formatter.string(from: self)
     }
+    
+    var dateToKoreanString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 M월 d일 H시 M분"
+        return formatter.string(from: self)
+    }
 }
