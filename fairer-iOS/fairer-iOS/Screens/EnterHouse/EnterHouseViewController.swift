@@ -16,21 +16,21 @@ final class EnterHouseViewController: BaseViewController {
     private let backButton = BackButton()
     private let enterHousePrimaryLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "초대코드를 입력해주세요.", lineHeight: 28)
+        label.setTextWithLineHeight(text: TextLiteral.enterHouseViewControllerPrimaryLabel, lineHeight: 28)
         label.font = .h2
         label.textColor = .gray800
         return label
     }()
     private let enterHouseSecondaryLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "초대코드를 입력 후 바로 공간에 참여할 수 있어요!", lineHeight: 26)
+        label.setTextWithLineHeight(text: TextLiteral.enterHouseViewControllerSecondaryLabel, lineHeight: 26)
         label.font = .body1
         label.textColor = .gray400
         return label
     }()
     private let enterHouseCodeTextfield: TextField = {
         let textfield = TextField()
-        textfield.myPlaceholder = "12글자 입력"
+        textfield.myPlaceholder = TextLiteral.enterHouseViewControllerTextfieldPlaceHolder
         return textfield
     }()
     private lazy var enterHouseDoneButton: MainButton = {
@@ -115,8 +115,8 @@ final class EnterHouseViewController: BaseViewController {
     
     private func touchUpToShowToast() {
         //FIXME: - 예외 케이스에 따라 분기처리
-        showToast("잘못된 코드입니다.", 36)
-        showToast("하우스가 꽉 차서 참여할 수 없어요.\n6명까지만 참여할 수 있어요.", 56)
+        showToast(TextLiteral.enterHouseViewControllerToastWrongCode, 36)
+        showToast(TextLiteral.enterHouseViewControllerToastHouseFull, 56)
     }
     
     private func showToast(_ message: String, _ height: Int) {
