@@ -14,7 +14,7 @@ final class HouseInviteCodeViewController: BaseViewController {
     // FIXME: - 사용자 지정 하우스 이름, 서버에서 받은 초대코드, 코드 유효 시간으로 변경
     let houseName: String = "즐거운 우리집"
     let inviteCode: String = "4D1AGE9HE362"
-    let validTime: Date = Calendar.current.date(byAdding: .hour, value: -1, to: Date())!
+    let validTime: Date = Calendar.current.date(byAdding: .hour, value: +1, to: Date())!
     
     // MARK: - property
     
