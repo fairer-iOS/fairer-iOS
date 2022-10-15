@@ -11,10 +11,10 @@ import SnapKit
 
 final class HouseInviteCodeViewController: BaseViewController {
     
+    // FIXME: - 사용자 지정 하우스 이름, 서버에서 받은 초대코드, 코드 유효 시간으로 변경
     let houseName: String = "즐거운 우리집"
     let inviteCode: String = "4D1AGE9HE362"
-    // FIXME: - 코드 유효 시간으로 변경
-    let validTime: Date = Calendar.current.date(byAdding: .hour, value: +1, to: Date())!
+    let validTime: Date = Calendar.current.date(byAdding: .hour, value: -1, to: Date())!
     
     // MARK: - property
     
@@ -68,18 +68,17 @@ final class HouseInviteCodeViewController: BaseViewController {
     }()
     private let refreshCodeButton: MainButton = {
         let button = MainButton()
-        button.title = "코드 재발급 받기"
+        button.title = TextLiteral.houseInviteCodeViewControllerRefreshButtonText
         button.isDisabled = false
         button.isHidden = true
         return button
     }()
     
-    
     // MARK: - lifecycle
     
     override func configUI() {
         super.configUI()
-        setupViewLayer()
+        setupButtonLayer()
     }
     
     override func render() {
@@ -146,7 +145,7 @@ final class HouseInviteCodeViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
-    private func setupViewLayer() {
+    private func setupButtonLayer() {
         if validTime < Date() {
             inviteCodeButtonView.isHidden = true
             refreshCodeButton.isHidden = false

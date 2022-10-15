@@ -60,4 +60,5 @@ enum TextLiteral {
     static let houseInviteCodeViewControllerKakaoShareButtonText: String = "카카오톡 공유하기"
     static let houseInviteCodeViewControllerSkipButtonText: String = "건너뛰기"
     static let houseInviteCodeViewControllerCopyCodeToastLabel: String = "코드를 클립보드에 복사했습니다."
+    static let houseInviteCodeViewControllerRefreshButtonText: String = "코드 재발급 받기"
 }
