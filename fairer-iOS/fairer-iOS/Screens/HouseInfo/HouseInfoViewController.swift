@@ -13,6 +13,23 @@ class HouseInfoViewController: BaseViewController {
 
     // MARK: - property
     
+    private let backButton = BackButton()
+    
     // MARK: - lifecycle
-
+    
+    override func render() {
+        
+    }
+    
+    // MARK: - functions
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let backButton = makeBarButtonItem(with: backButton)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = backButton
+    }
 }
