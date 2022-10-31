@@ -11,11 +11,13 @@ import SnapKit
 
 class HouseInfoViewController: BaseViewController {
     
+    // FIXME: - api 연결 후 변경 (현재 임의 지정)
+    
     let houseName: String = "즐거운 우리집"
 
     // MARK: - property
     
-    private let backButton = BackButton()
+    private let backButton = BackButton(type: .system)
     private let welcomeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -43,10 +45,10 @@ class HouseInfoViewController: BaseViewController {
         label.textColor = .gray600
         return label
     }()
+    private let houseMemberCollectionView = HouseMemberCollectionView()
     private let houseInfoDoneButton: MainButton = {
         let button = MainButton()
         button.title = "참여 완료"
-        button.isDisabled = false
         return button
     }()
     
@@ -83,6 +85,13 @@ class HouseInfoViewController: BaseViewController {
         houseInfoDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(houseMemberCollectionView)
+        houseMemberCollectionView.snp.makeConstraints {
+            $0.top.equalTo(houseMemberLabel.snp.bottom)
+            $0.bottom.equalTo(houseInfoDoneButton.snp.top)
+            $0.leading.trailing.equalToSuperview()
         }
     }
     
