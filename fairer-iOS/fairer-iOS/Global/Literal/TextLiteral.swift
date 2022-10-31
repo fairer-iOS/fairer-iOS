@@ -69,4 +69,10 @@ enum TextLiteral {
     static let enterHouseViewControllerTextfieldPlaceHolder: String = "12글자 입력"
     static let enterHouseViewControllerToastWrongCode: String = "잘못된 코드입니다."
     static let enterHouseViewControllerToastHouseFull: String = "하우스가 꽉 차서 참여할 수 없어요.\n6명까지만 참여할 수 있어요."
+    
+    // MARK: - HouseInfoViewController
+    
+    static let houseInfoViewControllerWelcomeLabel: String = "에 어서오세요!"
+    static let houseInfoViewControllerHouseMemberLabel: String = "공간 참여자"
+    static let houseInfoViewControllerHouseInfoDoneButtonText: String = "참여 완료"
 }

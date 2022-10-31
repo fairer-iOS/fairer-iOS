@@ -26,7 +26,7 @@ class HouseInfoViewController: BaseViewController {
     }()
     private lazy var welcomeLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: houseName + "에 어서오세요!", lineHeight: 28)
+        label.setTextWithLineHeight(text: houseName + TextLiteral.houseInfoViewControllerWelcomeLabel, lineHeight: 28)
         label.font = .h2
         label.textColor = .gray800
         label.applyColor(to: houseName, with: .blue)
@@ -40,7 +40,7 @@ class HouseInfoViewController: BaseViewController {
     }()
     private let houseMemberLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "공간 참여자", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.houseInfoViewControllerHouseMemberLabel, lineHeight: 22)
         label.font = .title1
         label.textColor = .gray600
         return label
@@ -48,7 +48,7 @@ class HouseInfoViewController: BaseViewController {
     private let houseMemberCollectionView = HouseMemberCollectionView()
     private let houseInfoDoneButton: MainButton = {
         let button = MainButton()
-        button.title = "참여 완료"
+        button.title = TextLiteral.houseInfoViewControllerHouseInfoDoneButtonText
         return button
     }()
     
