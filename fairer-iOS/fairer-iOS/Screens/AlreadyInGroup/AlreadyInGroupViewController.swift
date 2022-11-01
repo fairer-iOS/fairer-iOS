@@ -16,7 +16,7 @@ final class AlreadyInGroupViewController: BaseViewController {
     
     private let alreadyInGroupTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "이미 그룹에 참여되어 있습니다.\n새로운 그룹에 참여하려면\n기존의 그룹에서 나가주세요.", lineHeight: 28)
+        label.setTextWithLineHeight(text: TextLiteral.alreadyInGroupViewControllerTitleLabel, lineHeight: 28)
         label.numberOfLines = 0
         label.textColor = .gray800
         label.font = .h2
@@ -25,7 +25,7 @@ final class AlreadyInGroupViewController: BaseViewController {
     private let alreadyInGroupInfoLabel: InfoLabelView = {
         let view = InfoLabelView()
         view.textColor = .gray600
-        view.text = "기존의 그룹에서 나가는 경로는\n’설정>그룹 관리>그룹에서 나가기’ 입니다."
+        view.text = TextLiteral.alreadyInGroupViewControllerInfoLabel
         view.imageColor = .gray200
         return view
     }()
@@ -38,7 +38,7 @@ final class AlreadyInGroupViewController: BaseViewController {
     private let backToMainButton: MainButton = {
         let button = MainButton()
         button.isDisabled = false
-        button.title = "메인으로 돌아가기"
+        button.title = TextLiteral.alreadyInGroupViewControllerDoneButtonText
         return button
     }()
     
@@ -70,7 +70,5 @@ final class AlreadyInGroupViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
-    
-    // MARK: - func
     
 }

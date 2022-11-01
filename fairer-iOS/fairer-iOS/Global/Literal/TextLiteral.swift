@@ -75,4 +75,10 @@ enum TextLiteral {
     static let houseInfoViewControllerWelcomeLabel: String = "에 어서오세요!"
     static let houseInfoViewControllerHouseMemberLabel: String = "공간 참여자"
     static let houseInfoViewControllerHouseInfoDoneButtonText: String = "참여 완료"
+    
+    // MARK: - AlreadyInGroupViewController
+    
+    static let alreadyInGroupViewControllerTitleLabel: String = "이미 그룹에 참여되어 있습니다.\n새로운 그룹에 참여하려면\n기존의 그룹에서 나가주세요."
+    static let alreadyInGroupViewControllerInfoLabel: String = "기존의 그룹에서 나가는 경로는\n’설정>그룹 관리>그룹에서 나가기’ 입니다."
+    static let alreadyInGroupViewControllerDoneButtonText: String = "메인으로 돌아가기"
 }
