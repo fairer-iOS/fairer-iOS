@@ -43,6 +43,7 @@
 		5205055128DCB63D00355055 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055028DCB63D00355055 /* LoginViewController.swift */; };
 		5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055328E1BF6700355055 /* GroupMainViewController.swift */; };
 		5205055828E1C50600355055 /* InfoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055728E1C50600355055 /* InfoLabelView.swift */; };
+		520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D6FF1291133A800CF65B2 /* AlreadyInGroupViewController.swift */; };
 		5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227554F28B219DC0080DD65 /* AppDelegate.swift */; };
 		5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555128B219DC0080DD65 /* SceneDelegate.swift */; };
 		5227555428B219DC0080DD65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555328B219DC0080DD65 /* ViewController.swift */; };
@@ -52,6 +53,8 @@
 		522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E88FE28EC854C000C65C8 /* InviteCodeView.swift */; };
 		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
+		52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */; };
+		52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */; };
 		52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */; };
 		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
@@ -106,6 +109,7 @@
 		5205055028DCB63D00355055 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5205055328E1BF6700355055 /* GroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMainViewController.swift; sourceTree = "<group>"; };
 		5205055728E1C50600355055 /* InfoLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabelView.swift; sourceTree = "<group>"; };
+		520D6FF1291133A800CF65B2 /* AlreadyInGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlreadyInGroupViewController.swift; sourceTree = "<group>"; };
 		5227554C28B219DC0080DD65 /* fairer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fairer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5227554F28B219DC0080DD65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5227555128B219DC0080DD65 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 		522E88FE28EC854C000C65C8 /* InviteCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeView.swift; sourceTree = "<group>"; };
 		5275397828EC2F78002D8280 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
+		52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionView.swift; sourceTree = "<group>"; };
+		52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeButtonView.swift; sourceTree = "<group>"; };
 		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
@@ -289,6 +295,14 @@
 			path = GroupMain;
 			sourceTree = "<group>";
 		};
+		520D6FF02911339100CF65B2 /* AlreadyInGroup */ = {
+			isa = PBXGroup;
+			children = (
+				520D6FF1291133A800CF65B2 /* AlreadyInGroupViewController.swift */,
+			);
+			path = AlreadyInGroup;
+			sourceTree = "<group>";
+		};
 		5227554328B219DC0080DD65 = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +354,7 @@
 		5227556C28B303370080DD65 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				520D6FF02911339100CF65B2 /* AlreadyInGroup */,
 				52FFDFB328FBF95B00DE1AE8 /* HouseInfo */,
 				52FFDFB028FA983100DE1AE8 /* EnterHouse */,
 				5275397A28EC75EE002D8280 /* HouseInviteCode */,
@@ -373,6 +388,15 @@
 			path = HouseInviteCode;
 			sourceTree = "<group>";
 		};
+		52C09CF029113D5C00B46F15 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */,
+				52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
 		52EBF04728E578700062EB41 /* HouseMakeName */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +416,7 @@
 		52FFDFB328FBF95B00DE1AE8 /* HouseInfo */ = {
 			isa = PBXGroup;
 			children = (
+				52C09CF029113D5C00B46F15 /* UIComponent */,
 				52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */,
 			);
 			path = HouseInfo;
@@ -533,6 +558,7 @@
 				7EF87A3828E1A17800DFE353 /* SpaceNameLabel.swift in Sources */,
 				7EEE2FA028E449610067FA7B /* Space.swift in Sources */,
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
+				520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */,
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
@@ -558,7 +584,9 @@
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
 				7EFAA87328DA088900737DF0 /* SelectHouseWorkSpaceCollectionViewCell.swift in Sources */,
 				5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */,
+				52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */,
 				5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */,
+				52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */,
 				7EFAA86E28DA032800737DF0 /* CreateHouseWorkViewController.swift in Sources */,
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
