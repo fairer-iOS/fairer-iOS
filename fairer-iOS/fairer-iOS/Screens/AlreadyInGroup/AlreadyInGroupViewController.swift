@@ -21,6 +21,13 @@ final class AlreadyInGroupViewController: BaseViewController {
         label.font = .h2
         return label
     }()
+    private let alreadyInGroupInfoLabel: InfoLabelView = {
+        let view = InfoLabelView()
+        view.textColor = .gray600
+        view.text = "기존의 그룹에서 나가는 경로는\n’설정>그룹 관리>그룹에서 나가기’ 입니다."
+        view.imageColor = .gray200
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -28,6 +35,12 @@ final class AlreadyInGroupViewController: BaseViewController {
         view.addSubview(alreadyInGroupTitleLabel)
         alreadyInGroupTitleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(alreadyInGroupInfoLabel)
+        alreadyInGroupInfoLabel.snp.makeConstraints {
+            $0.top.equalTo(alreadyInGroupTitleLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
