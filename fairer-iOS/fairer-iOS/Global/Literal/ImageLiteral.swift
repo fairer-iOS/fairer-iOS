@@ -31,6 +31,7 @@ enum ImageLiterals {
     static var imgSelectedRoom: UIImage { .load(name: "selectedRoom") }
     static var imgCopyCode: UIImage { .load(name: "copycode") }
     static var imgKakaoShare: UIImage { .load(name: "kakaoshare") }
+    static var imgWelcomeHouse: UIImage { .load(name: "welcomehouse") }
     
     
     // MARK: - profile
