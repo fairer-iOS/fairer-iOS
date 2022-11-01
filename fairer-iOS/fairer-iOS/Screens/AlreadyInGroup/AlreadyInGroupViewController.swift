@@ -28,13 +28,19 @@ final class AlreadyInGroupViewController: BaseViewController {
         view.imageColor = .gray200
         return view
     }()
+    private let alreadyHouseImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = ImageLiterals.imgAlreadyHouse
+        return imageView
+    }()
     
     // MARK: - life cycle
     
     override func render() {
         view.addSubview(alreadyInGroupTitleLabel)
         alreadyInGroupTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(28)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -42,6 +48,13 @@ final class AlreadyInGroupViewController: BaseViewController {
         alreadyInGroupInfoLabel.snp.makeConstraints {
             $0.top.equalTo(alreadyInGroupTitleLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(alreadyHouseImageView)
+        alreadyHouseImageView.snp.makeConstraints {
+            $0.top.equalTo(alreadyInGroupInfoLabel.snp.bottom).offset(120)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(144)
         }
     }
     
