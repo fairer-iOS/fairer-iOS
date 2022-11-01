@@ -57,7 +57,7 @@ class HouseInfoViewController: BaseViewController {
     override func render() {
         view.addSubview(welcomeImageView)
         welcomeImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(240)
         }

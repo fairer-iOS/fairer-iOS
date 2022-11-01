@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import SwiftUI
 
 final class AlreadyInGroupViewController: BaseViewController {
     
@@ -34,6 +35,12 @@ final class AlreadyInGroupViewController: BaseViewController {
         imageView.image = ImageLiterals.imgAlreadyHouse
         return imageView
     }()
+    private let backToMainButton: MainButton = {
+        let button = MainButton()
+        button.isDisabled = false
+        button.title = "메인으로 돌아가기"
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -55,6 +62,12 @@ final class AlreadyInGroupViewController: BaseViewController {
             $0.top.equalTo(alreadyInGroupInfoLabel.snp.bottom).offset(120)
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(144)
+        }
+        
+        view.addSubview(backToMainButton)
+        backToMainButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
