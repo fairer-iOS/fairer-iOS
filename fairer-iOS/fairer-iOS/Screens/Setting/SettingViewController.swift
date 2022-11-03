@@ -13,7 +13,7 @@ struct SettingModel {
     let cellImage: UIImage
     let cellLabel: String
     
-    static let settingData: [SettingModel] = [SettingModel(cellImage: ImageLiterals.settingProfile, cellLabel: "계정"), SettingModel(cellImage: ImageLiterals.settingPeople, cellLabel: "하우스 관리"), SettingModel(cellImage: ImageLiterals.settingBell, cellLabel: "알림"), SettingModel(cellImage: ImageLiterals.settingExclamation, cellLabel: "문의하기"), SettingModel(cellImage: ImageLiterals.settingInfo, cellLabel: "정보")]
+    static let settingData: [SettingModel] = [SettingModel(cellImage: ImageLiterals.settingProfile, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[0]), SettingModel(cellImage: ImageLiterals.settingPeople, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[1]), SettingModel(cellImage: ImageLiterals.settingBell, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[2]), SettingModel(cellImage: ImageLiterals.settingExclamation, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[3]), SettingModel(cellImage: ImageLiterals.settingInfo, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[4])]
 }
 
 final class SettingViewController: BaseViewController {
@@ -24,14 +24,14 @@ final class SettingViewController: BaseViewController {
     private let settingTableView = UITableView()
     private let versionLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "버전", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.settingViewControllerVersionLabel, lineHeight: 22)
         label.textColor = .gray800
         label.font = .body2
         return label
     }()
     private let versionText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "0.0.1", lineHeight: 18)
+        label.setTextWithLineHeight(text: TextLiteral.settingViewControllerVersionText, lineHeight: 18)
         label.textColor = .gray800
         label.font = .caption1
         return label
@@ -43,7 +43,7 @@ final class SettingViewController: BaseViewController {
     }()
     private lazy var logoutButton: UIButton = {
         let button = UIButton()
-        button.setTitle("로그아웃", for: .normal)
+        button.setTitle(TextLiteral.settingViewControllerLogoutButtonText, for: .normal)
         button.setTitleColor(.negative20, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
@@ -118,7 +118,7 @@ final class SettingViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.title = "설정"
+        navigationItem.title = TextLiteral.settingViewControllerNavigationBarTitleLabel
     }
     
     private func setupDelegate() {
@@ -133,7 +133,9 @@ final class SettingViewController: BaseViewController {
     }
     
     private func touchUpToLogout() {
+        
         // FIXME: - 로그아웃 연결
+        
         print("로그아웃")
     }
 }
