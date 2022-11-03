@@ -46,6 +46,7 @@ class BaseViewController: UIViewController {
         
         appearance.shadowColor = .clear
         appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray800, NSAttributedString.Key.font: UIFont.title2]
         
         navigationBar.standardAppearance = appearance
         navigationBar.compactAppearance = appearance

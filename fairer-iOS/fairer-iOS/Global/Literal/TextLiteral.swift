@@ -81,4 +81,12 @@ enum TextLiteral {
     static let alreadyInGroupViewControllerTitleLabel: String = "이미 그룹에 참여되어 있습니다.\n새로운 그룹에 참여하려면\n기존의 그룹에서 나가주세요."
     static let alreadyInGroupViewControllerInfoLabel: String = "기존의 그룹에서 나가는 경로는\n’설정>그룹 관리>그룹에서 나가기’ 입니다."
     static let alreadyInGroupViewControllerDoneButtonText: String = "메인으로 돌아가기"
+    
+    // MARK: - SettingViewController
+    
+    static let settingViewControllerNavigationBarTitleLabel: String = "설정"
+    static let settingViewControllerTableViewCellLabelList: [String] = ["계정", "하우스 관리", "알림", "문의하기", "정보"]
+    static let settingViewControllerVersionLabel: String = "버전"
+    static let settingViewControllerVersionText: String = "0.0.1"
+    static let settingViewControllerLogoutButtonText: String = "로그아웃"
 }
