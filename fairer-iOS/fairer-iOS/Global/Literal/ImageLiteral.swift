@@ -60,6 +60,15 @@ enum ImageLiterals {
     
     static var textFieldClearButton: UIImage { .load(name: "clearbutton") }
     static var navigationBarBackButton: UIImage { .load(name: "backbutton") }
+    
+    // MARK: - icon
+    
+    static var settingProfile: UIImage { .load(systemName: "person.circle.fill") }
+    static var settingChevron: UIImage { .load(name: "settingchevron") }
+    static var settingPeople: UIImage { .load(systemName: "person.2.fill") }
+    static var settingBell: UIImage { .load(systemName: "bell.fill") }
+    static var settingExclamation: UIImage { .load(systemName: "exclamationmark.circle") }
+    static var settingInfo: UIImage { .load(systemName: "info.circle") }
 }
 
 extension UIImage {
