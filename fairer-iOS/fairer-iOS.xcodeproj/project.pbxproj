@@ -53,6 +53,7 @@
 		522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E88FE28EC854C000C65C8 /* InviteCodeView.swift */; };
 		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
+		52A673F0292293B800F3E6DA /* ProfileImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */; };
 		52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */; };
 		52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */; };
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
@@ -123,6 +124,7 @@
 		522E88FE28EC854C000C65C8 /* InviteCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeView.swift; sourceTree = "<group>"; };
 		5275397828EC2F78002D8280 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
+		52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButtonView.swift; sourceTree = "<group>"; };
 		52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionView.swift; sourceTree = "<group>"; };
 		52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -433,9 +435,18 @@
 		52F1E19F29228C7D00DDAA75 /* SettingProfile */ = {
 			isa = PBXGroup;
 			children = (
+				52F1E1A22922935300DDAA75 /* UIComponent */,
 				52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */,
 			);
 			name = SettingProfile;
+			sourceTree = "<group>";
+		};
+		52F1E1A22922935300DDAA75 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */,
+			);
+			name = UIComponent;
 			sourceTree = "<group>";
 		};
 		52FFDFB028FA983100DE1AE8 /* EnterHouse */ = {
@@ -577,6 +588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A673F0292293B800F3E6DA /* ProfileImageButtonView.swift in Sources */,
 				5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */,
 				39EEF68D28CBBA1B00437654 /* Model.swift in Sources */,
 				5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */,
