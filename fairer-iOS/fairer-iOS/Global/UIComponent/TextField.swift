@@ -17,10 +17,9 @@ final class TextField: UITextField {
         didSet { setupAttribute() }
     }
     
-    let attributes = [
-        NSAttributedString.Key.font: UIFont.h3,
-        NSAttributedString.Key.foregroundColor: UIColor.gray400
-    ]
+    var myFont: UIFont = UIFont.h3 {
+        didSet { setupAttribute() }
+    }
         
     // MARK: - init
     
@@ -44,7 +43,6 @@ final class TextField: UITextField {
     
     private func configUI() {
         self.backgroundColor = .normal0
-        self.font = .h3
         self.layer.cornerRadius = 8
         self.autocorrectionType = .no
         self.autocapitalizationType = .none
@@ -54,6 +52,12 @@ final class TextField: UITextField {
     }
     
     private func setupAttribute() {
+        self.font = myFont
+        
+        let attributes = [
+            NSAttributedString.Key.font: myFont,
+            NSAttributedString.Key.foregroundColor: UIColor.gray400
+        ]
         self.attributedPlaceholder = NSAttributedString(string: myPlaceholder ?? "값을 입력하세요", attributes: attributes)
     }
 }
