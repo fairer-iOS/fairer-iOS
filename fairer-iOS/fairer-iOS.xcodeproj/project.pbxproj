@@ -60,7 +60,7 @@
 		52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */; };
 		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
-		52F1E1A129228C9500DDAA75 /* SetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F1E1A029228C9500DDAA75 /* SetProfileViewController.swift */; };
+		52F1E1A129228C9500DDAA75 /* SettingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
@@ -130,7 +130,7 @@
 		52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeButtonView.swift; sourceTree = "<group>"; };
 		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
-		52F1E1A029228C9500DDAA75 /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
+		52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileViewController.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -360,7 +360,7 @@
 		5227556C28B303370080DD65 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				52F1E19F29228C7D00DDAA75 /* SetProfile */,
+				52F1E19F29228C7D00DDAA75 /* SettingProfile */,
 				52C09CF129115EFF00B46F15 /* Setting */,
 				520D6FF02911339100CF65B2 /* AlreadyInGroup */,
 				52FFDFB328FBF95B00DE1AE8 /* HouseInfo */,
@@ -430,12 +430,12 @@
 			path = HouseMakeName;
 			sourceTree = "<group>";
 		};
-		52F1E19F29228C7D00DDAA75 /* SetProfile */ = {
+		52F1E19F29228C7D00DDAA75 /* SettingProfile */ = {
 			isa = PBXGroup;
 			children = (
-				52F1E1A029228C9500DDAA75 /* SetProfileViewController.swift */,
+				52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */,
 			);
-			name = SetProfile;
+			name = SettingProfile;
 			sourceTree = "<group>";
 		};
 		52FFDFB028FA983100DE1AE8 /* EnterHouse */ = {
@@ -614,7 +614,7 @@
 				5275397928EC2F78002D8280 /* BackButton.swift in Sources */,
 				39F1C12A28D604B000585B83 /* HomeGroupCollectionViewCell.swift in Sources */,
 				39EEF67528CBB61200437654 /* String+Extension.swift in Sources */,
-				52F1E1A129228C9500DDAA75 /* SetProfileViewController.swift in Sources */,
+				52F1E1A129228C9500DDAA75 /* SettingProfileViewController.swift in Sources */,
 				5227555428B219DC0080DD65 /* ViewController.swift in Sources */,
 				52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */,
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
