@@ -62,6 +62,16 @@ final class SettingProfileViewController: BaseViewController {
         textField.text = lastStatus
         return textField
     }()
+    private lazy var settingProfileDoneButton: MainButton = {
+        let button = MainButton()
+        button.isDisabled = false
+        button.title = "입력 완료"
+        let action = UIAction {[weak self] _ in
+            self?.touchUpToSaveChange()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -102,6 +112,12 @@ final class SettingProfileViewController: BaseViewController {
             $0.top.equalTo(settingProfileStatusLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+        
+        view.addSubview(settingProfileDoneButton)
+        settingProfileDoneButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
+        }
     }
     
     // MARK: - func
@@ -117,6 +133,12 @@ final class SettingProfileViewController: BaseViewController {
     }
     
     private func pushSettingProfileImageViewController() {
-        print("누름")
+        // FIXME: - 프로필 이미지 선정 뷰로 이동
+        print("프로필 이미지")
+    }
+    
+    private func touchUpToSaveChange() {
+        // FIXME: - 서버에 프로필 정보 업데이트
+        print("입력 완료")
     }
 }
