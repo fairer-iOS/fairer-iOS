@@ -13,7 +13,7 @@ class OnboardingProfileViewController: BaseViewController {
     
     // MARK: - property
     
-    private let backButton = BackButton()
+    private let backButton = BackButton(type: .system)
     private let profileLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.onboardingProfileViewControllerProfileLabel
@@ -21,7 +21,7 @@ class OnboardingProfileViewController: BaseViewController {
         label.textColor = .gray800
         return label
     }()
-    private let selectedProfileImageView: UIImageView = {
+    let selectedProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.image = ImageLiterals.profileNone
@@ -35,11 +35,14 @@ class OnboardingProfileViewController: BaseViewController {
         return label
     }()
     private let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
-    private var profileDoneButton: MainButton = {
+    private lazy var profileDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.onboardingProfileViewControllerDoneButtonText
         button.isDisabled = true
-        button.addTarget(OnboardingProfileViewController.self, action: #selector(didTapDoneButton), for: .touchUpInside)
+        let action = UIAction { [weak self] _ in
+            self?.didTapDoneButton()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
