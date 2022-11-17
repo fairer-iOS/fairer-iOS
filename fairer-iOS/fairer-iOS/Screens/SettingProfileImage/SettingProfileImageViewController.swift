@@ -9,4 +9,19 @@ import UIKit
 
 final class SettingProfileImageViewController: OnboardingProfileViewController {
 
+    // FIXME: - api 연결로 대체
+    private let lastProfileImage = ImageLiterals.profileBlue3
+    
+    // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupProfileImage()
+    }
+    
+    // MARK: - func
+    
+    private func setupProfileImage() {
+        super.selectedProfileImageView.image = lastProfileImage
+    }
 }
