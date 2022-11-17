@@ -13,7 +13,7 @@ class OnboardingProfileViewController: BaseViewController {
     
     // MARK: - property
     
-    private let backButton = BackButton()
+    private let backButton = BackButton(type: .system)
     private let profileLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.onboardingProfileViewControllerProfileLabel
