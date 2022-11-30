@@ -64,3 +64,20 @@ final class ManageHouseViewController: BaseViewController {
         manageHouseTableView.separatorStyle = .none
     }
 }
+
+// MARK: - extension
+
+extension ManageHouseViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ManageHouseModel.manageHouseData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = manageHouseTableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.cellId, for: indexPath) as! SettingTableViewCell
+        
+        cell.cellLabel.text = ManageHouseModel.manageHouseData[indexPath.row].cellLabel
+        cell.cellImage.image = ManageHouseModel.manageHouseData[indexPath.row].cellImage
+        
+        return cell
+    }
+}
