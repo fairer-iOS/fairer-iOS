@@ -26,6 +26,12 @@ final class ChangeHouseNameViewController: BaseViewController {
         label.font = .body1
         return label
     }()
+    private let houseNameTextField: TextField = {
+        let textField = TextField()
+        textField.myPlaceholder = TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder
+        textField.text = "즐거운 우리집"
+        return textField
+    }()
     
     // MARK: - life cycle
     
@@ -40,6 +46,12 @@ final class ChangeHouseNameViewController: BaseViewController {
         changeHouseNameSecondaryLabel.snp.makeConstraints {
             $0.top.equalTo(changeHouseNameTitleLabel.snp.bottom)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(houseNameTextField)
+        houseNameTextField.snp.makeConstraints {
+            $0.top.equalTo(changeHouseNameSecondaryLabel.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
