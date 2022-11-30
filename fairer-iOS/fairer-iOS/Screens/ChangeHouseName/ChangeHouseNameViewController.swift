@@ -37,9 +37,18 @@ final class ChangeHouseNameViewController: BaseViewController {
         button.isDisabled = false
         button.title = "입력 완료"
         let action = UIAction { [weak self] _ in
+            self?.didTapDoneButton()
         }
         button.addAction(action, for: .touchUpInside)
         return button
+    }()
+    private let disableLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.textFieldDisableSignLabel
+        label.textColor = .negative20
+        label.font = .body2
+        label.layer.isHidden = true
+        return label
     }()
     
     // MARK: - life cycle
@@ -67,6 +76,12 @@ final class ChangeHouseNameViewController: BaseViewController {
         houseNameTextField.snp.makeConstraints {
             $0.top.equalTo(changeHouseNameSecondaryLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(disableLabel)
+        disableLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(houseNameTextField.snp.bottom).offset(8)
         }
         
         view.addSubview(changeHouseNameDoneButton)
@@ -109,6 +124,21 @@ final class ChangeHouseNameViewController: BaseViewController {
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func didTapDoneButton() {
+        if houseNameTextField.text!.hasCharacters() {
+            houseNameTextField.layer.borderWidth = 0
+            disableLabel.isHidden = true
+            
+            // TODO: - userdefault에 이름 저장
+            
+        } else {
+            houseNameTextField.layer.borderWidth = 1
+            houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
+            changeHouseNameDoneButton.isDisabled = true
+            disableLabel.isHidden = false
+        }
     }
 }
 
