@@ -17,7 +17,7 @@ struct ManageHouseModel {
 }
 
 final class ManageHouseViewController: BaseViewController {
-
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -36,6 +36,22 @@ final class ManageHouseViewController: BaseViewController {
         let view = UIView()
         view.backgroundColor = .gray100
         return view
+    }()
+    private let differentHouseImage: UIImageView = {
+        let image = UIImageView()
+        image.image = ImageLiterals.imgInfo
+        image.tintColor = .gray200
+        return image
+    }()
+    private lazy var differentHouseButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.text = "다른 공간에 참여하고 싶다면?"
+        button.titleLabel?.textColor = .gray600
+        let action = UIAction { [weak self] _ in
+            print("됨")
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
     }()
     
     // MARK: - life cycle
