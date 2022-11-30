@@ -53,6 +53,20 @@ final class ManageHouseViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(112)
         }
+        
+        view.addSubview(leaveHouseButton)
+        leaveHouseButton.snp.makeConstraints {
+            $0.top.equalTo(manageHouseTableView.snp.bottom).offset(17)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(22)
+        }
+        
+        view.addSubview(leaveHouseDivider)
+        leaveHouseDivider.snp.makeConstraints {
+            $0.top.equalTo(leaveHouseButton.snp.bottom).offset(17)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(1)
+        }
     }
     
     // MARK: - func
