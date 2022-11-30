@@ -32,6 +32,15 @@ final class ChangeHouseNameViewController: BaseViewController {
         textField.text = "즐거운 우리집"
         return textField
     }()
+    private lazy var changeHouseNameDoneButton: MainButton = {
+        let button = MainButton()
+        button.isDisabled = false
+        button.title = "입력 완료"
+        let action = UIAction { [weak self] _ in
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -51,6 +60,12 @@ final class ChangeHouseNameViewController: BaseViewController {
         view.addSubview(houseNameTextField)
         houseNameTextField.snp.makeConstraints {
             $0.top.equalTo(changeHouseNameSecondaryLabel.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(changeHouseNameDoneButton)
+        changeHouseNameDoneButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
