@@ -93,4 +93,11 @@ enum TextLiteral {
     // MARK: - ManageHouseViewController
     
     static let manageHouseViewControllerTableViewCellLabelList: [String] = ["하우스 이름 변경", "초대하기"]
+    static let manageHouseViewControllerLeaveHouseButtonText: String = "하우스에서 나가기"
+    static let manageHouseViewControllerDifferentHouseButtonText: String = "다른 공간에 참여하고 싶다면?"
+    static let manageHouseViewControllerBubbleText = "‘공간에서 나가기'를 하셔야만\n다른 공간에 참여하실 수 있습니다."
+    static let manageHouseViewControllerAlertTitle: String = "정말 나가시겠습니까?"
+    static let manageHouseViewControllerAlertMessage: String = "모든 집안일 기록이 사라집니다."
+    static let manageHouseViewControllerAlertOkTitle: String = "나가기"
+    static let manageHouseViewControllerAlertCancelTitle: String = "취소"
 }

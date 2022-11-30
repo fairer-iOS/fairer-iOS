@@ -24,7 +24,7 @@ final class ManageHouseViewController: BaseViewController {
     private let manageHouseTableView = UITableView()
     private lazy var leaveHouseButton: UIButton = {
         let button = UIButton()
-        button.setTitle("하우스에서 나가기", for: .normal)
+        button.setTitle(TextLiteral.manageHouseViewControllerLeaveHouseButtonText, for: .normal)
         button.setTitleColor(.negative20, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
@@ -46,7 +46,7 @@ final class ManageHouseViewController: BaseViewController {
     }()
     private lazy var differentHouseButton: UIButton = {
         let button = UIButton()
-        button.setTitle("다른 공간에 참여하고 싶다면?", for: .normal)
+        button.setTitle(TextLiteral.manageHouseViewControllerDifferentHouseButtonText, for: .normal)
         button.setTitleColor(.gray600, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
@@ -63,7 +63,7 @@ final class ManageHouseViewController: BaseViewController {
     }()
     private let bubbleText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "‘공간에서 나가기'를 하셔야만\n다른 공간에 참여하실 수 있습니다.", lineHeight: 20)
+        label.setTextWithLineHeight(text: TextLiteral.manageHouseViewControllerBubbleText, lineHeight: 20)
         label.textColor = .gray700
         label.font = .title2
         label.numberOfLines = 2
@@ -165,7 +165,7 @@ final class ManageHouseViewController: BaseViewController {
     
     private func touchUpToLeaveHouse() {
         // FIXME: - 하우스 나가기 api 연결
-        self.makeRequestAlert(title: "정말 나가시겠습니까?", message: "모든 집안일 기록이 사라집니다.", okTitle: "나가기", cancelTitle: "취소", okAction: { _ in print("하우스에서 나가기") }, cancelAction: nil, completion: nil)
+        self.makeRequestAlert(title: TextLiteral.manageHouseViewControllerAlertTitle, message: TextLiteral.manageHouseViewControllerAlertMessage, okTitle: TextLiteral.manageHouseViewControllerAlertOkTitle, cancelTitle: TextLiteral.manageHouseViewControllerAlertCancelTitle, okAction: { _ in print("하우스에서 나가기") }, cancelAction: nil, completion: nil)
     }
 }
 
