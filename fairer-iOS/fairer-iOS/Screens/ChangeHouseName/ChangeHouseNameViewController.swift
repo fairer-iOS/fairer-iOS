@@ -14,14 +14,14 @@ final class ChangeHouseNameViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let changeHouseNameTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "하우스의 이름을 입력해주세요.", lineHeight: 28)
+        label.setTextWithLineHeight(text: TextLiteral.changeHouseNameViewControllerTitleLabel, lineHeight: 28)
         label.textColor = .gray800
         label.font = .h2
         return label
     }()
     private let changeHouseNameSecondaryLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "집의 특성을 잘 보여줄 수 있는 이름도 좋아요!", lineHeight: 26)
+        label.setTextWithLineHeight(text: TextLiteral.changeHouseNameViewControllerSecondaryLabel, lineHeight: 26)
         label.textColor = .gray400
         label.font = .body1
         return label
@@ -29,13 +29,14 @@ final class ChangeHouseNameViewController: BaseViewController {
     private let houseNameTextField: TextField = {
         let textField = TextField()
         textField.myPlaceholder = TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder
+        // FIXME: - 하우스 이름 불러오기
         textField.text = "즐거운 우리집"
         return textField
     }()
     private lazy var changeHouseNameDoneButton: MainButton = {
         let button = MainButton()
         button.isDisabled = false
-        button.title = "입력 완료"
+        button.title = TextLiteral.changeHouseNameViewControllerDoneButtonText
         let action = UIAction { [weak self] _ in
             self?.didTapDoneButton()
         }
@@ -131,8 +132,7 @@ final class ChangeHouseNameViewController: BaseViewController {
             houseNameTextField.layer.borderWidth = 0
             disableLabel.isHidden = true
             
-            // TODO: - userdefault에 이름 저장
-            
+            // FIXME: - 하우스 이름 업데이트 api 연결
         } else {
             houseNameTextField.layer.borderWidth = 1
             houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
