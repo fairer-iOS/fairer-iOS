@@ -47,6 +47,7 @@ final class ChangeHouseNameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegation()
+        setupNotificationCenter()
     }
     
     override func render() {
@@ -90,6 +91,25 @@ final class ChangeHouseNameViewController: BaseViewController {
     private func setupDelegation() {
         houseNameTextField.delegate = self
     }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.changeHouseNameDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 35)
+            })
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.changeHouseNameDoneButton.transform = .identity
+        })
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
 }
 
 // MARK: - extension
@@ -102,7 +122,7 @@ extension ChangeHouseNameViewController : UITextFieldDelegate {
                 return true
             }
         }
-        guard textField.text!.count < 5 else { return false }
+        guard textField.text!.count < 16 else { return false }
         return true
     }
     
