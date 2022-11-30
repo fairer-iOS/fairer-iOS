@@ -49,18 +49,24 @@ final class ManageHouseViewController: BaseViewController {
         button.setTitleColor(.gray600, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
-            print("됨")
+            self?.touchUpToShowBubble()
         }
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let bubbleBackgroundView = UIImageView(image: ImageLiterals.imgBubble)
+    private let bubbleBackgroundView: UIImageView = {
+        let image = UIImageView()
+        image.image = ImageLiterals.imgBubble
+        image.alpha = 0
+        return image
+    }()
     private let bubbleText: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: "‘공간에서 나가기'를 하셔야만\n다른 공간에 참여하실 수 있습니다.", lineHeight: 20)
         label.textColor = .gray700
         label.font = .title2
         label.numberOfLines = 2
+        label.alpha = 0
         return label
     }()
     
@@ -142,6 +148,18 @@ final class ManageHouseViewController: BaseViewController {
         manageHouseTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.cellId)
         manageHouseTableView.rowHeight = 56
         manageHouseTableView.separatorStyle = .none
+    }
+    
+    private func touchUpToShowBubble() {
+        UIView.animate(withDuration: 0.8, delay: 0.1, animations: {
+            if self.bubbleBackgroundView.alpha == 0 {
+                self.bubbleBackgroundView.alpha = 1.0
+                self.bubbleText.alpha = 1.0
+            } else {
+                self.bubbleBackgroundView.alpha = 0
+                self.bubbleText.alpha = 0
+            }
+        })
     }
 }
 
