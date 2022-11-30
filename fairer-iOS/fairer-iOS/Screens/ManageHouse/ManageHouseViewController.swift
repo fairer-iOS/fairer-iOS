@@ -21,8 +21,18 @@ final class ManageHouseViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
+    private let manageHouseTableView = UITableView()
     
     // MARK: - life cycle
+    
+    override func render() {
+        view.addSubview(manageHouseTableView)
+        manageHouseTableView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(112)
+        }
+    }
     
     // MARK: - func
     
