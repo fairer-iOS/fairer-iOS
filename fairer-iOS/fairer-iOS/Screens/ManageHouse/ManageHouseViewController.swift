@@ -55,6 +55,14 @@ final class ManageHouseViewController: BaseViewController {
         return button
     }()
     private let bubbleBackgroundView = UIImageView(image: ImageLiterals.imgBubble)
+    private let bubbleText: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "‘공간에서 나가기'를 하셔야만\n다른 공간에 참여하실 수 있습니다.", lineHeight: 20)
+        label.textColor = .gray700
+        label.font = .title2
+        label.numberOfLines = 2
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -103,6 +111,12 @@ final class ManageHouseViewController: BaseViewController {
         bubbleBackgroundView.snp.makeConstraints {
             $0.bottom.equalTo(differentHouseButton.snp.top).offset(5)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        bubbleBackgroundView.addSubview(bubbleText)
+        bubbleText.snp.makeConstraints {
+            $0.top.equalTo(bubbleBackgroundView.snp.top).inset(6)
+            $0.leading.equalTo(bubbleBackgroundView.snp.leading).inset(16)
         }
     }
     
