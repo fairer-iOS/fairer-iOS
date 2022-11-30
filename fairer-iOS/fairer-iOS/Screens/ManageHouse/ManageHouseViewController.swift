@@ -25,6 +25,12 @@ final class ManageHouseViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegate()
+        setupAttribute()
+    }
+    
     override func render() {
         view.addSubview(manageHouseTableView)
         manageHouseTableView.snp.makeConstraints {
@@ -45,5 +51,16 @@ final class ManageHouseViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
         navigationItem.title = TextLiteral.settingViewControllerNavigationBarTitleLabel
+    }
+    
+    private func setupDelegate() {
+        manageHouseTableView.delegate = self
+        manageHouseTableView.dataSource = self
+    }
+    
+    private func setupAttribute() {
+        manageHouseTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.cellId)
+        manageHouseTableView.rowHeight = 56
+        manageHouseTableView.separatorStyle = .none
     }
 }
