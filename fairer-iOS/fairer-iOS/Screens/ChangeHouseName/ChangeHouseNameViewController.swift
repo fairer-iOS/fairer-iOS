@@ -8,12 +8,40 @@
 import UIKit
 
 final class ChangeHouseNameViewController: BaseViewController {
-
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
+    private let changeHouseNameTitleLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "하우스의 이름을 입력해주세요.", lineHeight: 28)
+        label.textColor = .gray800
+        label.font = .h2
+        return label
+    }()
+    private let changeHouseNameSecondaryLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "집의 특성을 잘 보여줄 수 있는 이름도 좋아요!", lineHeight: 26)
+        label.textColor = .gray400
+        label.font = .body1
+        return label
+    }()
     
     // MARK: - life cycle
+    
+    override func render() {
+        view.addSubview(changeHouseNameTitleLabel)
+        changeHouseNameTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(28)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(changeHouseNameSecondaryLabel)
+        changeHouseNameSecondaryLabel.snp.makeConstraints {
+            $0.top.equalTo(changeHouseNameTitleLabel.snp.bottom)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+    }
     
     // MARK: - func
     
