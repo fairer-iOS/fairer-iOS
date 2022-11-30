@@ -24,7 +24,7 @@ final class ManageHouseViewController: BaseViewController {
     private let manageHouseTableView = UITableView()
     private lazy var leaveHouseButton: UIButton = {
         let button = UIButton()
-        button.setTitle(TextLiteral.settingViewControllerLogoutButtonText, for: .normal)
+        button.setTitle("하우스에서 나가기", for: .normal)
         button.setTitleColor(.negative20, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
@@ -54,6 +54,7 @@ final class ManageHouseViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
+    private let bubbleBackgroundView = UIImageView(image: ImageLiterals.imgBubble)
     
     // MARK: - life cycle
     
@@ -96,6 +97,12 @@ final class ManageHouseViewController: BaseViewController {
         differentHouseButton.snp.makeConstraints {
             $0.centerY.equalTo(differentHouseImage.snp.centerY)
             $0.leading.equalTo(differentHouseImage.snp.trailing).offset(8)
+        }
+        
+        view.addSubview(bubbleBackgroundView)
+        bubbleBackgroundView.snp.makeConstraints {
+            $0.bottom.equalTo(differentHouseButton.snp.top).offset(5)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
