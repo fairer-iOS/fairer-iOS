@@ -28,6 +28,7 @@ final class ManageHouseViewController: BaseViewController {
         button.setTitleColor(.negative20, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
+            self?.touchUpToLeaveHouse()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -160,6 +161,11 @@ final class ManageHouseViewController: BaseViewController {
                 self.bubbleText.alpha = 0
             }
         })
+    }
+    
+    private func touchUpToLeaveHouse() {
+        // FIXME: - 하우스 나가기 api 연결
+        self.makeRequestAlert(title: "정말 나가시겠습니까?", message: "모든 집안일 기록이 사라집니다.", okTitle: "나가기", cancelTitle: "취소", okAction: { _ in print("하우스에서 나가기") }, cancelAction: nil, completion: nil)
     }
 }
 
