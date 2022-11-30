@@ -45,8 +45,9 @@ final class ManageHouseViewController: BaseViewController {
     }()
     private lazy var differentHouseButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.text = "다른 공간에 참여하고 싶다면?"
-        button.titleLabel?.textColor = .gray600
+        button.setTitle("다른 공간에 참여하고 싶다면?", for: .normal)
+        button.setTitleColor(.gray600, for: .normal)
+        button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
             print("됨")
         }
@@ -82,6 +83,19 @@ final class ManageHouseViewController: BaseViewController {
             $0.top.equalTo(leaveHouseButton.snp.bottom).offset(17)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(1)
+        }
+        
+        view.addSubview(differentHouseImage)
+        differentHouseImage.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(5)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.height.equalTo(16)
+        }
+        
+        view.addSubview(differentHouseButton)
+        differentHouseButton.snp.makeConstraints {
+            $0.centerY.equalTo(differentHouseImage.snp.centerY)
+            $0.leading.equalTo(differentHouseImage.snp.trailing).offset(8)
         }
     }
     
