@@ -44,6 +44,11 @@ final class ChangeHouseNameViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegation()
+    }
+    
     override func render() {
         view.addSubview(changeHouseNameTitleLabel)
         changeHouseNameTitleLabel.snp.makeConstraints {
@@ -80,5 +85,34 @@ final class ChangeHouseNameViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func setupDelegation() {
+        houseNameTextField.delegate = self
+    }
+}
+
+// MARK: - extension
+
+extension ChangeHouseNameViewController : UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        guard textField.text!.count < 5 else { return false }
+        return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let hasText = houseNameTextField.hasText
+        changeHouseNameDoneButton.isDisabled = !hasText
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        houseNameTextField.layer.borderWidth = 0
+        view.endEditing(true)
     }
 }
