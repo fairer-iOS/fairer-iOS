@@ -22,6 +22,21 @@ final class ManageHouseViewController: BaseViewController {
     
     private let backButton = BackButton(type: .system)
     private let manageHouseTableView = UITableView()
+    private lazy var leaveHouseButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(TextLiteral.settingViewControllerLogoutButtonText, for: .normal)
+        button.setTitleColor(.negative20, for: .normal)
+        button.titleLabel?.font = .body2
+        let action = UIAction { [weak self] _ in
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
+    private let leaveHouseDivider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        return view
+    }()
     
     // MARK: - life cycle
     
