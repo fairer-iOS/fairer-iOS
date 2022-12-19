@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 final class SettingAlarmTableViewCell: BaseTableViewCell {
     
     // MARK: - property
@@ -24,4 +26,31 @@ final class SettingAlarmTableViewCell: BaseTableViewCell {
         toggle.isOn = false
         return toggle
     }()
+    private let cellDivider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        return view
+    }()
+    
+    // MARK: - life cycle
+    
+    override func render() {
+        self.addSubview(cellLabel)
+        cellLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
+        }
+        
+        self.addSubview(cellToggle)
+        cellToggle.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview()
+        }
+        
+        self.addSubview(cellDivider)
+        cellDivider.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+    }
 }
