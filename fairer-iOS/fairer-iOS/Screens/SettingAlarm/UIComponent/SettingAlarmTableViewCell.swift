@@ -9,13 +9,16 @@ import UIKit
 
 import SnapKit
 
-final class SettingAlarmTableViewCell: BaseTableViewCell {
+final class SettingAlarmViewCell: UIView {
+    
+    var labelText: String? {
+        didSet { setupAttribute() }
+    }
     
     // MARK: - property
     
     private let cellLabel: UILabel = {
         let label = UILabel()
-        label.text = "예시"
         label.textColor = .gray800
         label.font = .body2
         return label
@@ -24,6 +27,7 @@ final class SettingAlarmTableViewCell: BaseTableViewCell {
         let toggle = UISwitch()
         toggle.onTintColor = .blue
         toggle.isOn = false
+        toggle.transform = CGAffineTransform(scaleX: 0.9, y: 0.8)
         return toggle
     }()
     private let cellDivider: UIView = {
@@ -34,7 +38,14 @@ final class SettingAlarmTableViewCell: BaseTableViewCell {
     
     // MARK: - life cycle
     
-    override func render() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        render()
+    }
+    
+    required init?(coder: NSCoder) { nil }
+    
+    func render() {
         self.addSubview(cellLabel)
         cellLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -52,5 +63,11 @@ final class SettingAlarmTableViewCell: BaseTableViewCell {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(1)
         }
+    }
+    
+    // MARK: - func
+    
+    private func setupAttribute() {
+        cellLabel.text = labelText
     }
 }

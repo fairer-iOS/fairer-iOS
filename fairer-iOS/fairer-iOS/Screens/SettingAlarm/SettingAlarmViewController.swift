@@ -10,18 +10,46 @@ import UIKit
 import SnapKit
 
 final class SettingAlarmViewController: BaseViewController {
-
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    private let settingAlarmTableView = UITableView()
-
+    private let timeAlarmCell: SettingAlarmViewCell = {
+        let cell = SettingAlarmViewCell()
+        cell.labelText = "설정 시간에 맞춰 집안일 알림"
+        return cell
+    }()
+    private let remindAlarmCell: SettingAlarmViewCell = {
+        let cell = SettingAlarmViewCell()
+        cell.labelText = "미완료 집안일 리마인드"
+        return cell
+    }()
+    private let morningAlarmCell: SettingAlarmViewCell = {
+        let cell = SettingAlarmViewCell()
+        cell.labelText = "기본 아침 알림"
+        return cell
+    }()
+    
     // MARK: - life cycle
     
     override func render() {
-        view.addSubview(settingAlarmTableView)
-        settingAlarmTableView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+        view.addSubview(timeAlarmCell)
+        timeAlarmCell.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(4)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(56)
+        }
+        
+        view.addSubview(remindAlarmCell)
+        remindAlarmCell.snp.makeConstraints {
+            $0.top.equalTo(timeAlarmCell.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(56)
+        }
+        
+        view.addSubview(morningAlarmCell)
+        morningAlarmCell.snp.makeConstraints {
+            $0.top.equalTo(remindAlarmCell.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(56)
         }
