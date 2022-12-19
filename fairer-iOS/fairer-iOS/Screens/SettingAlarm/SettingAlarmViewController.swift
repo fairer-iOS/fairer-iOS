@@ -14,8 +14,18 @@ final class SettingAlarmViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
+    private let settingAlarmTableView = UITableView()
 
     // MARK: - life cycle
+    
+    override func render() {
+        view.addSubview(settingAlarmTableView)
+        settingAlarmTableView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(56)
+        }
+    }
     
     // MARK: - func
     
