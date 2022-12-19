@@ -106,4 +106,10 @@ enum TextLiteral {
     static let changeHouseNameViewControllerTitleLabel: String = "하우스의 이름을 입력해주세요."
     static let changeHouseNameViewControllerSecondaryLabel: String = "집의 특성을 잘 보여줄 수 있는 이름도 좋아요!"
     static let changeHouseNameViewControllerDoneButtonText: String = "입력 완료"
+    
+    // MARK: - SettingAlarmViewController
+    
+    static let settingAlarmViewControllerTimeAlarmCellText = "설정 시간에 맞춰 집안일 알림"
+    static let settingAlarmViewControllerRemindAlarmCellText = "미완료 집안일 리마인드"
+    static let settingAlarmViewControllerMorningAlarmCellText = "기본 아침 알림"
 }

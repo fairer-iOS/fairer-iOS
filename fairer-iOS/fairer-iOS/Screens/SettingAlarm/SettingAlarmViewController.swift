@@ -16,17 +16,17 @@ final class SettingAlarmViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let timeAlarmCell: SettingAlarmViewCell = {
         let cell = SettingAlarmViewCell()
-        cell.labelText = "설정 시간에 맞춰 집안일 알림"
+        cell.labelText = TextLiteral.settingAlarmViewControllerTimeAlarmCellText
         return cell
     }()
     private let remindAlarmCell: SettingAlarmViewCell = {
         let cell = SettingAlarmViewCell()
-        cell.labelText = "미완료 집안일 리마인드"
+        cell.labelText = TextLiteral.settingAlarmViewControllerRemindAlarmCellText
         return cell
     }()
     private let morningAlarmCell: SettingAlarmViewCell = {
         let cell = SettingAlarmViewCell()
-        cell.labelText = "기본 아침 알림"
+        cell.labelText = TextLiteral.settingAlarmViewControllerMorningAlarmCellText
         return cell
     }()
     
