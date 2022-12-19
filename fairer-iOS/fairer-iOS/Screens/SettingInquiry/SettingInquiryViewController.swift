@@ -22,8 +22,16 @@ final class SettingInquiryViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
-    private let mailCellView = SettingInquiryCellView()
-    private let instagramCellView = SettingInquiryCellView()
+    private let mailCellView: SettingInquiryCellView = {
+        let view = SettingInquiryCellView()
+        view.inquiryType = .email
+        return view
+    }()
+    private let instagramCellView: SettingInquiryCellView = {
+        let view = SettingInquiryCellView()
+        view.inquiryType = .instagram
+        return view
+    }()
     
     // MARK: - life cycle
     
