@@ -22,6 +22,8 @@ final class SettingInquiryViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
+    private let mailCellView = SettingInquiryCellView()
+    private let instagramCellView = SettingInquiryCellView()
     
     // MARK: - life cycle
     
@@ -30,6 +32,20 @@ final class SettingInquiryViewController: BaseViewController {
         settingInquiryTitleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(28)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(mailCellView)
+        mailCellView.snp.makeConstraints {
+            $0.top.equalTo(settingInquiryTitleLabel.snp.bottom).offset(8)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(54)
+        }
+        
+        view.addSubview(instagramCellView)
+        instagramCellView.snp.makeConstraints {
+            $0.top.equalTo(mailCellView.snp.bottom)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(54)
         }
     }
     
