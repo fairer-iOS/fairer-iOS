@@ -13,8 +13,20 @@ final class SettingInquiryViewController: BaseViewController {
 
     // MARK: - property
     
+    private let backButton = BackButton(type: .system)
+    
     // MARK: - life cycle
     
     // MARK: - func
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let backButton = makeBarButtonItem(with: backButton)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = backButton
+    }
 
 }
