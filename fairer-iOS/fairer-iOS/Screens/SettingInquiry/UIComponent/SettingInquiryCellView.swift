@@ -38,9 +38,7 @@ final class SettingInquiryCellView: UIView {
     var inquiryType: InquiryType? {
         didSet { setupAttribute() }
     }
-    
-    var didTappedInstagram: ((SFSafariViewController) -> ())?
-    
+        
     // MARK: - property
     
     private let cellLabel: UILabel = {
@@ -99,9 +97,9 @@ final class SettingInquiryCellView: UIView {
         case .email:
             return print("이메일")
         case .instagram:
-            let instagramUrl = NSURL(string: "https://www.instagram.com/fairer.official/")
-            let instagramSafariView: SFSafariViewController = SFSafariViewController(url: instagramUrl as! URL)
-            didTappedInstagram?(instagramSafariView)
+            guard let url = URL(string: "https://www.instagram.com/fairer.official/") else { return }
+            guard UIApplication.shared.canOpenURL(url) else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         case .none:
             return print("어느것도 해당 안됨")
         }
