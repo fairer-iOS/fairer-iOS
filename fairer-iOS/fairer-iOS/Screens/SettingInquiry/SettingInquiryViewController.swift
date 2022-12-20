@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import SafariServices
 
 final class SettingInquiryViewController: BaseViewController {
 
@@ -32,8 +33,14 @@ final class SettingInquiryViewController: BaseViewController {
         view.inquiryType = .instagram
         return view
     }()
+    private let settingInquiryCellView = SettingInquiryCellView()
     
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        showInstagramSafari()
+    }
     
     override func render() {
         view.addSubview(settingInquiryTitleLabel)
@@ -68,5 +75,10 @@ final class SettingInquiryViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
     }
-
+    
+    private func showInstagramSafari() {
+        settingInquiryCellView.didTappedInstagram = { [weak self] safariView in
+            self?.present(safariView, animated: true, completion: nil)
+        }
+    }
 }

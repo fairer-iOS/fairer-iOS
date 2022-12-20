@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import SafariServices
 
 enum InquiryType {
     case email
@@ -37,6 +38,8 @@ final class SettingInquiryCellView: UIView {
     var inquiryType: InquiryType? {
         didSet { setupAttribute() }
     }
+    
+    var didTappedInstagram: ((SFSafariViewController) -> ())?
     
     // MARK: - property
     
@@ -92,7 +95,16 @@ final class SettingInquiryCellView: UIView {
     // MARK: - func
     
     private func didTappedCellButton() {
-        print("테스트: 잘됨")
+        switch inquiryType {
+        case .email:
+            return print("이메일")
+        case .instagram:
+            let instagramUrl = NSURL(string: "https://www.instagram.com/fairer.official/")
+            let instagramSafariView: SFSafariViewController = SFSafariViewController(url: instagramUrl as! URL)
+            didTappedInstagram?(instagramSafariView)
+        case .none:
+            return print("어느것도 해당 안됨")
+        }
     }
     
     private func setupAttribute() {
