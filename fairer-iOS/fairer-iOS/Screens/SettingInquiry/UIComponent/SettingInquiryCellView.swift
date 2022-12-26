@@ -33,11 +33,13 @@ enum InquiryType {
     }
 }
 
-final class SettingInquiryCellView: UIView {
+final class SettingInquiryCellView: BaseUIView {
     
     var inquiryType: InquiryType? {
         didSet { setupAttribute() }
     }
+    
+    var didTappedMail: (() -> ())?
         
     // MARK: - property
     
@@ -65,14 +67,7 @@ final class SettingInquiryCellView: UIView {
     
     // MARK: - life cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        render()
-    }
-    
-    required init?(coder: NSCoder) { nil }
-    
-    private func render() {
+    override func render() {
         self.addSubview(cellLabel)
         cellLabel.snp.makeConstraints {
             $0.centerY.leading.equalToSuperview()
@@ -95,7 +90,7 @@ final class SettingInquiryCellView: UIView {
     private func didTappedCellButton() {
         switch inquiryType {
         case .email:
-            return print("이메일")
+            didTappedMail?()
         case .instagram:
             guard let url = URL(string: "https://www.instagram.com/fairer.official/") else { return }
             guard UIApplication.shared.canOpenURL(url) else { return }

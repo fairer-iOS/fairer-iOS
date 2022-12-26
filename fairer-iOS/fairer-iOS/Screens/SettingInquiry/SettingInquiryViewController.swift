@@ -36,6 +36,11 @@ final class SettingInquiryViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        didTapMail()
+    }
+    
     override func render() {
         view.addSubview(settingInquiryTitleLabel)
         settingInquiryTitleLabel.snp.makeConstraints {
@@ -68,5 +73,11 @@ final class SettingInquiryViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func didTapMail() {
+        mailCellView.didTappedMail = { () -> () in
+            print("잘됨")
+        }
     }
 }
