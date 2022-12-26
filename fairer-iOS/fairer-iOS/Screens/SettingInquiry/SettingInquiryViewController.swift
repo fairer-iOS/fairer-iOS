@@ -9,6 +9,7 @@ import UIKit
 
 import SnapKit
 import SafariServices
+import MessageUI
 
 final class SettingInquiryViewController: BaseViewController {
     
@@ -33,6 +34,7 @@ final class SettingInquiryViewController: BaseViewController {
         view.inquiryType = .instagram
         return view
     }()
+    private let composeVC = MFMailComposeViewController()
     
     // MARK: - life cycle
     
@@ -77,7 +79,26 @@ final class SettingInquiryViewController: BaseViewController {
     
     private func didTapMail() {
         mailCellView.didTappedMail = { () -> () in
-            print("잘됨")
+            if MFMailComposeViewController.canSendMail() {
+                self.setupDelegate()
+                
+                self.composeVC.setToRecipients(["faireran@gmail.com"])
+                self.composeVC.setSubject("[문의]")
+                self.composeVC.setMessageBody("문의 내용", isHTML: false)
+                
+                self.present(self.composeVC, animated: true, completion: nil)
+            }
+            else {
+                self.makeAlert(title: "Mail 앱 연결 실패", message: "이메일 설정을 확인하고 다시 시도해주세요.")
+            }
         }
+    }
+}
+
+// MARK: - extension
+
+extension SettingInquiryViewController: MFMailComposeViewControllerDelegate {
+    private func setupDelegate() {
+        composeVC.mailComposeDelegate = self
     }
 }
