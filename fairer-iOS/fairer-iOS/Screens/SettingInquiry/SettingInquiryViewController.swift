@@ -17,7 +17,7 @@ final class SettingInquiryViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let settingInquiryTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "궁금한 점이 있으시다면\n아래 연락처를 통해 문의해주세요.", lineHeight: 28)
+        label.setTextWithLineHeight(text: TextLiteral.settingInquiryViewControllerTitleLabel, lineHeight: 28)
         label.textColor = .gray800
         label.font = .h2
         label.numberOfLines = 2
@@ -82,13 +82,13 @@ final class SettingInquiryViewController: BaseViewController {
                 self.setupDelegate()
                 
                 self.composeVC.setToRecipients(["faireran@gmail.com"])
-                self.composeVC.setSubject("[문의]")
-                self.composeVC.setMessageBody("문의 내용", isHTML: false)
+                self.composeVC.setSubject(TextLiteral.settingInquiryViewControllerMailSubjectText)
+                self.composeVC.setMessageBody(TextLiteral.settingInquiryViewControllerMailBodyText, isHTML: false)
                 
                 self.present(self.composeVC, animated: true, completion: nil)
             }
             else {
-                self.makeAlert(title: "Mail 앱 연결 실패", message: "이메일 설정을 확인하고 다시 시도해주세요.")
+                self.makeAlert(title: TextLiteral.settingInquiryViewControllerAlertTitle, message: TextLiteral.settingInquiryViewControllerAlertMessage)
             }
         }
     }

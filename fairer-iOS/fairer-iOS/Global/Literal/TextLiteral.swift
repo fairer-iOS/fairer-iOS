@@ -112,4 +112,12 @@ enum TextLiteral {
     static let settingAlarmViewControllerTimeAlarmCellText = "설정 시간에 맞춰 집안일 알림"
     static let settingAlarmViewControllerRemindAlarmCellText = "미완료 집안일 리마인드"
     static let settingAlarmViewControllerMorningAlarmCellText = "기본 아침 알림"
+    
+    // MARK: - SettingInquiryViewController
+    
+    static let settingInquiryViewControllerTitleLabel = "궁금한 점이 있으시다면\n아래 연락처를 통해 문의해주세요."
+    static let settingInquiryViewControllerMailSubjectText = "[문의] "
+    static let settingInquiryViewControllerMailBodyText = "문의 내용"
+    static let settingInquiryViewControllerAlertTitle = "Mail 앱 연결 실패"
+    static let settingInquiryViewControllerAlertMessage = "이메일 설정을 확인하고 다시 시도해주세요."
 }
