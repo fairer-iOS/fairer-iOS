@@ -8,7 +8,6 @@
 import UIKit
 
 import SnapKit
-import SafariServices
 import MessageUI
 
 final class SettingInquiryViewController: BaseViewController {
