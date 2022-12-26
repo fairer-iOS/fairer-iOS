@@ -45,7 +45,7 @@ final class SettingInquiryViewController: BaseViewController {
     override func render() {
         view.addSubview(settingInquiryTitleLabel)
         settingInquiryTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(28)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
