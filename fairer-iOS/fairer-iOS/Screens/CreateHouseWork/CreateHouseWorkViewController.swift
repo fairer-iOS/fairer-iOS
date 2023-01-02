@@ -23,13 +23,24 @@ final class CreateHouseWorkViewController: BaseViewController {
         label.imageColor = .gray200
         return label
     }()
+    private lazy var writeHouseWorkButton: WriteHouseWorkButton = {
+        let button = WriteHouseWorkButton()
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.positive20.cgColor
+        button.layer.cornerRadius = 6
+        let action = UIAction { [weak self] _ in
+            self?.didTappedWriteHouseWorkButton()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - life cycle
     
     override func render() {
         view.addSubview(createHouseWorkCalendar)
         createHouseWorkCalendar.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(4)
             $0.leading.equalToSuperview().inset(15)
         }
         
@@ -44,6 +55,14 @@ final class CreateHouseWorkViewController: BaseViewController {
         spaceInfoLabel.snp.makeConstraints {
             $0.top.equalTo(spaceCollectionView.snp.bottom)
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(22)
+        }
+        
+        view.addSubview(writeHouseWorkButton)
+        writeHouseWorkButton.snp.makeConstraints {
+            $0.top.equalTo(spaceInfoLabel.snp.bottom).offset(32)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(42)
         }
     }
     
@@ -57,5 +76,10 @@ final class CreateHouseWorkViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func didTappedWriteHouseWorkButton() {
+        // FIXME: - 집안일 직접 입력하기 페이지로 이동
+        print("집안일 직접 입력하기")
     }
 }
