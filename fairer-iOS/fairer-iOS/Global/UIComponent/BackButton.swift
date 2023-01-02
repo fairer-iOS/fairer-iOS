@@ -26,6 +26,6 @@ final class BackButton: UIButton {
     private func configUI() {
         self.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         self.setImage(ImageLiterals.navigationBarBackButton, for: .normal)
-        self.tintColor = .gray400
+        self.tintColor = UIColor(hex: "#323232")
     }
 }
