@@ -70,6 +70,7 @@ enum ImageLiterals {
     static var settingBell: UIImage { .load(systemName: "bell.fill") }
     static var settingExclamation: UIImage { .load(systemName: "exclamationmark.circle") }
     static var settingInfo: UIImage { .load(systemName: "info.circle") }
+    static var calendarChevron: UIImage { .load(name: "calendarchevron") }
 }
 
 extension UIImage {

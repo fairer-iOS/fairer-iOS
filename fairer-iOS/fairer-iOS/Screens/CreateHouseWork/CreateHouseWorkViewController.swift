@@ -14,16 +14,23 @@ final class CreateHouseWorkViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
+    private let createHouseWorkCalendar = CreateHouseWorkCalendarView()
     private let spaceCollectionView = SelectHouseWorkSpaceCollectionView()
     
     // MARK: - life cycle
     
     override func render() {
+        view.addSubview(createHouseWorkCalendar)
+        createHouseWorkCalendar.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
+            $0.leading.equalToSuperview().inset(15)
+        }
+        
         view.addSubview(spaceCollectionView)
         spaceCollectionView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(290)
+            $0.top.equalTo(createHouseWorkCalendar.snp.bottom).offset(4)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(248)
         }
     }
     
