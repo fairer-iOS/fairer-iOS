@@ -16,6 +16,13 @@ final class CreateHouseWorkViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let createHouseWorkCalendar = CreateHouseWorkCalendarView()
     private let spaceCollectionView = SelectHouseWorkSpaceCollectionView()
+    private let spaceInfoLabel: InfoLabelView = {
+        let label = InfoLabelView()
+        label.text = "공간을 선택하면 세부 집안일이 나옵니다."
+        label.textColor = .gray600
+        label.imageColor = .gray200
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -31,6 +38,12 @@ final class CreateHouseWorkViewController: BaseViewController {
             $0.top.equalTo(createHouseWorkCalendar.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(248)
+        }
+        
+        view.addSubview(spaceInfoLabel)
+        spaceInfoLabel.snp.makeConstraints {
+            $0.top.equalTo(spaceCollectionView.snp.bottom)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     

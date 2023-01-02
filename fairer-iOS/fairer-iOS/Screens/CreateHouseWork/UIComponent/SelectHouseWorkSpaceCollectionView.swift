@@ -15,7 +15,7 @@ final class SelectHouseWorkSpaceCollectionView: BaseUIView {
         static let collectionHorizontalSpacing: CGFloat = 24
         static let collectionVerticalSpacing: CGFloat = 12
         static let cellWidth: CGFloat = 102
-        static let cellHeight: CGFloat = 108
+        static let cellHeight: CGFloat = 107
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
             left: collectionHorizontalSpacing,
