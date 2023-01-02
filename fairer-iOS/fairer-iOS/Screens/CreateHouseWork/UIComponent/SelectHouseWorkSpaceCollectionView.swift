@@ -12,10 +12,10 @@ import SnapKit
 final class SelectHouseWorkSpaceCollectionView: BaseUIView {
     
     private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 0
-        static let collectionVerticalSpacing: CGFloat = 0
-        static let cellWidth: CGFloat = 105
-        static let cellHeight: CGFloat = 109
+        static let collectionHorizontalSpacing: CGFloat = 24
+        static let collectionVerticalSpacing: CGFloat = 12
+        static let cellWidth: CGFloat = 102
+        static let cellHeight: CGFloat = 108
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
             left: collectionHorizontalSpacing,
@@ -44,16 +44,20 @@ final class SelectHouseWorkSpaceCollectionView: BaseUIView {
     
     override func render() {
         self.addSubview(collectionView)
-        //FIXME
         collectionView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }
 
 // MARK: - extension
 
-extension SelectHouseWorkSpaceCollectionView: UICollectionViewDelegate {}
+extension SelectHouseWorkSpaceCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // FIXME: - api 연결할 때 공간 전달
+        print(Space.allCases[indexPath.item].rawValue)
+    }
+}
 
 extension SelectHouseWorkSpaceCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

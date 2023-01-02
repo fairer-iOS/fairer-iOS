@@ -13,12 +13,25 @@ final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
     
     var index: Int = 0
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                spaceImageView.image = Space.allCases[index].selectedImage
+            }
+            else {
+                spaceImageView.image = Space.allCases[index].normalImage
+            }
+        }
+    }
+    
     // MARK: - property
+    
     let spaceImageView = UIImageView()
     lazy var spaceNameLabel: SpaceNameLabel = {
         let label = SpaceNameLabel()
         label.backgroundColor = .white
         label.font = .title2
+        label.textColor = .gray700
         label.textAlignment = .center
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 5
@@ -41,17 +54,5 @@ final class SelectHouseWorkSpaceCollectionViewCell: BaseCollectionViewCell {
     
     override func configUI() {
         spaceNameLabel.layer.cornerRadius = 12
-    }
-    
-    // MARK: - function
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                spaceImageView.image = Space.allCases[index].selectedImage
-            }
-            else {
-                spaceImageView.image = Space.allCases[index].normalImage
-            }
-        }
     }
 }
