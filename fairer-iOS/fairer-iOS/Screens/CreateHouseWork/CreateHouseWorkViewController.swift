@@ -20,7 +20,7 @@ final class CreateHouseWorkViewController: BaseViewController {
     private let spaceCollectionView = SelectHouseWorkSpaceCollectionView()
     private let spaceInfoLabel: InfoLabelView = {
         let label = InfoLabelView()
-        label.text = "공간을 선택하면 세부 집안일이 나옵니다."
+        label.text = TextLiteral.createHouseWorkViewControllerInfoLabel
         label.textColor = .gray600
         label.imageColor = .gray200
         return label
@@ -43,7 +43,7 @@ final class CreateHouseWorkViewController: BaseViewController {
     }()
     private lazy var nextButton: MainButton = {
         let button = MainButton()
-        button.title = "다음"
+        button.title = TextLiteral.createHouseWorkViewControllerNextButtonText
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedNextButton()
