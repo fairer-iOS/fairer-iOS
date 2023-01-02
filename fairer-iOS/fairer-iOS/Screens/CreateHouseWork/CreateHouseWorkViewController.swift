@@ -13,6 +13,7 @@ final class CreateHouseWorkViewController: BaseViewController {
     
     // MARK: - property
     
+    private let backButton = BackButton(type: .system)
     private let spaceCollectionView = SelectHouseWorkSpaceCollectionView()
     
     // MARK: - life cycle
@@ -26,7 +27,15 @@ final class CreateHouseWorkViewController: BaseViewController {
         }
     }
     
-    override func configUI() {
-        view.backgroundColor = .white
+    // MARK: - func
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let backButton = makeBarButtonItem(with: backButton)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = backButton
     }
 }
