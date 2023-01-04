@@ -1,5 +1,5 @@
 //
-//  CreateHouseWorkViewController.swift
+//  SelectHouseWorkViewController.swift
 //  fairer-iOS
 //
 //  Created by LeeSungHo on 2022/09/20.
@@ -9,18 +9,18 @@ import UIKit
 
 import SnapKit
 
-final class CreateHouseWorkViewController: BaseViewController {
+final class SelectHouseWorkViewController: BaseViewController {
     
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    private let createHouseWorkCalendar = CreateHouseWorkCalendarView()
+    private let selectHouseWorkCalendar = SelectHouseWorkCalendarView()
     private let spaceCollectionView = SelectHouseWorkSpaceCollectionView()
     private let spaceInfoLabel: InfoLabelView = {
         let label = InfoLabelView()
-        label.text = TextLiteral.createHouseWorkViewControllerInfoLabel
+        label.text = TextLiteral.selectHouseWorkViewControllerInfoLabel
         label.textColor = .gray600
         label.imageColor = .gray200
         return label
@@ -43,7 +43,7 @@ final class CreateHouseWorkViewController: BaseViewController {
     }()
     private lazy var nextButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.createHouseWorkViewControllerNextButtonText
+        button.title = TextLiteral.selectHouseWorkViewControllerNextButtonText
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedNextButton()
@@ -65,15 +65,15 @@ final class CreateHouseWorkViewController: BaseViewController {
             $0.width.edges.equalToSuperview()
         }
         
-        contentView.addSubview(createHouseWorkCalendar)
-        createHouseWorkCalendar.snp.makeConstraints {
+        contentView.addSubview(selectHouseWorkCalendar)
+        selectHouseWorkCalendar.snp.makeConstraints {
             $0.top.equalToSuperview().inset(4)
             $0.leading.equalToSuperview().inset(15)
         }
         
         contentView.addSubview(spaceCollectionView)
         spaceCollectionView.snp.makeConstraints {
-            $0.top.equalTo(createHouseWorkCalendar.snp.bottom).offset(4)
+            $0.top.equalTo(selectHouseWorkCalendar.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(248)
         }

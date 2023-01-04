@@ -1,5 +1,5 @@
 //
-//  CreateHouseWorkCalendarView.swift
+//  SelectHouseWorkCalendarView.swift
 //  fairer-iOS
 //
 //  Created by 김유나 on 2023/01/02.
@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class CreateHouseWorkCalendarView: BaseUIView {
+final class SelectHouseWorkCalendarView: BaseUIView {
     var today = Date()
     
     // MARK: - property
