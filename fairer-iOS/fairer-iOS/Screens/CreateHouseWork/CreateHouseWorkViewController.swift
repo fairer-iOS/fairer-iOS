@@ -90,6 +90,7 @@ final class CreateHouseWorkViewController: BaseViewController {
             $0.top.equalTo(spaceInfoLabel.snp.bottom).offset(32)
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
+            $0.bottom.equalTo(0)
         }
         
         view.addSubview(nextButtonBackgroundView)
