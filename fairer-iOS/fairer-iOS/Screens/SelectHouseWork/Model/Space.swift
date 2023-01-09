@@ -49,7 +49,7 @@ enum Space: String, CaseIterable {
         }
     }
     
-    var houseWorkList: [String] {
+    var houseWorkDetailList: [String] {
         switch self {
         case .entrance:
             return ["현관 청소", "분리수거하기", "신발 정리"]
