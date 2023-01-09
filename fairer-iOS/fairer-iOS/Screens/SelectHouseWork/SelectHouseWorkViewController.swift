@@ -91,7 +91,7 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.top.equalTo(spaceInfoLabel.snp.bottom).offset(32)
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
-            $0.bottom.equalTo(0)
+//            $0.bottom.equalTo(0)
         }
         
         contentView.addSubview(detailCollectionView)
@@ -99,6 +99,7 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.top.equalTo(writeHouseWorkButton.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(220)
+            $0.bottom.equalTo(0)
         }
         
         view.addSubview(nextButtonBackgroundView)

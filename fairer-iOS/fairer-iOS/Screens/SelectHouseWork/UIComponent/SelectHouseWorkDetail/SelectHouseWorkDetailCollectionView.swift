@@ -14,7 +14,7 @@ final class SelectHouseWorkDetailCollectionView: BaseUIView {
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
         static let collectionVerticalSpacing: CGFloat = 8
-        static let cellWidth: CGFloat = 102
+        static let cellWidth: CGFloat = 102.3
         static let cellHeight: CGFloat = 64
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
@@ -55,13 +55,13 @@ final class SelectHouseWorkDetailCollectionView: BaseUIView {
 extension SelectHouseWorkDetailCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // FIXME: - api 연결할 때 공간 전달
-        print(Space.kitchen.houseWorkDetailList[indexPath.item])
+        print(Space.outside.houseWorkDetailList[indexPath.item])
     }
 }
 
 extension SelectHouseWorkDetailCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Space.kitchen.houseWorkDetailList.count
+        return Space.outside.houseWorkDetailList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -69,11 +69,8 @@ extension SelectHouseWorkDetailCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        
-//        cell.index = indexPath.row
-//        cell.spaceImageView.image = Space.allCases[indexPath.row].normalImage
-//        cell.spaceNameLabel.text = Space.allCases[indexPath.row].rawValue
-        cell.cellLabel.text = Space.kitchen.houseWorkDetailList[indexPath.item]
+
+        cell.cellLabel.text = Space.outside.houseWorkDetailList[indexPath.item]
         
         return cell
     }

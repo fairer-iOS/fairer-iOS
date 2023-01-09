@@ -12,7 +12,13 @@ import SnapKit
 final class SelectHouseWorkDetailCollectionViewCell: BaseCollectionViewCell {
     
     override var isSelected: Bool {
-        didSet { setupAttribute() }
+        didSet {
+            if isSelected {
+                cellBackgroundView.backgroundColor = .positive0
+                cellBackgroundView.layer.borderColor = UIColor.blue.cgColor
+                cellLabel.textColor = .blue
+            }
+        }
     }
     
     // MARK: - property
@@ -45,16 +51,6 @@ final class SelectHouseWorkDetailCollectionViewCell: BaseCollectionViewCell {
         cellBackgroundView.addSubview(cellLabel)
         cellLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
-        }
-    }
-    
-    // MARK: - func
-    
-    private func setupAttribute() {
-        if isSelected {
-            
-        } else {
-            
         }
     }
 }
