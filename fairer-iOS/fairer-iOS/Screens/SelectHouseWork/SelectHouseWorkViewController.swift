@@ -25,6 +25,7 @@ final class SelectHouseWorkViewController: BaseViewController {
         label.imageColor = .gray200
         return label
     }()
+    private let detailCollectionView = SelectHouseWorkDetailCollectionView()
     private lazy var writeHouseWorkButton: WriteHouseWorkButton = {
         let button = WriteHouseWorkButton()
         button.layer.borderWidth = 1
@@ -91,6 +92,13 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
             $0.bottom.equalTo(0)
+        }
+        
+        contentView.addSubview(detailCollectionView)
+        detailCollectionView.snp.makeConstraints {
+            $0.top.equalTo(writeHouseWorkButton.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(220)
         }
         
         view.addSubview(nextButtonBackgroundView)

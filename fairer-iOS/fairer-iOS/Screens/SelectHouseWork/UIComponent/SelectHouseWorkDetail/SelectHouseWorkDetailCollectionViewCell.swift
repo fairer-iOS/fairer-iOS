@@ -25,11 +25,12 @@ final class SelectHouseWorkDetailCollectionViewCell: BaseCollectionViewCell {
         view.layer.cornerRadius = 6
         return view
     }()
-    private let cellLabel: UILabel = {
+    let cellLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = .body2
         label.textAlignment = .center
+        label.numberOfLines = 0
         return label
     }()
     
