@@ -15,10 +15,11 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     
     let titleImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "applelogo")
-        imageView.tintColor = .black
+        imageView.image = UIImage(named: "profilelightblue1.svg")
+//        imageView.tintColor = .black
         return imageView
     }()
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         // FIXME: - figma 디자인시스템 정리 후 수정되야함

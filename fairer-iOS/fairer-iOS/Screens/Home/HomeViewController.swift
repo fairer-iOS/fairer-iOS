@@ -57,7 +57,26 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     private let homeCalenderView = HomeCalendarView()
+    private let homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
+    private let calendarDailyCollecionView = CalendarDailyCollectionView()
+    private let finishWorkLabel: UILabel = {
+        let label = UILabel()
+        label.text = "끝낸 집안일"
+        label.font = UIFont.font(AppFontName.semiBold, ofSize: 14)
+        label.textColor = .gray800
+        return label
+    }()
+    private let calendarDailyWorkEndCollectionView = CalendarDailyWorkEndCollectionView()
 
+    // 스크롤 뷰 (HeadGroupCollectionView 부터 모두 들어간다.)
+    private lazy var contentScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .systemBackground
+        scrollView.showsVerticalScrollIndicator = true
+        return scrollView
+    }()
+    
     // MARK: - life cycle
     
     deinit {
@@ -71,58 +90,95 @@ final class HomeViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(toolBarView)
+    
+        view.addSubviews(toolBarView,titleLabel,houseImageView,homeGroupLabel,contentScrollView)
+        contentScrollView.addSubviews(
+            homeGroupCollectionView,
+            homeRuleView,
+            homeDivider,
+            homeCalenderView,
+            homeWeekCalendarCollectionView,
+            calendarDailyCollecionView,
+            finishWorkLabel,
+            calendarDailyWorkEndCollectionView
+        )
+        
         toolBarView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(76)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
-        view.addSubview(titleLabel)
+
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(8)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-        
-        view.addSubview(houseImageView)
+
         houseImageView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-        
-        view.addSubview(homeGroupLabel)
+
         homeGroupLabel.snp.makeConstraints {
             $0.leading.equalTo(houseImageView.snp.trailing).offset(4)
             $0.centerY.equalTo(houseImageView.snp.centerY)
         }
         
-        view.addSubview(homeGroupCollectionView)
-        homeGroupCollectionView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+        contentScrollView.snp.makeConstraints{
             $0.top.equalTo(homeGroupLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(toolBarView.snp.top)
+        }
+        
+        // add in contentScrollView
+        homeGroupCollectionView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(94)
         }
-        
-        view.addSubview(homeRuleView)
+    
         homeRuleView.snp.makeConstraints {
             $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(40)
         }
         
-        view.addSubview(homeDivider)
         homeDivider.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(homeRuleView.snp.bottom).offset(16)
             $0.height.equalTo(2)
         }
         
-        view.addSubview(homeCalenderView)
         homeCalenderView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(homeDivider.snp.bottom).offset(8)
-            // FIXME: - auto layout
-            $0.height.equalTo(116)
+            $0.height.equalTo(50)
         }
+        
+        homeWeekCalendarCollectionView.snp.makeConstraints {
+            $0.top.equalTo(homeCalenderView.snp.bottom)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(70)
+        }
+
+        calendarDailyCollecionView.snp.makeConstraints{
+            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(16)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(310)
+        }
+        finishWorkLabel.snp.makeConstraints {
+            $0.top.equalTo(calendarDailyCollecionView.snp.bottom).offset(14)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(25)
+        }
+        calendarDailyWorkEndCollectionView.snp.makeConstraints {
+            $0.top.equalTo(finishWorkLabel.snp.bottom).offset(16)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(210)
+            $0.bottom.equalToSuperview()
+        }
+        
     }
     
     override func setupNavigationBar() {
