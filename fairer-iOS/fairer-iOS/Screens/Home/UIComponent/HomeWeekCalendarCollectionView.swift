@@ -10,7 +10,12 @@ import UIKit
 import SnapKit
 
 final class HomeWeekCalendarCollectionView: BaseUIView {
-
+    
+    // 캘린더 터치 이벤트 로직 관련 변수
+    var isSelected = false
+    var selectedCell = Int()
+    var cellIndexPath = IndexPath()
+    
     let dotList = [UIImage(named: "dot.svg"),UIImage(named: ""),UIImage(named: "2dot.svg"),UIImage(named: "dot.svg"),UIImage(named: ""),UIImage(named: "3dot.svg"),UIImage(named: "2dot.svg")]
     let dayList = ["일","월","화","수","목","금","토"]
     let dateList = ["31","1","2","3","4","5","6"]
@@ -64,10 +69,22 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
 
 extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        // 여기로 cell 연결
-        collectionView.deselectItem(at: indexPath, animated: true)
-        collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.gray100
+        // 주간 캘린더 선택 이벤트 로직
+        if self.isSelected == false {
+            print("first")
+            collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.gray100
+            self.isSelected = true
+            self.selectedCell = indexPath.row
+            self.cellIndexPath = indexPath
+        }else if indexPath.row != self.selectedCell {
+            print("second")
+            collectionView.cellForItem(at: self.cellIndexPath)?.backgroundColor = UIColor.systemBackground
+            collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.gray100
+            self.isSelected = true
+            self.selectedCell = indexPath.row
+            self.cellIndexPath = indexPath
+        }
+        // 최종 indexPath.row는 선택된 cell의 인덱스 값
         print(indexPath.row)
     }
 }
