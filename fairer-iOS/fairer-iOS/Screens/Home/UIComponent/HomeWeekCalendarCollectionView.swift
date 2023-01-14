@@ -11,7 +11,7 @@ import SnapKit
 
 final class HomeWeekCalendarCollectionView: BaseUIView {
 
-    
+    let dotList = [UIImage(named: "dot.svg"),UIImage(named: ""),UIImage(named: "2dot.svg"),UIImage(named: "dot.svg"),UIImage(named: ""),UIImage(named: "3dot.svg"),UIImage(named: "2dot.svg")]
     let dayList = ["일","월","화","수","목","금","토"]
     let dateList = ["31","1","2","3","4","5","6"]
     var startOfWeekDate = Date().startOfWeek
@@ -21,7 +21,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         static let collectionHorizontalSpacing: CGFloat = 8
         static let collectionVerticalSpacing: CGFloat = 0
         static let cellWidth: CGFloat = 40
-        static let cellHeight: CGFloat = 56
+        static let cellHeight: CGFloat = 65
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
             left: collectionHorizontalSpacing,
@@ -62,7 +62,15 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     }
 }
 
-extension HomeWeekCalendarCollectionView: UICollectionViewDelegate { }
+extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        // 여기로 cell 연결
+        collectionView.deselectItem(at: indexPath, animated: true)
+        collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.gray100
+        print(indexPath.row)
+    }
+}
 
 extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -77,7 +85,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = dateList[indexPath.item]
-        
+        cell.workDot.image = dotList[indexPath.item]
         
         return cell
     }

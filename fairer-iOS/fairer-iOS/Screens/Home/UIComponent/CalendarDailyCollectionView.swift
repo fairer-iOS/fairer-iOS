@@ -66,7 +66,11 @@ class CalendarDailyCollectionView: BaseUIView  {
 
 }
 
-extension CalendarDailyCollectionView: UICollectionViewDelegate {}
+extension CalendarDailyCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+}
 
 extension CalendarDailyCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

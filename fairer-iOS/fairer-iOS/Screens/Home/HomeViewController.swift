@@ -17,12 +17,17 @@ final class HomeViewController: BaseViewController {
     let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
     
     // MARK: - property
+
+    private let logoImage : UIImageView = {
+        let imgView = UIImageView()
+        imgView.image = UIImage(named: "fairerlogoInHomeVC.svg")
+        return imgView
+    }()
     
-    private let logoImage = UIImageView(image: ImageLiterals.imgLogo)
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        button.setImage(UIImage(systemName: "person"), for: .normal)
+//        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.setImage(UIImage(named: "menu.svg"), for: .normal)
         button.tintColor = .black
         return button
     }()
@@ -151,9 +156,9 @@ final class HomeViewController: BaseViewController {
         }
         
         homeCalenderView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(homeDivider.snp.bottom).offset(8)
-            $0.height.equalTo(50)
+            $0.height.equalTo(40)
         }
         
         homeWeekCalendarCollectionView.snp.makeConstraints {
@@ -163,10 +168,11 @@ final class HomeViewController: BaseViewController {
         }
 
         calendarDailyCollecionView.snp.makeConstraints{
-            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(16)
+            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(310)
         }
+        
         finishWorkLabel.snp.makeConstraints {
             $0.top.equalTo(calendarDailyCollecionView.snp.bottom).offset(14)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.leadingTrailingPadding)
