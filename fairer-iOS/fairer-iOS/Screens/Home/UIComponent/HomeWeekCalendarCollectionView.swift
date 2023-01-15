@@ -18,9 +18,10 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     
     let dotList = [UIImage(named: "dot.svg"),UIImage(named: ""),UIImage(named: "2dot.svg"),UIImage(named: "dot.svg"),UIImage(named: ""),UIImage(named: "3dot.svg"),UIImage(named: "2dot.svg")]
     let dayList = ["일","월","화","수","목","금","토"]
-    let dateList = ["31","1","2","3","4","5","6"]
+    let dateList = ["10","11","12","13","14","15","16"]
     var startOfWeekDate = Date().startOfWeek
     var endOfWeekDate = Date().endOfWeek
+    var todayDate = Date()
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 8
@@ -70,6 +71,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
 extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 주간 캘린더 선택 이벤트 로직
+        // 여기 로직 첫 if문 지워도 될듯 (일단 유지)
         if self.isSelected == false {
             print("first")
             self.isSelected = true
@@ -104,6 +106,15 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
         // 최종 indexPath.row는 선택된 cell의 인덱스 값
         print("click index=\(indexPath.row)")
     }
+    
+    // 오늘 날짜의 '일'을 정수로 리턴하는 함수
+    func getTodayDateInInt()->Int{
+        let ampmIndex = todayDate.dateToString.index(startOfWeekDate.dateToString.endIndex, offsetBy: -2)
+        let ampmStr = String(startOfWeekDate.dateToString[ampmIndex...])
+        let result = Int(ampmStr) ?? 0
+        print(result)
+        return result
+    }
 }
 
 extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
@@ -117,12 +128,21 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-
-        
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = dateList[indexPath.item]
         cell.workDot.image = dotList[indexPath.item]
         
+        // 오늘날짜 확인하여 셀 스타일 변경하는 부분
+        if Int(dateList[indexPath.item]) ?? 0 == self.getTodayDateInInt() {
+            self.isSelected = true
+            self.selectedCell = indexPath.row
+            self.cellIndexPath = indexPath
+            cell.globalView.backgroundColor = UIColor.gray100
+            cell.dateLabel.textColor = UIColor.blue
+            cell.dayLabel.textColor = UIColor.blue
+            cell.workDot.image = UIImage(named: "selectedCell.svg")
+        }
+    
         return cell
     }
 }

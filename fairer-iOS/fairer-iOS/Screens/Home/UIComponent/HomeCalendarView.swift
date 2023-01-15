@@ -34,7 +34,7 @@ final class HomeCalendarView: BaseUIView {
         button.snp.makeConstraints { make in
             make.height.width.equalTo(20)
         }
-        button.setImage(UIImage(named: "calendarchevron.svg"), for: .normal)
+        button.setImage(UIImage(named: "keyboard_arrow_down.svg"), for: .normal)
         return button
     }()
     

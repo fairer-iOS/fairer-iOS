@@ -172,12 +172,13 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(310)
         }
-        
+
         finishWorkLabel.snp.makeConstraints {
             $0.top.equalTo(calendarDailyCollecionView.snp.bottom).offset(14)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(25)
         }
+
         calendarDailyWorkEndCollectionView.snp.makeConstraints {
             $0.top.equalTo(finishWorkLabel.snp.bottom).offset(16)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
