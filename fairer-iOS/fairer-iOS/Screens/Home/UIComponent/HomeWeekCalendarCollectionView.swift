@@ -26,7 +26,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         static let collectionHorizontalSpacing: CGFloat = 8
         static let collectionVerticalSpacing: CGFloat = 0
         static let cellWidth: CGFloat = 40
-        static let cellHeight: CGFloat = 65
+        static let cellHeight: CGFloat = 56
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
             left: collectionHorizontalSpacing,
@@ -72,20 +72,37 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
         // 주간 캘린더 선택 이벤트 로직
         if self.isSelected == false {
             print("first")
-            collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.gray100
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
+            let firstCell  = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
+            firstCell.globalView.backgroundColor = UIColor.gray100
+            firstCell.dateLabel.textColor = UIColor.blue
+            firstCell.dayLabel.textColor = UIColor.blue
+            firstCell.workDot.image = UIImage(named: "selectedCell.svg")
+            
         }else if indexPath.row != self.selectedCell {
             print("second")
-            collectionView.cellForItem(at: self.cellIndexPath)?.backgroundColor = UIColor.systemBackground
-            collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.gray100
+            // 이전에 선택된 셀 초기화
+            let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
+            resetCell.globalView.backgroundColor = UIColor.systemBackground
+            resetCell.dateLabel.textColor = UIColor.gray400
+            resetCell.dayLabel.textColor = UIColor.gray400
+            resetCell.workDot.image = dotList[self.cellIndexPath.row]
+            
+            // 선택된 셀 커스텀
+            let secondCell = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
+            secondCell.globalView.backgroundColor = UIColor.gray100
+            secondCell.dateLabel.textColor = UIColor.blue
+            secondCell.dayLabel.textColor = UIColor.blue
+            secondCell.workDot.image = UIImage(named: "selectedCell.svg")
+            
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
         }
         // 최종 indexPath.row는 선택된 cell의 인덱스 값
-        print(indexPath.row)
+        print("click index=\(indexPath.row)")
     }
 }
 
@@ -99,6 +116,8 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
+        
+
         
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = dateList[indexPath.item]

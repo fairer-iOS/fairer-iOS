@@ -15,6 +15,7 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
     
     let workDot: UIImageView = {
         let imgView = UIImageView()
+//        imgView.backgroundColor = .red
 //        imgView.image = UIImage(named: "2dot.svg")
         return imgView
     }()
@@ -37,45 +38,56 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     
+    var globalView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.systemBackground
+        view.layer.cornerRadius = 8
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.systemBackground.cgColor
+        return view
+    }()
+    
     
     // MARK: - life cycle
     
     override func render() {
         
-        self.addSubviews(workDot,dayLabel,dateLabel)
+        self.addSubviews(workDot,globalView)
+        globalView.addSubviews(dayLabel,dateLabel)
+        self.bringSubviewToFront(workDot)
         
         workDot.snp.makeConstraints {
-            $0.top.equalToSuperview()
             $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(16)
+            $0.bottom.equalTo(globalView.snp.top).offset(3)
+        }
+        
+        globalView.snp.makeConstraints {
+            
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+            $0.bottom.equalToSuperview()
         }
         
         dayLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(22)
+            $0.height.equalTo(20)
             $0.bottom.equalTo(dateLabel.snp.top)
         }
         
         dateLabel.snp.makeConstraints {
             $0.top.equalTo(dayLabel.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(24)
-            $0.bottom.equalToSuperview()
+            $0.height.equalTo(20)
+            $0.bottom.equalToSuperview().offset(-10)
         }
     }
     
-    override func configUI() {
-        // cell layer
-        self.layer.cornerRadius = 8
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.systemBackground.cgColor
-    }
-    
-    func cellSelectedEvent(){
-        if self.layer.borderColor == UIColor.systemBackground.cgColor {
-            self.layer.borderColor = UIColor.gray100.cgColor
-            self.backgroundColor = UIColor.gray100
-            self.dateLabel.textColor = UIColor.blue
-            self.dayLabel.textColor = UIColor.blue
-        }
-    }
+//    override func configUI() {
+//        // cell layer
+//        self.layer.cornerRadius = 8
+//        self.layer.borderWidth = 1
+//        self.layer.borderColor = UIColor.systemBackground.cgColor
+//    }
 }
