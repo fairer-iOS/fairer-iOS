@@ -1,23 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Icon+Touch area.svg",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "Icon+Touch area 1.svg",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "Icon+Touch area 2.svg",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "menu.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }

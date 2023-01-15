@@ -20,13 +20,12 @@ final class HomeViewController: BaseViewController {
 
     private let logoImage : UIImageView = {
         let imgView = UIImageView()
-        imgView.image = UIImage(named: "fairerlogoInHomeVC.svg")
+        imgView.image = ImageLiterals.HomeImgLogo
         return imgView
     }()
     
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
-//        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         button.setImage(UIImage(named: "menu.svg"), for: .normal)
         button.tintColor = .black
         return button

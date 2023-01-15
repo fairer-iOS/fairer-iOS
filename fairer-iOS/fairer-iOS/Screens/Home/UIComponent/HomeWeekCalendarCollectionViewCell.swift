@@ -15,8 +15,6 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
     
     let workDot: UIImageView = {
         let imgView = UIImageView()
-//        imgView.backgroundColor = .red
-//        imgView.image = UIImage(named: "2dot.svg")
         return imgView
     }()
     
@@ -83,11 +81,4 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
             $0.bottom.equalToSuperview().offset(-10)
         }
     }
-    
-//    override func configUI() {
-//        // cell layer
-//        self.layer.cornerRadius = 8
-//        self.layer.borderWidth = 1
-//        self.layer.borderColor = UIColor.systemBackground.cgColor
-//    }
 }

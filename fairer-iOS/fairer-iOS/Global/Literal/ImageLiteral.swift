@@ -13,6 +13,7 @@ enum ImageLiterals {
     
     static var imgInfo: UIImage { .load(systemName: "info.circle.fill") }
     static var imgLogo: UIImage { .load(name: "fairerlogo") }
+    static var HomeImgLogo: UIImage { .load(name: "fairerlogoInHomeVC")}
     static var imgLogoLogin: UIImage { .load(name: "fairerlogologin") }
     static var imgLogoSplash: UIImage { .load(name: "fairerlogosplash") }
     static var imgAppleLogo: UIImage { .load(name: "applelogo") }
