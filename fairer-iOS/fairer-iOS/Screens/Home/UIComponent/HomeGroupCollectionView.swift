@@ -14,9 +14,9 @@ final class HomeGroupCollectionView: BaseUIView {
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
-        static let collectionVerticalSpacing: CGFloat = 10
+        static let collectionVerticalSpacing: CGFloat = 0
         static let cellWidth: CGFloat = 48
-        static let cellHeight: CGFloat = 68
+        static let cellHeight: CGFloat = 70
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
             left: collectionHorizontalSpacing,

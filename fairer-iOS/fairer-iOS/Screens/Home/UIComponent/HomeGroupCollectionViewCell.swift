@@ -16,7 +16,7 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     let titleImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "profilelightblue1.svg")
-//        imageView.tintColor = .black
+
         return imageView
     }()
     
@@ -35,7 +35,7 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
         self.addSubview(titleImage)
         titleImage.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(22)
         }
         
         self.addSubview(titleLabel)

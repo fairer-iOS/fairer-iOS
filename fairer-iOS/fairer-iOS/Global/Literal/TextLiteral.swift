@@ -45,6 +45,10 @@ enum TextLiteral {
     static let groupMainViewControllerHouseEnterButtonText: String = "집안일 하우스 참여하기"
     static let groupMainViewControllerHouseEnterInfoLabel: String = "기존에 만들어진 하우스에 참여하고 싶다면\n선택해주세요."
     
+    // MARK: - HomeView
+    
+    static let homeViewFinishWorkTitle: String = "끝낸 집안일"
+    
     // MARK: - HomeCalendarView
     
     static let homeCalendarViewTodayTitle: String = "오늘"
