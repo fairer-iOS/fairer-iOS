@@ -55,6 +55,11 @@ final class SelectHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        didTappedSpace()
+    }
+    
     override func render() {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints {
@@ -135,5 +140,11 @@ final class SelectHouseWorkViewController: BaseViewController {
     private func didTappedNextButton() {
         // FIXME: - 집안일 설정하기 페이지로 이동
         print("다음")
+    }
+    
+    private func didTappedSpace() {
+        spaceCollectionView.didTappedSpace = {[weak self] space in
+            self?.spaceInfoLabel.isHidden = true
+        }
     }
 }

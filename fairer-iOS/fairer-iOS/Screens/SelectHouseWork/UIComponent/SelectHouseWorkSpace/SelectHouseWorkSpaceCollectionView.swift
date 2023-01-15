@@ -11,6 +11,8 @@ import SnapKit
 
 final class SelectHouseWorkSpaceCollectionView: BaseUIView {
     
+    var didTappedSpace: ((Space) -> ())?
+    
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
         static let collectionVerticalSpacing: CGFloat = 12
@@ -55,7 +57,8 @@ final class SelectHouseWorkSpaceCollectionView: BaseUIView {
 extension SelectHouseWorkSpaceCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // FIXME: - api 연결할 때 공간 전달
-        print(Space.allCases[indexPath.item].rawValue)
+        didTappedSpace?(Space.allCases[indexPath.item])
+        print(Space.allCases[indexPath.item])
     }
 }
 
