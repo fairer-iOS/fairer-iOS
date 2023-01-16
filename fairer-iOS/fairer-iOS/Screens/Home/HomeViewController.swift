@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class HomeViewController: BaseViewController {
+class HomeViewController: BaseViewController {
     
     // TODO: - 추후 api연결 + UserDefault
     
@@ -87,6 +87,7 @@ final class HomeViewController: BaseViewController {
     
     override func configUI() {
         super.configUI()
+        self.contentScrollView.delegate = self
         setupToolBarGesture()
         setHomeRuleLabel()
     }
@@ -101,6 +102,7 @@ final class HomeViewController: BaseViewController {
                          homeGroupCollectionView,
                          homeRuleView,
                          homeDivider)
+        
         contentScrollView.addSubviews(
             homeCalenderView,
             homeWeekCalendarCollectionView,
@@ -129,28 +131,27 @@ final class HomeViewController: BaseViewController {
             $0.leading.equalTo(houseImageView.snp.trailing).offset(4)
             $0.centerY.equalTo(houseImageView.snp.centerY)
         }
-        
+
         homeGroupCollectionView.snp.makeConstraints {
             $0.top.equalTo(houseImageView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(70)
+            $0.height.equalTo(86)
         }
-    
+
         homeRuleView.snp.makeConstraints {
-            $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
+            $0.top.equalTo(homeGroupCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(40)
         }
         
         homeDivider.snp.makeConstraints {
+            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(144)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(homeRuleView.snp.bottom).offset(16)
             $0.height.equalTo(2)
         }
         
-        
         contentScrollView.snp.makeConstraints{
-            $0.top.equalTo(homeDivider.snp.bottom)
+            $0.top.equalTo(homeDivider.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(toolBarView.snp.top)
         }
@@ -224,12 +225,44 @@ final class HomeViewController: BaseViewController {
             }
         }
     }
-    
+
     // MARK: - selector
     
     @objc
     private func addTapGesture() {
         // FIXME: - 집안일 추가 뷰로 연결
         print("tap")
+    }
+}
+
+    // MARK: - Extension
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("scrollViewWillBeginDragging")
+        
+        homeRuleView.homeRuleLabel.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        
+        homeRuleView.homeRuleDescriptionLabel.snp.updateConstraints{
+            $0.height.equalTo(0)
+        }
+        
+        homeGroupCollectionView.snp.updateConstraints{
+            $0.height.equalTo(0)
+        }
+        homeRuleView.snp.updateConstraints{
+            $0.height.equalTo(0)
+        }
+        homeDivider.snp.updateConstraints{
+            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(8)
+        }
+        func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+            print("scrollViewDidEndDecelerating")
+        }
+        func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+            print("scrollViewDidScrollToTop")
+        }
     }
 }

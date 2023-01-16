@@ -35,7 +35,7 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
         self.addSubview(titleImage)
         titleImage.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(22)
+            $0.height.equalTo(48)
         }
         
         self.addSubview(titleLabel)
