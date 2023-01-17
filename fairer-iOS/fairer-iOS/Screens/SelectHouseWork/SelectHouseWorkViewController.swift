@@ -107,7 +107,8 @@ final class SelectHouseWorkViewController: BaseViewController {
         contentView.addSubview(selectHouseWorkCalendar)
         selectHouseWorkCalendar.snp.makeConstraints {
             $0.top.equalToSuperview().inset(4)
-            $0.leading.equalToSuperview().inset(15)
+            $0.leading.equalToSuperview().inset(10)
+            $0.width.equalTo(112)
         }
         
         contentView.addSubview(spaceCollectionView)
