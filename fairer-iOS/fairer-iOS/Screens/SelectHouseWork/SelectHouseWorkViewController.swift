@@ -77,9 +77,23 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
+        view.addSubview(nextButtonBackgroundView)
+        nextButtonBackgroundView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalToSuperview()
+            $0.height.equalTo(122)
+        }
+        
+        nextButtonBackgroundView.addSubview(nextButton)
+        nextButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
+        }
+        
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(nextButtonBackgroundView.snp.top)
         }
         
         scrollView.addSubview(contentView)
@@ -132,18 +146,6 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
             $0.bottom.equalTo(0)
-        }
-        
-        view.addSubview(nextButtonBackgroundView)
-        nextButtonBackgroundView.snp.makeConstraints {
-            $0.bottom.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(122)
-        }
-        
-        nextButtonBackgroundView.addSubview(nextButton)
-        nextButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
         }
     }
     
