@@ -40,7 +40,7 @@ final class SelectHouseWorkDetailCollectionView: BaseUIView {
         flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
         return flowLayout
     }()
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.allowsMultipleSelection = true
@@ -67,13 +67,11 @@ extension SelectHouseWorkDetailCollectionView: UICollectionViewDelegate {
         // FIXME: - api 연결할 때 공간 전달
         selectedHouseWorkList.append(space?.houseWorkDetailList[indexPath.item] ?? "")
         didTappedHouseWork?(selectedHouseWorkList)
-        print(selectedHouseWorkList)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         selectedHouseWorkList = selectedHouseWorkList.filter { $0 != space?.houseWorkDetailList[indexPath.item] ?? "" }
         didTappedHouseWork?(selectedHouseWorkList)
-        print(selectedHouseWorkList)
     }
 }
 

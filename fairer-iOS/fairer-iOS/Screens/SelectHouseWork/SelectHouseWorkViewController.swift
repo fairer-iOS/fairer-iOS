@@ -11,6 +11,8 @@ import SnapKit
 
 final class SelectHouseWorkViewController: BaseViewController {
     
+    var selectedSpace: Space?
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -175,6 +177,11 @@ final class SelectHouseWorkViewController: BaseViewController {
     
     private func didTappedSpace() {
         spaceCollectionView.didTappedSpace = {[weak self] space in
+            if space != self?.selectedSpace && self?.detailCollectionView.selectedHouseWorkList.count ?? 0 > 0 {
+                self?.makeAlert(title: "같은 공간만 선택 할 수 있어요", message: "다른 공간을 선택하시면 선택한 집안일이\n삭제 됩니다. 다른 공간을 선택하시겠어요?")
+                self?.detailCollectionView.selectedHouseWorkList = []
+                self?.nextButton.isDisabled = true
+            }
             let numOfHouseWork = space.houseWorkDetailList.count
             let height: Int
             if numOfHouseWork <= 3 {
@@ -199,6 +206,8 @@ final class SelectHouseWorkViewController: BaseViewController {
             self?.detailHouseWorkLabel.snp.updateConstraints {
                 $0.height.equalTo(26)
             }
+            
+            self?.selectedSpace = space
         }
     }
     
