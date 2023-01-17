@@ -27,7 +27,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     }()
     private let detailHouseWorkLabel: UILabel = {
         let label = UILabel()
-        label.text = "세부 집안일"
+        label.setTextWithLineHeight(text: "세부 집안일", lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         label.isHidden = true
@@ -105,19 +105,18 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        contentView.addSubview(writeHouseWorkButton)
-        writeHouseWorkButton.snp.makeConstraints {
-            $0.top.equalTo(spaceInfoLabel.snp.bottom).offset(32)
-            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(42)
-            //            $0.bottom.equalTo(0)
-        }
-        
         contentView.addSubview(detailCollectionView)
         detailCollectionView.snp.makeConstraints {
-            $0.top.equalTo(writeHouseWorkButton.snp.bottom)
-            $0.horizontalEdges.equalToSuperview()
+            $0.top.equalTo(detailHouseWorkLabel.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(220)
+        }
+        
+        contentView.addSubview(writeHouseWorkButton)
+        writeHouseWorkButton.snp.makeConstraints {
+            $0.top.equalTo(detailCollectionView.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(42)
             $0.bottom.equalTo(0)
         }
         
