@@ -29,7 +29,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     }()
     private let detailHouseWorkLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "세부 집안일", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.selectHouseWorkViewControllerDetailHouseWorkLabel, lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         label.isHidden = true
@@ -38,7 +38,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     private let detailCollectionView = SelectHouseWorkDetailCollectionView()
     private let writeHouseWorkLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "원하는 집안일이 없나요?", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.selectHouseWorkViewControllerWriteHouseWorkLabel, lineHeight: 22)
         label.textColor = .gray300
         label.font = .body2
         label.isHidden = true
@@ -179,7 +179,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     private func didTappedSpace() {
         spaceCollectionView.didTappedSpace = {[weak self] space in
             if space != self?.selectedSpace && self?.detailCollectionView.selectedHouseWorkList.count ?? 0 > 0 {
-                self?.makeAlert(title: "같은 공간만 선택 할 수 있어요", message: "다른 공간을 선택하시면 선택한 집안일이\n삭제 됩니다. 다른 공간을 선택하시겠어요?")
+                self?.makeAlert(title: TextLiteral.selectHouseWorkViewControllerAlertTitle, message: TextLiteral.selectHouseWorkViewControllerAlertMessage)
                 self?.detailCollectionView.selectedHouseWorkList = []
                 self?.nextButton.isDisabled = true
             }
