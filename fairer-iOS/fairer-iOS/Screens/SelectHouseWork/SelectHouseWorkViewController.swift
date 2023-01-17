@@ -74,6 +74,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didTappedSpace()
+        didTappedHouseWork()
     }
     
     override func render() {
@@ -186,6 +187,7 @@ final class SelectHouseWorkViewController: BaseViewController {
             
             self?.spaceInfoLabel.isHidden = true
             self?.detailCollectionView.space = space
+            
             self?.detailHouseWorkLabel.isHidden = false
             self?.writeHouseWorkLabel.isHidden = false
             self?.detailCollectionView.snp.updateConstraints {
@@ -196,6 +198,16 @@ final class SelectHouseWorkViewController: BaseViewController {
             }
             self?.detailHouseWorkLabel.snp.updateConstraints {
                 $0.height.equalTo(26)
+            }
+        }
+    }
+    
+    private func didTappedHouseWork() {
+        detailCollectionView.didTappedHouseWork = {[weak self] houseWork in
+            if houseWork.count > 0 {
+                self?.nextButton.isDisabled = false
+            } else {
+                self?.nextButton.isDisabled = true
             }
         }
     }

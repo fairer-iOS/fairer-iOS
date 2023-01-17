@@ -17,6 +17,9 @@ final class SelectHouseWorkDetailCollectionView: BaseUIView {
         }
     }
     
+    var didTappedHouseWork: (([String]) -> ())?
+    var selectedHouseWorkList: [String] = []
+    
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
         static let collectionVerticalSpacing: CGFloat = 8
@@ -62,7 +65,15 @@ final class SelectHouseWorkDetailCollectionView: BaseUIView {
 extension SelectHouseWorkDetailCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // FIXME: - api 연결할 때 공간 전달
-        print(space?.houseWorkDetailList[indexPath.item])
+        selectedHouseWorkList.append(space?.houseWorkDetailList[indexPath.item] ?? "")
+        didTappedHouseWork?(selectedHouseWorkList)
+        print(selectedHouseWorkList)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        selectedHouseWorkList = selectedHouseWorkList.filter { $0 != space?.houseWorkDetailList[indexPath.item] ?? "" }
+        didTappedHouseWork?(selectedHouseWorkList)
+        print(selectedHouseWorkList)
     }
 }
 
