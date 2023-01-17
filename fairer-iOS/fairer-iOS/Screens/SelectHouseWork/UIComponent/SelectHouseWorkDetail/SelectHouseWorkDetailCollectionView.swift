@@ -11,10 +11,9 @@ import SnapKit
 
 final class SelectHouseWorkDetailCollectionView: BaseUIView {
     
-    var space: Space = .entrance {
+    var space: Space? {
         didSet {
             self.collectionView.reloadData()
-//            self.collectionView.select
         }
     }
     
@@ -63,13 +62,13 @@ final class SelectHouseWorkDetailCollectionView: BaseUIView {
 extension SelectHouseWorkDetailCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // FIXME: - api 연결할 때 공간 전달
-        print(space.houseWorkDetailList[indexPath.item])
+        print(space?.houseWorkDetailList[indexPath.item])
     }
 }
 
 extension SelectHouseWorkDetailCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return space.houseWorkDetailList.count
+        return space?.houseWorkDetailList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,7 +77,7 @@ extension SelectHouseWorkDetailCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
-        cell.cellLabel.text = space.houseWorkDetailList[indexPath.item]
+        cell.cellLabel.text = space?.houseWorkDetailList[indexPath.item]
         
         return cell
     }

@@ -25,6 +25,14 @@ final class SelectHouseWorkViewController: BaseViewController {
         label.imageColor = .gray200
         return label
     }()
+    private let detailHouseWorkLabel: UILabel = {
+        let label = UILabel()
+        label.text = "세부 집안일"
+        label.textColor = .gray600
+        label.font = .title1
+        label.isHidden = true
+        return label
+    }()
     private let detailCollectionView = SelectHouseWorkDetailCollectionView()
     private lazy var writeHouseWorkButton: WriteHouseWorkButton = {
         let button = WriteHouseWorkButton()
@@ -91,12 +99,18 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.height.equalTo(22)
         }
         
+        contentView.addSubview(detailHouseWorkLabel)
+        detailHouseWorkLabel.snp.makeConstraints {
+            $0.top.equalTo(spaceCollectionView.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
         contentView.addSubview(writeHouseWorkButton)
         writeHouseWorkButton.snp.makeConstraints {
             $0.top.equalTo(spaceInfoLabel.snp.bottom).offset(32)
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
-//            $0.bottom.equalTo(0)
+            //            $0.bottom.equalTo(0)
         }
         
         contentView.addSubview(detailCollectionView)
@@ -146,6 +160,7 @@ final class SelectHouseWorkViewController: BaseViewController {
         spaceCollectionView.didTappedSpace = {[weak self] space in
             self?.spaceInfoLabel.isHidden = true
             self?.detailCollectionView.space = space
+            self?.detailHouseWorkLabel.isHidden = false
         }
     }
 }
