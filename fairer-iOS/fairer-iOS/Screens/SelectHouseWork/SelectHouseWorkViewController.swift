@@ -145,6 +145,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     private func didTappedSpace() {
         spaceCollectionView.didTappedSpace = {[weak self] space in
             self?.spaceInfoLabel.isHidden = true
+            self?.detailCollectionView.space = space
         }
     }
 }
