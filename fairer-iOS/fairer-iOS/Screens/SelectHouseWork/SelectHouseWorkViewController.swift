@@ -34,6 +34,14 @@ final class SelectHouseWorkViewController: BaseViewController {
         return label
     }()
     private let detailCollectionView = SelectHouseWorkDetailCollectionView()
+    private let writeHouseWorkLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "원하는 집안일이 없나요?", lineHeight: 22)
+        label.textColor = .gray300
+        label.font = .body2
+        label.isHidden = true
+        return label
+    }()
     private lazy var writeHouseWorkButton: WriteHouseWorkButton = {
         let button = WriteHouseWorkButton()
         button.layer.borderWidth = 1
@@ -112,9 +120,15 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.height.equalTo(220)
         }
         
+        contentView.addSubview(writeHouseWorkLabel)
+        writeHouseWorkLabel.snp.makeConstraints {
+            $0.top.equalTo(detailCollectionView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
         contentView.addSubview(writeHouseWorkButton)
         writeHouseWorkButton.snp.makeConstraints {
-            $0.top.equalTo(detailCollectionView.snp.bottom)
+            $0.top.equalTo(writeHouseWorkLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
             $0.bottom.equalTo(0)
@@ -160,6 +174,7 @@ final class SelectHouseWorkViewController: BaseViewController {
             self?.spaceInfoLabel.isHidden = true
             self?.detailCollectionView.space = space
             self?.detailHouseWorkLabel.isHidden = false
+            self?.writeHouseWorkLabel.isHidden = false
         }
     }
 }
