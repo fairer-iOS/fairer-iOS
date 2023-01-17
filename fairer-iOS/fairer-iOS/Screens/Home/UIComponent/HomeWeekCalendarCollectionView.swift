@@ -11,29 +11,24 @@ import SnapKit
 
 final class HomeWeekCalendarCollectionView: BaseUIView {
     
-    // 캘린더 터치 이벤트 로직 관련 변수
-    var isSelected = false
-    var selectedCell = Int()
-    var cellIndexPath = IndexPath()
-    
-    let dotList = [UIImage(named: "dot.svg"),UIImage(named: "dot.svg"),UIImage(named: "2dot.svg"),UIImage(named: "dot.svg"),UIImage(named: "dot.svg"),UIImage(named: "3dot.svg"),UIImage(named: "2dot.svg")]
-    let dayList = ["일","월","화","수","목","금","토"]
-    var dateList = [String]()
-    
-    var startOfWeekDate = Date().startOfWeek
-    var endOfWeekDate = Date().endOfWeek
-    var todayDate = Date()
-    
+    private var isSelected = false
+    private var selectedCell = Int()
+    private var cellIndexPath = IndexPath()
+    private let dotList = [ImageLiterals.oneDot,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.threeDots,ImageLiterals.twoDots]
+    private let dayList = ["일","월","화","수","목","금","토"]
+    private var dateList = [String]()
+    private var startOfWeekDate = Date().startOfWeek
+    private var endOfWeekDate = Date().endOfWeek
+    private var todayDate = Date()
     private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 8
-        static let collectionVerticalSpacing: CGFloat = 0
+        static let collectionSpacing: CGFloat = 0
         static let cellWidth: CGFloat = 40
         static let cellHeight: CGFloat = 56
         static let collectionInsets = UIEdgeInsets(
-            top: collectionVerticalSpacing,
-            left: collectionHorizontalSpacing,
-            bottom: collectionVerticalSpacing,
-            right: collectionHorizontalSpacing)
+            top: collectionSpacing,
+            left: collectionSpacing,
+            bottom: collectionSpacing,
+            right: collectionSpacing)
     }
     
     // MARK: - property
@@ -62,31 +57,28 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     
     override func render() {
         self.dateList = getNextDateInInt()
+    
         self.addSubview(collectionView)
+        
         collectionView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
     
     // MARK: - func
-    
-    // 오늘 날짜의 '일'을 정수로 리턴하는 함수
+
     func getTodayDateInInt()->Int{
         let ampmIndex = todayDate.dateToString.index(todayDate.dateToString.endIndex, offsetBy: -2)
         let ampmStr = String(todayDate.dateToString[ampmIndex...])
         let result = Int(ampmStr) ?? 0
         return result
     }
-    
-    // 오늘이 포함된 주에 날짜 구하는 함수
     func getNextDateInInt()->[String]{
         var resultArr = [String]()
-        // 주의 첫날 날짜를 resultArr에 저장
         let ampmIndex = startOfWeekDate.dateToString.index(startOfWeekDate.dateToString.endIndex, offsetBy: -2)
         let ampmStr = String(startOfWeekDate.dateToString[ampmIndex...])
         resultArr.append(ampmStr)
         var currentDate = startOfWeekDate
-        // 주의 첫날 이후의 날짜를 순서대로 resultArr에 저장
         for _ in 0...5 {
             let date: Date = currentDate.addingTimeInterval(+86400)
             let ampmIndex = date.dateToString.index(date.dateToString.endIndex, offsetBy: -2)
@@ -98,12 +90,11 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     }
 }
 
+// MARK: - Extension
+
 extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
-    // 주간 캘린더 선택 이벤트 로직
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // 여기 로직 첫 if문 지워도 될듯 (일단 유지)
         if self.isSelected == false {
-            print("first")
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
@@ -111,30 +102,22 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             firstCell.globalView.backgroundColor = UIColor.gray100
             firstCell.dateLabel.textColor = UIColor.blue
             firstCell.dayLabel.textColor = UIColor.blue
-            firstCell.workDot.image = UIImage(named: "selectedCell.svg")
-            
+            firstCell.workDot.image = ImageLiterals.selectedCalendarCell
         }else if indexPath.row != self.selectedCell {
-            print("second")
-            // 이전에 선택된 셀 초기화
             let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
             resetCell.globalView.backgroundColor = UIColor.systemBackground
             resetCell.dateLabel.textColor = UIColor.gray400
             resetCell.dayLabel.textColor = UIColor.gray400
             resetCell.workDot.image = dotList[self.cellIndexPath.row]
-            
-            // 선택된 셀 커스텀
             let secondCell = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
             secondCell.globalView.backgroundColor = UIColor.gray100
             secondCell.dateLabel.textColor = UIColor.blue
             secondCell.dayLabel.textColor = UIColor.blue
-            secondCell.workDot.image = UIImage(named: "selectedCell.svg")
-            
+            secondCell.workDot.image = ImageLiterals.selectedCalendarCell
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
         }
-        // 최종 indexPath.row는 선택된 cell의 인덱스 값
-        print("click index=\(indexPath.row)")
     }
 }
 
@@ -142,18 +125,14 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeWeekCalendarCollectionViewCell.className, for: indexPath) as? HomeWeekCalendarCollectionViewCell else {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = dateList[indexPath.item]
         cell.workDot.image = dotList[indexPath.item]
-        
-        // 오늘날짜 확인하여 셀 스타일 변경하는 부분
         if Int(dateList[indexPath.item]) ?? 0 == self.getTodayDateInInt() {
             self.isSelected = true
             self.selectedCell = indexPath.row
@@ -161,9 +140,8 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
             cell.globalView.backgroundColor = UIColor.gray100
             cell.dateLabel.textColor = UIColor.blue
             cell.dayLabel.textColor = UIColor.blue
-            cell.workDot.image = UIImage(named: "selectedCell.svg")
+            cell.workDot.image = ImageLiterals.selectedCalendarCell
         }
-    
         return cell
     }
 }

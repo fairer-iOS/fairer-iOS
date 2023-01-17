@@ -15,11 +15,9 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     
     let titleImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "profilelightblue1.svg")
-
+        imageView.image = ImageLiterals.profileLightBlue1
         return imageView
     }()
-    
     let titleLabel: UILabel = {
         let label = UILabel()
         // FIXME: - figma 디자인시스템 정리 후 수정되야함
@@ -32,13 +30,13 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubview(titleImage)
+        self.addSubviews(titleImage,titleLabel)
+        
         titleImage.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(48)
         }
-        
-        self.addSubview(titleLabel)
+
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(titleImage.snp.bottom).offset(0)
             $0.leading.trailing.equalToSuperview()

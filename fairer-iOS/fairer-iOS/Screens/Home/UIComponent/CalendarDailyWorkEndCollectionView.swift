@@ -15,10 +15,7 @@ struct dummyWorkEndCard {
     let room = ["거실","부엌"]
 }
 
-class CalendarDailyWorkEndCollectionView: BaseUIView  {
-    
-    // dummuy data
-    let dummy = dummyWorkEndCard()
+final class CalendarDailyWorkEndCollectionView: BaseUIView  {
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
@@ -32,6 +29,10 @@ class CalendarDailyWorkEndCollectionView: BaseUIView  {
             right: collectionHorizontalSpacing)
     }
     
+    // MARK: - TODO.API
+    
+    let dummy = dummyWorkEndCard()
+    
     // MARK: - property
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
@@ -42,7 +43,6 @@ class CalendarDailyWorkEndCollectionView: BaseUIView  {
         flowLayout.minimumLineSpacing = 8
         return flowLayout
     }()
-    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
@@ -59,33 +59,28 @@ class CalendarDailyWorkEndCollectionView: BaseUIView  {
     
     override func render() {
         self.addSubview(collectionView)
+        
         collectionView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
-
 }
 
-extension CalendarDailyWorkEndCollectionView: UICollectionViewDelegate {}
+// MARK: - Extension
 
+extension CalendarDailyWorkEndCollectionView: UICollectionViewDelegate {}
 extension CalendarDailyWorkEndCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarDailyWorkEndCollectionViewCell.className, for: indexPath) as? CalendarDailyWorkEndCollectionViewCell else {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        
-        // 일단 dummy binding
         cell.workLabel.text = dummy.work[indexPath.item]
         cell.time.text = dummy.time[indexPath.item]
         cell.room.text = dummy.room[indexPath.item]
-        
         return cell
     }
-    
-    
 }

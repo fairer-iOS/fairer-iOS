@@ -62,6 +62,8 @@ enum ImageLiterals {
     
     static var textFieldClearButton: UIImage { .load(name: "clearbutton") }
     static var navigationBarBackButton: UIImage { .load(name: "backbutton") }
+    static var plusWorkButton: UIImage { .load(systemName: "plus") }
+    static var moveToCalendarButton: UIImage { .load(name: "keyboard_arrow_down") }
     
     // MARK: - icon
     
@@ -73,8 +75,16 @@ enum ImageLiterals {
     static var settingInfo: UIImage { .load(systemName: "info.circle") }
     static var calendarChevron: UIImage { .load(name: "calendarchevron") }
     static var writeHouseWorkChevron: UIImage { .load(systemName: "chevron.right") }
-    static var settingMenu: UIImage { .load(name: "menu")}
+    static var settingMenu: UIImage { .load(name: "menu") }
+    static var selectedCalendarCell: UIImage { .load(name: "selectedCell") }
+    static var locationPin: UIImage { .load(name: "locationPin") }
+    static var houseFill: UIImage { .load(systemName: "house.fill") }
     
+    // MARK: - dot
+    
+    static var oneDot: UIImage { .load(name: "dot") }
+    static var twoDots: UIImage { .load(name: "2dot") }
+    static var threeDots: UIImage { .load(name: "3dot") }
 }
 
 extension UIImage {

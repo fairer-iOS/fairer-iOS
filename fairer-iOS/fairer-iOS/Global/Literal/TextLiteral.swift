@@ -47,6 +47,7 @@ enum TextLiteral {
     
     // MARK: - HomeView
     
+    static let homeViewAddWorkLabel: String = "집안일을 추가해 보세요!"
     static let homeViewFinishWorkTitle: String = "끝낸 집안일"
     
     // MARK: - HomeCalendarView

@@ -17,26 +17,21 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
         let imgView = UIImageView()
         return imgView
     }()
-    
     let dayLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray400
-        // 일단 시스템 폰트로 해둠
         label.font = UIFont.body1
         label.textAlignment = .center
         return label
     }()
-    
-    var dateLabel: UILabel = {
+    let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray400
-        // 일단 시스템 폰트로 해둠
         label.font = UIFont.body1
         label.textAlignment = .center
         return label
     }()
-    
-    var globalView : UIView = {
+    let globalView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.systemBackground
         view.layer.cornerRadius = 8
@@ -49,7 +44,6 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
     // MARK: - life cycle
     
     override func render() {
-        
         self.addSubviews(workDot,globalView)
         globalView.addSubviews(dayLabel,dateLabel)
         self.bringSubviewToFront(workDot)
@@ -61,7 +55,6 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
         }
         
         globalView.snp.makeConstraints {
-            
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(60)
             $0.bottom.equalToSuperview()

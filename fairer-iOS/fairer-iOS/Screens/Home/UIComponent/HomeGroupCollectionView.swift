@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 final class HomeGroupCollectionView: BaseUIView {
-    let userList = ["고가혜", "권진혁", "최지혜", "신동빈", "김수연"]
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -23,6 +22,10 @@ final class HomeGroupCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
+    
+    // MARK: - TODO.API
+    
+    private let userList = ["고가혜", "권진혁", "최지혜", "신동빈", "김수연"]
     
     // MARK: - property
     
@@ -49,14 +52,16 @@ final class HomeGroupCollectionView: BaseUIView {
     
     override func render() {
         self.addSubview(collectionView)
+        
         collectionView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }
 
-extension HomeGroupCollectionView: UICollectionViewDelegate { }
+// MARK: - Extension
 
+extension HomeGroupCollectionView: UICollectionViewDelegate { }
 extension HomeGroupCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return userList.count
@@ -68,7 +73,6 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.titleLabel.text = userList[indexPath.item]
-        
         return cell
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController {
     
     // TODO: - 추후 api연결 + UserDefault
     
@@ -23,7 +23,6 @@ class HomeViewController: BaseViewController {
         imgView.image = ImageLiterals.imgHomeLogo
         return imgView
     }()
-    
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(ImageLiterals.settingMenu, for: .normal)
@@ -41,7 +40,7 @@ class HomeViewController: BaseViewController {
     }()
     private let houseImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .load(systemName: "house.fill")
+        imageView.image = ImageLiterals.houseFill
         imageView.tintColor = .gray400
         return imageView
     }()
@@ -71,7 +70,6 @@ class HomeViewController: BaseViewController {
         return label
     }()
     private let calendarDailyWorkEndCollectionView = CalendarDailyWorkEndCollectionView()
-
     private lazy var contentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemBackground
@@ -85,15 +83,18 @@ class HomeViewController: BaseViewController {
         print("HomeViewController deinit")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupDelegate()
+    }
+    
     override func configUI() {
         super.configUI()
-        self.contentScrollView.delegate = self
         setupToolBarGesture()
         setHomeRuleLabel()
     }
     
     override func render() {
-    
         view.addSubviews(toolBarView,
                          titleLabel,
                          houseImageView,
@@ -114,7 +115,6 @@ class HomeViewController: BaseViewController {
         toolBarView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(76)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         titleLabel.snp.makeConstraints {
@@ -156,7 +156,6 @@ class HomeViewController: BaseViewController {
             $0.bottom.equalTo(toolBarView.snp.top)
         }
         
-        // add in contentScrollView
         homeCalenderView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
@@ -204,6 +203,10 @@ class HomeViewController: BaseViewController {
     
     // MARK: - func
     
+    private func setupDelegate(){
+        self.contentScrollView.delegate = self
+    }
+    
     private func setupToolBarGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))
         toolBarView.addGestureRecognizer(tapGesture)
@@ -239,8 +242,6 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        print("scrollViewWillBeginDragging")
-        
         homeRuleView.homeRuleLabel.snp.updateConstraints {
             $0.height.equalTo(0)
         }
@@ -252,17 +253,13 @@ extension HomeViewController: UIScrollViewDelegate {
         homeGroupCollectionView.snp.updateConstraints{
             $0.height.equalTo(0)
         }
+        
         homeRuleView.snp.updateConstraints{
             $0.height.equalTo(0)
         }
+        
         homeDivider.snp.updateConstraints{
             $0.top.equalTo(homeGroupLabel.snp.bottom).offset(8)
-        }
-        func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-            print("scrollViewDidEndDecelerating")
-        }
-        func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-            print("scrollViewDidScrollToTop")
         }
     }
 }

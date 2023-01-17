@@ -16,10 +16,7 @@ struct dummyWorkCard {
     let backColor = ["system"]
 }
 
-class CalendarDailyCollectionView: BaseUIView  {
-    
-    // dummuy data
-    let dummy = dummyWorkCard()
+final class CalendarDailyCollectionView: BaseUIView  {
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
@@ -32,6 +29,10 @@ class CalendarDailyCollectionView: BaseUIView  {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
+    
+    // MARK: - TODO.API
+    
+    private let dummy = dummyWorkCard()
     
     // MARK: - property
     
@@ -59,37 +60,33 @@ class CalendarDailyCollectionView: BaseUIView  {
     
     override func render() {
         self.addSubview(collectionView)
+        
         collectionView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 
 }
 
-extension CalendarDailyCollectionView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-}
+// MARK: - Extension
 
+extension CalendarDailyCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
+}
 extension CalendarDailyCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarDailyCollectionViewCell.className, for: indexPath) as? CalendarDailyCollectionViewCell else {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
     
-        // 일단 dummy binding
         cell.workLabel.text = dummy.work[indexPath.item]
         cell.time.text = dummy.time[indexPath.item]
         cell.room.text = dummy.room[indexPath.item]
         
         return cell
     }
-    
-    
 }
