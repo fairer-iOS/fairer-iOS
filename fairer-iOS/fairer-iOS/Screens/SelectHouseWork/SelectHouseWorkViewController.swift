@@ -125,13 +125,14 @@ final class SelectHouseWorkViewController: BaseViewController {
         detailHouseWorkLabel.snp.makeConstraints {
             $0.top.equalTo(spaceCollectionView.snp.bottom).offset(12)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
         }
         
         contentView.addSubview(detailCollectionView)
         detailCollectionView.snp.makeConstraints {
             $0.top.equalTo(detailHouseWorkLabel.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(220)
+            $0.height.equalTo(0)
         }
         
         contentView.addSubview(writeHouseWorkLabel)
@@ -173,10 +174,29 @@ final class SelectHouseWorkViewController: BaseViewController {
     
     private func didTappedSpace() {
         spaceCollectionView.didTappedSpace = {[weak self] space in
+            let numOfHouseWork = space.houseWorkDetailList.count
+            let height: Int
+            if numOfHouseWork <= 3 {
+                height = 80
+            } else if numOfHouseWork > 6 {
+                height = 228
+            } else {
+                height = 154
+            }
+            
             self?.spaceInfoLabel.isHidden = true
             self?.detailCollectionView.space = space
             self?.detailHouseWorkLabel.isHidden = false
             self?.writeHouseWorkLabel.isHidden = false
+            self?.detailCollectionView.snp.updateConstraints {
+                $0.height.equalTo(height)
+            }
+            self?.spaceInfoLabel.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+            self?.detailHouseWorkLabel.snp.updateConstraints {
+                $0.height.equalTo(26)
+            }
         }
     }
 }
