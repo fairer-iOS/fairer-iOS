@@ -14,6 +14,7 @@ final class SelectHouseWorkDetailCollectionView: BaseUIView {
     var space: Space = .entrance {
         didSet {
             self.collectionView.reloadData()
+//            self.collectionView.select
         }
     }
     
@@ -40,6 +41,7 @@ final class SelectHouseWorkDetailCollectionView: BaseUIView {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
+        collectionView.allowsMultipleSelection = true
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(SelectHouseWorkDetailCollectionViewCell.self, forCellWithReuseIdentifier: SelectHouseWorkDetailCollectionViewCell.className)

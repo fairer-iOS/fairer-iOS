@@ -17,6 +17,10 @@ final class SelectHouseWorkDetailCollectionViewCell: BaseCollectionViewCell {
                 cellBackgroundView.backgroundColor = .positive0
                 cellBackgroundView.layer.borderColor = UIColor.blue.cgColor
                 cellLabel.textColor = .blue
+            } else {
+                cellBackgroundView.backgroundColor = .white
+                cellBackgroundView.layer.borderColor = UIColor.gray100.cgColor
+                cellLabel.textColor = .black
             }
         }
     }
