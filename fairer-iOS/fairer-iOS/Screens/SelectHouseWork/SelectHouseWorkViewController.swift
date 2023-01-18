@@ -46,9 +46,6 @@ final class SelectHouseWorkViewController: BaseViewController {
     }()
     private lazy var writeHouseWorkButton: WriteHouseWorkButton = {
         let button = WriteHouseWorkButton()
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.positive20.cgColor
-        button.layer.cornerRadius = 6
         let action = UIAction { [weak self] _ in
             self?.didTappedWriteHouseWorkButton()
         }
@@ -178,37 +175,9 @@ final class SelectHouseWorkViewController: BaseViewController {
     
     private func didTappedSpace() {
         spaceCollectionView.didTappedSpace = {[weak self] space in
-            if space != self?.selectedSpace && self?.detailCollectionView.selectedHouseWorkList.count ?? 0 > 0 {
-                self?.makeAlert(title: TextLiteral.selectHouseWorkViewControllerAlertTitle, message: TextLiteral.selectHouseWorkViewControllerAlertMessage)
-                self?.detailCollectionView.selectedHouseWorkList = []
-                self?.nextButton.isDisabled = true
-            }
-            let numOfHouseWork = space.houseWorkDetailList.count
-            let height: Int
-            if numOfHouseWork <= 3 {
-                height = 80
-            } else if numOfHouseWork > 6 {
-                height = 228
-            } else {
-                height = 154
-            }
-            
-            self?.spaceInfoLabel.isHidden = true
-            self?.detailCollectionView.space = space
-            
-            self?.detailHouseWorkLabel.isHidden = false
-            self?.writeHouseWorkLabel.isHidden = false
-            self?.detailCollectionView.snp.updateConstraints {
-                $0.height.equalTo(height)
-            }
-            self?.spaceInfoLabel.snp.updateConstraints {
-                $0.height.equalTo(0)
-            }
-            self?.detailHouseWorkLabel.snp.updateConstraints {
-                $0.height.equalTo(26)
-            }
-            
-            self?.selectedSpace = space
+            self?.didTappedDifferentSpace(space)
+            self?.setDetailHouseWork(space)
+            self?.setLabels()
         }
     }
     
@@ -219,6 +188,47 @@ final class SelectHouseWorkViewController: BaseViewController {
             } else {
                 self?.nextButton.isDisabled = true
             }
+        }
+    }
+    
+    private func didTappedDifferentSpace(_ space: Space) {
+        if space != selectedSpace && detailCollectionView.selectedHouseWorkList.count > 0 {
+            makeAlert(title: TextLiteral.selectHouseWorkViewControllerAlertTitle, message: TextLiteral.selectHouseWorkViewControllerAlertMessage)
+            detailCollectionView.selectedHouseWorkList = []
+            nextButton.isDisabled = true
+        }
+        self.selectedSpace = space
+    }
+    
+    private func setDetailHouseWork(_ space: Space) {
+        let numOfHouseWork = space.houseWorkDetailList.count
+        let height: Int
+        
+        if numOfHouseWork <= 3 {
+            height = 80
+        } else if numOfHouseWork > 6 {
+            height = 228
+        } else {
+            height = 154
+        }
+        
+        detailCollectionView.snp.updateConstraints {
+            $0.height.equalTo(height)
+        }
+        detailCollectionView.space = space
+    }
+    
+    private func setLabels() {
+        writeHouseWorkLabel.isHidden = false
+        
+        spaceInfoLabel.isHidden = true
+        spaceInfoLabel.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        
+        detailHouseWorkLabel.isHidden = false
+        detailHouseWorkLabel.snp.updateConstraints {
+            $0.height.equalTo(26)
         }
     }
 }

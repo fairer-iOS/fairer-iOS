@@ -32,6 +32,7 @@ final class WriteHouseWorkButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
+        configUI()
     }
     
     required init?(coder: NSCoder) { nil }
@@ -50,5 +51,11 @@ final class WriteHouseWorkButton: UIButton {
             $0.width.equalTo(10)
             $0.height.equalTo(18)
         }
+    }
+    
+    private func configUI() {
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.positive20.cgColor
+        self.layer.cornerRadius = 6
     }
 }
