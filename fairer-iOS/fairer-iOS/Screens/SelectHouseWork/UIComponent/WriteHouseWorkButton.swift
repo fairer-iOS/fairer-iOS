@@ -15,7 +15,7 @@ final class WriteHouseWorkButton: UIButton {
     
     private let buttonLabel: UILabel = {
         let label = UILabel()
-        label.text = "집안일 직접 입력하기"
+        label.text = TextLiteral.writeHouseWorkButtonLabel
         label.textColor = .black
         label.font = .body1
         return label
