@@ -11,6 +11,16 @@ import SnapKit
 
 final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                setSelectedCellLayer()
+            } else {
+                setShadowCellLayer()
+            }
+        }
+    }
+    
     // MARK: - property
     
     private let timeLabel: UILabel = {
@@ -67,5 +77,18 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     
     private func didTappedDeleteButton() {
         print("Delete")
+    }
+    
+    private func setSelectedCellLayer() {
+        self.backgroundColor = .white
+        self.layer.borderWidth = 1.06
+        self.layer.borderColor = UIColor.blue.cgColor
+        self.houseWorkLabel.textColor = .gray800
+    }
+    
+    private func setShadowCellLayer() {
+        self.backgroundColor = .normal0
+        self.layer.borderWidth = 0
+        self.houseWorkLabel.textColor = .gray700
     }
 }
