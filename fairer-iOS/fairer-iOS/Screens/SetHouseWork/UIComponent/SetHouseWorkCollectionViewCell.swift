@@ -30,14 +30,10 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
         label.font = .caption1
         return label
     }()
-    private lazy var deleteButton: UIButton = {
+    lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(ImageLiterals.deleteButton, for: .normal)
         button.tintColor = .gray700
-        let action = UIAction { [weak self] _ in
-            self?.didTappedDeleteButton()
-        }
-        button.addAction(action, for: .touchUpInside)
         return button
     }()
     let houseWorkLabel: UILabel = {

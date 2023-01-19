@@ -13,7 +13,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
     
     var selectedIndex: Int = 0
     
-    private let selectedDetailHouseWork = ["창 청소", "거실 청소", "물건 정리정돈", "환기 시키기", "빨래 돌리기", "빨래 개기", "세탁기 청소"]
+    var selectedDetailHouseWork = ["창 청소", "거실 청소", "물건 정리정돈", "환기 시키기", "빨래 돌리기", "빨래 개기", "세탁기 청소"]
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -79,6 +79,13 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
+        
+        
+        let action = UIAction { [weak self] _ in
+            self?.selectedDetailHouseWork.remove(at: indexPath.item)
+            self?.collectionView.deleteItems(at: [IndexPath.init(item: indexPath.item, section: 0)])
+        }
+        cell.deleteButton.addAction(action, for: .touchUpInside)
         
         cell.houseWorkLabel.text = selectedDetailHouseWork[indexPath.row]
         
