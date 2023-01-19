@@ -15,6 +15,7 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private let backButton = BackButton(type: .system)
     private let setHouseWorkCalendarView = SetHouseWorkCalendarView()
+    private let setHouseWorkCollectionView = SetHouseWorkCollectionView()
     
     // MARK: - render
     
@@ -24,6 +25,13 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(38)
+        }
+        
+        view.addSubview(setHouseWorkCollectionView)
+        setHouseWorkCollectionView.snp.makeConstraints {
+            $0.top.equalTo(setHouseWorkCalendarView.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(134)
         }
     }
     

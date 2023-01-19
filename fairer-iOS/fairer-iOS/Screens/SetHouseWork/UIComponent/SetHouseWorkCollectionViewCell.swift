@@ -23,13 +23,14 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     private lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(ImageLiterals.deleteButton, for: .normal)
+        button.tintColor = .gray700
         let action = UIAction { [weak self] _ in
             self?.didTappedDeleteButton()
         }
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let houseWorkLabel: UILabel = {
+    let houseWorkLabel: UILabel = {
         let label = UILabel()
         label.text = "창 청소"
         label.textColor = .gray600
@@ -47,8 +48,8 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
         
         self.addSubview(deleteButton)
         deleteButton.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(11)
-            $0.width.height.equalTo(15)
+            $0.top.trailing.equalToSuperview().inset(10)
+            $0.width.height.equalTo(16)
         }
         
         self.addSubview(houseWorkLabel)
