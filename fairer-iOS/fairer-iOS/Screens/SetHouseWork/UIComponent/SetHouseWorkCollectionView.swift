@@ -11,6 +11,8 @@ import SnapKit
 
 final class SetHouseWorkCollectionView: BaseUIView {
     
+    var selectedIndex: Int = 0
+    
     private let selectedDetailHouseWork = ["창 청소", "거실 청소", "물건 정리정돈", "환기 시키기", "빨래 돌리기", "빨래 개기", "세탁기 청소"]
     
     private enum Size {
@@ -26,7 +28,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
     }
     
     // MARK: - property
-
+    
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = Size.collectionInsets
@@ -58,6 +60,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
 
 extension SetHouseWorkCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.item
     }
 }
 
@@ -70,6 +73,11 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SetHouseWorkCollectionViewCell.className, for: indexPath) as? SetHouseWorkCollectionViewCell else {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
+        }
+        
+        if indexPath.item == selectedIndex {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
         cell.houseWorkLabel.text = selectedDetailHouseWork[indexPath.row]
