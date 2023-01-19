@@ -11,6 +11,8 @@ import SnapKit
 
 final class HomeWeekCalendarCollectionView: BaseUIView {
     
+    static var indentifer = "reusableView"
+    
     private var isSelected = false
     private var selectedCell = Int()
     private var cellIndexPath = IndexPath()

@@ -171,6 +171,7 @@ final class HomeViewController: BaseViewController {
         calendarDailyCollecionView.snp.makeConstraints{
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            // MARK: - FIX ME
             $0.height.equalTo(310)
         }
 

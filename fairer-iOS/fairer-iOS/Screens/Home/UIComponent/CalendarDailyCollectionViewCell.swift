@@ -15,8 +15,8 @@ final class CalendarDailyCollectionViewCell: BaseCollectionViewCell {
     
     let workLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.font(AppFontName.semiBold, ofSize: 16)
-        label.textColor = UIColor.gray800
+        label.font = .title1
+        label.textColor = .gray800
         return label
     }()
     let time: UILabel = {
