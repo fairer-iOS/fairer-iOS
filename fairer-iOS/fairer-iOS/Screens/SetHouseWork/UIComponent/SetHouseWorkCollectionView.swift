@@ -80,15 +80,17 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
-        
-        let action = UIAction { [weak self] _ in
-            self?.selectedDetailHouseWork.remove(at: indexPath.item)
-            self?.collectionView.deleteItems(at: [IndexPath.init(item: indexPath.item, section: 0)])
-        }
-        cell.deleteButton.addAction(action, for: .touchUpInside)
-        
         cell.houseWorkLabel.text = selectedDetailHouseWork[indexPath.row]
         
+        cell.deleteButton.tag = indexPath.item
+        cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(sender:)), for: .touchUpInside)
         return cell
+    }
+}
+
+extension SetHouseWorkCollectionView {
+    @objc func didTappedDeleteButton(sender : UIButton) {
+        collectionView.deleteItems(at: [IndexPath.init(item: sender.tag, section: 0)])
+        selectedDetailHouseWork.remove(at: sender.tag)
     }
 }
