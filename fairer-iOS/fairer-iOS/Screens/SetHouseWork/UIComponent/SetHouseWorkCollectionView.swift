@@ -105,6 +105,13 @@ extension SetHouseWorkCollectionView {
         collectionView.deleteItems(at: [IndexPath.init(item: sender.tag, section: 0)])
         selectedDetailHouseWork.remove(at: sender.tag)
         
+        if selectedDetailHouseWork.isEmpty {
+            // FIXME: - 이전 페이지로 이동
+            print("이전 페이지로 이동")
+        } else if selectedDetailHouseWork.count == 1 {
+            selectedIndex = 0
+        }
+        
         if selectedIndex > sender.tag {
             selectedIndex -= 1
         }
