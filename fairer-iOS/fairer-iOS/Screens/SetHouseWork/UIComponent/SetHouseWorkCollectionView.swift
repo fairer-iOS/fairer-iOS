@@ -17,9 +17,9 @@ final class SetHouseWorkCollectionView: BaseUIView {
         }
     }
     
-    var selectedDetailHouseWork = ["창 청소", "거실 청소", "물건 정리정돈", "환기 시키기", "빨래 돌리기", "빨래 개기", "세탁기 청소"]
+    private var selectedDetailHouseWork = ["창 청소", "거실 청소", "물건 정리정돈", "환기 시키기", "빨래 돌리기", "빨래 개기", "세탁기 청소"]
     
-    lazy var isSelectedDetailHouseWork = [selectedIndex]
+    lazy var isSelectedDetailHouseWork = [selectedDetailHouseWork[selectedIndex]]
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -67,8 +67,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
 extension SetHouseWorkCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        isSelectedDetailHouseWork.append(selectedIndex)
-        print(selectedIndex)
+        isSelectedDetailHouseWork.append(selectedDetailHouseWork[selectedIndex])
     }
 }
 
@@ -83,7 +82,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if isSelectedDetailHouseWork.contains(indexPath.item) {
+        if isSelectedDetailHouseWork.contains(selectedDetailHouseWork[indexPath.item]) {
             cell.houseWorkLabel.textColor = .blue
         }
         
@@ -103,8 +102,9 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
 extension SetHouseWorkCollectionView {
     @objc func didTappedDeleteButton(sender : UIButton) {
         collectionView.deleteItems(at: [IndexPath.init(item: sender.tag, section: 0)])
+        isSelectedDetailHouseWork.removeAll(where: { $0 == selectedDetailHouseWork[sender.tag] })
         selectedDetailHouseWork.remove(at: sender.tag)
-        
+                
         if selectedDetailHouseWork.isEmpty {
             // FIXME: - 이전 페이지로 이동
             print("이전 페이지로 이동")
