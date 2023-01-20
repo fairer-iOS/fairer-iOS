@@ -18,6 +18,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
     }
     
     var selectedDetailHouseWork = ["창 청소", "거실 청소", "물건 정리정돈", "환기 시키기", "빨래 돌리기", "빨래 개기", "세탁기 청소"]
+    
     lazy var isSelectedDetailHouseWork = [selectedIndex]
     
     private enum Size {
@@ -103,5 +104,9 @@ extension SetHouseWorkCollectionView {
     @objc func didTappedDeleteButton(sender : UIButton) {
         collectionView.deleteItems(at: [IndexPath.init(item: sender.tag, section: 0)])
         selectedDetailHouseWork.remove(at: sender.tag)
+        
+        if selectedIndex > sender.tag {
+            selectedIndex -= 1
+        }
     }
 }
