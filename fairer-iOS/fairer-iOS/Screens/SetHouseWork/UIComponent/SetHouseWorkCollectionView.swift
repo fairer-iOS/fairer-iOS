@@ -17,6 +17,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
         }
     }
     
+    // FIXME: - SelectHouseWorkVC에서 선택한 집안일 목록 연결
     private var selectedDetailHouseWork = ["창 청소", "거실 청소", "물건 정리정돈", "환기 시키기", "빨래 돌리기", "빨래 개기", "세탁기 청소"]
     
     lazy var isSelectedDetailHouseWork = [selectedDetailHouseWork[selectedIndex]]
@@ -95,6 +96,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
         
         cell.deleteButton.tag = indexPath.item
         cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(sender:)), for: .touchUpInside)
+        
         return cell
     }
 }
@@ -107,7 +109,6 @@ extension SetHouseWorkCollectionView {
                 
         if selectedDetailHouseWork.isEmpty {
             // FIXME: - 이전 페이지로 이동
-            print("이전 페이지로 이동")
         } else if selectedDetailHouseWork.count == 1 {
             selectedIndex = 0
         }

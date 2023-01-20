@@ -25,7 +25,7 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "하루 종일", lineHeight: 18)
+        label.setTextWithLineHeight(text: TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel, lineHeight: 18)
         label.textColor = .gray700
         label.font = .caption1
         return label
@@ -38,7 +38,6 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     }()
     let houseWorkLabel: UILabel = {
         let label = UILabel()
-        label.text = "창 청소"
         label.textColor = .gray600
         label.font = .title2
         return label
@@ -70,10 +69,6 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     }
     
     // MARK: - func
-    
-    private func didTappedDeleteButton() {
-        print("Delete")
-    }
     
     private func setSelectedCellLayer() {
         self.backgroundColor = .white

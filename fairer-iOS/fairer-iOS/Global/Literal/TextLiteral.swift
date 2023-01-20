@@ -130,4 +130,8 @@ enum TextLiteral {
     
     static let selectHouseWorkViewControllerInfoLabel = "공간을 선택하면 세부 집안일이 나옵니다."
     static let selectHouseWorkViewControllerNextButtonText = "다음"
+    
+    // MARK: - SetHouseWorkCollectionViewCell
+    
+    static let setHouseWorkCollectionViewCellDefaultTimeLabel = "하루 종일"
 }
