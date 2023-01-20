@@ -17,7 +17,7 @@ final class SetHouseWorkViewController: BaseViewController {
     private let setHouseWorkCalendarView = SetHouseWorkCalendarView()
     private let setHouseWorkCollectionView = SetHouseWorkCollectionView()
     
-    // MARK: - render
+    // MARK: - life cycle
     
     override func render() {
         view.addSubview(setHouseWorkCalendarView)
