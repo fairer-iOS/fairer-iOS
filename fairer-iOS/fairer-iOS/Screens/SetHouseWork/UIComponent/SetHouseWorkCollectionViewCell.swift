@@ -85,6 +85,6 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     private func setShadowCellLayer() {
         self.backgroundColor = .normal0
         self.layer.borderWidth = 0
-        self.houseWorkLabel.textColor = .gray700
+        self.houseWorkLabel.textColor = .gray600
     }
 }
