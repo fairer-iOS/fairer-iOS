@@ -65,5 +65,22 @@ enum Space: String, CaseIterable {
             return ["설거지", "가스렌지 닦기", "냉장고 정리", "부엌 정리정돈", "음식물 쓰레기\n버리기", "식사 준비하기", "간식 준비하기"]
         }
     }
+    
+    var houseWorkDetailSize: CGFloat {
+        switch self {
+        case .entrance:
+            return SizeLiteral.houseWorkDetailOneLineHeight
+        case .livingRoom:
+            return SizeLiteral.houseWorkDetailThreeLineHeight
+        case .bathroom:
+            return SizeLiteral.houseWorkDetailTwoLineHeight
+        case .outside:
+            return SizeLiteral.houseWorkDetailTwoLineHeight
+        case .room:
+            return SizeLiteral.houseWorkDetailTwoLineHeight
+        case .kitchen:
+            return SizeLiteral.houseWorkDetailThreeLineHeight
+        }
+    }
 }
 

@@ -201,17 +201,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func setDetailHouseWork(_ space: Space) {
-        let numOfHouseWork = space.houseWorkDetailList.count
-        let height: Int
-        
-        if numOfHouseWork <= 3 {
-            height = 80
-        } else if numOfHouseWork > 6 {
-            height = 228
-        } else {
-            height = 154
-        }
-        
+        let height = space.houseWorkDetailSize
         detailCollectionView.snp.updateConstraints {
             $0.height.equalTo(height)
         }
