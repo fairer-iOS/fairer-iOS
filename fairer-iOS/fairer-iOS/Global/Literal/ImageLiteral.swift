@@ -75,6 +75,8 @@ enum ImageLiterals {
     static var writeHouseWorkChevron: UIImage { .load(systemName: "chevron.right") }
     static var spacePin: UIImage { .load(name: "pin") }
     static var deleteButton: UIImage { .load(systemName: "xmark.circle.fill") }
+    static var selectManager: UIImage { .load(systemName: "checkmark.circle.fill") }
+    static var deselectManager: UIImage { .load(systemName: "circle") }
 }
 
 extension UIImage {
