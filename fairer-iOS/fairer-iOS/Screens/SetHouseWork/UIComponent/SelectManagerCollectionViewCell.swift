@@ -11,6 +11,16 @@ import SnapKit
 
 final class SelectManagerCollectionViewCell: BaseCollectionViewCell {
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                setSelectedCellLayer()
+            } else {
+                setShadowCellLayer()
+            }
+        }
+    }
+    
     // MARK: - property
     
     let profileImage = UIImageView(image: ImageLiterals.profileLightBlue1)
@@ -57,5 +67,19 @@ final class SelectManagerCollectionViewCell: BaseCollectionViewCell {
         self.layer.cornerRadius = 6
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.gray200.cgColor
+    }
+    
+    // MARK: - func
+    
+    private func setSelectedCellLayer() {
+        self.layer.borderColor = UIColor.blue.cgColor
+        self.selectIcon.image = ImageLiterals.selectManager
+        self.selectIcon.tintColor = .blue
+    }
+    
+    private func setShadowCellLayer() {
+        self.layer.borderColor = UIColor.gray200.cgColor
+        self.selectIcon.image = ImageLiterals.deselectManager
+        self.selectIcon.tintColor = .gray200
     }
 }
