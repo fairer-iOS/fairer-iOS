@@ -20,6 +20,7 @@ final class GetManagerView: BaseUIView {
         label.font = .title1
         return label
     }()
+    private let getManagerCollectionView = GetManagerCollectionView()
     
     // MARK: - life cycle
     
@@ -28,6 +29,14 @@ final class GetManagerView: BaseUIView {
         managerLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(8)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        self.addSubview(getManagerCollectionView)
+        getManagerCollectionView.snp.makeConstraints {
+            $0.top.equalTo(managerLabel.snp.bottom)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.trailing.equalToSuperview().inset(72)
+            $0.height.equalTo(86)
         }
     }
     

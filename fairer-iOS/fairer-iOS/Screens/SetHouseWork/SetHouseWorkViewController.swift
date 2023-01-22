@@ -39,6 +39,7 @@ final class SetHouseWorkViewController: BaseViewController {
         getManagerView.snp.makeConstraints {
             $0.top.equalTo(setHouseWorkCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(120)
         }
     }
     

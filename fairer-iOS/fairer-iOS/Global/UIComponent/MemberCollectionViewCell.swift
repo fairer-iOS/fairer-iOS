@@ -14,7 +14,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     // MARK: - property
     
     private let profileImage = UIImageView(image: ImageLiterals.profileLightBlue1)
-    private let profileLabel: UILabel = {
+    let profileLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray800
         label.font = .caption1
@@ -26,7 +26,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     override func render() {
         self.addSubview(profileImage)
         profileImage.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
             $0.width.height.equalTo(48)
         }
         
