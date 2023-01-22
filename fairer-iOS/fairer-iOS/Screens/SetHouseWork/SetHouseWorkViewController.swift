@@ -16,8 +16,26 @@ final class SetHouseWorkViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let setHouseWorkCalendarView = SetHouseWorkCalendarView()
     private let setHouseWorkCollectionView = SetHouseWorkCollectionView()
-    private let getManagerView = GetManagerView()
-    private let selectManagerView = SelectManagerView()
+    private lazy var getManagerView: GetManagerView = {
+        let view = GetManagerView()
+        let action = UIAction { [weak self] _ in
+            self?.showSelectManagerView()
+        }
+        view.addManagerButton.addAction(action, for: .touchUpInside)
+        return view
+    }()
+    private lazy var selectManagerView: SelectManagerView = {
+        let view = SelectManagerView()
+        let cancelAction = UIAction { [weak self] _ in
+            self?.didTappedCancelButton()
+        }
+        let confirmAction = UIAction { [weak self] _ in
+            self?.didTappedConfirmButton()
+        }
+        view.cancelButton.addAction(cancelAction, for: .touchUpInside)
+        view.confirmButton.addAction(confirmAction, for: .touchUpInside)
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -47,7 +65,7 @@ final class SetHouseWorkViewController: BaseViewController {
         selectManagerView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(341)
+            $0.height.equalTo(0)
         }
     }
     
@@ -61,5 +79,35 @@ final class SetHouseWorkViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func showSelectManagerView() {
+        selectManagerView.snp.updateConstraints {
+            $0.height.equalTo(341)
+        }
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func didTappedCancelButton() {
+        selectManagerView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func didTappedConfirmButton() {
+        selectManagerView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
