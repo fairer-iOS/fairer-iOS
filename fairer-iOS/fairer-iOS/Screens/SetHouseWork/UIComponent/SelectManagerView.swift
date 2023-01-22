@@ -21,6 +21,24 @@ final class SelectManagerView: BaseUIView {
         return label
     }()
     private let selectManagerCollectionView = SelectManagerCollectionView()
+    let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("취소", for: .normal)
+        button.setTitleColor(.gray800, for: .normal)
+        button.titleLabel?.font = .title1
+        button.backgroundColor = .normal0
+        button.layer.cornerRadius = 8
+        return button
+    }()
+    let confirmButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("확인", for: .normal)
+        button.setTitleColor(.gray800, for: .normal)
+        button.titleLabel?.font = .title1
+        button.backgroundColor = .normal0
+        button.layer.cornerRadius = 8
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -36,6 +54,22 @@ final class SelectManagerView: BaseUIView {
             $0.top.equalTo(selectManagerLabel.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(142)
+        }
+        
+        self.addSubview(cancelButton)
+        cancelButton.snp.makeConstraints {
+            $0.top.equalTo(selectManagerCollectionView.snp.bottom).offset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(159.5)
+            $0.height.equalTo(56)
+        }
+        
+        self.addSubview(confirmButton)
+        confirmButton.snp.makeConstraints {
+            $0.centerY.equalTo(cancelButton.snp.centerY)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(159.5)
+            $0.height.equalTo(56)
         }
     }
     
