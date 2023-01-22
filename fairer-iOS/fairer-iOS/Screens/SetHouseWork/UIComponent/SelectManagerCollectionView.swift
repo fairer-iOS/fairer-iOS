@@ -11,7 +11,7 @@ import SnapKit
 
 final class SelectManagerCollectionView: BaseUIView {
     
-    var selectedIndex: Int = 0
+    var selectedIndex: Int? = 0
     
     var memberList: [String] = ["고가혜", "권진혁", "박정준", "김민주", "김유나", "홍준혁"]
     
@@ -43,6 +43,7 @@ final class SelectManagerCollectionView: BaseUIView {
         collectionView.dataSource = self
         collectionView.register(SelectManagerCollectionViewCell.self, forCellWithReuseIdentifier: SelectManagerCollectionViewCell.className)
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.allowsMultipleSelection = true
         return collectionView
     }()
     
