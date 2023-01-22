@@ -75,6 +75,7 @@
 		52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */; };
 		52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C085297CE8D2002AC755 /* GetManagerView.swift */; };
 		52E4C088297CE8DC002AC755 /* GetManagerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */; };
+		52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C089297CF66C002AC755 /* SelectManagerView.swift */; };
 		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
@@ -161,6 +162,7 @@
 		52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52E4C085297CE8D2002AC755 /* GetManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetManagerView.swift; sourceTree = "<group>"; };
 		52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetManagerCollectionView.swift; sourceTree = "<group>"; };
+		52E4C089297CF66C002AC755 /* SelectManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerView.swift; sourceTree = "<group>"; };
 		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				522714EA297918EC006BADBC /* SetHouseWorkCalendarView.swift */,
 				522714EC297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift */,
 				522714EE29792936006BADBC /* SetHouseWorkCollectionView.swift */,
+				52E4C089297CF66C002AC755 /* SelectManagerView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -766,6 +769,7 @@
 				7EFAA86E28DA032800737DF0 /* SelectHouseWorkViewController.swift in Sources */,
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */,
+				52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */,
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
 				39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */,
 				5204AABC2950BC50002FB6CA /* SettingInquiryViewController.swift in Sources */,

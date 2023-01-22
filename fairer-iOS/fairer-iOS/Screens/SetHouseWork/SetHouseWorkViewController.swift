@@ -17,6 +17,7 @@ final class SetHouseWorkViewController: BaseViewController {
     private let setHouseWorkCalendarView = SetHouseWorkCalendarView()
     private let setHouseWorkCollectionView = SetHouseWorkCollectionView()
     private let getManagerView = GetManagerView()
+    private let selectManagerView = SelectManagerView()
     
     // MARK: - life cycle
     
@@ -40,6 +41,13 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.top.equalTo(setHouseWorkCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(120)
+        }
+        
+        view.addSubview(selectManagerView)
+        selectManagerView.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(341)
         }
     }
     
