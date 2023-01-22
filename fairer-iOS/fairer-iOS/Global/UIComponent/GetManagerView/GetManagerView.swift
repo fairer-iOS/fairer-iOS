@@ -21,6 +21,11 @@ final class GetManagerView: BaseUIView {
         return label
     }()
     private let getManagerCollectionView = GetManagerCollectionView()
+    lazy var addManagerButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(ImageLiterals.addManagerButton, for: .normal)
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -37,6 +42,14 @@ final class GetManagerView: BaseUIView {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.trailing.equalToSuperview().inset(72)
             $0.height.equalTo(86)
+        }
+        
+        self.addSubview(addManagerButton)
+        addManagerButton.snp.makeConstraints {
+            $0.centerY.equalTo(getManagerCollectionView.snp.centerY)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(48)
+            $0.height.equalTo(70)
         }
     }
     

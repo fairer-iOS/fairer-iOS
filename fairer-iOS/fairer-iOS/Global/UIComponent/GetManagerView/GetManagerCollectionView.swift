@@ -11,7 +11,7 @@ import SnapKit
 
 final class GetManagerCollectionView: BaseUIView {
     
-    var memberList: [String] = ["고가혜", "권진혁", "박정준", "김민주", "고가혜", "권진혁"]
+    var memberList: [String] = ["고가혜", "권진혁", "박정준", "김민주", "김유나", "홍준혁"]
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
