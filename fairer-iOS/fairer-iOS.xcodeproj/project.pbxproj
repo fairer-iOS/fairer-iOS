@@ -72,6 +72,7 @@
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
 		52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB590D29116AC8003590DF /* SettingTableViewCell.swift */; };
 		52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */; };
+		52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */; };
 		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
@@ -155,6 +156,7 @@
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		52DB590D29116AC8003590DF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeButtonView.swift; sourceTree = "<group>"; };
+		52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				5205055728E1C50600355055 /* InfoLabelView.swift */,
 				52EBF04A28EC291F0062EB41 /* TextField.swift */,
 				5275397828EC2F78002D8280 /* BackButton.swift */,
+				52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */,
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
+				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
 				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
