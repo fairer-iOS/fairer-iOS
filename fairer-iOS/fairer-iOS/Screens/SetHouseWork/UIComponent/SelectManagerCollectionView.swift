@@ -11,6 +11,8 @@ import SnapKit
 
 final class SelectManagerCollectionView: BaseUIView {
     
+    var selectedIndex: Int = 0
+    
     var memberList: [String] = ["고가혜", "권진혁", "박정준", "김민주", "김유나", "홍준혁"]
     
     private enum Size {
@@ -58,7 +60,7 @@ final class SelectManagerCollectionView: BaseUIView {
 
 extension SelectManagerCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(memberList[indexPath.item])
+        selectedIndex = indexPath.item
     }
 }
 
@@ -71,6 +73,11 @@ extension SelectManagerCollectionView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectManagerCollectionViewCell.className, for: indexPath) as? SelectManagerCollectionViewCell else {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
+        }
+        
+        if indexPath.item == selectedIndex {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
         cell.profileName.setTextWithLineHeight(text: memberList[indexPath.item], lineHeight: 26)
