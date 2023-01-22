@@ -55,7 +55,7 @@ final class SetHouseWorkCalendarView: BaseUIView {
     override func render() {
         self.addSubview(calendarPicker)
         calendarPicker.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(8)
+            $0.leading.equalToSuperview().inset(5)
             $0.top.equalToSuperview().inset(8)
             $0.width.equalTo(120)
         }
