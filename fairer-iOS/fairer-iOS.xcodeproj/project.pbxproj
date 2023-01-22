@@ -77,6 +77,7 @@
 		52E4C088297CE8DC002AC755 /* GetManagerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */; };
 		52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C089297CF66C002AC755 /* SelectManagerView.swift */; };
 		52E4C08C297D037C002AC755 /* SelectManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C08B297D037C002AC755 /* SelectManagerCollectionViewCell.swift */; };
+		52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C08D297D06F5002AC755 /* SelectManagerCollectionView.swift */; };
 		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
@@ -165,6 +166,7 @@
 		52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetManagerCollectionView.swift; sourceTree = "<group>"; };
 		52E4C089297CF66C002AC755 /* SelectManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerView.swift; sourceTree = "<group>"; };
 		52E4C08B297D037C002AC755 /* SelectManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerCollectionViewCell.swift; sourceTree = "<group>"; };
+		52E4C08D297D06F5002AC755 /* SelectManagerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerCollectionView.swift; sourceTree = "<group>"; };
 		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 				522714EE29792936006BADBC /* SetHouseWorkCollectionView.swift */,
 				52E4C089297CF66C002AC755 /* SelectManagerView.swift */,
 				52E4C08B297D037C002AC755 /* SelectManagerCollectionViewCell.swift */,
+				52E4C08D297D06F5002AC755 /* SelectManagerCollectionView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
+				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
 				52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */,
 				39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */,

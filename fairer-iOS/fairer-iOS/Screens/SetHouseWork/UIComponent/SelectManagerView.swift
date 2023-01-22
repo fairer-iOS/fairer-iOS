@@ -20,6 +20,7 @@ final class SelectManagerView: BaseUIView {
         label.font = .title1
         return label
     }()
+    private let selectManagerCollectionView = SelectManagerCollectionView()
     
     // MARK: - life cycle
     
@@ -28,6 +29,13 @@ final class SelectManagerView: BaseUIView {
         selectManagerLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(20)
             $0.centerX.equalToSuperview()
+        }
+        
+        self.addSubview(selectManagerCollectionView)
+        selectManagerCollectionView.snp.makeConstraints {
+            $0.top.equalTo(selectManagerLabel.snp.bottom).offset(24)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(142)
         }
     }
     

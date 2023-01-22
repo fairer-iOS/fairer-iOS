@@ -16,7 +16,6 @@ final class SelectManagerCollectionViewCell: BaseCollectionViewCell {
     let profileImage = UIImageView(image: ImageLiterals.profileLightBlue1)
     let profileName: UILabel = {
         let label = UILabel()
-        label.text = "고가혜"
         label.textColor = .gray800
         label.font = .body1
         return label
@@ -24,7 +23,8 @@ final class SelectManagerCollectionViewCell: BaseCollectionViewCell {
     private let selectIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.deselectManager
-        var config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 18, weight: .light))
+        imageView.tintColor = .gray200
+        var config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20, weight: .light))
         imageView.preferredSymbolConfiguration = config
         return imageView
     }()
@@ -49,7 +49,7 @@ final class SelectManagerCollectionViewCell: BaseCollectionViewCell {
         selectIcon.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(12)
-            $0.width.height.equalTo(18)
+            $0.width.height.equalTo(20)
         }
     }
     
