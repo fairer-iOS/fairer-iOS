@@ -23,7 +23,7 @@ final class SelectManagerView: BaseUIView {
     let selectManagerCollectionView = SelectManagerCollectionView()
     let cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("취소", for: .normal)
+        button.setTitle(TextLiteral.selectManagerViewCancelButtonText , for: .normal)
         button.setTitleColor(.gray800, for: .normal)
         button.titleLabel?.font = .title1
         button.backgroundColor = .normal0
@@ -32,7 +32,7 @@ final class SelectManagerView: BaseUIView {
     }()
     let confirmButton: UIButton = {
         let button = UIButton()
-        button.setTitle("확인", for: .normal)
+        button.setTitle(TextLiteral.selectManagerViewConfirmButtonText, for: .normal)
         button.setTitleColor(.gray800, for: .normal)
         button.titleLabel?.font = .title1
         button.backgroundColor = .normal0
@@ -81,6 +81,4 @@ final class SelectManagerView: BaseUIView {
         self.layer.shadowRadius = 10
         self.layer.shadowOffset = CGSize(width: 0, height: -6)
     }
-    
-    // MARK: - func
 }

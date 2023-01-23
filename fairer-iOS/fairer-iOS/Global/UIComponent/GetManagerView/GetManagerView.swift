@@ -15,7 +15,7 @@ final class GetManagerView: BaseUIView {
     
     private let managerLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "담당자", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.getManagerViewManagerLabel, lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         return label
@@ -52,6 +52,4 @@ final class GetManagerView: BaseUIView {
             $0.height.equalTo(70)
         }
     }
-    
-    // MARK: - func
 }

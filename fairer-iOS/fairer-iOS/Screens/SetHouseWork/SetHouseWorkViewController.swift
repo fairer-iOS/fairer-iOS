@@ -38,7 +38,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }()
     private let managerToastLabel: UILabel = {
         let label = UILabel()
-        label.text = "집안일 담당자를 지정해주세요."
+        label.text = TextLiteral.setHouseWorkManagerToastLabel
         label.textColor = .white
         label.font = .title2
         label.backgroundColor = .gray700

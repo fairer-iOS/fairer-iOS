@@ -134,4 +134,14 @@ enum TextLiteral {
     // MARK: - SetHouseWorkCollectionViewCell
     
     static let setHouseWorkCollectionViewCellDefaultTimeLabel = "하루 종일"
+    static let setHouseWorkManagerToastLabel = "집안일 담당자를 지정해주세요."
+    
+    // MARK: - SelectManagerView
+    
+    static let selectManagerViewCancelButtonText = "취소"
+    static let selectManagerViewConfirmButtonText = "확인"
+    
+    // MARK: - GetManagerView
+    
+    static let getManagerViewManagerLabel = "담당자"
 }
