@@ -10,13 +10,16 @@ import UIKit
 import SnapKit
 
 struct dummyWorkCard {
-    let work = ["바닥 청소","설거지","빨래"]
-    let time = ["오전 9:30","오후 8:00","오전 11:00"]
-    let room = ["방","부엌","거실"]
+    let work = ["바닥 청소","설거지","빨래","바닥 청소","설거지","빨래","설거지"]
+    let time = ["오전 9:30","오후 8:00","오전 11:00","오전 9:30","오후 8:00","오전 11:00","오전 11:00"]
+    let room = ["방","부엌","거실","방","부엌","방","부엌"]
     let backColor = ["system"]
 }
 
 final class CalendarDailyCollectionView: BaseUIView  {
+    
+    weak var delegate: CollectionViewHeightProtocol?
+    private var cellNum = 0
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
@@ -61,6 +64,7 @@ final class CalendarDailyCollectionView: BaseUIView  {
     override func render() {
         self.addSubview(collectionView)
         
+        
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -74,8 +78,19 @@ extension CalendarDailyCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
 }
 extension CalendarDailyCollectionView: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        if section == 0 {
+            cellNum = cellNum + 3
+            return 3
+        }else {
+            cellNum = cellNum + 4
+            delegate?.getCollectionViewHeight(cellNum: cellNum)
+            cellNum = 0
+            return 4
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarDailyCollectionViewCell.className, for: indexPath) as? CalendarDailyCollectionViewCell else {

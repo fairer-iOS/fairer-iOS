@@ -87,8 +87,6 @@
 		911E967D29717ECE00F3AF35 /* CalendarDailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967C29717ECE00F3AF35 /* CalendarDailyCollectionView.swift */; };
 		911E967F29717F0E00F3AF35 /* CalendarDailyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967E29717F0E00F3AF35 /* CalendarDailyCollectionViewCell.swift */; };
 		911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E968229719CA400F3AF35 /* UIView+Extension.swift */; };
-		911E96852971CBDB00F3AF35 /* CalendarDailyWorkEndCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E96842971CBDB00F3AF35 /* CalendarDailyWorkEndCollectionView.swift */; };
-		911E96872971CC3300F3AF35 /* CalendarDailyWorkEndCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E96862971CC3300F3AF35 /* CalendarDailyWorkEndCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,8 +170,6 @@
 		911E967C29717ECE00F3AF35 /* CalendarDailyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyCollectionView.swift; sourceTree = "<group>"; };
 		911E967E29717F0E00F3AF35 /* CalendarDailyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyCollectionViewCell.swift; sourceTree = "<group>"; };
 		911E968229719CA400F3AF35 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		911E96842971CBDB00F3AF35 /* CalendarDailyWorkEndCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyWorkEndCollectionView.swift; sourceTree = "<group>"; };
-		911E96862971CC3300F3AF35 /* CalendarDailyWorkEndCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyWorkEndCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,8 +288,6 @@
 				911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */,
 				911E967C29717ECE00F3AF35 /* CalendarDailyCollectionView.swift */,
 				911E967E29717F0E00F3AF35 /* CalendarDailyCollectionViewCell.swift */,
-				911E96842971CBDB00F3AF35 /* CalendarDailyWorkEndCollectionView.swift */,
-				911E96862971CC3300F3AF35 /* CalendarDailyWorkEndCollectionViewCell.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -720,7 +714,6 @@
 				52EBF04B28EC29200062EB41 /* TextField.swift in Sources */,
 				39FABBDC28DB35020053EFD2 /* HomeCalendarView.swift in Sources */,
 				52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */,
-				911E96872971CC3300F3AF35 /* CalendarDailyWorkEndCollectionViewCell.swift in Sources */,
 				911E967D29717ECE00F3AF35 /* CalendarDailyCollectionView.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
@@ -751,7 +744,6 @@
 				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,
-				911E96852971CBDB00F3AF35 /* CalendarDailyWorkEndCollectionView.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,
 				39F1C12C28D614D800585B83 /* BaseUIView.swift in Sources */,
 				5205054228D8620000355055 /* OnboardingProfileViewController.swift in Sources */,

@@ -17,6 +17,8 @@ final class HomeViewController: BaseViewController {
     let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
     
     // MARK: - property
+    
+    private var cellHeight = Int()
 
     private let logoImage : UIImageView = {
         let imgView = UIImageView()
@@ -62,14 +64,6 @@ final class HomeViewController: BaseViewController {
     private let homeCalenderView = HomeCalendarView()
     private let homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
     private let calendarDailyCollecionView = CalendarDailyCollectionView()
-    private let finishWorkLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiteral.homeViewFinishWorkTitle
-        label.font = .title2
-        label.textColor = .gray800
-        return label
-    }()
-    private let calendarDailyWorkEndCollectionView = CalendarDailyWorkEndCollectionView()
     private lazy var contentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemBackground
@@ -107,9 +101,7 @@ final class HomeViewController: BaseViewController {
         contentScrollView.addSubviews(
             homeCalenderView,
             homeWeekCalendarCollectionView,
-            calendarDailyCollecionView,
-            finishWorkLabel,
-            calendarDailyWorkEndCollectionView
+            calendarDailyCollecionView
         )
         
         toolBarView.snp.makeConstraints {
@@ -173,21 +165,8 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             // MARK: - FIX ME
             $0.height.equalTo(310)
-        }
-
-        finishWorkLabel.snp.makeConstraints {
-            $0.top.equalTo(calendarDailyCollecionView.snp.bottom).offset(14)
-            $0.leading.equalToSuperview().offset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(25)
-        }
-
-        calendarDailyWorkEndCollectionView.snp.makeConstraints {
-            $0.top.equalTo(finishWorkLabel.snp.bottom).offset(16)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(210)
             $0.bottom.equalToSuperview()
         }
-        
     }
     
     override func setupNavigationBar() {
@@ -206,6 +185,7 @@ final class HomeViewController: BaseViewController {
     
     private func setupDelegate(){
         self.contentScrollView.delegate = self
+        self.calendarDailyCollecionView.delegate = self
     }
     
     private func setupToolBarGesture() {
@@ -239,7 +219,21 @@ final class HomeViewController: BaseViewController {
     }
 }
 
+    // MARK: - Protocol
+protocol CollectionViewHeightProtocol: AnyObject {
+    func getCollectionViewHeight(cellNum: Int)
+}
+
     // MARK: - Extension
+extension HomeViewController: CollectionViewHeightProtocol {
+    func getCollectionViewHeight(cellNum: Int) {
+        cellHeight = cellNum * 105
+        calendarDailyCollecionView.snp.updateConstraints {
+            $0.height.equalTo(cellHeight)
+        }
+        print(cellHeight)
+    }
+}
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
