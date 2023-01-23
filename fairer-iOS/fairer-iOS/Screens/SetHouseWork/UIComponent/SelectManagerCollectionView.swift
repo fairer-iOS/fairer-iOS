@@ -47,7 +47,6 @@ final class SelectManagerCollectionView: BaseUIView {
         collectionView.register(SelectManagerCollectionViewCell.self, forCellWithReuseIdentifier: SelectManagerCollectionViewCell.className)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.allowsMultipleSelection = true
-//        collectionView.refreshControl?.isSelected = false
         return collectionView
     }()
     
@@ -67,14 +66,12 @@ extension SelectManagerCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
         selectedManagerList.append(totalMemberList[indexPath.item])
-        print(selectedManagerList)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if !selectedManagerList.isEmpty {
             selectedManagerList.removeAll(where: { $0 == totalMemberList[indexPath.item]})
         }
-        print(selectedManagerList)
     }
 }
 
