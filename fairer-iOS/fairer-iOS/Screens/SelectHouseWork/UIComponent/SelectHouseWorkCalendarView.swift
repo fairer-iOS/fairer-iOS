@@ -18,12 +18,11 @@ final class SelectHouseWorkCalendarView: BaseUIView {
         let picker = UIDatePicker()
         let action = UIAction { [weak self] _ in
             self?.today = picker.date
-            picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .clear
         }
         picker.datePickerMode = .date
         picker.locale = Locale(identifier: "ko_KR")
         picker.preferredDatePickerStyle = .compact
-        picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .clear
+        picker.subviews[0].subviews[0].subviews[0].alpha = 0
         picker.addAction(action, for: .valueChanged)
         return picker
     }()

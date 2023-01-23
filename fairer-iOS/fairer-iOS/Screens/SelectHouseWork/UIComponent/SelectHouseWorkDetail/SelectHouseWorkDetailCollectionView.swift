@@ -1,21 +1,30 @@
 //
-//  SelectHouseWorkSpaceCollectionView.swift
+//  SelectHouseWorkDetailCollectionView.swift
 //  fairer-iOS
 //
-//  Created by LeeSungHo on 2022/09/20.
+//  Created by 김유나 on 2023/01/10.
 //
 
 import UIKit
 
 import SnapKit
 
-final class SelectHouseWorkSpaceCollectionView: BaseUIView {
+final class SelectHouseWorkDetailCollectionView: BaseUIView {
+    
+    var space: Space? {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    var didTappedHouseWork: (([String]) -> ())?
+    var selectedHouseWorkList: [String] = []
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
-        static let collectionVerticalSpacing: CGFloat = 12
-        static let cellWidth: CGFloat = 102
-        static let cellHeight: CGFloat = 107
+        static let collectionVerticalSpacing: CGFloat = 8
+        static let cellWidth: CGFloat = 102.3
+        static let cellHeight: CGFloat = 64
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
             left: collectionHorizontalSpacing,
@@ -31,12 +40,13 @@ final class SelectHouseWorkSpaceCollectionView: BaseUIView {
         flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
         return flowLayout
     }()
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
+        collectionView.allowsMultipleSelection = true
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(SelectHouseWorkSpaceCollectionViewCell.self, forCellWithReuseIdentifier: SelectHouseWorkSpaceCollectionViewCell.className)
+        collectionView.register(SelectHouseWorkDetailCollectionViewCell.self, forCellWithReuseIdentifier: SelectHouseWorkDetailCollectionViewCell.className)
         return collectionView
     }()
     
@@ -52,27 +62,31 @@ final class SelectHouseWorkSpaceCollectionView: BaseUIView {
 
 // MARK: - extension
 
-extension SelectHouseWorkSpaceCollectionView: UICollectionViewDelegate {
+extension SelectHouseWorkDetailCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // FIXME: - api 연결할 때 공간 전달
-        print(Space.allCases[indexPath.item].rawValue)
+        selectedHouseWorkList.append(space?.houseWorkDetailList[indexPath.item] ?? "")
+        didTappedHouseWork?(selectedHouseWorkList)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        selectedHouseWorkList = selectedHouseWorkList.filter { $0 != space?.houseWorkDetailList[indexPath.item] ?? "" }
+        didTappedHouseWork?(selectedHouseWorkList)
     }
 }
 
-extension SelectHouseWorkSpaceCollectionView: UICollectionViewDataSource {
+extension SelectHouseWorkDetailCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Space.allCases.count
+        return space?.houseWorkDetailList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectHouseWorkSpaceCollectionViewCell.className, for: indexPath) as? SelectHouseWorkSpaceCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectHouseWorkDetailCollectionViewCell.className, for: indexPath) as? SelectHouseWorkDetailCollectionViewCell else {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        
-        cell.index = indexPath.row
-        cell.spaceImageView.image = Space.allCases[indexPath.row].normalImage
-        cell.spaceNameLabel.text = Space.allCases[indexPath.row].rawValue
+
+        cell.cellLabel.text = space?.houseWorkDetailList[indexPath.item]
         
         return cell
     }
