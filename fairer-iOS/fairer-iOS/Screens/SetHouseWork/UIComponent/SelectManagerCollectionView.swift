@@ -12,8 +12,8 @@ import SnapKit
 final class SelectManagerCollectionView: BaseUIView {
     
     var selectedIndex: Int? = 0
-    
-    var memberList: [String] = ["고가혜", "권진혁", "박정준", "김민주", "김유나", "홍준혁"]
+    var totalMemberList: [String] = ["고가혜", "권진혁", "박정준", "김민주", "김유나", "홍준혁"]
+    var selectedManagerList: [String] = ["고가혜"]
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -62,12 +62,21 @@ final class SelectManagerCollectionView: BaseUIView {
 extension SelectManagerCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
+        selectedManagerList.append(totalMemberList[indexPath.item])
+        print(selectedManagerList)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if !selectedManagerList.isEmpty {
+            selectedManagerList.removeAll(where: { $0 == totalMemberList[indexPath.item]})
+        }
+        print(selectedManagerList)
     }
 }
 
 extension SelectManagerCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memberList.count
+        return totalMemberList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,7 +90,7 @@ extension SelectManagerCollectionView: UICollectionViewDataSource {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
-        cell.profileName.setTextWithLineHeight(text: memberList[indexPath.item], lineHeight: 26)
+        cell.profileName.setTextWithLineHeight(text: totalMemberList[indexPath.item], lineHeight: 26)
         
         return cell
     }

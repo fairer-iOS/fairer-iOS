@@ -20,7 +20,7 @@ final class SelectManagerView: BaseUIView {
         label.font = .title1
         return label
     }()
-    private let selectManagerCollectionView = SelectManagerCollectionView()
+    let selectManagerCollectionView = SelectManagerCollectionView()
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("취소", for: .normal)

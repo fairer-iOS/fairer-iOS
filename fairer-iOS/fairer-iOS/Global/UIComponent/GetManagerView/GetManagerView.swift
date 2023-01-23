@@ -20,7 +20,7 @@ final class GetManagerView: BaseUIView {
         label.font = .title1
         return label
     }()
-    private let getManagerCollectionView = GetManagerCollectionView()
+    let getManagerCollectionView = GetManagerCollectionView()
     lazy var addManagerButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(ImageLiterals.addManagerButton, for: .normal)

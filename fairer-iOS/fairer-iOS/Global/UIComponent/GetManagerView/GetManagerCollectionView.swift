@@ -11,7 +11,9 @@ import SnapKit
 
 final class GetManagerCollectionView: BaseUIView {
     
-    var memberList: [String] = ["고가혜", "권진혁", "박정준", "김민주", "김유나", "홍준혁"]
+    var selectedMemberList: [String] = ["고가혜"] {
+        didSet { collectionView.reloadData() }
+    }
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
@@ -58,7 +60,7 @@ final class GetManagerCollectionView: BaseUIView {
 
 extension GetManagerCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memberList.count
+        return selectedMemberList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,7 +69,7 @@ extension GetManagerCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.profileLabel.setTextWithLineHeight(text: memberList[indexPath.row], lineHeight: 18)
+        cell.profileLabel.setTextWithLineHeight(text: selectedMemberList[indexPath.row], lineHeight: 18)
 
         return cell
     }

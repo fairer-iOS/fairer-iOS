@@ -109,5 +109,7 @@ final class SetHouseWorkViewController: BaseViewController {
         UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
+        
+        getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
     }
 }
