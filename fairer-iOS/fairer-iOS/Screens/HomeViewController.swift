@@ -18,7 +18,7 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
-    private var cellHeight = Int()
+    private var cellHeight = CGFloat()
 
     private let logoImage : UIImageView = {
         let imgView = UIImageView()
@@ -163,7 +163,6 @@ final class HomeViewController: BaseViewController {
         calendarDailyCollecionView.snp.makeConstraints{
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
-            // MARK: - FIX ME
             $0.height.equalTo(310)
             $0.bottom.equalToSuperview()
         }
@@ -184,7 +183,6 @@ final class HomeViewController: BaseViewController {
     // MARK: - func
     
     private func setupDelegate(){
-        self.contentScrollView.delegate = self
         self.calendarDailyCollecionView.delegate = self
     }
     
@@ -227,34 +225,9 @@ protocol CollectionViewHeightProtocol: AnyObject {
     // MARK: - Extension
 extension HomeViewController: CollectionViewHeightProtocol {
     func getCollectionViewHeight(cellNum: Int) {
-        cellHeight = cellNum * 105
+        cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
         calendarDailyCollecionView.snp.updateConstraints {
             $0.height.equalTo(cellHeight)
-        }
-        print(cellHeight)
-    }
-}
-
-extension HomeViewController: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        homeRuleView.homeRuleLabel.snp.updateConstraints {
-            $0.height.equalTo(0)
-        }
-        
-        homeRuleView.homeRuleDescriptionLabel.snp.updateConstraints{
-            $0.height.equalTo(0)
-        }
-        
-        homeGroupCollectionView.snp.updateConstraints{
-            $0.height.equalTo(0)
-        }
-        
-        homeRuleView.snp.updateConstraints{
-            $0.height.equalTo(0)
-        }
-        
-        homeDivider.snp.updateConstraints{
-            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(8)
         }
     }
 }

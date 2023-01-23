@@ -13,14 +13,13 @@ struct dummyWorkCard {
     let work = ["바닥 청소","설거지","빨래","바닥 청소","설거지","빨래","설거지"]
     let time = ["오전 9:30","오후 8:00","오전 11:00","오전 9:30","오후 8:00","오전 11:00","오전 11:00"]
     let room = ["방","부엌","거실","방","부엌","방","부엌"]
-    let backColor = ["system"]
+    let status = [ WorkState.overdue,WorkState.overdue,WorkState.notFinished,WorkState.finished,WorkState.finished,WorkState.finished,WorkState.finished]
 }
 
 final class CalendarDailyCollectionView: BaseUIView  {
     
     weak var delegate: CollectionViewHeightProtocol?
     private var cellNum = 0
-    
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
         static let collectionVerticalSpacing: CGFloat = 8
@@ -64,7 +63,6 @@ final class CalendarDailyCollectionView: BaseUIView  {
     override func render() {
         self.addSubview(collectionView)
         
-        
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -97,25 +95,19 @@ extension CalendarDailyCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-    
         cell.workLabel.text = dummy.work[indexPath.item]
         cell.time.text = dummy.time[indexPath.item]
         cell.room.text = dummy.room[indexPath.item]
-        
-        return cell
-    }
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-           case UICollectionView.elementKindSectionHeader:
-               let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "reusableView", for: indexPath)
-               return headerView
-           default:
-               assert(false, "응 아니야")
+        switch dummy.status[indexPath.item] {
+        case .finished :
+            cell.backgroundColor = .positive10
+        case .notFinished :
+            cell.backgroundColor = .white
+        case .overdue :
+            cell.backgroundColor = .negative0
+            cell.layer.borderColor = UIColor.negative10.cgColor
+            cell.setErrorImageView()
         }
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-            let width: CGFloat = collectionView.frame.width
-            let height: CGFloat = 120
-            return CGSize(width: width, height: height)
+        return cell
     }
 }

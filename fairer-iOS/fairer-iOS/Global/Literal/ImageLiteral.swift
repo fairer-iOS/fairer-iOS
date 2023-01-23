@@ -79,6 +79,7 @@ enum ImageLiterals {
     static var selectedCalendarCell: UIImage { .load(name: "selectedCell") }
     static var locationPin: UIImage { .load(name: "locationPin") }
     static var houseFill: UIImage { .load(systemName: "house.fill") }
+    static var error: UIImage { .load(name: "error") }
     
     // MARK: - dot
     

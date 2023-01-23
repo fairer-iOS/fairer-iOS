@@ -20,4 +20,8 @@ enum SizeLiteral {
     static let houseWorkDetailOneLineHeight: CGFloat = 80
     static let houseWorkDetailTwoLineHeight: CGFloat = 154
     static let houseWorkDetailThreeLineHeight: CGFloat = 228
+    
+    // MARK: - HomeViewCollectionViewCell
+    
+    static let homeViewWorkCellHeight: CGFloat = 105
 }

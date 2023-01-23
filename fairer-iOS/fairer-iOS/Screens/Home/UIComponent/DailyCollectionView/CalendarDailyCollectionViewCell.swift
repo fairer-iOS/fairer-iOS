@@ -51,6 +51,10 @@ final class CalendarDailyCollectionViewCell: BaseCollectionViewCell {
         imageView.image = ImageLiterals.locationPin
         return imageView
     }()
+    private let errorImage: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
+    }()
     private lazy var workerStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [workerImage1,workerImage2,workerImage3])
         stackView.axis = .horizontal
@@ -70,8 +74,15 @@ final class CalendarDailyCollectionViewCell: BaseCollectionViewCell {
         stackView.alignment = .center
         return stackView
     }()
+    private lazy var timeStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [errorImage,time])
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 4
+        return stackView
+    }()
     private lazy var rightStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [time,roomStackView])
+        let stackView = UIStackView(arrangedSubviews: [timeStackView,roomStackView])
         stackView.axis = .vertical
         stackView.spacing = 25
         stackView.alignment = .trailing
@@ -114,5 +125,9 @@ final class CalendarDailyCollectionViewCell: BaseCollectionViewCell {
         self.layer.cornerRadius = 8
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.positive10.cgColor
+    }
+    
+    func setErrorImageView(){
+        self.errorImage.image = ImageLiterals.error
     }
 }
