@@ -147,6 +147,7 @@ enum TextLiteral {
     
     // MARK: - SelectManagerView
     
+    static let selectManagerViewLabel = "집안일 담당자 선택"
     static let selectManagerViewCancelButtonText = "취소"
     static let selectManagerViewConfirmButtonText = "확인"
     

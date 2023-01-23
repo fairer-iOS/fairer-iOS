@@ -15,7 +15,7 @@ final class SelectManagerView: BaseUIView {
     
     private let selectManagerLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "집안일 담당자 선택", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.selectManagerViewLabel, lineHeight: 22)
         label.textColor = .gray800
         label.font = .title1
         return label
