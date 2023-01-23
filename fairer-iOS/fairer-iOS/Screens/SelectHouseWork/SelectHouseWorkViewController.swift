@@ -11,6 +11,8 @@ import SnapKit
 
 final class SelectHouseWorkViewController: BaseViewController {
     
+    var selectedSpace: Space?
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -25,11 +27,25 @@ final class SelectHouseWorkViewController: BaseViewController {
         label.imageColor = .gray200
         return label
     }()
+    private let detailHouseWorkLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.selectHouseWorkViewControllerDetailHouseWorkLabel, lineHeight: 22)
+        label.textColor = .gray600
+        label.font = .title1
+        label.isHidden = true
+        return label
+    }()
+    private let detailCollectionView = SelectHouseWorkDetailCollectionView()
+    private let writeHouseWorkLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.selectHouseWorkViewControllerWriteHouseWorkLabel, lineHeight: 22)
+        label.textColor = .gray300
+        label.font = .body2
+        label.isHidden = true
+        return label
+    }()
     private lazy var writeHouseWorkButton: WriteHouseWorkButton = {
         let button = WriteHouseWorkButton()
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.positive20.cgColor
-        button.layer.cornerRadius = 6
         let action = UIAction { [weak self] _ in
             self?.didTappedWriteHouseWorkButton()
         }
@@ -54,10 +70,30 @@ final class SelectHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        didTappedSpace()
+        didTappedHouseWork()
+    }
+    
     override func render() {
+        view.addSubview(nextButtonBackgroundView)
+        nextButtonBackgroundView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalToSuperview()
+            $0.height.equalTo(122)
+        }
+        
+        nextButtonBackgroundView.addSubview(nextButton)
+        nextButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
+        }
+        
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(nextButtonBackgroundView.snp.top)
         }
         
         scrollView.addSubview(contentView)
@@ -68,7 +104,8 @@ final class SelectHouseWorkViewController: BaseViewController {
         contentView.addSubview(selectHouseWorkCalendar)
         selectHouseWorkCalendar.snp.makeConstraints {
             $0.top.equalToSuperview().inset(4)
-            $0.leading.equalToSuperview().inset(15)
+            $0.leading.equalToSuperview().inset(10)
+            $0.width.equalTo(112)
         }
         
         contentView.addSubview(spaceCollectionView)
@@ -85,24 +122,32 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.height.equalTo(22)
         }
         
+        contentView.addSubview(detailHouseWorkLabel)
+        detailHouseWorkLabel.snp.makeConstraints {
+            $0.top.equalTo(spaceCollectionView.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
+        }
+        
+        contentView.addSubview(detailCollectionView)
+        detailCollectionView.snp.makeConstraints {
+            $0.top.equalTo(detailHouseWorkLabel.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(0)
+        }
+        
+        contentView.addSubview(writeHouseWorkLabel)
+        writeHouseWorkLabel.snp.makeConstraints {
+            $0.top.equalTo(detailCollectionView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
         contentView.addSubview(writeHouseWorkButton)
         writeHouseWorkButton.snp.makeConstraints {
-            $0.top.equalTo(spaceInfoLabel.snp.bottom).offset(32)
-            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(writeHouseWorkLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
             $0.bottom.equalTo(0)
-        }
-        
-        view.addSubview(nextButtonBackgroundView)
-        nextButtonBackgroundView.snp.makeConstraints {
-            $0.bottom.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(122)
-        }
-        
-        nextButtonBackgroundView.addSubview(nextButton)
-        nextButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
         }
     }
     
@@ -126,5 +171,54 @@ final class SelectHouseWorkViewController: BaseViewController {
     private func didTappedNextButton() {
         // FIXME: - 집안일 설정하기 페이지로 이동
         print("다음")
+    }
+    
+    private func didTappedSpace() {
+        spaceCollectionView.didTappedSpace = {[weak self] space in
+            self?.didTappedDifferentSpace(space)
+            self?.setDetailHouseWork(space)
+            self?.setLabels()
+        }
+    }
+    
+    private func didTappedHouseWork() {
+        detailCollectionView.didTappedHouseWork = {[weak self] houseWork in
+            if houseWork.count > 0 {
+                self?.nextButton.isDisabled = false
+            } else {
+                self?.nextButton.isDisabled = true
+            }
+        }
+    }
+    
+    private func didTappedDifferentSpace(_ space: Space) {
+        if space != selectedSpace && detailCollectionView.selectedHouseWorkList.count > 0 {
+            makeAlert(title: TextLiteral.selectHouseWorkViewControllerAlertTitle, message: TextLiteral.selectHouseWorkViewControllerAlertMessage)
+            detailCollectionView.selectedHouseWorkList = []
+            nextButton.isDisabled = true
+        }
+        self.selectedSpace = space
+    }
+    
+    private func setDetailHouseWork(_ space: Space) {
+        let height = space.houseWorkDetailSize
+        detailCollectionView.snp.updateConstraints {
+            $0.height.equalTo(height)
+        }
+        detailCollectionView.space = space
+    }
+    
+    private func setLabels() {
+        writeHouseWorkLabel.isHidden = false
+        
+        spaceInfoLabel.isHidden = true
+        spaceInfoLabel.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        
+        detailHouseWorkLabel.isHidden = false
+        detailHouseWorkLabel.snp.updateConstraints {
+            $0.height.equalTo(26)
+        }
     }
 }
