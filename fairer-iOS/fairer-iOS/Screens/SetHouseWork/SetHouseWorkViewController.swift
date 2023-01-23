@@ -89,6 +89,8 @@ final class SetHouseWorkViewController: BaseViewController {
         UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
+        
+        selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
     
     private func didTappedCancelButton() {
@@ -99,6 +101,8 @@ final class SetHouseWorkViewController: BaseViewController {
         UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
+        
+        selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
     
     private func didTappedConfirmButton() {
