@@ -130,6 +130,15 @@ enum TextLiteral {
     
     static let selectHouseWorkViewControllerInfoLabel = "공간을 선택하면 세부 집안일이 나옵니다."
     static let selectHouseWorkViewControllerNextButtonText = "다음"
+    static let selectHouseWorkViewControllerDetailHouseWorkLabel = "세부 집안일"
+    static let selectHouseWorkViewControllerWriteHouseWorkLabel = "원하는 집안일이 없나요?"
+    static let selectHouseWorkViewControllerAlertTitle = "같은 공간만 선택 할 수 있어요"
+    static let selectHouseWorkViewControllerAlertMessage = "다른 공간을 선택하시면 선택한 집안일이\n삭제 됩니다. 다른 공간을 선택하시겠어요?"
+    
+    // MARK: - WriteHouseWorkButton
+    
+    static let writeHouseWorkButtonLabel = "집안일 직접 입력하기"
+    
     
     // MARK: - SetHouseWorkCollectionViewCell
     
