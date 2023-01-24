@@ -23,12 +23,12 @@ final class HomeViewControllerToolBar: UIView {
     }()
     private let affairLabel: UILabel = {
         let label = UILabel()
-        label.text = "집안일을 추가해 보세요!"
+        label.text = TextLiteral.homeViewAddWorkLabel
         label.font = .caption1
         label.textColor = .gray400
         return label
     }()
-    private let plusImage = UIImageView(image: UIImage(systemName: "plus"))
+    private let plusImage = UIImageView(image: ImageLiterals.plusWorkButton)
     
     // MARK: - init
     
@@ -43,17 +43,19 @@ final class HomeViewControllerToolBar: UIView {
     
     private func render() {
         self.addSubview(affairView)
+        affairView.addSubviews(affairLabel,plusImage)
+        
         affairView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(44)
         }
-        affairView.addSubview(affairLabel)
+
         affairLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
         }
-        affairView.addSubview(plusImage)
+
         plusImage.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()

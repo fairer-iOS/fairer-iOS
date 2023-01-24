@@ -18,11 +18,16 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
-    private let logoImage = UIImageView(image: ImageLiterals.imgLogo)
+    private var cellHeight = CGFloat()
+
+    private let logoImage : UIImageView = {
+        let imgView = UIImageView()
+        imgView.image = ImageLiterals.imgHomeLogo
+        return imgView
+    }()
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        button.setImage(UIImage(systemName: "person"), for: .normal)
+        button.setImage(ImageLiterals.settingMenu, for: .normal)
         button.tintColor = .black
         return button
     }()
@@ -37,7 +42,7 @@ final class HomeViewController: BaseViewController {
     }()
     private let houseImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .load(systemName: "house.fill")
+        imageView.image = ImageLiterals.houseFill
         imageView.tintColor = .gray400
         return imageView
     }()
@@ -57,11 +62,24 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     private let homeCalenderView = HomeCalendarView()
-
+    private let homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
+    private let calendarDailyCollecionView = CalendarDailyCollectionView()
+    private lazy var contentScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .systemBackground
+        scrollView.showsVerticalScrollIndicator = true
+        return scrollView
+    }()
+    
     // MARK: - life cycle
     
     deinit {
         print("HomeViewController deinit")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupDelegate()
     }
     
     override func configUI() {
@@ -71,57 +89,82 @@ final class HomeViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(toolBarView)
+        view.addSubviews(toolBarView,
+                         titleLabel,
+                         houseImageView,
+                         homeGroupLabel,
+                         contentScrollView,
+                         homeGroupCollectionView,
+                         homeRuleView,
+                         homeDivider)
+        
+        contentScrollView.addSubviews(
+            homeCalenderView,
+            homeWeekCalendarCollectionView,
+            calendarDailyCollecionView
+        )
+        
         toolBarView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(76)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
-        view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(8)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(houseImageView)
         houseImageView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-        
-        view.addSubview(homeGroupLabel)
+
         homeGroupLabel.snp.makeConstraints {
             $0.leading.equalTo(houseImageView.snp.trailing).offset(4)
             $0.centerY.equalTo(houseImageView.snp.centerY)
         }
-        
-        view.addSubview(homeGroupCollectionView)
+
         homeGroupCollectionView.snp.makeConstraints {
+            $0.top.equalTo(houseImageView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(8)
-            $0.height.equalTo(94)
+            $0.height.equalTo(86)
         }
-        
-        view.addSubview(homeRuleView)
+
         homeRuleView.snp.makeConstraints {
-            $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
+            $0.top.equalTo(homeGroupCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(40)
         }
         
-        view.addSubview(homeDivider)
         homeDivider.snp.makeConstraints {
+            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(144)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(homeRuleView.snp.bottom).offset(16)
             $0.height.equalTo(2)
         }
         
-        view.addSubview(homeCalenderView)
-        homeCalenderView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+        contentScrollView.snp.makeConstraints{
             $0.top.equalTo(homeDivider.snp.bottom).offset(8)
-            // FIXME: - auto layout
-            $0.height.equalTo(116)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(toolBarView.snp.top)
+        }
+        
+        homeCalenderView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(40)
+        }
+        
+        homeWeekCalendarCollectionView.snp.makeConstraints {
+            $0.top.equalTo(homeCalenderView.snp.bottom)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(95)
+        }
+
+        calendarDailyCollecionView.snp.makeConstraints{
+            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(310)
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -138,6 +181,10 @@ final class HomeViewController: BaseViewController {
     }
     
     // MARK: - func
+    
+    private func setupDelegate(){
+        self.calendarDailyCollecionView.delegate = self
+    }
     
     private func setupToolBarGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))
@@ -160,12 +207,27 @@ final class HomeViewController: BaseViewController {
             }
         }
     }
-    
+
     // MARK: - selector
     
     @objc
     private func addTapGesture() {
         // FIXME: - 집안일 추가 뷰로 연결
         print("tap")
+    }
+}
+
+    // MARK: - Protocol
+protocol CollectionViewHeightProtocol: AnyObject {
+    func getCollectionViewHeight(cellNum: Int)
+}
+
+    // MARK: - Extension
+extension HomeViewController: CollectionViewHeightProtocol {
+    func getCollectionViewHeight(cellNum: Int) {
+        cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
+        calendarDailyCollecionView.snp.updateConstraints {
+            $0.height.equalTo(cellHeight)
+        }
     }
 }
