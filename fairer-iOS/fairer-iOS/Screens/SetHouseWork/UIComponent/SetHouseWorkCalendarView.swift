@@ -28,7 +28,7 @@ final class SetHouseWorkCalendarView: BaseUIView {
     }()
     private let chevron: UIImageView = {
         let image = UIImageView()
-        image.image = ImageLiterals.calendarChevron
+        image.image = ImageLiterals.moveToCalendarButton
         image.tintColor = .gray800
         return image
     }()

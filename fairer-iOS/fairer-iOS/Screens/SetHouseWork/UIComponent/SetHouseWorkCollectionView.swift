@@ -109,11 +109,9 @@ extension SetHouseWorkCollectionView {
                 
         if selectedDetailHouseWork.isEmpty {
             // FIXME: - 이전 페이지로 이동
-        } else if selectedDetailHouseWork.count == 1 {
-            selectedIndex = 0
         }
         
-        if selectedIndex > sender.tag {
+        if selectedIndex > sender.tag || (selectedIndex == sender.tag && sender.tag == selectedDetailHouseWork.endIndex) {
             selectedIndex -= 1
         }
     }
