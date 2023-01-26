@@ -48,6 +48,39 @@ final class SetHouseWorkViewController: BaseViewController {
         label.alpha = 0
         return label
     }()
+    private let setTimeLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "시간설정", lineHeight: 22)
+        label.textColor = .gray600
+        label.font = .title1
+        return label
+    }()
+    private let setTimeToggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.isOn = false
+        toggle.onTintColor = .blue
+        toggle.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        return toggle
+    }()
+    private let divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        return view
+    }()
+    private let setRepeatLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "반복하기", lineHeight: 22)
+        label.textColor = .gray600
+        label.font = .title1
+        return label
+    }()
+    private let setRepeatToggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.isOn = false
+        toggle.onTintColor = .blue
+        toggle.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        return toggle
+    }()
     
     // MARK: - life cycle
     
@@ -85,6 +118,37 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.bottom.equalTo(selectManagerView.snp.top).offset(-10)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(36)
+        }
+        
+        view.addSubview(setTimeLabel)
+        setTimeLabel.snp.makeConstraints {
+            $0.top.equalTo(getManagerView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(setTimeToggle)
+        setTimeToggle.snp.makeConstraints {
+            $0.centerY.equalTo(setTimeLabel.snp.centerY)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(divider)
+        divider.snp.makeConstraints {
+            $0.top.equalTo(setTimeLabel.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(2)
+        }
+        
+        view.addSubview(setRepeatLabel)
+        setRepeatLabel.snp.makeConstraints {
+            $0.top.equalTo(divider.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(setRepeatToggle)
+        setRepeatToggle.snp.makeConstraints {
+            $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
