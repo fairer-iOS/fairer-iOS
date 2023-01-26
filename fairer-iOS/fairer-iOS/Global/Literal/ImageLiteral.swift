@@ -75,6 +75,8 @@ enum ImageLiterals {
     static var settingInfo: UIImage { .load(systemName: "info.circle") }
     static var calendarChevron: UIImage { .load(name: "calendarchevron") }
     static var writeHouseWorkChevron: UIImage { .load(systemName: "chevron.right") }
+    static var spacePin: UIImage { .load(name: "pin") }
+    static var deleteButton: UIImage { .load(systemName: "xmark.circle.fill") }
     static var settingMenu: UIImage { .load(name: "menu") }
     static var selectedCalendarCell: UIImage { .load(name: "selectedCell") }
     static var locationPin: UIImage { .load(name: "locationPin") }

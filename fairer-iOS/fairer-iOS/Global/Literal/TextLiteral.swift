@@ -144,4 +144,8 @@ enum TextLiteral {
     
     static let writeHouseWorkButtonLabel = "집안일 직접 입력하기"
     
+    
+    // MARK: - SetHouseWorkCollectionViewCell
+    
+    static let setHouseWorkCollectionViewCellDefaultTimeLabel = "하루 종일"
 }
