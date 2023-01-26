@@ -55,12 +55,24 @@ final class SetHouseWorkViewController: BaseViewController {
         label.font = .title1
         return label
     }()
-    private let setTimeToggle: UISwitch = {
+    private lazy var setTimeToggle: UISwitch = {
         let toggle = UISwitch()
         toggle.isOn = false
         toggle.onTintColor = .blue
         toggle.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedTimeToggle()
+        }
+        toggle.addAction(action, for: .touchUpInside)
         return toggle
+    }()
+    private let timePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.preferredDatePickerStyle = .wheels
+        picker.datePickerMode = .time
+        picker.locale = Locale(identifier: "ko-KR")
+        picker.timeZone = .autoupdatingCurrent
+        return picker
     }()
     private let divider: UIView = {
         let view = UIView()
@@ -74,11 +86,15 @@ final class SetHouseWorkViewController: BaseViewController {
         label.font = .title1
         return label
     }()
-    private let setRepeatToggle: UISwitch = {
+    private lazy var setRepeatToggle: UISwitch = {
         let toggle = UISwitch()
         toggle.isOn = false
         toggle.onTintColor = .blue
         toggle.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedRepeatToggle()
+        }
+        toggle.addAction(action, for: .touchUpInside)
         return toggle
     }()
     
@@ -132,9 +148,16 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        view.addSubview(timePicker)
+        timePicker.snp.makeConstraints {
+            $0.top.equalTo(setTimeLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
+        }
+        
         view.addSubview(divider)
         divider.snp.makeConstraints {
-            $0.top.equalTo(setTimeLabel.snp.bottom).offset(16)
+            $0.top.equalTo(timePicker.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
@@ -214,5 +237,26 @@ final class SetHouseWorkViewController: BaseViewController {
                 self.managerToastLabel.removeFromSuperview()
             })
         })
+    }
+    
+    private func didTappedTimeToggle() {
+        if setTimeToggle.isOn {
+            timePicker.snp.updateConstraints {
+                $0.height.equalTo(196.2)
+            }
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            timePicker.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+        }
+        
+    }
+    
+    private func didTappedRepeatToggle() {
+        
     }
 }
