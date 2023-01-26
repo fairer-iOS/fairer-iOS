@@ -66,12 +66,16 @@ final class SetHouseWorkViewController: BaseViewController {
         toggle.addAction(action, for: .touchUpInside)
         return toggle
     }()
-    private let timePicker: UIDatePicker = {
+    private lazy var timePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.preferredDatePickerStyle = .wheels
         picker.datePickerMode = .time
         picker.locale = Locale(identifier: "ko-KR")
         picker.timeZone = .autoupdatingCurrent
+        let action = UIAction { [weak self] _ in
+            self?.didChangedTime()
+        }
+        picker.addAction(action, for: .valueChanged)
         return picker
     }()
     private let divider: UIView = {
@@ -258,5 +262,14 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didTappedRepeatToggle() {
         
+    }
+    
+    private func didChangedTime() {
+        let dateformatter = DateFormatter()
+        dateformatter.dateStyle = .none
+        dateformatter.timeStyle = .short
+        let date = timePicker.date.timeToKoreanString
+        // FIXME: - 모델 생성 후 CollectionView에 시간 반영
+        print(date)
     }
 }

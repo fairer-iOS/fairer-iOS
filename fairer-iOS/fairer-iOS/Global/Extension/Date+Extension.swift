@@ -56,4 +56,9 @@ extension Date {
         return Calendar.current.date(byAdding: .second, value: 604799, to: self.startOfWeek)!
     }
     
+    var timeToKoreanString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "a\n h시 m분"
+        return formatter.string(from: self)
+    }
 }
