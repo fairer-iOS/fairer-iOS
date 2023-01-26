@@ -13,7 +13,7 @@ final class HomeRuleView: BaseUIView {
     
     // MARK: - property
     
-    private let homeRuleLabel: UILabel = {
+    let homeRuleLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.homeRuleViewRuleLabel
         label.font = .caption1
@@ -33,18 +33,19 @@ final class HomeRuleView: BaseUIView {
         self.backgroundColor = .positive0
         self.layer.cornerRadius = 8
     }
-    
     override func render() {
-        self.addSubview(homeRuleLabel)
+        self.addSubviews(homeRuleLabel,homeRuleDescriptionLabel)
+        
         homeRuleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
-            $0.top.bottom.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
+            $0.height.equalTo(18)
         }
         
-        self.addSubview(homeRuleDescriptionLabel)
         homeRuleDescriptionLabel.snp.makeConstraints {
             $0.leading.equalTo(homeRuleLabel.snp.trailing).offset(16)
-            $0.top.bottom.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
+            $0.height.equalTo(18)
         }
     }
 }

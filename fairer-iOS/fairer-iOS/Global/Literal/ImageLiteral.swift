@@ -13,6 +13,7 @@ enum ImageLiterals {
     
     static var imgInfo: UIImage { .load(systemName: "info.circle.fill") }
     static var imgLogo: UIImage { .load(name: "fairerlogo") }
+    static var imgHomeLogo: UIImage { .load(name: "fairerlogoInHomeVC")}
     static var imgLogoLogin: UIImage { .load(name: "fairerlogologin") }
     static var imgLogoSplash: UIImage { .load(name: "fairerlogosplash") }
     static var imgAppleLogo: UIImage { .load(name: "applelogo") }
@@ -61,6 +62,8 @@ enum ImageLiterals {
     
     static var textFieldClearButton: UIImage { .load(name: "clearbutton") }
     static var navigationBarBackButton: UIImage { .load(name: "backbutton") }
+    static var plusWorkButton: UIImage { .load(systemName: "plus") }
+    static var moveToCalendarButton: UIImage { .load(name: "keyboard_arrow_down") }
     static var addManagerButton: UIImage { .load(name: "managerplus") }
     
     // MARK: - icon
@@ -77,6 +80,17 @@ enum ImageLiterals {
     static var deleteButton: UIImage { .load(systemName: "xmark.circle.fill") }
     static var selectManager: UIImage { .load(systemName: "checkmark.circle.fill") }
     static var deselectManager: UIImage { .load(systemName: "circle") }
+    static var settingMenu: UIImage { .load(name: "menu") }
+    static var selectedCalendarCell: UIImage { .load(name: "selectedCell") }
+    static var locationPin: UIImage { .load(name: "locationPin") }
+    static var houseFill: UIImage { .load(systemName: "house.fill") }
+    static var error: UIImage { .load(name: "error") }
+    
+    // MARK: - dot
+    
+    static var oneDot: UIImage { .load(name: "dot") }
+    static var twoDots: UIImage { .load(name: "2dot") }
+    static var threeDots: UIImage { .load(name: "3dot") }
 }
 
 extension UIImage {
