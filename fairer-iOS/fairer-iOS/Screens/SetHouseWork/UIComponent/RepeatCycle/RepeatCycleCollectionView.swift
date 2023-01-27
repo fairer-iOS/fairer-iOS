@@ -12,7 +12,8 @@ import SnapKit
 final class RepeatCycleCollectionView: BaseUIView {
     
     private let daysOfWeek: [String] = ["월", "화", "수", "목", "금", "토", "일"]
-    var selectedDaysOfWeek: [String] = []
+    private var selectedDaysOfWeek: [String] = []
+    var didSelectDaysOfWeek: (([String]) -> ())?
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 31.5
@@ -60,12 +61,12 @@ final class RepeatCycleCollectionView: BaseUIView {
 extension RepeatCycleCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedDaysOfWeek.append(daysOfWeek[indexPath.item])
-        print(selectedDaysOfWeek)
+        didSelectDaysOfWeek?(selectedDaysOfWeek)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         selectedDaysOfWeek.removeAll(where: { $0 == daysOfWeek[indexPath.item]})
-        print(selectedDaysOfWeek)
+        didSelectDaysOfWeek?(selectedDaysOfWeek)
 
     }
 }

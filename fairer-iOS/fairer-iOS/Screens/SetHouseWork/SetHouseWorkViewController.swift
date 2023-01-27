@@ -11,8 +11,6 @@ import SnapKit
 
 final class SetHouseWorkViewController: BaseViewController {
     
-    var selectedDaysOfWeek = Date().dayOfWeekToKoreanString
-    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -115,10 +113,10 @@ final class SetHouseWorkViewController: BaseViewController {
     private let repeatCycleCollectionView = RepeatCycleCollectionView()
     private lazy var repeatCycleDayLabel: UILabel = {
        let label = UILabel()
-        label.text = "매주 " + selectedDaysOfWeek + "요일에 반복해요"
+        label.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
         label.textColor = .gray400
         label.font = .body2
-        label.applyColor(to: selectedDaysOfWeek + "요일", with: .positive20)
+        label.applyColor(to: Date().dayOfWeekToKoreanString + "요일", with: .positive20)
         return label
     }()
     
@@ -127,6 +125,7 @@ final class SetHouseWorkViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didTappedRepeatCycleMenuButton()
+        didSelectDaysOfWeek()
     }
     
     override func render() {
@@ -343,6 +342,14 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle
             self?.repeatCycleMenu.isHidden = true
+        }
+    }
+    
+    private func didSelectDaysOfWeek() {
+        repeatCycleCollectionView.didSelectDaysOfWeek = { [weak self] selectedDays in
+            let selectedDaysOfWeek = selectedDays.joined(separator: ", ")
+            self?.repeatCycleDayLabel.text = "매주 " + selectedDaysOfWeek + "요일에 반복해요"
+            self?.repeatCycleDayLabel.applyColor(to: selectedDaysOfWeek + "요일", with: .positive20)
         }
     }
 }
