@@ -110,6 +110,7 @@ final class SetHouseWorkViewController: BaseViewController {
         return view
     }()
     private let repeatCycleMenu = RepeatCycleMenu()
+    private let repeatCycleCollectionView = RepeatCycleCollectionView()
     
     // MARK: - life cycle
     
@@ -163,7 +164,7 @@ final class SetHouseWorkViewController: BaseViewController {
         view.addSubview(setTimeToggle)
         setTimeToggle.snp.makeConstraints {
             $0.centerY.equalTo(setTimeLabel.snp.centerY)
-            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.trailing.equalToSuperview().inset(20)
         }
         
         view.addSubview(timePicker)
@@ -189,7 +190,7 @@ final class SetHouseWorkViewController: BaseViewController {
         view.addSubview(setRepeatToggle)
         setRepeatToggle.snp.makeConstraints {
             $0.centerY.equalTo(setRepeatLabel.snp.centerY)
-            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.trailing.equalToSuperview().inset(20)
         }
         
         view.addSubview(repeatCycleView)
@@ -205,6 +206,13 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.trailing.equalToSuperview().inset(31.5)
             $0.width.equalTo(98)
             $0.height.equalTo(76)
+        }
+        
+        view.addSubview(repeatCycleCollectionView)
+        repeatCycleCollectionView.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(56)
         }
     }
     

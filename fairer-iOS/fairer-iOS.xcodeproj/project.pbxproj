@@ -57,6 +57,7 @@
 		52136FD4298299B90022D465 /* RepeatCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD3298299B90022D465 /* RepeatCycleView.swift */; };
 		52136FD72983DE1A0022D465 /* RepeatCycleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */; };
 		52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */; };
+		52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */; };
 		522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */; };
 		522714EB297918EC006BADBC /* SetHouseWorkCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714EA297918EC006BADBC /* SetHouseWorkCalendarView.swift */; };
 		522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714EC297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift */; };
@@ -155,6 +156,7 @@
 		52136FD3298299B90022D465 /* RepeatCycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleView.swift; sourceTree = "<group>"; };
 		52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleMenu.swift; sourceTree = "<group>"; };
 		52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionViewCell.swift; sourceTree = "<group>"; };
+		52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionView.swift; sourceTree = "<group>"; };
 		522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkViewController.swift; sourceTree = "<group>"; };
 		522714EA297918EC006BADBC /* SetHouseWorkCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkCalendarView.swift; sourceTree = "<group>"; };
 		522714EC297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				52136FD3298299B90022D465 /* RepeatCycleView.swift */,
 				52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */,
 				52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */,
+				52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */,
 			);
 			path = RepeatCycle;
 			sourceTree = "<group>";
@@ -882,6 +885,7 @@
 				52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */,
 				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
+				52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */,
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,
 				911455C0297E7FD7002CCDF9 /* WorkState.swift in Sources */,

@@ -12,6 +12,7 @@ import SnapKit
 final class RepeatCycleMenu: BaseUIView {
     
     var didTappedRepeatCycleMenuButton: ((String) -> ())?
+    
     // MARK: - property
     
     private lazy var everyWeekButton: UIButton = {
