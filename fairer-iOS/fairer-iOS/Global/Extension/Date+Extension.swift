@@ -61,4 +61,11 @@ extension Date {
         formatter.dateFormat = "a\n h시 m분"
         return formatter.string(from: self)
     }
+    
+    var dayOfWeekToKoreanString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier:"ko_KR")
+        formatter.dateFormat = "E"
+        return formatter.string(from: self)
+    }
 }

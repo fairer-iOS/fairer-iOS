@@ -11,6 +11,8 @@ import SnapKit
 
 final class SetHouseWorkViewController: BaseViewController {
     
+    var selectedDaysOfWeek = Date().dayOfWeekToKoreanString
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -111,6 +113,14 @@ final class SetHouseWorkViewController: BaseViewController {
     }()
     private let repeatCycleMenu = RepeatCycleMenu()
     private let repeatCycleCollectionView = RepeatCycleCollectionView()
+    private lazy var repeatCycleDayLabel: UILabel = {
+       let label = UILabel()
+        label.text = "매주 " + selectedDaysOfWeek + "요일에 반복해요"
+        label.textColor = .gray400
+        label.font = .body2
+        label.applyColor(to: selectedDaysOfWeek + "요일", with: .positive20)
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -202,7 +212,7 @@ final class SetHouseWorkViewController: BaseViewController {
         
         view.addSubview(repeatCycleCollectionView)
         repeatCycleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(repeatCycleView.snp.bottom).offset(8)
+            $0.top.equalTo(repeatCycleView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(56)
         }
@@ -213,6 +223,12 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.trailing.equalToSuperview().inset(31.5)
             $0.width.equalTo(98)
             $0.height.equalTo(76)
+        }
+        
+        view.addSubview(repeatCycleDayLabel)
+        repeatCycleDayLabel.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(8)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
