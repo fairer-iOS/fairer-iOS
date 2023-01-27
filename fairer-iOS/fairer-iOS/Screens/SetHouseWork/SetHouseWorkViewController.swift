@@ -109,8 +109,14 @@ final class SetHouseWorkViewController: BaseViewController {
         view.repeatCycleButton.addAction(action, for: .touchUpInside)
         return view
     }()
+    private let repeatCycleMenu = RepeatCycleMenu()
     
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        didTappedRepeatCycleMenuButton()
+    }
     
     override func render() {
         view.addSubview(setHouseWorkCalendarView)
@@ -191,6 +197,14 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.top.equalTo(setRepeatLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(31.5)
             $0.height.equalTo(36)
+        }
+        
+        view.addSubview(repeatCycleMenu)
+        repeatCycleMenu.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleView.snp.bottom)
+            $0.trailing.equalToSuperview().inset(31.5)
+            $0.width.equalTo(98)
+            $0.height.equalTo(76)
         }
     }
     
@@ -289,6 +303,14 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func didTappedRepeatCycleButton() {
-        print("누름")
+        repeatCycleMenu.isHidden.toggle()
+    }
+    
+    private func didTappedRepeatCycleMenuButton() {
+        repeatCycleMenu.didTappedRepeatCycleMenuButton = { [weak self] repeatCycle in
+            self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle
+            self?.repeatCycleMenu.isHidden = true
+        }
+        
     }
 }

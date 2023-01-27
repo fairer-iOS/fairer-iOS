@@ -21,7 +21,7 @@ final class RepeatCycleView: BaseUIView {
         return label
     }()
     let repeatCycleButton = UIButton()
-    private let repeatCycleButtonLabel: UILabel = {
+    let repeatCycleButtonLabel: UILabel = {
         let label = UILabel()
         label.text = "매주"
         label.textColor = .gray300
