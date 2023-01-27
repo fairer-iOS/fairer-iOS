@@ -58,6 +58,7 @@ final class RepeatCycleCollectionView: BaseUIView {
 
 extension RepeatCycleCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(daysOfWeek[indexPath.item])
     }
 }
 

@@ -11,6 +11,16 @@ import SnapKit
 
 final class RepeatCycleCollectionViewCell: BaseCollectionViewCell {
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                setSelectedCellLayer()
+            } else {
+                setShadowCellLayer()
+            }
+        }
+    }
+    
     // MARK: - property
     
     let weekOfDayLabel: UILabel = {
@@ -34,5 +44,19 @@ final class RepeatCycleCollectionViewCell: BaseCollectionViewCell {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.gray200.cgColor
         self.layer.cornerRadius = 6
+    }
+    
+    // MARK: - func
+    
+    private func setSelectedCellLayer() {
+        self.backgroundColor = .positive10
+        self.layer.borderColor = UIColor.blue.cgColor
+        self.weekOfDayLabel.textColor = .blue
+    }
+    
+    private func setShadowCellLayer() {
+        self.backgroundColor = .white
+        self.layer.borderColor = UIColor.gray200.cgColor
+        self.weekOfDayLabel.textColor = .gray600
     }
 }
