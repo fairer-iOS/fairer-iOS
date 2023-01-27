@@ -15,7 +15,7 @@ final class RepeatCycleCollectionView: BaseUIView {
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 31.5
-        static let collectionVerticalSpacing: CGFloat = 8
+        static let collectionVerticalSpacing: CGFloat = 0
         static let cellLength: CGFloat = 40
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,

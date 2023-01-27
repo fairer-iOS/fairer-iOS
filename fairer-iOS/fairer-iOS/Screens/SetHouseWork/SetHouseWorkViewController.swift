@@ -200,19 +200,19 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.height.equalTo(36)
         }
         
+        view.addSubview(repeatCycleCollectionView)
+        repeatCycleCollectionView.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleView.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(56)
+        }
+        
         view.addSubview(repeatCycleMenu)
         repeatCycleMenu.snp.makeConstraints {
             $0.top.equalTo(repeatCycleView.snp.bottom)
             $0.trailing.equalToSuperview().inset(31.5)
             $0.width.equalTo(98)
             $0.height.equalTo(76)
-        }
-        
-        view.addSubview(repeatCycleCollectionView)
-        repeatCycleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(repeatCycleView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(56)
         }
     }
     
@@ -316,6 +316,15 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didTappedRepeatCycleMenuButton() {
         repeatCycleMenu.didTappedRepeatCycleMenuButton = { [weak self] repeatCycle in
+            if repeatCycle == "매달" {
+                self?.repeatCycleCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+            } else {
+                self?.repeatCycleCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(56)
+                }
+            }
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle
             self?.repeatCycleMenu.isHidden = true
         }
