@@ -311,6 +311,5 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle
             self?.repeatCycleMenu.isHidden = true
         }
-        
     }
 }
