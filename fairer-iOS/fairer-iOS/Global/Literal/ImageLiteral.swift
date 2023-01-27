@@ -65,6 +65,7 @@ enum ImageLiterals {
     static var plusWorkButton: UIImage { .load(systemName: "plus") }
     static var moveToCalendarButton: UIImage { .load(name: "keyboard_arrow_down") }
     static var addManagerButton: UIImage { .load(name: "managerplus") }
+    static var repeatCycleChevronButton: UIImage { .load(name: "repeatcyclechevron") }
     
     // MARK: - icon
     

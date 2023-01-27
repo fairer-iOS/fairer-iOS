@@ -101,6 +101,14 @@ final class SetHouseWorkViewController: BaseViewController {
         toggle.addAction(action, for: .touchUpInside)
         return toggle
     }()
+    private lazy var repeatCycleView: RepeatCycleView = {
+        let view = RepeatCycleView()
+        let action = UIAction { [weak self] _ in
+            self?.didTappedRepeatCycleButton()
+        }
+        view.repeatCycleButton.addAction(action, for: .touchUpInside)
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -142,7 +150,7 @@ final class SetHouseWorkViewController: BaseViewController {
         
         view.addSubview(setTimeLabel)
         setTimeLabel.snp.makeConstraints {
-            $0.top.equalTo(getManagerView.snp.bottom).offset(16)
+            $0.top.equalTo(getManagerView.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -161,14 +169,14 @@ final class SetHouseWorkViewController: BaseViewController {
         
         view.addSubview(divider)
         divider.snp.makeConstraints {
-            $0.top.equalTo(timePicker.snp.bottom).offset(16)
+            $0.top.equalTo(timePicker.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
         
         view.addSubview(setRepeatLabel)
         setRepeatLabel.snp.makeConstraints {
-            $0.top.equalTo(divider.snp.bottom).offset(16)
+            $0.top.equalTo(divider.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -176,6 +184,13 @@ final class SetHouseWorkViewController: BaseViewController {
         setRepeatToggle.snp.makeConstraints {
             $0.centerY.equalTo(setRepeatLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(repeatCycleView)
+        repeatCycleView.snp.makeConstraints {
+            $0.top.equalTo(setRepeatLabel.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.trailing.equalToSuperview().inset(31.5)
+            $0.height.equalTo(36)
         }
     }
     
@@ -271,5 +286,9 @@ final class SetHouseWorkViewController: BaseViewController {
         let date = timePicker.date.timeToKoreanString
         // FIXME: - 모델 생성 후 CollectionView에 시간 반영
         print(date)
+    }
+    
+    private func didTappedRepeatCycleButton() {
+        print("누름")
     }
 }
