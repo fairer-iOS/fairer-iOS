@@ -267,26 +267,20 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.height.equalTo(0)
             }
             
-            if HouseWork.mockHouseWork[selectedHouseWorkIndex].time == "하루 종일" {
-                self?.setTimeToggle.isOn = false
-                self?.timePicker.snp.updateConstraints {
-                    $0.height.equalTo(0)
-                }
-            } else {
-                self?.setTimeToggle.isOn = true
-                self?.timePicker.snp.updateConstraints {
-                    $0.height.equalTo(196.2)
-                }
-            }
+            self?.isTimeSelected(selectedHouseWorkIndex)
         }
     }
     
     private func didDeleteHouseWork() {
         setHouseWorkCollectionView.didDeleteHouseWork = { [weak self] deletedHouseWorkIndex in
-            if deletedHouseWorkIndex == HouseWork.mockHouseWork.endIndex {
+            if HouseWork.mockHouseWork.count == 0 {
+                // FIXME: - 이전 페이지로 이동
+            } else if deletedHouseWorkIndex == HouseWork.mockHouseWork.endIndex {
                 self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[deletedHouseWorkIndex - 1].manager
+                self?.isTimeSelected(deletedHouseWorkIndex - 1)
             } else {
                 self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[deletedHouseWorkIndex].manager
+                self?.isTimeSelected(deletedHouseWorkIndex)
             }
         }
     }
@@ -432,5 +426,19 @@ final class SetHouseWorkViewController: BaseViewController {
     private func updateToMonthToday() {
         repeatCycleDayLabel.text = "매달 " + Date().singleDayToKoreanString + "에 반복해요"
         repeatCycleDayLabel.applyColor(to: Date().singleDayToKoreanString, with: .positive20)
+    }
+    
+    private func isTimeSelected(_ houseWork: Int) {
+        if HouseWork.mockHouseWork[houseWork].time == "하루 종일" {
+            setTimeToggle.isOn = false
+            timePicker.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+        } else {
+            setTimeToggle.isOn = true
+            timePicker.snp.updateConstraints {
+                $0.height.equalTo(196.2)
+            }
+        }
     }
 }
