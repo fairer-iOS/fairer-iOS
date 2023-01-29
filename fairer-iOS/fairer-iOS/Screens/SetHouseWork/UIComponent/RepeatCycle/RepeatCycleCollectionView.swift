@@ -11,13 +11,18 @@ import SnapKit
 
 final class RepeatCycleCollectionView: BaseUIView {
     
+    var selectedIndex: Int?
     private let daysOfWeek: [String] = ["월", "화", "수", "목", "금", "토", "일"]
-    private var selectedDaysOfWeek: [String] = []
+    var selectedDaysOfWeek: [String] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     var didSelectDaysOfWeek: (([String]) -> ())?
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 31.5
-        static let collectionVerticalSpacing: CGFloat = 8
+        static let collectionVerticalSpacing: CGFloat = 0
         static let cellLength: CGFloat = 40
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
@@ -60,6 +65,7 @@ final class RepeatCycleCollectionView: BaseUIView {
 
 extension RepeatCycleCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.item
         selectedDaysOfWeek.append(daysOfWeek[indexPath.item])
         didSelectDaysOfWeek?(selectedDaysOfWeek)
     }
@@ -67,7 +73,6 @@ extension RepeatCycleCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         selectedDaysOfWeek.removeAll(where: { $0 == daysOfWeek[indexPath.item]})
         didSelectDaysOfWeek?(selectedDaysOfWeek)
-
     }
 }
 
@@ -80,6 +85,11 @@ extension RepeatCycleCollectionView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RepeatCycleCollectionViewCell.className, for: indexPath) as? RepeatCycleCollectionViewCell else {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
+        }
+        
+        if selectedDaysOfWeek.contains(daysOfWeek[indexPath.item]) {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
         cell.weekOfDayLabel.text = daysOfWeek[indexPath.item]

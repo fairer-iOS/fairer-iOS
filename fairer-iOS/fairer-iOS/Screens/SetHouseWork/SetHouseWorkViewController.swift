@@ -211,9 +211,9 @@ final class SetHouseWorkViewController: BaseViewController {
         
         view.addSubview(repeatCycleCollectionView)
         repeatCycleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(repeatCycleView.snp.bottom)
+            $0.top.equalTo(repeatCycleView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(56)
+            $0.height.equalTo(40)
         }
         
         view.addSubview(repeatCycleMenu)
@@ -226,7 +226,7 @@ final class SetHouseWorkViewController: BaseViewController {
         
         view.addSubview(repeatCycleDayLabel)
         repeatCycleDayLabel.snp.makeConstraints {
-            $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(8)
+            $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
@@ -335,10 +335,17 @@ final class SetHouseWorkViewController: BaseViewController {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
+                
+                self?.repeatCycleDayLabel.text = "매달 " + Date().singleDayToKoreanString + "에 반복해요"
+                self?.repeatCycleDayLabel.applyColor(to: Date().singleDayToKoreanString, with: .positive20)
+                self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             } else {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
-                    $0.height.equalTo(56)
+                    $0.height.equalTo(40)
                 }
+                
+                self?.repeatCycleDayLabel.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
+                self?.repeatCycleDayLabel.applyColor(to: Date().dayOfWeekToKoreanString, with: .positive20)
             }
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle
             self?.repeatCycleMenu.isHidden = true

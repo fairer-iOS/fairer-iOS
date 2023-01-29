@@ -68,4 +68,11 @@ extension Date {
         formatter.dateFormat = "E"
         return formatter.string(from: self)
     }
+    
+    var singleDayToKoreanString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier:"ko_KR")
+        formatter.dateFormat = "d일"
+        return formatter.string(from: self)
+    }
 }
