@@ -11,6 +11,8 @@ import SnapKit
 
 final class SetHouseWorkCollectionView: BaseUIView {
     
+    var didTappedHouseWork: ((Int) -> ())?
+    
     var selectedIndex: Int = 0 {
         didSet {
             collectionView.reloadData()
@@ -68,6 +70,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
         isSelectedDetailHouseWork.append(selectedDetailHouseWork[selectedIndex].name)
+        didTappedHouseWork?(selectedIndex)
     }
 }
 
@@ -105,6 +108,9 @@ extension SetHouseWorkCollectionView {
         collectionView.deleteItems(at: [IndexPath.init(item: sender.tag, section: 0)])
         isSelectedDetailHouseWork.removeAll(where: { $0 == selectedDetailHouseWork[sender.tag].name })
         selectedDetailHouseWork.remove(at: sender.tag)
+        HouseWork.mockHouseWork.remove(at: sender.tag)
+        
+        print(HouseWork.mockHouseWork)
                 
         if selectedDetailHouseWork.isEmpty {
             // FIXME: - 이전 페이지로 이동

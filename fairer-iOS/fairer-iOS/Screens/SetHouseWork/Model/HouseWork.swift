@@ -12,12 +12,12 @@ struct HouseWork {
     let date: Date
     let time: Date?
     let space: String
-    let manager: [String]
+    var manager: [String]
     let repeatCycle: String?
     let repeatPattern: String?
     
     #if DEBUG
-    static let mockHouseWork: [HouseWork] = [
+    static var mockHouseWork: [HouseWork] = [
         HouseWork(name: "창 청소", date: Date(), time: nil, space: "거실", manager: ["고가혜"], repeatCycle: nil, repeatPattern: nil),
         HouseWork(name: "거실 청소", date: Date(), time: nil, space: "거실", manager: ["고가혜"], repeatCycle: nil, repeatPattern: nil),
         HouseWork(name: "물건 정리정돈", date: Date(), time: nil, space: "거실", manager: ["고가혜"], repeatCycle: nil, repeatPattern: nil),

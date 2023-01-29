@@ -11,6 +11,8 @@ import SnapKit
 
 final class SetHouseWorkViewController: BaseViewController {
     
+    private var selectedHouseWorkIndex: Int = 0
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -123,6 +125,7 @@ final class SetHouseWorkViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        didTappedHouseWork()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
     }
@@ -254,6 +257,17 @@ final class SetHouseWorkViewController: BaseViewController {
         selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
     
+    private func didTappedHouseWork() {
+        setHouseWorkCollectionView.didTappedHouseWork = { [weak self] selectedHouseWorkIndex in
+            self?.selectedHouseWorkIndex = selectedHouseWorkIndex
+            self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[selectedHouseWorkIndex].manager
+            
+            self?.selectManagerView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+        }
+    }
+    
     private func didTappedCancelButton() {
         selectManagerView.snp.updateConstraints {
             $0.height.equalTo(0)
@@ -277,6 +291,7 @@ final class SetHouseWorkViewController: BaseViewController {
             }, completion: nil)
             
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
+            HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
         } else {
             showToast()
         }
