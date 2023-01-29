@@ -311,23 +311,15 @@ final class SetHouseWorkViewController: BaseViewController {
             } else if deletedHouseWorkIndex == HouseWork.mockHouseWork.endIndex && deletedHouseWorkIndex == self?.selectedHouseWorkIndex ?? 0 {
                 self?.selectedHouseWorkIndex -= 1
                 self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
-                self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[deletedHouseWorkIndex - 1].manager
-                self?.isTimeSelected(deletedHouseWorkIndex - 1)
-                self?.isRepeatSelected(deletedHouseWorkIndex - 1)
+                self?.updateManagerTimeRepeat(deletedHouseWorkIndex - 1)
             } else if deletedHouseWorkIndex < self?.selectedHouseWorkIndex ?? 0 {
                 self?.selectedHouseWorkIndex -= 1
                 self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
-                self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].manager
-                self?.isTimeSelected(self?.selectedHouseWorkIndex ?? 0)
-                self?.isRepeatSelected(self?.selectedHouseWorkIndex ?? 0)
+                self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
             } else if deletedHouseWorkIndex == self?.selectedHouseWorkIndex {
-                self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[deletedHouseWorkIndex].manager
-                self?.isTimeSelected(deletedHouseWorkIndex)
-                self?.isRepeatSelected(deletedHouseWorkIndex)
+                self?.updateManagerTimeRepeat(deletedHouseWorkIndex)
             } else {
-                self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].manager
-                self?.isTimeSelected(self?.selectedHouseWorkIndex ?? 0)
-                self?.isRepeatSelected(self?.selectedHouseWorkIndex ?? 0)
+                self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
             }
         }
     }
@@ -533,5 +525,11 @@ final class SetHouseWorkViewController: BaseViewController {
                 updateToMonthToday()
             }
         }
+    }
+    
+    private func updateManagerTimeRepeat(_ houseWork: Int) {
+        getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
+        isTimeSelected(houseWork)
+        isRepeatSelected(houseWork)
     }
 }
