@@ -18,9 +18,8 @@ final class SetHouseWorkCollectionView: BaseUIView {
     }
     
     // FIXME: - SelectHouseWorkVC에서 선택한 집안일 목록 연결
-    private var selectedDetailHouseWork = ["창 청소", "거실 청소", "물건 정리정돈", "환기 시키기", "빨래 돌리기", "빨래 개기", "세탁기 청소"]
-    
-    lazy var isSelectedDetailHouseWork = [selectedDetailHouseWork[selectedIndex]]
+    private var selectedDetailHouseWork = HouseWork.mockHouseWork
+    lazy var isSelectedDetailHouseWork = [selectedDetailHouseWork[selectedIndex].name]
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -68,7 +67,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
 extension SetHouseWorkCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        isSelectedDetailHouseWork.append(selectedDetailHouseWork[selectedIndex])
+        isSelectedDetailHouseWork.append(selectedDetailHouseWork[selectedIndex].name)
     }
 }
 
@@ -83,7 +82,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if isSelectedDetailHouseWork.contains(selectedDetailHouseWork[indexPath.item]) {
+        if isSelectedDetailHouseWork.contains(selectedDetailHouseWork[indexPath.item].name) {
             cell.houseWorkLabel.textColor = .blue
         }
         
@@ -92,7 +91,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
-        cell.houseWorkLabel.text = selectedDetailHouseWork[indexPath.row]
+        cell.houseWorkLabel.text = selectedDetailHouseWork[indexPath.row].name
         
         cell.deleteButton.tag = indexPath.item
         cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(sender:)), for: .touchUpInside)
@@ -104,7 +103,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
 extension SetHouseWorkCollectionView {
     @objc func didTappedDeleteButton(sender : UIButton) {
         collectionView.deleteItems(at: [IndexPath.init(item: sender.tag, section: 0)])
-        isSelectedDetailHouseWork.removeAll(where: { $0 == selectedDetailHouseWork[sender.tag] })
+        isSelectedDetailHouseWork.removeAll(where: { $0 == selectedDetailHouseWork[sender.tag].name })
         selectedDetailHouseWork.remove(at: sender.tag)
                 
         if selectedDetailHouseWork.isEmpty {
