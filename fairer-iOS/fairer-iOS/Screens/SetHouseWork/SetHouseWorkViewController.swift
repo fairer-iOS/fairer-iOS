@@ -150,20 +150,6 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.height.equalTo(120)
         }
         
-        view.addSubview(selectManagerView)
-        selectManagerView.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(0)
-        }
-        
-        view.addSubview(managerToastLabel)
-        managerToastLabel.snp.makeConstraints {
-            $0.bottom.equalTo(selectManagerView.snp.top).offset(-10)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(36)
-        }
-        
         view.addSubview(setTimeLabel)
         setTimeLabel.snp.makeConstraints {
             $0.top.equalTo(getManagerView.snp.bottom).offset(SizeLiteral.componentPadding)
@@ -228,6 +214,20 @@ final class SetHouseWorkViewController: BaseViewController {
         repeatCycleDayLabel.snp.makeConstraints {
             $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(selectManagerView)
+        selectManagerView.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(0)
+        }
+        
+        view.addSubview(managerToastLabel)
+        managerToastLabel.snp.makeConstraints {
+            $0.bottom.equalTo(selectManagerView.snp.top).offset(-10)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(36)
         }
     }
     
