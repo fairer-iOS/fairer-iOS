@@ -113,10 +113,8 @@ final class SetHouseWorkViewController: BaseViewController {
     private let repeatCycleCollectionView = RepeatCycleCollectionView()
     private lazy var repeatCycleDayLabel: UILabel = {
         let label = UILabel()
-        label.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
         label.textColor = .gray400
         label.font = .body2
-        label.applyColor(to: Date().dayOfWeekToKoreanString + "요일", with: .positive20)
         label.isHidden = true
         return label
     }()
@@ -381,7 +379,7 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didSelectDaysOfWeek() {
         repeatCycleCollectionView.didSelectDaysOfWeek = { [weak self] selectedDays in
-            let selectedDaysOfWeek = selectedDays.joined(separator: ", ")
+            let selectedDaysOfWeek = selectedDays.isEmpty ? Date().dayOfWeekToKoreanString : selectedDays.joined(separator: ", ")
             self?.repeatCycleDayLabel.text = "매주 " + selectedDaysOfWeek + "요일에 반복해요"
             self?.repeatCycleDayLabel.applyColor(to: selectedDaysOfWeek + "요일", with: .positive20)
         }
@@ -389,7 +387,7 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func updateToWeekToday() {
         repeatCycleDayLabel.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
-        repeatCycleDayLabel.applyColor(to: Date().dayOfWeekToKoreanString, with: .positive20)
+        repeatCycleDayLabel.applyColor(to: Date().dayOfWeekToKoreanString + "요일", with: .positive20)
         repeatCycleCollectionView.selectedDaysOfWeek = []
     }
     
