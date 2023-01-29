@@ -12,6 +12,7 @@ import SnapKit
 final class RepeatCycleCollectionView: BaseUIView {
     
     var selectedIndex: Int?
+    var selectedHouseWorkIndex: Int = 0
     private let daysOfWeek: [String] = ["월", "화", "수", "목", "금", "토", "일"]
     var selectedDaysOfWeek: [String] = [] {
         didSet {
@@ -41,7 +42,7 @@ final class RepeatCycleCollectionView: BaseUIView {
         flowLayout.minimumInteritemSpacing = 5.33
         return flowLayout
     }()
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
@@ -87,9 +88,11 @@ extension RepeatCycleCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if selectedDaysOfWeek.contains(daysOfWeek[indexPath.item]) {
-            cell.isSelected = true
-            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+        if let houseWorkPattern = HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern {
+            if houseWorkPattern.contains(daysOfWeek[indexPath.item]) {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            }
         }
         
         cell.weekOfDayLabel.text = daysOfWeek[indexPath.item]

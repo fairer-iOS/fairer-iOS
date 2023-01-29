@@ -72,7 +72,7 @@ extension Date {
     var singleDayToKoreanString: String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier:"ko_KR")
-        formatter.dateFormat = "d일"
+        formatter.dateFormat = "d"
         return formatter.string(from: self)
     }
 }

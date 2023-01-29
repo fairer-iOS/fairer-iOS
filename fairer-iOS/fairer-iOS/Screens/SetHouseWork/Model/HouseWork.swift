@@ -13,8 +13,8 @@ struct HouseWork {
     var time: String
     let space: String
     var manager: [String]
-    let repeatCycle: String?
-    let repeatPattern: String?
+    var repeatCycle: String?
+    var repeatPattern: [String]?
     
     #if DEBUG
     static var mockHouseWork: [HouseWork] = [
