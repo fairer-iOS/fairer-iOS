@@ -75,7 +75,7 @@ final class SetHouseWorkViewController: BaseViewController {
         picker.locale = Locale(identifier: "ko-KR")
         picker.timeZone = .autoupdatingCurrent
         let action = UIAction { [weak self] _ in
-            self?.didChangedTime()
+            self?.didTimeChanged()
         }
         picker.addAction(action, for: .valueChanged)
         return picker
@@ -126,6 +126,7 @@ final class SetHouseWorkViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didTappedHouseWork()
+        didDeleteHouseWork()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
     }
@@ -268,6 +269,16 @@ final class SetHouseWorkViewController: BaseViewController {
         }
     }
     
+    private func didDeleteHouseWork() {
+        setHouseWorkCollectionView.didDeleteHouseWork = { [weak self] deletedHouseWorkIndex in
+            if deletedHouseWorkIndex == HouseWork.mockHouseWork.endIndex {
+                self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[deletedHouseWorkIndex - 1].manager
+            } else {
+                self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[deletedHouseWorkIndex].manager
+            }
+        }
+    }
+    
     private func didTappedCancelButton() {
         selectManagerView.snp.updateConstraints {
             $0.height.equalTo(0)
@@ -359,13 +370,13 @@ final class SetHouseWorkViewController: BaseViewController {
         }
     }
     
-    private func didChangedTime() {
+    private func didTimeChanged() {
         let dateformatter = DateFormatter()
         dateformatter.dateStyle = .none
         dateformatter.timeStyle = .short
-        let date = timePicker.date.timeToKoreanString
-        // FIXME: - 모델 생성 후 CollectionView에 시간 반영
-        print(date)
+        let time = timePicker.date.timeToKoreanString
+        HouseWork.mockHouseWork[selectedHouseWorkIndex].time = time
+        setHouseWorkCollectionView.collectionView.reloadData()
     }
     
     private func didTappedRepeatCycleButton() {

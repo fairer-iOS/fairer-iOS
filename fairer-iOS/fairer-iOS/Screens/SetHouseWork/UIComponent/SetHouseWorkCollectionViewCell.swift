@@ -23,11 +23,12 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    private let timeLabel: UILabel = {
+    let timeLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel, lineHeight: 18)
         label.textColor = .gray700
         label.font = .caption1
+        label.numberOfLines = 0
         return label
     }()
     lazy var deleteButton: UIButton = {

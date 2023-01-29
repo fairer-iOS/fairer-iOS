@@ -12,9 +12,6 @@ import SnapKit
 final class GetManagerCollectionView: BaseUIView {
     
     // FIXME: - 담당자 리스트 받아오기
-//    var selectedMemberList: [String] = ["고가혜"] {
-//        didSet { collectionView.reloadData() }
-//    }
     var selectedMemberList: [String] = HouseWork.mockHouseWork[0].manager {
         didSet { collectionView.reloadData() }
     }

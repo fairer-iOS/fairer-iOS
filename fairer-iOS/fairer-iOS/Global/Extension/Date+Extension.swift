@@ -58,7 +58,7 @@ extension Date {
     
     var timeToKoreanString: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "a\n h시 m분"
+        formatter.dateFormat = "a\nh시 m분"
         return formatter.string(from: self)
     }
     
