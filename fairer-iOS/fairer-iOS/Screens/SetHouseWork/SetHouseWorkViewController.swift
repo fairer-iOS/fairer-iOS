@@ -301,20 +301,20 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didDeleteHouseWork() {
         setHouseWorkCollectionView.didDeleteHouseWork = { [weak self] deletedHouseWorkIndex in
-            print(self?.selectedHouseWorkIndex)
-            print(deletedHouseWorkIndex)
             if HouseWork.mockHouseWork.count == 0 {
                 // FIXME: - 이전 페이지로 이동
             } else if deletedHouseWorkIndex == HouseWork.mockHouseWork.endIndex && deletedHouseWorkIndex == self?.selectedHouseWorkIndex ?? 0 {
+                self?.selectedHouseWorkIndex -= 1
+                self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
                 self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[deletedHouseWorkIndex - 1].manager
                 self?.isTimeSelected(deletedHouseWorkIndex - 1)
                 self?.isRepeatSelected(deletedHouseWorkIndex - 1)
-                self?.selectedHouseWorkIndex -= 1
             } else if deletedHouseWorkIndex < self?.selectedHouseWorkIndex ?? 0 {
-                self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[(self?.selectedHouseWorkIndex ?? 0) - 1].manager
-                self?.isTimeSelected((self?.selectedHouseWorkIndex ?? 0) - 1)
-                self?.isRepeatSelected((self?.selectedHouseWorkIndex ?? 0) - 1)
                 self?.selectedHouseWorkIndex -= 1
+                self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
+                self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].manager
+                self?.isTimeSelected(self?.selectedHouseWorkIndex ?? 0)
+                self?.isRepeatSelected(self?.selectedHouseWorkIndex ?? 0)
             } else if deletedHouseWorkIndex == self?.selectedHouseWorkIndex {
                 self?.getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[deletedHouseWorkIndex].manager
                 self?.isTimeSelected(deletedHouseWorkIndex)
@@ -519,7 +519,6 @@ final class SetHouseWorkViewController: BaseViewController {
             
             repeatCycleCollectionView.selectedHouseWorkIndex = houseWork
             repeatCycleCollectionView.collectionView.reloadData()
-            print(selectedHouseWorkIndex)
         }
     }
 }
