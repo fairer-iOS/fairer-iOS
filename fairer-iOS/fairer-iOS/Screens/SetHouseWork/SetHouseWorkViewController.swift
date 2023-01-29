@@ -112,11 +112,12 @@ final class SetHouseWorkViewController: BaseViewController {
     private let repeatCycleMenu = RepeatCycleMenu()
     private let repeatCycleCollectionView = RepeatCycleCollectionView()
     private lazy var repeatCycleDayLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
         label.textColor = .gray400
         label.font = .body2
         label.applyColor(to: Date().dayOfWeekToKoreanString + "요일", with: .positive20)
+        label.isHidden = true
         return label
     }()
     
@@ -192,14 +193,14 @@ final class SetHouseWorkViewController: BaseViewController {
         repeatCycleView.snp.makeConstraints {
             $0.top.equalTo(setRepeatLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(31.5)
-            $0.height.equalTo(36)
+            $0.height.equalTo(0)
         }
         
         view.addSubview(repeatCycleCollectionView)
         repeatCycleCollectionView.snp.makeConstraints {
             $0.top.equalTo(repeatCycleView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(40)
+            $0.height.equalTo(0)
         }
         
         view.addSubview(repeatCycleMenu)
@@ -313,7 +314,38 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func didTappedRepeatToggle() {
-        
+        if setRepeatToggle.isOn {
+            repeatCycleView.snp.updateConstraints {
+                $0.height.equalTo(36)
+            }
+            repeatCycleView.repeatCycleButton.isHidden = false
+            repeatCycleView.repeatCycleLabel.isHidden = false
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(40)
+            }
+            repeatCycleDayLabel.isHidden = false
+            repeatCycleDayLabel.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
+            repeatCycleDayLabel.applyColor(to: Date().dayOfWeekToKoreanString, with: .positive20)
+            repeatCycleCollectionView.selectedDaysOfWeek = []
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            repeatCycleView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+            repeatCycleView.repeatCycleButton.isHidden = true
+            repeatCycleView.repeatCycleLabel.isHidden = true
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+            repeatCycleDayLabel.isHidden = true
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
     }
     
     private func didChangedTime() {
@@ -338,7 +370,6 @@ final class SetHouseWorkViewController: BaseViewController {
                 
                 self?.repeatCycleDayLabel.text = "매달 " + Date().singleDayToKoreanString + "에 반복해요"
                 self?.repeatCycleDayLabel.applyColor(to: Date().singleDayToKoreanString, with: .positive20)
-                self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             } else {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
@@ -346,6 +377,7 @@ final class SetHouseWorkViewController: BaseViewController {
                 
                 self?.repeatCycleDayLabel.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
                 self?.repeatCycleDayLabel.applyColor(to: Date().dayOfWeekToKoreanString, with: .positive20)
+                self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             }
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle
             self?.repeatCycleMenu.isHidden = true

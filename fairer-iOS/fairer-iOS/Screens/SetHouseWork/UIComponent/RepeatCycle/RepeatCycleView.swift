@@ -13,14 +13,19 @@ final class RepeatCycleView: BaseUIView {
     
     // MARK: - property
     
-    private let repeatCycleLabel: UILabel = {
+    let repeatCycleLabel: UILabel = {
         let label = UILabel()
         label.text = "반복주기"
         label.textColor = .gray600
         label.font = .title2
+        label.isHidden = true
         return label
     }()
-    let repeatCycleButton = UIButton()
+    let repeatCycleButton: UIButton = {
+        let button = UIButton()
+        button.isHidden = true
+        return button
+    }()
     let repeatCycleButtonLabel: UILabel = {
         let label = UILabel()
         label.text = "매주"
