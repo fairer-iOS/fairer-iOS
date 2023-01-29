@@ -266,6 +266,18 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.selectManagerView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
+            
+            if HouseWork.mockHouseWork[selectedHouseWorkIndex].time == "하루 종일" {
+                self?.setTimeToggle.isOn = false
+                self?.timePicker.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+            } else {
+                self?.setTimeToggle.isOn = true
+                self?.timePicker.snp.updateConstraints {
+                    $0.height.equalTo(196.2)
+                }
+            }
         }
     }
     
