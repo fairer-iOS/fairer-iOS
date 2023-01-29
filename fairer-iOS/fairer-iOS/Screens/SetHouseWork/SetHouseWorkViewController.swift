@@ -324,9 +324,7 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.height.equalTo(40)
             }
             repeatCycleDayLabel.isHidden = false
-            repeatCycleDayLabel.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
-            repeatCycleDayLabel.applyColor(to: Date().dayOfWeekToKoreanString, with: .positive20)
-            repeatCycleCollectionView.selectedDaysOfWeek = []
+            updateToWeekToday()
             
             UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
                 self.view.layoutIfNeeded()
@@ -368,16 +366,13 @@ final class SetHouseWorkViewController: BaseViewController {
                     $0.height.equalTo(0)
                 }
                 
-                self?.repeatCycleDayLabel.text = "매달 " + Date().singleDayToKoreanString + "에 반복해요"
-                self?.repeatCycleDayLabel.applyColor(to: Date().singleDayToKoreanString, with: .positive20)
+                self?.updateToMonthToday()
             } else {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }
                 
-                self?.repeatCycleDayLabel.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
-                self?.repeatCycleDayLabel.applyColor(to: Date().dayOfWeekToKoreanString, with: .positive20)
-                self?.repeatCycleCollectionView.selectedDaysOfWeek = []
+                self?.updateToWeekToday()
             }
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle
             self?.repeatCycleMenu.isHidden = true
@@ -390,5 +385,16 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.repeatCycleDayLabel.text = "매주 " + selectedDaysOfWeek + "요일에 반복해요"
             self?.repeatCycleDayLabel.applyColor(to: selectedDaysOfWeek + "요일", with: .positive20)
         }
+    }
+    
+    private func updateToWeekToday() {
+        repeatCycleDayLabel.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
+        repeatCycleDayLabel.applyColor(to: Date().dayOfWeekToKoreanString, with: .positive20)
+        repeatCycleCollectionView.selectedDaysOfWeek = []
+    }
+    
+    private func updateToMonthToday() {
+        repeatCycleDayLabel.text = "매달 " + Date().singleDayToKoreanString + "에 반복해요"
+        repeatCycleDayLabel.applyColor(to: Date().singleDayToKoreanString, with: .positive20)
     }
 }
