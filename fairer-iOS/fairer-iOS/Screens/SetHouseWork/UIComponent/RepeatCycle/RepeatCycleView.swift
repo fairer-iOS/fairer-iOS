@@ -9,6 +9,11 @@ import UIKit
 
 import SnapKit
 
+enum RepeatType: String {
+    case week = "매주"
+    case month = "매달"
+}
+
 final class RepeatCycleView: BaseUIView {
     
     // MARK: - property
@@ -28,7 +33,7 @@ final class RepeatCycleView: BaseUIView {
     }()
     let repeatCycleButtonLabel: UILabel = {
         let label = UILabel()
-        label.text = "매주"
+        label.text = RepeatType.week.rawValue
         label.textColor = .gray300
         label.font = .title2
         return label

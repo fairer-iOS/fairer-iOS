@@ -13,7 +13,7 @@ struct HouseWork {
     var time: String
     let space: String
     var manager: [String]
-    var repeatCycle: String?
+    var repeatCycle: RepeatType?
     var repeatPattern: [String]?
     
     #if DEBUG

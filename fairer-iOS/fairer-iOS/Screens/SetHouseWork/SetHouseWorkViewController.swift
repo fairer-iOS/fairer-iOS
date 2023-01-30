@@ -317,7 +317,7 @@ final class SetHouseWorkViewController: BaseViewController {
                 self?.repeatCycleView.repeatCycleLabel.isHidden = false
                 self?.repeatCycleDayLabel.isHidden = false
                 
-                if HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle == "매주" {
+                if HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle == RepeatType.week {
                     self?.repeatCycleCollectionView.snp.updateConstraints {
                         $0.height.equalTo(40)
                     }
@@ -434,11 +434,13 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             }
             updateToWeekToday()
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = "매주"
+            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
             
             UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
+            
+            // FIXME: - Calendar View 비활성화 (개발되면 변경)
         } else {
             repeatCycleView.snp.updateConstraints {
                 $0.height.equalTo(0)
@@ -473,22 +475,22 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didTappedRepeatCycleMenuButton() {
         repeatCycleMenu.didTappedRepeatCycleMenuButton = { [weak self] repeatCycle in
-            if repeatCycle == "매달" {
+            if repeatCycle == .month {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
                 
                 self?.updateToMonthToday()
-                HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = "매달"
+                HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
             } else {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }
                 
                 self?.updateToWeekToday()
-                HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = "매주"
+                HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
             }
-            self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle
+            self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.rawValue
             self?.repeatCycleMenu.isHidden = true
         }
     }
@@ -548,7 +550,7 @@ final class SetHouseWorkViewController: BaseViewController {
             repeatCycleView.repeatCycleLabel.isHidden = false
             repeatCycleDayLabel.isHidden = false
             
-            if HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle == "매주" {
+            if HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle == RepeatType.week {
                 repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }

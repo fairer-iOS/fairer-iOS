@@ -11,17 +11,17 @@ import SnapKit
 
 final class RepeatCycleMenu: BaseUIView {
     
-    var didTappedRepeatCycleMenuButton: ((String) -> ())?
+    var didTappedRepeatCycleMenuButton: ((RepeatType) -> ())?
     
     // MARK: - property
     
     private lazy var everyWeekButton: UIButton = {
         let button = UIButton()
-        button.setTitle("매주", for: .normal)
+        button.setTitle(RepeatType.week.rawValue, for: .normal)
         button.setTitleColor(.gray600, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
-            self?.didTappedRepeatCycleMenuButton?("매주")
+            self?.didTappedRepeatCycleMenuButton?(.week)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -37,7 +37,7 @@ final class RepeatCycleMenu: BaseUIView {
         button.setTitleColor(.gray600, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
-            self?.didTappedRepeatCycleMenuButton?("매달")
+            self?.didTappedRepeatCycleMenuButton?(.month)
         }
         button.addAction(action, for: .touchUpInside)
         return button
