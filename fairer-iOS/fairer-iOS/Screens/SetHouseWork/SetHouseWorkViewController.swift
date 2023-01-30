@@ -263,10 +263,7 @@ final class SetHouseWorkViewController: BaseViewController {
         selectManagerView.snp.updateConstraints {
             $0.height.equalTo(341)
         }
-        
-        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        addAnimation()
         
         selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
@@ -341,10 +338,7 @@ final class SetHouseWorkViewController: BaseViewController {
         selectManagerView.snp.updateConstraints {
             $0.height.equalTo(0)
         }
-        
-        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        addAnimation()
         
         selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
@@ -354,10 +348,7 @@ final class SetHouseWorkViewController: BaseViewController {
             selectManagerView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
-            
-            UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
+            addAnimation()
             
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
             HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
@@ -383,10 +374,7 @@ final class SetHouseWorkViewController: BaseViewController {
             timePicker.snp.updateConstraints {
                 $0.height.equalTo(196.2)
             }
-            
-            UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
+            addAnimation()
         } else {
             timePicker.snp.updateConstraints {
                 $0.height.equalTo(0)
@@ -422,10 +410,6 @@ final class SetHouseWorkViewController: BaseViewController {
             updateToWeekToday()
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
             
-            UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-            
             // FIXME: - Calendar View 비활성화 (개발되면 변경)
         } else {
             repeatCycleView.snp.updateConstraints {
@@ -439,11 +423,8 @@ final class SetHouseWorkViewController: BaseViewController {
             repeatCycleDayLabel.isHidden = true
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = nil
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern = nil
-            
-            UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
         }
+        addAnimation()
     }
     
     private func didTimeChanged() {
@@ -556,5 +537,11 @@ final class SetHouseWorkViewController: BaseViewController {
         getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
         isTimeSelected(houseWork)
         isRepeatSelected(houseWork)
+    }
+    
+    private func addAnimation() {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
