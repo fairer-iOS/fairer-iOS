@@ -282,23 +282,13 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.repeatCycleCollectionView.collectionView.reloadData()
             if HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle == nil {
                 self?.setRepeatToggle.isOn = false
-                self?.repeatCycleView.snp.updateConstraints {
-                    $0.height.equalTo(0)
-                }
-                self?.repeatCycleView.repeatCycleButton.isHidden = true
-                self?.repeatCycleView.repeatCycleLabel.isHidden = true
+                self?.closeRepeatCycleView()
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
-                self?.repeatCycleDayLabel.isHidden = true
             } else {
                 self?.setRepeatToggle.isOn = true
-                self?.repeatCycleView.snp.updateConstraints {
-                    $0.height.equalTo(36)
-                }
-                self?.repeatCycleView.repeatCycleButton.isHidden = false
-                self?.repeatCycleView.repeatCycleLabel.isHidden = false
-                self?.repeatCycleDayLabel.isHidden = false
+                self?.openRepeatCycleView()
                 
                 if HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle == RepeatType.week {
                     self?.repeatCycleCollectionView.snp.updateConstraints {
@@ -387,16 +377,11 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didTappedRepeatToggle() {
         if setRepeatToggle.isOn {
-            repeatCycleView.snp.updateConstraints {
-                $0.height.equalTo(36)
-            }
-            repeatCycleView.repeatCycleButton.isHidden = false
-            repeatCycleView.repeatCycleLabel.isHidden = false
+            openRepeatCycleView()
             repeatCycleView.repeatCycleButtonLabel.text = "매주"
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(40)
             }
-            repeatCycleDayLabel.isHidden = false
             repeatCycleDayLabel.snp.remakeConstraints {
                 $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
@@ -412,15 +397,10 @@ final class SetHouseWorkViewController: BaseViewController {
             
             // FIXME: - Calendar View 비활성화 (개발되면 변경)
         } else {
-            repeatCycleView.snp.updateConstraints {
-                $0.height.equalTo(0)
-            }
-            repeatCycleView.repeatCycleButton.isHidden = true
-            repeatCycleView.repeatCycleLabel.isHidden = true
+            closeRepeatCycleView()
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
-            repeatCycleDayLabel.isHidden = true
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = nil
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern = nil
         }
@@ -499,23 +479,13 @@ final class SetHouseWorkViewController: BaseViewController {
     private func isRepeatSelected(_ houseWork: Int) {
         if HouseWork.mockHouseWork[houseWork].repeatCycle == nil {
             setRepeatToggle.isOn = false
-            repeatCycleView.snp.updateConstraints {
-                $0.height.equalTo(0)
-            }
-            repeatCycleView.repeatCycleButton.isHidden = true
-            repeatCycleView.repeatCycleLabel.isHidden = true
+            closeRepeatCycleView()
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
-            repeatCycleDayLabel.isHidden = true
         } else {
             setRepeatToggle.isOn = true
-            repeatCycleView.snp.updateConstraints {
-                $0.height.equalTo(36)
-            }
-            repeatCycleView.repeatCycleButton.isHidden = false
-            repeatCycleView.repeatCycleLabel.isHidden = false
-            repeatCycleDayLabel.isHidden = false
+            openRepeatCycleView()
             
             if HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle == RepeatType.week {
                 repeatCycleCollectionView.snp.updateConstraints {
@@ -543,5 +513,23 @@ final class SetHouseWorkViewController: BaseViewController {
         UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
+    }
+    
+    private func openRepeatCycleView() {
+        repeatCycleView.snp.updateConstraints {
+            $0.height.equalTo(36)
+        }
+        repeatCycleView.repeatCycleLabel.isHidden = false
+        repeatCycleView.repeatCycleButton.isHidden = false
+        repeatCycleDayLabel.isHidden = false
+    }
+    
+    private func closeRepeatCycleView() {
+        repeatCycleView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        repeatCycleView.repeatCycleLabel.isHidden = true
+        repeatCycleView.repeatCycleButton.isHidden = true
+        repeatCycleDayLabel.isHidden = true
     }
 }
