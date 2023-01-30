@@ -54,7 +54,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }()
     private let setTimeLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "시간설정", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.setHouseWorkViewControllerSetTimeLabel, lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         return label
@@ -89,7 +89,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }()
     private let setRepeatLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "반복하기", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.setHouseWorkViewControllerSetRepeatLabel, lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         return label
@@ -124,7 +124,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }()
     private let doneButton: MainButton = {
         let button = MainButton()
-        button.title = "집안일 추가 완료"
+        button.title = TextLiteral.setHouseWorkViewControllerDoneButtonText
         button.isDisabled = false
         return button
     }()
@@ -344,7 +344,7 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(setTimeLabel.snp.bottom)
                 $0.height.equalTo(0)
             }
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].time = "하루 종일"
+            HouseWork.mockHouseWork[selectedHouseWorkIndex].time = TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel
             setHouseWorkCollectionView.collectionView.reloadData()
         }
     }
@@ -428,7 +428,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func isTimeSelected(_ houseWork: Int) {
-        if HouseWork.mockHouseWork[houseWork].time == "하루 종일" {
+        if HouseWork.mockHouseWork[houseWork].time == TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel {
             setTimeToggle.isOn = false
             timePicker.snp.updateConstraints {
                 $0.top.equalTo(setTimeLabel.snp.bottom)
@@ -448,6 +448,7 @@ final class SetHouseWorkViewController: BaseViewController {
         case .week:
             setRepeatToggle.isOn = true
             openRepeatCycleView()
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(40)
             }
@@ -457,6 +458,7 @@ final class SetHouseWorkViewController: BaseViewController {
         case .month:
             setRepeatToggle.isOn = true
             openRepeatCycleView()
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.month.rawValue
             updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
         case .none:
             setRepeatToggle.isOn = false
@@ -500,11 +502,11 @@ final class SetHouseWorkViewController: BaseViewController {
     private func updateRepeatCycleDayLabel(_ type: RepeatType, _ repeatDay: String) {
         switch type {
         case .week:
-            repeatCycleDayLabel.text = "매주 " + repeatDay + "요일에 반복해요"
-            repeatCycleDayLabel.applyColor(to: repeatDay + "요일", with: .positive20)
+            repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryWeek + repeatDay + TextLiteral.setHouseWorkViewControllerWeek + TextLiteral.setHouseWorkViewControllerRepeat
+            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerWeek, with: .positive20)
         case .month:
-            repeatCycleDayLabel.text = "매달 " + repeatDay + "일에 반복해요"
-            repeatCycleDayLabel.applyColor(to: repeatDay + "일", with: .positive20)
+            repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryMonth + repeatDay + TextLiteral.setHouseWorkViewControllerDay + TextLiteral.setHouseWorkViewControllerRepeat
+            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerDay, with: .positive20)
         }
     }
 }

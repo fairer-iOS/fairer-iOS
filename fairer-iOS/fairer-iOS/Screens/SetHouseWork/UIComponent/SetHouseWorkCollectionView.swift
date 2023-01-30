@@ -94,8 +94,8 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
         }
         
         cell.houseWorkLabel.text = HouseWork.mockHouseWork[indexPath.row].name
-        cell.timeLabel.text = HouseWork.mockHouseWork[indexPath.row].time
-        
+        cell.timeLabel.setTextWithLineHeight(text: HouseWork.mockHouseWork[indexPath.row].time, lineHeight: 18)
+
         cell.deleteButton.tag = indexPath.item
         cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(sender:)), for: .touchUpInside)
         

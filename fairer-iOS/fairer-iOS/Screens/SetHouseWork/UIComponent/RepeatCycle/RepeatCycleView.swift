@@ -20,7 +20,7 @@ final class RepeatCycleView: BaseUIView {
     
     let repeatCycleLabel: UILabel = {
         let label = UILabel()
-        label.text = "반복주기"
+        label.text = TextLiteral.repeatCycleViewRepeatCycleLabel
         label.textColor = .gray600
         label.font = .title2
         label.isHidden = true
@@ -33,7 +33,6 @@ final class RepeatCycleView: BaseUIView {
     }()
     let repeatCycleButtonLabel: UILabel = {
         let label = UILabel()
-        label.text = RepeatType.week.rawValue
         label.textColor = .gray300
         label.font = .title2
         return label
@@ -47,25 +46,24 @@ final class RepeatCycleView: BaseUIView {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubview(repeatCycleLabel)
+        self.addSubviews(repeatCycleLabel, repeatCycleButton)
+        repeatCycleButton.addSubviews(repeatCycleButtonLabel, repeatCycleButtonChevron)
+        
         repeatCycleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
         }
         
-        self.addSubview(repeatCycleButton)
         repeatCycleButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
         }
         
-        repeatCycleButton.addSubview(repeatCycleButtonLabel)
         repeatCycleButtonLabel.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.centerY.equalToSuperview()
         }
         
-        repeatCycleButton.addSubview(repeatCycleButtonChevron)
         repeatCycleButtonChevron.snp.makeConstraints {
             $0.trailing.equalToSuperview()
             $0.centerY.equalToSuperview()

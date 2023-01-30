@@ -33,7 +33,7 @@ final class RepeatCycleMenu: BaseUIView {
     }()
     private lazy var everyMonthButton: UIButton = {
         let button = UIButton()
-        button.setTitle("매달", for: .normal)
+        button.setTitle(RepeatType.month.rawValue, for: .normal)
         button.setTitleColor(.gray600, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
@@ -46,20 +46,19 @@ final class RepeatCycleMenu: BaseUIView {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubview(everyWeekButton)
+        self.addSubviews(everyWeekButton, divider, everyMonthButton)
+        
         everyWeekButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(5)
             $0.leading.equalToSuperview().inset(16)
         }
         
-        self.addSubview(divider)
         divider.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
         }
         
-        self.addSubview(everyMonthButton)
         everyMonthButton.snp.makeConstraints {
             $0.top.equalTo(divider.snp.bottom).offset(4)
             $0.leading.equalToSuperview().inset(16)

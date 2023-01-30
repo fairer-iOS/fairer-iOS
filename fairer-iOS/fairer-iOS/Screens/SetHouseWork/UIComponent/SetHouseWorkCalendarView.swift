@@ -53,27 +53,25 @@ final class SetHouseWorkCalendarView: BaseUIView {
     }
     
     override func render() {
-        self.addSubview(calendarPicker)
+        self.addSubviews(calendarPicker, chevron, spaceLabel, spacePin)
+        
         calendarPicker.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(5)
             $0.top.equalToSuperview()
             $0.width.equalTo(120)
         }
         
-        self.addSubview(chevron)
         chevron.snp.makeConstraints {
             $0.leading.equalTo(calendarPicker.snp.trailing).offset(-10)
             $0.centerY.equalTo(calendarPicker.snp.centerY)
             $0.width.height.equalTo(20)
         }
         
-        self.addSubview(spaceLabel)
         spaceLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.centerY.equalTo(calendarPicker.snp.centerY)
         }
         
-        self.addSubview(spacePin)
         spacePin.snp.makeConstraints {
             $0.trailing.equalTo(spaceLabel.snp.leading).inset(-4)
             $0.centerY.equalTo(spaceLabel.snp.centerY)

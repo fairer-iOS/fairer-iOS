@@ -42,20 +42,19 @@ final class SelectManagerCollectionViewCell: BaseCollectionViewCell {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubview(profileImage)
+        self.addSubviews(profileImage, profileName, selectIcon)
+        
         profileImage.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(12)
             $0.width.height.equalTo(24)
         }
         
-        self.addSubview(profileName)
         profileName.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(profileImage.snp.trailing).offset(6)
         }
         
-        self.addSubview(selectIcon)
         selectIcon.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(12)

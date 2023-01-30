@@ -17,7 +17,7 @@ final class RepeatCycleCollectionView: BaseUIView {
             selectedDaysOfWeek = HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern ?? []
         }
     }
-    private let daysOfWeek: [String] = ["월", "화", "수", "목", "금", "토", "일"]
+    private let daysOfWeekList: [String] = TextLiteral.repeatCycleCollectionViewDaysOfWeekList
     var selectedDaysOfWeek: [String] = [] {
         didSet {
             collectionView.reloadData()
@@ -71,19 +71,19 @@ final class RepeatCycleCollectionView: BaseUIView {
 extension RepeatCycleCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        selectedDaysOfWeek.append(daysOfWeek[indexPath.item])
+        selectedDaysOfWeek.append(daysOfWeekList[indexPath.item])
         didSelectDaysOfWeek?(selectedDaysOfWeek)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        selectedDaysOfWeek.removeAll(where: { $0 == daysOfWeek[indexPath.item]})
+        selectedDaysOfWeek.removeAll(where: { $0 == daysOfWeekList[indexPath.item]})
         didSelectDaysOfWeek?(selectedDaysOfWeek)
     }
 }
 
 extension RepeatCycleCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return daysOfWeek.count
+        return daysOfWeekList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -93,13 +93,13 @@ extension RepeatCycleCollectionView: UICollectionViewDataSource {
         }
         
         if let houseWorkPattern = HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern {
-            if houseWorkPattern.contains(daysOfWeek[indexPath.item]) {
+            if houseWorkPattern.contains(daysOfWeekList[indexPath.item]) {
                 cell.isSelected = true
                 collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
             }
         }
         
-        cell.weekOfDayLabel.text = daysOfWeek[indexPath.item]
+        cell.weekOfDayLabel.text = daysOfWeekList[indexPath.item]
         
         return cell
     }
