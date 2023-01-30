@@ -188,7 +188,7 @@ final class SetHouseWorkViewController: BaseViewController {
         }
         
         timePicker.snp.makeConstraints {
-            $0.top.equalTo(setTimeLabel.snp.bottom).offset(12)
+            $0.top.equalTo(setTimeLabel.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(0)
         }
@@ -202,12 +202,12 @@ final class SetHouseWorkViewController: BaseViewController {
         setRepeatLabel.snp.makeConstraints {
             $0.top.equalTo(divider.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(0)
         }
         
         setRepeatToggle.snp.makeConstraints {
             $0.centerY.equalTo(setRepeatLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(0)
         }
         
         repeatCycleView.snp.makeConstraints {
@@ -259,14 +259,6 @@ final class SetHouseWorkViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
-    private func showSelectManagerView() {
-        selectManagerView.snp.updateConstraints {
-            $0.height.equalTo(341)
-        }
-        addAnimation()
-        selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
-    }
-    
     private func didTappedHouseWork() {
         setHouseWorkCollectionView.didTappedHouseWork = { [weak self] selectedHouseWorkIndex in
             self?.selectedHouseWorkIndex = selectedHouseWorkIndex
@@ -287,16 +279,24 @@ final class SetHouseWorkViewController: BaseViewController {
                 self?.selectedHouseWorkIndex -= 1
                 self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
                 self?.updateManagerTimeRepeat(deletedHouseWorkIndex - 1)
+            } else if deletedHouseWorkIndex == self?.selectedHouseWorkIndex {
+                self?.updateManagerTimeRepeat(deletedHouseWorkIndex)
             } else if deletedHouseWorkIndex < self?.selectedHouseWorkIndex ?? 0 {
                 self?.selectedHouseWorkIndex -= 1
                 self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
                 self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
-            } else if deletedHouseWorkIndex == self?.selectedHouseWorkIndex {
-                self?.updateManagerTimeRepeat(deletedHouseWorkIndex)
             } else {
                 self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
             }
         }
+    }
+    
+    private func showSelectManagerView() {
+        selectManagerView.snp.updateConstraints {
+            $0.height.equalTo(341)
+        }
+        addAnimation()
+        selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
     
     private func didTappedCancelButton() {
@@ -335,11 +335,13 @@ final class SetHouseWorkViewController: BaseViewController {
     private func didTappedTimeToggle() {
         if setTimeToggle.isOn {
             timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom).offset(8)
                 $0.height.equalTo(196.2)
             }
             addAnimation()
         } else {
             timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom)
                 $0.height.equalTo(0)
             }
             HouseWork.mockHouseWork[selectedHouseWorkIndex].time = "하루 종일"
@@ -347,41 +349,49 @@ final class SetHouseWorkViewController: BaseViewController {
         }
     }
     
+    private func didTimeChanged() {
+        let time = timePicker.date.timeToKoreanString
+        HouseWork.mockHouseWork[selectedHouseWorkIndex].time = time
+        setHouseWorkCollectionView.collectionView.reloadData()
+    }
+    
     private func didTappedRepeatToggle() {
         if setRepeatToggle.isOn {
             openRepeatCycleView()
-            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(40)
+            }
+            setRepeatToggle.snp.remakeConstraints {
+                $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+                $0.trailing.equalToSuperview().inset(20)
             }
             repeatCycleDayLabel.snp.remakeConstraints {
                 $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-                $0.height.equalTo(22)
                 $0.bottom.equalTo(0)
             }
-            setRepeatLabel.snp.remakeConstraints {
-                $0.top.equalTo(divider.snp.bottom).offset(SizeLiteral.componentPadding)
-                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            }
+            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
             updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
             repeatCycleCollectionView.selectedDaysOfWeek = []
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
         } else {
             closeRepeatCycleView()
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
+            setRepeatToggle.snp.remakeConstraints {
+                $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+                $0.trailing.equalToSuperview().inset(20)
+                $0.bottom.equalTo(0)
+            }
+            repeatCycleDayLabel.snp.remakeConstraints {
+                $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            }
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = nil
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern = nil
         }
         addAnimation()
-    }
-    
-    private func didTimeChanged() {
-        let time = timePicker.date.timeToKoreanString
-        HouseWork.mockHouseWork[selectedHouseWorkIndex].time = time
-        setHouseWorkCollectionView.collectionView.reloadData()
     }
     
     private func didTappedRepeatCycleButton() {
@@ -421,11 +431,13 @@ final class SetHouseWorkViewController: BaseViewController {
         if HouseWork.mockHouseWork[houseWork].time == "하루 종일" {
             setTimeToggle.isOn = false
             timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom)
                 $0.height.equalTo(0)
             }
         } else {
             setTimeToggle.isOn = true
             timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom).offset(8)
                 $0.height.equalTo(196.2)
             }
         }

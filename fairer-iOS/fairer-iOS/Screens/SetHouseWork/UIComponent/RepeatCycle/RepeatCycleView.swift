@@ -57,8 +57,6 @@ final class RepeatCycleView: BaseUIView {
         repeatCycleButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
-            $0.width.equalTo(45)
-            $0.height.equalTo(20)
         }
         
         repeatCycleButton.addSubview(repeatCycleButtonLabel)
