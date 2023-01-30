@@ -140,99 +140,88 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(setHouseWorkCalendarView)
+        view.addSubviews(setHouseWorkCalendarView, setHouseWorkCollectionView, doneButton, scrollView, selectManagerView, managerToastLabel)
+        scrollView.addSubview(contentView)
+        contentView.addSubviews(getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleMenu, repeatCycleDayLabel)
+        
         setHouseWorkCalendarView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(38)
         }
         
-        view.addSubview(setHouseWorkCollectionView)
         setHouseWorkCollectionView.snp.makeConstraints {
             $0.top.equalTo(setHouseWorkCalendarView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(134)
         }
         
-        view.addSubview(doneButton)
         doneButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
         }
         
-        view.addSubview(scrollView)
         scrollView.snp.makeConstraints {
             $0.top.equalTo(setHouseWorkCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(doneButton.snp.top).inset(-SizeLiteral.componentPadding)
         }
         
-        scrollView.addSubview(contentView)
         contentView.snp.makeConstraints {
             $0.width.edges.equalToSuperview()
         }
         
-        contentView.addSubview(getManagerView)
         getManagerView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(120)
         }
         
-        contentView.addSubview(setTimeLabel)
         setTimeLabel.snp.makeConstraints {
             $0.top.equalTo(getManagerView.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        contentView.addSubview(setTimeToggle)
         setTimeToggle.snp.makeConstraints {
             $0.centerY.equalTo(setTimeLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
         }
         
-        contentView.addSubview(timePicker)
         timePicker.snp.makeConstraints {
             $0.top.equalTo(setTimeLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(0)
         }
         
-        contentView.addSubview(divider)
         divider.snp.makeConstraints {
             $0.top.equalTo(timePicker.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
         
-        contentView.addSubview(setRepeatLabel)
         setRepeatLabel.snp.makeConstraints {
             $0.top.equalTo(divider.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.bottom.equalTo(0)
         }
         
-        contentView.addSubview(setRepeatToggle)
         setRepeatToggle.snp.makeConstraints {
             $0.centerY.equalTo(setRepeatLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
         }
         
-        contentView.addSubview(repeatCycleView)
         repeatCycleView.snp.makeConstraints {
             $0.top.equalTo(setRepeatLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(31.5)
             $0.height.equalTo(0)
         }
         
-        contentView.addSubview(repeatCycleCollectionView)
         repeatCycleCollectionView.snp.makeConstraints {
             $0.top.equalTo(repeatCycleView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
         }
         
-        contentView.addSubview(repeatCycleMenu)
         repeatCycleMenu.snp.makeConstraints {
             $0.top.equalTo(repeatCycleView.snp.bottom)
             $0.trailing.equalToSuperview().inset(31.5)
@@ -240,20 +229,17 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.height.equalTo(76)
         }
         
-        contentView.addSubview(repeatCycleDayLabel)
         repeatCycleDayLabel.snp.makeConstraints {
             $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(selectManagerView)
         selectManagerView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
         }
-
-        view.addSubview(managerToastLabel)
+        
         managerToastLabel.snp.makeConstraints {
             $0.bottom.equalTo(selectManagerView.snp.top).offset(-10)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
