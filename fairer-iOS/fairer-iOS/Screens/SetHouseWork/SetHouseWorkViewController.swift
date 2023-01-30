@@ -294,11 +294,9 @@ final class SetHouseWorkViewController: BaseViewController {
                     self?.repeatCycleCollectionView.snp.updateConstraints {
                         $0.height.equalTo(40)
                     }
-                    let selectedDays = HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern?.joined(separator: ", ")
-                    self?.repeatCycleDayLabel.text = "매주 " + (selectedDays ?? Date().dayOfWeekToKoreanString) + "요일에 반복해요"
-                    self?.repeatCycleDayLabel.applyColor(to: (selectedDays ?? Date().dayOfWeekToKoreanString) + "요일", with: .positive20)
+                    self?.updateRepeatCycleDayLabel(.week, HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern?.joined(separator: ", ") ?? Date().dayOfWeekToKoreanString)
                 } else {
-                    self?.updateToMonthToday()
+                    self?.updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
                 }
             }
         }
@@ -392,7 +390,8 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(divider.snp.bottom).offset(SizeLiteral.componentPadding)
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             }
-            updateToWeekToday()
+            updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
+            repeatCycleCollectionView.selectedDaysOfWeek = []
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
             
             // FIXME: - Calendar View 비활성화 (개발되면 변경)
@@ -427,14 +426,15 @@ final class SetHouseWorkViewController: BaseViewController {
                     $0.height.equalTo(0)
                 }
                 
-                self?.updateToMonthToday()
+                self?.updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
                 HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
             } else {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }
                 
-                self?.updateToWeekToday()
+                self?.updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
+                self?.repeatCycleCollectionView.selectedDaysOfWeek = []
                 HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
             }
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.rawValue
@@ -445,21 +445,9 @@ final class SetHouseWorkViewController: BaseViewController {
     private func didSelectDaysOfWeek() {
         repeatCycleCollectionView.didSelectDaysOfWeek = { [weak self] selectedDays in
             let selectedDaysOfWeek = selectedDays.isEmpty ? Date().dayOfWeekToKoreanString : selectedDays.joined(separator: ", ")
-            self?.repeatCycleDayLabel.text = "매주 " + selectedDaysOfWeek + "요일에 반복해요"
-            self?.repeatCycleDayLabel.applyColor(to: selectedDaysOfWeek + "요일", with: .positive20)
+            self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek)
             HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatPattern = selectedDays
         }
-    }
-    
-    private func updateToWeekToday() {
-        repeatCycleDayLabel.text = "매주 " + Date().dayOfWeekToKoreanString + "요일에 반복해요"
-        repeatCycleDayLabel.applyColor(to: Date().dayOfWeekToKoreanString + "요일", with: .positive20)
-        repeatCycleCollectionView.selectedDaysOfWeek = []
-    }
-    
-    private func updateToMonthToday() {
-        repeatCycleDayLabel.text = "매달 " + Date().singleDayToKoreanString + "일에 반복해요"
-        repeatCycleDayLabel.applyColor(to: Date().singleDayToKoreanString + "일", with: .positive20)
     }
     
     private func isTimeSelected(_ houseWork: Int) {
@@ -492,13 +480,11 @@ final class SetHouseWorkViewController: BaseViewController {
                     $0.height.equalTo(40)
                 }
                 
-                let selectedDays = HouseWork.mockHouseWork[houseWork].repeatPattern?.joined(separator: ", ")
-                repeatCycleDayLabel.text = "매주 " + (selectedDays ?? Date().dayOfWeekToKoreanString) + "요일에 반복해요"
-                repeatCycleDayLabel.applyColor(to: (selectedDays ?? Date().dayOfWeekToKoreanString) + "요일", with: .positive20)
+                updateRepeatCycleDayLabel(.week, HouseWork.mockHouseWork[houseWork].repeatPattern?.joined(separator: ", ") ?? Date().dayOfWeekToKoreanString)
                 repeatCycleCollectionView.selectedHouseWorkIndex = houseWork
                 repeatCycleCollectionView.collectionView.reloadData()
             } else {
-                updateToMonthToday()
+                updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
             }
         }
     }
@@ -531,5 +517,16 @@ final class SetHouseWorkViewController: BaseViewController {
         repeatCycleView.repeatCycleLabel.isHidden = true
         repeatCycleView.repeatCycleButton.isHidden = true
         repeatCycleDayLabel.isHidden = true
+    }
+    
+    private func updateRepeatCycleDayLabel(_ type: RepeatType, _ repeatDay: String) {
+        switch type {
+        case .week:
+            repeatCycleDayLabel.text = "매주 " + repeatDay + "요일에 반복해요"
+            repeatCycleDayLabel.applyColor(to: repeatDay + "요일", with: .positive20)
+        case .month:
+            repeatCycleDayLabel.text = "매달 " + repeatDay + "일에 반복해요"
+            repeatCycleDayLabel.applyColor(to: repeatDay + "일", with: .positive20)
+        }
     }
 }
