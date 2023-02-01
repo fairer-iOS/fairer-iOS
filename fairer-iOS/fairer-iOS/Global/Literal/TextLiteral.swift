@@ -148,4 +148,10 @@ enum TextLiteral {
     // MARK: - SetHouseWorkCollectionViewCell
     
     static let setHouseWorkCollectionViewCellDefaultTimeLabel = "하루 종일"
+    
+    // MARK: - WriteHouseWorkViewController
+    
+    static let writeHouseWorkViewControllerHouseWorkNameLabel = "집안일 이름"
+    static let writeHouseWorkViewControllerHouseWorkNameTextFieldPlaceholderText = "직접 입력"
+    static let writeHouseWorkViewControllerHouseWorkNameWarningLabel = "텍스트는 16글자를 초과하여 입력하실 수 없어요."
 }

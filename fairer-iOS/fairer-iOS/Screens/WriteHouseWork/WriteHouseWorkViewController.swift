@@ -20,7 +20,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     private let writeHouseWorkCalendarView = SetHouseWorkCalendarView()
     private let houseWorkNameLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "집안일 이름", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.writeHouseWorkViewControllerHouseWorkNameLabel, lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         return label
@@ -28,12 +28,12 @@ final class WriteHouseWorkViewController: BaseViewController {
     private let houseWorkNameTextField: TextField = {
         let textField = TextField()
         textField.type = .small
-        textField.myPlaceholder = "직접 입력"
+        textField.myPlaceholder = TextLiteral.writeHouseWorkViewControllerHouseWorkNameTextFieldPlaceholderText
         return textField
     }()
     private let houseWorkNameWarningLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "텍스트는 16글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.writeHouseWorkViewControllerHouseWorkNameWarningLabel, lineHeight: 22)
         label.textColor = .negative20
         label.font = .body2
         return label
