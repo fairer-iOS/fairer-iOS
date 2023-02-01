@@ -33,6 +33,16 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNotificationCenter()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegation()
+    }
+    
     override func render() {
         view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField)
         
@@ -64,5 +74,52 @@ final class WriteHouseWorkViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func setupDelegation() {
+        houseWorkNameTextField.delegate = self
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func endEditingView() {
+        view.endEditing(true)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                // FIXME: - button 이동 로직 추가
+            })
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            // FIXME: - button 이동 로직 추가
+        })
+    }
+    
+    private func checkMaxLength() {
+        let maxLength = 16
+        if let text = houseWorkNameTextField.text {
+            if text.count > maxLength {
+                houseWorkNameTextField.layer.borderWidth = 1
+                houseWorkNameTextField.layer.borderColor = UIColor.negative20.cgColor
+            } else {
+                houseWorkNameTextField.layer.borderWidth = 0
+            }
+        }
+    }
+}
+
+// MARK: - extension
+
+extension WriteHouseWorkViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        checkMaxLength()
     }
 }
