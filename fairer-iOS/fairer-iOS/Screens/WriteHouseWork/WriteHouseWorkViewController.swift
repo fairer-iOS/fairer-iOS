@@ -30,6 +30,13 @@ final class WriteHouseWorkViewController: BaseViewController {
         textField.myPlaceholder = "직접 입력"
         return textField
     }()
+    private let houseWorkNameWarningLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "텍스트는 16글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
+        label.textColor = .negative20
+        label.font = .body2
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -44,7 +51,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField)
+        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel)
         
         writeHouseWorkCalendarView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -61,6 +68,12 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.top.equalTo(houseWorkNameLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
+        }
+        
+        houseWorkNameWarningLabel.snp.makeConstraints {
+            $0.top.equalTo(houseWorkNameTextField.snp.bottom).offset(8)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
         }
     }
     
@@ -109,8 +122,14 @@ final class WriteHouseWorkViewController: BaseViewController {
             if text.count > maxLength {
                 houseWorkNameTextField.layer.borderWidth = 1
                 houseWorkNameTextField.layer.borderColor = UIColor.negative20.cgColor
+                houseWorkNameWarningLabel.snp.updateConstraints {
+                    $0.height.equalTo(22)
+                }
             } else {
                 houseWorkNameTextField.layer.borderWidth = 0
+                houseWorkNameWarningLabel.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
             }
         }
     }
