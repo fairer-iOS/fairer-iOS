@@ -11,6 +11,7 @@ import SnapKit
 
 final class WriteHouseWorkViewController: BaseViewController {
     
+    var houseWorkMaxLength = 16
     
     // MARK: - property
     
@@ -98,10 +99,6 @@ final class WriteHouseWorkViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    override func endEditingView() {
-        view.endEditing(true)
-    }
-    
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
@@ -117,9 +114,8 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     private func checkMaxLength() {
-        let maxLength = 16
         if let text = houseWorkNameTextField.text {
-            if text.count > maxLength {
+            if text.count > houseWorkMaxLength {
                 houseWorkNameTextField.layer.borderWidth = 1
                 houseWorkNameTextField.layer.borderColor = UIColor.negative20.cgColor
                 houseWorkNameWarningLabel.snp.updateConstraints {
@@ -140,5 +136,14 @@ final class WriteHouseWorkViewController: BaseViewController {
 extension WriteHouseWorkViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         checkMaxLength()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
