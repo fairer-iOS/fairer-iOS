@@ -30,6 +30,7 @@ final class EnterHouseViewController: BaseViewController {
     }()
     private let enterHouseCodeTextfield: TextField = {
         let textfield = TextField()
+        textfield.type = .large
         textfield.myPlaceholder = TextLiteral.enterHouseViewControllerTextfieldPlaceHolder
         return textfield
     }()

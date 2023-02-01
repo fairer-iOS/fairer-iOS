@@ -56,7 +56,7 @@ final class SetHouseWorkCalendarView: BaseUIView {
         self.addSubviews(calendarPicker, chevron, spaceLabel, spacePin)
         
         calendarPicker.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(5)
+            $0.leading.equalToSuperview().inset(-4)
             $0.top.equalToSuperview()
             $0.width.equalTo(120)
         }

@@ -24,11 +24,17 @@ final class WriteHouseWorkViewController: BaseViewController {
         label.font = .title1
         return label
     }()
+    private let houseWorkNameTextField: TextField = {
+        let textField = TextField()
+        textField.type = .small
+        textField.myPlaceholder = "직접 입력"
+        return textField
+    }()
     
     // MARK: - life cycle
     
     override func render() {
-        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel)
+        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField)
         
         writeHouseWorkCalendarView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -39,6 +45,12 @@ final class WriteHouseWorkViewController: BaseViewController {
         houseWorkNameLabel.snp.makeConstraints {
             $0.top.equalTo(writeHouseWorkCalendarView.snp.bottom).offset(6)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        houseWorkNameTextField.snp.makeConstraints {
+            $0.top.equalTo(houseWorkNameLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(42)
         }
     }
     
