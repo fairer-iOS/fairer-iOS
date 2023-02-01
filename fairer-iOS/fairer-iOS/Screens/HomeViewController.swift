@@ -184,6 +184,7 @@ final class HomeViewController: BaseViewController {
     
     private func setupDelegate(){
         self.calendarDailyCollecionView.delegate = self
+        self.contentScrollView.delegate = self
     }
     
     private func setupToolBarGesture() {
@@ -228,6 +229,24 @@ extension HomeViewController: CollectionViewHeightProtocol {
         cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
         calendarDailyCollecionView.snp.updateConstraints {
             $0.height.equalTo(cellHeight)
+        }
+    }
+}
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollViewHeight = scrollView.frame.size.height
+        let scrollContentSizeHeight = scrollView.contentSize.height
+        let scrollOffset = scrollView.contentOffset.y
+        if (scrollOffset == 0)
+        {
+            // then we are at the top
+            print("its top")
+        }
+        else if (scrollOffset + scrollViewHeight == scrollContentSizeHeight)
+        {
+            // then we are at the end
+            print("its end")
         }
     }
 }
