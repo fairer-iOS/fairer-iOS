@@ -54,7 +54,7 @@
 		5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055328E1BF6700355055 /* GroupMainViewController.swift */; };
 		5205055828E1C50600355055 /* InfoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055728E1C50600355055 /* InfoLabelView.swift */; };
 		520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D6FF1291133A800CF65B2 /* AlreadyInGroupViewController.swift */; };
-		52136FE1298A72130022D465 /* WritHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FE0298A72130022D465 /* WritHouseWorkViewController.swift */; };
+		52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */; };
 		522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */; };
 		522714EB297918EC006BADBC /* SetHouseWorkCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714EA297918EC006BADBC /* SetHouseWorkCalendarView.swift */; };
 		522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714EC297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift */; };
@@ -144,7 +144,7 @@
 		5205055328E1BF6700355055 /* GroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMainViewController.swift; sourceTree = "<group>"; };
 		5205055728E1C50600355055 /* InfoLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabelView.swift; sourceTree = "<group>"; };
 		520D6FF1291133A800CF65B2 /* AlreadyInGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlreadyInGroupViewController.swift; sourceTree = "<group>"; };
-		52136FE0298A72130022D465 /* WritHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritHouseWorkViewController.swift; sourceTree = "<group>"; };
+		52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteHouseWorkViewController.swift; sourceTree = "<group>"; };
 		522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkViewController.swift; sourceTree = "<group>"; };
 		522714EA297918EC006BADBC /* SetHouseWorkCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkCalendarView.swift; sourceTree = "<group>"; };
 		522714EC297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -424,7 +424,7 @@
 		52136FDF298A72020022D465 /* WriteHouseWork */ = {
 			isa = PBXGroup;
 			children = (
-				52136FE0298A72130022D465 /* WritHouseWorkViewController.swift */,
+				52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */,
 			);
 			path = WriteHouseWork;
 			sourceTree = "<group>";
@@ -791,7 +791,7 @@
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
 				5204AAC62962D281002FB6CA /* SelectHouseWorkCalendarView.swift in Sources */,
 				522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */,
-				52136FE1298A72130022D465 /* WritHouseWorkViewController.swift in Sources */,
+				52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */,
 				5204AAB929507319002FB6CA /* SettingAlarmTableViewCell.swift in Sources */,
 				520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */,
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
