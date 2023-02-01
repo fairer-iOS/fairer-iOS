@@ -15,11 +15,11 @@ final class HomeViewController: BaseViewController {
     
     let userName: String = "고가혜"
     let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
+    var isScrolled = false
     
     // MARK: - property
     
     private var cellHeight = CGFloat()
-
     private let logoImage : UIImageView = {
         let imgView = UIImageView()
         imgView.image = ImageLiterals.imgHomeLogo
@@ -208,6 +208,39 @@ final class HomeViewController: BaseViewController {
             }
         }
     }
+    
+    private func scrollDidStart(){
+        UIView.animate(withDuration: 0.2 ,delay: 0 ,options: .transitionCurlUp ,animations: {
+            self.homeRuleView.homeRuleLabel.isHidden = true
+            self.homeRuleView.homeRuleDescriptionLabel.isHidden = true
+            self.homeGroupCollectionView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+            self.homeRuleView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+            self.homeDivider.snp.updateConstraints {
+                $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(16)
+            }
+        })
+    }
+    
+    private func scrollDidEnd(){
+        self.homeDivider.snp.updateConstraints {
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(144)
+        }
+        self.homeGroupCollectionView.snp.updateConstraints {
+            $0.height.equalTo(86)
+        }
+        self.homeRuleView.snp.updateConstraints {
+            $0.height.equalTo(40)
+        }
+        self.homeRuleView.homeRuleLabel.isHidden = false
+        self.homeRuleView.homeRuleDescriptionLabel.isHidden = false
+        UIView.animate(withDuration: 0.3, delay: 0 ,options: .transitionCurlUp ,animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
 
     // MARK: - selector
     
@@ -235,18 +268,23 @@ extension HomeViewController: CollectionViewHeightProtocol {
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let scrollViewHeight = scrollView.frame.size.height
-        let scrollContentSizeHeight = scrollView.contentSize.height
+//        let scrollViewHeight = scrollView.frame.size.height
+//        let scrollContentSizeHeight = scrollView.contentSize.height
         let scrollOffset = scrollView.contentOffset.y
-        if (scrollOffset == 0)
-        {
-            // then we are at the top
+        // top
+        if (scrollOffset <= 5) {
             print("its top")
-        }
-        else if (scrollOffset + scrollViewHeight == scrollContentSizeHeight)
-        {
-            // then we are at the end
-            print("its end")
+            scrollDidEnd()
+            isScrolled = false
+        }else{
+            // not top
+            if isScrolled == false {
+                print("scrolling start")
+                scrollDidStart()
+                isScrolled = true
+            }else {
+                print("still scrolling")
+            }
         }
     }
 }
