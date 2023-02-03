@@ -29,8 +29,7 @@ final class EnterHouseViewController: BaseViewController {
         return label
     }()
     private let enterHouseCodeTextfield: TextField = {
-        let textfield = TextField()
-        textfield.type = .large
+        let textfield = TextField(type: .large)
         textfield.myPlaceholder = TextLiteral.enterHouseViewControllerTextfieldPlaceHolder
         return textfield
     }()

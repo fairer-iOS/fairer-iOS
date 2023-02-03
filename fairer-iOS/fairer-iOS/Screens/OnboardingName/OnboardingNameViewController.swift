@@ -24,8 +24,7 @@ final class OnboardingNameViewController: BaseViewController {
         return label
     }()
     private let nameTextField: TextField = {
-        let textField = TextField()
-        textField.type = .large
+        let textField = TextField(type: .large)
         textField.myPlaceholder = TextLiteral.onboardingNameViewControllerTextFieldPlaceholder
         return textField
     }()

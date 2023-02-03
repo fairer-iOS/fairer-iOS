@@ -45,9 +45,7 @@ final class TextField: UITextField {
     
     // MARK: - property
     
-    var type: TextFieldType? {
-        didSet { configUI() }
-    }
+    var type: TextFieldType
     
     var myPlaceholder: String? {
         didSet { setupAttribute() }
@@ -55,33 +53,35 @@ final class TextField: UITextField {
         
     // MARK: - init
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(type: TextFieldType) {
+        self.type = type
+        super.init(frame: .zero)
         render()
+        configUI()
     }
     
     required init?(coder: NSCoder) { nil }
     
     private func render() {
         self.snp.makeConstraints {
-            $0.height.equalTo(type?.textFieldHeight ?? 58)
+            $0.height.equalTo(type.textFieldHeight)
         }
     }
     
     private func configUI() {
         self.backgroundColor = .normal0
-        self.font = type?.font ?? .h3
+        self.font = type.font
         self.layer.cornerRadius = 8
         self.autocorrectionType = .no
         self.autocapitalizationType = .none
-        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: type?.leftPadding ?? 24, height: type?.textFieldHeight ?? 58))
+        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: type.leftPadding, height: type.textFieldHeight))
         self.leftViewMode = .always
         self.setClearButton()
     }
     
     private func setupAttribute() {
         let attributes = [
-            NSAttributedString.Key.font: type?.font ?? UIFont.h3,
+            NSAttributedString.Key.font: type.font,
             NSAttributedString.Key.foregroundColor: UIColor.gray400
         ]
         self.attributedPlaceholder = NSAttributedString(string: myPlaceholder ?? "값을 입력하세요", attributes: attributes)

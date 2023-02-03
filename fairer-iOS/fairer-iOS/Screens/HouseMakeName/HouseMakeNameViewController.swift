@@ -30,8 +30,7 @@ final class HouseMakeNameViewController: BaseViewController {
         return label
     }()
     private let houseNameTextField: TextField = {
-        let textField = TextField()
-        textField.type = .large
+        let textField = TextField(type: .large)
         textField.myPlaceholder = TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder
         return textField
     }()
