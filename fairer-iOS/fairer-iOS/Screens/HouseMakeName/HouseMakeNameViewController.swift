@@ -29,11 +29,7 @@ final class HouseMakeNameViewController: BaseViewController {
         label.numberOfLines = 0
         return label
     }()
-    private let houseNameTextField: TextField = {
-        let textField = TextField(type: .large)
-        textField.myPlaceholder = TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder
-        return textField
-    }()
+    private let houseNameTextField = TextField(type: .large, placeHolder: TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder)
     private let disableLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.textFieldDisableSignLabel

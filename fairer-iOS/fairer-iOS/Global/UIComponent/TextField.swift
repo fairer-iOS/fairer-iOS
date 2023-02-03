@@ -46,15 +46,16 @@ final class TextField: UITextField {
     // MARK: - property
     
     var type: TextFieldType
-    
-    var myPlaceholder: String? {
-        didSet { setupAttribute() }
-    }
+    var placeHolder: String
+//    var myPlaceholder: String? {
+//        didSet { setupAttribute() }
+//    }
         
     // MARK: - init
     
-    init(type: TextFieldType) {
+    init(type: TextFieldType, placeHolder: String) {
         self.type = type
+        self.placeHolder = placeHolder
         super.init(frame: .zero)
         render()
         configUI()
@@ -77,14 +78,19 @@ final class TextField: UITextField {
         self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: type.leftPadding, height: type.textFieldHeight))
         self.leftViewMode = .always
         self.setClearButton()
-    }
-    
-    private func setupAttribute() {
         let attributes = [
             NSAttributedString.Key.font: type.font,
             NSAttributedString.Key.foregroundColor: UIColor.gray400
         ]
-        self.attributedPlaceholder = NSAttributedString(string: myPlaceholder ?? "값을 입력하세요", attributes: attributes)
+        self.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: attributes)
     }
+    
+//    private func setupAttribute() {
+//        let attributes = [
+//            NSAttributedString.Key.font: type.font,
+//            NSAttributedString.Key.foregroundColor: UIColor.gray400
+//        ]
+//        self.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: attributes)
+//    }
 }
 

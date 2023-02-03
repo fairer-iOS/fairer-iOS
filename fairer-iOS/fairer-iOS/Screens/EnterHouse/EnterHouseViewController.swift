@@ -28,11 +28,7 @@ final class EnterHouseViewController: BaseViewController {
         label.textColor = .gray400
         return label
     }()
-    private let enterHouseCodeTextfield: TextField = {
-        let textfield = TextField(type: .large)
-        textfield.myPlaceholder = TextLiteral.enterHouseViewControllerTextfieldPlaceHolder
-        return textfield
-    }()
+    private let enterHouseCodeTextfield = TextField(type: .large, placeHolder: TextLiteral.enterHouseViewControllerTextfieldPlaceHolder)
     private lazy var enterHouseDoneButton: MainButton = {
         let button = MainButton()
         button.isDisabled = true

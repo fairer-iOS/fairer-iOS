@@ -25,11 +25,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         label.font = .title1
         return label
     }()
-    private let houseWorkNameTextField: TextField = {
-        let textField = TextField(type: .small)
-        textField.myPlaceholder = TextLiteral.writeHouseWorkViewControllerHouseWorkNameTextFieldPlaceholderText
-        return textField
-    }()
+    private let houseWorkNameTextField = TextField(type: .small, placeHolder: TextLiteral.writeHouseWorkViewControllerHouseWorkNameTextFieldPlaceholderText)
     private let houseWorkNameWarningLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.writeHouseWorkViewControllerHouseWorkNameWarningLabel, lineHeight: 22)
