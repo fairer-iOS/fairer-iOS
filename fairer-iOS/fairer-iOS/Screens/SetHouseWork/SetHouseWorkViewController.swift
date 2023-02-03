@@ -212,7 +212,7 @@ final class SetHouseWorkViewController: BaseViewController {
         
         repeatCycleView.snp.makeConstraints {
             $0.top.equalTo(setRepeatLabel.snp.bottom).offset(SizeLiteral.componentPadding)
-            $0.leading.trailing.equalToSuperview().inset(31.5)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(0)
         }
         
@@ -224,7 +224,7 @@ final class SetHouseWorkViewController: BaseViewController {
         
         repeatCycleMenu.snp.makeConstraints {
             $0.top.equalTo(repeatCycleView.snp.bottom)
-            $0.trailing.equalToSuperview().inset(31.5)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.width.equalTo(98)
             $0.height.equalTo(76)
         }

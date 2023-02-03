@@ -26,7 +26,7 @@ final class RepeatCycleCollectionView: BaseUIView {
     var didSelectDaysOfWeek: (([String]) -> ())?
     
     private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 31.5
+        static let collectionHorizontalSpacing: CGFloat = 24
         static let collectionVerticalSpacing: CGFloat = 0
         static let cellLength: CGFloat = 40
         static let collectionInsets = UIEdgeInsets(
@@ -43,7 +43,7 @@ final class RepeatCycleCollectionView: BaseUIView {
         flowLayout.sectionInset = Size.collectionInsets
         flowLayout.itemSize = CGSize(width: Size.cellLength, height: Size.cellLength)
         flowLayout.scrollDirection = .vertical
-        flowLayout.minimumInteritemSpacing = 5.33
+        flowLayout.minimumInteritemSpacing = 7.83
         return flowLayout
     }()
     lazy var collectionView: UICollectionView = {
