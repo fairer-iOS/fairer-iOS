@@ -47,9 +47,6 @@ final class TextField: UITextField {
     
     var type: TextFieldType
     var placeHolder: String
-//    var myPlaceholder: String? {
-//        didSet { setupAttribute() }
-//    }
         
     // MARK: - init
     
@@ -84,13 +81,4 @@ final class TextField: UITextField {
         ]
         self.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: attributes)
     }
-    
-//    private func setupAttribute() {
-//        let attributes = [
-//            NSAttributedString.Key.font: type.font,
-//            NSAttributedString.Key.foregroundColor: UIColor.gray400
-//        ]
-//        self.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: attributes)
-//    }
 }
-
