@@ -27,7 +27,6 @@ final class WriteHouseWorkViewController: BaseViewController {
     }()
     private let houseWorkNameTextField: TextField = {
         let textField = TextField(type: .small)
-//        textField.type = .small
         textField.myPlaceholder = TextLiteral.writeHouseWorkViewControllerHouseWorkNameTextFieldPlaceholderText
         return textField
     }()
