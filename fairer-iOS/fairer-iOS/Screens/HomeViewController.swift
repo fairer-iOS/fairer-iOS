@@ -15,7 +15,7 @@ final class HomeViewController: BaseViewController {
     
     let userName: String = "고가혜"
     let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
-    var isScrolled = false
+    private var isScrolled = false
     
     // MARK: - property
     
@@ -268,16 +268,12 @@ extension HomeViewController: CollectionViewHeightProtocol {
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let scrollViewHeight = scrollView.frame.size.height
-//        let scrollContentSizeHeight = scrollView.contentSize.height
         let scrollOffset = scrollView.contentOffset.y
-        // top
         if (scrollOffset <= 5) {
             print("its top")
             scrollDidEnd()
             isScrolled = false
         }else{
-            // not top
             if isScrolled == false {
                 print("scrolling start")
                 scrollDidStart()
