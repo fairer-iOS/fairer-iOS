@@ -210,18 +210,19 @@ final class HomeViewController: BaseViewController {
     }
     
     private func scrollDidStart(){
+        self.homeRuleView.homeRuleLabel.isHidden = true
+        self.homeRuleView.homeRuleDescriptionLabel.isHidden = true
+        self.homeGroupCollectionView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        self.homeRuleView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        self.homeDivider.snp.updateConstraints {
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(16)
+        }
         UIView.animate(withDuration: 0.2 ,delay: 0 ,options: .transitionCurlUp ,animations: {
-            self.homeRuleView.homeRuleLabel.isHidden = true
-            self.homeRuleView.homeRuleDescriptionLabel.isHidden = true
-            self.homeGroupCollectionView.snp.updateConstraints {
-                $0.height.equalTo(0)
-            }
-            self.homeRuleView.snp.updateConstraints {
-                $0.height.equalTo(0)
-            }
-            self.homeDivider.snp.updateConstraints {
-                $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(16)
-            }
+            self.view.layoutIfNeeded()
         })
     }
     
