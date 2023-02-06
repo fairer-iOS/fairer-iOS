@@ -60,10 +60,10 @@ class SettingHomeRuleViewController: BaseViewController {
 
     // MARK: - life cycle
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegation()
+    }
     
     override func configUI() {
         view.backgroundColor = .white
@@ -91,7 +91,6 @@ class SettingHomeRuleViewController: BaseViewController {
             $0.top.equalTo(settingHomeRuleTextField.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-        
     }
      
     // MARK: - func
@@ -101,5 +100,45 @@ class SettingHomeRuleViewController: BaseViewController {
         
         let backButton = makeBarButtonItem(with: backButton)
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func setupDelegation() {
+        settingHomeRuleTextField.delegate = self
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        
+            if let frameValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let height = frameValue.cgRectValue.height
+                
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.view.frame.origin.y -= (height - self.view.safeAreaInsets.bottom)
+                })
+            }
+        }
+    
+    @objc private func keyboardWillHide(notification:NSNotification) {
+        
+        if let frameValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let height = frameValue.cgRectValue.height
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.frame.origin.y += (height - self.view.safeAreaInsets.bottom)
+            })
+        }
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+}
+
+// MARK: - extension
+
+extension SettingHomeRuleViewController: UITextFieldDelegate {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
