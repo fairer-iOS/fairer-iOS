@@ -8,10 +8,19 @@
 import UIKit
 
 class SettingHomeRuleViewController: BaseViewController {
+    
+    // MARK: - property
+    
+    private let backButton = BackButton(type: .system)
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // MARK: - life cycle
+     
+    // MARK: - func
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let backButton = makeBarButtonItem(with: backButton)
+        navigationItem.leftBarButtonItem = backButton
     }
-
-
 }
