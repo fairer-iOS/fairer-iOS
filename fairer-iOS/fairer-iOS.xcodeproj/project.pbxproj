@@ -77,6 +77,7 @@
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
+		5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
 		7E1F2E2E28D2168300A5744A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */; };
 		7E1F2E2F28D2168300A5744A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */; };
@@ -167,6 +168,7 @@
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
+		5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleViewController.swift; sourceTree = "<group>"; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 		39F1C11F28D5A7BC00585B83 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				5A8030802990D8B1005C7909 /* SettingHomeRule */,
 				39F1C12228D5C02900585B83 /* UIComponent */,
 			);
 			path = Home;
@@ -598,6 +601,14 @@
 			path = HouseInfo;
 			sourceTree = "<group>";
 		};
+		5A8030802990D8B1005C7909 /* SettingHomeRule */ = {
+			isa = PBXGroup;
+			children = (
+				5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */,
+			);
+			path = SettingHomeRule;
+			sourceTree = "<group>";
+		};
 		7E1F2E2628D212E000A5744A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +799,7 @@
 				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
+				5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */,
 				5205055128DCB63D00355055 /* LoginViewController.swift in Sources */,
 				5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */,
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
