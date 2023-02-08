@@ -14,6 +14,12 @@ extension String {
         return formatter.date(from: self)
     }
     
+    var stringToDay: Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd"
+        return formatter.date(from: self)
+    }
+    
     func subStringToDate() -> String {
         let startIdx: String.Index = self.index(self.startIndex, offsetBy: 2)
         return String(self[startIdx...])

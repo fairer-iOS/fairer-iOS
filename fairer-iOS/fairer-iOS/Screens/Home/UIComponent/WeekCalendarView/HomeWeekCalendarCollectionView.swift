@@ -34,7 +34,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     }
     
     // MARK: - property
-   
+    
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -51,15 +51,15 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         collectionView.isScrollEnabled = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(cell: HomeWeekCalendarCollectionViewCell.self,
-            forCellWithReuseIdentifier: HomeWeekCalendarCollectionViewCell.className)
+                                forCellWithReuseIdentifier: HomeWeekCalendarCollectionViewCell.className)
         return collectionView
     }()
-
+    
     // MARK: - life cycle
     
     override func render() {
         self.dateList = getNextDateInInt()
-    
+        
         self.addSubview(collectionView)
         
         collectionView.snp.makeConstraints {
@@ -68,7 +68,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     }
     
     // MARK: - func
-
+    
     func getTodayDateInInt()->Int{
         let ampmIndex = todayDate.dateToString.index(todayDate.dateToString.endIndex, offsetBy: -2)
         let ampmStr = String(todayDate.dateToString[ampmIndex...])
@@ -89,6 +89,36 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
             currentDate = date
         }
         return resultArr
+    }
+    
+    func getAfterWeekDate(){
+        let currentDateList = dateList
+        print(dateList)
+        var resultWeekData = [String]()
+        for date in currentDateList {
+            var afterWeekDate = date.stringToDay
+            for _ in 0...6 {
+                afterWeekDate = afterWeekDate?.addingTimeInterval(+86400)
+            }
+            resultWeekData.append(afterWeekDate?.dayToString ?? String())
+        }
+        self.dateList = resultWeekData
+        collectionView.reloadData()
+    }
+    
+    func getBeforeWeekDate(){
+        let currentDateList = dateList
+        print(dateList)
+        var resultWeekData = [String]()
+        for date in currentDateList {
+            var afterWeekDate = date.stringToDay
+            for _ in 0...6 {
+                afterWeekDate = afterWeekDate?.addingTimeInterval(-86400)
+            }
+            resultWeekData.append(afterWeekDate?.dayToString ?? String())
+        }
+        self.dateList = resultWeekData
+        collectionView.reloadData()
     }
 }
 

@@ -16,6 +16,8 @@ final class HomeViewController: BaseViewController {
     let userName: String = "고가혜"
     let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
     private var isScrolled = false
+    private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     
     // MARK: - property
     
@@ -76,8 +78,9 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupDelegate()
+        self.setWeekCalendarSwipeGesture()
     }
-    
+
     override func configUI() {
         super.configUI()
         setupToolBarGesture()
@@ -238,6 +241,13 @@ final class HomeViewController: BaseViewController {
             self.view.layoutIfNeeded()
         })
     }
+    
+    func setWeekCalendarSwipeGesture(){
+        leftSwipeGestureRecognizer.direction = .left
+        rightSwipeGestureRecognizer.direction = .right
+        homeWeekCalendarCollectionView.addGestureRecognizer(leftSwipeGestureRecognizer)
+        homeWeekCalendarCollectionView.addGestureRecognizer(rightSwipeGestureRecognizer)
+    }
 
     // MARK: - selector
     
@@ -245,6 +255,18 @@ final class HomeViewController: BaseViewController {
     private func addTapGesture() {
         // FIXME: - 집안일 추가 뷰로 연결
         print("tap")
+    }
+    
+    @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .left) {
+            NSLog("Swipe Left")
+            self.homeWeekCalendarCollectionView.getAfterWeekDate()
+        }
+            
+        if (sender.direction == .right) {
+            NSLog("Swipe Right")
+            self.homeWeekCalendarCollectionView.getBeforeWeekDate()
+        }
     }
 }
 

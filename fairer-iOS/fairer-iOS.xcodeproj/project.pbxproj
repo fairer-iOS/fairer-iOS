@@ -632,8 +632,8 @@
 			isa = PBXGroup;
 			children = (
 				39FABBDB28DB35020053EFD2 /* HomeCalendarView.swift */,
-				911E9678297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift */,
 				911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */,
+				911E9678297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift */,
 			);
 			path = WeekCalendarView;
 			sourceTree = "<group>";
