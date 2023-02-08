@@ -249,11 +249,13 @@ final class HomeViewController: BaseViewController {
 }
 
     // MARK: - protocol
+
 protocol CollectionViewHeightProtocol: AnyObject {
     func getCollectionViewHeight(cellNum: Int)
 }
 
     // MARK: - extension
+
 extension HomeViewController: CollectionViewHeightProtocol {
     func getCollectionViewHeight(cellNum: Int) {
         cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
@@ -273,7 +275,6 @@ extension HomeViewController: UIScrollViewDelegate {
             if !isScrolled {
                 scrollDidStart()
                 isScrolled = true
-            } else {
             }
         }
     }
