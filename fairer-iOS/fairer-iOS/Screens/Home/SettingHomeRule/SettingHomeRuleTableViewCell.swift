@@ -32,10 +32,9 @@ class SettingHomeRuleTableViewCell: BaseTableViewCell {
     // MARK: - life cycle
     
     override func layoutSubviews() {
-        // 테이블 뷰 셀 사이의 간격
         super.layoutSubviews()
 
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 24, bottom: 0, right: 24))
     }
     
     override func render() {
@@ -46,10 +45,10 @@ class SettingHomeRuleTableViewCell: BaseTableViewCell {
             $0.top.equalToSuperview().inset(11)
             $0.bottom.equalToSuperview().inset(11)
         }
-        
+        	
         clearButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(12)
-//            $0.leading.equalTo(ruleLabel.snp.trailing).offset(12)
+            $0.leading.equalTo(ruleLabel.snp.trailing).offset(12)
             $0.top.equalToSuperview().inset(12)
             $0.bottom.equalToSuperview().inset(12)
         }

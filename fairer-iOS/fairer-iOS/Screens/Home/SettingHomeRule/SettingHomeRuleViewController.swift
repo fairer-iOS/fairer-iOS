@@ -11,10 +11,12 @@ import SnapKit
 
 class SettingHomeRuleViewController: BaseViewController {
     
+    var dummyList = ["고가혜", "권진혁", "최지혜", "신동빈", "김수연", "김수연", "김수연", "김수연"]
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    
+    private let scrollView = UIScrollView()
     private let settingHomeRulePrimaryLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.settingHomeRulePrimaryLabel
@@ -49,7 +51,6 @@ class SettingHomeRuleViewController: BaseViewController {
         label.font = .body2
         return label
     }()
-    
     private lazy var settingHomeRuleInfoStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [settingHomeRuleInfoPin,settingHomeRuleInfoLabel])
         stackView.axis = .horizontal
@@ -57,19 +58,41 @@ class SettingHomeRuleViewController: BaseViewController {
         stackView.spacing = 8
         return stackView
     }()
-
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "규칙"
+        label.textColor = .black
+        label.font = .h2
+        return label
+    }()
+    lazy var homeRuleTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.register(cell: SettingHomeRuleTableViewCell.self,
+                           forCellReuseIdentifier: SettingHomeRuleTableViewCell.cellId)
+        return tableView
+    }()
+    
     // MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegation()
+<<<<<<< efd7144a6600963e598ad2daae8ea4777ced2457
+=======
+        //setupNotificationCenter()
+>>>>>>> [ADD] 텍스트 필드에서 엔터 클릭시 규칙 추가
     }
     
     override func configUI() {
         view.backgroundColor = .white
     }
     override func render() {
-        view.addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, settingHomeRuleTextField, settingHomeRuleInfoStackView)
+        view.addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, settingHomeRuleTextField, settingHomeRuleInfoStackView, titleLabel, homeRuleTableView)
         
         settingHomeRulePrimaryLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(SizeLiteral.topPadding)
@@ -91,6 +114,17 @@ class SettingHomeRuleViewController: BaseViewController {
             $0.top.equalTo(settingHomeRuleTextField.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(settingHomeRuleInfoStackView.snp.bottom).offset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        homeRuleTableView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
     }
      
     // MARK: - func
@@ -134,11 +168,39 @@ class SettingHomeRuleViewController: BaseViewController {
     }
 }
 
-// MARK: - extension
+    // MARK: - extension
 
 extension SettingHomeRuleViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        if let text = settingHomeRuleTextField.text {
+            dummyList.append(text)
+            
+            DispatchQueue.main.async {
+                self.homeRuleTableView.reloadData()
+            }
+            settingHomeRuleTextField.text =  ""
+            settingHomeRuleTextField.resignFirstResponder()
+        }
+        return true
+    }
+}
+
+extension SettingHomeRuleViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dummyList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = homeRuleTableView.dequeueReusableCell(withIdentifier: SettingHomeRuleTableViewCell.cellId, for: indexPath) as! SettingHomeRuleTableViewCell
+
+        cell.ruleLabel.text = dummyList[indexPath.item]
+
+        return cell
     }
 }
