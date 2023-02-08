@@ -16,7 +16,6 @@ class SettingHomeRuleViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    private let scrollView = UIScrollView()
     private let settingHomeRulePrimaryLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.settingHomeRulePrimaryLabel
@@ -65,7 +64,7 @@ class SettingHomeRuleViewController: BaseViewController {
         label.font = .h2
         return label
     }()
-    lazy var homeRuleTableView: UITableView = {
+    private lazy var homeRuleTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
@@ -166,6 +165,13 @@ class SettingHomeRuleViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    @objc func deleteBtnAction(_ sender: UIButton) {
+        let point = sender.convert(CGPoint.zero, to: homeRuleTableView)
+        guard let indexPath = homeRuleTableView.indexPathForRow(at: point) else { return }
+        dummyList.remove(at: indexPath.row)
+        homeRuleTableView.deleteRows(at: [indexPath], with: .automatic)
+      }
 }
 
     // MARK: - extension
@@ -184,6 +190,7 @@ extension SettingHomeRuleViewController: UITextFieldDelegate {
             DispatchQueue.main.async {
                 self.homeRuleTableView.reloadData()
             }
+            
             settingHomeRuleTextField.text =  ""
             settingHomeRuleTextField.resignFirstResponder()
         }
@@ -198,7 +205,9 @@ extension SettingHomeRuleViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = homeRuleTableView.dequeueReusableCell(withIdentifier: SettingHomeRuleTableViewCell.cellId, for: indexPath) as! SettingHomeRuleTableViewCell
-
+        
+        cell.clearButton.addTarget(self, action: #selector(deleteBtnAction(_:)), for: .touchUpInside)
+        
         cell.ruleLabel.text = dummyList[indexPath.item]
 
         return cell

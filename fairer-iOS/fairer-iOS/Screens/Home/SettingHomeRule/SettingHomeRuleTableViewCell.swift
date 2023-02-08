@@ -9,6 +9,7 @@ import UIKit
 
 import SnapKit
 
+
 class SettingHomeRuleTableViewCell: BaseTableViewCell {
     
     static let cellId = "CellId"
@@ -22,7 +23,7 @@ class SettingHomeRuleTableViewCell: BaseTableViewCell {
         label.textAlignment = .left
         return label
     }()
-    private let clearButton: UIButton = {
+    let clearButton: UIButton = {
         let button = UIButton()
         button.setImage(ImageLiterals.textFieldClearButton, for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
