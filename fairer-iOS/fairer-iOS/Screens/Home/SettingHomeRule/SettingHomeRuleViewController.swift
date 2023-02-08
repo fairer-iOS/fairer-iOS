@@ -38,6 +38,21 @@ class SettingHomeRuleViewController: BaseViewController {
         textField.setClearButton()
         return textField
     }()
+    private let HomeRuleTextFieldeWarningLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "텍스트는 16글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
+        label.textColor = .negative20
+        label.font = .body2
+        label.isHidden = true
+        return label
+    }()
+    private lazy var HomeRuleTextFieldStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [settingHomeRuleTextField,HomeRuleTextFieldeWarningLabel])
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        return stackView
+    }()
     private let settingHomeRuleInfoPin: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.settingInfo
@@ -77,21 +92,12 @@ class SettingHomeRuleViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupDelegation()
-<<<<<<< efd7144a6600963e598ad2daae8ea4777ced2457
-=======
-        //setupNotificationCenter()
->>>>>>> [ADD] 텍스트 필드에서 엔터 클릭시 규칙 추가
-    }
-    
+        
     override func configUI() {
         view.backgroundColor = .white
     }
     override func render() {
-        view.addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, settingHomeRuleTextField, settingHomeRuleInfoStackView, titleLabel, homeRuleTableView)
+        view.addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, HomeRuleTextFieldStackView, settingHomeRuleInfoStackView, titleLabel, homeRuleTableView)
         
         settingHomeRulePrimaryLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(SizeLiteral.topPadding)
@@ -103,14 +109,14 @@ class SettingHomeRuleViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        settingHomeRuleTextField.snp.makeConstraints {
+        HomeRuleTextFieldStackView.snp.makeConstraints {
             $0.top.equalTo(settingHomeRuleTextFieldLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         settingHomeRuleInfoStackView.snp.makeConstraints {
-            $0.top.equalTo(settingHomeRuleTextField.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.top.equalTo(HomeRuleTextFieldStackView.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -128,6 +134,12 @@ class SettingHomeRuleViewController: BaseViewController {
      
     // MARK: - func
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegation()
+        
+    }
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -139,39 +151,26 @@ class SettingHomeRuleViewController: BaseViewController {
         settingHomeRuleTextField.delegate = self
     }
     
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        
-            if let frameValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                let height = frameValue.cgRectValue.height
-                
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.view.frame.origin.y -= (height - self.view.safeAreaInsets.bottom)
-                })
-            }
-        }
-    
-    @objc private func keyboardWillHide(notification:NSNotification) {
-        
-        if let frameValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let height = frameValue.cgRectValue.height
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.frame.origin.y += (height - self.view.safeAreaInsets.bottom)
-            })
-        }
-    }
-    
-    private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
     @objc func deleteBtnAction(_ sender: UIButton) {
         let point = sender.convert(CGPoint.zero, to: homeRuleTableView)
         guard let indexPath = homeRuleTableView.indexPathForRow(at: point) else { return }
         dummyList.remove(at: indexPath.row)
         homeRuleTableView.deleteRows(at: [indexPath], with: .automatic)
       }
+    
+     func checkMaxLength() {
+            let maxLength = 16
+            if let text = settingHomeRuleTextField.text {
+                if text.count > maxLength {
+                    settingHomeRuleTextField.layer.borderWidth = 1
+                    settingHomeRuleTextField.layer.borderColor = UIColor.negative20.cgColor
+                    HomeRuleTextFieldeWarningLabel.isHidden = false
+                } else {
+                    settingHomeRuleTextField.layer.borderWidth = 0
+                    HomeRuleTextFieldeWarningLabel.isHidden = true
+                }
+            }
+        }
 }
 
     // MARK: - extension
@@ -180,6 +179,10 @@ extension SettingHomeRuleViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        checkMaxLength()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
