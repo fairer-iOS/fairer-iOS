@@ -20,11 +20,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - property
     
     private var cellHeight = CGFloat()
-    private let logoImage : UIImageView = {
-        let imgView = UIImageView()
-        imgView.image = ImageLiterals.imgHomeLogo
-        return imgView
-    }()
+    private let logoImage = UIImageView(image: ImageLiterals.imgHomeLogo)
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(ImageLiterals.settingMenu, for: .normal)
@@ -221,7 +217,7 @@ final class HomeViewController: BaseViewController {
         self.homeDivider.snp.updateConstraints {
             $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(16)
         }
-        UIView.animate(withDuration: 0.2 ,delay: 0 ,options: .transitionCurlUp ,animations: {
+        UIView.animate(withDuration: 0.5 ,delay: 0 ,options: .transitionCurlUp ,animations: {
             self.view.layoutIfNeeded()
         })
     }
@@ -238,7 +234,7 @@ final class HomeViewController: BaseViewController {
         }
         self.homeRuleView.homeRuleLabel.isHidden = false
         self.homeRuleView.homeRuleDescriptionLabel.isHidden = false
-        UIView.animate(withDuration: 0.3, delay: 0 ,options: .transitionCurlUp ,animations: {
+        UIView.animate(withDuration: 0.5, delay: 0 ,options: .transitionCurlUp ,animations: {
             self.view.layoutIfNeeded()
         })
     }
@@ -252,12 +248,12 @@ final class HomeViewController: BaseViewController {
     }
 }
 
-    // MARK: - Protocol
+    // MARK: - protocol
 protocol CollectionViewHeightProtocol: AnyObject {
     func getCollectionViewHeight(cellNum: Int)
 }
 
-    // MARK: - Extension
+    // MARK: - extension
 extension HomeViewController: CollectionViewHeightProtocol {
     func getCollectionViewHeight(cellNum: Int) {
         cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
@@ -271,16 +267,13 @@ extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollOffset = scrollView.contentOffset.y
         if (scrollOffset <= 5) {
-            print("its top")
             scrollDidEnd()
             isScrolled = false
-        }else{
-            if isScrolled == false {
-                print("scrolling start")
+        } else {
+            if !isScrolled {
                 scrollDidStart()
                 isScrolled = true
-            }else {
-                print("still scrolling")
+            } else {
             }
         }
     }
