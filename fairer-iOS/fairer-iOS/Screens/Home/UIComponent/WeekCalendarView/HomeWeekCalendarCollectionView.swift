@@ -99,6 +99,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
             var afterWeekDate = date.stringToDay
             for _ in 0...6 {
                 afterWeekDate = afterWeekDate?.addingTimeInterval(+86400)
+                print(afterWeekDate)
             }
             resultWeekData.append(afterWeekDate?.dayToString ?? String())
         }
