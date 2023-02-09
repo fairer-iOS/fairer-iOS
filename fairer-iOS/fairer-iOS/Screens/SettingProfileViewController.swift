@@ -75,6 +75,11 @@ final class SettingProfileViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegation()
+    }
+    
     override func render() {
         view.addSubview(settingProfileTitleLabel)
         settingProfileTitleLabel.snp.makeConstraints {
@@ -132,6 +137,11 @@ final class SettingProfileViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
+    private func setupDelegation() {
+        settingProfileNameTextField.delegate = self
+        settingProfileStatusTextField.delegate = self
+    }
+    
     private func pushSettingProfileImageViewController() {
         // FIXME: - 프로필 이미지 선정 뷰로 이동
         print("프로필 이미지")
@@ -140,5 +150,12 @@ final class SettingProfileViewController: BaseViewController {
     private func touchUpToSaveChange() {
         // FIXME: - 서버에 프로필 정보 업데이트
         print("입력 완료")
+    }
+}
+
+// MARK: - extension
+
+extension SettingProfileViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
     }
 }
