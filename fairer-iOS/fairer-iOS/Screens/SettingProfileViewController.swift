@@ -78,6 +78,7 @@ final class SettingProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegation()
+        setupNotificationCenter()
     }
     
     override func render() {
@@ -142,6 +143,11 @@ final class SettingProfileViewController: BaseViewController {
         settingProfileStatusTextField.delegate = self
     }
     
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private func pushSettingProfileImageViewController() {
         // FIXME: - 프로필 이미지 선정 뷰로 이동
         print("프로필 이미지")
@@ -151,11 +157,31 @@ final class SettingProfileViewController: BaseViewController {
         // FIXME: - 서버에 프로필 정보 업데이트
         print("입력 완료")
     }
+    
+    // MARK: - selector
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.settingProfileDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 36)
+            })
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.settingProfileDoneButton.transform = .identity
+        })
+    }
 }
 
 // MARK: - extension
 
 extension SettingProfileViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
