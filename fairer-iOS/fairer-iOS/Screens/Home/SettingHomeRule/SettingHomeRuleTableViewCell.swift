@@ -26,7 +26,6 @@ class SettingHomeRuleTableViewCell: BaseTableViewCell {
     let clearButton: UIButton = {
         let button = UIButton()
         button.setImage(ImageLiterals.textFieldClearButton, for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         return button
     }()
     
@@ -50,8 +49,8 @@ class SettingHomeRuleTableViewCell: BaseTableViewCell {
         clearButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(12)
             $0.leading.equalTo(ruleLabel.snp.trailing).offset(12)
-            $0.top.equalToSuperview().inset(12)
-            $0.bottom.equalToSuperview().inset(12)
+            $0.height.equalTo(58)
+            $0.width.equalTo(58)
         }
     }
     
