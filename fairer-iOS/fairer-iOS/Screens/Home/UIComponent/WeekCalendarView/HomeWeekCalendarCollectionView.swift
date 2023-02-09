@@ -18,7 +18,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     private var cellIndexPath = IndexPath()
     private let dotList = [ImageLiterals.oneDot,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.threeDots,ImageLiterals.twoDots]
     private let dayList = ["일","월","화","수","목","금","토"]
-    private var dateList = [String]()
+    lazy var dateList = [String]()
     private var startOfWeekDate = Date().startOfWeek
     private var endOfWeekDate = Date().endOfWeek
     private var todayDate = Date()
@@ -43,7 +43,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         flowLayout.minimumLineSpacing = 8
         return flowLayout
     }()
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
@@ -58,7 +58,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     // MARK: - life cycle
     
     override func render() {
-        self.dateList = getNextDateInInt()
+        self.dateList = getThisWeekInInt()
         
         self.addSubview(collectionView)
         
@@ -75,7 +75,8 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         let result = Int(ampmStr) ?? 0
         return result
     }
-    func getNextDateInInt()->[String]{
+    
+    func getThisWeekInInt()->[String]{
         var resultArr = [String]()
         let ampmIndex = startOfWeekDate.dateToString.index(startOfWeekDate.dateToString.endIndex, offsetBy: -2)
         let ampmStr = String(startOfWeekDate.dateToString[ampmIndex...])
@@ -99,7 +100,6 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
             var afterWeekDate = date.stringToDay
             for _ in 0...6 {
                 afterWeekDate = afterWeekDate?.addingTimeInterval(+86400)
-                print(afterWeekDate)
             }
             resultWeekData.append(afterWeekDate?.dayToString ?? String())
         }

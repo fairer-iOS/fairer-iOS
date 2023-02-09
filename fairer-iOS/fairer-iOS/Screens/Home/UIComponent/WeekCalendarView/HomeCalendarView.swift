@@ -36,7 +36,7 @@ final class HomeCalendarView: BaseUIView {
         stackView.alignment = .center
         return stackView
     }()
-    private let todayButton: UIButton = {
+    let todayButton: UIButton = {
         let button = UIButton()
         button.setTitle(TextLiteral.homeCalendarViewTodayTitle, for: .normal)
         button.setTitleColor(.positive20, for: .normal)

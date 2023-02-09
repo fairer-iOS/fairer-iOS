@@ -79,6 +79,7 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         self.setupDelegate()
         self.setWeekCalendarSwipeGesture()
+        self.setButtonEvent()
     }
 
     override func configUI() {
@@ -181,6 +182,10 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - func
     
+    private func setButtonEvent(){
+        self.homeCalenderView.todayButton.addTarget(self, action: #selector(moveToTodayDate), for: .touchUpInside)
+    }
+    
     private func setupDelegate(){
         self.calendarDailyCollecionView.delegate = self
         self.contentScrollView.delegate = self
@@ -259,14 +264,17 @@ final class HomeViewController: BaseViewController {
     
     @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
         if (sender.direction == .left) {
-            NSLog("Swipe Left")
             self.homeWeekCalendarCollectionView.getAfterWeekDate()
         }
             
         if (sender.direction == .right) {
-            NSLog("Swipe Right")
             self.homeWeekCalendarCollectionView.getBeforeWeekDate()
         }
+    }
+    
+    @objc private func moveToTodayDate(){
+        self.homeWeekCalendarCollectionView.dateList = self.homeWeekCalendarCollectionView.getThisWeekInInt()
+        self.homeWeekCalendarCollectionView.collectionView.reloadData()
     }
 }
 
