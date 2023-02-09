@@ -13,13 +13,15 @@ class SettingHomeRuleViewController: BaseViewController {
     
     var dummyList = ["고가혜", "권진혁", "최지혜", "신동빈", "김수연", "김수연", "김수연", "김수연"]
     
+    private let maxLength = 16
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
     private let settingHomeRulePrimaryLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.settingHomeRulePrimaryLabel
-        label.textColor = .black
+        label.textColor = .gray800
         label.font = .h2
         return label
     }()
@@ -32,13 +34,11 @@ class SettingHomeRuleViewController: BaseViewController {
     }()
     private let settingHomeRuleTextField: TextField = {
         let textField = TextField()
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.gray200.cgColor
         textField.myPlaceholder = TextLiteral.settingHomeRuleTextFieldPlaceholder
         textField.setClearButton()
         return textField
     }()
-    private let HomeRuleTextFieldeWarningLabel: UILabel = {
+    private let settingHomeRuleTextFieldeWarningLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: "텍스트는 16글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
         label.textColor = .negative20
@@ -46,61 +46,36 @@ class SettingHomeRuleViewController: BaseViewController {
         label.isHidden = true
         return label
     }()
-    private lazy var HomeRuleTextFieldStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [settingHomeRuleTextField,HomeRuleTextFieldeWarningLabel])
+    private lazy var settingHomeRuleTextFieldStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [settingHomeRuleTextField,settingHomeRuleTextFieldeWarningLabel])
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.spacing = 8
         return stackView
     }()
-    private let settingHomeRuleInfoPin: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.settingInfo
-        return imageView
-    }()
-    private let settingHomeRuleInfoLabel: UILabel = {
-        let label = UILabel()
+    private let settingHomeRuleInfoLabel: InfoLabelView = {
+        let label = InfoLabelView()
         label.text = TextLiteral.settingHomeRuleInfoLabel
         label.textColor = .gray600
-        label.font = .body2
+        label.imageColor = .gray200
         return label
-    }()
-    private lazy var settingHomeRuleInfoStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [settingHomeRuleInfoPin,settingHomeRuleInfoLabel])
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 8
-        return stackView
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "규칙"
-        label.textColor = .black
+        label.text = TextLiteral.homeRuleViewRuleLabel
+        label.textColor = .gray600
         label.font = .h2
         return label
     }()
-    private lazy var homeRuleTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.backgroundColor = .white
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.showsVerticalScrollIndicator = false
-        tableView.register(cell: SettingHomeRuleTableViewCell.self,
-                           forCellReuseIdentifier: SettingHomeRuleTableViewCell.cellId)
-        return tableView
-    }()
+    private let homeRuleTableView = UITableView()
     
     // MARK: - life cycle
         
-    override func configUI() {
-        view.backgroundColor = .white
-    }
     override func render() {
-        view.addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, HomeRuleTextFieldStackView, settingHomeRuleInfoStackView, titleLabel, homeRuleTableView)
+        view.addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, settingHomeRuleTextFieldStackView, settingHomeRuleInfoLabel, titleLabel, homeRuleTableView)
         
         settingHomeRulePrimaryLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(SizeLiteral.topPadding)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -109,19 +84,20 @@ class SettingHomeRuleViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        HomeRuleTextFieldStackView.snp.makeConstraints {
+        settingHomeRuleTextFieldStackView.snp.makeConstraints {
             $0.top.equalTo(settingHomeRuleTextFieldLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        settingHomeRuleInfoStackView.snp.makeConstraints {
-            $0.top.equalTo(HomeRuleTextFieldStackView.snp.bottom).offset(SizeLiteral.componentPadding)
+        settingHomeRuleInfoLabel.snp.makeConstraints {
+            $0.top.equalTo(settingHomeRuleTextFieldStackView.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(22)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(settingHomeRuleInfoStackView.snp.bottom).offset(24)
+            $0.top.equalTo(settingHomeRuleInfoLabel.snp.bottom).offset(24)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -129,16 +105,15 @@ class SettingHomeRuleViewController: BaseViewController {
             $0.top.equalTo(titleLabel.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-        
     }
-     
-    // MARK: - func
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegation()
-        
+        setupAttribute()
     }
+    
+    // MARK: - func
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
@@ -149,6 +124,16 @@ class SettingHomeRuleViewController: BaseViewController {
     
     private func setupDelegation() {
         settingHomeRuleTextField.delegate = self
+        homeRuleTableView.delegate = self
+        homeRuleTableView.dataSource = self
+    }
+    
+    private func setupAttribute() {
+        homeRuleTableView.register(SettingHomeRuleTableViewCell.self, forCellReuseIdentifier: SettingHomeRuleTableViewCell.cellId)
+        homeRuleTableView.rowHeight = 74
+        homeRuleTableView.separatorStyle = .none
+        homeRuleTableView.showsVerticalScrollIndicator = false
+        homeRuleTableView.backgroundColor = .white
     }
     
     @objc func deleteBtnAction(_ sender: UIButton) {
@@ -159,19 +144,19 @@ class SettingHomeRuleViewController: BaseViewController {
       }
     
     private func checkMaxLength() {
-            let maxLength = 16
             if let text = settingHomeRuleTextField.text {
                 if text.count > maxLength {
-                    settingHomeRuleTextField.layer.borderWidth = 1
                     settingHomeRuleTextField.layer.borderColor = UIColor.negative20.cgColor
-                    HomeRuleTextFieldeWarningLabel.isHidden = false
+                    settingHomeRuleTextField.layer.borderWidth = 1
+                    settingHomeRuleTextFieldeWarningLabel.isHidden = false
                 } else {
-                    settingHomeRuleTextField.layer.borderWidth = 0
-                    HomeRuleTextFieldeWarningLabel.isHidden = true
+                    settingHomeRuleTextField.layer.borderColor = UIColor.gray200.cgColor
+                    settingHomeRuleTextField.layer.borderWidth = 1
+                    settingHomeRuleTextFieldeWarningLabel.isHidden = true
                 }
             }
         }
-}
+    }
 
     // MARK: - extension
 
@@ -184,18 +169,34 @@ extension SettingHomeRuleViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         checkMaxLength()
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+           if !isEditing {
+               isEditing = true
+               checkMaxLength()
+           }
+       }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+           if isEditing {
+               isEditing = false
+               settingHomeRuleTextField.layer.borderWidth = 0
+           }
+       }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-
+        
         if let text = settingHomeRuleTextField.text {
-            dummyList.append(text)
-            
-            DispatchQueue.main.async {
-                self.homeRuleTableView.reloadData()
+            if !text.isEmpty && text.count <= maxLength {
+                dummyList.append(text)
+                
+                DispatchQueue.main.async {
+                    self.homeRuleTableView.reloadData()
+                }
+                
+                settingHomeRuleTextField.text =  ""
+                settingHomeRuleTextField.resignFirstResponder()
             }
-            
-            settingHomeRuleTextField.text =  ""
-            settingHomeRuleTextField.resignFirstResponder()
         }
         return true
     }
