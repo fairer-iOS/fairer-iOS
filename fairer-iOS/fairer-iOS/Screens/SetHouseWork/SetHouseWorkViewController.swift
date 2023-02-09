@@ -142,12 +142,13 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func showToast() {
         UIView.animate(withDuration: 1.0, animations: {
+            self.managerToastLabel.isHidden = false
             self.managerToastLabel.alpha = 1.0
         }, completion: { isCompleted in
             UIView.animate(withDuration: 1.0, animations: {
                 self.managerToastLabel.alpha = 0
             }, completion: { isCompleted in
-                self.managerToastLabel.removeFromSuperview()
+                self.managerToastLabel.isHidden = true
             })
         })
     }
