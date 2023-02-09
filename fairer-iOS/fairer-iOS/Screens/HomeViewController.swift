@@ -217,7 +217,7 @@ final class HomeViewController: BaseViewController {
         self.homeDivider.snp.updateConstraints {
             $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(16)
         }
-        UIView.animate(withDuration: 0.5 ,delay: 0 ,options: .transitionCurlUp ,animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
             self.view.layoutIfNeeded()
         })
     }
@@ -234,7 +234,7 @@ final class HomeViewController: BaseViewController {
         }
         self.homeRuleView.homeRuleLabel.isHidden = false
         self.homeRuleView.homeRuleDescriptionLabel.isHidden = false
-        UIView.animate(withDuration: 0.5, delay: 0 ,options: .transitionCurlUp ,animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
             self.view.layoutIfNeeded()
         })
     }
