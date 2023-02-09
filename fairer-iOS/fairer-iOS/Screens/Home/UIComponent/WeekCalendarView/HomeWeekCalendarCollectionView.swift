@@ -94,7 +94,6 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     
     func getAfterWeekDate(){
         let currentDateList = dateList
-        print(dateList)
         var resultWeekData = [String]()
         for date in currentDateList {
             var afterWeekDate = date.stringToDay
@@ -109,7 +108,6 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     
     func getBeforeWeekDate(){
         let currentDateList = dateList
-        print(dateList)
         var resultWeekData = [String]()
         for date in currentDateList {
             var afterWeekDate = date.stringToDay
