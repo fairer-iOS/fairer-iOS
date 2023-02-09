@@ -7,8 +7,6 @@
 
 import UIKit
 
-import SnapKit
-
 final class HomeCalendarView: BaseUIView {
     
     private var today = Date()
@@ -18,14 +16,14 @@ final class HomeCalendarView: BaseUIView {
     
     // MARK: - property
     
-    private lazy var calendarMonthLabelButton : UIButton = {
+    lazy var calendarMonthLabelButton : UIButton = {
         let button = UIButton()
         button.setTitle("\(self.year)년 \(self.month)월", for: .normal)
         button.setTitleColor(.gray800, for: .normal)
         button.titleLabel?.font = UIFont.font(AppFontName.semiBold, ofSize: 14)
         return button
     }()
-    private lazy var calendarMonthPickButton : UIButton = {
+    lazy var calendarMonthPickButton : UIButton = {
         let button = UIButton()
         button.setImage(ImageLiterals.moveToCalendarButton, for: .normal)
         return button

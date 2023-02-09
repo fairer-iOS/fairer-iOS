@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 import SnapKit
 
@@ -68,6 +69,10 @@ final class HomeViewController: BaseViewController {
         scrollView.showsVerticalScrollIndicator = true
         return scrollView
     }()
+    let myPicker: MyDatePicker = {
+        let v = MyDatePicker()
+        return v
+    }()
     
     // MARK: - life cycle
     
@@ -80,6 +85,7 @@ final class HomeViewController: BaseViewController {
         self.setupDelegate()
         self.setWeekCalendarSwipeGesture()
         self.setButtonEvent()
+        self.setDatePicker()
     }
 
     override func configUI() {
@@ -96,7 +102,8 @@ final class HomeViewController: BaseViewController {
                          contentScrollView,
                          homeGroupCollectionView,
                          homeRuleView,
-                         homeDivider)
+                         homeDivider,
+                         myPicker)
         
         contentScrollView.addSubviews(
             homeCalenderView,
@@ -166,6 +173,10 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(310)
             $0.bottom.equalToSuperview()
         }
+        
+        myPicker.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     override func setupNavigationBar() {
@@ -184,6 +195,7 @@ final class HomeViewController: BaseViewController {
     
     private func setButtonEvent(){
         self.homeCalenderView.todayButton.addTarget(self, action: #selector(moveToTodayDate), for: .touchUpInside)
+        self.homeCalenderView.calendarMonthPickButton.addTarget(self, action: #selector(moveToDatePicker), for: .touchUpInside)
     }
     
     private func setupDelegate(){
@@ -253,6 +265,24 @@ final class HomeViewController: BaseViewController {
         homeWeekCalendarCollectionView.addGestureRecognizer(leftSwipeGestureRecognizer)
         homeWeekCalendarCollectionView.addGestureRecognizer(rightSwipeGestureRecognizer)
     }
+    
+    func setDatePicker(){
+        myPicker.isHidden = true
+        // add closures to custom picker view
+        myPicker.dismissClosure = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.myPicker.isHidden = true
+        }
+        myPicker.changeClosure = { [weak self] val in
+            guard let self = self else {
+                return
+            }
+            print(val)
+            // do something with the selected date
+        }
+    }
 
     // MARK: - selector
     
@@ -275,6 +305,10 @@ final class HomeViewController: BaseViewController {
     @objc private func moveToTodayDate(){
         self.homeWeekCalendarCollectionView.dateList = self.homeWeekCalendarCollectionView.getThisWeekInInt()
         self.homeWeekCalendarCollectionView.collectionView.reloadData()
+    }
+    
+    @objc private func moveToDatePicker(){
+        self.myPicker.isHidden = false
     }
 }
 
