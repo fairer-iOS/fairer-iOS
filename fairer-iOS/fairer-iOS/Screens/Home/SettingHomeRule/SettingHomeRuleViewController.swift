@@ -158,7 +158,7 @@ class SettingHomeRuleViewController: BaseViewController {
         homeRuleTableView.deleteRows(at: [indexPath], with: .automatic)
       }
     
-     func checkMaxLength() {
+    private func checkMaxLength() {
             let maxLength = 16
             if let text = settingHomeRuleTextField.text {
                 if text.count > maxLength {
