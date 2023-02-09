@@ -14,4 +14,15 @@ enum SizeLiteral {
     static let leadingTrailingPadding: CGFloat = 24
     static let componentPadding: CGFloat = 16
     static let topComponentPadding: CGFloat = 28
+    static let topPadding: CGFloat = 28
+    
+    // MARK: - SelectHouseWorkViewController
+    
+    static let houseWorkDetailOneLineHeight: CGFloat = 80
+    static let houseWorkDetailTwoLineHeight: CGFloat = 154
+    static let houseWorkDetailThreeLineHeight: CGFloat = 228
+    
+    // MARK: - HomeViewCollectionViewCell
+    
+    static let homeViewWorkCellHeight: CGFloat = 105
 }

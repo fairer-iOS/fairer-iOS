@@ -13,6 +13,7 @@ enum ImageLiterals {
     
     static var imgInfo: UIImage { .load(systemName: "info.circle.fill") }
     static var imgLogo: UIImage { .load(name: "fairerlogo") }
+    static var imgHomeLogo: UIImage { .load(name: "fairerlogoInHomeVC")}
     static var imgLogoLogin: UIImage { .load(name: "fairerlogologin") }
     static var imgLogoSplash: UIImage { .load(name: "fairerlogosplash") }
     static var imgAppleLogo: UIImage { .load(name: "applelogo") }
@@ -33,6 +34,7 @@ enum ImageLiterals {
     static var imgKakaoShare: UIImage { .load(name: "kakaoshare") }
     static var imgWelcomeHouse: UIImage { .load(name: "welcomehouse") }
     static var imgAlreadyHouse: UIImage { .load(name: "alreadyhouse") }
+    static var imgBubble: UIImage { .load(name: "bubble") }
     
     
     // MARK: - profile
@@ -61,6 +63,8 @@ enum ImageLiterals {
     static var textFieldClearButton: UIImage { .load(name: "clearbutton") }
     static var navigationBarBackButton: UIImage { .load(name: "backbutton") }
     static var settingProfileImageBrushButton: UIImage { .load(name: "brushButton") }
+    static var plusWorkButton: UIImage { .load(systemName: "plus") }
+    static var moveToCalendarButton: UIImage { .load(name: "keyboard_arrow_down") }
     
     // MARK: - icon
     
@@ -70,6 +74,21 @@ enum ImageLiterals {
     static var settingBell: UIImage { .load(systemName: "bell.fill") }
     static var settingExclamation: UIImage { .load(systemName: "exclamationmark.circle") }
     static var settingInfo: UIImage { .load(systemName: "info.circle") }
+    static var calendarChevron: UIImage { .load(name: "calendarchevron") }
+    static var writeHouseWorkChevron: UIImage { .load(systemName: "chevron.right") }
+    static var spacePin: UIImage { .load(name: "pin") }
+    static var deleteButton: UIImage { .load(systemName: "xmark.circle.fill") }
+    static var settingMenu: UIImage { .load(name: "menu") }
+    static var selectedCalendarCell: UIImage { .load(name: "selectedCell") }
+    static var locationPin: UIImage { .load(name: "locationPin") }
+    static var houseFill: UIImage { .load(systemName: "house.fill") }
+    static var error: UIImage { .load(name: "error") }
+    
+    // MARK: - dot
+    
+    static var oneDot: UIImage { .load(name: "dot") }
+    static var twoDots: UIImage { .load(name: "2dot") }
+    static var threeDots: UIImage { .load(name: "3dot") }
 }
 
 extension UIImage {

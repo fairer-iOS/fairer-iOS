@@ -25,4 +25,35 @@ extension Date {
         formatter.dateFormat = "yyyy년 M월 d일 H시 M분"
         return formatter.string(from: self)
     }
+    
+    var dayToKoreanString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 M월 d일"
+        return formatter.string(from: self)
+    }
+    
+    var yearToString: String {
+        let formatter_year = DateFormatter()
+        formatter_year.dateFormat = "yyyy"
+        var current_year_string = formatter_year.string(from: Date())
+        return current_year_string
+    }
+    
+    var monthToString: String {
+        let formatter_year = DateFormatter()
+        formatter_year.dateFormat = "MM"
+        var current_year_string = formatter_year.string(from: Date())
+        return current_year_string
+    }
+    
+    var startOfWeek: Date {
+        let date = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
+        let dslTimeOffset = NSTimeZone.local.daylightSavingTimeOffset(for: date)
+        return date.addingTimeInterval(dslTimeOffset)
+    }
+
+    var endOfWeek: Date {
+        return Calendar.current.date(byAdding: .second, value: 604799, to: self.startOfWeek)!
+    }
+    
 }
