@@ -15,16 +15,12 @@ final class HomeViewController: BaseViewController {
     
     let userName: String = "고가혜"
     let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
+    private var isScrolled = false
     
     // MARK: - property
     
     private var cellHeight = CGFloat()
-
-    private let logoImage : UIImageView = {
-        let imgView = UIImageView()
-        imgView.image = ImageLiterals.imgHomeLogo
-        return imgView
-    }()
+    private let logoImage = UIImageView(image: ImageLiterals.imgHomeLogo)
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(ImageLiterals.settingMenu, for: .normal)
@@ -184,6 +180,7 @@ final class HomeViewController: BaseViewController {
     
     private func setupDelegate(){
         self.calendarDailyCollecionView.delegate = self
+        self.contentScrollView.delegate = self
     }
     
     private func setupToolBarGesture() {
@@ -207,6 +204,40 @@ final class HomeViewController: BaseViewController {
             }
         }
     }
+    
+    private func scrollDidStart(){
+        self.homeRuleView.homeRuleLabel.isHidden = true
+        self.homeRuleView.homeRuleDescriptionLabel.isHidden = true
+        self.homeGroupCollectionView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        self.homeRuleView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        self.homeDivider.snp.updateConstraints {
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(16)
+        }
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    private func scrollDidEnd(){
+        self.homeDivider.snp.updateConstraints {
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(144)
+        }
+        self.homeGroupCollectionView.snp.updateConstraints {
+            $0.height.equalTo(86)
+        }
+        self.homeRuleView.snp.updateConstraints {
+            $0.height.equalTo(40)
+        }
+        self.homeRuleView.homeRuleLabel.isHidden = false
+        self.homeRuleView.homeRuleDescriptionLabel.isHidden = false
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
 
     // MARK: - selector
     
@@ -217,17 +248,34 @@ final class HomeViewController: BaseViewController {
     }
 }
 
-    // MARK: - Protocol
+    // MARK: - protocol
+
 protocol CollectionViewHeightProtocol: AnyObject {
     func getCollectionViewHeight(cellNum: Int)
 }
 
-    // MARK: - Extension
+    // MARK: - extension
+
 extension HomeViewController: CollectionViewHeightProtocol {
     func getCollectionViewHeight(cellNum: Int) {
         cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
         calendarDailyCollecionView.snp.updateConstraints {
             $0.height.equalTo(cellHeight)
+        }
+    }
+}
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollOffset = scrollView.contentOffset.y
+        if (scrollOffset <= 5) {
+            scrollDidEnd()
+            isScrolled = false
+        } else {
+            if !isScrolled {
+                scrollDidStart()
+                isScrolled = true
+            }
         }
     }
 }
