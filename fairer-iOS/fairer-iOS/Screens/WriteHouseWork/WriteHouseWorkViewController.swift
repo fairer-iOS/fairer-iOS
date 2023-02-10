@@ -53,6 +53,18 @@ final class WriteHouseWorkViewController: BaseViewController {
         view.confirmButton.addAction(confirmAction, for: .touchUpInside)
         return view
     }()
+    private let managerToastLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.setHouseWorkManagerToastLabel
+        label.textColor = .white
+        label.font = .title2
+        label.backgroundColor = .gray700
+        label.textAlignment = .center
+        label.layer.cornerRadius = 8
+        label.clipsToBounds = true
+        label.alpha = 0
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -67,7 +79,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, selectManagerView)
+        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, selectManagerView, managerToastLabel)
         
         writeHouseWorkCalendarView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -102,6 +114,12 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
+        }
+        
+        managerToastLabel.snp.makeConstraints {
+            $0.bottom.equalTo(selectManagerView.snp.top).offset(-10)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(36)
         }
     }
     
@@ -199,8 +217,21 @@ final class WriteHouseWorkViewController: BaseViewController {
             
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
         } else {
-//            showToast()
+            showToast()
         }
+    }
+    
+    private func showToast() {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.managerToastLabel.isHidden = false
+            self.managerToastLabel.alpha = 1.0
+        }, completion: { isCompleted in
+            UIView.animate(withDuration: 1.0, animations: {
+                self.managerToastLabel.alpha = 0
+            }, completion: { isCompleted in
+                self.managerToastLabel.isHidden = true
+            })
+        })
     }
 }
 
