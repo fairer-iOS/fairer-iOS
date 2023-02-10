@@ -54,6 +54,7 @@
 		5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055328E1BF6700355055 /* GroupMainViewController.swift */; };
 		5205055828E1C50600355055 /* InfoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055728E1C50600355055 /* InfoLabelView.swift */; };
 		520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D6FF1291133A800CF65B2 /* AlreadyInGroupViewController.swift */; };
+		52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */; };
 		52136FD4298299B90022D465 /* RepeatCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD3298299B90022D465 /* RepeatCycleView.swift */; };
 		52136FD72983DE1A0022D465 /* RepeatCycleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */; };
 		52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */; };
@@ -154,6 +155,7 @@
 		5205055328E1BF6700355055 /* GroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMainViewController.swift; sourceTree = "<group>"; };
 		5205055728E1C50600355055 /* InfoLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabelView.swift; sourceTree = "<group>"; };
 		520D6FF1291133A800CF65B2 /* AlreadyInGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlreadyInGroupViewController.swift; sourceTree = "<group>"; };
+		52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteHouseWorkViewController.swift; sourceTree = "<group>"; };
 		52136FD3298299B90022D465 /* RepeatCycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleView.swift; sourceTree = "<group>"; };
 		52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleMenu.swift; sourceTree = "<group>"; };
 		52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -462,6 +464,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		52136FDF298A72020022D465 /* WriteHouseWork */ = {
+			isa = PBXGroup;
+			children = (
+				52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */,
+			);
+			path = WriteHouseWork;
+			sourceTree = "<group>";
+		};
 		522714E6297917AF006BADBC /* SetHouseWork */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +547,7 @@
 		5227556C28B303370080DD65 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				52136FDF298A72020022D465 /* WriteHouseWork */,
 				522714E6297917AF006BADBC /* SetHouseWork */,
 				5204AAC2295A01F4002FB6CA /* SettingPolicy */,
 				5204AABA2950BC3B002FB6CA /* SettingInquiry */,
@@ -841,6 +852,7 @@
 				52136FD4298299B90022D465 /* RepeatCycleView.swift in Sources */,
 				52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */,
 				522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */,
+				52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */,
 				5204AAB929507319002FB6CA /* SettingAlarmTableViewCell.swift in Sources */,
 				520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */,
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
