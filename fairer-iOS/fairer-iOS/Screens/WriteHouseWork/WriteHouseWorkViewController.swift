@@ -36,9 +36,21 @@ final class WriteHouseWorkViewController: BaseViewController {
     private lazy var getManagerView: GetManagerView = {
         let view = GetManagerView()
         let action = UIAction { [weak self] _ in
-            print("getmanagerview")
+            self?.showSelectManagerView()
         }
         view.addManagerButton.addAction(action, for: .touchUpInside)
+        return view
+    }()
+    private lazy var selectManagerView: SelectManagerView = {
+        let view = SelectManagerView()
+        let cancelAction = UIAction { [weak self] _ in
+            print("취소")
+        }
+        let confirmAction = UIAction { [weak self] _ in
+            print("확인")
+        }
+        view.cancelButton.addAction(cancelAction, for: .touchUpInside)
+        view.confirmButton.addAction(confirmAction, for: .touchUpInside)
         return view
     }()
     
@@ -55,7 +67,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView)
+        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, selectManagerView)
         
         writeHouseWorkCalendarView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -84,6 +96,12 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.top.equalTo(houseWorkNameTextField.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(120)
+        }
+        
+        selectManagerView.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(0)
         }
     }
     
@@ -143,6 +161,18 @@ final class WriteHouseWorkViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    private func showSelectManagerView() {
+        selectManagerView.snp.updateConstraints {
+            $0.height.equalTo(341)
+        }
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+        selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
 }
 
