@@ -33,6 +33,14 @@ final class WriteHouseWorkViewController: BaseViewController {
         label.font = .body2
         return label
     }()
+    private lazy var getManagerView: GetManagerView = {
+        let view = GetManagerView()
+        let action = UIAction { [weak self] _ in
+            print("getmanagerview")
+        }
+        view.addManagerButton.addAction(action, for: .touchUpInside)
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -47,7 +55,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel)
+        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView)
         
         writeHouseWorkCalendarView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -70,6 +78,12 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.top.equalTo(houseWorkNameTextField.snp.bottom).offset(8)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(0)
+        }
+        
+        getManagerView.snp.makeConstraints {
+            $0.top.equalTo(houseWorkNameTextField.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(120)
         }
     }
     
