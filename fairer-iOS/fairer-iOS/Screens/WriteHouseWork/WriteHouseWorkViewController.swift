@@ -66,6 +66,24 @@ final class WriteHouseWorkViewController: BaseViewController {
         label.alpha = 0
         return label
     }()
+    private let setTimeLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "시간설정", lineHeight: 22)
+        label.textColor = .gray600
+        label.font = .title1
+        return label
+    }()
+    private lazy var setTimeToggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.isOn = false
+        toggle.onTintColor = .blue
+        toggle.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        let action = UIAction { [weak self] _ in
+            print("토글토글")
+        }
+        toggle.addAction(action, for: .touchUpInside)
+        return toggle
+    }()
     
     // MARK: - life cycle
     
@@ -82,7 +100,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView, selectManagerView, managerToastLabel)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView)
+        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle)
         
         scrollView.snp.makeConstraints {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -120,6 +138,16 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.top.equalTo(houseWorkNameTextField.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(120)
+        }
+        
+        setTimeLabel.snp.makeConstraints {
+            $0.top.equalTo(getManagerView.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        setTimeToggle.snp.makeConstraints {
+            $0.centerY.equalTo(setTimeLabel.snp.centerY)
+            $0.trailing.equalToSuperview().inset(20)
             // FIXME: - 하단에 컴포넌트 추가되면 삭제
             $0.bottom.equalTo(0)
         }
