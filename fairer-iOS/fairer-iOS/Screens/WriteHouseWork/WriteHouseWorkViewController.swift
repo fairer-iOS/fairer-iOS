@@ -68,6 +68,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     }()
     private let setTimeLabel: UILabel = {
         let label = UILabel()
+        // FIXME: - 71 PR 머지되면 common textliteral 로 변경
         label.setTextWithLineHeight(text: "시간설정", lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
@@ -84,7 +85,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         toggle.addAction(action, for: .touchUpInside)
         return toggle
     }()
-    private lazy var timePicker: UIDatePicker = {
+    private let timePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.preferredDatePickerStyle = .wheels
         picker.datePickerMode = .time
@@ -95,13 +96,9 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupNotificationCenter()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotificationCenter()
         setupDelegation()
     }
     
@@ -111,8 +108,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker)
         
         scrollView.snp.makeConstraints {
-            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
