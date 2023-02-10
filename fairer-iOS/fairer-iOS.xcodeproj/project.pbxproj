@@ -73,6 +73,12 @@
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
 		52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB590D29116AC8003590DF /* SettingTableViewCell.swift */; };
 		52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */; };
+		52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */; };
+		52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C085297CE8D2002AC755 /* GetManagerView.swift */; };
+		52E4C088297CE8DC002AC755 /* GetManagerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */; };
+		52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C089297CF66C002AC755 /* SelectManagerView.swift */; };
+		52E4C08C297D037C002AC755 /* SelectManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C08B297D037C002AC755 /* SelectManagerCollectionViewCell.swift */; };
+		52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C08D297D06F5002AC755 /* SelectManagerCollectionView.swift */; };
 		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
@@ -163,6 +169,12 @@
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		52DB590D29116AC8003590DF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeButtonView.swift; sourceTree = "<group>"; };
+		52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		52E4C085297CE8D2002AC755 /* GetManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetManagerView.swift; sourceTree = "<group>"; };
+		52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetManagerCollectionView.swift; sourceTree = "<group>"; };
+		52E4C089297CF66C002AC755 /* SelectManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerView.swift; sourceTree = "<group>"; };
+		52E4C08B297D037C002AC755 /* SelectManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerCollectionViewCell.swift; sourceTree = "<group>"; };
+		52E4C08D297D06F5002AC755 /* SelectManagerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerCollectionView.swift; sourceTree = "<group>"; };
 		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
@@ -223,10 +235,12 @@
 		39EEF67C28CBB66200437654 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
+				52E4C084297CE8B5002AC755 /* GetManagerView */,
 				39EEF67D28CBB66F00437654 /* MainButton.swift */,
 				5205055728E1C50600355055 /* InfoLabelView.swift */,
 				52EBF04A28EC291F0062EB41 /* TextField.swift */,
 				5275397828EC2F78002D8280 /* BackButton.swift */,
+				52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -434,6 +448,9 @@
 				522714EA297918EC006BADBC /* SetHouseWorkCalendarView.swift */,
 				522714EC297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift */,
 				522714EE29792936006BADBC /* SetHouseWorkCollectionView.swift */,
+				52E4C089297CF66C002AC755 /* SelectManagerView.swift */,
+				52E4C08B297D037C002AC755 /* SelectManagerCollectionViewCell.swift */,
+				52E4C08D297D06F5002AC755 /* SelectManagerCollectionView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -571,6 +588,15 @@
 				52DB590D29116AC8003590DF /* SettingTableViewCell.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		52E4C084297CE8B5002AC755 /* GetManagerView */ = {
+			isa = PBXGroup;
+			children = (
+				52E4C085297CE8D2002AC755 /* GetManagerView.swift */,
+				52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */,
+			);
+			path = GetManagerView;
 			sourceTree = "<group>";
 		};
 		52EBF04728E578700062EB41 /* HouseMakeName */ = {
@@ -759,6 +785,7 @@
 			files = (
 				5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */,
 				39EEF68D28CBBA1B00437654 /* Model.swift in Sources */,
+				52E4C08C297D037C002AC755 /* SelectManagerCollectionViewCell.swift in Sources */,
 				5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */,
 				52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */,
 				911E967F29717F0E00F3AF35 /* CalendarDailyCollectionViewCell.swift in Sources */,
@@ -784,6 +811,7 @@
 				520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */,
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
+				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
 				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
@@ -803,7 +831,9 @@
 				911E967D29717ECE00F3AF35 /* CalendarDailyCollectionView.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
+				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
+				52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */,
 				39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */,
 				5275397928EC2F78002D8280 /* BackButton.swift in Sources */,
 				39F1C12A28D604B000585B83 /* HomeGroupCollectionViewCell.swift in Sources */,
@@ -822,10 +852,12 @@
 				7EFAA86E28DA032800737DF0 /* SelectHouseWorkViewController.swift in Sources */,
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */,
+				52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */,
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
 				39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */,
 				5204AABC2950BC50002FB6CA /* SettingInquiryViewController.swift in Sources */,
 				39EEF67128CBB5F600437654 /* Notification+Extension.swift in Sources */,
+				52E4C088297CE8DC002AC755 /* GetManagerCollectionView.swift in Sources */,
 				5204AAB329379981002FB6CA /* ChangeHouseNameViewController.swift in Sources */,
 				52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */,
 				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
