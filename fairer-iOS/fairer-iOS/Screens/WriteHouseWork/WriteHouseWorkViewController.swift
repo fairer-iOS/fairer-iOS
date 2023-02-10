@@ -84,6 +84,18 @@ final class WriteHouseWorkViewController: BaseViewController {
         toggle.addAction(action, for: .touchUpInside)
         return toggle
     }()
+    private lazy var timePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.preferredDatePickerStyle = .wheels
+        picker.datePickerMode = .time
+        picker.locale = Locale(identifier: "ko-KR")
+        picker.timeZone = .autoupdatingCurrent
+        let action = UIAction { [weak self] _ in
+            print("시간 바뀐당")
+        }
+        picker.addAction(action, for: .valueChanged)
+        return picker
+    }()
     
     // MARK: - life cycle
     
@@ -100,7 +112,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView, selectManagerView, managerToastLabel)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle)
+        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker)
         
         scrollView.snp.makeConstraints {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -162,6 +174,12 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.bottom.equalTo(selectManagerView.snp.top).offset(-10)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(36)
+        }
+        
+        timePicker.snp.makeConstraints {
+            $0.top.equalTo(setTimeLabel.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
         }
     }
     
