@@ -79,7 +79,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         toggle.onTintColor = .blue
         toggle.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         let action = UIAction { [weak self] _ in
-            print("토글토글")
+            self?.didTappedTimeToggle()
         }
         toggle.addAction(action, for: .touchUpInside)
         return toggle
@@ -90,10 +90,6 @@ final class WriteHouseWorkViewController: BaseViewController {
         picker.datePickerMode = .time
         picker.locale = Locale(identifier: "ko-KR")
         picker.timeZone = .autoupdatingCurrent
-        let action = UIAction { [weak self] _ in
-            print("시간 바뀐당")
-        }
-        picker.addAction(action, for: .valueChanged)
         return picker
     }()
     
@@ -160,6 +156,12 @@ final class WriteHouseWorkViewController: BaseViewController {
         setTimeToggle.snp.makeConstraints {
             $0.centerY.equalTo(setTimeLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
+        }
+        
+        timePicker.snp.makeConstraints {
+            $0.top.equalTo(setTimeLabel.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
             // FIXME: - 하단에 컴포넌트 추가되면 삭제
             $0.bottom.equalTo(0)
         }
@@ -174,12 +176,6 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.bottom.equalTo(selectManagerView.snp.top).offset(-10)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(36)
-        }
-        
-        timePicker.snp.makeConstraints {
-            $0.top.equalTo(setTimeLabel.snp.bottom)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(0)
         }
     }
     
@@ -292,6 +288,23 @@ final class WriteHouseWorkViewController: BaseViewController {
                 self.managerToastLabel.isHidden = true
             })
         })
+    }
+    
+    private func didTappedTimeToggle() {
+        if setTimeToggle.isOn {
+            timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom).offset(8)
+                $0.height.equalTo(196.2)
+            }
+            UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom)
+                $0.height.equalTo(0)
+            }
+        }
     }
 }
 
