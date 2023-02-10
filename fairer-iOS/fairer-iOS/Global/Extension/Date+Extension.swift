@@ -59,5 +59,4 @@ extension Date {
     var endOfWeek: Date {
         return Calendar.current.date(byAdding: .second, value: 604799, to: self.startOfWeek)!
     }
-    
 }

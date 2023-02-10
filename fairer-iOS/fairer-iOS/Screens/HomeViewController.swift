@@ -285,10 +285,13 @@ final class HomeViewController: BaseViewController {
     
     func setDatePicker(){
         myPicker.isHidden = true
-        myPicker.dismissClosure = { [weak self] in
+        myPicker.dismissClosure = { [weak self] val in
             guard let self = self else {
                 return
             }
+            self.homeWeekCalendarCollectionView.startOfWeekDate = val
+            self.homeWeekCalendarCollectionView.dateList = self.homeWeekCalendarCollectionView.getThisWeekInInt()
+            self.homeWeekCalendarCollectionView.collectionView.reloadData()
             self.myPicker.isHidden = true
             self.setupNavigationBar()
         }
@@ -297,7 +300,6 @@ final class HomeViewController: BaseViewController {
                 return
             }
             print(val)
-            // do something with the selected date
         }
     }
 
@@ -320,6 +322,7 @@ final class HomeViewController: BaseViewController {
     }
     
     @objc private func moveToTodayDate(){
+        self.homeWeekCalendarCollectionView.startOfWeekDate = Date().startOfWeek
         self.homeWeekCalendarCollectionView.dateList = self.homeWeekCalendarCollectionView.getThisWeekInInt()
         self.homeWeekCalendarCollectionView.collectionView.reloadData()
     }

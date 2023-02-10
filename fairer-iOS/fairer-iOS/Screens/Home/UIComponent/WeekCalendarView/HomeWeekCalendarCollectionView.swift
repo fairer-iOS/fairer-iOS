@@ -19,8 +19,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     private let dotList = [ImageLiterals.oneDot,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.threeDots,ImageLiterals.twoDots]
     private let dayList = ["일","월","화","수","목","금","토"]
     lazy var dateList = [String]()
-    private var startOfWeekDate = Date().startOfWeek
-    private var endOfWeekDate = Date().endOfWeek
+    lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
     private enum Size {
         static let collectionSpacing: CGFloat = 0
