@@ -16,7 +16,8 @@ final class WriteHouseWorkViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    // FIXME: - PR 머지되면 Calendar View Global 로
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     private let writeHouseWorkCalendarView = SetHouseWorkCalendarView()
     private let houseWorkNameLabel: UILabel = {
         let label = UILabel()
@@ -79,7 +80,18 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, selectManagerView, managerToastLabel)
+        view.addSubviews(scrollView, selectManagerView, managerToastLabel)
+        scrollView.addSubview(contentView)
+        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView)
+        
+        scrollView.snp.makeConstraints {
+            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.width.edges.equalToSuperview()
+        }
         
         writeHouseWorkCalendarView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -108,6 +120,8 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.top.equalTo(houseWorkNameTextField.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(120)
+            // FIXME: - 하단에 컴포넌트 추가되면 삭제
+            $0.bottom.equalTo(0)
         }
         
         selectManagerView.snp.makeConstraints {
