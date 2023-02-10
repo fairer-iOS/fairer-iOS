@@ -23,11 +23,7 @@ final class OnboardingNameViewController: BaseViewController {
         label.font = .h2
         return label
     }()
-    private let nameTextField: TextField = {
-        let textField = TextField()
-        textField.myPlaceholder = TextLiteral.onboardingNameViewControllerTextFieldPlaceholder
-        return textField
-    }()
+    private let nameTextField = TextField(type: .large, placeHolder: TextLiteral.onboardingNameViewControllerTextFieldPlaceholder)
     private lazy var nameDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.doneButtonText
