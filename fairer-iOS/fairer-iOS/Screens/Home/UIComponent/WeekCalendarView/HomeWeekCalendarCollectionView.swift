@@ -132,23 +132,6 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     }
     
     func getBeforeWeekDate(){
-//        let currentDateList = dateList
-//        var resultWeekData = [String]()
-//        var resultFullWeekData = [String]()
-//        for date in currentDateList {
-//            var afterWeekDate = date.stringToDay
-//            var afterFullWeekDate = date.stringToDate
-//            for _ in 0...6 {
-//                afterWeekDate = afterWeekDate?.addingTimeInterval(-86400)
-//                afterFullWeekDate = afterFullWeekDate?.addingTimeInterval(-86400)
-//            }
-//            resultWeekData.append(afterWeekDate?.dayToString ?? String())
-//            resultFullWeekData.append(afterFullWeekDate?.dateToString ?? String())
-//        }
-//        self.dateList = resultWeekData
-//        self.fullDateList = resultFullWeekData
-//        print(fullDateList)
-//        collectionView.reloadData()
         let currentDateList = dateList
         let currentDateListForFullDate = fullDateList
         var resultWeekData = [String]()
@@ -218,16 +201,6 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = dateList[indexPath.item]
         cell.workDot.image = dotList[indexPath.item]
-//        if Int(dateList[indexPath.item]) ?? 0 == self.getTodayDateInInt() {
-//            self.isSelected = true
-//            self.selectedCell = indexPath.row
-//            self.cellIndexPath = indexPath
-//            cell.globalView.backgroundColor = UIColor.gray100
-//            cell.dateLabel.textColor = UIColor.blue
-//            cell.dayLabel.textColor = UIColor.blue
-//            cell.workDot.image = ImageLiterals.selectedCalendarCell
-//        }
-        print(fullDateList[indexPath.item],self.todayDateInString)
         if fullDateList[indexPath.item] == self.todayDateInString {
             self.isSelected = true
             self.selectedCell = indexPath.row

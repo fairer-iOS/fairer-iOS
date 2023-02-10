@@ -69,8 +69,8 @@ final class HomeViewController: BaseViewController {
         scrollView.showsVerticalScrollIndicator = true
         return scrollView
     }()
-    let myPicker: MyDatePicker = {
-        let v = MyDatePicker()
+    let datePickerView: DatePickerView = {
+        let v = DatePickerView()
         return v
     }()
     
@@ -103,7 +103,7 @@ final class HomeViewController: BaseViewController {
                          homeGroupCollectionView,
                          homeRuleView,
                          homeDivider,
-                         myPicker)
+                         datePickerView)
         
         contentScrollView.addSubviews(
             homeCalenderView,
@@ -144,7 +144,7 @@ final class HomeViewController: BaseViewController {
         }
         
         homeDivider.snp.makeConstraints {
-            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(144)
+            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(150)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
@@ -174,7 +174,7 @@ final class HomeViewController: BaseViewController {
             $0.bottom.equalToSuperview()
         }
         
-        myPicker.snp.makeConstraints {
+        datePickerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
@@ -261,7 +261,7 @@ final class HomeViewController: BaseViewController {
     
     private func scrollDidEnd(){
         self.homeDivider.snp.updateConstraints {
-            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(144)
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(150)
         }
         self.homeGroupCollectionView.snp.updateConstraints {
             $0.height.equalTo(86)
@@ -284,8 +284,8 @@ final class HomeViewController: BaseViewController {
     }
     
     func setDatePicker(){
-        myPicker.isHidden = true
-        myPicker.dismissClosure = { [weak self] startDateWeek, yearInString, monthInString in
+        datePickerView.isHidden = true
+        datePickerView.dismissClosure = { [weak self] startDateWeek, yearInString, monthInString in
             guard let self = self else {
                 return
             }
@@ -294,14 +294,13 @@ final class HomeViewController: BaseViewController {
             self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
             self.homeWeekCalendarCollectionView.collectionView.reloadData()
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(yearInString)년 \(monthInString)월", for: .normal)
-            self.myPicker.isHidden = true
+            self.datePickerView.isHidden = true
             self.setupNavigationBar()
         }
-        myPicker.changeClosure = { [weak self] val in
-            guard let self = self else {
+        datePickerView.changeClosure = { [weak self] val in
+            guard self != nil else {
                 return
             }
-            print(val)
         }
     }
 
@@ -332,7 +331,7 @@ final class HomeViewController: BaseViewController {
     }
     
     @objc private func moveToDatePicker(){
-        self.myPicker.isHidden = false
+        self.datePickerView.isHidden = false
         self.setupAlphaNavigationBar()
     }
 }
