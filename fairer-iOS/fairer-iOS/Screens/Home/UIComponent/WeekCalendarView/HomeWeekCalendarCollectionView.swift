@@ -19,8 +19,10 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     private let dotList = [ImageLiterals.oneDot,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.threeDots,ImageLiterals.twoDots]
     private let dayList = ["일","월","화","수","목","금","토"]
     lazy var dateList = [String]()
+    lazy var fullDateList = [String]()
     lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
+    private var todayDateInString = Date().dateToString
     private enum Size {
         static let collectionSpacing: CGFloat = 0
         static let cellWidth: CGFloat = 40
@@ -58,7 +60,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     
     override func render() {
         self.dateList = getThisWeekInInt()
-        
+        self.fullDateList = getThisWeekInDate()
         self.addSubview(collectionView)
         
         collectionView.snp.makeConstraints {
@@ -91,9 +93,23 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         return resultArr
     }
     
+    func getThisWeekInDate()->[String]{
+        var resultArr = [String]()
+        resultArr.append(startOfWeekDate.dateToString)
+        var currentDate = startOfWeekDate
+        for _ in 0...5 {
+            let date: Date = currentDate.addingTimeInterval(+86400)
+            resultArr.append(date.dateToString)
+            currentDate = date
+        }
+        return resultArr
+    }
+    
     func getAfterWeekDate(){
         let currentDateList = dateList
+        let currentDateListForFullDate = fullDateList
         var resultWeekData = [String]()
+        var resultFullWeekData = [String]()
         for date in currentDateList {
             var afterWeekDate = date.stringToDay
             for _ in 0...6 {
@@ -101,13 +117,42 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
             }
             resultWeekData.append(afterWeekDate?.dayToString ?? String())
         }
+        for date in currentDateListForFullDate {
+            var afterFullWeekDate = date.stringToDate
+            for _ in 0...6 {
+                afterFullWeekDate = afterFullWeekDate?.addingTimeInterval(+86400)
+            }
+            resultFullWeekData.append(afterFullWeekDate?.dateToString ?? String())
+        }
         self.dateList = resultWeekData
+        self.fullDateList = resultFullWeekData
+        print(dateList)
+        print(fullDateList)
         collectionView.reloadData()
     }
     
     func getBeforeWeekDate(){
+//        let currentDateList = dateList
+//        var resultWeekData = [String]()
+//        var resultFullWeekData = [String]()
+//        for date in currentDateList {
+//            var afterWeekDate = date.stringToDay
+//            var afterFullWeekDate = date.stringToDate
+//            for _ in 0...6 {
+//                afterWeekDate = afterWeekDate?.addingTimeInterval(-86400)
+//                afterFullWeekDate = afterFullWeekDate?.addingTimeInterval(-86400)
+//            }
+//            resultWeekData.append(afterWeekDate?.dayToString ?? String())
+//            resultFullWeekData.append(afterFullWeekDate?.dateToString ?? String())
+//        }
+//        self.dateList = resultWeekData
+//        self.fullDateList = resultFullWeekData
+//        print(fullDateList)
+//        collectionView.reloadData()
         let currentDateList = dateList
+        let currentDateListForFullDate = fullDateList
         var resultWeekData = [String]()
+        var resultFullWeekData = [String]()
         for date in currentDateList {
             var afterWeekDate = date.stringToDay
             for _ in 0...6 {
@@ -115,7 +160,17 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
             }
             resultWeekData.append(afterWeekDate?.dayToString ?? String())
         }
+        for date in currentDateListForFullDate {
+            var afterFullWeekDate = date.stringToDate
+            for _ in 0...6 {
+                afterFullWeekDate = afterFullWeekDate?.addingTimeInterval(-86400)
+            }
+            resultFullWeekData.append(afterFullWeekDate?.dateToString ?? String())
+        }
         self.dateList = resultWeekData
+        self.fullDateList = resultFullWeekData
+        print(dateList)
+        print(fullDateList)
         collectionView.reloadData()
     }
 }
@@ -163,7 +218,17 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = dateList[indexPath.item]
         cell.workDot.image = dotList[indexPath.item]
-        if Int(dateList[indexPath.item]) ?? 0 == self.getTodayDateInInt() {
+//        if Int(dateList[indexPath.item]) ?? 0 == self.getTodayDateInInt() {
+//            self.isSelected = true
+//            self.selectedCell = indexPath.row
+//            self.cellIndexPath = indexPath
+//            cell.globalView.backgroundColor = UIColor.gray100
+//            cell.dateLabel.textColor = UIColor.blue
+//            cell.dayLabel.textColor = UIColor.blue
+//            cell.workDot.image = ImageLiterals.selectedCalendarCell
+//        }
+        print(fullDateList[indexPath.item],self.todayDateInString)
+        if fullDateList[indexPath.item] == self.todayDateInString {
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
