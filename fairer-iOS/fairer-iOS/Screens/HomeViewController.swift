@@ -191,10 +191,27 @@ final class HomeViewController: BaseViewController {
         navigationItem.rightBarButtonItem = rightButton
     }
     
+    func setupAlphaNavigationBar(){
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        let logoView = makeBarButtonItem(with: logoImage)
+        let rightButton = makeBarButtonItem(with: profileButton)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = logoView
+        navigationItem.rightBarButtonItem = rightButton
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor.init(hex: "#1A1A1A", alpha: 0.6)
+        navigationBar.backgroundColor = UIColor.init(hex: "#1A1A1A", alpha: 0.6)
+        navigationBar.standardAppearance = appearance
+        navigationBar.compactAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
+    }
+    
     // MARK: - func
     
     private func setButtonEvent(){
         self.homeCalenderView.todayButton.addTarget(self, action: #selector(moveToTodayDate), for: .touchUpInside)
+        self.homeCalenderView.calendarMonthLabelButton.addTarget(self, action: #selector(moveToDatePicker), for: .touchUpInside)
         self.homeCalenderView.calendarMonthPickButton.addTarget(self, action: #selector(moveToDatePicker), for: .touchUpInside)
     }
     
@@ -268,12 +285,12 @@ final class HomeViewController: BaseViewController {
     
     func setDatePicker(){
         myPicker.isHidden = true
-        // add closures to custom picker view
         myPicker.dismissClosure = { [weak self] in
             guard let self = self else {
                 return
             }
             self.myPicker.isHidden = true
+            self.setupNavigationBar()
         }
         myPicker.changeClosure = { [weak self] val in
             guard let self = self else {
@@ -309,6 +326,7 @@ final class HomeViewController: BaseViewController {
     
     @objc private func moveToDatePicker(){
         self.myPicker.isHidden = false
+        self.setupAlphaNavigationBar()
     }
 }
 

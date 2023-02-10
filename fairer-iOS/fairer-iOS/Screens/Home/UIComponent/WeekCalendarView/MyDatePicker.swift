@@ -28,8 +28,13 @@ class MyDatePicker: UIView {
         commonInit()
     }
     func commonInit() -> Void {
-        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+
+        let blurredEffectView : UIView = {
+            let v = UIView()
+            v.backgroundColor = UIColor.black
+            v.alpha = 0.6
+            return v
+        }()
         
         let pickerHolderView: UIView = {
             let v = UIView()
