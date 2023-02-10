@@ -93,13 +93,13 @@ extension RepeatCycleCollectionView: UICollectionViewDataSource {
         }
         
         if let houseWorkPattern = HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern {
-            if houseWorkPattern.contains(daysOfWeekList[indexPath.item]) {
+            if houseWorkPattern.contains(String(daysOfWeekList[indexPath.item].dropFirst(1))) {
                 cell.isSelected = true
                 collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
             }
         }
         
-        cell.weekOfDayLabel.text = daysOfWeekList[indexPath.item]
+        cell.weekOfDayLabel.text = String(daysOfWeekList[indexPath.item].dropFirst(1))
         
         return cell
     }

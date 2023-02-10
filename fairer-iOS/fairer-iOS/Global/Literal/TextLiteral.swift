@@ -165,7 +165,7 @@ enum TextLiteral {
     
     // MARK: - RepeatCycleCollectionView
     
-    static let repeatCycleCollectionViewDaysOfWeekList = ["월", "화", "수", "목", "금", "토", "일"]
+    static let repeatCycleCollectionViewDaysOfWeekList = ["0월", "1화", "2수", "3목", "4금", "5토", "6일"]
     
     // MARK: - SetHouseWorkViewController
     

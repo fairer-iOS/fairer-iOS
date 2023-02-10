@@ -391,6 +391,7 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = nil
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern = nil
+            repeatCycleMenu.isHidden = true
         }
         addAnimation()
     }
@@ -422,9 +423,13 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didSelectDaysOfWeek() {
         repeatCycleCollectionView.didSelectDaysOfWeek = { [weak self] selectedDays in
-            let selectedDaysOfWeek = selectedDays.isEmpty ? Date().dayOfWeekToKoreanString : selectedDays.joined(separator: ", ")
+            var sortedDays: [String] = []
+            for day in selectedDays.sorted(){
+                sortedDays.append(String(day.dropFirst(1)))
+            }
+            let selectedDaysOfWeek = selectedDays.isEmpty ? Date().dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
             self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek)
-            HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatPattern = selectedDays
+            HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatPattern = sortedDays
         }
     }
     
