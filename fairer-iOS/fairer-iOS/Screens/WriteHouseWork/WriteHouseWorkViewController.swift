@@ -44,10 +44,10 @@ final class WriteHouseWorkViewController: BaseViewController {
     private lazy var selectManagerView: SelectManagerView = {
         let view = SelectManagerView()
         let cancelAction = UIAction { [weak self] _ in
-            print("취소")
+            self?.didTappedCancelButton()
         }
         let confirmAction = UIAction { [weak self] _ in
-            print("확인")
+            self?.didTappedConfirmButton()
         }
         view.cancelButton.addAction(cancelAction, for: .touchUpInside)
         view.confirmButton.addAction(confirmAction, for: .touchUpInside)
@@ -173,6 +173,34 @@ final class WriteHouseWorkViewController: BaseViewController {
         }, completion: nil)
         
         selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
+    }
+    
+    private func didTappedCancelButton() {
+        selectManagerView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+        selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
+    }
+    
+    private func didTappedConfirmButton() {
+        if !selectManagerView.selectManagerCollectionView.selectedManagerList.isEmpty {
+            selectManagerView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+            
+            UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            
+            getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
+        } else {
+//            showToast()
+        }
     }
 }
 
