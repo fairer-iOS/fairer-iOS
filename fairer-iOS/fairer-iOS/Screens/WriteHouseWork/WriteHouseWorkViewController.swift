@@ -130,10 +130,16 @@ final class WriteHouseWorkViewController: BaseViewController {
                 houseWorkNameWarningLabel.snp.updateConstraints {
                     $0.height.equalTo(22)
                 }
+                getManagerView.snp.updateConstraints {
+                    $0.top.equalTo(houseWorkNameTextField.snp.bottom).offset(38)
+                }
             } else {
                 houseWorkNameTextField.layer.borderWidth = 0
                 houseWorkNameWarningLabel.snp.updateConstraints {
                     $0.height.equalTo(0)
+                }
+                getManagerView.snp.updateConstraints {
+                    $0.top.equalTo(houseWorkNameTextField.snp.bottom).offset(8)
                 }
             }
         }
