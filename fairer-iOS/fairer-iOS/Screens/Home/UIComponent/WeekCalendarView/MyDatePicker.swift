@@ -12,7 +12,7 @@ import SnapKit
 final class MyDatePicker: UIView {
     
     var changeClosure: ((Date)->())?
-    var dismissClosure: ((Date)->())?
+    var dismissClosure: ((Date,String,String)->())?
     private lazy var changeDateResult = Date()
     private lazy var dPicker: UIDatePicker = {
         let v = UIDatePicker()
@@ -81,7 +81,8 @@ final class MyDatePicker: UIView {
 
     @objc func tapHandler(_ g: UITapGestureRecognizer) -> Void {
         self.changeDateResult = self.dPicker.date.startOfWeek
-        dismissClosure?(self.changeDateResult)
+        dismissClosure?(self.changeDateResult,self.dPicker.date.yearToString
+                        ,self.dPicker.date.monthToString)
     }
     
     @objc func didChangeDate(_ sender: UIDatePicker) -> Void {

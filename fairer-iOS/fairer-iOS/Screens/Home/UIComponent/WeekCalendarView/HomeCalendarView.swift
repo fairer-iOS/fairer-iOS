@@ -9,9 +9,9 @@ import UIKit
 
 final class HomeCalendarView: BaseUIView {
     
-    private var today = Date()
-    private var year = Date().yearToString
-    private var month = Date().monthToString
+    var today = Date()
+    var year = Date().yearToString
+    var month = Date().monthToString
     
     
     // MARK: - property
