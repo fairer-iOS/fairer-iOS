@@ -200,8 +200,7 @@ final class HomeViewController: BaseViewController {
         navigationItem.leftBarButtonItem = logoView
         navigationItem.rightBarButtonItem = rightButton
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor.init(hex: "#1A1A1A", alpha: 0.6)
-        navigationBar.backgroundColor = UIColor.init(hex: "#1A1A1A", alpha: 0.6)
+        appearance.configureWithTransparentBackground()
         navigationBar.standardAppearance = appearance
         navigationBar.compactAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
