@@ -210,9 +210,15 @@ final class HomeViewController: BaseViewController {
     // MARK: - func
     
     private func setButtonEvent(){
-        self.homeCalenderView.todayButton.addTarget(self, action: #selector(moveToTodayDate), for: .touchUpInside)
-        self.homeCalenderView.calendarMonthLabelButton.addTarget(self, action: #selector(moveToDatePicker), for: .touchUpInside)
-        self.homeCalenderView.calendarMonthPickButton.addTarget(self, action: #selector(moveToDatePicker), for: .touchUpInside)
+        let moveToTodayDateButtonAction = UIAction { [weak self] _ in
+            self?.moveToTodayDate()
+        }
+        let moveToTodayDatePickerButtonAction = UIAction { [weak self] _ in
+            self?.moveToDatePicker()
+        }
+        self.homeCalenderView.todayButton.addAction(moveToTodayDateButtonAction, for: .touchUpInside)
+        self.homeCalenderView.calendarMonthLabelButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
+        self.homeCalenderView.calendarMonthPickButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
     }
     
     private func setupDelegate(){
@@ -276,14 +282,14 @@ final class HomeViewController: BaseViewController {
         })
     }
     
-    func setWeekCalendarSwipeGesture(){
+    private func setWeekCalendarSwipeGesture(){
         leftSwipeGestureRecognizer.direction = .left
         rightSwipeGestureRecognizer.direction = .right
         homeWeekCalendarCollectionView.addGestureRecognizer(leftSwipeGestureRecognizer)
         homeWeekCalendarCollectionView.addGestureRecognizer(rightSwipeGestureRecognizer)
     }
     
-    func setDatePicker(){
+    private func setDatePicker(){
         datePickerView.isHidden = true
         datePickerView.dismissClosure = { [weak self] startDateWeek, yearInString, monthInString in
             guard let self = self else {
@@ -322,7 +328,7 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    @objc private func moveToTodayDate(){
+    private func moveToTodayDate(){
         self.homeCalenderView.calendarMonthLabelButton.setTitle("\(Date().yearToString)년 \(Date().monthToString)월", for: .normal)
         self.homeWeekCalendarCollectionView.startOfWeekDate = Date().startOfWeek
         self.homeWeekCalendarCollectionView.dateList = self.homeWeekCalendarCollectionView.getThisWeekInInt()
@@ -330,7 +336,7 @@ final class HomeViewController: BaseViewController {
         self.homeWeekCalendarCollectionView.collectionView.reloadData()
     }
     
-    @objc private func moveToDatePicker(){
+    private func moveToDatePicker(){
         self.datePickerView.isHidden = false
         self.setupAlphaNavigationBar()
     }
