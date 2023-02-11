@@ -90,6 +90,7 @@ final class HomeViewController: BaseViewController {
 
     override func configUI() {
         super.configUI()
+        setCalendarHight()
         setupToolBarGesture()
         setHomeRuleLabel()
     }
@@ -222,7 +223,6 @@ final class HomeViewController: BaseViewController {
     }
     
     private func setupDelegate(){
-        self.calendarDailyCollecionView.delegate = self
         self.contentScrollView.delegate = self
     }
     
@@ -340,24 +340,22 @@ final class HomeViewController: BaseViewController {
         self.datePickerView.isHidden = false
         self.setupAlphaNavigationBar()
     }
-}
-
-    // MARK: - protocol
-
-protocol CollectionViewHeightProtocol: AnyObject {
-    func getCollectionViewHeight(cellNum: Int)
-}
-
-    // MARK: - extension
-
-extension HomeViewController: CollectionViewHeightProtocol {
-    func getCollectionViewHeight(cellNum: Int) {
-        cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
-        calendarDailyCollecionView.snp.updateConstraints {
-            $0.height.equalTo(cellHeight)
+    
+    private func setCalendarHight(){
+        self.calendarDailyCollecionView.changeHeightClosure = { [weak self]
+            cellNum in
+            guard let self = self else {
+                return
+            }
+            self.cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
+            self.calendarDailyCollecionView.snp.updateConstraints {
+                $0.height.equalTo(self.cellHeight)
+            }
         }
     }
 }
+
+    // MARK: - extension
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
