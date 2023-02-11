@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 import SnapKit
 
@@ -69,8 +68,8 @@ final class HomeViewController: BaseViewController {
         scrollView.showsVerticalScrollIndicator = true
         return scrollView
     }()
-    let datePickerView: DatePickerView = {
-        let v = DatePickerView()
+    let datePickerView: PickDateView = {
+        let v = PickDateView()
         return v
     }()
     

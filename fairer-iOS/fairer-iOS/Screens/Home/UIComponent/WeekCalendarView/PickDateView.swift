@@ -1,16 +1,17 @@
 //
-//  MyDatePicker.swift
+//  PickDateView.swift
 //  fairer-iOS
 //
-//  Created by 홍준혁 on 2023/02/09.
+//  Created by 홍준혁 on 2023/02/11.
 //
 
-import SwiftUI
 import UIKit
 
 import SnapKit
 
-final class DatePickerView: UIView {
+class PickDateView: BaseUIView {
+    
+    // MARK: - property
     
     var changeClosure: ((Date)->())?
     var dismissClosure: ((Date,String,String)->())?
@@ -18,40 +19,38 @@ final class DatePickerView: UIView {
     private lazy var dPicker: UIDatePicker = {
         let v = UIDatePicker()
         v.datePickerMode = .dateAndTime
+        if #available(iOS 14.0, *) {
+            v.preferredDatePickerStyle = .inline
+        } else {
+            // use default
+        }
         return v
     }()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
+    let blurredEffectView : UIView = {
+        let v = UIView()
+        v.backgroundColor = UIColor.black
+        v.alpha = 0.6
+        return v
+    }()
+    
+    let pickerHolderView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .white
+        v.layer.cornerRadius = 8
+        return v
+    }()
+    
+    // MARK: - life cycle
+    
+    override func configUI() {
+        setAction()
     }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        commonInit()
-    }
-    func commonInit() -> Void {
-
-        let blurredEffectView : UIView = {
-            let v = UIView()
-            v.backgroundColor = UIColor.black
-            v.alpha = 0.6
-            return v
-        }()
-        
-        let pickerHolderView: UIView = {
-            let v = UIView()
-            v.backgroundColor = .white
-            v.layer.cornerRadius = 8
-            return v
-        }()
-        
-        [blurredEffectView, pickerHolderView, dPicker].forEach { v in
-            v.translatesAutoresizingMaskIntoConstraints = false
-        }
-
+    
+    override func render() {
         addSubview(blurredEffectView)
         pickerHolderView.addSubview(dPicker)
         addSubview(pickerHolderView)
-
+        
         blurredEffectView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -66,16 +65,14 @@ final class DatePickerView: UIView {
             $0.trailing.equalTo(pickerHolderView.snp.trailing).inset(SizeLiteral.componentPadding)
             $0.bottom.equalTo(pickerHolderView.snp.bottom).inset(SizeLiteral.componentPadding)
         }
-        
-        if #available(iOS 14.0, *) {
-            dPicker.preferredDatePickerStyle = .inline
-        } else {
-            // use default
-        }
+    }
+    
+    // MARK: - func
+    
+    func setAction(){
         dPicker.addTarget(self, action: #selector(didChangeDate(_:)), for: .valueChanged)
-        
-        let t = UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:)))
-        blurredEffectView.addGestureRecognizer(t)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:)))
+        blurredEffectView.addGestureRecognizer(tap)
     }
     
     // MARK: - @objc
