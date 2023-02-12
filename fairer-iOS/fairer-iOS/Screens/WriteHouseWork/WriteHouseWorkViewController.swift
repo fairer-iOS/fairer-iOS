@@ -93,6 +93,11 @@ final class WriteHouseWorkViewController: BaseViewController {
         picker.timeZone = .autoupdatingCurrent
         return picker
     }()
+    private let divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -105,7 +110,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView, selectManagerView, managerToastLabel)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker)
+        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider)
         
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -158,6 +163,12 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.top.equalTo(setTimeLabel.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(0)
+        }
+        
+        divider.snp.makeConstraints {
+            $0.top.equalTo(timePicker.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(2)
             // FIXME: - 하단에 컴포넌트 추가되면 삭제
             $0.bottom.equalTo(0)
         }
