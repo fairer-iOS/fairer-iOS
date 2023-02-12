@@ -137,6 +137,12 @@ final class WriteHouseWorkViewController: BaseViewController {
         label.isHidden = true
         return label
     }()
+    private let doneButton: MainButton = {
+        let button = MainButton()
+        button.title = TextLiteral.setHouseWorkViewControllerDoneButtonText
+        button.isDisabled = false
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -146,15 +152,22 @@ final class WriteHouseWorkViewController: BaseViewController {
         setupDelegation()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
+        hidekeyboardWhenTappedAround()
     }
     
     override func render() {
-        view.addSubviews(scrollView, selectManagerView, managerToastLabel)
+        view.addSubviews(scrollView, doneButton, selectManagerView, managerToastLabel)
         scrollView.addSubview(contentView)
         contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleMenu, repeatCycleDayLabel)
         
+        doneButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
+        }
+        
         scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(doneButton.snp.top).inset(-16)
         }
         
         contentView.snp.makeConstraints {
@@ -162,7 +175,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         }
         
         writeHouseWorkCalendarView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(38)
         }
@@ -284,14 +297,14 @@ final class WriteHouseWorkViewController: BaseViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                // FIXME: - button 이동 로직 추가
+                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 36)
             })
         }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            // FIXME: - button 이동 로직 추가
+            self.doneButton.transform = .identity
         })
     }
     
@@ -496,9 +509,5 @@ extension WriteHouseWorkViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
     }
 }
