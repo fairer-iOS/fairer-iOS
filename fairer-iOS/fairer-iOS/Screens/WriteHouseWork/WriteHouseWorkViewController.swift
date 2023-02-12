@@ -125,6 +125,13 @@ final class WriteHouseWorkViewController: BaseViewController {
         return view
     }()
     private let repeatCycleCollectionView = RepeatCycleCollectionView()
+    private lazy var repeatCycleDayLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray400
+        label.font = .body2
+        label.isHidden = true
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -137,7 +144,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView, selectManagerView, managerToastLabel)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView)
+        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleDayLabel)
         
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -219,6 +226,11 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.top.equalTo(repeatCycleView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
+        }
+        
+        repeatCycleDayLabel.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         selectManagerView.snp.makeConstraints {
@@ -357,8 +369,33 @@ final class WriteHouseWorkViewController: BaseViewController {
     private func didTappedRepeatToggle() {
         if setRepeatToggle.isOn {
             openRepeatCycleView()
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(40)
+            }
+            setRepeatToggle.snp.remakeConstraints {
+                $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+                $0.trailing.equalToSuperview().inset(20)
+            }
+            repeatCycleDayLabel.snp.remakeConstraints {
+                $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                $0.bottom.equalTo(0)
+            }
+            updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
         } else {
             closeRepeatCycleView()
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+            setRepeatToggle.snp.remakeConstraints {
+                $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+                $0.trailing.equalToSuperview().inset(20)
+                $0.bottom.equalTo(0)
+            }
+            repeatCycleDayLabel.snp.remakeConstraints {
+                $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            }
         }
         addAnimation()
     }
@@ -371,9 +408,10 @@ final class WriteHouseWorkViewController: BaseViewController {
         repeatCycleView.snp.updateConstraints {
             $0.height.equalTo(36)
         }
+        repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
         repeatCycleView.repeatCycleLabel.isHidden = false
         repeatCycleView.repeatCycleButton.isHidden = false
-        repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
+        repeatCycleDayLabel.isHidden = false
     }
     
     private func closeRepeatCycleView() {
@@ -382,12 +420,24 @@ final class WriteHouseWorkViewController: BaseViewController {
         }
         repeatCycleView.repeatCycleLabel.isHidden = true
         repeatCycleView.repeatCycleButton.isHidden = true
+        repeatCycleDayLabel.isHidden = true
     }
     
     private func addAnimation() {
         UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
+    }
+    
+    private func updateRepeatCycleDayLabel(_ type: RepeatType, _ repeatDay: String) {
+        switch type {
+        case .week:
+            repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryWeek + repeatDay + TextLiteral.setHouseWorkViewControllerWeek + TextLiteral.setHouseWorkViewControllerRepeat
+            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerWeek, with: .positive20)
+        case .month:
+            repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryMonth + repeatDay + TextLiteral.setHouseWorkViewControllerDay + TextLiteral.setHouseWorkViewControllerRepeat
+            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerDay, with: .positive20)
+        }
     }
 }
 
