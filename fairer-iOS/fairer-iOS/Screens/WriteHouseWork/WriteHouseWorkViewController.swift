@@ -290,9 +290,7 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.height.equalTo(341)
         }
         
-        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        addAnimation()
         
         selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
@@ -302,9 +300,7 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.height.equalTo(0)
         }
         
-        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        addAnimation()
         
         selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
@@ -315,9 +311,7 @@ final class WriteHouseWorkViewController: BaseViewController {
                 $0.height.equalTo(0)
             }
             
-            UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
+            addAnimation()
             
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
         } else {
@@ -344,9 +338,7 @@ final class WriteHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(setTimeLabel.snp.bottom).offset(8)
                 $0.height.equalTo(196.2)
             }
-            UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
+            addAnimation()
         } else {
             timePicker.snp.updateConstraints {
                 $0.top.equalTo(setTimeLabel.snp.bottom)
@@ -356,11 +348,39 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     private func didTappedRepeatToggle() {
-        print("토글토글")
+        if setRepeatToggle.isOn {
+            openRepeatCycleView()
+        } else {
+            closeRepeatCycleView()
+        }
+        addAnimation()
     }
     
     private func didTappedRepeatCycleButton() {
         print("cycle button")
+    }
+    
+    private func openRepeatCycleView() {
+        repeatCycleView.snp.updateConstraints {
+            $0.height.equalTo(36)
+        }
+        repeatCycleView.repeatCycleLabel.isHidden = false
+        repeatCycleView.repeatCycleButton.isHidden = false
+        repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
+    }
+    
+    private func closeRepeatCycleView() {
+        repeatCycleView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        repeatCycleView.repeatCycleLabel.isHidden = true
+        repeatCycleView.repeatCycleButton.isHidden = true
+    }
+    
+    private func addAnimation() {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 
