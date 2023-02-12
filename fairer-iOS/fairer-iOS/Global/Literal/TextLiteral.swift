@@ -144,7 +144,6 @@ enum TextLiteral {
     
     static let writeHouseWorkButtonLabel = "집안일 직접 입력하기"
     
-    
     // MARK: - SetHouseWorkCollectionViewCell
     
     static let setHouseWorkCollectionViewCellDefaultTimeLabel = "하루 종일"
@@ -159,6 +158,26 @@ enum TextLiteral {
     // MARK: - GetManagerView
     
     static let getManagerViewManagerLabel = "담당자"
+    
+    // MARK: - RepeatCycleView
+    
+    static let repeatCycleViewRepeatCycleLabel = "반복주기"
+    
+    // MARK: - RepeatCycleCollectionView
+    
+    static let repeatCycleCollectionViewDaysOfWeekList = ["0월", "1화", "2수", "3목", "4금", "5토", "6일"]
+    
+    // MARK: - SetHouseWorkViewController
+    
+    static let setHouseWorkViewControllerSetTimeLabel = "시간설정"
+    static let setHouseWorkViewControllerSetRepeatLabel = "반복하기"
+    static let setHouseWorkViewControllerDoneButtonText = "집안일 추가 완료"
+    static let setHouseWorkViewControllerEveryWeek = "매주 "
+    static let setHouseWorkViewControllerWeek = "요일"
+    static let setHouseWorkViewControllerEveryMonth = "매달 "
+    static let setHouseWorkViewControllerDay = "일"
+    static let setHouseWorkViewControllerRepeat = "에 반복해요"
+    
     
     // MARK: - WriteHouseWorkViewController
     

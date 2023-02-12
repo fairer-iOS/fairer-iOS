@@ -11,6 +11,8 @@ import SnapKit
 
 final class SetHouseWorkViewController: BaseViewController {
     
+    private var selectedHouseWorkIndex: Int = 0
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -24,6 +26,8 @@ final class SetHouseWorkViewController: BaseViewController {
         view.addManagerButton.addAction(action, for: .touchUpInside)
         return view
     }()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     private lazy var selectManagerView: SelectManagerView = {
         let view = SelectManagerView()
         let cancelAction = UIAction { [weak self] _ in
@@ -48,39 +52,194 @@ final class SetHouseWorkViewController: BaseViewController {
         label.alpha = 0
         return label
     }()
+    private let setTimeLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.setHouseWorkViewControllerSetTimeLabel, lineHeight: 22)
+        label.textColor = .gray600
+        label.font = .title1
+        return label
+    }()
+    private lazy var setTimeToggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.isOn = false
+        toggle.onTintColor = .blue
+        toggle.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedTimeToggle()
+        }
+        toggle.addAction(action, for: .touchUpInside)
+        return toggle
+    }()
+    private lazy var timePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.preferredDatePickerStyle = .wheels
+        picker.datePickerMode = .time
+        picker.locale = Locale(identifier: "ko-KR")
+        picker.timeZone = .autoupdatingCurrent
+        let action = UIAction { [weak self] _ in
+            self?.didTimeChanged()
+        }
+        picker.addAction(action, for: .valueChanged)
+        return picker
+    }()
+    private let divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        return view
+    }()
+    private let setRepeatLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.setHouseWorkViewControllerSetRepeatLabel, lineHeight: 22)
+        label.textColor = .gray600
+        label.font = .title1
+        return label
+    }()
+    private lazy var setRepeatToggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.isOn = false
+        toggle.onTintColor = .blue
+        toggle.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedRepeatToggle()
+        }
+        toggle.addAction(action, for: .touchUpInside)
+        return toggle
+    }()
+    private lazy var repeatCycleView: RepeatCycleView = {
+        let view = RepeatCycleView()
+        let action = UIAction { [weak self] _ in
+            self?.didTappedRepeatCycleButton()
+        }
+        view.repeatCycleButton.addAction(action, for: .touchUpInside)
+        return view
+    }()
+    private let repeatCycleMenu = RepeatCycleMenu()
+    private let repeatCycleCollectionView = RepeatCycleCollectionView()
+    private lazy var repeatCycleDayLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray400
+        label.font = .body2
+        label.isHidden = true
+        return label
+    }()
+    private let doneButton: MainButton = {
+        let button = MainButton()
+        button.title = TextLiteral.setHouseWorkViewControllerDoneButtonText
+        button.isDisabled = false
+        return button
+    }()
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        didTappedHouseWork()
+        didDeleteHouseWork()
+        didTappedRepeatCycleMenuButton()
+        didSelectDaysOfWeek()
+    }
+    
     override func render() {
-        view.addSubview(setHouseWorkCalendarView)
+        view.addSubviews(setHouseWorkCalendarView, setHouseWorkCollectionView, doneButton, scrollView, selectManagerView, managerToastLabel)
+        scrollView.addSubview(contentView)
+        contentView.addSubviews(getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleMenu, repeatCycleDayLabel)
+        
         setHouseWorkCalendarView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(38)
         }
         
-        view.addSubview(setHouseWorkCollectionView)
         setHouseWorkCollectionView.snp.makeConstraints {
-            $0.top.equalTo(setHouseWorkCalendarView.snp.bottom).offset(8)
+            $0.top.equalTo(setHouseWorkCalendarView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(134)
         }
         
-        view.addSubview(getManagerView)
-        getManagerView.snp.makeConstraints {
+        doneButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
+        }
+        
+        scrollView.snp.makeConstraints {
             $0.top.equalTo(setHouseWorkCollectionView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(doneButton.snp.top).inset(-SizeLiteral.componentPadding)
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.width.edges.equalToSuperview()
+        }
+        
+        getManagerView.snp.makeConstraints {
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(120)
         }
         
-        view.addSubview(selectManagerView)
+        setTimeLabel.snp.makeConstraints {
+            $0.top.equalTo(getManagerView.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        setTimeToggle.snp.makeConstraints {
+            $0.centerY.equalTo(setTimeLabel.snp.centerY)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+        
+        timePicker.snp.makeConstraints {
+            $0.top.equalTo(setTimeLabel.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
+        }
+        
+        divider.snp.makeConstraints {
+            $0.top.equalTo(timePicker.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(2)
+        }
+        
+        setRepeatLabel.snp.makeConstraints {
+            $0.top.equalTo(divider.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        setRepeatToggle.snp.makeConstraints {
+            $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(0)
+        }
+        
+        repeatCycleView.snp.makeConstraints {
+            $0.top.equalTo(setRepeatLabel.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
+        }
+        
+        repeatCycleCollectionView.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleView.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(0)
+        }
+        
+        repeatCycleMenu.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleView.snp.bottom)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(98)
+            $0.height.equalTo(76)
+        }
+        
+        repeatCycleDayLabel.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
         selectManagerView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
         }
         
-        view.addSubview(managerToastLabel)
         managerToastLabel.snp.makeConstraints {
             $0.bottom.equalTo(selectManagerView.snp.top).offset(-10)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
@@ -100,15 +259,43 @@ final class SetHouseWorkViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
+    private func didTappedHouseWork() {
+        setHouseWorkCollectionView.didTappedHouseWork = { [weak self] selectedHouseWorkIndex in
+            self?.selectedHouseWorkIndex = selectedHouseWorkIndex
+            self?.repeatCycleCollectionView.selectedHouseWorkIndex = selectedHouseWorkIndex
+            self?.repeatCycleCollectionView.collectionView.reloadData()
+            self?.updateManagerTimeRepeat(selectedHouseWorkIndex)
+            self?.selectManagerView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+        }
+    }
+    
+    private func didDeleteHouseWork() {
+        setHouseWorkCollectionView.didDeleteHouseWork = { [weak self] deletedHouseWorkIndex in
+            if HouseWork.mockHouseWork.count == 0 {
+                // FIXME: - 이전 페이지로 이동
+            } else if deletedHouseWorkIndex == HouseWork.mockHouseWork.endIndex && deletedHouseWorkIndex == self?.selectedHouseWorkIndex ?? 0 {
+                self?.selectedHouseWorkIndex -= 1
+                self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
+                self?.updateManagerTimeRepeat(deletedHouseWorkIndex - 1)
+            } else if deletedHouseWorkIndex == self?.selectedHouseWorkIndex {
+                self?.updateManagerTimeRepeat(deletedHouseWorkIndex)
+            } else if deletedHouseWorkIndex < self?.selectedHouseWorkIndex ?? 0 {
+                self?.selectedHouseWorkIndex -= 1
+                self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
+                self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
+            } else {
+                self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
+            }
+        }
+    }
+    
     private func showSelectManagerView() {
         selectManagerView.snp.updateConstraints {
             $0.height.equalTo(341)
         }
-        
-        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        
+        addAnimation()
         selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
     
@@ -116,27 +303,20 @@ final class SetHouseWorkViewController: BaseViewController {
         selectManagerView.snp.updateConstraints {
             $0.height.equalTo(0)
         }
-        
-        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        
+        addAnimation()
         selectManagerView.selectManagerCollectionView.selectedManagerList = getManagerView.getManagerCollectionView.selectedMemberList
     }
     
     private func didTappedConfirmButton() {
-        if !selectManagerView.selectManagerCollectionView.selectedManagerList.isEmpty {
+        if selectManagerView.selectManagerCollectionView.selectedManagerList.isEmpty {
+            showToast()
+        } else {
             selectManagerView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
-            
-            UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlDown, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-            
+            addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
-        } else {
-            showToast()
+            HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
         }
     }
     
@@ -151,5 +331,188 @@ final class SetHouseWorkViewController: BaseViewController {
                 self.managerToastLabel.isHidden = true
             })
         })
+    }
+    
+    private func didTappedTimeToggle() {
+        if setTimeToggle.isOn {
+            timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom).offset(8)
+                $0.height.equalTo(196.2)
+            }
+            addAnimation()
+        } else {
+            timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom)
+                $0.height.equalTo(0)
+            }
+            HouseWork.mockHouseWork[selectedHouseWorkIndex].time = TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel
+            setHouseWorkCollectionView.collectionView.reloadData()
+        }
+    }
+    
+    private func didTimeChanged() {
+        let time = timePicker.date.timeToKoreanString
+        HouseWork.mockHouseWork[selectedHouseWorkIndex].time = time
+        setHouseWorkCollectionView.collectionView.reloadData()
+    }
+    
+    private func didTappedRepeatToggle() {
+        if setRepeatToggle.isOn {
+            openRepeatCycleView()
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(40)
+            }
+            setRepeatToggle.snp.remakeConstraints {
+                $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+                $0.trailing.equalToSuperview().inset(20)
+            }
+            repeatCycleDayLabel.snp.remakeConstraints {
+                $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                $0.bottom.equalTo(0)
+            }
+            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
+            updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
+            repeatCycleCollectionView.selectedDaysOfWeek = []
+        } else {
+            closeRepeatCycleView()
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+            setRepeatToggle.snp.remakeConstraints {
+                $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+                $0.trailing.equalToSuperview().inset(20)
+                $0.bottom.equalTo(0)
+            }
+            repeatCycleDayLabel.snp.remakeConstraints {
+                $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            }
+            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = nil
+            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern = nil
+            repeatCycleMenu.isHidden = true
+        }
+        addAnimation()
+    }
+    
+    private func didTappedRepeatCycleButton() {
+        repeatCycleMenu.isHidden.toggle()
+    }
+    
+    private func didTappedRepeatCycleMenuButton() {
+        repeatCycleMenu.didTappedRepeatCycleMenuButton = { [weak self] repeatCycle in
+            switch repeatCycle {
+            case .week:
+                self?.repeatCycleCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(40)
+                }
+                self?.updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
+                self?.repeatCycleCollectionView.selectedDaysOfWeek = []
+            case .month:
+                self?.repeatCycleCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+                self?.updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
+            }
+            HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
+            self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.rawValue
+            self?.repeatCycleMenu.isHidden = true
+        }
+    }
+    
+    private func didSelectDaysOfWeek() {
+        repeatCycleCollectionView.didSelectDaysOfWeek = { [weak self] selectedDays in
+            var sortedDays: [String] = []
+            for day in selectedDays.sorted(){
+                sortedDays.append(String(day.dropFirst(1)))
+            }
+            let selectedDaysOfWeek = selectedDays.isEmpty ? Date().dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
+            self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek)
+            HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatPattern = sortedDays
+        }
+    }
+    
+    private func isTimeSelected(_ houseWork: Int) {
+        if HouseWork.mockHouseWork[houseWork].time == TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel {
+            setTimeToggle.isOn = false
+            timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom)
+                $0.height.equalTo(0)
+            }
+        } else {
+            setTimeToggle.isOn = true
+            timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom).offset(8)
+                $0.height.equalTo(196.2)
+            }
+        }
+    }
+    
+    private func isRepeatSelected(_ houseWork: Int) {
+        switch HouseWork.mockHouseWork[houseWork].repeatCycle {
+        case .week:
+            setRepeatToggle.isOn = true
+            openRepeatCycleView()
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(40)
+            }
+            repeatCycleCollectionView.selectedHouseWorkIndex = houseWork
+            repeatCycleCollectionView.collectionView.reloadData()
+            updateRepeatCycleDayLabel(.week, HouseWork.mockHouseWork[houseWork].repeatPattern?.joined(separator: ", ") ?? Date().dayOfWeekToKoreanString)
+        case .month:
+            setRepeatToggle.isOn = true
+            openRepeatCycleView()
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.month.rawValue
+            updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
+        case .none:
+            setRepeatToggle.isOn = false
+            closeRepeatCycleView()
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
+        }
+    }
+    
+    private func updateManagerTimeRepeat(_ houseWork: Int) {
+        getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
+        isTimeSelected(houseWork)
+        isRepeatSelected(houseWork)
+    }
+    
+    private func addAnimation() {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func openRepeatCycleView() {
+        repeatCycleView.snp.updateConstraints {
+            $0.height.equalTo(36)
+        }
+        repeatCycleView.repeatCycleLabel.isHidden = false
+        repeatCycleView.repeatCycleButton.isHidden = false
+        repeatCycleDayLabel.isHidden = false
+    }
+    
+    private func closeRepeatCycleView() {
+        repeatCycleView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        repeatCycleView.repeatCycleLabel.isHidden = true
+        repeatCycleView.repeatCycleButton.isHidden = true
+        repeatCycleDayLabel.isHidden = true
+    }
+    
+    private func updateRepeatCycleDayLabel(_ type: RepeatType, _ repeatDay: String) {
+        switch type {
+        case .week:
+            repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryWeek + repeatDay + TextLiteral.setHouseWorkViewControllerWeek + TextLiteral.setHouseWorkViewControllerRepeat
+            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerWeek, with: .positive20)
+        case .month:
+            repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryMonth + repeatDay + TextLiteral.setHouseWorkViewControllerDay + TextLiteral.setHouseWorkViewControllerRepeat
+            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerDay, with: .positive20)
+        }
     }
 }

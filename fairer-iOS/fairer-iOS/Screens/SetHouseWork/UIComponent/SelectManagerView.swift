@@ -43,20 +43,19 @@ final class SelectManagerView: BaseUIView {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubview(selectManagerLabel)
+        self.addSubviews(selectManagerLabel, selectManagerCollectionView, cancelButton, confirmButton)
+        
         selectManagerLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(20)
             $0.centerX.equalToSuperview()
         }
         
-        self.addSubview(selectManagerCollectionView)
         selectManagerCollectionView.snp.makeConstraints {
             $0.top.equalTo(selectManagerLabel.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(142)
         }
         
-        self.addSubview(cancelButton)
         cancelButton.snp.makeConstraints {
             $0.top.equalTo(selectManagerCollectionView.snp.bottom).offset(24)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
@@ -64,7 +63,6 @@ final class SelectManagerView: BaseUIView {
             $0.height.equalTo(56)
         }
         
-        self.addSubview(confirmButton)
         confirmButton.snp.makeConstraints {
             $0.centerY.equalTo(cancelButton.snp.centerY)
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
