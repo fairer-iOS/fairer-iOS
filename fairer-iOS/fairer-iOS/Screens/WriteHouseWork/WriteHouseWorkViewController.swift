@@ -98,6 +98,24 @@ final class WriteHouseWorkViewController: BaseViewController {
         view.backgroundColor = .gray100
         return view
     }()
+    private let setRepeatLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.setHouseWorkViewControllerSetRepeatLabel, lineHeight: 22)
+        label.textColor = .gray600
+        label.font = .title1
+        return label
+    }()
+    private lazy var setRepeatToggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.isOn = false
+        toggle.onTintColor = .blue
+        toggle.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedRepeatToggle()
+        }
+        toggle.addAction(action, for: .touchUpInside)
+        return toggle
+    }()
     
     // MARK: - life cycle
     
@@ -110,7 +128,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView, selectManagerView, managerToastLabel)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider)
+        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle)
         
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -169,7 +187,16 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.top.equalTo(timePicker.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
-            // FIXME: - 하단에 컴포넌트 추가되면 삭제
+        }
+        
+        setRepeatLabel.snp.makeConstraints {
+            $0.top.equalTo(divider.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        setRepeatToggle.snp.makeConstraints {
+            $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+            $0.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(0)
         }
         
@@ -312,6 +339,10 @@ final class WriteHouseWorkViewController: BaseViewController {
                 $0.height.equalTo(0)
             }
         }
+    }
+    
+    private func didTappedRepeatToggle() {
+        print("토글토글")
     }
 }
 
