@@ -116,6 +116,14 @@ final class WriteHouseWorkViewController: BaseViewController {
         toggle.addAction(action, for: .touchUpInside)
         return toggle
     }()
+    private lazy var repeatCycleView: RepeatCycleView = {
+        let view = RepeatCycleView()
+        let action = UIAction { [weak self] _ in
+            self?.didTappedRepeatCycleButton()
+        }
+        view.repeatCycleButton.addAction(action, for: .touchUpInside)
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -128,7 +136,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView, selectManagerView, managerToastLabel)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle)
+        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView)
         
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -198,6 +206,12 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.centerY.equalTo(setRepeatLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(0)
+        }
+        
+        repeatCycleView.snp.makeConstraints {
+            $0.top.equalTo(setRepeatLabel.snp.bottom).offset(SizeLiteral.componentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
         }
         
         selectManagerView.snp.makeConstraints {
@@ -343,6 +357,10 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     private func didTappedRepeatToggle() {
         print("토글토글")
+    }
+    
+    private func didTappedRepeatCycleButton() {
+        print("cycle button")
     }
 }
 
