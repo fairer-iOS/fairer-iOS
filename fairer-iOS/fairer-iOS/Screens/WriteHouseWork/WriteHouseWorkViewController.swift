@@ -140,6 +140,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         super.viewDidLoad()
         setupNotificationCenter()
         setupDelegation()
+        didTappedRepeatCycleMenuButton()
     }
     
     override func render() {
@@ -446,6 +447,26 @@ final class WriteHouseWorkViewController: BaseViewController {
         case .month:
             repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryMonth + repeatDay + TextLiteral.setHouseWorkViewControllerDay + TextLiteral.setHouseWorkViewControllerRepeat
             repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerDay, with: .positive20)
+        }
+    }
+    
+    private func didTappedRepeatCycleMenuButton() {
+        repeatCycleMenu.didTappedRepeatCycleMenuButton = { [weak self] repeatCycle in
+            switch repeatCycle {
+            case .week:
+                self?.repeatCycleCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(40)
+                }
+                self?.updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
+                self?.repeatCycleCollectionView.selectedDaysOfWeek = []
+            case .month:
+                self?.repeatCycleCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+                self?.updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
+            }
+            self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.rawValue
+            self?.repeatCycleMenu.isHidden = true
         }
     }
 }
