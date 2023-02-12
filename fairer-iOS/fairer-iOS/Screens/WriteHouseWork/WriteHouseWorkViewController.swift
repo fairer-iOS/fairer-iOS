@@ -125,6 +125,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         return view
     }()
     private let repeatCycleCollectionView = RepeatCycleCollectionView()
+    private let repeatCycleMenu = RepeatCycleMenu()
     private lazy var repeatCycleDayLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray400
@@ -144,7 +145,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView, selectManagerView, managerToastLabel)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleDayLabel)
+        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleMenu, repeatCycleDayLabel)
         
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -226,6 +227,13 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.top.equalTo(repeatCycleView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
+        }
+        
+        repeatCycleMenu.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleView.snp.bottom)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(98)
+            $0.height.equalTo(76)
         }
         
         repeatCycleDayLabel.snp.makeConstraints {
