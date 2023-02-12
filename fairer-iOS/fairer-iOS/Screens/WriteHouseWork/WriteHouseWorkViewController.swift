@@ -124,6 +124,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         view.repeatCycleButton.addAction(action, for: .touchUpInside)
         return view
     }()
+    private let repeatCycleCollectionView = RepeatCycleCollectionView()
     
     // MARK: - life cycle
     
@@ -136,7 +137,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView, selectManagerView, managerToastLabel)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView)
+        contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView)
         
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -211,6 +212,12 @@ final class WriteHouseWorkViewController: BaseViewController {
         repeatCycleView.snp.makeConstraints {
             $0.top.equalTo(setRepeatLabel.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(0)
+        }
+        
+        repeatCycleCollectionView.snp.makeConstraints {
+            $0.top.equalTo(repeatCycleView.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
         }
         
