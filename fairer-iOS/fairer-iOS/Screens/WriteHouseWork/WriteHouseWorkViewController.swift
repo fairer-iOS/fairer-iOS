@@ -404,12 +404,13 @@ final class WriteHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             }
+            repeatCycleMenu.isHidden = true
         }
         addAnimation()
     }
     
     private func didTappedRepeatCycleButton() {
-        print("cycle button")
+        repeatCycleMenu.isHidden.toggle()
     }
     
     private func openRepeatCycleView() {
