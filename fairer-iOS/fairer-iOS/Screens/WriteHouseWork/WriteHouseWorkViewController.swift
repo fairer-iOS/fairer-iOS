@@ -12,6 +12,7 @@ import SnapKit
 final class WriteHouseWorkViewController: BaseViewController {
     
     var houseWorkMaxLength = 16
+    var isCorrection: Bool = false
     
     // MARK: - property
     
@@ -149,6 +150,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         super.viewDidLoad()
         setupNotificationCenter()
         setupDelegation()
+        setupCorrection()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
@@ -291,6 +293,13 @@ final class WriteHouseWorkViewController: BaseViewController {
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func setupCorrection() {
+        if isCorrection {
+            // FIXME: - 집안일 정보 불러오는 api 연결 후 ui 업데이트
+            doneButton.title = "수정 완료"
+        }
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
