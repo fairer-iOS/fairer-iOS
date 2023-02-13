@@ -42,7 +42,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }()
     private let managerToastLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.setHouseWorkManagerToastLabel
+        label.text = TextLiteral.setManagerToastLabel
         label.textColor = .white
         label.font = .title2
         label.backgroundColor = .gray700
@@ -54,7 +54,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }()
     private let setTimeLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: TextLiteral.setHouseWorkViewControllerSetTimeLabel, lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.setTimeLabel, lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         return label
@@ -89,7 +89,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }()
     private let setRepeatLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: TextLiteral.setHouseWorkViewControllerSetRepeatLabel, lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.setRepeatLabel, lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         return label
@@ -124,7 +124,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }()
     private let doneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.setHouseWorkViewControllerDoneButtonText
+        button.title = TextLiteral.houseWorkDoneButtonText
         button.isDisabled = false
         return button
     }()
@@ -508,11 +508,11 @@ final class SetHouseWorkViewController: BaseViewController {
     private func updateRepeatCycleDayLabel(_ type: RepeatType, _ repeatDay: String) {
         switch type {
         case .week:
-            repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryWeek + repeatDay + TextLiteral.setHouseWorkViewControllerWeek + TextLiteral.setHouseWorkViewControllerRepeat
-            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerWeek, with: .positive20)
+            repeatCycleDayLabel.text = TextLiteral.everyWeekText + repeatDay + TextLiteral.weekText + TextLiteral.repeatText
+            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.weekText, with: .positive20)
         case .month:
-            repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryMonth + repeatDay + TextLiteral.setHouseWorkViewControllerDay + TextLiteral.setHouseWorkViewControllerRepeat
-            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerDay, with: .positive20)
+            repeatCycleDayLabel.text = TextLiteral.everyMonthText + repeatDay + TextLiteral.dayText + TextLiteral.repeatText
+            repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.dayText, with: .positive20)
         }
     }
 }

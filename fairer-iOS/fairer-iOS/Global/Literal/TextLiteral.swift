@@ -13,6 +13,15 @@ enum TextLiteral {
     
     static let doneButtonText: String = "입력 완료"
     static let textFieldDisableSignLabel: String = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
+    static let setManagerToastLabel = "집안일 담당자를 지정해주세요."
+    static let setTimeLabel = "시간설정"
+    static let setRepeatLabel = "반복하기"
+    static let houseWorkDoneButtonText = "집안일 추가 완료"
+    static let everyWeekText = "매주 "
+    static let weekText = "요일"
+    static let everyMonthText = "매달 "
+    static let dayText = "일"
+    static let repeatText = "에 반복해요"
     
     // MARK: - OnboardingNameViewController
     
@@ -147,7 +156,6 @@ enum TextLiteral {
     // MARK: - SetHouseWorkCollectionViewCell
     
     static let setHouseWorkCollectionViewCellDefaultTimeLabel = "하루 종일"
-    static let setHouseWorkManagerToastLabel = "집안일 담당자를 지정해주세요."
     
     // MARK: - SelectManagerView
     
@@ -166,18 +174,6 @@ enum TextLiteral {
     // MARK: - RepeatCycleCollectionView
     
     static let repeatCycleCollectionViewDaysOfWeekList = ["0월", "1화", "2수", "3목", "4금", "5토", "6일"]
-    
-    // MARK: - SetHouseWorkViewController
-    
-    static let setHouseWorkViewControllerSetTimeLabel = "시간설정"
-    static let setHouseWorkViewControllerSetRepeatLabel = "반복하기"
-    static let setHouseWorkViewControllerDoneButtonText = "집안일 추가 완료"
-    static let setHouseWorkViewControllerEveryWeek = "매주 "
-    static let setHouseWorkViewControllerWeek = "요일"
-    static let setHouseWorkViewControllerEveryMonth = "매달 "
-    static let setHouseWorkViewControllerDay = "일"
-    static let setHouseWorkViewControllerRepeat = "에 반복해요"
-    
     
     // MARK: - WriteHouseWorkViewController
     
