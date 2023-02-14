@@ -158,6 +158,28 @@ final class SettingProfileViewController: BaseViewController {
         print("입력 완료")
     }
     
+    private func didTappedTextField() {
+        settingProfileTitleLabel.isHidden = true
+        settingProfileButtonView.snp.updateConstraints {
+            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(-48)
+        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func didTappedBackground() {
+        settingProfileTitleLabel.isHidden = false
+        settingProfileButtonView.snp.updateConstraints {
+            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(26)
+        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -166,12 +188,16 @@ final class SettingProfileViewController: BaseViewController {
                 self.settingProfileDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 36)
             })
         }
+        
+        didTappedTextField()
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.settingProfileDoneButton.transform = .identity
         })
+        
+        didTappedBackground()
     }
 }
 
