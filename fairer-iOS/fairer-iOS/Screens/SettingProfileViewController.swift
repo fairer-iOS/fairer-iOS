@@ -51,7 +51,16 @@ final class SettingProfileViewController: BaseViewController {
     }()
     private let settingProfileNameWarningLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "텍스트는 5글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
+        label.text = "텍스트는 5글자를 초과하여 입력하실 수 없어요."
+        label.textColor = .negative20
+        label.font = .body2
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    private let settingProfileNameSpecialWarningLabel: UILabel = {
+        let label = UILabel()
+        label.text = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
         label.textColor = .negative20
         label.font = .body2
         label.numberOfLines = 0
@@ -59,7 +68,7 @@ final class SettingProfileViewController: BaseViewController {
         return label
     }()
     private lazy var settingProfileNameStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [settingProfileNameLabel, settingProfileNameTextField, settingProfileNameWarningLabel])
+        let stackView = UIStackView(arrangedSubviews: [settingProfileNameLabel, settingProfileNameTextField, settingProfileNameWarningLabel, settingProfileNameSpecialWarningLabel])
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.spacing = 8
@@ -80,7 +89,7 @@ final class SettingProfileViewController: BaseViewController {
     }()
     private let settingProfileStatusWarningLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "텍스트는 20글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
+        label.text = "텍스트는 20글자를 초과하여 입력하실 수 없어요."
         label.textColor = .negative20
         label.font = .body2
         label.numberOfLines = 0
@@ -181,7 +190,7 @@ final class SettingProfileViewController: BaseViewController {
     private func didTappedTextField() {
         settingProfileTitleLabel.isHidden = true
         settingProfileButtonView.snp.updateConstraints {
-            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(-60)
+            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(-65)
         }
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
@@ -216,6 +225,16 @@ final class SettingProfileViewController: BaseViewController {
         }
     }
     
+    private func checkSpecialCharacter(textField: UITextField) {
+        if let text = textField.text, textField == settingProfileNameTextField {
+            if text.hasSpecialCharacters() {
+                settingProfileNameSpecialWarningLabel.isHidden = false
+            } else {
+                settingProfileNameSpecialWarningLabel.isHidden = true
+            }
+        }
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -242,6 +261,7 @@ final class SettingProfileViewController: BaseViewController {
 extension SettingProfileViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         checkMaxLength(textField: textField)
+        checkSpecialCharacter(textField: textField)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
