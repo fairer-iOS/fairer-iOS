@@ -49,6 +49,22 @@ final class SettingProfileViewController: BaseViewController {
         textField.myFont = UIFont.body1
         return textField
     }()
+    private let settingProfileNameWarningLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "텍스트는 5글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
+        label.textColor = .negative20
+        label.font = .body2
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    private lazy var settingProfileNameStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [settingProfileNameLabel, settingProfileNameTextField, settingProfileNameWarningLabel])
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        return stackView
+    }()
     private let settingProfileStatusLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: "상태 메세지", lineHeight: 22)
@@ -61,6 +77,22 @@ final class SettingProfileViewController: BaseViewController {
         textField.myFont = UIFont.body1
         textField.text = lastStatus
         return textField
+    }()
+    private let settingProfileStatusWarningLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "텍스트는 20글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
+        label.textColor = .negative20
+        label.font = .body2
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    private lazy var settingProfileStatusStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [settingProfileStatusLabel, settingProfileStatusTextField, settingProfileStatusWarningLabel])
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        return stackView
     }()
     private lazy var settingProfileDoneButton: MainButton = {
         let button = MainButton()
@@ -95,27 +127,15 @@ final class SettingProfileViewController: BaseViewController {
             $0.centerX.equalToSuperview()
         }
         
-        view.addSubview(settingProfileNameLabel)
-        settingProfileNameLabel.snp.makeConstraints {
+        view.addSubview(settingProfileNameStackView)
+        settingProfileNameStackView.snp.makeConstraints {
             $0.top.equalTo(settingProfileButtonView.snp.bottom)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        view.addSubview(settingProfileNameTextField)
-        settingProfileNameTextField.snp.makeConstraints {
-            $0.top.equalTo(settingProfileNameLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(settingProfileStatusLabel)
-        settingProfileStatusLabel.snp.makeConstraints {
-            $0.top.equalTo(settingProfileNameTextField.snp.bottom).offset(8)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        view.addSubview(settingProfileStatusTextField)
-        settingProfileStatusTextField.snp.makeConstraints {
-            $0.top.equalTo(settingProfileStatusLabel.snp.bottom).offset(8)
+        view.addSubview(settingProfileStatusStackView)
+        settingProfileStatusStackView.snp.makeConstraints {
+            $0.top.equalTo(settingProfileNameStackView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -161,7 +181,7 @@ final class SettingProfileViewController: BaseViewController {
     private func didTappedTextField() {
         settingProfileTitleLabel.isHidden = true
         settingProfileButtonView.snp.updateConstraints {
-            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(-48)
+            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(-60)
         }
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
@@ -178,6 +198,22 @@ final class SettingProfileViewController: BaseViewController {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
+    }
+    
+    private func checkMaxLength(textField: UITextField) {
+        let maxLength = textField == settingProfileNameTextField ? 5 : 20
+        let warningLabel = textField == settingProfileNameTextField ? settingProfileNameWarningLabel : settingProfileStatusWarningLabel
+        
+        if let text = textField.text {
+            if text.count > maxLength {
+                textField.layer.borderWidth = 1
+                textField.layer.borderColor = UIColor.negative20.cgColor
+                warningLabel.isHidden = false
+            } else {
+                textField.layer.borderWidth = 0
+                warningLabel.isHidden = true
+            }
+        }
     }
     
     // MARK: - selector
@@ -205,6 +241,7 @@ final class SettingProfileViewController: BaseViewController {
 
 extension SettingProfileViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        checkMaxLength(textField: textField)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
