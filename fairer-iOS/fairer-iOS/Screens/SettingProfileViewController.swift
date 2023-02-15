@@ -15,7 +15,9 @@ final class SettingProfileViewController: BaseViewController {
     
     private let lastProfileImage = ImageLiterals.profileBlue3
     private let lastName = "진저"
-    private let lastStatus: String? = nil
+    private let lastStatus: String? = ""
+    private var isNameSatisfied = true
+    private var isStatusSatisfied = true
     
     // MARK: - property
     
@@ -105,7 +107,7 @@ final class SettingProfileViewController: BaseViewController {
     }()
     private lazy var settingProfileDoneButton: MainButton = {
         let button = MainButton()
-        button.isDisabled = false
+        button.isDisabled = true
         button.title = "입력 완료"
         let action = UIAction {[weak self] _ in
             self?.touchUpToSaveChange()
@@ -209,39 +211,15 @@ final class SettingProfileViewController: BaseViewController {
         }, completion: nil)
     }
     
-    private func checkMaxLength(textField: UITextField) {
-        let maxLength = textField == settingProfileNameTextField ? 5 : 20
-        let warningLabel = textField == settingProfileNameTextField ? settingProfileNameWarningLabel : settingProfileStatusWarningLabel
-        
-        if let text = textField.text {
-            if text.count > maxLength {
-                textField.layer.borderWidth = 1
-                textField.layer.borderColor = UIColor.negative20.cgColor
-                warningLabel.isHidden = false
-            } else {
-                textField.layer.borderWidth = 0
-                warningLabel.isHidden = true
-            }
-        }
-    }
-    
-    private func checkSpecialCharacter(textField: UITextField) {
-        if let text = textField.text, textField == settingProfileNameTextField {
-            if text.hasSpecialCharacters() {
-                settingProfileNameSpecialWarningLabel.isHidden = false
-            } else {
-                settingProfileNameSpecialWarningLabel.isHidden = true
-            }
-        }
-    }
-    
     private func checkNameTextField() {
         if let text = settingProfileNameTextField.text {
             if text.count > 5 || text.hasSpecialCharacters() {
                 settingProfileNameTextField.layer.borderWidth = 1
                 settingProfileNameTextField.layer.borderColor = UIColor.negative20.cgColor
+                isNameSatisfied = false
             } else {
                 settingProfileNameTextField.layer.borderWidth = 0
+                isNameSatisfied = true
             }
             
             if text.count > 5 && text.hasSpecialCharacters() {
@@ -266,10 +244,20 @@ final class SettingProfileViewController: BaseViewController {
                 settingProfileStatusTextField.layer.borderWidth = 1
                 settingProfileStatusTextField.layer.borderColor = UIColor.negative20.cgColor
                 settingProfileStatusWarningLabel.isHidden = false
+                isStatusSatisfied = false
             } else {
                 settingProfileStatusTextField.layer.borderWidth = 0
                 settingProfileStatusWarningLabel.isHidden = true
+                isStatusSatisfied = true
             }
+        }
+    }
+    
+    private func checkDoneButton() {
+        if isNameSatisfied && isStatusSatisfied  && !(settingProfileNameTextField.text == lastName && settingProfileStatusTextField.text == lastStatus) {
+            settingProfileDoneButton.isDisabled = false
+        } else {
+            settingProfileDoneButton.isDisabled = true
         }
     }
     
@@ -303,6 +291,7 @@ extension SettingProfileViewController: UITextFieldDelegate {
         } else {
             checkStatusTextField()
         }
+        checkDoneButton()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
