@@ -32,6 +32,13 @@ enum TextLiteral {
     static let homeRuleViewRuleLabel: String = "규칙"
     static let homeRuleViewRuleDescriptionLabel: String = "여기를 눌러 하우스의 규칙을 입력해주세요!"
     
+    // MARK: - SettingHomeRuleViewController
+    
+    static let settingHomeRulePrimaryLabel: String = "하우스 규칙 설정"
+    static let settingHomeRuleTextFieldLabel: String = "새로운 규칙"
+    static let settingHomeRuleTextFieldPlaceholder: String = "예) 밥은 다 먹은 사람이 치우기"
+    static let settingHomeRuleInfoLabel: String = "규칙은 최대 10개까지 만들 수 있습니다."
+    
     // MARK: - HouseMakeNameViewController
     
     static let houseMakeNameViewControllerWriteNamePrimaryLabel: String = "하우스의 이름을 입력해주세요."
@@ -146,10 +153,46 @@ enum TextLiteral {
     
     static let writeHouseWorkButtonLabel = "집안일 직접 입력하기"
     
-    
     // MARK: - SetHouseWorkCollectionViewCell
     
     static let setHouseWorkCollectionViewCellDefaultTimeLabel = "하루 종일"
+    static let setHouseWorkManagerToastLabel = "집안일 담당자를 지정해주세요."
+    
+    // MARK: - SelectManagerView
+    
+    static let selectManagerViewLabel = "집안일 담당자 선택"
+    static let selectManagerViewCancelButtonText = "취소"
+    static let selectManagerViewConfirmButtonText = "확인"
+    
+    // MARK: - GetManagerView
+    
+    static let getManagerViewManagerLabel = "담당자"
+    
+    // MARK: - RepeatCycleView
+    
+    static let repeatCycleViewRepeatCycleLabel = "반복주기"
+    
+    // MARK: - RepeatCycleCollectionView
+    
+    static let repeatCycleCollectionViewDaysOfWeekList = ["0월", "1화", "2수", "3목", "4금", "5토", "6일"]
+    
+    // MARK: - SetHouseWorkViewController
+    
+    static let setHouseWorkViewControllerSetTimeLabel = "시간설정"
+    static let setHouseWorkViewControllerSetRepeatLabel = "반복하기"
+    static let setHouseWorkViewControllerDoneButtonText = "집안일 추가 완료"
+    static let setHouseWorkViewControllerEveryWeek = "매주 "
+    static let setHouseWorkViewControllerWeek = "요일"
+    static let setHouseWorkViewControllerEveryMonth = "매달 "
+    static let setHouseWorkViewControllerDay = "일"
+    static let setHouseWorkViewControllerRepeat = "에 반복해요"
+    
+    
+    // MARK: - WriteHouseWorkViewController
+    
+    static let writeHouseWorkViewControllerHouseWorkNameLabel = "집안일 이름"
+    static let writeHouseWorkViewControllerHouseWorkNameTextFieldPlaceholderText = "직접 입력"
+    static let writeHouseWorkViewControllerHouseWorkNameWarningLabel = "텍스트는 16글자를 초과하여 입력하실 수 없어요."
     
     // MARK: - SettingProfileViewController
     

@@ -65,6 +65,8 @@ enum ImageLiterals {
     static var settingProfileImageBrushButton: UIImage { .load(name: "brushButton") }
     static var plusWorkButton: UIImage { .load(systemName: "plus") }
     static var moveToCalendarButton: UIImage { .load(name: "keyboard_arrow_down") }
+    static var addManagerButton: UIImage { .load(name: "managerplus") }
+    static var repeatCycleChevronButton: UIImage { .load(name: "repeatcyclechevron") }
     
     // MARK: - icon
     
@@ -78,6 +80,8 @@ enum ImageLiterals {
     static var writeHouseWorkChevron: UIImage { .load(systemName: "chevron.right") }
     static var spacePin: UIImage { .load(name: "pin") }
     static var deleteButton: UIImage { .load(systemName: "xmark.circle.fill") }
+    static var selectManager: UIImage { .load(systemName: "checkmark.circle.fill") }
+    static var deselectManager: UIImage { .load(systemName: "circle") }
     static var settingMenu: UIImage { .load(name: "menu") }
     static var selectedCalendarCell: UIImage { .load(name: "selectedCell") }
     static var locationPin: UIImage { .load(name: "locationPin") }

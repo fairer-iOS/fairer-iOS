@@ -11,16 +11,16 @@ import SnapKit
 
 final class SetHouseWorkCollectionView: BaseUIView {
     
+    var didTappedHouseWork: ((Int) -> ())?
+    var didDeleteHouseWork: ((Int) -> ())?
+    
     var selectedIndex: Int = 0 {
         didSet {
             collectionView.reloadData()
         }
     }
     
-    // FIXME: - SelectHouseWorkVC에서 선택한 집안일 목록 연결
-    private var selectedDetailHouseWork = ["창 청소", "거실 청소", "물건 정리정돈", "환기 시키기", "빨래 돌리기", "빨래 개기", "세탁기 청소"]
-    
-    lazy var isSelectedDetailHouseWork = [selectedDetailHouseWork[selectedIndex]]
+    lazy var isSelectedDetailHouseWork = [HouseWork.mockHouseWork[selectedIndex].name]
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -43,7 +43,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
         flowLayout.scrollDirection = .horizontal
         return flowLayout
     }()
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
@@ -68,13 +68,14 @@ final class SetHouseWorkCollectionView: BaseUIView {
 extension SetHouseWorkCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        isSelectedDetailHouseWork.append(selectedDetailHouseWork[selectedIndex])
+        isSelectedDetailHouseWork.append(HouseWork.mockHouseWork[selectedIndex].name)
+        didTappedHouseWork?(selectedIndex)
     }
 }
 
 extension SetHouseWorkCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedDetailHouseWork.count
+        return HouseWork.mockHouseWork.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,7 +84,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if isSelectedDetailHouseWork.contains(selectedDetailHouseWork[indexPath.item]) {
+        if isSelectedDetailHouseWork.contains(HouseWork.mockHouseWork[indexPath.item].name) {
             cell.houseWorkLabel.textColor = .blue
         }
         
@@ -92,8 +93,9 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
-        cell.houseWorkLabel.text = selectedDetailHouseWork[indexPath.row]
-        
+        cell.houseWorkLabel.text = HouseWork.mockHouseWork[indexPath.row].name
+        cell.timeLabel.setTextWithLineHeight(text: HouseWork.mockHouseWork[indexPath.row].time, lineHeight: 18)
+
         cell.deleteButton.tag = indexPath.item
         cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(sender:)), for: .touchUpInside)
         
@@ -104,15 +106,18 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
 extension SetHouseWorkCollectionView {
     @objc func didTappedDeleteButton(sender : UIButton) {
         collectionView.deleteItems(at: [IndexPath.init(item: sender.tag, section: 0)])
-        isSelectedDetailHouseWork.removeAll(where: { $0 == selectedDetailHouseWork[sender.tag] })
-        selectedDetailHouseWork.remove(at: sender.tag)
-                
-        if selectedDetailHouseWork.isEmpty {
+        isSelectedDetailHouseWork.removeAll(where: { $0 == HouseWork.mockHouseWork[sender.tag].name })
+        HouseWork.mockHouseWork.remove(at: sender.tag)
+        didDeleteHouseWork?(sender.tag)
+        
+        if HouseWork.mockHouseWork.isEmpty {
             // FIXME: - 이전 페이지로 이동
         }
         
-        if selectedIndex > sender.tag || (selectedIndex == sender.tag && sender.tag == selectedDetailHouseWork.endIndex) {
+        if selectedIndex > sender.tag || (selectedIndex == sender.tag && sender.tag == HouseWork.mockHouseWork.endIndex) {
             selectedIndex -= 1
+        } else if sender.tag == selectedIndex {
+            isSelectedDetailHouseWork.append(HouseWork.mockHouseWork[sender.tag].name)
         }
     }
 }

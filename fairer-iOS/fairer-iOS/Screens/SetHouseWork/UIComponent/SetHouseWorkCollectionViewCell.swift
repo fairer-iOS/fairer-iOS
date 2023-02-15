@@ -23,11 +23,11 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    private let timeLabel: UILabel = {
+    let timeLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel, lineHeight: 18)
         label.textColor = .gray700
         label.font = .caption1
+        label.numberOfLines = 0
         return label
     }()
     lazy var deleteButton: UIButton = {
@@ -46,18 +46,17 @@ final class SetHouseWorkCollectionViewCell: BaseCollectionViewCell {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubview(timeLabel)
+        self.addSubviews(timeLabel, deleteButton, houseWorkLabel)
+        
         timeLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().inset(12)
         }
         
-        self.addSubview(deleteButton)
         deleteButton.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(10)
             $0.width.height.equalTo(16)
         }
         
-        self.addSubview(houseWorkLabel)
         houseWorkLabel.snp.makeConstraints {
             $0.bottom.leading.equalToSuperview().inset(12)
         }
