@@ -69,8 +69,8 @@ final class HomeViewController: BaseViewController {
         return scrollView
     }()
     let datePickerView: PickDateView = {
-        let v = PickDateView()
-        return v
+        let view = PickDateView()
+        return view
     }()
     
     // MARK: - life cycle
