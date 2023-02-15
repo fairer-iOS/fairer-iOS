@@ -54,6 +54,16 @@
 		5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055328E1BF6700355055 /* GroupMainViewController.swift */; };
 		5205055828E1C50600355055 /* InfoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205055728E1C50600355055 /* InfoLabelView.swift */; };
 		520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D6FF1291133A800CF65B2 /* AlreadyInGroupViewController.swift */; };
+		52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */; };
+		52136FD4298299B90022D465 /* RepeatCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD3298299B90022D465 /* RepeatCycleView.swift */; };
+		52136FD72983DE1A0022D465 /* RepeatCycleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */; };
+		52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */; };
+		52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */; };
+		52136FDE29867AB60022D465 /* HouseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FDD29867AB60022D465 /* HouseWork.swift */; };
+		522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */; };
+		522714EB297918EC006BADBC /* SetHouseWorkCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714EA297918EC006BADBC /* SetHouseWorkCalendarView.swift */; };
+		522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714EC297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift */; };
+		522714EF29792936006BADBC /* SetHouseWorkCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714EE29792936006BADBC /* SetHouseWorkCollectionView.swift */; };
 		5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227554F28B219DC0080DD65 /* AppDelegate.swift */; };
 		5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227555128B219DC0080DD65 /* SceneDelegate.swift */; };
 		5227555928B219E50080DD65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5227555828B219E50080DD65 /* Assets.xcassets */; };
@@ -69,6 +79,12 @@
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
 		52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB590D29116AC8003590DF /* SettingTableViewCell.swift */; };
 		52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */; };
+		52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */; };
+		52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C085297CE8D2002AC755 /* GetManagerView.swift */; };
+		52E4C088297CE8DC002AC755 /* GetManagerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */; };
+		52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C089297CF66C002AC755 /* SelectManagerView.swift */; };
+		52E4C08C297D037C002AC755 /* SelectManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C08B297D037C002AC755 /* SelectManagerCollectionViewCell.swift */; };
+		52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C08D297D06F5002AC755 /* SelectManagerCollectionView.swift */; };
 		52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */; };
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
@@ -140,6 +156,16 @@
 		5205055328E1BF6700355055 /* GroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMainViewController.swift; sourceTree = "<group>"; };
 		5205055728E1C50600355055 /* InfoLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabelView.swift; sourceTree = "<group>"; };
 		520D6FF1291133A800CF65B2 /* AlreadyInGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlreadyInGroupViewController.swift; sourceTree = "<group>"; };
+		52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteHouseWorkViewController.swift; sourceTree = "<group>"; };
+		52136FD3298299B90022D465 /* RepeatCycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleView.swift; sourceTree = "<group>"; };
+		52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleMenu.swift; sourceTree = "<group>"; };
+		52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionViewCell.swift; sourceTree = "<group>"; };
+		52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionView.swift; sourceTree = "<group>"; };
+		52136FDD29867AB60022D465 /* HouseWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWork.swift; sourceTree = "<group>"; };
+		522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkViewController.swift; sourceTree = "<group>"; };
+		522714EA297918EC006BADBC /* SetHouseWorkCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkCalendarView.swift; sourceTree = "<group>"; };
+		522714EC297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkCollectionViewCell.swift; sourceTree = "<group>"; };
+		522714EE29792936006BADBC /* SetHouseWorkCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkCollectionView.swift; sourceTree = "<group>"; };
 		5227554C28B219DC0080DD65 /* fairer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fairer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5227554F28B219DC0080DD65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5227555128B219DC0080DD65 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +182,12 @@
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		52DB590D29116AC8003590DF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeButtonView.swift; sourceTree = "<group>"; };
+		52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		52E4C085297CE8D2002AC755 /* GetManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetManagerView.swift; sourceTree = "<group>"; };
+		52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetManagerCollectionView.swift; sourceTree = "<group>"; };
+		52E4C089297CF66C002AC755 /* SelectManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerView.swift; sourceTree = "<group>"; };
+		52E4C08B297D037C002AC755 /* SelectManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerCollectionViewCell.swift; sourceTree = "<group>"; };
+		52E4C08D297D06F5002AC755 /* SelectManagerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagerCollectionView.swift; sourceTree = "<group>"; };
 		52EBF04828E578850062EB41 /* HouseMakeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMakeNameViewController.swift; sourceTree = "<group>"; };
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
@@ -217,10 +249,12 @@
 		39EEF67C28CBB66200437654 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
+				52E4C084297CE8B5002AC755 /* GetManagerView */,
 				39EEF67D28CBB66F00437654 /* MainButton.swift */,
 				5205055728E1C50600355055 /* InfoLabelView.swift */,
 				52EBF04A28EC291F0062EB41 /* TextField.swift */,
 				5275397828EC2F78002D8280 /* BackButton.swift */,
+				52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -413,6 +447,57 @@
 			path = AlreadyInGroup;
 			sourceTree = "<group>";
 		};
+		52136FD5298299BD0022D465 /* RepeatCycle */ = {
+			isa = PBXGroup;
+			children = (
+				52136FD3298299B90022D465 /* RepeatCycleView.swift */,
+				52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */,
+				52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */,
+				52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */,
+			);
+			path = RepeatCycle;
+			sourceTree = "<group>";
+		};
+		52136FDC29867A810022D465 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52136FDD29867AB60022D465 /* HouseWork.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		52136FDF298A72020022D465 /* WriteHouseWork */ = {
+			isa = PBXGroup;
+			children = (
+				52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */,
+			);
+			path = WriteHouseWork;
+			sourceTree = "<group>";
+		};
+		522714E6297917AF006BADBC /* SetHouseWork */ = {
+			isa = PBXGroup;
+			children = (
+				52136FDC29867A810022D465 /* Model */,
+				522714E9297918DB006BADBC /* UIComponent */,
+				522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */,
+			);
+			path = SetHouseWork;
+			sourceTree = "<group>";
+		};
+		522714E9297918DB006BADBC /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				52136FD5298299BD0022D465 /* RepeatCycle */,
+				522714EA297918EC006BADBC /* SetHouseWorkCalendarView.swift */,
+				522714EC297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift */,
+				522714EE29792936006BADBC /* SetHouseWorkCollectionView.swift */,
+				52E4C089297CF66C002AC755 /* SelectManagerView.swift */,
+				52E4C08B297D037C002AC755 /* SelectManagerCollectionViewCell.swift */,
+				52E4C08D297D06F5002AC755 /* SelectManagerCollectionView.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
 		5227554328B219DC0080DD65 = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +549,8 @@
 		5227556C28B303370080DD65 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				52136FDF298A72020022D465 /* WriteHouseWork */,
+				522714E6297917AF006BADBC /* SetHouseWork */,
 				5204AAC2295A01F4002FB6CA /* SettingPolicy */,
 				5204AABA2950BC3B002FB6CA /* SettingInquiry */,
 				5204AAB429507226002FB6CA /* SettingAlarm */,
@@ -545,6 +632,15 @@
 				52DB590D29116AC8003590DF /* SettingTableViewCell.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		52E4C084297CE8B5002AC755 /* GetManagerView */ = {
+			isa = PBXGroup;
+			children = (
+				52E4C085297CE8D2002AC755 /* GetManagerView.swift */,
+				52E4C087297CE8DC002AC755 /* GetManagerCollectionView.swift */,
+			);
+			path = GetManagerView;
 			sourceTree = "<group>";
 		};
 		52EBF04728E578700062EB41 /* HouseMakeName */ = {
@@ -734,18 +830,21 @@
 			files = (
 				5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */,
 				39EEF68D28CBBA1B00437654 /* Model.swift in Sources */,
+				52E4C08C297D037C002AC755 /* SelectManagerCollectionViewCell.swift in Sources */,
 				5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */,
 				52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */,
 				911E967F29717F0E00F3AF35 /* CalendarDailyCollectionViewCell.swift in Sources */,
 				5205055828E1C50600355055 /* InfoLabelView.swift in Sources */,
 				911E9679297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift in Sources */,
 				39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */,
+				522714EB297918EC006BADBC /* SetHouseWorkCalendarView.swift in Sources */,
 				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
 				39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */,
 				39EEF66D28CBB59D00437654 /* UICollectionView+Extension.swift in Sources */,
 				39EEF67728CBB61600437654 /* Date+Extension.swift in Sources */,
 				39EEF66928CBB57F00437654 /* UIViewController+Extension.swift in Sources */,
+				52136FD72983DE1A0022D465 /* RepeatCycleMenu.swift in Sources */,
 				7EF87A3828E1A17800DFE353 /* SpaceNameLabel.swift in Sources */,
 				52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */,
 				7EEE2FA028E449610067FA7B /* Space.swift in Sources */,
@@ -753,18 +852,25 @@
 				5204AAC82963150F002FB6CA /* WriteHouseWorkButton.swift in Sources */,
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
 				5204AAC62962D281002FB6CA /* SelectHouseWorkCalendarView.swift in Sources */,
+				52136FD4298299B90022D465 /* RepeatCycleView.swift in Sources */,
+				52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */,
+				522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */,
+				52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */,
 				5204AAB929507319002FB6CA /* SettingAlarmTableViewCell.swift in Sources */,
 				520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */,
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
+				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
 				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
+				52136FDE29867AB60022D465 /* HouseWork.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
 				5205055128DCB63D00355055 /* LoginViewController.swift in Sources */,
 				5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */,
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
 				52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */,
+				522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */,
 				5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */,
 				39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */,
 				5204AAC4295A020E002FB6CA /* SettingPolicyViewController.swift in Sources */,
@@ -775,10 +881,13 @@
 				911E967D29717ECE00F3AF35 /* CalendarDailyCollectionView.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
+				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
+				52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */,
 				39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */,
 				5275397928EC2F78002D8280 /* BackButton.swift in Sources */,
 				39F1C12A28D604B000585B83 /* HomeGroupCollectionViewCell.swift in Sources */,
+				522714EF29792936006BADBC /* SetHouseWorkCollectionView.swift in Sources */,
 				39EEF67528CBB61200437654 /* String+Extension.swift in Sources */,
 				911E967B297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift in Sources */,
 				52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */,
@@ -793,14 +902,17 @@
 				7EFAA86E28DA032800737DF0 /* SelectHouseWorkViewController.swift in Sources */,
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */,
+				52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */,
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
 				39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */,
 				5204AABC2950BC50002FB6CA /* SettingInquiryViewController.swift in Sources */,
 				39EEF67128CBB5F600437654 /* Notification+Extension.swift in Sources */,
+				52E4C088297CE8DC002AC755 /* GetManagerCollectionView.swift in Sources */,
 				5204AAB329379981002FB6CA /* ChangeHouseNameViewController.swift in Sources */,
 				52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */,
 				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
+				52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */,
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,
 				911455C0297E7FD7002CCDF9 /* WorkState.swift in Sources */,
