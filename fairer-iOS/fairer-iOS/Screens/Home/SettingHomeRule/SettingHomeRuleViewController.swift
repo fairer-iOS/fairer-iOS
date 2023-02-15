@@ -32,7 +32,7 @@ class SettingHomeRuleViewController: BaseViewController {
         label.font = .title1
         return label
     }()
-    private let settingHomeRuleTextField = TextField(type: .large, placeHolder: TextLiteral.settingHomeRuleTextFieldPlaceholder)
+    private let settingHomeRuleTextField = TextField(type: .medium, placeHolder: TextLiteral.settingHomeRuleTextFieldPlaceholder)
 
     private let settingHomeRuleTextFieldeWarningLabel: UILabel = {
         let label = UILabel()
