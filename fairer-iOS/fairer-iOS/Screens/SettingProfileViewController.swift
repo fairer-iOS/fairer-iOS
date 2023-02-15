@@ -190,7 +190,7 @@ final class SettingProfileViewController: BaseViewController {
     private func didTappedTextField() {
         settingProfileTitleLabel.isHidden = true
         settingProfileButtonView.snp.updateConstraints {
-            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(-65)
+            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(-70)
         }
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
@@ -235,12 +235,50 @@ final class SettingProfileViewController: BaseViewController {
         }
     }
     
+    private func checkNameTextField() {
+        if let text = settingProfileNameTextField.text {
+            if text.count > 5 || text.hasSpecialCharacters() {
+                settingProfileNameTextField.layer.borderWidth = 1
+                settingProfileNameTextField.layer.borderColor = UIColor.negative20.cgColor
+            } else {
+                settingProfileNameTextField.layer.borderWidth = 0
+            }
+            
+            if text.count > 5 && text.hasSpecialCharacters() {
+                settingProfileNameWarningLabel.isHidden = false
+                settingProfileNameSpecialWarningLabel.isHidden = false
+            } else if text.count > 5 {
+                settingProfileNameWarningLabel.isHidden = false
+                settingProfileNameSpecialWarningLabel.isHidden = true
+            } else if text.hasSpecialCharacters() {
+                settingProfileNameWarningLabel.isHidden = true
+                settingProfileNameSpecialWarningLabel.isHidden = false
+            } else {
+                settingProfileNameWarningLabel.isHidden = true
+                settingProfileNameSpecialWarningLabel.isHidden = true
+            }
+        }
+    }
+    
+    private func checkStatusTextField() {
+        if let text = settingProfileStatusTextField.text {
+            if text.count > 20 {
+                settingProfileStatusTextField.layer.borderWidth = 1
+                settingProfileStatusTextField.layer.borderColor = UIColor.negative20.cgColor
+                settingProfileStatusWarningLabel.isHidden = false
+            } else {
+                settingProfileStatusTextField.layer.borderWidth = 0
+                settingProfileStatusWarningLabel.isHidden = true
+            }
+        }
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.settingProfileDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 36)
+                self.settingProfileDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 40)
             })
         }
         
@@ -260,8 +298,11 @@ final class SettingProfileViewController: BaseViewController {
 
 extension SettingProfileViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        checkMaxLength(textField: textField)
-        checkSpecialCharacter(textField: textField)
+        if textField == settingProfileNameTextField {
+            checkNameTextField()
+        } else {
+            checkStatusTextField()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
