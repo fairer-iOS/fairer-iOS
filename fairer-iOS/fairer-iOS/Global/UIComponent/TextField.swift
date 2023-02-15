@@ -13,11 +13,12 @@ final class TextField: UITextField {
     
     enum TextFieldType {
         case large
+        case medium
         case small
         
         var textFieldHeight: CGFloat {
             switch self {
-            case .large:
+            case .large, .medium:
                 return 58
             case .small:
                 return 42
@@ -28,14 +29,14 @@ final class TextField: UITextField {
             switch self {
             case .large:
                 return .h3
-            case .small:
+            case .medium, .small:
                 return .body1
             }
         }
         
         var leftPadding: CGFloat {
             switch self {
-            case .large:
+            case .large, .medium:
                 return 24
             case .small:
                 return 16
