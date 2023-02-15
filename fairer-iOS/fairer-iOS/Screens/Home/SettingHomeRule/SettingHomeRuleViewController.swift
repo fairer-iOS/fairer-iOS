@@ -32,12 +32,8 @@ class SettingHomeRuleViewController: BaseViewController {
         label.font = .title1
         return label
     }()
-    private let settingHomeRuleTextField: TextField = {
-        let textField = TextField()
-        textField.myPlaceholder = TextLiteral.settingHomeRuleTextFieldPlaceholder
-        textField.setClearButton()
-        return textField
-    }()
+    private let settingHomeRuleTextField = TextField(type: .large, placeHolder: TextLiteral.settingHomeRuleTextFieldPlaceholder)
+
     private let settingHomeRuleTextFieldeWarningLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: "텍스트는 16글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)

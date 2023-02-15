@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 
-class SettingHomeRuleTableViewCell: BaseTableViewCell {
+final class SettingHomeRuleTableViewCell: BaseTableViewCell {
     
     static let cellId = "CellId"
     
