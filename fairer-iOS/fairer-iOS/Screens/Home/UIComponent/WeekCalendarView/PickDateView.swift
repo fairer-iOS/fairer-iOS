@@ -9,24 +9,21 @@ import UIKit
 
 import SnapKit
 
-class PickDateView: BaseUIView {
+final class PickDateView: BaseUIView {
     
     // MARK: - property
     
     var changeClosure: ((Date)->())?
-    var dismissClosure: ((Date,String,String)->())?
+    var dismissClosure: ((Date,Date,String,String)->())?
     private lazy var changeDateResult = Date()
-    private lazy var dPicker: UIDatePicker = {
-        let v = UIDatePicker()
-        v.datePickerMode = .dateAndTime
-        if #available(iOS 14.0, *) {
-            v.preferredDatePickerStyle = .inline
-        } else {
-            // use default
-        }
-        return v
+    private lazy var changeDateStartDateWeekResult = Date()
+    private lazy var datePicker: UIDatePicker = {
+        let view = UIDatePicker()
+        view.datePickerMode = .date
+        view.preferredDatePickerStyle = .inline
+        return view
     }()
-    let blurredEffectView : UIView = {
+    let blurredEffectView: UIView = {
         let v = UIView()
         v.backgroundColor = UIColor.black
         v.alpha = 0.6
@@ -47,30 +44,32 @@ class PickDateView: BaseUIView {
     }
     
     override func render() {
-        addSubview(blurredEffectView)
-        pickerHolderView.addSubview(dPicker)
-        addSubview(pickerHolderView)
+        
+        self.addSubviews(blurredEffectView, pickerHolderView)
+        pickerHolderView.addSubview(datePicker)
         
         blurredEffectView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
         pickerHolderView.snp.makeConstraints{
-            $0.leading.equalToSuperview().offset(SizeLiteral.componentPadding)
-            $0.trailing.equalToSuperview().inset(SizeLiteral.componentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.componentPadding)
             $0.centerY.equalToSuperview()
         }
-        dPicker.snp.makeConstraints{
-            $0.top.equalTo(pickerHolderView.snp.top).offset(10)
-            $0.leading.equalTo(pickerHolderView.snp.leading).offset(SizeLiteral.componentPadding)
-            $0.trailing.equalTo(pickerHolderView.snp.trailing).inset(SizeLiteral.componentPadding)
-            $0.bottom.equalTo(pickerHolderView.snp.bottom).inset(SizeLiteral.componentPadding)
+        
+        datePicker.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(10)
+            $0.leading.trailing.bottom.equalToSuperview().inset(SizeLiteral.componentPadding)
         }
     }
     
     // MARK: - func
     
-    func setAction(){
-        dPicker.addTarget(self, action: #selector(didChangeDate(_:)), for: .valueChanged)
+    func setAction() {
+        let dateDidChange = UIAction { [weak self] _ in
+            self?.didChangeDate(self!.datePicker)
+        }
+        self.datePicker.addAction(dateDidChange, for: .touchUpInside)
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:)))
         blurredEffectView.addGestureRecognizer(tap)
     }
@@ -78,12 +77,13 @@ class PickDateView: BaseUIView {
     // MARK: - @objc
 
     @objc func tapHandler(_ g: UITapGestureRecognizer) -> Void {
-        self.changeDateResult = self.dPicker.date.startOfWeek
-        dismissClosure?(self.changeDateResult,self.dPicker.date.yearToString
-                        ,self.dPicker.date.monthToString)
+        self.changeDateResult = self.datePicker.date
+        self.changeDateStartDateWeekResult = self.datePicker.date.startOfWeek
+        dismissClosure?(self.changeDateResult, self.changeDateStartDateWeekResult,self.datePicker.date.yearToString
+                        ,self.datePicker.date.monthToString)
     }
     
-    @objc func didChangeDate(_ sender: UIDatePicker) -> Void {
+    func didChangeDate(_ sender: UIDatePicker) -> Void {
         changeClosure?(sender.date)
     }
 }

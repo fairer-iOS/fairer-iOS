@@ -23,6 +23,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
     private var todayDateInString = Date().dateToString
+    lazy var datePickedByOthers = ""
     private enum Size {
         static let collectionSpacing: CGFloat = 0
         static let cellWidth: CGFloat = 40
@@ -70,14 +71,14 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     
     // MARK: - func
     
-    func getTodayDateInInt()->Int{
+    func getTodayDateInInt() -> Int {
         let ampmIndex = todayDate.dateToString.index(todayDate.dateToString.endIndex, offsetBy: -2)
         let ampmStr = String(todayDate.dateToString[ampmIndex...])
         let result = Int(ampmStr) ?? 0
         return result
     }
     
-    func getThisWeekInInt()->[String]{
+    func getThisWeekInInt() -> [String] {
         var resultArr = [String]()
         let ampmIndex = startOfWeekDate.dateToString.index(startOfWeekDate.dateToString.endIndex, offsetBy: -2)
         let ampmStr = String(startOfWeekDate.dateToString[ampmIndex...])
@@ -93,7 +94,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         return resultArr
     }
     
-    func getThisWeekInDate()->[String]{
+    func getThisWeekInDate() -> [String] {
         var resultArr = [String]()
         resultArr.append(startOfWeekDate.dateToString)
         var currentDate = startOfWeekDate
@@ -105,7 +106,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         return resultArr
     }
     
-    func getAfterWeekDate(){
+    func getAfterWeekDate() {
         let currentDateList = dateList
         let currentDateListForFullDate = fullDateList
         var resultWeekData = [String]()
@@ -126,12 +127,13 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         }
         self.dateList = resultWeekData
         self.fullDateList = resultFullWeekData
+        self.datePickedByOthers = self.fullDateList.first ?? String()
         print(dateList)
         print(fullDateList)
         collectionView.reloadData()
     }
     
-    func getBeforeWeekDate(){
+    func getBeforeWeekDate() {
         let currentDateList = dateList
         let currentDateListForFullDate = fullDateList
         var resultWeekData = [String]()
@@ -152,6 +154,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         }
         self.dateList = resultWeekData
         self.fullDateList = resultFullWeekData
+        self.datePickedByOthers = self.fullDateList.first ?? String()
         print(dateList)
         print(fullDateList)
         collectionView.reloadData()
@@ -162,6 +165,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
 
 extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.datePickedByOthers = ""
         if self.isSelected == false {
             self.isSelected = true
             self.selectedCell = indexPath.row
@@ -201,7 +205,19 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = dateList[indexPath.item]
         cell.workDot.image = dotList[indexPath.item]
-        if fullDateList[indexPath.item] == self.todayDateInString {
+        guard self.datePickedByOthers != "" else {
+            if fullDateList[indexPath.item] == self.todayDateInString {
+                self.isSelected = true
+                self.selectedCell = indexPath.row
+                self.cellIndexPath = indexPath
+                cell.globalView.backgroundColor = UIColor.gray100
+                cell.dateLabel.textColor = UIColor.blue
+                cell.dayLabel.textColor = UIColor.blue
+                cell.workDot.image = ImageLiterals.selectedCalendarCell
+            }
+            return cell
+        }
+        if fullDateList[indexPath.item] == self.datePickedByOthers {
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath

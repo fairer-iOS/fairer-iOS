@@ -149,7 +149,7 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(2)
         }
         
-        contentScrollView.snp.makeConstraints{
+        contentScrollView.snp.makeConstraints {
             $0.top.equalTo(homeDivider.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(toolBarView.snp.top)
@@ -167,7 +167,7 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(95)
         }
 
-        calendarDailyCollecionView.snp.makeConstraints{
+        calendarDailyCollecionView.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(310)
@@ -191,7 +191,7 @@ final class HomeViewController: BaseViewController {
         navigationItem.rightBarButtonItem = rightButton
     }
     
-    func setupAlphaNavigationBar(){
+    func setupAlphaNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         let logoView = makeBarButtonItem(with: logoImage)
         let rightButton = makeBarButtonItem(with: profileButton)
@@ -208,7 +208,7 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - func
     
-    private func setButtonEvent(){
+    private func setButtonEvent() {
         let moveToTodayDateButtonAction = UIAction { [weak self] _ in
             self?.moveToTodayDate()
         }
@@ -220,7 +220,7 @@ final class HomeViewController: BaseViewController {
         self.homeCalenderView.calendarMonthPickButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
     }
     
-    private func setupDelegate(){
+    private func setupDelegate() {
         self.contentScrollView.delegate = self
     }
     
@@ -263,7 +263,7 @@ final class HomeViewController: BaseViewController {
         })
     }
     
-    private func scrollDidEnd(){
+    private func scrollDidEnd() {
         self.homeDivider.snp.updateConstraints {
             $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(150)
         }
@@ -280,16 +280,16 @@ final class HomeViewController: BaseViewController {
         })
     }
     
-    private func setWeekCalendarSwipeGesture(){
+    private func setWeekCalendarSwipeGesture() {
         leftSwipeGestureRecognizer.direction = .left
         rightSwipeGestureRecognizer.direction = .right
         homeWeekCalendarCollectionView.addGestureRecognizer(leftSwipeGestureRecognizer)
         homeWeekCalendarCollectionView.addGestureRecognizer(rightSwipeGestureRecognizer)
     }
     
-    private func setDatePicker(){
+    private func setDatePicker() {
         datePickerView.isHidden = true
-        datePickerView.dismissClosure = { [weak self] startDateWeek, yearInString, monthInString in
+        datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
             guard let self = self else {
                 return
             }
@@ -298,6 +298,7 @@ final class HomeViewController: BaseViewController {
             self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
             self.homeWeekCalendarCollectionView.collectionView.reloadData()
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(yearInString)년 \(monthInString)월", for: .normal)
+            self.homeWeekCalendarCollectionView.datePickedByOthers = pickedDate.dateToString
             self.datePickerView.isHidden = true
             self.setupNavigationBar()
         }
@@ -326,7 +327,8 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    private func moveToTodayDate(){
+    private func moveToTodayDate() {
+        self.homeWeekCalendarCollectionView.datePickedByOthers = ""
         self.homeCalenderView.calendarMonthLabelButton.setTitle("\(Date().yearToString)년 \(Date().monthToString)월", for: .normal)
         self.homeWeekCalendarCollectionView.startOfWeekDate = Date().startOfWeek
         self.homeWeekCalendarCollectionView.dateList = self.homeWeekCalendarCollectionView.getThisWeekInInt()
@@ -334,12 +336,13 @@ final class HomeViewController: BaseViewController {
         self.homeWeekCalendarCollectionView.collectionView.reloadData()
     }
     
-    private func moveToDatePicker(){
+    private func moveToDatePicker() {
+        self.homeWeekCalendarCollectionView.datePickedByOthers = ""
         self.datePickerView.isHidden = false
         self.setupAlphaNavigationBar()
     }
     
-    private func setCalendarHight(){
+    private func setCalendarHight() {
         self.calendarDailyCollecionView.changeHeightClosure = { [weak self]
             cellNum in
             guard let self = self else {

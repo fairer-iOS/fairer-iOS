@@ -7,28 +7,30 @@
 
 import UIKit
 
+import SnapKit
+
 final class HomeCalendarView: BaseUIView {
     
-    var today = Date()
-    var year = Date().yearToString
-    var month = Date().monthToString
+//    var today = Date()
+    private var year = Date().yearToString
+    private var month = Date().monthToString
     
     
     // MARK: - property
     
-    lazy var calendarMonthLabelButton : UIButton = {
+    lazy var calendarMonthLabelButton: UIButton = {
         let button = UIButton()
         button.setTitle("\(self.year)년 \(self.month)월", for: .normal)
         button.setTitleColor(.gray800, for: .normal)
-        button.titleLabel?.font = UIFont.font(AppFontName.semiBold, ofSize: 14)
+        button.titleLabel?.font = .title2
         return button
     }()
-    lazy var calendarMonthPickButton : UIButton = {
+    let calendarMonthPickButton: UIButton = {
         let button = UIButton()
         button.setImage(ImageLiterals.moveToCalendarButton, for: .normal)
         return button
     }()
-    private lazy var calendarPicker : UIStackView = {
+    private lazy var calendarPicker: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [calendarMonthLabelButton,calendarMonthPickButton])
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -59,7 +61,7 @@ final class HomeCalendarView: BaseUIView {
             $0.width.equalTo(100)
         }
         
-        calendarMonthPickButton.snp.makeConstraints{
+        calendarMonthPickButton.snp.makeConstraints {
             $0.height.width.equalTo(20)
         }
         
