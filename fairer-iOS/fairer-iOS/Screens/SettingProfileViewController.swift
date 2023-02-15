@@ -11,11 +11,11 @@ import SnapKit
 
 final class SettingProfileViewController: BaseViewController {
     
-    // FIXME: - api 로 profile image 불러오기
-    
+    // FIXME: - api 로 profile image, name, status 불러오기
     private let lastProfileImage = ImageLiterals.profileBlue3
     private let lastName = "진저"
     private let lastStatus: String? = ""
+    
     private var isNameSatisfied = true
     private var isStatusSatisfied = true
     
@@ -24,7 +24,7 @@ final class SettingProfileViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let settingProfileTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "프로필을 설정해주세요.", lineHeight: 28)
+        label.setTextWithLineHeight(text: TextLiteral.settingProfileViewControllerTitleLabel, lineHeight: 28)
         label.textColor = .gray800
         label.font = .h2
         return label
@@ -40,7 +40,7 @@ final class SettingProfileViewController: BaseViewController {
     }()
     private let settingProfileNameLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "이름", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.settingProfileViewControllerProfileNameLabel, lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         return label
@@ -53,7 +53,7 @@ final class SettingProfileViewController: BaseViewController {
     }()
     private let settingProfileNameWarningLabel: UILabel = {
         let label = UILabel()
-        label.text = "텍스트는 5글자를 초과하여 입력하실 수 없어요."
+        label.text = TextLiteral.textFieldWarningOverFive
         label.textColor = .negative20
         label.font = .body2
         label.numberOfLines = 0
@@ -62,7 +62,7 @@ final class SettingProfileViewController: BaseViewController {
     }()
     private let settingProfileNameSpecialWarningLabel: UILabel = {
         let label = UILabel()
-        label.text = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
+        label.text = TextLiteral.textFieldDisableSignLabel
         label.textColor = .negative20
         label.font = .body2
         label.numberOfLines = 0
@@ -78,7 +78,7 @@ final class SettingProfileViewController: BaseViewController {
     }()
     private let settingProfileStatusLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "상태 메세지", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.settingProfileViewControllerProfileStatusLabel, lineHeight: 22)
         label.textColor = .gray600
         label.font = .title1
         return label
@@ -91,7 +91,7 @@ final class SettingProfileViewController: BaseViewController {
     }()
     private let settingProfileStatusWarningLabel: UILabel = {
         let label = UILabel()
-        label.text = "텍스트는 20글자를 초과하여 입력하실 수 없어요."
+        label.text = TextLiteral.textFieldWarningOverTwenty
         label.textColor = .negative20
         label.font = .body2
         label.numberOfLines = 0
@@ -108,9 +108,9 @@ final class SettingProfileViewController: BaseViewController {
     private lazy var settingProfileDoneButton: MainButton = {
         let button = MainButton()
         button.isDisabled = true
-        button.title = "입력 완료"
+        button.title = TextLiteral.doneButtonText
         let action = UIAction {[weak self] _ in
-            self?.touchUpToSaveChange()
+            self?.didTappedDoneButton()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -184,7 +184,7 @@ final class SettingProfileViewController: BaseViewController {
         print("프로필 이미지")
     }
     
-    private func touchUpToSaveChange() {
+    private func didTappedDoneButton() {
         // FIXME: - 서버에 프로필 정보 업데이트
         print("입력 완료")
     }
