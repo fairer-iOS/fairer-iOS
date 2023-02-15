@@ -123,32 +123,29 @@ final class SettingProfileViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(settingProfileTitleLabel)
+        view.addSubviews(settingProfileTitleLabel, settingProfileButtonView, settingProfileNameStackView, settingProfileStatusStackView, settingProfileDoneButton)
+        
         settingProfileTitleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(settingProfileButtonView)
         settingProfileButtonView.snp.makeConstraints {
             $0.width.height.equalTo(100)
             $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(26)
             $0.centerX.equalToSuperview()
         }
         
-        view.addSubview(settingProfileNameStackView)
         settingProfileNameStackView.snp.makeConstraints {
             $0.top.equalTo(settingProfileButtonView.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(settingProfileStatusStackView)
         settingProfileStatusStackView.snp.makeConstraints {
             $0.top.equalTo(settingProfileNameStackView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(settingProfileDoneButton)
         settingProfileDoneButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.componentPadding)
