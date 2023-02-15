@@ -294,7 +294,6 @@ final class HomeViewController: BaseViewController {
                 return
             }
             self.homeWeekCalendarCollectionView.startOfWeekDate = startDateWeek
-            self.homeWeekCalendarCollectionView.dateList = self.homeWeekCalendarCollectionView.getThisWeekInInt()
             self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
             self.homeWeekCalendarCollectionView.collectionView.reloadData()
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(yearInString)년 \(monthInString)월", for: .normal)
@@ -311,7 +310,7 @@ final class HomeViewController: BaseViewController {
             guard let self = self else {
                 return
             }
-            var seporateResult = yearDate.components(separatedBy: ".")
+            let seporateResult = yearDate.components(separatedBy: ".")
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(seporateResult[0])년 \(seporateResult[1])월", for: .normal)
         }
     }
@@ -338,7 +337,6 @@ final class HomeViewController: BaseViewController {
         self.homeWeekCalendarCollectionView.datePickedByOthers = ""
         self.homeCalenderView.calendarMonthLabelButton.setTitle("\(Date().yearToString)년 \(Date().monthToString)월", for: .normal)
         self.homeWeekCalendarCollectionView.startOfWeekDate = Date().startOfWeek
-        self.homeWeekCalendarCollectionView.dateList = self.homeWeekCalendarCollectionView.getThisWeekInInt()
         self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
         self.homeWeekCalendarCollectionView.collectionView.reloadData()
     }

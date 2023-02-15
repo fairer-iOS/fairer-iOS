@@ -57,7 +57,7 @@ final class HomeCalendarView: BaseUIView {
         calendarPicker.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview().inset(8)
-            $0.width.equalTo(100)
+            $0.width.equalTo(105)
         }
         
         calendarMonthPickButton.snp.makeConstraints {
