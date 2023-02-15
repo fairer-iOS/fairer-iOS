@@ -46,9 +46,8 @@ final class SettingProfileViewController: BaseViewController {
         return label
     }()
     private lazy var settingProfileNameTextField: TextField = {
-        let textField = TextField()
+        let textField = TextField(type: .medium, placeHolder: TextLiteral.settingProfileViewControllerPlaceholderText)
         textField.text = lastName
-        textField.myFont = UIFont.body1
         return textField
     }()
     private let settingProfileNameWarningLabel: UILabel = {
@@ -84,8 +83,7 @@ final class SettingProfileViewController: BaseViewController {
         return label
     }()
     private lazy var settingProfileStatusTextField: TextField = {
-        let textField = TextField()
-        textField.myFont = UIFont.body1
+        let textField = TextField(type: .medium, placeHolder: TextLiteral.settingProfileViewControllerPlaceholderText)
         textField.text = lastStatus
         return textField
     }()
@@ -219,7 +217,11 @@ final class SettingProfileViewController: BaseViewController {
                 isNameSatisfied = false
             } else {
                 settingProfileNameTextField.layer.borderWidth = 0
-                isNameSatisfied = true
+                if text.count > 0 {
+                    isNameSatisfied = true
+                } else {
+                    isNameSatisfied = false
+                }
             }
             
             if text.count > 5 && text.hasSpecialCharacters() {
