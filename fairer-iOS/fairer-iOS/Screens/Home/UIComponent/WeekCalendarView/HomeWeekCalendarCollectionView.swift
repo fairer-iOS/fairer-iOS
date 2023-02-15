@@ -24,6 +24,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     private var todayDate = Date()
     private var todayDateInString = Date().dateToString
     lazy var datePickedByOthers = ""
+    var yearMonthDateByTouchedCell: ((String)->())?
     private enum Size {
         static let collectionSpacing: CGFloat = 0
         static let cellWidth: CGFloat = 40
@@ -175,6 +176,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             firstCell.dateLabel.textColor = UIColor.blue
             firstCell.dayLabel.textColor = UIColor.blue
             firstCell.workDot.image = ImageLiterals.selectedCalendarCell
+            yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
         }else if indexPath.row != self.selectedCell {
             let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
             resetCell.globalView.backgroundColor = UIColor.systemBackground
@@ -189,6 +191,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
+            yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
         }
     }
 }

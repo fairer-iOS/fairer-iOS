@@ -11,7 +11,6 @@ import SnapKit
 
 final class HomeCalendarView: BaseUIView {
     
-//    var today = Date()
     private var year = Date().yearToString
     private var month = Date().monthToString
     

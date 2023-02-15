@@ -307,6 +307,13 @@ final class HomeViewController: BaseViewController {
                 return
             }
         }
+        homeWeekCalendarCollectionView.yearMonthDateByTouchedCell = { [weak self] yearDate in
+            guard let self = self else {
+                return
+            }
+            var seporateResult = yearDate.components(separatedBy: ".")
+            self.homeCalenderView.calendarMonthLabelButton.setTitle("\(seporateResult[0])년 \(seporateResult[1])월", for: .normal)
+        }
     }
 
     // MARK: - selector

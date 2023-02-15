@@ -24,17 +24,17 @@ final class PickDateView: BaseUIView {
         return view
     }()
     let blurredEffectView: UIView = {
-        let v = UIView()
-        v.backgroundColor = UIColor.black
-        v.alpha = 0.6
-        return v
+        let view = UIView()
+        view.backgroundColor = UIColor.black
+        view.alpha = 0.6
+        return view
     }()
     
     let pickerHolderView: UIView = {
-        let v = UIView()
-        v.backgroundColor = .white
-        v.layer.cornerRadius = 8
-        return v
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 8
+        return view
     }()
     
     // MARK: - life cycle
