@@ -38,11 +38,7 @@ final class PickDateView: BaseUIView {
     }()
     
     // MARK: - life cycle
-    
-    override func configUI() {
-        setAction()
-    }
-    
+
     override func render() {
         
         self.addSubviews(blurredEffectView, pickerHolderView)

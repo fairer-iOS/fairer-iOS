@@ -89,7 +89,7 @@ final class HomeViewController: BaseViewController {
 
     override func configUI() {
         super.configUI()
-        setCalendarHight()
+        setCalendarHeight()
         setupToolBarGesture()
         setHomeRuleLabel()
     }
@@ -209,6 +209,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - func
     
     private func setButtonEvent() {
+        self.datePickerView.setAction()
         let moveToTodayDateButtonAction = UIAction { [weak self] _ in
             self?.moveToTodayDate()
         }
@@ -347,7 +348,7 @@ final class HomeViewController: BaseViewController {
         self.setupAlphaNavigationBar()
     }
     
-    private func setCalendarHight() {
+    private func setCalendarHeight() {
         self.calendarDailyCollecionView.changeHeightClosure = { [weak self]
             cellNum in
             guard let self = self else {
