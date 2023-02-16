@@ -18,7 +18,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    private let selectHouseWorkCalendar = SelectHouseWorkCalendarView()
+    private let selectHouseWorkCalendar = PickDateButton()
     private let spaceCollectionView = SelectHouseWorkSpaceCollectionView()
     private let spaceInfoLabel: InfoLabelView = {
         let label = InfoLabelView()
@@ -103,14 +103,13 @@ final class SelectHouseWorkViewController: BaseViewController {
         
         contentView.addSubview(selectHouseWorkCalendar)
         selectHouseWorkCalendar.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(4)
-            $0.leading.equalToSuperview().inset(10)
-            $0.width.equalTo(112)
+            $0.top.equalToSuperview().inset(8)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         contentView.addSubview(spaceCollectionView)
         spaceCollectionView.snp.makeConstraints {
-            $0.top.equalTo(selectHouseWorkCalendar.snp.bottom).offset(4)
+            $0.top.equalTo(selectHouseWorkCalendar.snp.bottom).offset(8)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(248)
         }

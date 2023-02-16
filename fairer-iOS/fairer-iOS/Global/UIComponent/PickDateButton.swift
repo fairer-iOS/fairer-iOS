@@ -15,14 +15,14 @@ final class PickDateButton: UIButton {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = Date().dateToKoreanString
+        label.text = Date().dayToKoreanString
         label.textColor = .gray800
         label.font = .title1
         return label
     }()
     private let dateChevron: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.calendarChevron
+        imageView.image = ImageLiterals.moveToCalendarButton
         imageView.tintColor = .gray800
         return imageView
     }()
