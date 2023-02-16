@@ -369,7 +369,7 @@ final class SetHouseWorkViewController: BaseViewController {
             repeatCycleDayLabel.snp.remakeConstraints {
                 $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-                $0.bottom.equalTo(0)
+                $0.bottom.equalToSuperview().inset(40)
             }
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
             repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue

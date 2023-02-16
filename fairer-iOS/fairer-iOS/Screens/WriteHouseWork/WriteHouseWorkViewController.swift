@@ -11,7 +11,7 @@ import SnapKit
 
 final class WriteHouseWorkViewController: BaseViewController {
     
-    var houseWorkMaxLength = 16
+    private let houseWorkMaxLength = 16
     var isCorrection: Bool = false
     
     // MARK: - property
@@ -416,7 +416,7 @@ final class WriteHouseWorkViewController: BaseViewController {
             repeatCycleDayLabel.snp.remakeConstraints {
                 $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-                $0.bottom.equalTo(0)
+                $0.bottom.equalToSuperview().inset(40)
             }
             repeatCycleView.repeatCycleLabel.isHidden = false
             repeatCycleView.repeatCycleButton.isHidden = false
