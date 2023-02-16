@@ -13,7 +13,7 @@ final class PickDateButton: UIButton {
     
     // MARK: - property
     
-    private let dateLabel: UILabel = {
+    let dateLabel: UILabel = {
         let label = UILabel()
         label.text = Date().dayToKoreanString
         label.textColor = .gray800

@@ -67,6 +67,7 @@ final class SelectHouseWorkViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
+    private let datePickerView = PickDateView()
     
     // MARK: - life cycle
     
@@ -149,6 +150,11 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.height.equalTo(42)
             $0.bottom.equalTo(0)
         }
+        
+        view.addSubview(datePickerView)
+        datePickerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     // MARK: - func
@@ -161,9 +167,17 @@ final class SelectHouseWorkViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func setDatePicker() {
+        datePickerView.isHidden = true
+        datePickerView.setAction()
+        
         let action = UIAction { [weak self] _ in
             self?.presentPickDateView()
         }
@@ -230,6 +244,10 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func presentPickDateView() {
-        
+        datePickerView.isHidden = false
+        datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
+            self?.datePickerView.isHidden = true
+            self?.selectHouseWorkCalendar.dateLabel.text = pickedDate.dayToKoreanString
+        }
     }
 }
