@@ -39,7 +39,6 @@
 		5204AABC2950BC50002FB6CA /* SettingInquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204AABB2950BC50002FB6CA /* SettingInquiryViewController.swift */; };
 		5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204AABE2950BE43002FB6CA /* SettingInquiryCellView.swift */; };
 		5204AAC4295A020E002FB6CA /* SettingPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204AAC3295A020E002FB6CA /* SettingPolicyViewController.swift */; };
-		5204AAC62962D281002FB6CA /* SelectHouseWorkCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204AAC52962D281002FB6CA /* SelectHouseWorkCalendarView.swift */; };
 		5204AAC82963150F002FB6CA /* WriteHouseWorkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204AAC72963150F002FB6CA /* WriteHouseWorkButton.swift */; };
 		5204AACC296C6447002FB6CA /* SelectHouseWorkDetailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204AACB296C6447002FB6CA /* SelectHouseWorkDetailCollectionView.swift */; };
 		5204AACE296C647A002FB6CA /* SelectHouseWorkDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204AACD296C647A002FB6CA /* SelectHouseWorkDetailCollectionViewCell.swift */; };
@@ -144,7 +143,6 @@
 		5204AABB2950BC50002FB6CA /* SettingInquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingInquiryViewController.swift; sourceTree = "<group>"; };
 		5204AABE2950BE43002FB6CA /* SettingInquiryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingInquiryCellView.swift; sourceTree = "<group>"; };
 		5204AAC3295A020E002FB6CA /* SettingPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPolicyViewController.swift; sourceTree = "<group>"; };
-		5204AAC52962D281002FB6CA /* SelectHouseWorkCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseWorkCalendarView.swift; sourceTree = "<group>"; };
 		5204AAC72963150F002FB6CA /* WriteHouseWorkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteHouseWorkButton.swift; sourceTree = "<group>"; };
 		5204AACB296C6447002FB6CA /* SelectHouseWorkDetailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseWorkDetailCollectionView.swift; sourceTree = "<group>"; };
 		5204AACD296C647A002FB6CA /* SelectHouseWorkDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseWorkDetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -719,7 +717,6 @@
 			children = (
 				5204AAC9296C63CE002FB6CA /* SelectHouseWorkDetail */,
 				5204AACA296C641D002FB6CA /* SelectHouseWorkSpace */,
-				5204AAC52962D281002FB6CA /* SelectHouseWorkCalendarView.swift */,
 				5204AAC72963150F002FB6CA /* WriteHouseWorkButton.swift */,
 			);
 			path = UIComponent;
@@ -868,7 +865,6 @@
 				911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */,
 				5204AAC82963150F002FB6CA /* WriteHouseWorkButton.swift in Sources */,
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
-				5204AAC62962D281002FB6CA /* SelectHouseWorkCalendarView.swift in Sources */,
 				52136FD4298299B90022D465 /* RepeatCycleView.swift in Sources */,
 				52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */,
 				522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */,
