@@ -72,6 +72,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDatePicker()
         didTappedSpace()
         didTappedHouseWork()
     }
@@ -162,6 +163,13 @@ final class SelectHouseWorkViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
+    private func setDatePicker() {
+        let action = UIAction { [weak self] _ in
+            self?.presentPickDateView()
+        }
+        selectHouseWorkCalendar.addAction(action, for: .touchUpInside)
+    }
+    
     private func didTappedWriteHouseWorkButton() {
         // FIXME: - 집안일 직접 입력하기 페이지로 이동
         print("집안일 직접 입력하기")
@@ -219,5 +227,9 @@ final class SelectHouseWorkViewController: BaseViewController {
         detailHouseWorkLabel.snp.updateConstraints {
             $0.height.equalTo(26)
         }
+    }
+    
+    private func presentPickDateView() {
+        
     }
 }
