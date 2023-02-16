@@ -134,6 +134,7 @@ final class SetHouseWorkViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDatePicker()
         didTappedHouseWork()
         didDeleteHouseWork()
         didTappedRepeatCycleMenuButton()
@@ -266,6 +267,16 @@ final class SetHouseWorkViewController: BaseViewController {
         appearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func setDatePicker() {
+        datePickerView.isHidden = true
+        datePickerView.setAction()
+        
+        let action = UIAction { [weak self] _ in
+            self?.presentPickDateView()
+        }
+        setHouseWorkCalendarView.pickDateButton.addAction(action, for: .touchUpInside)
     }
     
     private func didTappedHouseWork() {
@@ -522,6 +533,14 @@ final class SetHouseWorkViewController: BaseViewController {
         case .month:
             repeatCycleDayLabel.text = TextLiteral.setHouseWorkViewControllerEveryMonth + repeatDay + TextLiteral.setHouseWorkViewControllerDay + TextLiteral.setHouseWorkViewControllerRepeat
             repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.setHouseWorkViewControllerDay, with: .positive20)
+        }
+    }
+    
+    private func presentPickDateView() {
+        datePickerView.isHidden = false
+        datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
+            self?.datePickerView.isHidden = true
+            self?.setHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
         }
     }
 }
