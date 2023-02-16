@@ -33,17 +33,21 @@ extension Date {
     }
     
     var yearToString: String {
-        let formatter_year = DateFormatter()
-        formatter_year.dateFormat = "yyyy"
-        var current_year_string = formatter_year.string(from: Date())
-        return current_year_string
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        return formatter.string(from: self)
     }
     
     var monthToString: String {
-        let formatter_year = DateFormatter()
-        formatter_year.dateFormat = "MM"
-        var current_year_string = formatter_year.string(from: Date())
-        return current_year_string
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM"
+        return formatter.string(from: self)
+    }
+    
+    var dayToString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd"
+        return formatter.string(from: self)
     }
     
     var startOfWeek: Date {
@@ -55,7 +59,7 @@ extension Date {
     var endOfWeek: Date {
         return Calendar.current.date(byAdding: .second, value: 604799, to: self.startOfWeek)!
     }
-    
+
     var timeToKoreanString: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "a\nh시 m분"

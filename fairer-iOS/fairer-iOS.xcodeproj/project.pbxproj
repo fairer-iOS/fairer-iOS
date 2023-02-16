@@ -89,6 +89,8 @@
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
+		5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */; };
+		5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
 		7E1F2E2E28D2168300A5744A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */; };
 		7E1F2E2F28D2168300A5744A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */; };
@@ -105,6 +107,7 @@
 		911E967D29717ECE00F3AF35 /* CalendarDailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967C29717ECE00F3AF35 /* CalendarDailyCollectionView.swift */; };
 		911E967F29717F0E00F3AF35 /* CalendarDailyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967E29717F0E00F3AF35 /* CalendarDailyCollectionViewCell.swift */; };
 		911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E968229719CA400F3AF35 /* UIView+Extension.swift */; };
+		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -191,6 +194,8 @@
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
+		5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleViewController.swift; sourceTree = "<group>"; };
+		5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleTableViewCell.swift; sourceTree = "<group>"; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -206,6 +211,7 @@
 		911E967C29717ECE00F3AF35 /* CalendarDailyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyCollectionView.swift; sourceTree = "<group>"; };
 		911E967E29717F0E00F3AF35 /* CalendarDailyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyCollectionViewCell.swift; sourceTree = "<group>"; };
 		911E968229719CA400F3AF35 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +314,7 @@
 		39F1C11F28D5A7BC00585B83 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				5A8030802990D8B1005C7909 /* SettingHomeRule */,
 				39F1C12228D5C02900585B83 /* UIComponent */,
 			);
 			path = Home;
@@ -666,6 +673,15 @@
 			path = HouseInfo;
 			sourceTree = "<group>";
 		};
+		5A8030802990D8B1005C7909 /* SettingHomeRule */ = {
+			isa = PBXGroup;
+			children = (
+				5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */,
+				5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */,
+			);
+			path = SettingHomeRule;
+			sourceTree = "<group>";
+		};
 		7E1F2E2628D212E000A5744A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,8 +744,9 @@
 			isa = PBXGroup;
 			children = (
 				39FABBDB28DB35020053EFD2 /* HomeCalendarView.swift */,
-				911E9678297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift */,
 				911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */,
+				911E9678297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift */,
+				91CB591B29977B09002A3295 /* PickDateView.swift */,
 			);
 			path = WeekCalendarView;
 			sourceTree = "<group>";
@@ -863,6 +880,7 @@
 				52136FDE29867AB60022D465 /* HouseWork.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
+				5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */,
 				5205055128DCB63D00355055 /* LoginViewController.swift in Sources */,
 				5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */,
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
@@ -913,6 +931,8 @@
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,
 				911455C0297E7FD7002CCDF9 /* WorkState.swift in Sources */,
+				91CB591C29977B09002A3295 /* PickDateView.swift in Sources */,
+				5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */,
 				39F1C12C28D614D800585B83 /* BaseUIView.swift in Sources */,
 				5205054228D8620000355055 /* OnboardingProfileViewController.swift in Sources */,
 			);

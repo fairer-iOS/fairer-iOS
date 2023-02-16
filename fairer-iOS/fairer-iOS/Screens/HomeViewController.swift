@@ -16,6 +16,8 @@ final class HomeViewController: BaseViewController {
     let userName: String = "고가혜"
     let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
     private var isScrolled = false
+    private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     
     // MARK: - property
     
@@ -66,6 +68,10 @@ final class HomeViewController: BaseViewController {
         scrollView.showsVerticalScrollIndicator = true
         return scrollView
     }()
+    let datePickerView: PickDateView = {
+        let view = PickDateView()
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -76,10 +82,14 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupDelegate()
+        self.setWeekCalendarSwipeGesture()
+        self.setButtonEvent()
+        self.setDatePicker()
     }
-    
+
     override func configUI() {
         super.configUI()
+        setCalendarHeight()
         setupToolBarGesture()
         setHomeRuleLabel()
     }
@@ -92,7 +102,8 @@ final class HomeViewController: BaseViewController {
                          contentScrollView,
                          homeGroupCollectionView,
                          homeRuleView,
-                         homeDivider)
+                         homeDivider,
+                         datePickerView)
         
         contentScrollView.addSubviews(
             homeCalenderView,
@@ -133,12 +144,12 @@ final class HomeViewController: BaseViewController {
         }
         
         homeDivider.snp.makeConstraints {
-            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(144)
+            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(150)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
         
-        contentScrollView.snp.makeConstraints{
+        contentScrollView.snp.makeConstraints {
             $0.top.equalTo(homeDivider.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(toolBarView.snp.top)
@@ -156,11 +167,15 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(95)
         }
 
-        calendarDailyCollecionView.snp.makeConstraints{
+        calendarDailyCollecionView.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(310)
             $0.bottom.equalToSuperview()
+        }
+        
+        datePickerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -176,10 +191,37 @@ final class HomeViewController: BaseViewController {
         navigationItem.rightBarButtonItem = rightButton
     }
     
+    func setupAlphaNavigationBar() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        let logoView = makeBarButtonItem(with: logoImage)
+        let rightButton = makeBarButtonItem(with: profileButton)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = logoView
+        navigationItem.rightBarButtonItem = rightButton
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationBar.standardAppearance = appearance
+        navigationBar.compactAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
+    }
+    
     // MARK: - func
     
-    private func setupDelegate(){
-        self.calendarDailyCollecionView.delegate = self
+    private func setButtonEvent() {
+        self.datePickerView.setAction()
+        let moveToTodayDateButtonAction = UIAction { [weak self] _ in
+            self?.moveToTodayDate()
+        }
+        let moveToTodayDatePickerButtonAction = UIAction { [weak self] _ in
+            self?.moveToDatePicker()
+        }
+        self.homeCalenderView.todayButton.addAction(moveToTodayDateButtonAction, for: .touchUpInside)
+        self.homeCalenderView.calendarMonthLabelButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
+        self.homeCalenderView.calendarMonthPickButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
+    }
+    
+    private func setupDelegate() {
         self.contentScrollView.delegate = self
     }
     
@@ -222,9 +264,9 @@ final class HomeViewController: BaseViewController {
         })
     }
     
-    private func scrollDidEnd(){
+    private func scrollDidEnd() {
         self.homeDivider.snp.updateConstraints {
-            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(144)
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(150)
         }
         self.homeGroupCollectionView.snp.updateConstraints {
             $0.height.equalTo(86)
@@ -238,6 +280,41 @@ final class HomeViewController: BaseViewController {
             self.view.layoutIfNeeded()
         })
     }
+    
+    private func setWeekCalendarSwipeGesture() {
+        leftSwipeGestureRecognizer.direction = .left
+        rightSwipeGestureRecognizer.direction = .right
+        homeWeekCalendarCollectionView.addGestureRecognizer(leftSwipeGestureRecognizer)
+        homeWeekCalendarCollectionView.addGestureRecognizer(rightSwipeGestureRecognizer)
+    }
+    
+    private func setDatePicker() {
+        datePickerView.isHidden = true
+        datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
+            guard let self = self else {
+                return
+            }
+            self.homeWeekCalendarCollectionView.startOfWeekDate = startDateWeek
+            self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
+            self.homeWeekCalendarCollectionView.collectionView.reloadData()
+            self.homeCalenderView.calendarMonthLabelButton.setTitle("\(yearInString)년 \(monthInString)월", for: .normal)
+            self.homeWeekCalendarCollectionView.datePickedByOthers = pickedDate.dateToString
+            self.datePickerView.isHidden = true
+            self.setupNavigationBar()
+        }
+        datePickerView.changeClosure = { [weak self] val in
+            guard self != nil else {
+                return
+            }
+        }
+        homeWeekCalendarCollectionView.yearMonthDateByTouchedCell = { [weak self] yearDate in
+            guard let self = self else {
+                return
+            }
+            let seporateResult = yearDate.components(separatedBy: ".")
+            self.homeCalenderView.calendarMonthLabelButton.setTitle("\(seporateResult[0])년 \(seporateResult[1])월", for: .normal)
+        }
+    }
 
     // MARK: - selector
     
@@ -246,24 +323,46 @@ final class HomeViewController: BaseViewController {
         // FIXME: - 집안일 추가 뷰로 연결
         print("tap")
     }
-}
-
-    // MARK: - protocol
-
-protocol CollectionViewHeightProtocol: AnyObject {
-    func getCollectionViewHeight(cellNum: Int)
-}
-
-    // MARK: - extension
-
-extension HomeViewController: CollectionViewHeightProtocol {
-    func getCollectionViewHeight(cellNum: Int) {
-        cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
-        calendarDailyCollecionView.snp.updateConstraints {
-            $0.height.equalTo(cellHeight)
+    
+    @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .left) {
+            self.homeWeekCalendarCollectionView.getAfterWeekDate()
+        }
+            
+        if (sender.direction == .right) {
+            self.homeWeekCalendarCollectionView.getBeforeWeekDate()
+        }
+    }
+    
+    private func moveToTodayDate() {
+        self.homeWeekCalendarCollectionView.datePickedByOthers = ""
+        self.homeCalenderView.calendarMonthLabelButton.setTitle("\(Date().yearToString)년 \(Date().monthToString)월", for: .normal)
+        self.homeWeekCalendarCollectionView.startOfWeekDate = Date().startOfWeek
+        self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
+        self.homeWeekCalendarCollectionView.collectionView.reloadData()
+    }
+    
+    private func moveToDatePicker() {
+        self.homeWeekCalendarCollectionView.datePickedByOthers = ""
+        self.datePickerView.isHidden = false
+        self.setupAlphaNavigationBar()
+    }
+    
+    private func setCalendarHeight() {
+        self.calendarDailyCollecionView.changeHeightClosure = { [weak self]
+            cellNum in
+            guard let self = self else {
+                return
+            }
+            self.cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
+            self.calendarDailyCollecionView.snp.updateConstraints {
+                $0.height.equalTo(self.cellHeight)
+            }
         }
     }
 }
+
+    // MARK: - extension
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
