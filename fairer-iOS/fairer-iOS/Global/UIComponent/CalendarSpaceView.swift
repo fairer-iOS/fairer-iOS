@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 final class CalendarSpaceView: BaseUIView {
-    var today = Date()
     
     // MARK: - property
     
@@ -22,11 +21,7 @@ final class CalendarSpaceView: BaseUIView {
         label.font = .title1
         return label
     }()
-    private let spacePin: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.spacePin
-        return imageView
-    }()
+    private let spacePin = UIImageView(image: ImageLiterals.spacePin)
     
     
     // MARK: - life cycle
