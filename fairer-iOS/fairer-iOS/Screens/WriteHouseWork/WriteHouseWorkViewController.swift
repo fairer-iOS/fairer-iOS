@@ -99,6 +99,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDatePicker()
         setupNotificationCenter()
         setupDelegation()
     }
@@ -123,7 +124,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         }
         
         houseWorkNameLabel.snp.makeConstraints {
-            $0.top.equalTo(writeHouseWorkCalendarView.snp.bottom).offset(6)
+            $0.top.equalTo(writeHouseWorkCalendarView.snp.bottom).offset(8)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -194,6 +195,16 @@ final class WriteHouseWorkViewController: BaseViewController {
         appearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func setDatePicker() {
+        datePickerView.isHidden = true
+        datePickerView.setAction()
+        
+        let action = UIAction { [weak self] _ in
+            self?.presentPickDateView()
+        }
+        writeHouseWorkCalendarView.pickDateButton.addAction(action, for: .touchUpInside)
     }
     
     private func setupDelegation() {
@@ -309,6 +320,14 @@ final class WriteHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(setTimeLabel.snp.bottom)
                 $0.height.equalTo(0)
             }
+        }
+    }
+    
+    private func presentPickDateView() {
+        datePickerView.isHidden = false
+        datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
+            self?.datePickerView.isHidden = true
+            self?.writeHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
         }
     }
 }
