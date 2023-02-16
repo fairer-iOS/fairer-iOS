@@ -16,7 +16,7 @@ final class SetHouseWorkViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    private let setHouseWorkCalendarView = SetHouseWorkCalendarView()
+    private let setHouseWorkCalendarView = CalendarSpaceView()
     private let setHouseWorkCollectionView = SetHouseWorkCollectionView()
     private lazy var getManagerView: GetManagerView = {
         let view = GetManagerView()
@@ -145,7 +145,7 @@ final class SetHouseWorkViewController: BaseViewController {
         contentView.addSubviews(getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleMenu, repeatCycleDayLabel)
         
         setHouseWorkCalendarView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(38)
         }

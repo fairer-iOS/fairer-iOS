@@ -18,7 +18,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    private let writeHouseWorkCalendarView = SetHouseWorkCalendarView()
+    private let writeHouseWorkCalendarView = CalendarSpaceView()
     private let houseWorkNameLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.writeHouseWorkViewControllerHouseWorkNameLabel, lineHeight: 22)
