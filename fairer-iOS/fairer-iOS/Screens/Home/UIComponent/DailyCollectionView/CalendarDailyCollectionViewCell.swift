@@ -91,22 +91,22 @@ final class CalendarDailyCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - life cycle
     
-    override func render() {
+    override func render(){
         self.addSubviews(leftStackView,rightStackView)
         
-        workerImage1.snp.makeConstraints{
+        workerImage1.snp.makeConstraints {
             $0.width.height.equalTo(24)
         }
         
-        workerImage2.snp.makeConstraints{
+        workerImage2.snp.makeConstraints {
             $0.width.height.equalTo(24)
         }
         
-        workerImage3.snp.makeConstraints{
+        workerImage3.snp.makeConstraints {
             $0.width.height.equalTo(24)
         }
         
-        pinImage.snp.makeConstraints{
+        pinImage.snp.makeConstraints {
             $0.width.height.equalTo(18)
         }
         
@@ -115,7 +115,7 @@ final class CalendarDailyCollectionViewCell: BaseCollectionViewCell {
             $0.leading.equalToSuperview().offset(SizeLiteral.componentPadding)
         }
 
-        rightStackView.snp.makeConstraints{
+        rightStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(SizeLiteral.componentPadding)
             $0.trailing.equalToSuperview().inset(SizeLiteral.componentPadding)
         }
@@ -127,7 +127,7 @@ final class CalendarDailyCollectionViewCell: BaseCollectionViewCell {
         self.layer.borderColor = UIColor.positive10.cgColor
     }
     
-    func setErrorImageView(){
+    func setErrorImageView() {
         self.errorImage.image = ImageLiterals.error
     }
 }

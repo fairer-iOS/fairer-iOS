@@ -18,8 +18,8 @@ struct dummyWorkCard {
 
 final class CalendarDailyCollectionView: BaseUIView  {
     
-    weak var delegate: CollectionViewHeightProtocol?
     private var cellNum = 0
+    var changeHeightClosure: ((Int)->())?
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
         static let collectionVerticalSpacing: CGFloat = 8
@@ -85,7 +85,7 @@ extension CalendarDailyCollectionView: UICollectionViewDataSource {
             return 3
         }else {
             cellNum = cellNum + 4
-            delegate?.getCollectionViewHeight(cellNum: cellNum)
+            changeHeightClosure?(cellNum)
             cellNum = 0
             return 4
         }

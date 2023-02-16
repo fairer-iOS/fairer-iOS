@@ -11,32 +11,31 @@ import SnapKit
 
 final class HomeCalendarView: BaseUIView {
     
-    private var today = Date()
     private var year = Date().yearToString
     private var month = Date().monthToString
     
     
     // MARK: - property
     
-    private lazy var calendarMonthLabelButton : UIButton = {
+    lazy var calendarMonthLabelButton: UIButton = {
         let button = UIButton()
         button.setTitle("\(self.year)년 \(self.month)월", for: .normal)
         button.setTitleColor(.gray800, for: .normal)
-        button.titleLabel?.font = UIFont.font(AppFontName.semiBold, ofSize: 14)
+        button.titleLabel?.font = .title2
         return button
     }()
-    private lazy var calendarMonthPickButton : UIButton = {
+    let calendarMonthPickButton: UIButton = {
         let button = UIButton()
         button.setImage(ImageLiterals.moveToCalendarButton, for: .normal)
         return button
     }()
-    private lazy var calendarPicker : UIStackView = {
+    private lazy var calendarPicker: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [calendarMonthLabelButton,calendarMonthPickButton])
         stackView.axis = .horizontal
         stackView.alignment = .center
         return stackView
     }()
-    private let todayButton: UIButton = {
+    let todayButton: UIButton = {
         let button = UIButton()
         button.setTitle(TextLiteral.homeCalendarViewTodayTitle, for: .normal)
         button.setTitleColor(.positive20, for: .normal)
@@ -58,10 +57,10 @@ final class HomeCalendarView: BaseUIView {
         calendarPicker.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview().inset(8)
-            $0.width.equalTo(100)
+            $0.width.equalTo(105)
         }
         
-        calendarMonthPickButton.snp.makeConstraints{
+        calendarMonthPickButton.snp.makeConstraints {
             $0.height.width.equalTo(20)
         }
         

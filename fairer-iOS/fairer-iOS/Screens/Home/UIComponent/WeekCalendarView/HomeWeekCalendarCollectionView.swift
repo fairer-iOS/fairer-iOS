@@ -18,10 +18,12 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     private var cellIndexPath = IndexPath()
     private let dotList = [ImageLiterals.oneDot,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.threeDots,ImageLiterals.twoDots]
     private let dayList = ["일","월","화","수","목","금","토"]
-    private var dateList = [String]()
-    private var startOfWeekDate = Date().startOfWeek
-    private var endOfWeekDate = Date().endOfWeek
+    lazy var fullDateList = [String]()
+    lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
+    private var todayDateInString = Date().dateToString
+    lazy var datePickedByOthers = ""
+    var yearMonthDateByTouchedCell: ((String)->())?
     private enum Size {
         static let collectionSpacing: CGFloat = 0
         static let cellWidth: CGFloat = 40
@@ -34,7 +36,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     }
     
     // MARK: - property
-   
+    
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -43,7 +45,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         flowLayout.minimumLineSpacing = 8
         return flowLayout
     }()
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
@@ -51,15 +53,14 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         collectionView.isScrollEnabled = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(cell: HomeWeekCalendarCollectionViewCell.self,
-            forCellWithReuseIdentifier: HomeWeekCalendarCollectionViewCell.className)
+                                forCellWithReuseIdentifier: HomeWeekCalendarCollectionViewCell.className)
         return collectionView
     }()
-
+    
     // MARK: - life cycle
     
     override func render() {
-        self.dateList = getNextDateInInt()
-    
+        self.fullDateList = getThisWeekInDate()
         self.addSubview(collectionView)
         
         collectionView.snp.makeConstraints {
@@ -68,14 +69,15 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     }
     
     // MARK: - func
-
-    func getTodayDateInInt()->Int{
+    
+    func getTodayDateInInt() -> Int {
         let ampmIndex = todayDate.dateToString.index(todayDate.dateToString.endIndex, offsetBy: -2)
         let ampmStr = String(todayDate.dateToString[ampmIndex...])
         let result = Int(ampmStr) ?? 0
         return result
     }
-    func getNextDateInInt()->[String]{
+    
+    func getThisWeekInInt() -> [String] {
         var resultArr = [String]()
         let ampmIndex = startOfWeekDate.dateToString.index(startOfWeekDate.dateToString.endIndex, offsetBy: -2)
         let ampmStr = String(startOfWeekDate.dateToString[ampmIndex...])
@@ -90,12 +92,57 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         }
         return resultArr
     }
+    
+    func getThisWeekInDate() -> [String] {
+        var resultArr = [String]()
+        resultArr.append(startOfWeekDate.dateToString)
+        var currentDate = startOfWeekDate
+        for _ in 0...5 {
+            let date: Date = currentDate.addingTimeInterval(+86400)
+            resultArr.append(date.dateToString)
+            currentDate = date
+        }
+        return resultArr
+    }
+    
+    func getAfterWeekDate() {
+        let currentDateListForFullDate = fullDateList
+        var resultFullWeekData = [String]()
+        for date in currentDateListForFullDate {
+            var afterFullWeekDate = date.stringToDate
+            for _ in 0...6 {
+                afterFullWeekDate = afterFullWeekDate?.addingTimeInterval(+86400)
+            }
+            resultFullWeekData.append(afterFullWeekDate?.dateToString ?? String())
+        }
+        self.fullDateList = resultFullWeekData
+        self.datePickedByOthers = self.fullDateList.first ?? String()
+        yearMonthDateByTouchedCell?(self.fullDateList.first ?? String())
+        collectionView.reloadData()
+    }
+    
+    func getBeforeWeekDate() {
+        let currentDateListForFullDate = fullDateList
+        var resultFullWeekData = [String]()
+        for date in currentDateListForFullDate {
+            var afterFullWeekDate = date.stringToDate
+            for _ in 0...6 {
+                afterFullWeekDate = afterFullWeekDate?.addingTimeInterval(-86400)
+            }
+            resultFullWeekData.append(afterFullWeekDate?.dateToString ?? String())
+        }
+        self.fullDateList = resultFullWeekData
+        self.datePickedByOthers = self.fullDateList.first ?? String()
+        yearMonthDateByTouchedCell?(self.fullDateList.first ?? String())
+        collectionView.reloadData()
+    }
 }
 
 // MARK: - Extension
 
 extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.datePickedByOthers = ""
         if self.isSelected == false {
             self.isSelected = true
             self.selectedCell = indexPath.row
@@ -105,6 +152,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             firstCell.dateLabel.textColor = UIColor.blue
             firstCell.dayLabel.textColor = UIColor.blue
             firstCell.workDot.image = ImageLiterals.selectedCalendarCell
+            yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
         }else if indexPath.row != self.selectedCell {
             let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
             resetCell.globalView.backgroundColor = UIColor.systemBackground
@@ -119,6 +167,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
+            yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
         }
     }
 }
@@ -132,10 +181,23 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
+        let seporateDate = fullDateList[indexPath.row].components(separatedBy: ".")
         cell.dayLabel.text = dayList[indexPath.item]
-        cell.dateLabel.text = dateList[indexPath.item]
+        cell.dateLabel.text = seporateDate[2]
         cell.workDot.image = dotList[indexPath.item]
-        if Int(dateList[indexPath.item]) ?? 0 == self.getTodayDateInInt() {
+        guard self.datePickedByOthers != "" else {
+            if fullDateList[indexPath.item] == self.todayDateInString {
+                self.isSelected = true
+                self.selectedCell = indexPath.row
+                self.cellIndexPath = indexPath
+                cell.globalView.backgroundColor = UIColor.gray100
+                cell.dateLabel.textColor = UIColor.blue
+                cell.dayLabel.textColor = UIColor.blue
+                cell.workDot.image = ImageLiterals.selectedCalendarCell
+            }
+            return cell
+        }
+        if fullDateList[indexPath.item] == self.datePickedByOthers {
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
