@@ -93,6 +93,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         picker.timeZone = .autoupdatingCurrent
         return picker
     }()
+    private let datePickerView = PickDateView()
     
     // MARK: - life cycle
     
@@ -103,7 +104,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(scrollView, selectManagerView, managerToastLabel)
+        view.addSubviews(scrollView, selectManagerView, managerToastLabel, datePickerView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker)
         
@@ -173,6 +174,10 @@ final class WriteHouseWorkViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(36)
         }
+        
+        datePickerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     // MARK: - func
@@ -181,10 +186,14 @@ final class WriteHouseWorkViewController: BaseViewController {
         super.setupNavigationBar()
         
         let backButton = makeBarButtonItem(with: backButton)
-        
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func setupDelegation() {
