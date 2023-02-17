@@ -9,7 +9,9 @@ import UIKit
 
 import SnapKit
 
-final class CalendarDailyCollectionViewCell: BaseCollectionViewCell {
+final class CalendarDailyCollectionViewCell: BaseTableViewCell {
+
+    static let identifier = "CellId"
 
     // MARK: - property
     
@@ -90,6 +92,12 @@ final class CalendarDailyCollectionViewCell: BaseCollectionViewCell {
     }()
     
     // MARK: - life cycle
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0))
+    }
     
     override func render(){
         self.addSubviews(leftStackView,rightStackView)

@@ -173,6 +173,7 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(310)
             $0.bottom.equalToSuperview()
         }
+        calendarDailyCollecionView.backgroundColor = .red
         
         datePickerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
