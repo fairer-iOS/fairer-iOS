@@ -104,7 +104,6 @@
 		911455C0297E7FD7002CCDF9 /* WorkState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911455BF297E7FD7002CCDF9 /* WorkState.swift */; };
 		911E9679297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E9678297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift */; };
 		911E967B297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */; };
-		911E967D29717ECE00F3AF35 /* CalendarDailyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967C29717ECE00F3AF35 /* CalendarDailyTableView.swift */; };
 		911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */; };
 		911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E968229719CA400F3AF35 /* UIView+Extension.swift */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
@@ -208,7 +207,6 @@
 		911455BF297E7FD7002CCDF9 /* WorkState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkState.swift; sourceTree = "<group>"; };
 		911E9678297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWeekCalendarCollectionView.swift; sourceTree = "<group>"; };
 		911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWeekCalendarCollectionViewCell.swift; sourceTree = "<group>"; };
-		911E967C29717ECE00F3AF35 /* CalendarDailyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyTableView.swift; sourceTree = "<group>"; };
 		911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyTableViewCell.swift; sourceTree = "<group>"; };
 		911E968229719CA400F3AF35 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
@@ -725,7 +723,6 @@
 		911455C1297E8B79002CCDF9 /* DailyCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				911E967C29717ECE00F3AF35 /* CalendarDailyTableView.swift */,
 				911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */,
 			);
 			path = DailyCollectionView;
@@ -893,7 +890,6 @@
 				52EBF04B28EC29200062EB41 /* TextField.swift in Sources */,
 				39FABBDC28DB35020053EFD2 /* HomeCalendarView.swift in Sources */,
 				52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */,
-				911E967D29717ECE00F3AF35 /* CalendarDailyTableView.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
