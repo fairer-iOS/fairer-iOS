@@ -92,6 +92,7 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     }()
     
     // MARK: - life cycle
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0))
@@ -132,6 +133,18 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         self.layer.cornerRadius = 8
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.positive10.cgColor
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.layer.cornerRadius = 8
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.positive10.cgColor
+        self.backgroundColor = .white
+        self.workLabel.text = String()
+        self.errorImage.image = UIImage()
+        self.time.text = String()
+        self.room.text = String()
     }
     
     func setErrorImageView() {

@@ -384,12 +384,11 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let swipeAction = UIContextualAction(style: .destructive, title: "", handler: { action, view, completionHaldler in
+        let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
             // 원하는 액션 추가
             completionHaldler(true)
         })
         swipeAction.backgroundColor = .blue
-        swipeAction.title = "완료"
         return UISwipeActionsConfiguration(actions: [swipeAction])
     }
     
