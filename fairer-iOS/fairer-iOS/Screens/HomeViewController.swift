@@ -384,13 +384,17 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let swipeAction = UIContextualAction(style: .normal, title: "") { (_, _, success: @escaping (Bool) -> Void) in
+        let swipeAction = UIContextualAction(style: .destructive, title: "", handler: { action, view, completionHaldler in
             // 원하는 액션 추가
-          success(true)
-        }
+            completionHaldler(true)
+        })
         swipeAction.backgroundColor = .blue
         swipeAction.title = "완료"
         return UISwipeActionsConfiguration(actions: [swipeAction])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // MARK: - 집안일 수정 뷰로 이동
     }
 }
 extension HomeViewController: UITableViewDataSource {
