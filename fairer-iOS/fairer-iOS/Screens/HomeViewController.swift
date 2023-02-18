@@ -74,7 +74,6 @@ final class HomeViewController: BaseViewController {
         calendarDailyTableView.showsVerticalScrollIndicator = false
         calendarDailyTableView.separatorStyle = .none
         calendarDailyTableView.rowHeight = 94
-        calendarDailyTableView.backgroundColor = .white
         return calendarDailyTableView
     }()
     private lazy var contentScrollView: UIScrollView = {
@@ -382,7 +381,18 @@ extension HomeViewController: UIScrollViewDelegate {
     }
 }
 
-extension HomeViewController: UITableViewDelegate {}
+extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let swipeAction = UIContextualAction(style: .normal, title: "") { (_, _, success: @escaping (Bool) -> Void) in
+            // 원하는 액션 추가
+          success(true)
+        }
+        swipeAction.backgroundColor = .blue
+        swipeAction.title = "완료"
+        return UISwipeActionsConfiguration(actions: [swipeAction])
+    }
+}
 extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
