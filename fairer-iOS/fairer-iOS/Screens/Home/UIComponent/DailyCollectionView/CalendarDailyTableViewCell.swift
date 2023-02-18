@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class CalendarDailyCollectionViewCell: BaseTableViewCell {
+final class CalendarDailyTableViewCell: BaseTableViewCell {
 
     static let identifier = "CellId"
 

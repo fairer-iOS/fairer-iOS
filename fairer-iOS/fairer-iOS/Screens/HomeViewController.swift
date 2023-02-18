@@ -61,7 +61,7 @@ final class HomeViewController: BaseViewController {
     }()
     private let homeCalenderView = HomeCalendarView()
     private let homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
-    private let calendarDailyCollecionView = CalendarDailyCollectionView()
+    private let calendarDailyTableView = CalendarDailyTableView()
     private lazy var contentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemBackground
@@ -108,7 +108,7 @@ final class HomeViewController: BaseViewController {
         contentScrollView.addSubviews(
             homeCalenderView,
             homeWeekCalendarCollectionView,
-            calendarDailyCollecionView
+            calendarDailyTableView
         )
         
         toolBarView.snp.makeConstraints {
@@ -167,13 +167,12 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(95)
         }
 
-        calendarDailyCollecionView.snp.makeConstraints {
+        calendarDailyTableView.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(310)
             $0.bottom.equalToSuperview()
         }
-        calendarDailyCollecionView.backgroundColor = .red
         
         datePickerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -350,13 +349,13 @@ final class HomeViewController: BaseViewController {
     }
     
     private func setCalendarHeight() {
-        self.calendarDailyCollecionView.changeHeightClosure = { [weak self]
+        self.calendarDailyTableView.changeHeightClosure = { [weak self]
             cellNum in
             guard let self = self else {
                 return
             }
             self.cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
-            self.calendarDailyCollecionView.snp.updateConstraints {
+            self.calendarDailyTableView.snp.updateConstraints {
                 $0.height.equalTo(self.cellHeight)
             }
         }
