@@ -69,10 +69,9 @@ final class SettingProfileViewController: BaseViewController {
         return label
     }()
     private lazy var settingProfileNameStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [settingProfileNameLabel, settingProfileNameTextField, settingProfileNameWarningLabel, settingProfileNameSpecialWarningLabel])
+        let stackView = UIStackView(arrangedSubviews: [settingProfileNameWarningLabel, settingProfileNameSpecialWarningLabel])
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = 8
         return stackView
     }()
     private let settingProfileStatusLabel: UILabel = {
@@ -96,13 +95,6 @@ final class SettingProfileViewController: BaseViewController {
         label.isHidden = true
         return label
     }()
-    private lazy var settingProfileStatusStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [settingProfileStatusLabel, settingProfileStatusTextField, settingProfileStatusWarningLabel])
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.spacing = 8
-        return stackView
-    }()
     private lazy var settingProfileDoneButton: MainButton = {
         let button = MainButton()
         button.isDisabled = true
@@ -123,7 +115,7 @@ final class SettingProfileViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(settingProfileTitleLabel, settingProfileButtonView, settingProfileNameStackView, settingProfileStatusStackView, settingProfileDoneButton)
+        view.addSubviews(settingProfileTitleLabel, settingProfileButtonView, settingProfileNameLabel, settingProfileNameTextField, settingProfileNameStackView, settingProfileStatusLabel, settingProfileStatusTextField, settingProfileStatusWarningLabel, settingProfileDoneButton)
         
         settingProfileTitleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topComponentPadding)
@@ -136,14 +128,34 @@ final class SettingProfileViewController: BaseViewController {
             $0.centerX.equalToSuperview()
         }
         
-        settingProfileNameStackView.snp.makeConstraints {
+        settingProfileNameLabel.snp.makeConstraints {
             $0.top.equalTo(settingProfileButtonView.snp.bottom)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        settingProfileNameTextField.snp.makeConstraints {
+            $0.top.equalTo(settingProfileNameLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        settingProfileStatusStackView.snp.makeConstraints {
-            $0.top.equalTo(settingProfileNameStackView.snp.bottom).offset(8)
+        settingProfileNameStackView.snp.makeConstraints {
+            $0.top.equalTo(settingProfileNameTextField.snp.bottom).offset(6)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        settingProfileStatusLabel.snp.makeConstraints {
+            $0.top.equalTo(settingProfileNameStackView.snp.bottom).offset(8)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        settingProfileStatusTextField.snp.makeConstraints {
+            $0.top.equalTo(settingProfileStatusLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        settingProfileStatusWarningLabel.snp.makeConstraints {
+            $0.top.equalTo(settingProfileStatusTextField.snp.bottom).offset(6)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         settingProfileDoneButton.snp.makeConstraints {
@@ -187,7 +199,7 @@ final class SettingProfileViewController: BaseViewController {
     private func didTappedTextField() {
         settingProfileTitleLabel.isHidden = true
         settingProfileButtonView.snp.updateConstraints {
-            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(-70)
+            $0.top.equalTo(settingProfileTitleLabel.snp.bottom).offset(-85)
         }
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
@@ -265,7 +277,7 @@ final class SettingProfileViewController: BaseViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.settingProfileDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 40)
+                self.settingProfileDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 45)
             })
         }
         
