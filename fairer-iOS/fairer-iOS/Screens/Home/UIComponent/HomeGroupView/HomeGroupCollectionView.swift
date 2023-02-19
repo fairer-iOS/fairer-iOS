@@ -22,6 +22,7 @@ final class HomeGroupCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
+    private var selectedWorkerIndex = 0
     
     // MARK: - TODO.API
     
@@ -59,9 +60,14 @@ final class HomeGroupCollectionView: BaseUIView {
     }
 }
 
-// MARK: - Extension
+// MARK: - extension
 
-extension HomeGroupCollectionView: UICollectionViewDelegate { }
+extension HomeGroupCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let firstCell  = collectionView.cellForItem(at: indexPath) as! HomeGroupCollectionViewCell
+        firstCell.isSelected = true
+    }
+}
 extension HomeGroupCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return userList.count
@@ -73,6 +79,8 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.titleLabel.text = userList[indexPath.item]
+        if cell.isSelected == true { cell.onSelected() }
+        else { cell.onDeselected() }
         return cell
     }
 }

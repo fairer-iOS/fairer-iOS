@@ -138,7 +138,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     }
 }
 
-// MARK: - Extension
+// MARK: - extension
 
 extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

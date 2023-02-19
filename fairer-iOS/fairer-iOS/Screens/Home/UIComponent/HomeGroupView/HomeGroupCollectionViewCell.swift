@@ -11,6 +11,16 @@ import SnapKit
 
 final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                self.titleImage.image = ImageLiterals.profilelightblue1Selected
+            }else {
+                self.titleImage.image = ImageLiterals.profileLightBlue1
+            }
+        }
+    }
+    
     // MARK: - property
     
     let titleImage: UIImageView = {
@@ -41,5 +51,13 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
             $0.top.equalTo(titleImage.snp.bottom).offset(0)
             $0.leading.trailing.equalToSuperview()
         }
+    }
+    
+    func onSelected(){
+        self.titleImage.image = ImageLiterals.locationPin
+    }
+    
+    func onDeselected(){
+        self.titleImage.image = ImageLiterals.profileLightBlue1
     }
 }
