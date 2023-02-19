@@ -13,6 +13,15 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     private let houseWorkMaxLength = 16
     var isCorrection: Bool = false
+    private var selectedDay: Date = Date() {
+        didSet {
+            if HouseWork.mockHouseWork[0].repeatCycle == .week {
+                updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
+            } else {
+                updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
+            }
+        }
+    }
     
     // MARK: - property
     
@@ -421,6 +430,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
             self?.datePickerView.isHidden = true
             self?.writeHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
+            self?.selectedDay = pickedDate
         }
     }
     
@@ -452,7 +462,7 @@ final class WriteHouseWorkViewController: BaseViewController {
             repeatCycleCollectionView.selectedDaysOfWeek = []
             HouseWork.mockHouseWork[0].repeatCycle = RepeatType.week
             repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
-            updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
+            updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
         } else {
             repeatCycleView.snp.updateConstraints {
                 $0.height.equalTo(0)
@@ -507,12 +517,13 @@ final class WriteHouseWorkViewController: BaseViewController {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }
-                self?.updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
+                self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
+                HouseWork.mockHouseWork[0].repeatPattern = nil
             case .month:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
-                self?.updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
+                self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
             HouseWork.mockHouseWork[0].repeatCycle = repeatCycle
             HouseWork.mockHouseWork[0].repeatPattern = nil
@@ -528,8 +539,8 @@ final class WriteHouseWorkViewController: BaseViewController {
             for day in selectedDays.sorted(){
                 sortedDays.append(String(day.dropFirst(1)))
             }
-            let selectedDaysOfWeek = selectedDays.isEmpty ? Date().dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
-            self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek)
+            let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
+            self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
             HouseWork.mockHouseWork[0].repeatPattern = sortedDays
         }
     }
