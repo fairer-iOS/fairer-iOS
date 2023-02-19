@@ -69,11 +69,13 @@ final class HomeViewController: BaseViewController {
     private let homeCalenderView = HomeCalendarView()
     private let homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
     private let calendarDailyTableView: UITableView = {
-        let calendarDailyTableView = UITableView()
+        let calendarDailyTableView = UITableView(frame: .zero, style: .insetGrouped)
         calendarDailyTableView.register(CalendarDailyTableViewCell.self, forCellReuseIdentifier: CalendarDailyTableViewCell.identifier)
         calendarDailyTableView.showsVerticalScrollIndicator = false
         calendarDailyTableView.separatorStyle = .none
-        calendarDailyTableView.rowHeight = 94
+//        calendarDailyTableView.backgroundColor = .white
+//        calendarDailyTableView.rowHeight = 94
+//        tableView.contentInset = .zero
         return calendarDailyTableView
     }()
     private lazy var contentScrollView: UIScrollView = {
@@ -182,7 +184,8 @@ final class HomeViewController: BaseViewController {
 
         calendarDailyTableView.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(310)
             $0.bottom.equalToSuperview()
         }
@@ -384,6 +387,7 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        self.calendarDailyTableView.reloadData()
         let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
             // 원하는 액션 추가
             completionHaldler(true)
@@ -399,31 +403,41 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        var cellNum = 4
+        let cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
+        self.calendarDailyTableView.snp.updateConstraints {
+            $0.height.equalTo(cellHeight)
+        }
+        return 7
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return ""
-        }else {
+//        if section == 0 {
+//            return ""
+//        }else {
+//            return "끝낸 집안일"
+//        }
+        if section == 4 {
             return "끝낸 집안일"
+        }else {
+            return ""
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            var cellNum = Int()
-            if section == 0 {
-                cellNum = cellNum + 3
-                return 3
-            }else {
-            cellNum = cellNum + 4
-            let cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
-            self.calendarDailyTableView.snp.updateConstraints {
-                $0.height.equalTo(cellHeight)
-            }
-            cellNum = 0
-            return 4
-        }
+//            var cellNum = Int()
+//            if section == 0 {
+//                cellNum = cellNum + 3
+//                return 3
+//            }else {
+//            cellNum = cellNum + 4
+//            let cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
+//            self.calendarDailyTableView.snp.updateConstraints {
+//                $0.height.equalTo(cellHeight)
+//            }
+//            cellNum = 0
+//            return 4
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -443,6 +457,14 @@ extension HomeViewController: UITableViewDataSource {
             cell.setErrorImageView()
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 94
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 16
     }
 }
 
