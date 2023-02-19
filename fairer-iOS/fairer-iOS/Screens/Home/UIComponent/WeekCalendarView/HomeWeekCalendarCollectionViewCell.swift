@@ -74,4 +74,12 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
             $0.bottom.equalToSuperview().offset(-10)
         }
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.globalView.backgroundColor = .systemBackground
+        self.dateLabel.textColor = .gray400
+        self.dayLabel.textColor = .gray400
+        self.workDot.image = nil
+    }
 }
