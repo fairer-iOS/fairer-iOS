@@ -26,6 +26,7 @@ final class HomeViewController: BaseViewController {
     private var isScrolled = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+
     
     // MARK: - property
 
@@ -386,13 +387,23 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        self.calendarDailyTableView.reloadData()
-        let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
-            // MARK: - 액션 추가
-            completionHaldler(true)
-        })
-        swipeAction.backgroundColor = .blue
-        return UISwipeActionsConfiguration(actions: [swipeAction])
+        if indexPath.section < 4 {
+            let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
+                // MARK: - 액션 추가
+                completionHaldler(true)
+            })
+            swipeAction.backgroundColor = .blue
+            let configuration = UISwipeActionsConfiguration(actions: [swipeAction])
+            return configuration
+        }else {
+            let swipeAction = UIContextualAction(style: .normal, title: "되돌리기", handler: { action, view, completionHaldler in
+                // MARK: - 액션 추가
+                completionHaldler(true)
+            })
+            swipeAction.backgroundColor = .gray400
+            let configuration = UISwipeActionsConfiguration(actions: [swipeAction])
+            return configuration
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -445,4 +456,3 @@ extension HomeViewController: UITableViewDataSource {
         return 94
     }
 }
-
