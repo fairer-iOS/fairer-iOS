@@ -12,7 +12,15 @@ import SnapKit
 final class SetHouseWorkViewController: BaseViewController {
     
     private var selectedHouseWorkIndex: Int = 0
-    private var selectedDay: String = Date().dayOfWeekToKoreanString
+    private var selectedDay: Date = Date() {
+        didSet {
+            if HouseWork.mockHouseWork[0].repeatCycle == .week {
+                updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
+            } else {
+                updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
+            }
+        }
+    }
     
     // MARK: - property
     
@@ -394,7 +402,7 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
             repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
-            updateRepeatCycleDayLabel(.week, selectedDay)
+            updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
             repeatCycleCollectionView.selectedDaysOfWeek = []
         } else {
             closeRepeatCycleView()
@@ -428,13 +436,14 @@ final class SetHouseWorkViewController: BaseViewController {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }
-                self?.updateRepeatCycleDayLabel(.week, self?.selectedDay ?? Date().dayOfWeekToKoreanString)
+                self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
+                HouseWork.mockHouseWork[0].repeatPattern = nil
                 self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             case .month:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
-                self?.updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
+                self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
             HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.rawValue
@@ -448,7 +457,7 @@ final class SetHouseWorkViewController: BaseViewController {
             for day in selectedDays.sorted(){
                 sortedDays.append(String(day.dropFirst(1)))
             }
-            let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay : sortedDays.joined(separator: ", ")
+            let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
             self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
             HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatPattern = sortedDays
         }
@@ -485,8 +494,11 @@ final class SetHouseWorkViewController: BaseViewController {
         case .month:
             setRepeatToggle.isOn = true
             openRepeatCycleView()
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
             repeatCycleView.repeatCycleButtonLabel.text = RepeatType.month.rawValue
-            updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
+            updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
         case .none:
             setRepeatToggle.isOn = false
             closeRepeatCycleView()
@@ -542,8 +554,7 @@ final class SetHouseWorkViewController: BaseViewController {
         datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
             self?.datePickerView.isHidden = true
             self?.setHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
-            self?.selectedDay = pickedDate.dayOfWeekToKoreanString
-            self?.updateRepeatCycleDayLabel(.week, pickedDate.dayOfWeekToKoreanString)
+            self?.selectedDay = pickedDate
         }
     }
 }
