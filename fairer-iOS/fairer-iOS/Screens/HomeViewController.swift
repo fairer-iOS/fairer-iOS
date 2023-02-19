@@ -13,7 +13,7 @@ struct dummyWorkCard {
     let work = ["바닥 청소","설거지","빨래","바닥 청소","설거지","빨래","설거지"]
     let time = ["오전 9:30","오후 8:00","오전 11:00","오전 9:30","오후 8:00","오전 11:00","오전 11:00"]
     let room = ["방","부엌","거실","방","부엌","방","부엌"]
-    let status = [ WorkState.overdue,WorkState.overdue,WorkState.notFinished,WorkState.finished,WorkState.finished,WorkState.finished,WorkState.finished]
+    let status = [ WorkState.overdue,WorkState.overdue,WorkState.notFinished,WorkState.notFinished,WorkState.finished,WorkState.finished,WorkState.finished]
 }
 
 final class HomeViewController: BaseViewController {
@@ -73,9 +73,9 @@ final class HomeViewController: BaseViewController {
         calendarDailyTableView.register(CalendarDailyTableViewCell.self, forCellReuseIdentifier: CalendarDailyTableViewCell.identifier)
         calendarDailyTableView.showsVerticalScrollIndicator = false
         calendarDailyTableView.separatorStyle = .none
-//        calendarDailyTableView.backgroundColor = .white
-//        calendarDailyTableView.rowHeight = 94
-//        tableView.contentInset = .zero
+        calendarDailyTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: CGFloat.leastNonzeroMagnitude))
+        calendarDailyTableView.sectionFooterHeight = 0
+        calendarDailyTableView.backgroundColor = .white
         return calendarDailyTableView
     }()
     private lazy var contentScrollView: UIScrollView = {
@@ -184,7 +184,6 @@ final class HomeViewController: BaseViewController {
 
         calendarDailyTableView.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
-//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(310)
             $0.bottom.equalToSuperview()
@@ -389,7 +388,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         self.calendarDailyTableView.reloadData()
         let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
-            // 원하는 액션 추가
+            // MARK: - 액션 추가
             completionHaldler(true)
         })
         swipeAction.backgroundColor = .blue
@@ -403,7 +402,7 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        var cellNum = 4
+        let cellNum = 4
         let cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
         self.calendarDailyTableView.snp.updateConstraints {
             $0.height.equalTo(cellHeight)
@@ -412,11 +411,6 @@ extension HomeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if section == 0 {
-//            return ""
-//        }else {
-//            return "끝낸 집안일"
-//        }
         if section == 4 {
             return "끝낸 집안일"
         }else {
@@ -425,28 +419,16 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//            var cellNum = Int()
-//            if section == 0 {
-//                cellNum = cellNum + 3
-//                return 3
-//            }else {
-//            cellNum = cellNum + 4
-//            let cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
-//            self.calendarDailyTableView.snp.updateConstraints {
-//                $0.height.equalTo(cellHeight)
-//            }
-//            cellNum = 0
-//            return 4
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = calendarDailyTableView.dequeueReusableCell(withIdentifier: CalendarDailyTableViewCell.identifier, for: indexPath) as? CalendarDailyTableViewCell ?? CalendarDailyTableViewCell()
         cell.selectionStyle = .none
-        cell.workLabel.text = dummy.work[indexPath.item]
-        cell.time.text = dummy.time[indexPath.item]
-        cell.room.text = dummy.room[indexPath.item]
-        switch dummy.status[indexPath.item] {
+        cell.workLabel.text = dummy.work[indexPath.section]
+        cell.time.text = dummy.time[indexPath.section]
+        cell.room.text = dummy.room[indexPath.section]
+        switch dummy.status[indexPath.section] {
         case .finished :
             cell.backgroundColor = .positive10
         case .notFinished :
@@ -461,10 +443,6 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 94
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 16
     }
 }
 

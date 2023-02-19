@@ -90,17 +90,14 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         stackView.alignment = .trailing
         return stackView
     }()
-    
+
     // MARK: - life cycle
-//    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
-//    }
     
     override func render(){
         
-        self.addSubviews(leftStackView,rightStackView)
+        layoutSubviews()
+        
+        self.addSubviews(workLabel,workerStackView,timeStackView,roomStackView)
         
         workerImage1.snp.makeConstraints {
             $0.width.height.equalTo(24)
@@ -118,18 +115,24 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
             $0.width.height.equalTo(18)
         }
         
-        leftStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(SizeLiteral.componentPadding)
-            $0.height.equalTo(62)
-            $0.leading.equalToSuperview().inset(SizeLiteral.componentPadding)
+        workLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(SizeLiteral.componentPadding)
+            $0.leading.equalToSuperview().offset(SizeLiteral.componentPadding)
+        }
+        
+        workerStackView.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(SizeLiteral.componentPadding)
+            $0.leading.equalToSuperview().offset(SizeLiteral.componentPadding)
         }
 
-        rightStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(SizeLiteral.componentPadding)
-            $0.height.equalTo(62)
+        timeStackView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(SizeLiteral.componentPadding)
             $0.trailing.equalToSuperview().inset(SizeLiteral.componentPadding)
+        }
+        
+        roomStackView.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(SizeLiteral.componentPadding)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.componentPadding)
         }
     }
     
