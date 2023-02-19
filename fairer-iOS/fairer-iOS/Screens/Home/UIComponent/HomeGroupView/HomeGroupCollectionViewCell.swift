@@ -25,7 +25,6 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     
     let titleImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.profileLightBlue1
         return imageView
     }()
     let titleLabel: UILabel = {
@@ -54,7 +53,7 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     }
     
     func onSelected(){
-        self.titleImage.image = ImageLiterals.locationPin
+        self.titleImage.image = ImageLiterals.profilelightblue1Selected
     }
     
     func onDeselected(){
