@@ -26,6 +26,8 @@ final class HomeViewController: BaseViewController {
     private var isScrolled = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    // MARK: - FIX ME
+    var finishedWorkSum = 3
 
     
     // MARK: - property
@@ -423,14 +425,14 @@ extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UILabel()
-        header.text = "끝낸 집안일"
+        header.text = "끝낸 집안일 \(self.finishedWorkSum)"
         header.font = .title1
         header.textColor = .black
         return section == 4 ? header : UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 4 ? 68 : 16
+        return section == 4 ? 68 : SizeLiteral.componentPadding
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
