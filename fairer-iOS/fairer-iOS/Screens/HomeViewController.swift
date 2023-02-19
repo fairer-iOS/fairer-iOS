@@ -421,12 +421,16 @@ extension HomeViewController: UITableViewDataSource {
         return 7
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 4 {
-            return "끝낸 집안일"
-        }else {
-            return ""
-        }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UILabel()
+        header.text = "끝낸 집안일"
+        header.font = .title1
+        header.textColor = .black
+        return section == 4 ? header : UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 4 ? 68 : 16
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
