@@ -53,7 +53,6 @@ final class HomeGroupCollectionView: BaseUIView {
     
     override func render() {
         self.addSubview(collectionView)
-        
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -81,6 +80,7 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.titleLabel.text = userList[indexPath.item]
+        cell.titleImage.image = ImageLiterals.profileLightBlue1
         if cell.isSelected == true { cell.onSelected() }
         else { cell.onDeselected() }
         return cell
@@ -88,6 +88,6 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let selectedIndexPath = IndexPath(row: self.selectedIndex, section: 0)
-        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
+        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .init())
     }
 }

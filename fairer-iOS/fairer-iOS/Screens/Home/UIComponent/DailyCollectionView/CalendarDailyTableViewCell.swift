@@ -10,9 +10,21 @@ import UIKit
 import SnapKit
 
 final class CalendarDailyTableViewCell: BaseTableViewCell {
-
+    
     static let identifier = "CellId"
-
+    
+    private enum Size {
+        static let collectionHorizontalSpacing: CGFloat = 0
+        static let collectionVerticalSpacing: CGFloat = 0
+        static let cellWidth: CGFloat = 24
+        static let cellHeight: CGFloat = 24
+        static let collectionInsets = UIEdgeInsets(
+            top: collectionVerticalSpacing,
+            left: collectionHorizontalSpacing,
+            bottom: collectionVerticalSpacing,
+            right: collectionHorizontalSpacing)
+    }
+    
     // MARK: - property
     
     let workLabel: UILabel = {
@@ -33,21 +45,6 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         label.textColor = UIColor.gray800
         return label
     }()
-    private let workerImage1: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.profileLightBlue1
-        return imageView
-    }()
-    private let workerImage2: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.profileGreen1
-        return imageView
-    }()
-    private let workerImage3: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.profileLightBlue2
-        return imageView
-    }()
     private let pinImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.locationPin
@@ -57,18 +54,24 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         let imageView = UIImageView()
         return imageView
     }()
-    private lazy var workerStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [workerImage1,workerImage2,workerImage3])
-        stackView.axis = .horizontal
-        stackView.alignment = .leading
-        return stackView
+    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.sectionInset = Size.collectionInsets
+        flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
+        return flowLayout
     }()
-    private lazy var leftStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [workLabel,workerStackView])
-        stackView.axis = .vertical
-        stackView.spacing = 20
-        stackView.alignment = .leading
-        return stackView
+    private lazy var workerCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        collectionView.backgroundColor = .clear
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.register(cell: WorkerCollectionViewCell.self,
+            forCellWithReuseIdentifier: WorkerCollectionViewCell.className)
+        return collectionView
     }()
     private lazy var roomStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [pinImage,room])
@@ -83,33 +86,12 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         stackView.spacing = 4
         return stackView
     }()
-    private lazy var rightStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [timeStackView,roomStackView])
-        stackView.axis = .vertical
-        stackView.spacing = 25
-        stackView.alignment = .trailing
-        return stackView
-    }()
 
     // MARK: - life cycle
     
     override func render(){
-        
-        layoutSubviews()
-        
-        self.addSubviews(workLabel,workerStackView,timeStackView,roomStackView)
-        
-        workerImage1.snp.makeConstraints {
-            $0.width.height.equalTo(24)
-        }
-        
-        workerImage2.snp.makeConstraints {
-            $0.width.height.equalTo(24)
-        }
-        
-        workerImage3.snp.makeConstraints {
-            $0.width.height.equalTo(24)
-        }
+
+        self.addSubviews(workLabel,workerCollectionView,timeStackView,roomStackView)
         
         pinImage.snp.makeConstraints {
             $0.width.height.equalTo(18)
@@ -120,9 +102,11 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
             $0.leading.equalToSuperview().offset(SizeLiteral.componentPadding)
         }
         
-        workerStackView.snp.makeConstraints {
+        workerCollectionView.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().offset(SizeLiteral.componentPadding)
+            $0.height.equalTo(24)
+            $0.width.equalTo(190)
         }
 
         timeStackView.snp.makeConstraints {
@@ -156,5 +140,24 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     
     func setErrorImageView() {
         self.errorImage.image = ImageLiterals.error
+    }
+}
+
+extension CalendarDailyTableViewCell: UICollectionViewDelegate {}
+
+extension CalendarDailyTableViewCell: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkerCollectionViewCell.className, for: indexPath) as? WorkerCollectionViewCell else {
+            assert(false, "Wrong Cell")
+            return UICollectionViewCell()
+        }
+        // MARK: - api 연결 시 수정
+        cell.workerIconImage.image = ImageLiterals.profilePink1
+        return cell
     }
 }
