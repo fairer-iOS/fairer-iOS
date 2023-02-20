@@ -86,13 +86,28 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         stackView.spacing = 4
         return stackView
     }()
+    lazy var mainBackground: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.layer.masksToBounds = false
+        return view
+    }()
+    lazy var shadowLayer = ShadowView()
 
     // MARK: - life cycle
     
     override func render(){
-
-        self.addSubviews(workLabel,workerCollectionView,timeStackView,roomStackView)
+        self.addSubview(shadowLayer)
+        shadowLayer.addSubview(mainBackground)
+        mainBackground.addSubviews(workLabel,workerCollectionView,timeStackView,roomStackView)
         
+        mainBackground.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+            $0.trailing.bottom.equalToSuperview().inset(2)
+        }
+        shadowLayer.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         pinImage.snp.makeConstraints {
             $0.width.height.equalTo(18)
         }
@@ -121,17 +136,21 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     }
     
     override func configUI() {
-        self.layer.cornerRadius = 8
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.positive10.cgColor
+        self.mainBackground.layer.cornerRadius = 8
+        self.mainBackground.layer.borderWidth = 1
+        self.mainBackground.layer.borderColor = UIColor.positive10.cgColor
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.layer.cornerRadius = 8
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.positive10.cgColor
-        self.backgroundColor = .white
+        self.shadowLayer.layoutSubviews()
+        self.mainBackground.snp.updateConstraints {
+            $0.bottom.equalToSuperview().inset(2)
+        }
+        self.mainBackground.layer.cornerRadius = 8
+        self.mainBackground.layer.borderWidth = 1
+        self.mainBackground.layer.borderColor = UIColor.positive10.cgColor
+        self.mainBackground.backgroundColor = .white
         self.workLabel.text = String()
         self.errorImage.image = UIImage()
         self.time.text = String()

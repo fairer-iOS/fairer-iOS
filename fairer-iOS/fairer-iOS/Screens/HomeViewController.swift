@@ -26,6 +26,7 @@ final class HomeViewController: BaseViewController {
     private var isScrolled = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    
     // MARK: - FIX ME
     var finishedWorkSum = 3
 
@@ -367,6 +368,14 @@ final class HomeViewController: BaseViewController {
         self.datePickerView.isHidden = false
         self.setupAlphaNavigationBar()
     }
+    
+    private func setTableCellWhenSwipeDone(cell: CalendarDailyTableViewCell){
+        cell.shadowLayer.layer.cornerRadius = 8
+        cell.shadowLayer.backgroundColor = .black
+        cell.mainBackground.snp.updateConstraints {
+            $0.bottom.equalToSuperview().inset(2)
+        }
+    }
 }
 
     // MARK: - extension
@@ -389,6 +398,21 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let selectedCell = tableView.cellForRow(at: indexPath) as! CalendarDailyTableViewCell
+        selectedCell.mainBackground.snp.updateConstraints {
+            $0.bottom.equalToSuperview()
+        }
+        // MARK: - FIX !!!!
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            // 1초 후 실행될 부분
+            if indexPath.section < 4 {
+                selectedCell.shadowLayer.layer.cornerRadius = 0
+                selectedCell.shadowLayer.backgroundColor = .blue
+            }else {
+                selectedCell.shadowLayer.layer.cornerRadius = 0
+                selectedCell.shadowLayer.backgroundColor = .gray400
+            }
+        }
         if indexPath.section < 4 {
             let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
                 // MARK: - 액션 추가
@@ -447,12 +471,15 @@ extension HomeViewController: UITableViewDataSource {
         cell.room.text = dummy.room[indexPath.section]
         switch dummy.status[indexPath.section] {
         case .finished :
-            cell.backgroundColor = .positive10
+            cell.mainBackground.backgroundColor = .positive10
+//            cell.shadowLayer.backgroundColor = .positive10
         case .notFinished :
-            cell.backgroundColor = .white
+            cell.mainBackground.backgroundColor = .white
+//            cell.shadowLayer.backgroundColor = .white
         case .overdue :
-            cell.backgroundColor = .negative0
-            cell.layer.borderColor = UIColor.negative10.cgColor
+            cell.mainBackground.backgroundColor = .negative0
+//            cell.shadowLayer.backgroundColor = .negative0
+            cell.mainBackground.layer.borderColor = UIColor.negative10.cgColor
             cell.setErrorImageView()
         }
         return cell
