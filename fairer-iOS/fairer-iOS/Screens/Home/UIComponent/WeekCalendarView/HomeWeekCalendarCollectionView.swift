@@ -201,6 +201,8 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
             cell.globalView.backgroundColor = UIColor.gray100
             cell.dateLabel.textColor = UIColor.blue
             cell.dayLabel.textColor = UIColor.blue
+            cell.dayLabel.font = .title2
+            cell.dateLabel.font = .title2
             cell.workDot.image = ImageLiterals.selectedCalendarCell
         }
         return cell
