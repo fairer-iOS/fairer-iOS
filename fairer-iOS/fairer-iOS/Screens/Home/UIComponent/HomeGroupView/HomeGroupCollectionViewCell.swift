@@ -14,9 +14,10 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.titleImage.image = ImageLiterals.profilelightblue1Selected
+                checkCircleView.isHidden = false
+                self.bringSubviewToFront(titleImage)
             }else {
-                self.titleImage.image = ImageLiterals.profileLightBlue1
+                checkCircleView.isHidden = true
             }
         }
     }
@@ -24,6 +25,14 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     // MARK: - property
     
     let titleImage = UIImageView()
+    let checkCircleView: UIView = {
+        let view = UIView()
+        view.layer.borderWidth = 1.5
+        view.layer.cornerRadius = 24
+        view.layer.borderColor = UIColor.blue.cgColor
+        view.backgroundColor = .clear
+        return view
+    }()
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .caption1
@@ -36,12 +45,15 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     
     override func render() {
         self.addSubviews(titleImage,titleLabel)
-        
+        titleImage.addSubview(checkCircleView)
         titleImage.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(48)
+            $0.center.equalToSuperview()
+            $0.width.height.equalTo(47)
         }
-        
+        checkCircleView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.height.equalTo(48)
+        }
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(titleImage.snp.bottom).offset(4)
             $0.leading.trailing.equalToSuperview()
@@ -49,10 +61,11 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     }
     
     func onSelected(){
-        self.titleImage.image = ImageLiterals.profilelightblue1Selected
+        checkCircleView.isHidden = false
+        self.bringSubviewToFront(titleImage)
     }
     
     func onDeselected(){
-        self.titleImage.image = ImageLiterals.profileLightBlue1
+        checkCircleView.isHidden = true
     }
 }

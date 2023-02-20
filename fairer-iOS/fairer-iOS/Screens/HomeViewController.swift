@@ -157,13 +157,13 @@ final class HomeViewController: BaseViewController {
         }
 
         homeRuleView.snp.makeConstraints {
-            $0.top.equalTo(homeGroupCollectionView.snp.bottom)
+            $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(40)
         }
         
         homeDivider.snp.makeConstraints {
-            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(150)
+            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(165)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
@@ -269,6 +269,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func scrollDidStart(){
+        print("scrollDidStart")
         self.homeRuleView.homeRuleLabel.isHidden = true
         self.homeRuleView.homeRuleDescriptionLabel.isHidden = true
         self.homeGroupCollectionView.snp.updateConstraints {
@@ -287,7 +288,7 @@ final class HomeViewController: BaseViewController {
     
     private func scrollDidEnd() {
         self.homeDivider.snp.updateConstraints {
-            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(150)
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(165)
         }
         self.homeGroupCollectionView.snp.updateConstraints {
             $0.height.equalTo(86)
@@ -383,7 +384,7 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollOffset = scrollView.contentOffset.y
-        if (scrollOffset <= 5) {
+        if (scrollOffset <= 1) {
             scrollDidEnd()
             isScrolled = false
         } else {

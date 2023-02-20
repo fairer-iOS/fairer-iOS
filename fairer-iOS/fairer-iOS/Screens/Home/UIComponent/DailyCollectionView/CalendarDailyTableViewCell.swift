@@ -143,9 +143,9 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.shadowLayer.layoutSubviews()
+        self.shadowLayer.setupShadow()
         self.mainBackground.snp.updateConstraints {
-            $0.bottom.equalToSuperview().inset(2)
+            $0.trailing.bottom.equalToSuperview().inset(2)
         }
         self.mainBackground.layer.cornerRadius = 8
         self.mainBackground.layer.borderWidth = 1

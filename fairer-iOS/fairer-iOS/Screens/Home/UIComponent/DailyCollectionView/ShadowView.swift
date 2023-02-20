@@ -21,6 +21,7 @@ class ShadowView: UIView {
         self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
+        print("setupShadow")
         setupShadowDone = true
     }
 
