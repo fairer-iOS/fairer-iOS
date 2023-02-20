@@ -187,7 +187,7 @@ final class HomeViewController: BaseViewController {
         }
 
         calendarDailyTableView.snp.makeConstraints {
-            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
+            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(-15)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(310)
             $0.bottom.equalToSuperview()
