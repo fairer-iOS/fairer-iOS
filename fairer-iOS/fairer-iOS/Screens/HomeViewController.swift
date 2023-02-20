@@ -402,9 +402,8 @@ extension HomeViewController: UITableViewDelegate {
         selectedCell.mainBackground.snp.updateConstraints {
             $0.bottom.equalToSuperview()
         }
-        // MARK: - FIX !!!!
+        // MARK: - FIX
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-            // 1초 후 실행될 부분
             if indexPath.section < 4 {
                 selectedCell.shadowLayer.layer.cornerRadius = 0
                 selectedCell.shadowLayer.backgroundColor = .blue

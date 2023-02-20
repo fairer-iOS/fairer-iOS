@@ -26,10 +26,10 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
                 dayLabel.textColor = .gray400
                 dayLabel.font = .body2
                 dateLabel.font = .body2
-                workDot.image = UIImage()
             }
         }
     }
+    
     
     // MARK: - property
     
