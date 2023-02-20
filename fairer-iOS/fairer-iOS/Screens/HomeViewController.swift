@@ -153,17 +153,17 @@ final class HomeViewController: BaseViewController {
         homeGroupCollectionView.snp.makeConstraints {
             $0.top.equalTo(houseImageView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(86)
+            $0.height.equalTo(70)
         }
 
         homeRuleView.snp.makeConstraints {
             $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(40)
+            $0.height.equalTo(35)
         }
         
         homeDivider.snp.makeConstraints {
-            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(165)
+            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(144)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
@@ -269,7 +269,6 @@ final class HomeViewController: BaseViewController {
     }
     
     private func scrollDidStart(){
-        print("scrollDidStart")
         self.homeRuleView.homeRuleLabel.isHidden = true
         self.homeRuleView.homeRuleDescriptionLabel.isHidden = true
         self.homeGroupCollectionView.snp.updateConstraints {
@@ -288,13 +287,13 @@ final class HomeViewController: BaseViewController {
     
     private func scrollDidEnd() {
         self.homeDivider.snp.updateConstraints {
-            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(165)
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(144)
         }
         self.homeGroupCollectionView.snp.updateConstraints {
-            $0.height.equalTo(86)
+            $0.height.equalTo(70)
         }
         self.homeRuleView.snp.updateConstraints {
-            $0.height.equalTo(40)
+            $0.height.equalTo(35)
         }
         self.homeRuleView.homeRuleLabel.isHidden = false
         self.homeRuleView.homeRuleDescriptionLabel.isHidden = false
