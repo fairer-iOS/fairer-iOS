@@ -472,13 +472,10 @@ extension HomeViewController: UITableViewDataSource {
         switch dummy.status[indexPath.section] {
         case .finished :
             cell.mainBackground.backgroundColor = .positive10
-//            cell.shadowLayer.backgroundColor = .positive10
         case .notFinished :
             cell.mainBackground.backgroundColor = .white
-//            cell.shadowLayer.backgroundColor = .white
         case .overdue :
             cell.mainBackground.backgroundColor = .negative0
-//            cell.shadowLayer.backgroundColor = .negative0
             cell.mainBackground.layer.borderColor = UIColor.negative10.cgColor
             cell.setErrorImageView()
         }

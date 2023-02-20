@@ -148,26 +148,21 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
             let firstCell  = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
-            firstCell.globalView.backgroundColor = UIColor.gray100
-            firstCell.dateLabel.textColor = UIColor.blue
-            firstCell.dayLabel.textColor = UIColor.blue
             firstCell.workDot.image = ImageLiterals.selectedCalendarCell
             yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
+            firstCell.isSelected = true
+            
         }else if indexPath.row != self.selectedCell {
             let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
-            resetCell.globalView.backgroundColor = UIColor.systemBackground
-            resetCell.dateLabel.textColor = UIColor.gray400
-            resetCell.dayLabel.textColor = UIColor.gray400
             resetCell.workDot.image = dotList[self.cellIndexPath.row]
+            resetCell.isSelected = false
             let secondCell = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
-            secondCell.globalView.backgroundColor = UIColor.gray100
-            secondCell.dateLabel.textColor = UIColor.blue
-            secondCell.dayLabel.textColor = UIColor.blue
             secondCell.workDot.image = ImageLiterals.selectedCalendarCell
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
             yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
+            secondCell.isSelected = true
         }
     }
 }
@@ -193,6 +188,8 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
                 cell.globalView.backgroundColor = UIColor.gray100
                 cell.dateLabel.textColor = UIColor.blue
                 cell.dayLabel.textColor = UIColor.blue
+                cell.dayLabel.font = .title2
+                cell.dateLabel.font = .title2
                 cell.workDot.image = ImageLiterals.selectedCalendarCell
             }
             return cell
