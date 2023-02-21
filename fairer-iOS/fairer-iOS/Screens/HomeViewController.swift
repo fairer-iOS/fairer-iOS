@@ -126,13 +126,7 @@ final class HomeViewController: BaseViewController {
                          homeCalenderView,
                          homeWeekCalendarCollectionView,
                          calendarDailyTableView)
-        
-//        contentScrollView.addSubviews(
-//            homeCalenderView,
-//            homeWeekCalendarCollectionView,
-//            calendarDailyTableView
-//        )
-        
+
         toolBarView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(76)
@@ -173,32 +167,22 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
-//
-//        contentScrollView.snp.makeConstraints {
-//            $0.top.equalTo(homeDivider.snp.bottom)
-//            $0.leading.trailing.equalToSuperview()
-//            $0.bottom.equalTo(toolBarView.snp.top).offset(5)
-//        }
         
         homeCalenderView.snp.makeConstraints {
             $0.top.equalTo(homeDivider.snp.bottom)
-//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(40)
         }
         
         homeWeekCalendarCollectionView.snp.makeConstraints {
             $0.top.equalTo(homeCalenderView.snp.bottom)
-//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(95)
         }
 
         calendarDailyTableView.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(-15)
-//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(310)
             $0.bottom.equalTo(toolBarView.snp.top)
         }
         
@@ -408,20 +392,28 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let selectedCell = tableView.cellForRow(at: indexPath) as! CalendarDailyTableViewCell
-        selectedCell.mainBackground.snp.updateConstraints {
-            $0.bottom.equalToSuperview()
-        }
+//        selectedCell.mainBackground.snp.updateConstraints {
+//            $0.bottom.equalToSuperview()
+//        }
+        selectedCell.shadowBehindView.backgroundColor = .white
+//        selectedCell.insertSubview(shadowBehindView, at: 1)
+        selectedCell.bringSubviewToFront(selectedCell.mainBackground)
+//        selectedCell.insertSubview(selectedCell.shadowBehindView, at: 2)
+        selectedCell.shadowBehindView.isHidden = false
+        selectedCell.shadowLayer.layer.cornerRadius = 0
+        
         // MARK: - FIX
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-            if indexPath.section < 4 {
-                selectedCell.shadowLayer.layer.cornerRadius = 0
-                selectedCell.shadowLayer.backgroundColor = .blue
-            }else {
-                selectedCell.shadowLayer.layer.cornerRadius = 0
-                selectedCell.shadowLayer.backgroundColor = .gray400
-            }
-        }
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+//            if indexPath.section < 4 {
+//                selectedCell.shadowLayer.layer.cornerRadius = 0
+//                selectedCell.shadowLayer.backgroundColor = .blue
+//            }else {
+//                selectedCell.shadowLayer.layer.cornerRadius = 0
+//                selectedCell.shadowLayer.backgroundColor = .gray400
+//            }
+//        }
         if indexPath.section < 4 {
+            selectedCell.shadowLayer.backgroundColor = .blue
             let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
                 // MARK: - 액션 추가
                 completionHaldler(true)
@@ -430,6 +422,7 @@ extension HomeViewController: UITableViewDelegate {
             let configuration = UISwipeActionsConfiguration(actions: [swipeAction])
             return configuration
         }else {
+            selectedCell.shadowLayer.backgroundColor = .gray400
             let swipeAction = UIContextualAction(style: .normal, title: "되돌리기", handler: { action, view, completionHaldler in
                 // MARK: - 액션 추가
                 completionHaldler(true)
@@ -447,11 +440,7 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let cellNum = 4
-        let cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
-        self.calendarDailyTableView.snp.updateConstraints {
-            $0.height.equalTo(cellHeight)
-        }
+        // MARK: - fix me API
         return 7
     }
 

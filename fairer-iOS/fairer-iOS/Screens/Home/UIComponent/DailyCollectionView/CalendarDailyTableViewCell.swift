@@ -70,7 +70,7 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
         collectionView.register(cell: WorkerCollectionViewCell.self,
-            forCellWithReuseIdentifier: WorkerCollectionViewCell.className)
+                                forCellWithReuseIdentifier: WorkerCollectionViewCell.className)
         return collectionView
     }()
     private lazy var roomStackView: UIStackView = {
@@ -92,22 +92,44 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         view.layer.masksToBounds = false
         return view
     }()
-    lazy var shadowLayer = ShadowView()
+    lazy var shadowLayer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        view.layer.cornerRadius = 8
+        view.layer.masksToBounds = false
+        return view
+    }()
+    lazy var shadowBehindView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 0
+        view.layer.masksToBounds = false
+        return view
+    }()
 
     // MARK: - life cycle
     
     override func render(){
+        self.shadowBehindView.isHidden = true
         self.addSubview(shadowLayer)
         shadowLayer.addSubview(mainBackground)
+        mainBackground.addSubview(shadowBehindView)
         mainBackground.addSubviews(workLabel,workerCollectionView,timeStackView,roomStackView)
+        
+        shadowBehindView.snp.makeConstraints {
+            $0.top.leading.bottom.equalTo(shadowLayer)
+            $0.trailing.equalToSuperview().inset(5)
+        }
         
         mainBackground.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
-            $0.trailing.bottom.equalToSuperview().inset(2)
+            $0.trailing.bottom.equalToSuperview().inset(1)
         }
+        
         shadowLayer.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
         pinImage.snp.makeConstraints {
             $0.width.height.equalTo(18)
         }
@@ -143,10 +165,13 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.shadowLayer.setupShadow()
-        self.mainBackground.snp.updateConstraints {
-            $0.trailing.bottom.equalToSuperview().inset(2)
-        }
+        self.shadowBehindView.isHidden = true
+        self.shadowBehindView.backgroundColor = .clear
+        self.bringSubviewToFront(shadowBehindView)
+        self.shadowLayer.backgroundColor = .gray100
+//        self.mainBackground.snp.updateConstraints {
+//            $0.trailing.bottom.equalToSuperview().inset(1)
+//        }
         self.mainBackground.layer.cornerRadius = 8
         self.mainBackground.layer.borderWidth = 1
         self.mainBackground.layer.borderColor = UIColor.positive10.cgColor
