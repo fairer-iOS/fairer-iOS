@@ -18,7 +18,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    private let selectHouseWorkCalendar = SelectHouseWorkCalendarView()
+    private let selectHouseWorkCalendar = PickDateButton()
     private let spaceCollectionView = SelectHouseWorkSpaceCollectionView()
     private let spaceInfoLabel: InfoLabelView = {
         let label = InfoLabelView()
@@ -67,11 +67,13 @@ final class SelectHouseWorkViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
+    private let datePickerView = PickDateView()
     
     // MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDatePicker()
         didTappedSpace()
         didTappedHouseWork()
     }
@@ -103,14 +105,14 @@ final class SelectHouseWorkViewController: BaseViewController {
         
         contentView.addSubview(selectHouseWorkCalendar)
         selectHouseWorkCalendar.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(4)
-            $0.leading.equalToSuperview().inset(10)
-            $0.width.equalTo(112)
+            $0.top.equalToSuperview().inset(8)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(22)
         }
         
         contentView.addSubview(spaceCollectionView)
         spaceCollectionView.snp.makeConstraints {
-            $0.top.equalTo(selectHouseWorkCalendar.snp.bottom).offset(4)
+            $0.top.equalTo(selectHouseWorkCalendar.snp.bottom).offset(8)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(248)
         }
@@ -149,6 +151,11 @@ final class SelectHouseWorkViewController: BaseViewController {
             $0.height.equalTo(42)
             $0.bottom.equalTo(0)
         }
+        
+        view.addSubview(datePickerView)
+        datePickerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     // MARK: - func
@@ -161,6 +168,21 @@ final class SelectHouseWorkViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func setDatePicker() {
+        datePickerView.isHidden = true
+        datePickerView.setAction()
+        
+        let action = UIAction { [weak self] _ in
+            self?.presentPickDateView()
+        }
+        selectHouseWorkCalendar.addAction(action, for: .touchUpInside)
     }
     
     private func didTappedWriteHouseWorkButton() {
@@ -219,6 +241,14 @@ final class SelectHouseWorkViewController: BaseViewController {
         detailHouseWorkLabel.isHidden = false
         detailHouseWorkLabel.snp.updateConstraints {
             $0.height.equalTo(26)
+        }
+    }
+    
+    private func presentPickDateView() {
+        datePickerView.isHidden = false
+        datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
+            self?.datePickerView.isHidden = true
+            self?.selectHouseWorkCalendar.dateLabel.text = pickedDate.dayToKoreanString
         }
     }
 }
