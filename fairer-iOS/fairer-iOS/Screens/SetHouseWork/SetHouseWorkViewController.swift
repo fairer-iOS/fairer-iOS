@@ -12,11 +12,20 @@ import SnapKit
 final class SetHouseWorkViewController: BaseViewController {
     
     private var selectedHouseWorkIndex: Int = 0
+    private var selectedDay: Date = Date() {
+        didSet {
+            if HouseWork.mockHouseWork[0].repeatCycle == .week {
+                updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
+            } else {
+                updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
+            }
+        }
+    }
     
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    private let setHouseWorkCalendarView = SetHouseWorkCalendarView()
+    private let setHouseWorkCalendarView = CalendarSpaceView()
     private let setHouseWorkCollectionView = SetHouseWorkCollectionView()
     private lazy var getManagerView: GetManagerView = {
         let view = GetManagerView()
@@ -128,11 +137,13 @@ final class SetHouseWorkViewController: BaseViewController {
         button.isDisabled = false
         return button
     }()
+    private let datePickerView = PickDateView()
     
     // MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDatePicker()
         didTappedHouseWork()
         didDeleteHouseWork()
         didTappedRepeatCycleMenuButton()
@@ -140,7 +151,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(setHouseWorkCalendarView, setHouseWorkCollectionView, doneButton, scrollView, selectManagerView, managerToastLabel)
+        view.addSubviews(setHouseWorkCalendarView, setHouseWorkCollectionView, doneButton, scrollView, selectManagerView, managerToastLabel, datePickerView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleMenu, repeatCycleDayLabel)
         
@@ -245,6 +256,10 @@ final class SetHouseWorkViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(36)
         }
+        
+        datePickerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     // MARK: - func
@@ -253,10 +268,24 @@ final class SetHouseWorkViewController: BaseViewController {
         super.setupNavigationBar()
         
         let backButton = makeBarButtonItem(with: backButton)
-        
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func setDatePicker() {
+        datePickerView.isHidden = true
+        datePickerView.setAction()
+        
+        let action = UIAction { [weak self] _ in
+            self?.presentPickDateView()
+        }
+        setHouseWorkCalendarView.pickDateButton.addAction(action, for: .touchUpInside)
     }
     
     private func didTappedHouseWork() {
@@ -373,7 +402,7 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
             repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
-            updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
+            updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
             repeatCycleCollectionView.selectedDaysOfWeek = []
         } else {
             closeRepeatCycleView()
@@ -407,13 +436,14 @@ final class SetHouseWorkViewController: BaseViewController {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }
-                self?.updateRepeatCycleDayLabel(.week, Date().dayOfWeekToKoreanString)
+                self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
+                HouseWork.mockHouseWork[0].repeatPattern = nil
                 self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             case .month:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
-                self?.updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
+                self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
             HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.rawValue
@@ -427,8 +457,8 @@ final class SetHouseWorkViewController: BaseViewController {
             for day in selectedDays.sorted(){
                 sortedDays.append(String(day.dropFirst(1)))
             }
-            let selectedDaysOfWeek = selectedDays.isEmpty ? Date().dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
-            self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek)
+            let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
+            self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
             HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatPattern = sortedDays
         }
     }
@@ -464,8 +494,11 @@ final class SetHouseWorkViewController: BaseViewController {
         case .month:
             setRepeatToggle.isOn = true
             openRepeatCycleView()
+            repeatCycleCollectionView.snp.updateConstraints {
+                $0.height.equalTo(0)
+            }
             repeatCycleView.repeatCycleButtonLabel.text = RepeatType.month.rawValue
-            updateRepeatCycleDayLabel(.month, Date().singleDayToKoreanString)
+            updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
         case .none:
             setRepeatToggle.isOn = false
             closeRepeatCycleView()
@@ -513,6 +546,15 @@ final class SetHouseWorkViewController: BaseViewController {
         case .month:
             repeatCycleDayLabel.text = TextLiteral.everyMonthText + repeatDay + TextLiteral.dayText + TextLiteral.repeatText
             repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.dayText, with: .positive20)
+        }
+    }
+    
+    private func presentPickDateView() {
+        datePickerView.isHidden = false
+        datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
+            self?.datePickerView.isHidden = true
+            self?.setHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
+            self?.selectedDay = pickedDate
         }
     }
 }

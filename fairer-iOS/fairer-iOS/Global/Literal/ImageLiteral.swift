@@ -66,6 +66,7 @@ enum ImageLiterals {
     
     static var textFieldClearButton: UIImage { .load(name: "clearbutton") }
     static var navigationBarBackButton: UIImage { .load(name: "backbutton") }
+    static var settingProfileImageBrushButton: UIImage { .load(name: "brushButton") }
     static var plusWorkButton: UIImage { .load(systemName: "plus") }
     static var moveToCalendarButton: UIImage { .load(name: "keyboard_arrow_down") }
     static var addManagerButton: UIImage { .load(name: "managerplus") }
