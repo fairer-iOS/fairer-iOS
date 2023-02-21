@@ -86,19 +86,8 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         stackView.spacing = 4
         return stackView
     }()
-    lazy var mainBackground: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 8
-        view.layer.masksToBounds = false
-        return view
-    }()
-    lazy var shadowLayer: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray100
-        view.layer.cornerRadius = 8
-        view.layer.masksToBounds = false
-        return view
-    }()
+    lazy var mainBackground = UIView()
+    lazy var shadowLayer = UIView()
 
     // MARK: - life cycle
     
@@ -143,15 +132,20 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     }
     
     override func configUI() {
-        self.mainBackground.layer.cornerRadius = 8
+        self.mainBackground.layer.cornerRadius = 10
         self.mainBackground.layer.borderWidth = 1
         self.mainBackground.layer.borderColor = UIColor.positive10.cgColor
+        self.mainBackground.layer.masksToBounds = false
+        self.shadowLayer.backgroundColor = .gray400
+        self.shadowLayer.layer.cornerRadius = 10
+        self.shadowLayer.layer.masksToBounds = false
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         self.shadowLayer.backgroundColor = .gray100
-        self.mainBackground.layer.cornerRadius = 8
+        self.shadowLayer.layer.cornerRadius = 10
+        self.mainBackground.layer.cornerRadius = 10
         self.mainBackground.layer.borderWidth = 1
         self.mainBackground.layer.borderColor = UIColor.positive10.cgColor
         self.mainBackground.backgroundColor = .white

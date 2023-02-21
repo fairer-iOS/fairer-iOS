@@ -87,7 +87,10 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let selectedIndexPath = IndexPath(row: self.selectedIndex, section: 0)
-        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .init())
+        if selectedIndex == indexPath.item {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+        }
     }
+    
 }

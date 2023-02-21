@@ -385,7 +385,6 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let selectedCell = tableView.cellForRow(at: indexPath) as! CalendarDailyTableViewCell
-        selectedCell.bringSubviewToFront(selectedCell.mainBackground)
         selectedCell.shadowLayer.layer.cornerRadius = 0
         if indexPath.section < 4 {
             selectedCell.shadowLayer.backgroundColor = .blue

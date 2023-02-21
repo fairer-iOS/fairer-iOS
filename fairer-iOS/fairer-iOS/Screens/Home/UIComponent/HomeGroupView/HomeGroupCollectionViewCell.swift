@@ -14,10 +14,10 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                checkCircleView.isHidden = false
+                self.onSelected()
                 self.bringSubviewToFront(titleImage)
             }else {
-                checkCircleView.isHidden = true
+                self.onDeselected()
             }
         }
     }
