@@ -13,6 +13,8 @@ enum TextLiteral {
     
     static let doneButtonText: String = "입력 완료"
     static let textFieldDisableSignLabel: String = "&,!,#,@,^와 같은 특수문자는 입력하실 수 없어요."
+    static let textFieldWarningOverFive: String = "텍스트는 5글자를 초과하여 입력하실 수 없어요."
+    static let textFieldWarningOverTwenty: String = "텍스트는 20글자를 초과하여 입력하실 수 없어요."
     static let setManagerToastLabel = "집안일 담당자를 지정해주세요."
     static let setTimeLabel = "시간설정"
     static let setRepeatLabel = "반복하기"
@@ -187,4 +189,11 @@ enum TextLiteral {
     static let writeHouseWorkViewControllerHouseWorkNameLabel = "집안일 이름"
     static let writeHouseWorkViewControllerHouseWorkNameTextFieldPlaceholderText = "직접 입력"
     static let writeHouseWorkViewControllerHouseWorkNameWarningLabel = "텍스트는 16글자를 초과하여 입력하실 수 없어요."
+    
+    // MARK: - SettingProfileViewController
+    
+    static let settingProfileViewControllerTitleLabel = "프로필을 설정해주세요."
+    static let settingProfileViewControllerProfileNameLabel = "이름"
+    static let settingProfileViewControllerProfileStatusLabel = "상태 메세지"
+    static let settingProfileViewControllerPlaceholderText = "Text"
 }
