@@ -122,13 +122,16 @@ final class HomeViewController: BaseViewController {
                          homeGroupCollectionView,
                          homeRuleView,
                          homeDivider,
-                         datePickerView)
+                         datePickerView,
+                         homeCalenderView,
+                         homeWeekCalendarCollectionView,
+                         calendarDailyTableView)
         
-        contentScrollView.addSubviews(
-            homeCalenderView,
-            homeWeekCalendarCollectionView,
-            calendarDailyTableView
-        )
+//        contentScrollView.addSubviews(
+//            homeCalenderView,
+//            homeWeekCalendarCollectionView,
+//            calendarDailyTableView
+//        )
         
         toolBarView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -137,16 +140,19 @@ final class HomeViewController: BaseViewController {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(8)
+            $0.height.equalTo(45)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         houseImageView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.height.equalTo(18)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
 
         homeGroupLabel.snp.makeConstraints {
             $0.leading.equalTo(houseImageView.snp.trailing).offset(4)
+            $0.height.equalTo(18)
             $0.centerY.equalTo(houseImageView.snp.centerY)
         }
 
@@ -167,30 +173,33 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
-        
-        contentScrollView.snp.makeConstraints {
-            $0.top.equalTo(homeDivider.snp.bottom).offset(8)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(toolBarView.snp.top)
-        }
+//
+//        contentScrollView.snp.makeConstraints {
+//            $0.top.equalTo(homeDivider.snp.bottom)
+//            $0.leading.trailing.equalToSuperview()
+//            $0.bottom.equalTo(toolBarView.snp.top).offset(5)
+//        }
         
         homeCalenderView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(homeDivider.snp.bottom)
+//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(40)
         }
         
         homeWeekCalendarCollectionView.snp.makeConstraints {
             $0.top.equalTo(homeCalenderView.snp.bottom)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(95)
         }
 
         calendarDailyTableView.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(-15)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(310)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(toolBarView.snp.top)
         }
         
         datePickerView.snp.makeConstraints {
@@ -449,7 +458,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UILabel()
         header.text = "끝낸 집안일 \(self.finishedWorkSum)"
-        header.font = .title1
+        header.font = .title2
         header.textColor = .black
         return section == 4 ? header : UIView()
     }

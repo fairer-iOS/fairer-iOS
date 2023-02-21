@@ -27,7 +27,7 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
     let titleImage = UIImageView()
     let checkCircleView: UIView = {
         let view = UIView()
-        view.layer.borderWidth = 1.5
+        view.layer.borderWidth = 1
         view.layer.cornerRadius = 24
         view.layer.borderColor = UIColor.blue.cgColor
         view.backgroundColor = .clear
