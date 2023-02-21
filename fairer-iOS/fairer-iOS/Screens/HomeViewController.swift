@@ -9,19 +9,30 @@ import UIKit
 
 import SnapKit
 
+struct dummyWorkCard {
+    let work = ["바닥 청소","설거지","빨래","바닥 청소","설거지","빨래","설거지"]
+    let time = ["오전 9:30","오후 8:00","오전 11:00","오전 9:30","오후 8:00","오전 11:00","오전 11:00"]
+    let room = ["방","부엌","거실","방","부엌","방","부엌"]
+    let status = [ WorkState.overdue,WorkState.overdue,WorkState.notFinished,WorkState.notFinished,WorkState.finished,WorkState.finished,WorkState.finished]
+}
+
 final class HomeViewController: BaseViewController {
     
     // TODO: - 추후 api연결 + UserDefault
     
+    private let dummy = dummyWorkCard()
     let userName: String = "고가혜"
     let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
     private var isScrolled = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     
-    // MARK: - property
+    // MARK: - FIX ME
+    var finishedWorkSum = 3
+
     
-    private var cellHeight = CGFloat()
+    // MARK: - property
+
     private let logoImage = UIImageView(image: ImageLiterals.imgHomeLogo)
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
@@ -61,7 +72,16 @@ final class HomeViewController: BaseViewController {
     }()
     private let homeCalenderView = HomeCalendarView()
     private let homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
-    private let calendarDailyCollecionView = CalendarDailyCollectionView()
+    private let calendarDailyTableView: UITableView = {
+        let calendarDailyTableView = UITableView(frame: .zero, style: .insetGrouped)
+        calendarDailyTableView.register(CalendarDailyTableViewCell.self, forCellReuseIdentifier: CalendarDailyTableViewCell.identifier)
+        calendarDailyTableView.showsVerticalScrollIndicator = false
+        calendarDailyTableView.separatorStyle = .none
+        calendarDailyTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: CGFloat.leastNonzeroMagnitude))
+        calendarDailyTableView.sectionFooterHeight = 0
+        calendarDailyTableView.backgroundColor = .white
+        return calendarDailyTableView
+    }()
     private lazy var contentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemBackground
@@ -89,7 +109,6 @@ final class HomeViewController: BaseViewController {
 
     override func configUI() {
         super.configUI()
-        setCalendarHeight()
         setupToolBarGesture()
         setHomeRuleLabel()
     }
@@ -103,14 +122,11 @@ final class HomeViewController: BaseViewController {
                          homeGroupCollectionView,
                          homeRuleView,
                          homeDivider,
-                         datePickerView)
-        
-        contentScrollView.addSubviews(
-            homeCalenderView,
-            homeWeekCalendarCollectionView,
-            calendarDailyCollecionView
-        )
-        
+                         datePickerView,
+                         homeCalenderView,
+                         homeWeekCalendarCollectionView,
+                         calendarDailyTableView)
+
         toolBarView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(76)
@@ -118,60 +134,56 @@ final class HomeViewController: BaseViewController {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(8)
+            $0.height.equalTo(45)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         houseImageView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.height.equalTo(18)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
 
         homeGroupLabel.snp.makeConstraints {
             $0.leading.equalTo(houseImageView.snp.trailing).offset(4)
+            $0.height.equalTo(18)
             $0.centerY.equalTo(houseImageView.snp.centerY)
         }
 
         homeGroupCollectionView.snp.makeConstraints {
             $0.top.equalTo(houseImageView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(86)
+            $0.height.equalTo(70)
         }
 
         homeRuleView.snp.makeConstraints {
-            $0.top.equalTo(homeGroupCollectionView.snp.bottom)
+            $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(40)
+            $0.height.equalTo(35)
         }
         
         homeDivider.snp.makeConstraints {
-            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(150)
+            $0.top.equalTo(homeGroupLabel.snp.bottom).offset(144)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(2)
         }
         
-        contentScrollView.snp.makeConstraints {
-            $0.top.equalTo(homeDivider.snp.bottom).offset(8)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(toolBarView.snp.top)
-        }
-        
         homeCalenderView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(homeDivider.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(40)
         }
         
         homeWeekCalendarCollectionView.snp.makeConstraints {
             $0.top.equalTo(homeCalenderView.snp.bottom)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(95)
         }
 
-        calendarDailyCollecionView.snp.makeConstraints {
-            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(310)
-            $0.bottom.equalToSuperview()
+        calendarDailyTableView.snp.makeConstraints {
+            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(-15)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(toolBarView.snp.top)
         }
         
         datePickerView.snp.makeConstraints {
@@ -223,6 +235,8 @@ final class HomeViewController: BaseViewController {
     
     private func setupDelegate() {
         self.contentScrollView.delegate = self
+        self.calendarDailyTableView.delegate = self
+        self.calendarDailyTableView.dataSource = self
     }
     
     private func setupToolBarGesture() {
@@ -266,13 +280,13 @@ final class HomeViewController: BaseViewController {
     
     private func scrollDidEnd() {
         self.homeDivider.snp.updateConstraints {
-            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(150)
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(144)
         }
         self.homeGroupCollectionView.snp.updateConstraints {
-            $0.height.equalTo(86)
+            $0.height.equalTo(70)
         }
         self.homeRuleView.snp.updateConstraints {
-            $0.height.equalTo(40)
+            $0.height.equalTo(35)
         }
         self.homeRuleView.homeRuleLabel.isHidden = false
         self.homeRuleView.homeRuleDescriptionLabel.isHidden = false
@@ -345,20 +359,8 @@ final class HomeViewController: BaseViewController {
     private func moveToDatePicker() {
         self.homeWeekCalendarCollectionView.datePickedByOthers = ""
         self.datePickerView.isHidden = false
+        self.view.bringSubviewToFront(datePickerView)
         self.setupAlphaNavigationBar()
-    }
-    
-    private func setCalendarHeight() {
-        self.calendarDailyCollecionView.changeHeightClosure = { [weak self]
-            cellNum in
-            guard let self = self else {
-                return
-            }
-            self.cellHeight = CGFloat(cellNum) * SizeLiteral.homeViewWorkCellHeight
-            self.calendarDailyCollecionView.snp.updateConstraints {
-                $0.height.equalTo(self.cellHeight)
-            }
-        }
     }
 }
 
@@ -367,7 +369,7 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollOffset = scrollView.contentOffset.y
-        if (scrollOffset <= 5) {
+        if scrollOffset <= 1 {
             scrollDidEnd()
             isScrolled = false
         } else {
@@ -376,5 +378,82 @@ extension HomeViewController: UIScrollViewDelegate {
                 isScrolled = true
             }
         }
+    }
+}
+
+extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let selectedCell = tableView.cellForRow(at: indexPath) as! CalendarDailyTableViewCell
+        selectedCell.shadowLayer.layer.cornerRadius = 0
+        if indexPath.section < 4 {
+            selectedCell.shadowLayer.backgroundColor = .blue
+            let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
+                // MARK: - 액션 추가
+                completionHaldler(true)
+            })
+            swipeAction.backgroundColor = .blue
+            let configuration = UISwipeActionsConfiguration(actions: [swipeAction])
+            return configuration
+        }else {
+            selectedCell.shadowLayer.backgroundColor = .gray400
+            let swipeAction = UIContextualAction(style: .normal, title: "되돌리기", handler: { action, view, completionHaldler in
+                // MARK: - 액션 추가
+                completionHaldler(true)
+            })
+            swipeAction.backgroundColor = .gray400
+            let configuration = UISwipeActionsConfiguration(actions: [swipeAction])
+            return configuration
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // MARK: - 집안일 수정 뷰로 이동
+    }
+}
+extension HomeViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // MARK: - fix me API
+        return 7
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UILabel()
+        header.text = "끝낸 집안일 \(self.finishedWorkSum)"
+        header.font = .title2
+        header.textColor = .black
+        return section == 4 ? header : UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 4 ? 68 : SizeLiteral.componentPadding
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = calendarDailyTableView.dequeueReusableCell(withIdentifier: CalendarDailyTableViewCell.identifier, for: indexPath) as? CalendarDailyTableViewCell ?? CalendarDailyTableViewCell()
+        cell.selectionStyle = .none
+        cell.workLabel.text = dummy.work[indexPath.section]
+        cell.time.text = dummy.time[indexPath.section]
+        cell.room.text = dummy.room[indexPath.section]
+        switch dummy.status[indexPath.section] {
+        case .finished :
+            cell.mainBackground.backgroundColor = .positive10
+        case .notFinished :
+            cell.mainBackground.backgroundColor = .white
+        case .overdue :
+            cell.mainBackground.backgroundColor = .negative0
+            cell.mainBackground.layer.borderColor = UIColor.negative10.cgColor
+            cell.setErrorImageView()
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 94
     }
 }

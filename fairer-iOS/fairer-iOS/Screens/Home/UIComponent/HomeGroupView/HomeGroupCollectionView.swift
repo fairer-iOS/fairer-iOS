@@ -22,6 +22,7 @@ final class HomeGroupCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
+    private var selectedIndex = 0
     
     // MARK: - TODO.API
     
@@ -52,16 +53,22 @@ final class HomeGroupCollectionView: BaseUIView {
     
     override func render() {
         self.addSubview(collectionView)
-        
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
 }
 
-// MARK: - Extension
+// MARK: - extension
 
-extension HomeGroupCollectionView: UICollectionViewDelegate { }
+extension HomeGroupCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCell  = collectionView.cellForItem(at: indexPath) as! HomeGroupCollectionViewCell
+        self.selectedIndex = indexPath.row
+        selectedCell.isSelected = true
+    }
+}
+
 extension HomeGroupCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return userList.count
@@ -73,6 +80,17 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.titleLabel.text = userList[indexPath.item]
+        cell.titleImage.image = ImageLiterals.profileLightBlue1
+        if cell.isSelected == true { cell.onSelected() }
+        else { cell.onDeselected() }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if selectedIndex == indexPath.item {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+        }
+    }
+    
 }

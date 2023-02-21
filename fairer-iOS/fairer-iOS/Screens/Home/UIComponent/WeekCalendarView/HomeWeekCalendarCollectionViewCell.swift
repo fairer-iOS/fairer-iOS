@@ -11,6 +11,26 @@ import SnapKit
 
 final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                globalView.backgroundColor = UIColor.gray100
+                dateLabel.textColor = UIColor.blue
+                dayLabel.textColor = UIColor.blue
+                dayLabel.font = .title2
+                dateLabel.font = .title2
+                workDot.image = ImageLiterals.selectedCalendarCell
+            }else {
+                globalView.backgroundColor = .systemBackground
+                dateLabel.textColor = .gray400
+                dayLabel.textColor = .gray400
+                dayLabel.font = .body2
+                dateLabel.font = .body2
+            }
+        }
+    }
+    
+    
     // MARK: - property
     
     let workDot: UIImageView = {
@@ -20,14 +40,14 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
     let dayLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray400
-        label.font = UIFont.body1
+        label.font = UIFont.body2
         label.textAlignment = .center
         return label
     }()
     let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray400
-        label.font = UIFont.body1
+        label.font = UIFont.body2
         label.textAlignment = .center
         return label
     }()
@@ -80,6 +100,8 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
         self.globalView.backgroundColor = .systemBackground
         self.dateLabel.textColor = .gray400
         self.dayLabel.textColor = .gray400
+        self.dayLabel.font = .body2
+        self.dateLabel.font = .body2
         self.workDot.image = nil
     }
 }

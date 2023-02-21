@@ -58,6 +58,10 @@ enum ImageLiterals {
     static var profileLightBlue2: UIImage { .load(name: "profilelightblue2") }
     static var profileList: [UIImage] = [profileBlue3, profileBlue4, profileOrange1, profilePink1, profilePink3, profileOrange2, profileYellow2, profileIndigo3, profilePurple1, profilePurple2, profilePurple3, profileGreen1, profileYellow1, profileGreen3, profileLightBlue1, profileLightBlue2]
     
+    // MARK: - profile selected
+    
+    static var profilelightblue1Selected: UIImage { .load(name: "profilelightblue1Selected") }
+    
     // MARK: - button
     
     static var textFieldClearButton: UIImage { .load(name: "clearbutton") }
