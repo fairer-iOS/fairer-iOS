@@ -359,15 +359,8 @@ final class HomeViewController: BaseViewController {
     private func moveToDatePicker() {
         self.homeWeekCalendarCollectionView.datePickedByOthers = ""
         self.datePickerView.isHidden = false
+        self.view.bringSubviewToFront(datePickerView)
         self.setupAlphaNavigationBar()
-    }
-    
-    private func setTableCellWhenSwipeDone(cell: CalendarDailyTableViewCell){
-        cell.shadowLayer.layer.cornerRadius = 8
-        cell.shadowLayer.backgroundColor = .black
-        cell.mainBackground.snp.updateConstraints {
-            $0.bottom.equalToSuperview().inset(2)
-        }
     }
 }
 
@@ -376,7 +369,7 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollOffset = scrollView.contentOffset.y
-        if (scrollOffset <= 1) {
+        if scrollOffset <= 1 {
             scrollDidEnd()
             isScrolled = false
         } else {
@@ -392,26 +385,8 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let selectedCell = tableView.cellForRow(at: indexPath) as! CalendarDailyTableViewCell
-//        selectedCell.mainBackground.snp.updateConstraints {
-//            $0.bottom.equalToSuperview()
-//        }
-        selectedCell.shadowBehindView.backgroundColor = .white
-//        selectedCell.insertSubview(shadowBehindView, at: 1)
         selectedCell.bringSubviewToFront(selectedCell.mainBackground)
-//        selectedCell.insertSubview(selectedCell.shadowBehindView, at: 2)
-        selectedCell.shadowBehindView.isHidden = false
         selectedCell.shadowLayer.layer.cornerRadius = 0
-        
-        // MARK: - FIX
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-//            if indexPath.section < 4 {
-//                selectedCell.shadowLayer.layer.cornerRadius = 0
-//                selectedCell.shadowLayer.backgroundColor = .blue
-//            }else {
-//                selectedCell.shadowLayer.layer.cornerRadius = 0
-//                selectedCell.shadowLayer.backgroundColor = .gray400
-//            }
-//        }
         if indexPath.section < 4 {
             selectedCell.shadowLayer.backgroundColor = .blue
             let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
