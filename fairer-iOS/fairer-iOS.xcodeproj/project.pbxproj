@@ -24,7 +24,6 @@
 		39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF68428CBB80800437654 /* BaseViewController.swift */; };
 		39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF68628CBB81600437654 /* BaseCollectionViewCell.swift */; };
 		39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF68828CBB85C00437654 /* BaseTableViewCell.swift */; };
-		39EEF68D28CBBA1B00437654 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF68C28CBBA1B00437654 /* Model.swift */; };
 		39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12028D5A80400585B83 /* HomeViewController.swift */; };
 		39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12328D5C04F00585B83 /* HomeViewControllerToolBar.swift */; };
 		39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1C12528D5FB4100585B83 /* UILabel+Extension.swift */; };
@@ -109,7 +108,31 @@
 		911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */; };
 		911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E968229719CA400F3AF35 /* UIView+Extension.swift */; };
 		916945B029A376F900E560F7 /* WorkerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */; };
-		916945B229A396F100E560F7 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916945B129A396F100E560F7 /* ShadowView.swift */; };
+		917D8B5529A6315F00E26B73 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */; };
+		917D8B5829A631C500E26B73 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 917D8B5729A631C500E26B73 /* Moya */; };
+		917D8B5A29A632A100E26B73 /* AlarmRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B5929A632A100E26B73 /* AlarmRouter.swift */; };
+		917D8B5C29A632BE00E26B73 /* HouseWorksCompleteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B5B29A632BE00E26B73 /* HouseWorksCompleteRouter.swift */; };
+		917D8B5F29A632D000E26B73 /* HouseWorksRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B5E29A632D000E26B73 /* HouseWorksRouter.swift */; };
+		917D8B6129A632EC00E26B73 /* MembersRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6029A632EC00E26B73 /* MembersRouter.swift */; };
+		917D8B6329A6330300E26B73 /* OauthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6229A6330300E26B73 /* OauthRouter.swift */; };
+		917D8B6529A6331100E26B73 /* PresetsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6429A6331100E26B73 /* PresetsRouter.swift */; };
+		917D8B6729A6332400E26B73 /* RulesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6629A6332400E26B73 /* RulesRouter.swift */; };
+		917D8B6929A6333C00E26B73 /* StatisticsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6829A6333C00E26B73 /* StatisticsRouter.swift */; };
+		917D8B6B29A6334800E26B73 /* TeamsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6A29A6334800E26B73 /* TeamsRouter.swift */; };
+		917D8B6D29A6337B00E26B73 /* AlarmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6C29A6337B00E26B73 /* AlarmAPI.swift */; };
+		917D8B6F29A6338C00E26B73 /* HouseWorkCompleteRouterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6E29A6338C00E26B73 /* HouseWorkCompleteRouterAPI.swift */; };
+		917D8B7129A6339700E26B73 /* HouseWorksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7029A6339700E26B73 /* HouseWorksAPI.swift */; };
+		917D8B7329A633A200E26B73 /* MembersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7229A633A200E26B73 /* MembersAPI.swift */; };
+		917D8B7529A633AF00E26B73 /* OauthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7429A633AF00E26B73 /* OauthAPI.swift */; };
+		917D8B7729A633B900E26B73 /* PresetsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7629A633B900E26B73 /* PresetsAPI.swift */; };
+		917D8B7929A633C500E26B73 /* RulesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7829A633C500E26B73 /* RulesAPI.swift */; };
+		917D8B7B29A633CF00E26B73 /* StatisticsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7A29A633CF00E26B73 /* StatisticsAPI.swift */; };
+		917D8B7D29A633D800E26B73 /* TeamsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7C29A633D800E26B73 /* TeamsAPI.swift */; };
+		917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7F29A634CA00E26B73 /* URLConstant.swift */; };
+		917D8B8229A6355500E26B73 /* FCMRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8129A6355500E26B73 /* FCMRouter.swift */; };
+		917D8B8429A636C000E26B73 /* BaseURLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8329A636C000E26B73 /* BaseURLConstant.swift */; };
+		917D8B8629A6371700E26B73 /* NetworkHeaderConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8529A6371700E26B73 /* NetworkHeaderConstant.swift */; };
+		917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8729A63AA500E26B73 /* FcmAPI.swift */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
 /* End PBXBuildFile section */
 
@@ -131,7 +154,6 @@
 		39EEF68428CBB80800437654 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		39EEF68628CBB81600437654 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		39EEF68828CBB85C00437654 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
-		39EEF68C28CBBA1B00437654 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		39F1C12028D5A80400585B83 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		39F1C12328D5C04F00585B83 /* HomeViewControllerToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerToolBar.swift; sourceTree = "<group>"; };
 		39F1C12528D5FB4100585B83 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -216,7 +238,30 @@
 		911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyTableViewCell.swift; sourceTree = "<group>"; };
 		911E968229719CA400F3AF35 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCollectionViewCell.swift; sourceTree = "<group>"; };
-		916945B129A396F100E560F7 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
+		917D8B5929A632A100E26B73 /* AlarmRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRouter.swift; sourceTree = "<group>"; };
+		917D8B5B29A632BE00E26B73 /* HouseWorksCompleteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksCompleteRouter.swift; sourceTree = "<group>"; };
+		917D8B5E29A632D000E26B73 /* HouseWorksRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksRouter.swift; sourceTree = "<group>"; };
+		917D8B6029A632EC00E26B73 /* MembersRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersRouter.swift; sourceTree = "<group>"; };
+		917D8B6229A6330300E26B73 /* OauthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthRouter.swift; sourceTree = "<group>"; };
+		917D8B6429A6331100E26B73 /* PresetsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsRouter.swift; sourceTree = "<group>"; };
+		917D8B6629A6332400E26B73 /* RulesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesRouter.swift; sourceTree = "<group>"; };
+		917D8B6829A6333C00E26B73 /* StatisticsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsRouter.swift; sourceTree = "<group>"; };
+		917D8B6A29A6334800E26B73 /* TeamsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsRouter.swift; sourceTree = "<group>"; };
+		917D8B6C29A6337B00E26B73 /* AlarmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmAPI.swift; sourceTree = "<group>"; };
+		917D8B6E29A6338C00E26B73 /* HouseWorkCompleteRouterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorkCompleteRouterAPI.swift; sourceTree = "<group>"; };
+		917D8B7029A6339700E26B73 /* HouseWorksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksAPI.swift; sourceTree = "<group>"; };
+		917D8B7229A633A200E26B73 /* MembersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersAPI.swift; sourceTree = "<group>"; };
+		917D8B7429A633AF00E26B73 /* OauthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthAPI.swift; sourceTree = "<group>"; };
+		917D8B7629A633B900E26B73 /* PresetsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsAPI.swift; sourceTree = "<group>"; };
+		917D8B7829A633C500E26B73 /* RulesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesAPI.swift; sourceTree = "<group>"; };
+		917D8B7A29A633CF00E26B73 /* StatisticsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsAPI.swift; sourceTree = "<group>"; };
+		917D8B7C29A633D800E26B73 /* TeamsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsAPI.swift; sourceTree = "<group>"; };
+		917D8B7F29A634CA00E26B73 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
+		917D8B8129A6355500E26B73 /* FCMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRouter.swift; sourceTree = "<group>"; };
+		917D8B8329A636C000E26B73 /* BaseURLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLConstant.swift; sourceTree = "<group>"; };
+		917D8B8529A6371700E26B73 /* NetworkHeaderConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHeaderConstant.swift; sourceTree = "<group>"; };
+		917D8B8729A63AA500E26B73 /* FcmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmAPI.swift; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,6 +272,7 @@
 			files = (
 				7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */,
 				5227557028B3092A0080DD65 /* GoogleSignIn in Frameworks */,
+				917D8B5829A631C500E26B73 /* Moya in Frameworks */,
 				5227557428B30AF90080DD65 /* KakaoSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,17 +352,12 @@
 		39EEF68A28CBB9D600437654 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				39EEF68B28CBB9FB00437654 /* Model */,
+				917D8B7E29A6342400E26B73 /* Foundation */,
+				917D8B5129A62F8C00E26B73 /* Router */,
+				917D8B5229A62F9400E26B73 /* API */,
+				917D8B5329A62F9B00E26B73 /* DTO */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		39EEF68B28CBB9FB00437654 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				39EEF68C28CBBA1B00437654 /* Model.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		39F1C11F28D5A7BC00585B83 /* Home */ = {
@@ -888,7 +929,6 @@
 			children = (
 				911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */,
 				916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */,
-				916945B129A396F100E560F7 /* ShadowView.swift */,
 			);
 			path = DailyCollectionView;
 			sourceTree = "<group>";
@@ -921,6 +961,58 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		917D8B5129A62F8C00E26B73 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				917D8B5929A632A100E26B73 /* AlarmRouter.swift */,
+				917D8B8129A6355500E26B73 /* FCMRouter.swift */,
+				917D8B5B29A632BE00E26B73 /* HouseWorksCompleteRouter.swift */,
+				917D8B5E29A632D000E26B73 /* HouseWorksRouter.swift */,
+				917D8B6029A632EC00E26B73 /* MembersRouter.swift */,
+				917D8B6229A6330300E26B73 /* OauthRouter.swift */,
+				917D8B6429A6331100E26B73 /* PresetsRouter.swift */,
+				917D8B6629A6332400E26B73 /* RulesRouter.swift */,
+				917D8B6829A6333C00E26B73 /* StatisticsRouter.swift */,
+				917D8B6A29A6334800E26B73 /* TeamsRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		917D8B5229A62F9400E26B73 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				917D8B6C29A6337B00E26B73 /* AlarmAPI.swift */,
+				917D8B8729A63AA500E26B73 /* FcmAPI.swift */,
+				917D8B6E29A6338C00E26B73 /* HouseWorkCompleteRouterAPI.swift */,
+				917D8B7029A6339700E26B73 /* HouseWorksAPI.swift */,
+				917D8B7229A633A200E26B73 /* MembersAPI.swift */,
+				917D8B7429A633AF00E26B73 /* OauthAPI.swift */,
+				917D8B7629A633B900E26B73 /* PresetsAPI.swift */,
+				917D8B7829A633C500E26B73 /* RulesAPI.swift */,
+				917D8B7A29A633CF00E26B73 /* StatisticsAPI.swift */,
+				917D8B7C29A633D800E26B73 /* TeamsAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		917D8B5329A62F9B00E26B73 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		917D8B7E29A6342400E26B73 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				917D8B8329A636C000E26B73 /* BaseURLConstant.swift */,
+				917D8B7F29A634CA00E26B73 /* URLConstant.swift */,
+				917D8B8529A6371700E26B73 /* NetworkHeaderConstant.swift */,
+				917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -941,6 +1033,7 @@
 				5227556F28B3092A0080DD65 /* GoogleSignIn */,
 				5227557328B30AF90080DD65 /* KakaoSDK */,
 				7E1F2E2428D2123B00A5744A /* SnapKit */,
+				917D8B5729A631C500E26B73 /* Moya */,
 			);
 			productName = "fairer-iOS";
 			productReference = 5227554C28B219DC0080DD65 /* fairer-iOS.app */;
@@ -974,6 +1067,7 @@
 				5227556E28B3092A0080DD65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				5227557228B30AF90080DD65 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				7E1F2E2328D2123B00A5744A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				917D8B5629A631C500E26B73 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 5227554D28B219DC0080DD65 /* Products */;
 			projectDirPath = "";
@@ -1006,15 +1100,19 @@
 			files = (
 				52A673F0292293B800F3E6DA /* ProfileImageButtonView.swift in Sources */,
 				5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */,
-				39EEF68D28CBBA1B00437654 /* Model.swift in Sources */,
+				917D8B7529A633AF00E26B73 /* OauthAPI.swift in Sources */,
 				52E4C08C297D037C002AC755 /* SelectManagerCollectionViewCell.swift in Sources */,
 				5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */,
+				917D8B8229A6355500E26B73 /* FCMRouter.swift in Sources */,
 				52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */,
 				911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */,
+				917D8B7729A633B900E26B73 /* PresetsAPI.swift in Sources */,
 				5205055828E1C50600355055 /* InfoLabelView.swift in Sources */,
 				911E9679297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift in Sources */,
+				917D8B6329A6330300E26B73 /* OauthRouter.swift in Sources */,
 				39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */,
 				522714EB297918EC006BADBC /* CalendarSpaceView.swift in Sources */,
+				917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */,
 				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
 				39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */,
@@ -1025,8 +1123,9 @@
 				916945B029A376F900E560F7 /* WorkerCollectionViewCell.swift in Sources */,
 				7EF87A3828E1A17800DFE353 /* SpaceNameLabel.swift in Sources */,
 				52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */,
-				916945B229A396F100E560F7 /* ShadowView.swift in Sources */,
+				917D8B6929A6333C00E26B73 /* StatisticsRouter.swift in Sources */,
 				7EEE2FA028E449610067FA7B /* Space.swift in Sources */,
+				917D8B5529A6315F00E26B73 /* MoyaLoggerPlugin.swift in Sources */,
 				911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */,
 				5204AAC82963150F002FB6CA /* WriteHouseWorkButton.swift in Sources */,
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
@@ -1039,9 +1138,11 @@
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
+				917D8B8629A6371700E26B73 /* NetworkHeaderConstant.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
 				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
 				52136FDE29867AB60022D465 /* HouseWork.swift in Sources */,
+				917D8B6129A632EC00E26B73 /* MembersRouter.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
 				5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */,
@@ -1051,6 +1152,7 @@
 				52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */,
 				522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */,
 				5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */,
+				917D8B6D29A6337B00E26B73 /* AlarmAPI.swift in Sources */,
 				39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */,
 				5204AAC4295A020E002FB6CA /* SettingPolicyViewController.swift in Sources */,
 				5204AACC296C6447002FB6CA /* SelectHouseWorkDetailCollectionView.swift in Sources */,
@@ -1060,25 +1162,33 @@
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
+				917D8B5A29A632A100E26B73 /* AlarmRouter.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
 				52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */,
+				917D8B8429A636C000E26B73 /* BaseURLConstant.swift in Sources */,
 				39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */,
+				917D8B6729A6332400E26B73 /* RulesRouter.swift in Sources */,
 				5275397928EC2F78002D8280 /* BackButton.swift in Sources */,
+				917D8B5C29A632BE00E26B73 /* HouseWorksCompleteRouter.swift in Sources */,
 				39F1C12A28D604B000585B83 /* HomeGroupCollectionViewCell.swift in Sources */,
 				522714EF29792936006BADBC /* SetHouseWorkCollectionView.swift in Sources */,
 				39EEF67528CBB61200437654 /* String+Extension.swift in Sources */,
 				5226860A299E1190007943EF /* PickDateButton.swift in Sources */,
+				917D8B6B29A6334800E26B73 /* TeamsRouter.swift in Sources */,
 				911E967B297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift in Sources */,
 				52F1E1A129228C9500DDAA75 /* SettingProfileViewController.swift in Sources */,
 				52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */,
 				5204AAB629507238002FB6CA /* SettingAlarmViewController.swift in Sources */,
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
+				917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */,
 				7EFAA87328DA088900737DF0 /* SelectHouseWorkSpaceCollectionViewCell.swift in Sources */,
 				5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */,
 				52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */,
 				5204AACE296C647A002FB6CA /* SelectHouseWorkDetailCollectionViewCell.swift in Sources */,
 				5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */,
+				917D8B7B29A633CF00E26B73 /* StatisticsAPI.swift in Sources */,
 				52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */,
+				917D8B6529A6331100E26B73 /* PresetsRouter.swift in Sources */,
 				7EFAA86E28DA032800737DF0 /* SelectHouseWorkViewController.swift in Sources */,
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */,
@@ -1087,17 +1197,23 @@
 				39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */,
 				5204AABC2950BC50002FB6CA /* SettingInquiryViewController.swift in Sources */,
 				39EEF67128CBB5F600437654 /* Notification+Extension.swift in Sources */,
+				917D8B7929A633C500E26B73 /* RulesAPI.swift in Sources */,
 				52E4C088297CE8DC002AC755 /* GetManagerCollectionView.swift in Sources */,
 				5204AAB329379981002FB6CA /* ChangeHouseNameViewController.swift in Sources */,
 				52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */,
 				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
+				917D8B7D29A633D800E26B73 /* TeamsAPI.swift in Sources */,
 				52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */,
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,
+				917D8B7329A633A200E26B73 /* MembersAPI.swift in Sources */,
+				917D8B5F29A632D000E26B73 /* HouseWorksRouter.swift in Sources */,
 				911455C0297E7FD7002CCDF9 /* WorkState.swift in Sources */,
+				917D8B7129A6339700E26B73 /* HouseWorksAPI.swift in Sources */,
 				91CB591C29977B09002A3295 /* PickDateView.swift in Sources */,
 				5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */,
+				917D8B6F29A6338C00E26B73 /* HouseWorkCompleteRouterAPI.swift in Sources */,
 				39F1C12C28D614D800585B83 /* BaseUIView.swift in Sources */,
 				5205054228D8620000355055 /* OnboardingProfileViewController.swift in Sources */,
 			);
@@ -1324,6 +1440,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		917D8B5629A631C500E26B73 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1341,6 +1465,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E1F2E2328D2123B00A5744A /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		917D8B5729A631C500E26B73 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 917D8B5629A631C500E26B73 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
