@@ -108,7 +108,6 @@
 		911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */; };
 		911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E968229719CA400F3AF35 /* UIView+Extension.swift */; };
 		916945B029A376F900E560F7 /* WorkerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */; };
-		916945B229A396F100E560F7 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916945B129A396F100E560F7 /* ShadowView.swift */; };
 		917D8B5529A6315F00E26B73 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */; };
 		917D8B5829A631C500E26B73 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 917D8B5729A631C500E26B73 /* Moya */; };
 		917D8B5A29A632A100E26B73 /* AlarmRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B5929A632A100E26B73 /* AlarmRouter.swift */; };
@@ -239,7 +238,6 @@
 		911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyTableViewCell.swift; sourceTree = "<group>"; };
 		911E968229719CA400F3AF35 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCollectionViewCell.swift; sourceTree = "<group>"; };
-		916945B129A396F100E560F7 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		917D8B5929A632A100E26B73 /* AlarmRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRouter.swift; sourceTree = "<group>"; };
 		917D8B5B29A632BE00E26B73 /* HouseWorksCompleteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksCompleteRouter.swift; sourceTree = "<group>"; };
@@ -931,7 +929,6 @@
 			children = (
 				911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */,
 				916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */,
-				916945B129A396F100E560F7 /* ShadowView.swift */,
 			);
 			path = DailyCollectionView;
 			sourceTree = "<group>";
@@ -1127,7 +1124,6 @@
 				7EF87A3828E1A17800DFE353 /* SpaceNameLabel.swift in Sources */,
 				52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */,
 				917D8B6929A6333C00E26B73 /* StatisticsRouter.swift in Sources */,
-				916945B229A396F100E560F7 /* ShadowView.swift in Sources */,
 				7EEE2FA028E449610067FA7B /* Space.swift in Sources */,
 				917D8B5529A6315F00E26B73 /* MoyaLoggerPlugin.swift in Sources */,
 				911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */,
