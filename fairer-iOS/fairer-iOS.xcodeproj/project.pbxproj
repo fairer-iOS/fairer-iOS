@@ -92,6 +92,9 @@
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
 		5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */; };
 		5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */; };
+		5A99A2DB29A8C3F3006FE9B2 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */; };
+		5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */; };
+		5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
 		7E1F2E2E28D2168300A5744A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */; };
 		7E1F2E2F28D2168300A5744A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */; };
@@ -131,7 +134,6 @@
 		917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7F29A634CA00E26B73 /* URLConstant.swift */; };
 		917D8B8229A6355500E26B73 /* FCMRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8129A6355500E26B73 /* FCMRouter.swift */; };
 		917D8B8429A636C000E26B73 /* BaseURLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8329A636C000E26B73 /* BaseURLConstant.swift */; };
-		917D8B8629A6371700E26B73 /* NetworkHeaderConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8529A6371700E26B73 /* NetworkHeaderConstant.swift */; };
 		917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8729A63AA500E26B73 /* FcmAPI.swift */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
 /* End PBXBuildFile section */
@@ -223,6 +225,9 @@
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
 		5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleViewController.swift; sourceTree = "<group>"; };
 		5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleTableViewCell.swift; sourceTree = "<group>"; };
+		5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
+		5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -260,7 +265,6 @@
 		917D8B7F29A634CA00E26B73 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		917D8B8129A6355500E26B73 /* FCMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRouter.swift; sourceTree = "<group>"; };
 		917D8B8329A636C000E26B73 /* BaseURLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLConstant.swift; sourceTree = "<group>"; };
-		917D8B8529A6371700E26B73 /* NetworkHeaderConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHeaderConstant.swift; sourceTree = "<group>"; };
 		917D8B8729A63AA500E26B73 /* FcmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmAPI.swift; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -352,6 +356,7 @@
 		39EEF68A28CBB9D600437654 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				5A99A2E029A8C483006FE9B2 /* MoyaPlugin */,
 				917D8B7E29A6342400E26B73 /* Foundation */,
 				917D8B5129A62F8C00E26B73 /* Router */,
 				917D8B5229A62F9400E26B73 /* API */,
@@ -885,6 +890,14 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		5A99A2E029A8C483006FE9B2 /* MoyaPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */,
+			);
+			path = MoyaPlugin;
+			sourceTree = "<group>";
+		};
 		7E1F2E2628D212E000A5744A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1005,10 +1018,11 @@
 		917D8B7E29A6342400E26B73 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */,
+				5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */,
+				5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */,
 				917D8B8329A636C000E26B73 /* BaseURLConstant.swift */,
 				917D8B7F29A634CA00E26B73 /* URLConstant.swift */,
-				917D8B8529A6371700E26B73 /* NetworkHeaderConstant.swift */,
-				917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1108,8 +1122,10 @@
 				911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */,
 				917D8B7729A633B900E26B73 /* PresetsAPI.swift in Sources */,
 				5205055828E1C50600355055 /* InfoLabelView.swift in Sources */,
+				5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */,
 				911E9679297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift in Sources */,
 				917D8B6329A6330300E26B73 /* OauthRouter.swift in Sources */,
+				5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */,
 				39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */,
 				522714EB297918EC006BADBC /* CalendarSpaceView.swift in Sources */,
 				917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */,
@@ -1138,7 +1154,6 @@
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
-				917D8B8629A6371700E26B73 /* NetworkHeaderConstant.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
 				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
 				52136FDE29867AB60022D465 /* HouseWork.swift in Sources */,
@@ -1178,6 +1193,7 @@
 				911E967B297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift in Sources */,
 				52F1E1A129228C9500DDAA75 /* SettingProfileViewController.swift in Sources */,
 				52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */,
+				5A99A2DB29A8C3F3006FE9B2 /* BaseTargetType.swift in Sources */,
 				5204AAB629507238002FB6CA /* SettingAlarmViewController.swift in Sources */,
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
 				917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */,
