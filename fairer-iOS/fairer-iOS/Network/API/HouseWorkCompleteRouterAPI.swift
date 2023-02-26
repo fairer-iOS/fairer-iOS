@@ -53,9 +53,8 @@ final class HouseWorkCompleteRouterAPI {
     }
     
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
-
         let decoder = JSONDecoder()
-
+        print("statusCode: ", statusCode)
         switch statusCode {
         case 200..<300:
             switch responseData {

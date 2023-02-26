@@ -335,6 +335,18 @@ final class HomeViewController: BaseViewController {
     @objc
     private func addTapGesture() {
         // FIXME: - 집안일 추가 뷰로 연결
+        NetworkService.shared.houseWorkCompleteRouter.completeHouseWork(houseWorkId: 0, scheduledDate: "dummyDate"){ [weak self] result in
+            switch result {
+            case .success(let response):
+                print("집안일 완료 성공")
+                // MARK: - 당일 데이터 API get
+                self?.calendarDailyTableView.reloadData()
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
         print("tap")
     }
     
@@ -387,6 +399,20 @@ extension HomeViewController: UITableViewDelegate {
         let selectedCell = tableView.cellForRow(at: indexPath) as! CalendarDailyTableViewCell
         selectedCell.shadowLayer.layer.cornerRadius = 0
         if indexPath.section < 4 {
+//            NetworkService.shared.houseWorkCompleteRouter.completeHouseWork(houseWorkId: 1, scheduledDate: "dummyDate"){ [weak self] result in
+//                switch result {
+//                case .success(let response):
+//                    print("집안일 완료 성공")
+//                    guard let houseWorkCompleteId = response as? HouseWorkCompleteResponse else { return }
+//                    selectedCell.houseWorkCompleteId = houseWorkCompleteId.houseWorkCompleteId ?? Int()
+//                    // MARK: - 당일 데이터 API get
+//                    self?.calendarDailyTableView.reloadData()
+//                case .requestErr(let errorResponse):
+//                    dump(errorResponse)
+//                default:
+//                    print("error")
+//                }
+//            }
             selectedCell.shadowLayer.backgroundColor = .blue
             let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
                 // MARK: - 액션 추가
@@ -396,6 +422,18 @@ extension HomeViewController: UITableViewDelegate {
             let configuration = UISwipeActionsConfiguration(actions: [swipeAction])
             return configuration
         }else {
+            NetworkService.shared.houseWorkCompleteRouter.deleteCompleteHouseWork(houseWorkCompleteId: selectedCell.houseWorkCompleteId){ [weak self] result in
+                switch result {
+                case .success:
+                    print("집안일 되돌리기 성공")
+                    // MARK: - 당일 데이터 API get
+                    self?.calendarDailyTableView.reloadData()
+                case .requestErr(let errorResponse):
+                    dump(errorResponse)
+                default:
+                    print("error")
+                }
+            }
             selectedCell.shadowLayer.backgroundColor = .gray400
             let swipeAction = UIContextualAction(style: .normal, title: "되돌리기", handler: { action, view, completionHaldler in
                 // MARK: - 액션 추가

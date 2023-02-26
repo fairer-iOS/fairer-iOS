@@ -6,6 +6,8 @@
 //
 
 struct ErrorResponse: Codable {
-    let code: Int?
-    let message: String?
+    let timeStamp: String
+    let status: Int
+    let error: String?
+    let path: String?
 }

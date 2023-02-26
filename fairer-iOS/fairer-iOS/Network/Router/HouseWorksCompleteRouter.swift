@@ -37,7 +37,7 @@ extension HouseWorksCompleteRouter: BaseTargetType {
         switch self {
         case .deleteHouseWorkCompleted:
             return .requestPlain
-        case .houseWorkCompleted(let scheduledDate, _):
+        case .houseWorkCompleted(_, let scheduledDate):
             return .requestParameters(parameters: [
                 "scheduledDate": scheduledDate
             ], encoding: URLEncoding.queryString)
