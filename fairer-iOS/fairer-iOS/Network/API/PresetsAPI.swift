@@ -14,4 +14,22 @@ final class PresetsAPI {
     private var presetsProvider = MoyaProvider<PresetRouter>(plugins: [MoyaLoggerPlugin()])
     
     init() { }
+    
+    private(set) var getAllPresetData: [GetAllPresetResponse]?
+    
+    func getAllPresetData(completion: @escaping ([GetAllPresetResponse]?) -> Void){
+        self.presetsProvider.request(.getAllPreset) { [self] (result) in
+            switch result {
+            case .success(let response):
+                do {
+                    self.getAllPresetData = try response.map([GetAllPresetResponse]?.self)
+                    completion(getAllPresetData)
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
 }
