@@ -72,7 +72,7 @@
 		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
 		52A53D9929AB375E00C4BB4C /* BaseURLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53D9829AB375E00C4BB4C /* BaseURLConstant.swift */; };
-		52A53D9C29AB487000C4BB4C /* GetAllPresetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53D9B29AB487000C4BB4C /* GetAllPresetResponse.swift */; };
+		52A53D9C29AB487000C4BB4C /* GetPresetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53D9B29AB487000C4BB4C /* GetPresetResponse.swift */; };
 		52A673F0292293B800F3E6DA /* ProfileImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */; };
 		52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */; };
 		52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */; };
@@ -206,7 +206,7 @@
 		5275397828EC2F78002D8280 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
 		52A53D9829AB375E00C4BB4C /* BaseURLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLConstant.swift; sourceTree = "<group>"; };
-		52A53D9B29AB487000C4BB4C /* GetAllPresetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllPresetResponse.swift; sourceTree = "<group>"; };
+		52A53D9B29AB487000C4BB4C /* GetPresetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPresetResponse.swift; sourceTree = "<group>"; };
 		52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButtonView.swift; sourceTree = "<group>"; };
 		52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileImageViewController.swift; sourceTree = "<group>"; };
 		52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageHouseViewController.swift; sourceTree = "<group>"; };
@@ -639,7 +639,7 @@
 		52A53D9A29AB484800C4BB4C /* Presets */ = {
 			isa = PBXGroup;
 			children = (
-				52A53D9B29AB487000C4BB4C /* GetAllPresetResponse.swift */,
+				52A53D9B29AB487000C4BB4C /* GetPresetResponse.swift */,
 			);
 			path = Presets;
 			sourceTree = "<group>";
@@ -1125,7 +1125,7 @@
 			files = (
 				52A673F0292293B800F3E6DA /* ProfileImageButtonView.swift in Sources */,
 				5205053928D6EFAF00355055 /* OnboardingNameViewController.swift in Sources */,
-				52A53D9C29AB487000C4BB4C /* GetAllPresetResponse.swift in Sources */,
+				52A53D9C29AB487000C4BB4C /* GetPresetResponse.swift in Sources */,
 				917D8B7529A633AF00E26B73 /* OauthAPI.swift in Sources */,
 				52E4C08C297D037C002AC755 /* SelectManagerCollectionViewCell.swift in Sources */,
 				5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */,
