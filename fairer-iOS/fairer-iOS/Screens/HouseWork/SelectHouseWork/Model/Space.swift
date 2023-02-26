@@ -14,6 +14,23 @@ enum Space: String, CaseIterable {
     case outside = "외부"
     case room = "방"
     case kitchen = "부엌"
+        
+    var apiName: String {
+        switch self {
+        case .entrance:
+            return "ENTRANCE"
+        case .livingRoom:
+            return "LIVINGROOM"
+        case .bathroom:
+            return "BATHROOM"
+        case .outside:
+            return "OUTSIDE"
+        case .room:
+            return "ROOM"
+        case .kitchen:
+            return "KITCHEN"
+        }
+    }
     
     var normalImage: UIImage {
         switch self {

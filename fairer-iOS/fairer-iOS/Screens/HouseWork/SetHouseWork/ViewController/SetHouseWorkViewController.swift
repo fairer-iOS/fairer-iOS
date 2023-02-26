@@ -564,7 +564,7 @@ final class SetHouseWorkViewController: BaseViewController {
 
 extension SetHouseWorkViewController {
     private func getHouseWorkPreset() {
-        NetworkService.shared.presets.getHouseWorkPreset(space: "LIVINGROOM") { response in
+        NetworkService.shared.presets.getHouseWorkPreset(space: Space.livingRoom.apiName) { response in
             // FIXME: - SelectHouseWorkVC에서 공간 받아오기 (LIVINGROOM)
             // FIXME: - setHouseWorkCollectionView에 세부 집안일 추가하기
         }
