@@ -14,7 +14,7 @@ protocol BaseTargetType: TargetType { }
 extension BaseTargetType {
 
     var baseURL: URL {
-        return URL(string: URLConst.base)!
+        return URL(string: BaseURLConstant.base)!
     }
 
     var headers: [String: String]? {
