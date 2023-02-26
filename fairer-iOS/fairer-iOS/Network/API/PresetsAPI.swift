@@ -17,7 +17,7 @@ final class PresetsAPI {
     
     private(set) var getAllPresetData: [GetAllPresetResponse]?
     
-    func getAllPresetData(completion: @escaping ([GetAllPresetResponse]?) -> Void){
+    func getAllPreset(completion: @escaping ([GetAllPresetResponse]?) -> Void) {
         self.presetsProvider.request(.getAllPreset) { [self] (result) in
             switch result {
             case .success(let response):
