@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+import Moya
+
+final class PresetsAPI {
+    
+    private var presetsProvider = MoyaProvider<PresetRouter>(plugins: [MoyaLoggerPlugin()])
+    
+    init() { }
+}
