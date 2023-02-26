@@ -20,7 +20,7 @@ extension PresetRouter: BaseTargetType {
         case .getAllPreset:
             return URLConstant.presets
         case .getHouseWorkPreset(let space):
-            return URLConstant.presets + space
+            return URLConstant.presets + "/\(space)"
         }
     }
     

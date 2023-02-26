@@ -255,9 +255,12 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
 }
 
+// MARK: - extension
+
 extension SelectHouseWorkViewController {
     private func getAllPreset() {
         NetworkService.shared.presets.getAllPreset { response in
+            // FIXME: - detailCollectionView에 공간에 따른 세부 집안일 넣기
         }
     }
 }
