@@ -148,6 +148,7 @@ final class SetHouseWorkViewController: BaseViewController {
         didDeleteHouseWork()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
+        getHouseWorkPreset()
     }
     
     override func render() {
@@ -555,6 +556,17 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.datePickerView.isHidden = true
             self?.setHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
             self?.selectedDay = pickedDate
+        }
+    }
+}
+
+// MARK: - extension
+
+extension SetHouseWorkViewController {
+    private func getHouseWorkPreset() {
+        NetworkService.shared.presets.getHouseWorkPreset(space: Space.livingRoom.apiName) { response in
+            // FIXME: - SelectHouseWorkVC에서 공간 받아오기 (LIVINGROOM)
+            // FIXME: - setHouseWorkCollectionView에 세부 집안일 추가하기
         }
     }
 }
