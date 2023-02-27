@@ -8,11 +8,12 @@
 import UIKit
 
 import SnapKit
+import GoogleSignIn
 
 final class LoginViewController: BaseViewController {
     
     // MARK: - property
-    
+    private let signInConfig = GIDConfiguration.init(clientID: "973504120779-g8md3m1t8dc3gg6t3vnpkj8nhuphgp93.apps.googleusercontent.com")
     private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
         let label = UILabel()
@@ -52,7 +53,18 @@ final class LoginViewController: BaseViewController {
         return button
     }()
     
+    private func setButtonEvent(){
+        let moveToGoogleLogin = UIAction { [weak self] _ in
+            self?.googleSignIn()
+        }
+        self.googleButton.addAction(moveToGoogleLogin, for: .touchUpInside)
+    }
+    
     // MARK: - lifecycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.setButtonEvent()
+    }
     
     override func configUI() {
         view.backgroundColor = .blue
@@ -92,4 +104,29 @@ final class LoginViewController: BaseViewController {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .blue
     }
+    
+    private func googleSignIn() {
+        GIDSignIn.sharedInstance.signIn(with: self.signInConfig, presenting: self) { user, error in
+            guard error == nil else { return }
+            guard let user = user else { return }
+            user.authentication.do { [self] authentication, error in
+                guard error == nil else {
+                    print(error as Any)
+                    return
+                }
+                guard let authentication = authentication else { return }
+                let idToken = authentication.idToken
+                let accessToken = authentication.accessToken
+                let refreshToken = authentication.refreshToken
+                print("idToken : ", idToken as Any)
+                print("accessToken : ", accessToken)
+                print("refreshToken : ", refreshToken)
+//                tokenSign(idToken: idToken!)
+            }
+        }
+    }
+    
+//    func tokenSign(idToken: String) {
+//
+//    }
 }
