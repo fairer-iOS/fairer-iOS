@@ -13,7 +13,7 @@ import GoogleSignIn
 final class LoginViewController: BaseViewController {
     
     // MARK: - property
-    private let signInConfig = GIDConfiguration.init(clientID: "973504120779-g8md3m1t8dc3gg6t3vnpkj8nhuphgp93.apps.googleusercontent.com")
+    private let signInConfig = GIDConfiguration.init(clientID: "")
     private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
         let label = UILabel()
