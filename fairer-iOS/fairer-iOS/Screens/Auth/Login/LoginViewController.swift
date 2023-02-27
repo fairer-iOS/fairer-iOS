@@ -116,17 +116,12 @@ final class LoginViewController: BaseViewController {
                 }
                 guard let authentication = authentication else { return }
                 let idToken = authentication.idToken
-                let accessToken = authentication.accessToken
-                let refreshToken = authentication.refreshToken
                 print("idToken : ", idToken as Any)
-                print("accessToken : ", accessToken)
-                print("refreshToken : ", refreshToken)
-//                tokenSign(idToken: idToken!)
+                self.tokenSign(idToken: idToken!)
             }
         }
     }
     
-//    func tokenSign(idToken: String) {
-//
-//    }
+    // MARK: - 로그인 API 호출
+    func tokenSign(idToken: String) {}
 }
