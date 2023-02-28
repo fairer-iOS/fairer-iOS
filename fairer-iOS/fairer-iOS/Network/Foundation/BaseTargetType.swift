@@ -19,7 +19,8 @@ extension BaseTargetType {
 
     var headers: [String: String]? {
         let header = [
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer" + LoginViewController.idToken
         ]
         return header
     }

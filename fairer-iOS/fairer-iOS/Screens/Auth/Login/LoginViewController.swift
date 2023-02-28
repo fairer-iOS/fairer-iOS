@@ -13,6 +13,7 @@ import GoogleSignIn
 final class LoginViewController: BaseViewController {
     
     // MARK: - property
+    static var idToken = String()
     private let signInConfig = GIDConfiguration.init(clientID: "")
     private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
@@ -116,12 +117,27 @@ final class LoginViewController: BaseViewController {
                 }
                 guard let authentication = authentication else { return }
                 let idToken = authentication.idToken
-                print("idToken : ", idToken as Any)
-                self.tokenSign(idToken: idToken!)
+                // MARK: - Fix UserDefault
+                LoginViewController.idToken = idToken!
+                print("idToken : ", idToken!)
+                self.postSignIn()
             }
         }
     }
     
-    // MARK: - 로그인 API 호출
-    func tokenSign(idToken: String) {}
+    func postSignIn() {
+        NetworkService.shared.oauth.postSignIn(socialType: "GOOGLE") { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? AuthResponse else { return }
+                print(data)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+                guard let data = errorResponse as? ErrorResponse else { return }
+                print(data.errorMessage)
+            default:
+                print("sign in error")
+            }
+        }
+    }
 }
