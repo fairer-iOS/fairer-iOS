@@ -21,6 +21,7 @@ final class SetHouseWorkViewController: BaseViewController {
             }
         }
     }
+    private var houseWorks: [HouseWorksRequest] = []
     
     // MARK: - property
     
@@ -148,6 +149,7 @@ final class SetHouseWorkViewController: BaseViewController {
         didDeleteHouseWork()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
+        setDoneButton()
     }
     
     override func render() {
@@ -555,6 +557,32 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.datePickerView.isHidden = true
             self?.setHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
             self?.selectedDay = pickedDate
+        }
+    }
+    
+    private func setDoneButton() {
+        let action = UIAction { [weak self] _ in
+            self?.prepareHouseWorksRequest()
+            if let houseWorks = self?.houseWorks {
+                self?.postAddHouseWorks(body: houseWorks)
+            }
+        }
+        doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func prepareHouseWorksRequest() {
+        // FIXME: - data binding & model 수정 필요
+        let houseWork = HouseWorksRequest(assignees: [1, 2], houseWorkName: "창 청소", repeatCycle: "W", repeatPattern: "monday, sunday", scheduledDate: "2022-07-02", scheduledTime: "10:00", space: "LIVINGROOM")
+        self.houseWorks.append(houseWork)
+    }
+}
+
+// MARK: - extension
+
+extension SetHouseWorkViewController {
+    private func postAddHouseWorks(body: [HouseWorksRequest]) {
+        NetworkService.shared.houseWorks.postAddHouseWorksAPI(body: body) { response in
+            
         }
     }
 }

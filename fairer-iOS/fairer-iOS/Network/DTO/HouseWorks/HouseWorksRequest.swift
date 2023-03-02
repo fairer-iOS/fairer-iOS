@@ -8,12 +8,12 @@
 import Foundation
 
 struct HouseWorksRequest: Codable {
-    let assignees: [Int]
-    let houseWorkName: String
+    var assignees: [Int]
+    var houseWorkName: String
     // FIXME: - cycle type 4가지로 변경 필요
-    let repeatCycle: String
-    let repeatPattern: String?
-    let scheduledDate: String
-    let scheduledTime: String?
-    let space: String
+    var repeatCycle: String
+    var repeatPattern: String?
+    var scheduledDate: String
+    var scheduledTime: String?
+    var space: String
 }

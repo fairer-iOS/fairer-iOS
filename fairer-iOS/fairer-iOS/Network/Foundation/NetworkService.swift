@@ -16,7 +16,7 @@ final class NetworkService {
 //
 //    let houseWorkCompleteRouter = HouseWorkCompleteRouterAPI()
 //
-//    let houseWorks = HouseWorksAPI()
+    let houseWorks = HouseWorksAPI()
 //
 //    let members = MembersAPI()
 //
