@@ -165,6 +165,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
+        getTeamInfo()
     }
     
     override func render() {
@@ -556,5 +557,13 @@ extension WriteHouseWorkViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension WriteHouseWorkViewController {
+    private func getTeamInfo() {
+        NetworkService.shared.teams.getTeamInfo { response in
+            // FIXME: - selectManagerView.selectManagerCollectionView.totalMemberList 에 프로필 이미지와 이름 추가
+        }
     }
 }
