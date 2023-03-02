@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 enum HouseWorkRouter {
-    case postAddHouseWorks(body: HouseWorksRequest)
+    case postAddHouseWorks(body: [HouseWorksRequest])
 }
 
 extension HouseWorkRouter: BaseTargetType {
