@@ -148,6 +148,7 @@ final class SetHouseWorkViewController: BaseViewController {
         didDeleteHouseWork()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
+        getTeamInfo()
     }
     
     override func render() {
@@ -555,6 +556,16 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.datePickerView.isHidden = true
             self?.setHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
             self?.selectedDay = pickedDate
+        }
+    }
+}
+
+// MARK: - extension
+
+extension SetHouseWorkViewController {
+    private func getTeamInfo() {
+        NetworkService.shared.teams.getTeamInfo { response in
+            // FIXME: - selectManagerView.selectManagerCollectionView.totalMemberList 에 프로필 이미지와 이름 추가
         }
     }
 }
