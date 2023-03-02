@@ -71,6 +71,7 @@
 		522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E88FE28EC854C000C65C8 /* InviteCodeView.swift */; };
 		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
+		52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */; };
 		52A673F0292293B800F3E6DA /* ProfileImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */; };
 		52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */; };
 		52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */; };
@@ -204,6 +205,7 @@
 		522E88FE28EC854C000C65C8 /* InviteCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeView.swift; sourceTree = "<group>"; };
 		5275397828EC2F78002D8280 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
+		52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksRequest.swift; sourceTree = "<group>"; };
 		52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButtonView.swift; sourceTree = "<group>"; };
 		52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileImageViewController.swift; sourceTree = "<group>"; };
 		52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageHouseViewController.swift; sourceTree = "<group>"; };
@@ -634,6 +636,14 @@
 			path = HouseInviteCode;
 			sourceTree = "<group>";
 		};
+		52A53DCC29B0771700C4BB4C /* HouseWorks */ = {
+			isa = PBXGroup;
+			children = (
+				52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */,
+			);
+			path = HouseWorks;
+			sourceTree = "<group>";
+		};
 		52A673F129265EC800F3E6DA /* SettingProfileImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1011,6 +1021,7 @@
 		917D8B5329A62F9B00E26B73 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				52A53DCC29B0771700C4BB4C /* HouseWorks */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1125,6 +1136,7 @@
 				5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */,
 				911E9679297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift in Sources */,
 				917D8B6329A6330300E26B73 /* OauthRouter.swift in Sources */,
+				52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */,
 				5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */,
 				39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */,
 				522714EB297918EC006BADBC /* CalendarSpaceView.swift in Sources */,

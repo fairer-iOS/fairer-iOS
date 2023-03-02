@@ -10,28 +10,28 @@ import Foundation
 import Moya
 
 enum HouseWorkRouter {
-    case postAddHouseWorks
+    case postAddHouseWorks(body: HouseWorksRequest)
 }
 
 extension HouseWorkRouter: BaseTargetType {
     var path: String {
         switch self {
-        case .postAddHouseWorks:
+        case .postAddHouseWorks(_):
             return URLConstant.houseWorks
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .postAddHouseWorks:
+        case .postAddHouseWorks(_):
             return .post
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .postAddHouseWorks:
-            return .requestJSONEncodable
+        case .postAddHouseWorks(let body):
+            return .requestJSONEncodable(body)
         }
     }
 }

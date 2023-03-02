@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Space: String, CaseIterable {
+enum Space: String, CaseIterable, Codable {
     case entrance = "현관"
     case livingRoom = "거실"
     case bathroom = "화장실"
