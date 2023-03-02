@@ -15,5 +15,5 @@ struct HouseWorksRequest: Codable {
     let repeatPattern: String?
     let scheduledDate: String
     let scheduledTime: String?
-    let space: Space
+    let space: String
 }

@@ -72,6 +72,8 @@
 		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
 		52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */; };
+		52A53DD029B0864500C4BB4C /* HouseWorksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */; };
+		52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DD329B086A200C4BB4C /* MemberResponse.swift */; };
 		52A673F0292293B800F3E6DA /* ProfileImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */; };
 		52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */; };
 		52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */; };
@@ -206,6 +208,8 @@
 		5275397828EC2F78002D8280 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
 		52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksRequest.swift; sourceTree = "<group>"; };
+		52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksResponse.swift; sourceTree = "<group>"; };
+		52A53DD329B086A200C4BB4C /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButtonView.swift; sourceTree = "<group>"; };
 		52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileImageViewController.swift; sourceTree = "<group>"; };
 		52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageHouseViewController.swift; sourceTree = "<group>"; };
@@ -640,6 +644,7 @@
 			isa = PBXGroup;
 			children = (
 				52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */,
+				52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */,
 			);
 			path = HouseWorks;
 			sourceTree = "<group>";
@@ -1022,6 +1027,7 @@
 			isa = PBXGroup;
 			children = (
 				52A53DCC29B0771700C4BB4C /* HouseWorks */,
+				52A53DD329B086A200C4BB4C /* MemberResponse.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1143,6 +1149,7 @@
 				917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */,
 				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
+				52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */,
 				39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */,
 				39EEF66D28CBB59D00437654 /* UICollectionView+Extension.swift in Sources */,
 				39EEF67728CBB61600437654 /* Date+Extension.swift in Sources */,
@@ -1205,6 +1212,7 @@
 				911E967B297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift in Sources */,
 				52F1E1A129228C9500DDAA75 /* SettingProfileViewController.swift in Sources */,
 				52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */,
+				52A53DD029B0864500C4BB4C /* HouseWorksResponse.swift in Sources */,
 				5A99A2DB29A8C3F3006FE9B2 /* BaseTargetType.swift in Sources */,
 				5204AAB629507238002FB6CA /* SettingAlarmViewController.swift in Sources */,
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
