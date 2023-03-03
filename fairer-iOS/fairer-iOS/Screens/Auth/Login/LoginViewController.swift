@@ -62,7 +62,7 @@ final class LoginViewController: BaseViewController {
     }
     
     // MARK: - lifecycle
-    
+
     override func viewWillAppear(_ animated: Bool) {
         self.setButtonEvent()
     }
@@ -105,7 +105,7 @@ final class LoginViewController: BaseViewController {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .blue
     }
-    
+
     private func googleSignIn() {
         GIDSignIn.sharedInstance.signIn(with: self.signInConfig, presenting: self) { user, error in
             guard error == nil else { return }
@@ -124,7 +124,7 @@ final class LoginViewController: BaseViewController {
             }
         }
     }
-    
+
     func postSignIn() {
         NetworkService.shared.oauth.postSignIn(socialType: "GOOGLE") { result in
             switch result {
