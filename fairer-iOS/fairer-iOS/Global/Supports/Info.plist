@@ -9,12 +9,12 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.720771356142-t2db67dm1gpclm8vkj1upc12bkijdjdj</string>
+				<string></string>
 			</array>
 		</dict>
 	</array>
 	<key>GIDClientID</key>
-	<string>720771356142-t2db67dm1gpclm8vkj1upc12bkijdjdj.apps.googleusercontent.com</string>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>kakaolink</string>
