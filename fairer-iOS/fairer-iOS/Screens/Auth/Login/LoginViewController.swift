@@ -120,6 +120,7 @@ final class LoginViewController: BaseViewController {
                 // MARK: - Fix UserDefault
                 LoginViewController.idToken = idToken!
                 print("idToken : ", idToken!)
+                print("grantedScopes :",user.grantedScopes as Any)
                 self.postSignIn()
             }
         }
