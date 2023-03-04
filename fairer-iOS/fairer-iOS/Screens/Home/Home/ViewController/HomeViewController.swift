@@ -349,15 +349,17 @@ final class HomeViewController: BaseViewController {
     }
     
     private func moveToTodayDate() {
-        self.homeWeekCalendarCollectionView.datePickedByOthers = ""
         self.homeCalenderView.calendarMonthLabelButton.setTitle("\(Date().yearToString)년 \(Date().monthToString)월", for: .normal)
         self.homeWeekCalendarCollectionView.startOfWeekDate = Date().startOfWeek
         self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
         self.homeWeekCalendarCollectionView.collectionView.reloadData()
+        self.homeWeekCalendarCollectionView.datePickedByOthers = Date().dateToString
     }
     
     private func moveToDatePicker() {
-        self.homeWeekCalendarCollectionView.datePickedByOthers = ""
+        if self.homeWeekCalendarCollectionView.datePickedByOthers != "" {
+            self.datePickerView.datePicker.setDate(self.homeWeekCalendarCollectionView.datePickedByOthers.stringToDate ?? Date(), animated: false)
+        }
         self.datePickerView.isHidden = false
         self.view.bringSubviewToFront(datePickerView)
         self.setupAlphaNavigationBar()
