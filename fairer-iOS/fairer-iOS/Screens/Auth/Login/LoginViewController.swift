@@ -11,10 +11,10 @@ import SnapKit
 import GoogleSignIn
 
 final class LoginViewController: BaseViewController {
-    
+
     // MARK: - property
     static var idToken = String()
-    private let signInConfig = GIDConfiguration.init(clientID: "")
+    private let signInConfig = GIDConfiguration.init(clientID: "720771356142-t2db67dm1gpclm8vkj1upc12bkijdjdj.apps.googleusercontent.com")
     private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
         let label = UILabel()
@@ -120,7 +120,7 @@ final class LoginViewController: BaseViewController {
                 // MARK: - Fix UserDefault
                 LoginViewController.idToken = idToken!
                 print("idToken : ", idToken!)
-                print("grantedScopes :",user.grantedScopes as Any)
+//                print("grantedScopes :",user.grantedScopes as Any)
                 self.postSignIn()
             }
         }
