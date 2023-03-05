@@ -43,9 +43,7 @@ final class HomeViewController: BaseViewController {
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var divideIndex: Int = 0
-    
-    // MARK: - FIX ME
-    var finishedWorkSum = 3
+    private var finishedWorkSum: Int?
     
     // MARK: - property
 
@@ -126,6 +124,7 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.addDummyData()
         self.getDivideIndex()
+        self.getDateHouseWork(fromDate: "2023-03-05", toDate: "2023-03-05")
     }
 
     override func configUI() {
@@ -491,7 +490,7 @@ extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UILabel()
-        header.text = "끝낸 집안일 \(self.finishedWorkSum)"
+        header.text = "끝낸 집안일 \(String(describing: self.finishedWorkSum))"
         header.font = .title2
         header.textColor = .black
         return section == self.divideIndex ? header : UIView()
@@ -553,6 +552,20 @@ extension HomeViewController {
         NetworkService.shared.houseWorkCompleteRouter.deleteCompleteHouseWork(houseWorkCompleteId: houseWorkCompleteId) { result in
             switch result {
             case .success: break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
+    }
+    
+    func getDateHouseWork(fromDate: String, toDate: String) {
+        NetworkService.shared.houseWorks.getDateHouseWork(fromDate: fromDate, toDate: toDate) { result in
+            switch result {
+            case .success(let response):
+                guard let houseWorkResponse = response as? HouseWorksResponse else { return }
+                print(houseWorkResponse)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
