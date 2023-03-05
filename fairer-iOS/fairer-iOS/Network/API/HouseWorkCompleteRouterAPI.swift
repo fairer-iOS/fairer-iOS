@@ -77,10 +77,7 @@ final class HouseWorkCompleteRouterAPI {
         let decoder = JSONDecoder()
         switch responseData {
         case .deleteCompleteHouseWork:
-            guard let decodedData = try? decoder.decode(BlankResponse.self, from: data) else {
-                return .pathErr
-            }
-            return .success(decodedData)
+            return .success(AnyObject.self)
         case .addCompleteHouseWork:
             guard let decodedData = try? decoder.decode(HouseWorkCompleteResponse.self, from: data) else {
                 return .pathErr

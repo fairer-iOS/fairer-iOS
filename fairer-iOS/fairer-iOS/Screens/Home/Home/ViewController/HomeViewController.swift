@@ -410,7 +410,8 @@ extension HomeViewController: UITableViewDelegate {
             let configuration = UISwipeActionsConfiguration(actions: [swipeAction])
             return configuration
         }else {
-            NetworkService.shared.houseWorkCompleteRouter.deleteCompleteHouseWork(houseWorkCompleteId: selectedCell.houseWorkCompleteId){ [weak self] result in
+            NetworkService.shared.houseWorkCompleteRouter.deleteCompleteHouseWork(houseWorkCompleteId: 0){ [weak self] result in
+                print("result : ",result)
                 switch result {
                 case .success:
                     print("집안일 되돌리기 성공")
