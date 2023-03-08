@@ -13,40 +13,73 @@ final class PresetsAPI {
     
     private var presetsProvider = MoyaProvider<PresetRouter>(plugins: [MoyaLoggerPlugin()])
     
-    init() { }
+    private enum ResponseData {
+        case getAllPreset
+        case getHouseWorkPreset
+    }
     
-    private(set) var getAllPresetData: [GetPresetResponse]?
-    private(set) var getHouseWorkPresetData: GetPresetResponse?
-    
-    func getAllPreset(completion: @escaping ([GetPresetResponse]?) -> Void) {
-        self.presetsProvider.request(.getAllPreset) { [self] result in
+    func getAllPreset(completion: @escaping (NetworkResult<Any>) -> Void) {
+        presetsProvider.request(.getAllPreset) { result in
             switch result {
             case .success(let response):
-                do {
-                    self.getAllPresetData = try response.map([GetPresetResponse]?.self)
-                    completion(getAllPresetData)
-                } catch(let err) {
-                    print(err.localizedDescription)
-                }
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getAllPreset)
+                completion(networkResult)
             case .failure(let err):
-                print(err.localizedDescription)
+                print(err)
             }
         }
     }
     
-    func getHouseWorkPreset(space: String, completion: @escaping (GetPresetResponse?) -> Void) {
-        self.presetsProvider.request(.getHouseWorkPreset(space: space)) { [self] result in
+    func getHouseWorkPreset(space: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        presetsProvider.request(.getHouseWorkPreset(space: space)) { result in
             switch result {
             case .success(let response):
-                do {
-                    self.getHouseWorkPresetData = try response.map(GetPresetResponse.self)
-                    completion(getHouseWorkPresetData)
-                } catch(let err) {
-                    print(err.localizedDescription)
-                }
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getHouseWorkPreset)
+                completion(networkResult)
             case .failure(let err):
-                print(err.localizedDescription)
+                print(err)
             }
+        }
+    }
+    
+    private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
+        let decoder = JSONDecoder()
+        print("statusCode: ", statusCode)
+        switch statusCode {
+        case 200..<300:
+            switch responseData {
+            case .getAllPreset, .getHouseWorkPreset:
+                return isValidData(data: data, responseData: responseData)
+            }
+        case 400..<500:
+            guard let decodedData = try? decoder.decode(ErrorResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .requestErr(decodedData)
+        case 500:
+            return .serverErr
+        default:
+            return .networkFail
+        }
+    }
+    
+    private func isValidData(data: Data, responseData: ResponseData) -> NetworkResult<Any> {
+        let decoder = JSONDecoder()
+        switch responseData {
+        case .getAllPreset:
+            guard let decodedData = try? decoder.decode([GetPresetResponse].self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
+        case .getHouseWorkPreset:
+            guard let decodedData = try? decoder.decode(GetPresetResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
         }
     }
 }

@@ -58,6 +58,7 @@
 		52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */; };
 		52136FDE29867AB60022D465 /* HouseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FDD29867AB60022D465 /* HouseWork.swift */; };
 		52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */; };
+		52136FE529B8BABB0022D465 /* BaseURLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FE429B8BABB0022D465 /* BaseURLConstant.swift */; };
 		5226860A299E1190007943EF /* PickDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52268609299E1190007943EF /* PickDateButton.swift */; };
 		522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */; };
 		522714EB297918EC006BADBC /* CalendarSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714EA297918EC006BADBC /* CalendarSpaceView.swift */; };
@@ -71,7 +72,6 @@
 		522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E88FE28EC854C000C65C8 /* InviteCodeView.swift */; };
 		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
-		52A53D9929AB375E00C4BB4C /* BaseURLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53D9829AB375E00C4BB4C /* BaseURLConstant.swift */; };
 		52A53D9C29AB487000C4BB4C /* GetPresetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53D9B29AB487000C4BB4C /* GetPresetResponse.swift */; };
 		52A673F0292293B800F3E6DA /* ProfileImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */; };
 		52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */; };
@@ -112,7 +112,6 @@
 		911E967B297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */; };
 		911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */; };
 		911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E968229719CA400F3AF35 /* UIView+Extension.swift */; };
-		914C69CC29AA0D17008EA9EE /* BaseURLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C69CB29AA0D17008EA9EE /* BaseURLConstant.swift */; };
 		914C69CE29AA2F03008EA9EE /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */; };
 		914C69D029AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */; };
 		916945B029A376F900E560F7 /* WorkerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */; };
@@ -194,6 +193,7 @@
 		52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionView.swift; sourceTree = "<group>"; };
 		52136FDD29867AB60022D465 /* HouseWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWork.swift; sourceTree = "<group>"; };
 		52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteHouseWorkViewController.swift; sourceTree = "<group>"; };
+		52136FE429B8BABB0022D465 /* BaseURLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLConstant.swift; sourceTree = "<group>"; };
 		52268609299E1190007943EF /* PickDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateButton.swift; sourceTree = "<group>"; };
 		522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkViewController.swift; sourceTree = "<group>"; };
 		522714EA297918EC006BADBC /* CalendarSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSpaceView.swift; sourceTree = "<group>"; };
@@ -208,7 +208,6 @@
 		522E88FE28EC854C000C65C8 /* InviteCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeView.swift; sourceTree = "<group>"; };
 		5275397828EC2F78002D8280 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
-		52A53D9829AB375E00C4BB4C /* BaseURLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLConstant.swift; sourceTree = "<group>"; };
 		52A53D9B29AB487000C4BB4C /* GetPresetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPresetResponse.swift; sourceTree = "<group>"; };
 		52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButtonView.swift; sourceTree = "<group>"; };
 		52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileImageViewController.swift; sourceTree = "<group>"; };
@@ -248,7 +247,6 @@
 		911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWeekCalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyTableViewCell.swift; sourceTree = "<group>"; };
 		911E968229719CA400F3AF35 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		914C69CB29AA0D17008EA9EE /* BaseURLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLConstant.swift; sourceTree = "<group>"; };
 		914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorkCompleteResponse.swift; sourceTree = "<group>"; };
 		916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1040,9 +1038,8 @@
 				5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */,
 				5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */,
 				5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */,
-				52A53D9829AB375E00C4BB4C /* BaseURLConstant.swift */,
 				917D8B7F29A634CA00E26B73 /* URLConstant.swift */,
-				914C69CB29AA0D17008EA9EE /* BaseURLConstant.swift */,
+				52136FE429B8BABB0022D465 /* BaseURLConstant.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1173,7 +1170,6 @@
 				5204AAB929507319002FB6CA /* SettingAlarmTableViewCell.swift in Sources */,
 				520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */,
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
-				914C69CC29AA0D17008EA9EE /* BaseURLConstant.swift in Sources */,
 				914C69CE29AA2F03008EA9EE /* ErrorResponse.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
@@ -1242,6 +1238,7 @@
 				52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */,
 				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
+				52136FE529B8BABB0022D465 /* BaseURLConstant.swift in Sources */,
 				917D8B7D29A633D800E26B73 /* TeamsAPI.swift in Sources */,
 				52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */,
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,
