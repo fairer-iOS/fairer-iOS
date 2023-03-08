@@ -142,7 +142,6 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
 
 extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.datePickedByOthers = ""
         if self.isSelected == false {
             self.isSelected = true
             self.selectedCell = indexPath.row
@@ -151,7 +150,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             firstCell.workDot.image = ImageLiterals.selectedCalendarCell
             yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
             firstCell.isSelected = true
-            
+            datePickedByOthers = self.fullDateList[indexPath.row]
         }else if indexPath.row != self.selectedCell {
             let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
             resetCell.workDot.image = dotList[self.cellIndexPath.row]
@@ -163,6 +162,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             self.cellIndexPath = indexPath
             yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
             secondCell.isSelected = true
+            datePickedByOthers = self.fullDateList[indexPath.row]
         }
     }
 }
