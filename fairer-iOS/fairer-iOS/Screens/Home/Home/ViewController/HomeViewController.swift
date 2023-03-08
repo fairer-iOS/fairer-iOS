@@ -10,26 +10,42 @@ import UIKit
 import SnapKit
 
 struct dummyWorkCard {
-    let work = ["바닥 청소","설거지","빨래","바닥 청소","설거지","빨래","설거지"]
-    let time = ["오전 9:30","오후 8:00","오전 11:00","오전 9:30","오후 8:00","오전 11:00","오전 11:00"]
-    let room = ["방","부엌","거실","방","부엌","방","부엌"]
-    let status = [ WorkState.overdue,WorkState.overdue,WorkState.notFinished,WorkState.notFinished,WorkState.finished,WorkState.finished,WorkState.finished]
+    let work: String
+    let time: String
+    let room: String
+    var status: WorkState
+    
+    init(work: String, time: String, room: String, status: WorkState) {
+        self.work = work
+        self.time = time
+        self.room = room
+        self.status = status
+    }
 }
 
 final class HomeViewController: BaseViewController {
     
     // TODO: - 추후 api연결 + UserDefault
-    
-    private let dummy = dummyWorkCard()
+
+    private var dummy = [dummyWorkCard]()
+    private var dummy1 = dummyWorkCard(work: "바닥 청소", time: "오전 9:30", room: "방", status: WorkState.overdue)
+    private var dummy2 = dummyWorkCard(work: "설거지", time: "오후 8:00", room: "부엌", status: WorkState.overdue)
+    private var dummy3 = dummyWorkCard(work: "빨래", time: "오전 11:00", room: "거실", status: WorkState.overdue)
+    private var dummy4 = dummyWorkCard(work: "바닥 청소", time: "오전 9:30", room: "방", status: WorkState.notFinished)
+    private var dummy5 = dummyWorkCard(work: "설거지", time: "오후 8:00", room: "부엌", status: WorkState.notFinished)
+    private var dummy6 = dummyWorkCard(work: "빨래", time: "오전 11:00", room: "거실", status: WorkState.notFinished)
+    private var dummy7 = dummyWorkCard(work: "바닥 청소", time: "오전 9:30", room: "방", status: WorkState.finished)
+    private var dummy8 = dummyWorkCard(work: "설거지", time: "오후 8:00", room: "부엌", status: WorkState.finished)
+    private var dummy9 = dummyWorkCard(work: "빨래", time: "오전 11:00", room: "거실", status: WorkState.finished)
     let userName: String = "고가혜"
     let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
     private var isScrolled = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    private lazy var divideIndex: Int = 0
     
     // MARK: - FIX ME
     var finishedWorkSum = 3
-
     
     // MARK: - property
 
@@ -105,6 +121,11 @@ final class HomeViewController: BaseViewController {
         self.setWeekCalendarSwipeGesture()
         self.setButtonEvent()
         self.setDatePicker()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.addDummyData()
+        self.getDivideIndex()
     }
 
     override func configUI() {
@@ -329,6 +350,44 @@ final class HomeViewController: BaseViewController {
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(seporateResult[0])년 \(seporateResult[1])월", for: .normal)
         }
     }
+    
+    private func getDivideIndex() {
+        self.divideIndex = 0
+        for divider in self.dummy {
+            if divider.status == WorkState.finished { break }
+            self.divideIndex = self.divideIndex + 1
+        }
+    }
+    
+    private func listCompleteHouseWorkLast(WorkList: [dummyWorkCard]) -> [dummyWorkCard] {
+        var notFinishedList = [dummyWorkCard]()
+        var finishedList = [dummyWorkCard]()
+        for dummy in WorkList {
+            if dummy.status == WorkState.finished { finishedList.append(dummy) }
+            else { notFinishedList.append(dummy) }
+        }
+        return notFinishedList + finishedList
+    }
+    
+    private func countDoneHouseWork(WorkList: [dummyWorkCard]) -> Int {
+        var finishedHouseWorkNum = 0
+        for dummy in WorkList {
+            if dummy.status == WorkState.finished { finishedHouseWorkNum = finishedHouseWorkNum + 1}
+        }
+        return finishedHouseWorkNum
+    }
+    
+    private func addDummyData(){
+        self.dummy.append(dummy1)
+        self.dummy.append(dummy2)
+        self.dummy.append(dummy3)
+        self.dummy.append(dummy4)
+        self.dummy.append(dummy5)
+        self.dummy.append(dummy6)
+        self.dummy.append(dummy7)
+        self.dummy.append(dummy8)
+        self.dummy.append(dummy9)
+    }
 
     // MARK: - selector
     
@@ -388,10 +447,15 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let selectedCell = tableView.cellForRow(at: indexPath) as! CalendarDailyTableViewCell
         selectedCell.shadowLayer.layer.cornerRadius = 0
-        if indexPath.section < 4 {
+        if indexPath.section < self.divideIndex {
             selectedCell.shadowLayer.backgroundColor = .blue
             let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
-                // MARK: - 액션 추가
+                selectedCell.houseWorkCompleteId = self.completeHouseWork(houseWorkId: indexPath.section, scheduledDate: "dummyDate")
+                self.dummy[indexPath.section].status = WorkState.finished
+                self.finishedWorkSum = self.countDoneHouseWork(WorkList: self.dummy)
+                self.dummy = self.listCompleteHouseWorkLast(WorkList: self.dummy)
+                self.getDivideIndex()
+                self.calendarDailyTableView.reloadData()
                 completionHaldler(true)
             })
             swipeAction.backgroundColor = .blue
@@ -400,7 +464,12 @@ extension HomeViewController: UITableViewDelegate {
         }else {
             selectedCell.shadowLayer.backgroundColor = .gray400
             let swipeAction = UIContextualAction(style: .normal, title: "되돌리기", handler: { action, view, completionHaldler in
-                // MARK: - 액션 추가
+                self.deleteCompleteHouseWork(houseWorkCompleteId: indexPath.section)
+                self.dummy[indexPath.section].status = WorkState.notFinished
+                self.finishedWorkSum = self.countDoneHouseWork(WorkList: self.dummy)
+                self.dummy = self.listCompleteHouseWorkLast(WorkList: self.dummy)
+                self.getDivideIndex()
+                self.calendarDailyTableView.reloadData()
                 completionHaldler(true)
             })
             swipeAction.backgroundColor = .gray400
@@ -417,7 +486,7 @@ extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // MARK: - fix me API
-        return 7
+        return self.dummy.count
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -425,11 +494,11 @@ extension HomeViewController: UITableViewDataSource {
         header.text = "끝낸 집안일 \(self.finishedWorkSum)"
         header.font = .title2
         header.textColor = .black
-        return section == 4 ? header : UIView()
+        return section == self.divideIndex ? header : UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 4 ? 68 : SizeLiteral.componentPadding
+        return section == self.divideIndex ? 68 : SizeLiteral.componentPadding
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -439,10 +508,10 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = calendarDailyTableView.dequeueReusableCell(withIdentifier: CalendarDailyTableViewCell.identifier, for: indexPath) as? CalendarDailyTableViewCell ?? CalendarDailyTableViewCell()
         cell.selectionStyle = .none
-        cell.workLabel.text = dummy.work[indexPath.section]
-        cell.time.text = dummy.time[indexPath.section]
-        cell.room.text = dummy.room[indexPath.section]
-        switch dummy.status[indexPath.section] {
+        cell.workLabel.text = dummy[indexPath.section].work
+        cell.time.text = dummy[indexPath.section].time
+        cell.room.text = dummy[indexPath.section].room
+        switch dummy[indexPath.section].status {
         case .finished :
             cell.mainBackground.backgroundColor = .positive10
         case .notFinished :
@@ -457,5 +526,38 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 94
+    }
+}
+
+// MARK: - network
+
+extension HomeViewController {
+    
+    func completeHouseWork(houseWorkId: Int, scheduledDate: String) -> Int {
+        var returnHouseWorkCompleteId = Int()
+        NetworkService.shared.houseWorkCompleteRouter.completeHouseWork(houseWorkId: houseWorkId, scheduledDate: scheduledDate) { result in
+            switch result {
+            case .success(let response):
+                guard let houseWorkCompleteId = response as? HouseWorkCompleteResponse else { return }
+                returnHouseWorkCompleteId = houseWorkCompleteId.houseWorkCompleteId ?? Int()
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
+        return returnHouseWorkCompleteId
+    }
+    
+    func deleteCompleteHouseWork(houseWorkCompleteId: Int) {
+        NetworkService.shared.houseWorkCompleteRouter.deleteCompleteHouseWork(houseWorkCompleteId: houseWorkCompleteId) { result in
+            switch result {
+            case .success: break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
     }
 }
