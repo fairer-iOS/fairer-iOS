@@ -112,6 +112,9 @@
 		911E967B297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */; };
 		911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */; };
 		911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E968229719CA400F3AF35 /* UIView+Extension.swift */; };
+		914C69CC29AA0D17008EA9EE /* BaseURLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C69CB29AA0D17008EA9EE /* BaseURLConstant.swift */; };
+		914C69CE29AA2F03008EA9EE /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */; };
+		914C69D029AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */; };
 		916945B029A376F900E560F7 /* WorkerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */; };
 		917D8B5529A6315F00E26B73 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */; };
 		917D8B5829A631C500E26B73 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 917D8B5729A631C500E26B73 /* Moya */; };
@@ -245,6 +248,9 @@
 		911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWeekCalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		911E967E29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyTableViewCell.swift; sourceTree = "<group>"; };
 		911E968229719CA400F3AF35 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		914C69CB29AA0D17008EA9EE /* BaseURLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLConstant.swift; sourceTree = "<group>"; };
+		914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorkCompleteResponse.swift; sourceTree = "<group>"; };
 		916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCollectionViewCell.swift; sourceTree = "<group>"; };
 		917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		917D8B5929A632A100E26B73 /* AlarmRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRouter.swift; sourceTree = "<group>"; };
@@ -1013,7 +1019,8 @@
 		917D8B5329A62F9B00E26B73 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */,
+				914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */,
+				914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1025,7 +1032,7 @@
 				5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */,
 				5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */,
 				917D8B7F29A634CA00E26B73 /* URLConstant.swift */,
-				5ABB7FAF29B48C38008D5C15 /* BaseURLConstant.swift */,
+				914C69CB29AA0D17008EA9EE /* BaseURLConstant.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1156,7 +1163,8 @@
 				5204AAB929507319002FB6CA /* SettingAlarmTableViewCell.swift in Sources */,
 				520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */,
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
-				5ABB7FB029B48C38008D5C15 /* BaseURLConstant.swift in Sources */,
+				914C69CC29AA0D17008EA9EE /* BaseURLConstant.swift in Sources */,
+				914C69CE29AA2F03008EA9EE /* ErrorResponse.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
@@ -1188,6 +1196,7 @@
 				39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */,
 				917D8B6729A6332400E26B73 /* RulesRouter.swift in Sources */,
 				5275397928EC2F78002D8280 /* BackButton.swift in Sources */,
+				914C69D029AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift in Sources */,
 				917D8B5C29A632BE00E26B73 /* HouseWorksCompleteRouter.swift in Sources */,
 				39F1C12A28D604B000585B83 /* HomeGroupCollectionViewCell.swift in Sources */,
 				522714EF29792936006BADBC /* SetHouseWorkCollectionView.swift in Sources */,
