@@ -9,9 +9,15 @@ import UIKit
 
 import SnapKit
 
+import Moya
+
 class SettingHomeRuleViewController: BaseViewController {
     
     var dummyList = ["고가혜", "권진혁", "최지혜", "신동빈", "김수연", "김수연", "김수연", "김수연"]
+    
+    var ruleData: [ruleData] = [] {
+        didSet { homeRuleTableView.reloadData() }
+    }
     
     private let maxLength = 16
     
@@ -109,6 +115,10 @@ class SettingHomeRuleViewController: BaseViewController {
         setupAttribute()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        getRules()
+    }
+    
     // MARK: - func
     
     override func setupNavigationBar() {
@@ -200,7 +210,8 @@ extension SettingHomeRuleViewController: UITextFieldDelegate {
 
 extension SettingHomeRuleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyList.count
+        return ruleData.count
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -210,8 +221,26 @@ extension SettingHomeRuleViewController: UITableViewDelegate, UITableViewDataSou
         
         cell.clearButton.addTarget(self, action: #selector(deleteBtnAction(_:)), for: .touchUpInside)
         
-        cell.ruleLabel.text = dummyList[indexPath.item]
+        cell.ruleLabel.text = ruleData[indexPath.row].ruleName
 
         return cell
+    }
+}
+
+extension SettingHomeRuleViewController {
+    func getRules() {
+        NetworkService.shared.rules.getRules { result in
+            switch result {
+            case .success(let response):
+                guard let rules = response as? RulesResponse else { return }
+                self.ruleData = rules.ruleResponseDtos
+
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("server error")
+                
+            }
+        }
     }
 }

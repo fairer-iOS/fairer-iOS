@@ -21,7 +21,7 @@ final class RulesAPI {
         case deleteRules
     }
     
-    func getRules(ruleId: String, completion: @escaping (NetworkResult<Any>) -> Void ) {
+    func getRules(completion: @escaping (NetworkResult<Any>) -> Void ) {
         rulesProvider.request(.getRules) { result in
             switch result {
             case .success(let response):
@@ -29,6 +29,7 @@ final class RulesAPI {
                 let data = response.data
                 
                 let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getRules)
+                completion(networkResult)
                 
             case .failure(let error):
                 print(error)
@@ -60,13 +61,13 @@ final class RulesAPI {
     private func isValidData(data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch responseData {
-        case .getRules:
+        case .getRules, .postRules:
             guard let decodedData = try? decoder.decode(RulesResponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)
 
-        case .deleteRules, .postRules:
+        case .deleteRules:
             guard let decodedData = try? decoder.decode(RulesResponse.self, from: data) else {
                 return .pathErr
             }
