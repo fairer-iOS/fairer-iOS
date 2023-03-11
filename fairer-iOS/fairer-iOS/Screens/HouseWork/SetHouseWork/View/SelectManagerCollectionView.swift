@@ -96,8 +96,6 @@ extension SelectManagerCollectionView: UICollectionViewDataSource {
         cell.profileName.setTextWithLineHeight(text: memberName, lineHeight: 26)
         if let memberImagePath = URL(string: memberImage) {
             cell.profileImage.load(from: memberImagePath)
-        } else {
-            cell.profileImage.image = ImageLiterals.profileNone
         }
         
         return cell
