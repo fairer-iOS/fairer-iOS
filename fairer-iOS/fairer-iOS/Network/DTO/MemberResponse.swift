@@ -8,8 +8,8 @@
 import Foundation
 
 struct MemberResponse: Codable {
-    let memberId: Int
-    let memberName: String
-    let profilePath: String
+    let memberId: Int?
+    let memberName: String?
+    let profilePath: String?
     let statusMessage: String?
 }

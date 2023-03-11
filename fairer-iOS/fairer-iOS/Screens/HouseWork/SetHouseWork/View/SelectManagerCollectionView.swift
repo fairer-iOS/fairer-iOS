@@ -13,7 +13,7 @@ final class SelectManagerCollectionView: BaseUIView {
     
     var selectedIndex: Int? = 0
     // FIXME: - SetHouseWorkVC에서 전체 멤버리스트 받아오기
-    var totalMemberList: [String] = ["고가혜", "권진혁", "박정준", "김민주", "김유나", "홍준혁"]
+    var totalMemberList: [MemberResponse] = []
     var selectedManagerList: [String] = [] {
         didSet { collectionView.reloadData() }
     }
@@ -65,12 +65,14 @@ final class SelectManagerCollectionView: BaseUIView {
 extension SelectManagerCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        selectedManagerList.append(totalMemberList[indexPath.item])
+        if let memberName = totalMemberList[indexPath.item].memberName {
+            selectedManagerList.append(memberName)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if !selectedManagerList.isEmpty {
-            selectedManagerList.removeAll(where: { $0 == totalMemberList[indexPath.item]})
+            selectedManagerList.removeAll(where: { $0 == totalMemberList[indexPath.item].memberName})
         }
     }
 }
@@ -86,12 +88,15 @@ extension SelectManagerCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if selectedManagerList.contains(totalMemberList[indexPath.item]) {
-            cell.isSelected = true
-            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+        if let memberName = totalMemberList[indexPath.item].memberName {
+            if selectedManagerList.contains(memberName) {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            }
         }
         
-        cell.profileName.setTextWithLineHeight(text: totalMemberList[indexPath.item], lineHeight: 26)
+        cell.profileName.setTextWithLineHeight(text: totalMemberList[indexPath.item].memberName, lineHeight: 26)
+        
         
         return cell
     }

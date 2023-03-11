@@ -9,6 +9,6 @@ import Foundation
 
 struct TeamInfoResponse: Codable {
     let members: [MemberResponse]?
-    let teamId: Int
-    let teamName: String
+    let teamId: Int?
+    let teamName: String?
 }

@@ -564,8 +564,31 @@ final class SetHouseWorkViewController: BaseViewController {
 
 extension SetHouseWorkViewController {
     private func getTeamInfo() {
-        NetworkService.shared.teams.getTeamInfo { response in
-            // FIXME: - selectManagerView.selectManagerCollectionView.totalMemberList 에 프로필 이미지와 이름 추가
+        NetworkService.shared.teams.getTeamInfo { result in
+            switch result {
+            case .success(let response):
+                guard let teamInfo = response as? TeamInfoResponse else { return }
+                guard let membersInfo = teamInfo.members else { return }
+                self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
+//                var members = []
+//                for member in membersInfo {
+//                    members.append(member.memberName)
+//                }
+//                print(members)
+//                selectManagerView.selectManagerCollectionView.totalMemberList = members
+//                let members = []
+//                for member in teamInfo.members {
+//                    print(member)
+////                    members.append(teamInfo.members[num].memberName)
+//                }
+//                print(teamInfo.members. ?? "몰라")
+//                selectManagerView.selectManagerCollectionView.totalMemberList =
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
         }
     }
 }
