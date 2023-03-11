@@ -12,11 +12,10 @@ import SnapKit
 final class SelectManagerCollectionView: BaseUIView {
     
     var selectedIndex: Int? = 0
-    // FIXME: - SetHouseWorkVC에서 전체 멤버리스트 받아오기
-    var totalMemberList: [MemberResponse] = []
-    var selectedManagerList: [String] = [] {
+    var totalMemberList: [MemberResponse] = [] {
         didSet { collectionView.reloadData() }
     }
+    var selectedManagerList: [String] = [] 
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -65,9 +64,8 @@ final class SelectManagerCollectionView: BaseUIView {
 extension SelectManagerCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        if let memberName = totalMemberList[indexPath.item].memberName {
-            selectedManagerList.append(memberName)
-        }
+        guard let memberName = totalMemberList[indexPath.item].memberName else { return }
+        selectedManagerList.append(memberName)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -88,15 +86,20 @@ extension SelectManagerCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if let memberName = totalMemberList[indexPath.item].memberName {
-            if selectedManagerList.contains(memberName) {
-                cell.isSelected = true
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
-            }
+        guard let memberName = totalMemberList[indexPath.item].memberName,
+              let memberImage = totalMemberList[indexPath.item].profilePath else { return UICollectionViewCell() }
+        
+        if selectedManagerList.contains(memberName) {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
-        cell.profileName.setTextWithLineHeight(text: totalMemberList[indexPath.item].memberName, lineHeight: 26)
-        
+        cell.profileName.setTextWithLineHeight(text: memberName, lineHeight: 26)
+        if let memberImagePath = URL(string: memberImage) {
+            cell.profileImage.load(from: memberImagePath)
+        } else {
+            cell.profileImage.image = ImageLiterals.profileNone
+        }
         
         return cell
     }
