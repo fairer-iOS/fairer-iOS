@@ -394,7 +394,8 @@ final class WriteHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
-//            HouseWork.mockHouseWork[0].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
+            // FIXME: - 집안일 생성을 위한 모델에 적용
+            // HouseWork.mockHouseWork[0].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
         }
     }
     

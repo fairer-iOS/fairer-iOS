@@ -347,7 +347,7 @@ final class SetHouseWorkViewController: BaseViewController {
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
             // FIXME: - 집안일 생성을 위한 모델에 적용
-//            HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
+            // HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
         }
     }
     
@@ -512,7 +512,7 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func updateManagerTimeRepeat(_ houseWork: Int) {
         // FIXME: - 집안일 생성을 위한 모델에 적용
-//        getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
+        // getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
         isTimeSelected(houseWork)
         isRepeatSelected(houseWork)
     }

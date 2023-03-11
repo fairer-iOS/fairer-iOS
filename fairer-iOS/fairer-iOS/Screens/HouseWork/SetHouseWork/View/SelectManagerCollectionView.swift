@@ -64,7 +64,6 @@ final class SelectManagerCollectionView: BaseUIView {
 extension SelectManagerCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-//        guard let memberName = totalMemberList[indexPath.item].memberName else { return }
         selectedManagerList.append(totalMemberList[indexPath.item])
     }
     
