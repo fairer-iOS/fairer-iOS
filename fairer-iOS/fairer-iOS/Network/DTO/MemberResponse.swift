@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MemberResponse: Codable {
+struct MemberResponse: Codable, Equatable {
     let memberId: Int?
     let memberName: String?
     let profilePath: String?

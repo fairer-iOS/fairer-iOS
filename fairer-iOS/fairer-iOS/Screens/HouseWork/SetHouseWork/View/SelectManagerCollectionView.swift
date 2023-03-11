@@ -15,7 +15,7 @@ final class SelectManagerCollectionView: BaseUIView {
     var totalMemberList: [MemberResponse] = [] {
         didSet { collectionView.reloadData() }
     }
-    var selectedManagerList: [String] = [] 
+    var selectedManagerList: [MemberResponse] = []
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -64,13 +64,13 @@ final class SelectManagerCollectionView: BaseUIView {
 extension SelectManagerCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        guard let memberName = totalMemberList[indexPath.item].memberName else { return }
-        selectedManagerList.append(memberName)
+//        guard let memberName = totalMemberList[indexPath.item].memberName else { return }
+        selectedManagerList.append(totalMemberList[indexPath.item])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if !selectedManagerList.isEmpty {
-            selectedManagerList.removeAll(where: { $0 == totalMemberList[indexPath.item].memberName})
+            selectedManagerList.removeAll(where: { $0 == totalMemberList[indexPath.item]})
         }
     }
 }
@@ -89,7 +89,7 @@ extension SelectManagerCollectionView: UICollectionViewDataSource {
         guard let memberName = totalMemberList[indexPath.item].memberName,
               let memberImage = totalMemberList[indexPath.item].profilePath else { return UICollectionViewCell() }
         
-        if selectedManagerList.contains(memberName) {
+        if selectedManagerList.contains(totalMemberList[indexPath.item]) {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }

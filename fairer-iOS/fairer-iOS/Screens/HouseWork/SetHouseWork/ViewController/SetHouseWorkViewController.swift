@@ -346,7 +346,8 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
+            // FIXME: - 집안일 생성을 위한 모델에 적용
+//            HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
         }
     }
     
@@ -510,7 +511,8 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func updateManagerTimeRepeat(_ houseWork: Int) {
-        getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
+        // FIXME: - 집안일 생성을 위한 모델에 적용
+//        getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
         isTimeSelected(houseWork)
         isRepeatSelected(houseWork)
     }
@@ -569,7 +571,12 @@ extension SetHouseWorkViewController {
             case .success(let response):
                 guard let teamInfo = response as? TeamInfoResponse else { return }
                 guard let membersInfo = teamInfo.members else { return }
-                self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
+                DispatchQueue.main.async {
+                    // FIXME: 첫번째 멤버 대신 user item 넣어주기
+                    self.getManagerView.getManagerCollectionView.selectedMemberList = [membersInfo[0]]
+                    self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
+                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = [membersInfo[0]]
+                }
                 break
             case .requestErr(let errorResponse):
                 dump(errorResponse)
