@@ -38,10 +38,10 @@ extension RulesRouter: BaseTargetType {
         switch self {
         case .getRules, .deleteRules:
             return .requestPlain
-        case .postRuels:
+        case .postRuels(let ruleName):
             return .requestParameters(parameters: [
-                "ruleName": "string"
-            ], encoding: URLEncoding.queryString)
+                "ruleName": ruleName
+            ], encoding: JSONEncoding.default)
         }
     }
 }

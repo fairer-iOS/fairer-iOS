@@ -6,7 +6,7 @@
 //
 
 struct RulesResponse: Codable {
-    let ruleResponseDtos: [ruleData]
+    let ruleResponseDtos: [ruleData]?
     let teamId: Int
 }
 

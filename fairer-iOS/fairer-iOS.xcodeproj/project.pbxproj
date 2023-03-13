@@ -95,6 +95,7 @@
 		5A99A2DB29A8C3F3006FE9B2 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */; };
 		5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */; };
 		5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */; };
+		5AB8068629BEE842009EB243 /* ServerErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8068529BEE842009EB243 /* ServerErrorResponse.swift */; };
 		5ABB7FB229B48DED008D5C15 /* RulesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
 		7E1F2E2E28D2168300A5744A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */; };
@@ -231,6 +232,7 @@
 		5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		5AB8068529BEE842009EB243 /* ServerErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorResponse.swift; sourceTree = "<group>"; };
 		5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RulesResponse.swift; path = "fairer-iOS/Network/DTO/RulesResponse.swift"; sourceTree = SOURCE_ROOT; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -1019,6 +1021,7 @@
 			children = (
 				5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */,
 				914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */,
+				5AB8068529BEE842009EB243 /* ServerErrorResponse.swift */,
 				914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */,
 			);
 			path = DTO;
@@ -1221,6 +1224,7 @@
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */,
 				52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */,
+				5AB8068629BEE842009EB243 /* ServerErrorResponse.swift in Sources */,
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
 				39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */,
 				5204AABC2950BC50002FB6CA /* SettingInquiryViewController.swift in Sources */,

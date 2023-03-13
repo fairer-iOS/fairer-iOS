@@ -37,6 +37,22 @@ final class RulesAPI {
         }
     }
     
+    func postRules(ruleName: String, completion: @escaping (NetworkResult<Any>) -> Void ) {
+        rulesProvider.request(.postRuels(ruleName: ruleName)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getRules)
+                completion(networkResult)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         
@@ -46,7 +62,12 @@ final class RulesAPI {
             case .getRules, .postRules, .deleteRules:
                 return isValidData(data: data, responseData: responseData)
             }
-        case 400..<500:
+        case 400:
+            guard let decodedData = try? decoder.decode(ServerErrorResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .requestErr(decodedData)
+        case 401..<500:
             guard let decodedData = try? decoder.decode(ErrorResponse.self, from: data) else {
                 return .pathErr
             }

@@ -15,9 +15,7 @@ class SettingHomeRuleViewController: BaseViewController {
     
     var dummyList = ["고가혜", "권진혁", "최지혜", "신동빈", "김수연", "김수연", "김수연", "김수연"]
     
-    var ruleData: [ruleData] = [] {
-        didSet { homeRuleTableView.reloadData() }
-    }
+    var ruleData: [ruleData] = []
     
     private let maxLength = 16
     
@@ -194,12 +192,14 @@ extension SettingHomeRuleViewController: UITextFieldDelegate {
         
         if let text = settingHomeRuleTextField.text {
             if !text.isEmpty && text.count <= maxLength {
-                dummyList.append(text)
-                
-                DispatchQueue.main.async {
-                    self.homeRuleTableView.reloadData()
+                postRules(ruleName: text) { data in
+                    guard let ruleData = data.ruleResponseDtos?.last else { return }
+                    self.ruleData.append(ruleData)
+                    
+                    DispatchQueue.main.async {
+                        self.homeRuleTableView.reloadData()
+                    }
                 }
-                
                 settingHomeRuleTextField.text =  ""
                 settingHomeRuleTextField.resignFirstResponder()
             }
@@ -233,13 +233,35 @@ extension SettingHomeRuleViewController {
             switch result {
             case .success(let response):
                 guard let rules = response as? RulesResponse else { return }
-                self.ruleData = rules.ruleResponseDtos
+                guard let ruleData = rules.ruleResponseDtos else { return }
+                self.ruleData = ruleData
+                self.homeRuleTableView.reloadData()
 
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
                 print("server error")
                 
+            }
+        }
+    }
+    
+    func postRules(ruleName: String, completion: @escaping (RulesResponse) -> Void) {
+        NetworkService.shared.rules.postRules(ruleName: ruleName) { result in
+            switch result {
+            case .success(let response):
+                guard let ruleName = response as? RulesResponse else { return }
+                completion(ruleName)
+            case .requestErr(let errorResponse):
+                guard let error = errorResponse as? ServerErrorResponse else { return }
+                
+                self.settingHomeRuleTextFieldeWarningLabel.text = error.errorMessage
+                self.settingHomeRuleTextFieldeWarningLabel.isHidden = false
+                self.settingHomeRuleTextField.layer.borderColor = UIColor.negative20.cgColor
+                self.settingHomeRuleTextField.layer.borderWidth = 1
+                
+            default:
+                print("server error")
             }
         }
     }
