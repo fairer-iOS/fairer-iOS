@@ -13,7 +13,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    private let profileImage = UIImageView(image: ImageLiterals.profileLightBlue1)
+    let profileImage = UIImageView(image: ImageLiterals.profileNone)
     let profileLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray800

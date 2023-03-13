@@ -12,11 +12,10 @@ import SnapKit
 final class SelectManagerCollectionView: BaseUIView {
     
     var selectedIndex: Int? = 0
-    // FIXME: - SetHouseWorkVC에서 전체 멤버리스트 받아오기
-    var totalMemberList: [String] = ["고가혜", "권진혁", "박정준", "김민주", "김유나", "홍준혁"]
-    var selectedManagerList: [String] = [] {
+    var totalMemberList: [MemberResponse] = [] {
         didSet { collectionView.reloadData() }
     }
+    var selectedManagerList: [MemberResponse] = []
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -86,12 +85,18 @@ extension SelectManagerCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        guard let memberName = totalMemberList[indexPath.item].memberName,
+              let memberImage = totalMemberList[indexPath.item].profilePath else { return UICollectionViewCell() }
+        
         if selectedManagerList.contains(totalMemberList[indexPath.item]) {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
-        cell.profileName.setTextWithLineHeight(text: totalMemberList[indexPath.item], lineHeight: 26)
+        cell.profileName.setTextWithLineHeight(text: memberName, lineHeight: 26)
+        if let memberImagePath = URL(string: memberImage) {
+            cell.profileImage.load(from: memberImagePath)
+        }
         
         return cell
     }
