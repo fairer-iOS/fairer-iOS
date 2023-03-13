@@ -391,8 +391,8 @@ final class HomeViewController: BaseViewController {
         self.dummy.append(dummy9)
     }
     
-    private func getWeekHouseWorks(startDate: String, endDate: String){
-        DispatchQueue.main.async {
+    private func getWeekHouseWorks(startDate: String, endDate: String) {
+        DispatchQueue.global().async {
             self.getDateHouseWork(
                 fromDate: startDate.replacingOccurrences(of: ".", with: "-")
                 , toDate: endDate.replacingOccurrences(of: ".", with: "-")
