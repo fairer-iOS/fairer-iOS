@@ -53,6 +53,23 @@ final class RulesAPI {
         }
     }
     
+    func deleteRules(ruleId: Int, completion: @escaping (NetworkResult<Any>) -> Void ) {
+        rulesProvider.request(.deleteRules(ruleId: ruleId)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteRules)
+                completion(networkResult)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         
@@ -89,10 +106,7 @@ final class RulesAPI {
             return .success(decodedData)
 
         case .deleteRules:
-            guard let decodedData = try? decoder.decode(RulesResponse.self, from: data) else {
-                return .pathErr
-            }
-            return .success(decodedData)
+            return .success(BlankResponse())
         }
     }
 }

@@ -143,8 +143,13 @@ class SettingHomeRuleViewController: BaseViewController {
     @objc func deleteBtnAction(_ sender: UIButton) {
         let point = sender.convert(CGPoint.zero, to: homeRuleTableView)
         guard let indexPath = homeRuleTableView.indexPathForRow(at: point) else { return }
-        dummyList.remove(at: indexPath.row)
+        let ruleId = self.ruleData[indexPath.row].ruleId
+        
+        self.ruleData.remove(at: indexPath.row)
         homeRuleTableView.deleteRows(at: [indexPath], with: .automatic)
+        
+        deleteRules(ruleId: ruleId)
+    
       }
     
     private func checkMaxLength() {
@@ -260,6 +265,18 @@ extension SettingHomeRuleViewController {
                 self.settingHomeRuleTextField.layer.borderColor = UIColor.negative20.cgColor
                 self.settingHomeRuleTextField.layer.borderWidth = 1
                 
+            default:
+                print("server error")
+            }
+        }
+    }
+    
+    func deleteRules(ruleId: Int) {
+        NetworkService.shared.rules.deleteRules(ruleId: ruleId) { result in
+            switch result {
+            case .success: break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
             default:
                 print("server error")
             }
