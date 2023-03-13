@@ -26,7 +26,7 @@ struct dummyWorkCard {
 final class HomeViewController: BaseViewController {
     
     // TODO: - 추후 api연결 + UserDefault
-
+    
     private var dummy = [dummyWorkCard]()
     private var dummy1 = dummyWorkCard(work: "바닥 청소", time: "오전 9:30", room: "방", status: WorkState.overdue)
     private var dummy2 = dummyWorkCard(work: "설거지", time: "오후 8:00", room: "부엌", status: WorkState.overdue)
@@ -46,7 +46,7 @@ final class HomeViewController: BaseViewController {
     private var finishedWorkSum: Int?
     
     // MARK: - property
-
+    
     private let logoImage = UIImageView(image: ImageLiterals.imgHomeLogo)
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
@@ -124,9 +124,12 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.addDummyData()
         self.getDivideIndex()
-        self.getDateHouseWork(fromDate: "2023-03-05", toDate: "2023-03-05")
+        self.getWeekHouseWorks(
+            startDate: homeWeekCalendarCollectionView.fullDateList.first ?? String(),
+            endDate: homeWeekCalendarCollectionView.fullDateList.last ?? String()
+        )
     }
-
+    
     override func configUI() {
         super.configUI()
         setupToolBarGesture()
@@ -146,7 +149,7 @@ final class HomeViewController: BaseViewController {
                          homeCalenderView,
                          homeWeekCalendarCollectionView,
                          calendarDailyTableView)
-
+        
         toolBarView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(76)
@@ -163,19 +166,19 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(18)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-
+        
         homeGroupLabel.snp.makeConstraints {
             $0.leading.equalTo(houseImageView.snp.trailing).offset(4)
             $0.height.equalTo(18)
             $0.centerY.equalTo(houseImageView.snp.centerY)
         }
-
+        
         homeGroupCollectionView.snp.makeConstraints {
             $0.top.equalTo(houseImageView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(70)
         }
-
+        
         homeRuleView.snp.makeConstraints {
             $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
@@ -199,7 +202,7 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(95)
         }
-
+        
         calendarDailyTableView.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(-15)
             $0.leading.trailing.equalToSuperview()
@@ -213,10 +216,10 @@ final class HomeViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-
+        
         let logoView = makeBarButtonItem(with: logoImage)
         let rightButton = makeBarButtonItem(with: profileButton)
-
+        
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = logoView
@@ -387,7 +390,16 @@ final class HomeViewController: BaseViewController {
         self.dummy.append(dummy8)
         self.dummy.append(dummy9)
     }
-
+    
+    private func getWeekHouseWorks(startDate: String, endDate: String){
+        DispatchQueue.main.async {
+            self.getDateHouseWork(
+                fromDate: startDate.replacingOccurrences(of: ".", with: "-")
+                , toDate: endDate.replacingOccurrences(of: ".", with: "-")
+            )
+        }
+    }
+    
     // MARK: - selector
     
     @objc
