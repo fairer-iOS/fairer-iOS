@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias WorkInfo = [String: DayHouseWorks]
+typealias WorkInfoReponse = [String: DayHouseWorks]
 
 struct DayHouseWorks: Codable {
     let memberId: Int

@@ -60,7 +60,7 @@ final class HouseWorksAPI {
         
         switch responseData {
         case .getHouseWorks:
-            guard let decodedData = try? decoder.decode(WorkInfo.self, from: data) else {
+            guard let decodedData = try? decoder.decode(WorkInfoReponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)

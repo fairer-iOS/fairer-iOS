@@ -396,7 +396,9 @@ final class HomeViewController: BaseViewController {
     }
     
     private func getWeekHouseWorks(startDate: String, endDate: String) {
-        LoadingView.showLoading()
+        DispatchQueue.main.async {
+            LoadingView.showLoading()
+        }
         DispatchQueue.global().async {
             self.getDateHouseWork(
                 fromDate: startDate.replacingOccurrences(of: ".", with: "-")
@@ -589,8 +591,10 @@ extension HomeViewController {
         NetworkService.shared.houseWorks.getDateHouseWork(fromDate: fromDate, toDate: toDate) { result in
             switch result {
             case .success(let response):
-                guard let houseWorkResponse = response as? WorkInfo else { return }
-                LoadingView.hideLoading()
+                guard let houseWorkResponse = response as? WorkInfoReponse else { return }
+                DispatchQueue.main.async {
+                    LoadingView.hideLoading()
+                }
                 print(houseWorkResponse)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
