@@ -241,7 +241,7 @@
 		5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		5AB8068529BEE842009EB243 /* ServerErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorResponse.swift; sourceTree = "<group>"; };
-		5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RulesResponse.swift; path = "fairer-iOS/Network/DTO/RulesResponse.swift"; sourceTree = SOURCE_ROOT; };
+		5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RulesResponse.swift; path = "fairer-iOS/Network/DTO/Rules/RulesResponse.swift"; sourceTree = SOURCE_ROOT; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -923,6 +923,14 @@
 			path = MoyaPlugin;
 			sourceTree = "<group>";
 		};
+		5A9BD08629C1A21100ADD3CC /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */,
+			);
+			path = Rules;
+			sourceTree = "<group>";
+		};
 		7E1F2E2628D212E000A5744A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1036,8 +1044,7 @@
 		917D8B5329A62F9B00E26B73 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-
-				5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */,
+				5A9BD08629C1A21100ADD3CC /* Rules */,
 				52A53DC729B06DD200C4BB4C /* Teams */,
 				52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */,
 				914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */,

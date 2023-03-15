@@ -80,7 +80,7 @@ final class RulesAPI {
                 return isValidData(data: data, responseData: responseData)
             }
         case 400:
-            guard let decodedData = try? decoder.decode(ServerErrorResponse.self, from: data) else {
+            guard let decodedData = try? decoder.decode(UserErrorResponse.self, from: data) else {
                 return .pathErr
             }
             return .requestErr(decodedData)

@@ -11,11 +11,9 @@ import SnapKit
 
 import Moya
 
-class SettingHomeRuleViewController: BaseViewController {
+final class SettingHomeRuleViewController: BaseViewController {
     
-    var dummyList = ["고가혜", "권진혁", "최지혜", "신동빈", "김수연", "김수연", "김수연", "김수연"]
-    
-    var ruleData: [ruleData] = []
+    private var ruleData: [RuleData] = []
     
     private let maxLength = 16
     
@@ -258,7 +256,7 @@ extension SettingHomeRuleViewController {
                 guard let ruleName = response as? RulesResponse else { return }
                 completion(ruleName)
             case .requestErr(let errorResponse):
-                guard let error = errorResponse as? ServerErrorResponse else { return }
+                guard let error = errorResponse as? UserErrorResponse else { return }
                 
                 self.settingHomeRuleTextFieldeWarningLabel.text = error.errorMessage
                 self.settingHomeRuleTextFieldeWarningLabel.isHidden = false

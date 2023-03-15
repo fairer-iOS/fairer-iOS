@@ -6,11 +6,11 @@
 //
 
 struct RulesResponse: Codable {
-    let ruleResponseDtos: [ruleData]?
+    let ruleResponseDtos: [RuleData]?
     let teamId: Int
 }
 
-struct ruleData: Codable {
+struct RuleData: Codable {
     let ruleId: Int
     let ruleName: String
 }
