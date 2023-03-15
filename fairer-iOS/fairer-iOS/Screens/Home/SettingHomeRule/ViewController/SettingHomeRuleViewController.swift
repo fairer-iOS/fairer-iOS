@@ -27,6 +27,16 @@ final class SettingHomeRuleViewController: BaseViewController {
         label.font = .h2
         return label
     }()
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = .systemBackground
+        return scrollView
+    }()
+    
+    private let contentView = UIView()
+    
     private let settingHomeRuleTextFieldLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.settingHomeRuleTextFieldLabel
@@ -70,7 +80,22 @@ final class SettingHomeRuleViewController: BaseViewController {
     // MARK: - life cycle
         
     override func render() {
-        view.addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, settingHomeRuleTextFieldStackView, settingHomeRuleInfoLabel, titleLabel, homeRuleTableView)
+        
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, settingHomeRuleTextFieldStackView, settingHomeRuleInfoLabel, titleLabel, homeRuleTableView)
+
+        scrollView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
+
+        contentView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+                $0.width.equalToSuperview()
+            $0.height.equalToSuperview()
+            }
         
         settingHomeRulePrimaryLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
