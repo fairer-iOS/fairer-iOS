@@ -337,6 +337,10 @@ final class HomeViewController: BaseViewController {
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(yearInString)년 \(monthInString)월", for: .normal)
             self.homeWeekCalendarCollectionView.datePickedByOthers = pickedDate.dateToString
             self.datePickerView.isHidden = true
+            self.getWeekHouseWorks(
+                startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
+                endDate: self.homeWeekCalendarCollectionView.fullDateList.last ?? String()
+            )
             self.setupNavigationBar()
         }
         datePickerView.changeClosure = { [weak self] val in
@@ -392,6 +396,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func getWeekHouseWorks(startDate: String, endDate: String) {
+        LoadingView.showLoading()
         DispatchQueue.global().async {
             self.getDateHouseWork(
                 fromDate: startDate.replacingOccurrences(of: ".", with: "-")
@@ -416,6 +421,10 @@ final class HomeViewController: BaseViewController {
         if (sender.direction == .right) {
             self.homeWeekCalendarCollectionView.getBeforeWeekDate()
         }
+        self.getWeekHouseWorks(
+            startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
+            endDate: self.homeWeekCalendarCollectionView.fullDateList.last ?? String()
+        )
     }
     
     private func moveToTodayDate() {
@@ -424,6 +433,10 @@ final class HomeViewController: BaseViewController {
         self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
         self.homeWeekCalendarCollectionView.collectionView.reloadData()
         self.homeWeekCalendarCollectionView.datePickedByOthers = Date().dateToString
+        self.getWeekHouseWorks(
+            startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
+            endDate: self.homeWeekCalendarCollectionView.fullDateList.last ?? String()
+        )
     }
     
     private func moveToDatePicker() {
@@ -577,6 +590,7 @@ extension HomeViewController {
             switch result {
             case .success(let response):
                 guard let houseWorkResponse = response as? WorkInfo else { return }
+                LoadingView.hideLoading()
                 print(houseWorkResponse)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
