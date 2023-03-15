@@ -100,7 +100,7 @@ final class SettingHomeRuleViewController: BaseViewController {
         }
         
         homeRuleTableView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -132,7 +132,7 @@ final class SettingHomeRuleViewController: BaseViewController {
     
     private func setupAttribute() {
         homeRuleTableView.register(SettingHomeRuleTableViewCell.self, forCellReuseIdentifier: SettingHomeRuleTableViewCell.cellId)
-        homeRuleTableView.rowHeight = 74
+        homeRuleTableView.rowHeight = 64
         homeRuleTableView.separatorStyle = .none
         homeRuleTableView.showsVerticalScrollIndicator = false
         homeRuleTableView.backgroundColor = .white

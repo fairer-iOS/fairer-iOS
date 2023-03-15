@@ -18,14 +18,14 @@ final class SettingHomeRuleTableViewCell: BaseTableViewCell {
     
     let ruleLabel: UILabel = {
         let label = UILabel()
-        label.font = .title2
+        label.font = .title1
         label.textColor = .gray600
         label.textAlignment = .left
         return label
     }()
     let clearButton: UIButton = {
         let button = UIButton()
-        button.setImage(ImageLiterals.textFieldClearButton, for: .normal)
+        button.setImage(ImageLiterals.smallClearButton, for: .normal)
         return button
     }()
     
@@ -34,7 +34,7 @@ final class SettingHomeRuleTableViewCell: BaseTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 24, bottom: 0, right: 24))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 24, bottom: 16, right: 24))
     }
     
     override func render() {
@@ -47,10 +47,9 @@ final class SettingHomeRuleTableViewCell: BaseTableViewCell {
         }
         	
         clearButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(12)
-            $0.leading.equalTo(ruleLabel.snp.trailing).offset(12)
-            $0.height.equalTo(58)
-            $0.width.equalTo(58)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.centerY.equalToSuperview()
+            $0.width.height.equalTo(24)
         }
     }
     
