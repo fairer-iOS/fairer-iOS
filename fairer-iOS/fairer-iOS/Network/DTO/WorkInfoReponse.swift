@@ -13,7 +13,7 @@ struct DayHouseWorks: Codable {
     let memberId: Int
     let scheduledDate: String
     let countDone, countLeft: Int
-    let houseWorks: [HouseWorkData]?
+    var houseWorks: [HouseWorkData]?
 }
 
 struct HouseWorkData: Codable {
@@ -25,7 +25,7 @@ struct HouseWorkData: Codable {
     let repeatPattern: String?
     let scheduledDate: String?
     let scheduledTime: String?
-    let success: Bool?
+    var success: Bool
     let successDateTime: String?
     let houseWorkCompleteId: Int?
 }
