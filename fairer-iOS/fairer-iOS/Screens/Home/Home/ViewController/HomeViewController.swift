@@ -576,7 +576,7 @@ extension HomeViewController {
         NetworkService.shared.houseWorks.getDateHouseWork(fromDate: fromDate, toDate: toDate) { result in
             switch result {
             case .success(let response):
-                guard let houseWorkResponse = response as? HouseWorksResponse else { return }
+                guard let houseWorkResponse = response as? WorkInfo else { return }
                 print(houseWorkResponse)
             case .requestErr(let errorResponse):
                 dump(errorResponse)

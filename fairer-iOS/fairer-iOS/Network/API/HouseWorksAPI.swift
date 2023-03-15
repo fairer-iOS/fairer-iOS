@@ -36,7 +36,7 @@ final class HouseWorksAPI {
     
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        print("statusCode: ", statusCode)
+        
         switch statusCode {
         case 200..<300:
             switch responseData {
@@ -57,9 +57,10 @@ final class HouseWorksAPI {
     
     private func isValidData(data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
+        
         switch responseData {
         case .getHouseWorks:
-            guard let decodedData = try? decoder.decode(HouseWorksResponse.self, from: data) else {
+            guard let decodedData = try? decoder.decode(WorkInfo.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)

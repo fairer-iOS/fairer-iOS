@@ -7,35 +7,29 @@
 
 import Foundation
 
-// MARK: - HouseWorksResponse
-struct HouseWorksResponse: Codable {
-    let additionalProp: WorkInfo?
-}
+typealias WorkInfo = [String: DayHouseWorks]
 
-// MARK: - WorkInfo
-struct WorkInfo: Codable {
-    let memberId: Int?
-    let scheduledDate: String?
+struct DayHouseWorks: Codable {
+    let memberId: Int
+    let scheduledDate: String
     let countDone, countLeft: Int
     let houseWorks: [HouseWorkData]?
 }
 
-// MARK: - HouseWork
 struct HouseWorkData: Codable {
     let houseWorkId: Int?
     let space, houseWorkName: String?
+    let assignees: [Assignee]?
     let repeatCycle: String?
     let repeatEndDate: String?
     let repeatPattern: String?
-    let assignees: [Assignee]?
     let scheduledDate: String?
+    let scheduledTime: String?
     let success: Bool?
     let successDateTime: String?
     let houseWorkCompleteId: Int?
-    let scheduledTime: String?
 }
 
-// MARK: - Assignee
 struct Assignee: Codable {
     let memberId: Int?
     let memberName: String?
