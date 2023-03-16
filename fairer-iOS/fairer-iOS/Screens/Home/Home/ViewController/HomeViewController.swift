@@ -72,12 +72,6 @@ final class HomeViewController: BaseViewController {
         calendarDailyTableView.backgroundColor = .white
         return calendarDailyTableView
     }()
-    private lazy var contentScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemBackground
-        scrollView.showsVerticalScrollIndicator = true
-        return scrollView
-    }()
     let datePickerView: PickDateView = {
         let view = PickDateView()
         return view
@@ -116,7 +110,6 @@ final class HomeViewController: BaseViewController {
                          titleLabel,
                          houseImageView,
                          homeGroupLabel,
-                         contentScrollView,
                          homeGroupCollectionView,
                          homeRuleView,
                          homeDivider,
@@ -232,7 +225,6 @@ final class HomeViewController: BaseViewController {
     }
     
     private func setupDelegate() {
-        self.contentScrollView.delegate = self
         self.calendarDailyTableView.delegate = self
         self.calendarDailyTableView.dataSource = self
     }
@@ -335,9 +327,10 @@ final class HomeViewController: BaseViewController {
     private func getDivideIndex() {
         self.divideIndex = 0
         for divider in self.pickDayWorkInfo?.houseWorks ?? [HouseWorkData]() {
-            if divider.success == true { break }
+            if divider.success == true { continue }
             self.divideIndex = self.divideIndex + 1
         }
+        print("divideIndex",self.divideIndex)
     }
     
     private func listCompleteHouseWorkLast(WorkList: [HouseWorkData]) -> [HouseWorkData] {
@@ -419,8 +412,9 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollOffset = scrollView.contentOffset.y
+        // MARK: - fix for main view scroll
         if scrollOffset <= 1 {
-            scrollDidEnd()
+//            scrollDidEnd()
             isScrolled = false
         } else {
             if !isScrolled {
@@ -481,7 +475,7 @@ extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UILabel()
-        header.text = "끝낸 집안일 \(String(describing: self.pickDayWorkInfo?.countDone ?? 0))"
+        header.text = "끝낸 집안일 \(String(describing: self.finishedWorkSum))"
         header.font = .title2
         header.textColor = .black
         return section == self.divideIndex ? header : UIView()
@@ -570,9 +564,13 @@ extension HomeViewController {
                 DispatchQueue.main.async {
                     LoadingView.hideLoading()
                 }
-                DispatchQueue.main.async {
+                DispatchQueue.global().sync {
                     self.workInfoReponse = houseWorkResponse
                     self.pickDayWorkInfo = self.workInfoReponse?.removeValue(forKey: self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-"))
+                    self.finishedWorkSum = self.pickDayWorkInfo?.countDone ?? Int()
+                    self.divideIndex = self.pickDayWorkInfo?.countDone ?? Int()
+                }
+                DispatchQueue.global().sync {
                     self.calendarDailyTableView.reloadData()
                 }
             case .requestErr(let errorResponse):
