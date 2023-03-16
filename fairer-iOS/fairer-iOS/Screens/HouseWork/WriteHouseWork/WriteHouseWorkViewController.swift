@@ -166,6 +166,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
+        getTeamInfo()
         setDoneButton()
     }
     
@@ -395,7 +396,8 @@ final class WriteHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
-            HouseWork.mockHouseWork[0].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
+            // FIXME: - 집안일 생성을 위한 모델에 적용
+            // HouseWork.mockHouseWork[0].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
         }
     }
     
@@ -574,6 +576,29 @@ extension WriteHouseWorkViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension WriteHouseWorkViewController {
+    private func getTeamInfo() {
+        NetworkService.shared.teams.getTeamInfo { result in
+            switch result {
+            case .success(let response):
+                guard let teamInfo = response as? TeamInfoResponse else { return }
+                guard let membersInfo = teamInfo.members else { return }
+                DispatchQueue.main.async {
+                    // FIXME: 첫번째 멤버 대신 user item 넣어주기
+                    self.getManagerView.getManagerCollectionView.selectedMemberList = [membersInfo[0]]
+                    self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
+                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = [membersInfo[0]]
+                }
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
     }
 }
 

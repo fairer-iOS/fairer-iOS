@@ -28,7 +28,7 @@ final class NetworkService {
 //
 //    let statistics = StatisticsAPI()
 //
-//    let teams = TeamsAPI()
+    let teams = TeamsAPI()
     
 
 }

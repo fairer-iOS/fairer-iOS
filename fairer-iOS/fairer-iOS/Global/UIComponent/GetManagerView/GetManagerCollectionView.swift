@@ -11,9 +11,10 @@ import SnapKit
 
 final class GetManagerCollectionView: BaseUIView {
     
-    // FIXME: - 담당자 리스트 받아오기
-    var selectedMemberList: [String] = HouseWork.mockHouseWork[0].manager {
-        didSet { collectionView.reloadData() }
+    var selectedMemberList: [MemberResponse] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
     }
     
     private enum Size {
@@ -70,8 +71,13 @@ extension GetManagerCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.profileLabel.setTextWithLineHeight(text: selectedMemberList[indexPath.row], lineHeight: 18)
-
+        guard let memberName = selectedMemberList[indexPath.item].memberName,
+              let memberImage = selectedMemberList[indexPath.item].profilePath else { return UICollectionViewCell() }
+        if let memberImagePath = URL(string: memberImage) {
+            cell.profileImage.load(from: memberImagePath)
+        }
+        cell.profileLabel.setTextWithLineHeight(text: memberName, lineHeight: 18)
+        
         return cell
     }
 }

@@ -150,6 +150,7 @@ final class SetHouseWorkViewController: BaseViewController {
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
         setDoneButton()
+        getTeamInfo()
     }
     
     override func render() {
@@ -347,7 +348,8 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
+            // FIXME: - 집안일 생성을 위한 모델에 적용
+            // HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
         }
     }
     
@@ -511,7 +513,8 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func updateManagerTimeRepeat(_ houseWork: Int) {
-        getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
+        // FIXME: - 집안일 생성을 위한 모델에 적용
+        // getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
         isTimeSelected(houseWork)
         isRepeatSelected(houseWork)
     }
@@ -574,6 +577,31 @@ final class SetHouseWorkViewController: BaseViewController {
         // FIXME: - data binding & model 수정 필요
         let houseWork = HouseWorksRequest(assignees: [1, 2], houseWorkName: "창 청소", repeatCycle: "W", repeatPattern: "monday, sunday", scheduledDate: "2022-07-02", scheduledTime: "10:00", space: "LIVINGROOM")
         self.houseWorks.append(houseWork)
+    }
+}
+
+// MARK: - extension
+
+extension SetHouseWorkViewController {
+    private func getTeamInfo() {
+        NetworkService.shared.teams.getTeamInfo { result in
+            switch result {
+            case .success(let response):
+                guard let teamInfo = response as? TeamInfoResponse else { return }
+                guard let membersInfo = teamInfo.members else { return }
+                DispatchQueue.main.async {
+                    // FIXME: 첫번째 멤버 대신 user item 넣어주기
+                    self.getManagerView.getManagerCollectionView.selectedMemberList = [membersInfo[0]]
+                    self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
+                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = [membersInfo[0]]
+                }
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
     }
 }
 

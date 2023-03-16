@@ -71,6 +71,9 @@
 		522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E88FE28EC854C000C65C8 /* InviteCodeView.swift */; };
 		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
+		52A53DC929B06DF200C4BB4C /* TeamInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */; };
+		52A53DCB29B06E9100C4BB4C /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */; };
+		52A53DDE29BC5E0400C4BB4C /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DDD29BC5E0400C4BB4C /* UIImageView+Extension.swift */; };
 		52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */; };
 		52A53DD029B0864500C4BB4C /* HouseWorksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */; };
 		52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DD329B086A200C4BB4C /* MemberResponse.swift */; };
@@ -212,6 +215,9 @@
 		52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksRequest.swift; sourceTree = "<group>"; };
 		52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksResponse.swift; sourceTree = "<group>"; };
 		52A53DD329B086A200C4BB4C /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
+		52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoResponse.swift; sourceTree = "<group>"; };
+		52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
+		52A53DDD29BC5E0400C4BB4C /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButtonView.swift; sourceTree = "<group>"; };
 		52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileImageViewController.swift; sourceTree = "<group>"; };
 		52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageHouseViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +318,7 @@
 				5205053C28D7382900355055 /* UITextField+Extension.swift */,
 				39F1C12528D5FB4100585B83 /* UILabel+Extension.swift */,
 				911E968229719CA400F3AF35 /* UIView+Extension.swift */,
+				52A53DDD29BC5E0400C4BB4C /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -651,6 +658,14 @@
 				52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */,
 			);
 			path = HouseWorks;
+			sourceTree = "<group>";
+		};
+		52A53DC729B06DD200C4BB4C /* Teams */ = {
+			isa = PBXGroup;
+			children = (
+				52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */,
+			);
+			path = Teams;
 			sourceTree = "<group>";
 		};
 		52A673F129265EC800F3E6DA /* SettingProfileImage */ = {
@@ -1032,6 +1047,8 @@
 			children = (
 				52A53DCC29B0771700C4BB4C /* HouseWorks */,
 				52A53DD329B086A200C4BB4C /* MemberResponse.swift */,
+				52A53DC729B06DD200C4BB4C /* Teams */,
+				52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */,
 				914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */,
 				914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */,
 			);
@@ -1167,6 +1184,7 @@
 				917D8B6929A6333C00E26B73 /* StatisticsRouter.swift in Sources */,
 				7EEE2FA028E449610067FA7B /* Space.swift in Sources */,
 				917D8B5529A6315F00E26B73 /* MoyaLoggerPlugin.swift in Sources */,
+				52A53DC929B06DF200C4BB4C /* TeamInfoResponse.swift in Sources */,
 				911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */,
 				5204AAC82963150F002FB6CA /* WriteHouseWorkButton.swift in Sources */,
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
@@ -1222,6 +1240,7 @@
 				52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */,
 				52A53DD029B0864500C4BB4C /* HouseWorksResponse.swift in Sources */,
 				5A99A2DB29A8C3F3006FE9B2 /* BaseTargetType.swift in Sources */,
+				52A53DDE29BC5E0400C4BB4C /* UIImageView+Extension.swift in Sources */,
 				5204AAB629507238002FB6CA /* SettingAlarmViewController.swift in Sources */,
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
 				917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */,
@@ -1249,6 +1268,7 @@
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
 				917D8B7D29A633D800E26B73 /* TeamsAPI.swift in Sources */,
 				52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */,
+				52A53DCB29B06E9100C4BB4C /* MemberResponse.swift in Sources */,
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,
 				917D8B7329A633A200E26B73 /* MembersAPI.swift in Sources */,
