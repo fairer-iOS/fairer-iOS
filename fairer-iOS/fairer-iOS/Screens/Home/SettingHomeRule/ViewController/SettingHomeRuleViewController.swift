@@ -20,112 +20,17 @@ final class SettingHomeRuleViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    private let settingHomeRulePrimaryLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiteral.settingHomeRulePrimaryLabel
-        label.textColor = .gray800
-        label.font = .h2
-        return label
-    }()
-    
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.backgroundColor = .systemBackground
-        return scrollView
-    }()
-    
-    private let contentView = UIView()
-    
-    private let settingHomeRuleTextFieldLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiteral.settingHomeRuleTextFieldLabel
-        label.textColor = .gray600
-        label.font = .title1
-        return label
-    }()
-    private let settingHomeRuleTextField = TextField(type: .medium, placeHolder: TextLiteral.settingHomeRuleTextFieldPlaceholder)
-
-    private let settingHomeRuleTextFieldeWarningLabel: UILabel = {
-        let label = UILabel()
-        label.setTextWithLineHeight(text: "텍스트는 16글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
-        label.textColor = .negative20
-        label.font = .body2
-        label.isHidden = true
-        return label
-    }()
-    private lazy var settingHomeRuleTextFieldStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [settingHomeRuleTextField,settingHomeRuleTextFieldeWarningLabel])
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.spacing = 8
-        return stackView
-    }()
-    private let settingHomeRuleInfoLabel: InfoLabelView = {
-        let label = InfoLabelView()
-        label.text = TextLiteral.settingHomeRuleInfoLabel
-        label.textColor = .gray600
-        label.imageColor = .gray200
-        return label
-    }()
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiteral.homeRuleViewRuleLabel
-        label.textColor = .gray600
-        label.font = .h2
-        return label
-    }()
-    private let homeRuleTableView = UITableView()
+    private let HomeRuleHeaderView = SettingHomeRuleHeaderView()
+    private let homeRuleTableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: - life cycle
         
     override func render() {
         
-        view.addSubview(scrollView)
-        
-        scrollView.addSubview(contentView)
-        
-        contentView.addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, settingHomeRuleTextFieldStackView, settingHomeRuleInfoLabel, titleLabel, homeRuleTableView)
-
-        scrollView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
-            }
-
-        contentView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
-                $0.width.equalToSuperview()
-            $0.height.equalToSuperview()
-            }
-        
-        settingHomeRulePrimaryLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        settingHomeRuleTextFieldLabel.snp.makeConstraints {
-            $0.top.equalTo(settingHomeRulePrimaryLabel.snp.bottom).offset(SizeLiteral.topPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        settingHomeRuleTextFieldStackView.snp.makeConstraints {
-            $0.top.equalTo(settingHomeRuleTextFieldLabel.snp.bottom).offset(SizeLiteral.componentPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        settingHomeRuleInfoLabel.snp.makeConstraints {
-            $0.top.equalTo(settingHomeRuleTextFieldStackView.snp.bottom).offset(SizeLiteral.componentPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(22)
-        }
-        
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(settingHomeRuleInfoLabel.snp.bottom).offset(24)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
+        view.addSubview(homeRuleTableView)
         
         homeRuleTableView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -150,13 +55,13 @@ final class SettingHomeRuleViewController: BaseViewController {
     }
     
     private func setupDelegation() {
-        settingHomeRuleTextField.delegate = self
         homeRuleTableView.delegate = self
         homeRuleTableView.dataSource = self
     }
     
     private func setupAttribute() {
         homeRuleTableView.register(SettingHomeRuleTableViewCell.self, forCellReuseIdentifier: SettingHomeRuleTableViewCell.cellId)
+        homeRuleTableView.register(SettingHomeRuleHeaderView.self, forHeaderFooterViewReuseIdentifier: SettingHomeRuleHeaderView.identifier)
         homeRuleTableView.rowHeight = 64
         homeRuleTableView.separatorStyle = .none
         homeRuleTableView.showsVerticalScrollIndicator = false
@@ -175,68 +80,44 @@ final class SettingHomeRuleViewController: BaseViewController {
     
       }
     
-    private func checkMaxLength() {
-            if let text = settingHomeRuleTextField.text {
-                if text.count > maxLength {
-                    settingHomeRuleTextField.layer.borderColor = UIColor.negative20.cgColor
-                    settingHomeRuleTextField.layer.borderWidth = 1
-                    settingHomeRuleTextFieldeWarningLabel.isHidden = false
+    private func checkMaxLength(textfield: UITextField) {
+            
+        if let text = textfield.text {
+                    if text.count > maxLength {
+                    HomeRuleHeaderView.settingHomeRuleTextField.layer.borderColor = UIColor.negative20.cgColor
+                    HomeRuleHeaderView.settingHomeRuleTextField.layer.borderWidth = 1
+                    NotificationCenter.default.post(name: Notification.Name("showWarningLabel"), object: nil)
                 } else {
-                    settingHomeRuleTextField.layer.borderColor = UIColor.gray200.cgColor
-                    settingHomeRuleTextField.layer.borderWidth = 1
-                    settingHomeRuleTextFieldeWarningLabel.isHidden = true
+                    HomeRuleHeaderView.settingHomeRuleTextField.layer.borderColor = UIColor.gray200.cgColor
+                    HomeRuleHeaderView.settingHomeRuleTextField.layer.borderWidth = 1
+                    NotificationCenter.default.post(name: Notification.Name("hideWarningLabel"), object: nil)
                 }
             }
         }
     }
 
-    // MARK: - extension
 
-extension SettingHomeRuleViewController: UITextFieldDelegate {
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        checkMaxLength()
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-           if !isEditing {
-               isEditing = true
-               checkMaxLength()
-           }
-       }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-           if isEditing {
-               isEditing = false
-               settingHomeRuleTextField.layer.borderWidth = 0
-           }
-       }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if let text = settingHomeRuleTextField.text {
-            if !text.isEmpty && text.count <= maxLength {
-                postRules(ruleName: text) { data in
-                    guard let ruleData = data.ruleResponseDtos?.last else { return }
-                    self.ruleData.append(ruleData)
-                    
-                    DispatchQueue.main.async {
-                        self.homeRuleTableView.reloadData()
-                    }
-                }
-                settingHomeRuleTextField.text =  ""
-                settingHomeRuleTextField.resignFirstResponder()
-            }
-        }
-        return true
-    }
-}
 
 extension SettingHomeRuleViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = SettingHomeRuleHeaderView(reuseIdentifier: SettingHomeRuleHeaderView.identifier)
+        
+        headerView.settingHomeRuleTextField.delegate = self
+        headerView.settingHomeRuleTextField.tintColor = .blue
+        headerView.tintColor = .white
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 340
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ruleData.count
 
@@ -246,12 +127,70 @@ extension SettingHomeRuleViewController: UITableViewDelegate, UITableViewDataSou
         let cell = homeRuleTableView.dequeueReusableCell(withIdentifier: SettingHomeRuleTableViewCell.cellId, for: indexPath) as! SettingHomeRuleTableViewCell
         
         cell.selectionStyle = .none
-        
         cell.clearButton.addTarget(self, action: #selector(deleteBtnAction(_:)), for: .touchUpInside)
-        
         cell.ruleLabel.text = ruleData[indexPath.row].ruleName
 
         return cell
+    }
+}
+
+// MARK: - extension
+
+extension SettingHomeRuleViewController: UITextFieldDelegate {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        HomeRuleHeaderView.settingHomeRuleTextField = textField as! TextField
+        
+        checkMaxLength(textfield: textField)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        HomeRuleHeaderView.settingHomeRuleTextField = textField as! TextField
+        
+        if !isEditing {
+            isEditing = true
+            checkMaxLength(textfield: textField)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if isEditing {
+            isEditing = false
+            HomeRuleHeaderView.settingHomeRuleTextField.layer.borderWidth = 0
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if let text = HomeRuleHeaderView.settingHomeRuleTextField.text {
+            if !text.isEmpty && text.count <= maxLength {
+                postRules(ruleName: text) { data in
+                    guard let ruleData = data.ruleResponseDtos?.last else { return }
+                    self.ruleData.append(ruleData)
+                    
+                    DispatchQueue.main.async {
+                        self.homeRuleTableView.reloadData()
+                    }
+                    
+                    self.HomeRuleHeaderView.settingHomeRuleTextField.text =  ""
+                    self.HomeRuleHeaderView.settingHomeRuleTextField.resignFirstResponder()
+                }
+            }
+        }
+        return true
+    }
+        
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if self.ruleData.count >= 10 {
+            return false
+        } else {
+            return true
+        }
     }
 }
 
@@ -264,7 +203,7 @@ extension SettingHomeRuleViewController {
                 guard let ruleData = rules.ruleResponseDtos else { return }
                 self.ruleData = ruleData
                 self.homeRuleTableView.reloadData()
-
+                
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
@@ -273,7 +212,7 @@ extension SettingHomeRuleViewController {
             }
         }
     }
-    
+        
     func postRules(ruleName: String, completion: @escaping (RulesResponse) -> Void) {
         NetworkService.shared.rules.postRules(ruleName: ruleName) { result in
             switch result {
@@ -281,13 +220,7 @@ extension SettingHomeRuleViewController {
                 guard let ruleName = response as? RulesResponse else { return }
                 completion(ruleName)
             case .requestErr(let errorResponse):
-                guard let error = errorResponse as? UserErrorResponse else { return }
-                
-                self.settingHomeRuleTextFieldeWarningLabel.text = error.errorMessage
-                self.settingHomeRuleTextFieldeWarningLabel.isHidden = false
-                self.settingHomeRuleTextField.layer.borderColor = UIColor.negative20.cgColor
-                self.settingHomeRuleTextField.layer.borderWidth = 1
-                
+                dump(errorResponse)
             default:
                 print("server error")
             }
