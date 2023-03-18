@@ -317,9 +317,12 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didDeleteHouseWork() {
         setHouseWorkCollectionView.didDeleteHouseWork = { [weak self] deletedHouseWorkIndex in
-            if HouseWork.mockHouseWork.count == 0 {
+            self?.houseWorks.remove(at: deletedHouseWorkIndex)
+            self?.setHouseWorkCollectionView.totalHouseWorks = self?.houseWorks ?? []
+            
+            if self?.houseWorks.count == 0 {
                 // FIXME: - 이전 페이지로 이동
-            } else if deletedHouseWorkIndex == HouseWork.mockHouseWork.endIndex && deletedHouseWorkIndex == self?.selectedHouseWorkIndex ?? 0 {
+            } else if deletedHouseWorkIndex == self?.houseWorks.endIndex && deletedHouseWorkIndex == self?.selectedHouseWorkIndex ?? 0 {
                 self?.selectedHouseWorkIndex -= 1
                 self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
                 self?.updateManagerTimeRepeat(deletedHouseWorkIndex - 1)

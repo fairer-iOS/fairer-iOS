@@ -11,7 +11,11 @@ import SnapKit
 
 final class SetHouseWorkCollectionView: BaseUIView {
     
-    var totalHouseWorks: [HouseWorksRequest] = []
+    var totalHouseWorks: [HouseWorksRequest] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     var didTappedHouseWork: ((Int) -> ())?
     var didDeleteHouseWork: ((Int) -> ())?
@@ -22,7 +26,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
         }
     }
     
-    lazy var isSelectedDetailHouseWork = [HouseWork.mockHouseWork[selectedIndex].name]
+    lazy var isSelectedDetailHouseWork = [totalHouseWorks[0].houseWorkName]
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -70,7 +74,7 @@ final class SetHouseWorkCollectionView: BaseUIView {
 extension SetHouseWorkCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        isSelectedDetailHouseWork.append(HouseWork.mockHouseWork[selectedIndex].name)
+        isSelectedDetailHouseWork.append(totalHouseWorks[selectedIndex].houseWorkName)
         didTappedHouseWork?(selectedIndex)
     }
 }
@@ -86,7 +90,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if isSelectedDetailHouseWork.contains(HouseWork.mockHouseWork[indexPath.item].name) {
+        if isSelectedDetailHouseWork.contains(totalHouseWorks[indexPath.item].houseWorkName) {
             cell.houseWorkLabel.textColor = .blue
         }
         
@@ -95,8 +99,8 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
-        cell.houseWorkLabel.text = HouseWork.mockHouseWork[indexPath.row].name
-        cell.timeLabel.setTextWithLineHeight(text: HouseWork.mockHouseWork[indexPath.row].time, lineHeight: 18)
+        cell.houseWorkLabel.text = totalHouseWorks[indexPath.row].houseWorkName
+        cell.timeLabel.setTextWithLineHeight(text: totalHouseWorks[indexPath.row].scheduledTime, lineHeight: 18)
 
         cell.deleteButton.tag = indexPath.item
         cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(sender:)), for: .touchUpInside)
@@ -108,18 +112,17 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
 extension SetHouseWorkCollectionView {
     @objc func didTappedDeleteButton(sender : UIButton) {
         collectionView.deleteItems(at: [IndexPath.init(item: sender.tag, section: 0)])
-        isSelectedDetailHouseWork.removeAll(where: { $0 == HouseWork.mockHouseWork[sender.tag].name })
-        HouseWork.mockHouseWork.remove(at: sender.tag)
+        isSelectedDetailHouseWork.removeAll(where: { $0 == totalHouseWorks[sender.tag].houseWorkName })
         didDeleteHouseWork?(sender.tag)
         
-        if HouseWork.mockHouseWork.isEmpty {
+        if totalHouseWorks.isEmpty {
             // FIXME: - 이전 페이지로 이동
         }
         
-        if selectedIndex > sender.tag || (selectedIndex == sender.tag && sender.tag == HouseWork.mockHouseWork.endIndex) {
+        if selectedIndex > sender.tag || (selectedIndex == sender.tag && sender.tag == totalHouseWorks.endIndex) {
             selectedIndex -= 1
         } else if sender.tag == selectedIndex {
-            isSelectedDetailHouseWork.append(HouseWork.mockHouseWork[sender.tag].name)
+            isSelectedDetailHouseWork.append(totalHouseWorks[sender.tag].houseWorkName)
         }
     }
 }
