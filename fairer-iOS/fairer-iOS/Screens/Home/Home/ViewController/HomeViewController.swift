@@ -433,7 +433,11 @@ extension HomeViewController: UITableViewDelegate {
         if indexPath.section < self.divideIndex {
             selectedCell.shadowLayer.backgroundColor = .blue
             let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
-                selectedCell.houseWorkCompleteId = self.completeHouseWork(houseWorkId: selectedCell.houseWorkId, scheduledDate: selectedCell.scheduledDate)
+                self.completeHouseWork(houseWorkId: selectedCell.houseWorkId, scheduledDate: selectedCell.scheduledDate) { response in
+                    selectedCell.houseWorkCompleteId = response.houseWorkCompleteId ?? Int()
+                    print("selectedCell.houseWorkCompletedId",selectedCell.houseWorkCompleteId)
+                }
+                print(selectedCell.houseWorkCompleteId)
                 self.pickDayWorkInfo?.houseWorks?[indexPath.section].success = true
                 self.finishedWorkSum = self.countDoneHouseWork(WorkList: self.pickDayWorkInfo?.houseWorks ?? [HouseWorkData]())
                 let newHouseWorks = self.listCompleteHouseWorkLast(WorkList: self.pickDayWorkInfo?.houseWorks ?? [HouseWorkData]())
@@ -528,20 +532,18 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController {
     
-    func completeHouseWork(houseWorkId: Int, scheduledDate: String) -> Int {
-        var returnHouseWorkCompleteId = Int()
+    func completeHouseWork(houseWorkId: Int, scheduledDate: String, completion: @escaping (HouseWorkCompleteResponse) -> Void) {
         NetworkService.shared.houseWorkCompleteRouter.completeHouseWork(houseWorkId: houseWorkId, scheduledDate: scheduledDate) { result in
             switch result {
             case .success(let response):
                 guard let houseWorkCompleteId = response as? HouseWorkCompleteResponse else { return }
-                returnHouseWorkCompleteId = houseWorkCompleteId.houseWorkCompleteId ?? Int()
+                completion(houseWorkCompleteId)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
                 print("error")
             }
         }
-        return returnHouseWorkCompleteId
     }
     
     func deleteCompleteHouseWork(houseWorkCompleteId: Int) {
@@ -568,7 +570,7 @@ extension HomeViewController {
                     self.workInfoReponse = houseWorkResponse
                     self.pickDayWorkInfo = self.workInfoReponse?.removeValue(forKey: self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-"))
                     self.finishedWorkSum = self.pickDayWorkInfo?.countDone ?? Int()
-                    self.divideIndex = self.pickDayWorkInfo?.countDone ?? Int()
+                    self.divideIndex = self.pickDayWorkInfo?.countLeft ?? Int()
                 }
                 DispatchQueue.global().sync {
                     self.calendarDailyTableView.reloadData()

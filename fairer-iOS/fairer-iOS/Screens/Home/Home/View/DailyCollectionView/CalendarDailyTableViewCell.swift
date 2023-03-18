@@ -26,8 +26,8 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     }
     
     // MARK: - FIX ME
-    var houseWorkId = 0
-    var scheduledDate = ""
+    var houseWorkId = Int()
+    var scheduledDate = String()
     var houseWorkCompleteId = Int()
     
     // MARK: - property
