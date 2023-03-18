@@ -10,11 +10,10 @@ import Foundation
 struct HouseWorksRequest: Codable {
     var assignees: [Int]
     var houseWorkName: String
-    // FIXME: - cycle type 4가지로 변경 필요
-    var repeatCycle: RepeatCycleType.RawValue
+    var repeatCycle: RepeatCycleType.RawValue = "O"
     var repeatPattern: String?
-    var scheduledDate: String?
-    var scheduledTime: String?
+    var scheduledDate: String
+    var scheduledTime: String = "하루 종일"
     var space: String
 }
 

@@ -9,7 +9,19 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
-    // MARK: property
+    // MARK: init
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    deinit {
+        print("success deallocation")
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     // MARK: life cycle
     

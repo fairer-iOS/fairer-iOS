@@ -11,6 +11,8 @@ import SnapKit
 
 final class SetHouseWorkCollectionView: BaseUIView {
     
+    var totalHouseWorks: [HouseWorksRequest] = []
+    
     var didTappedHouseWork: ((Int) -> ())?
     var didDeleteHouseWork: ((Int) -> ())?
     
@@ -75,7 +77,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDelegate {
 
 extension SetHouseWorkCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return HouseWork.mockHouseWork.count
+        return totalHouseWorks.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

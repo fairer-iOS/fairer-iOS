@@ -79,4 +79,11 @@ extension Date {
         formatter.dateFormat = "d"
         return formatter.string(from: self)
     }
+    
+    var dateToAPIString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
+    }
 }

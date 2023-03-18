@@ -21,7 +21,7 @@ final class SetHouseWorkViewController: BaseViewController {
             }
         }
     }
-    private var houseWorks: [HouseWorksRequest] = []
+    private var houseWorks: [HouseWorksRequest]
     
     // MARK: - property
     
@@ -142,8 +142,16 @@ final class SetHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override init() {
+        self.houseWorks = [HouseWorksRequest(assignees: [11], houseWorkName: "창 청소", scheduledDate: Date().dateToAPIString, space: "거실"), HouseWorksRequest(assignees: [11], houseWorkName: "거실 청소", scheduledDate: Date().dateToAPIString, space: "거실"), HouseWorksRequest(assignees: [11], houseWorkName: "물건 정리정돈", scheduledDate: Date().dateToAPIString, space: "거실")]
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setHouseWork()
         setDatePicker()
         didTappedHouseWork()
         didDeleteHouseWork()
@@ -279,6 +287,10 @@ final class SetHouseWorkViewController: BaseViewController {
         appearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func setHouseWork() {
+        setHouseWorkCollectionView.totalHouseWorks = houseWorks
     }
     
     private func setDatePicker() {
