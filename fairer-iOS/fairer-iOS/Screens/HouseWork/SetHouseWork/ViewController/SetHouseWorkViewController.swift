@@ -143,7 +143,7 @@ final class SetHouseWorkViewController: BaseViewController {
     // MARK: - life cycle
     
     override init() {
-        self.houseWorks = [HouseWorksRequest(assignees: [11], houseWorkName: "창 청소", scheduledDate: Date().dateToAPIString, space: "거실"), HouseWorksRequest(assignees: [11], houseWorkName: "거실 청소", scheduledDate: Date().dateToAPIString, space: "거실"), HouseWorksRequest(assignees: [11], houseWorkName: "물건 정리정돈", scheduledDate: Date().dateToAPIString, space: "거실")]
+        self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "창 청소", scheduledDate: Date().dateToAPIString, space: "거실"), HouseWorksRequest(assignees: [], houseWorkName: "거실 청소", scheduledDate: Date().dateToAPIString, space: "거실"), HouseWorksRequest(assignees: [], houseWorkName: "물건 정리정돈", scheduledDate: Date().dateToAPIString, space: "거실")]
         super.init()
     }
     
@@ -532,8 +532,11 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func updateManagerTimeRepeat(_ houseWork: Int) {
-        // FIXME: - 집안일 생성을 위한 모델에 적용
-        // getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
+        var updateMembers: [MemberResponse] = []
+        for assignee in houseWorks[houseWork].assignees {
+            updateMembers += selectManagerView.selectManagerCollectionView.totalMemberList.filter { $0.memberId == assignee }
+        }
+        getManagerView.getManagerCollectionView.selectedMemberList = updateMembers
         isTimeSelected(houseWork)
         isRepeatSelected(houseWork)
     }
@@ -610,6 +613,10 @@ extension SetHouseWorkViewController {
                 guard let membersInfo = teamInfo.members else { return }
                 DispatchQueue.main.async {
                     // FIXME: 첫번째 멤버 대신 user item 넣어주기
+                    guard let memberId = membersInfo[0].memberId else { return }
+                    for index in self.houseWorks.indices {
+                        self.houseWorks[index].assignees.append(memberId)
+                    }
                     self.getManagerView.getManagerCollectionView.selectedMemberList = [membersInfo[0]]
                     self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
                     self.selectManagerView.selectManagerCollectionView.selectedManagerList = [membersInfo[0]]
