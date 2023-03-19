@@ -94,9 +94,7 @@ extension SelectManagerCollectionView: UICollectionViewDataSource {
         }
         
         cell.profileName.setTextWithLineHeight(text: memberName, lineHeight: 26)
-        if let memberImagePath = URL(string: memberImage) {
-            cell.profileImage.load(from: memberImagePath)
-        }
+        cell.profileImage.load(from: memberImage)
         
         return cell
     }
