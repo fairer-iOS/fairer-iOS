@@ -151,7 +151,7 @@ final class SetHouseWorkViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setHouseWork()
+        setInitialHouseWork()
         setDatePicker()
         didTappedHouseWork()
         didDeleteHouseWork()
@@ -289,7 +289,7 @@ final class SetHouseWorkViewController: BaseViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
-    private func setHouseWork() {
+    private func setInitialHouseWork() {
         setHouseWorkCollectionView.totalHouseWorks = houseWorks
     }
     
@@ -363,8 +363,12 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
-            // FIXME: - 집안일 생성을 위한 모델에 적용
-            // HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
+            selectManagerView.selectManagerCollectionView.selectedManagerList.forEach {
+                if let memberId = $0.memberId, !houseWorks[selectedHouseWorkIndex].assignees.contains(memberId) {
+                    houseWorks[selectedHouseWorkIndex].assignees.append(memberId)
+                }
+            }
+            print(getManagerView.getManagerCollectionView.selectedMemberList)
         }
     }
     
