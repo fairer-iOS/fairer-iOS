@@ -86,4 +86,11 @@ extension Date {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: self)
     }
+    
+    var dateToTimeString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: self)
+    }
 }

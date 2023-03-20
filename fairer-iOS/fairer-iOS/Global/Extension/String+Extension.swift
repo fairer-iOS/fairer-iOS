@@ -49,5 +49,19 @@ extension String {
         }
         return false
     }
+    
+    func twentyFourToTwelve() -> String {
+        let time = self.split(separator: ":")
+        // 오전 1~11 / 오후 13~23 / 오전 12시 0 / 오후 12시 24
+        if var hour = Int(time[0]) {
+            
+        }
+        if var hour = Int(time[0]), hour > 12 {
+            hour = hour - 12
+            return "오후\n\(hour)시 \(time[1])분"
+        } else {
+            return "오전\n\(time[0])시 \(time[1])분"
+        }
+    }
 }
 

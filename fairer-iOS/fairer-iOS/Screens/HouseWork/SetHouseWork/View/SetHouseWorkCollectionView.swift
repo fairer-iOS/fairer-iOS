@@ -100,7 +100,7 @@ extension SetHouseWorkCollectionView: UICollectionViewDataSource {
         }
         
         cell.houseWorkLabel.text = totalHouseWorks[indexPath.row].houseWorkName
-        cell.timeLabel.setTextWithLineHeight(text: totalHouseWorks[indexPath.row].scheduledTime, lineHeight: 18)
+        cell.timeLabel.setTextWithLineHeight(text: totalHouseWorks[indexPath.row].scheduledTime == "" ? "하루 종일" : totalHouseWorks[indexPath.row].scheduledTime.twentyFourToTwelve(), lineHeight: 18)
 
         cell.deleteButton.tag = indexPath.item
         cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(sender:)), for: .touchUpInside)

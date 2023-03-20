@@ -368,7 +368,6 @@ final class SetHouseWorkViewController: BaseViewController {
                     houseWorks[selectedHouseWorkIndex].assignees.append(memberId)
                 }
             }
-            print(getManagerView.getManagerCollectionView.selectedMemberList)
         }
     }
     
@@ -403,9 +402,9 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func didTimeChanged() {
-        let time = timePicker.date.timeToKoreanString
-        HouseWork.mockHouseWork[selectedHouseWorkIndex].time = time
-        setHouseWorkCollectionView.collectionView.reloadData()
+        let time = timePicker.date.dateToTimeString
+        houseWorks[selectedHouseWorkIndex].scheduledTime = time
+        setHouseWorkCollectionView.totalHouseWorks[selectedHouseWorkIndex].scheduledTime = time
     }
     
     private func didTappedRepeatToggle() {
@@ -487,7 +486,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func isTimeSelected(_ houseWork: Int) {
-        if HouseWork.mockHouseWork[houseWork].time == TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel {
+        if houseWorks[houseWork].scheduledTime == "" {
             setTimeToggle.isOn = false
             timePicker.snp.updateConstraints {
                 $0.top.equalTo(setTimeLabel.snp.bottom)
