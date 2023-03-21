@@ -103,12 +103,19 @@ final class HouseMakeNameViewController: BaseViewController {
     }
     
     @objc private func didTapDoneButton() {
-        if houseNameTextField.text!.hasCharacters() {
+        guard let text = houseNameTextField.text else { return }
+        
+        if text.hasCharacters() {
             houseNameTextField.layer.borderWidth = 0
             disableLabel.isHidden = true
             
-            // TODO: - userdefault에 하우스 이름 저장
-            
+            postAddTeam(teamName: text) { [weak self] result in
+                let inviteCode = result.inviteCode
+                let houseInviteCodeView = HouseInviteCodeViewController(houseName: text, inviteCode: inviteCode)
+                
+                self?.navigationController?.pushViewController(houseInviteCodeView, animated: true)
+            }
+
         } else {
             houseNameTextField.layer.borderWidth = 1
             houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
@@ -159,5 +166,21 @@ extension HouseMakeNameViewController : UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         houseNameTextField.layer.borderWidth = 0
         view.endEditing(true)
+    }
+}
+
+extension HouseMakeNameViewController {
+    private func postAddTeam(teamName: String, completion: @escaping (AddTeamResponse) -> Void) {
+        NetworkService.shared.teams.postAddTeam(teamName: teamName) { result in
+            switch result {
+            case .success(let response):
+                guard let addPostTeamData = response as? AddTeamResponse else { return }
+                completion(addPostTeamData)
+            case .requestErr(let error):
+                dump(error)
+            default:
+                print("server error")
+            }
+        }
     }
 }
