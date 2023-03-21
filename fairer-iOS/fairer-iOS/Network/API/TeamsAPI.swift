@@ -15,6 +15,7 @@ final class TeamsAPI {
     
     private enum ResponseData {
         case getTeamInfo
+        case postAddTeam
     }
     
     func getTeamInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
@@ -31,13 +32,27 @@ final class TeamsAPI {
         }
     }
     
+    func postAddTeam(teamName: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        teamsProvider.request(.postAddTeam(teamName: teamName)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postAddTeam)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         print("statusCode: ", statusCode)
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .getTeamInfo:
+            case .getTeamInfo, .postAddTeam:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400..<500:
@@ -57,6 +72,11 @@ final class TeamsAPI {
         switch responseData {
         case .getTeamInfo:
             guard let decodedData = try? decoder.decode(TeamInfoResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
+        case .postAddTeam:
+            guard let decodedData = try? decoder.decode(AddTeamResponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)
