@@ -11,6 +11,7 @@ import Moya
 
 enum TeamsRouter {
     case getTeamInfo
+    case postAddTeam(teamName: String)
 }
 
 extension TeamsRouter: BaseTargetType {
@@ -18,6 +19,8 @@ extension TeamsRouter: BaseTargetType {
         switch self {
         case .getTeamInfo:
             return URLConstant.teams + "/my"
+        case .postAddTeam:
+            return URLConstant.teams
         }
     }
     
@@ -25,6 +28,8 @@ extension TeamsRouter: BaseTargetType {
         switch self {
         case .getTeamInfo:
             return .get
+        case .postAddTeam:
+            return .post
         }
     }
     
@@ -32,6 +37,8 @@ extension TeamsRouter: BaseTargetType {
         switch self {
         case .getTeamInfo:
             return .requestPlain
+        case .postAddTeam(let teamName):
+            return .requestParameters(parameters: ["teamName": teamName], encoding: JSONEncoding.default)
         }
     }
 }
