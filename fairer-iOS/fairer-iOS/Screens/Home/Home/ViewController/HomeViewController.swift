@@ -187,7 +187,7 @@ final class HomeViewController: BaseViewController {
         datePickerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+
         emptyHouseWorkImage.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
             $0.centerX.equalToSuperview()
@@ -388,6 +388,11 @@ final class HomeViewController: BaseViewController {
         self.pickDayWorkInfo = self.workInfoReponse?[object.replacingOccurrences(of: ".", with: "-")]
         self.getDivideIndex()
         self.finishedWorkSum = self.countDoneHouseWork(WorkList: self.pickDayWorkInfo?.houseWorks ?? [HouseWorkData]())
+        if (self.pickDayWorkInfo?.countDone ?? Int()) + (self.pickDayWorkInfo?.countLeft ?? Int()) != 0 {
+            self.emptyHouseWorkImage.isHidden = true
+        }else {
+            self.emptyHouseWorkImage.isHidden = false
+        }
         DispatchQueue.main.async {
             self.calendarDailyTableView.reloadData()
         }
@@ -599,6 +604,9 @@ extension HomeViewController {
                     self.divideIndex = self.pickDayWorkInfo?.countLeft ?? Int()
                 }
                 DispatchQueue.main.async {
+                    if (self.pickDayWorkInfo?.countDone ?? Int()) + (self.pickDayWorkInfo?.countLeft ?? Int()) != 0 {
+                        self.emptyHouseWorkImage.isHidden = true
+                    }
                     self.calendarDailyTableView.reloadData()
                 }
             case .requestErr(let errorResponse):
