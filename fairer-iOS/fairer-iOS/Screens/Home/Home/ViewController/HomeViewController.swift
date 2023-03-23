@@ -76,6 +76,11 @@ final class HomeViewController: BaseViewController {
         let view = PickDateView()
         return view
     }()
+    let emptyHouseWorkImage: UIImageView = {
+        let imgView = UIImageView()
+        imgView.image = ImageLiterals.emptyHouseWork
+        return imgView
+    }()
     
     // MARK: - life cycle
     
@@ -117,7 +122,8 @@ final class HomeViewController: BaseViewController {
                          datePickerView,
                          homeCalenderView,
                          homeWeekCalendarCollectionView,
-                         calendarDailyTableView)
+                         calendarDailyTableView,
+                         emptyHouseWorkImage)
         
         toolBarView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -180,6 +186,13 @@ final class HomeViewController: BaseViewController {
         
         datePickerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        
+        emptyHouseWorkImage.snp.makeConstraints {
+            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(156)
+            $0.height.equalTo(240)
         }
     }
     
@@ -372,8 +385,9 @@ final class HomeViewController: BaseViewController {
     
     @objc func observeWeekCalendar(notification: Notification) {
         guard let object = notification.userInfo?[NotificationKey.date] as? String else { return }
-        print("날짜는 \(object)")
-        self.pickDayWorkInfo = self.workInfoReponse?.removeValue(forKey: object.replacingOccurrences(of: ".", with: "-"))
+        self.pickDayWorkInfo = self.workInfoReponse?[object.replacingOccurrences(of: ".", with: "-")]
+        self.getDivideIndex()
+        self.finishedWorkSum = self.countDoneHouseWork(WorkList: self.pickDayWorkInfo?.houseWorks ?? [HouseWorkData]())
         DispatchQueue.main.async {
             self.calendarDailyTableView.reloadData()
         }
@@ -579,18 +593,14 @@ extension HomeViewController {
                     LoadingView.hideLoading()
                 }
                 DispatchQueue.global().sync {
-                    self.workInfoReponse = nil
-                    self.pickDayWorkInfo = nil
                     self.workInfoReponse = houseWorkResponse
-                    self.pickDayWorkInfo = self.workInfoReponse?.removeValue(forKey: self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-"))
+                    self.pickDayWorkInfo = houseWorkResponse[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]
                     self.finishedWorkSum = self.pickDayWorkInfo?.countDone ?? Int()
                     self.divideIndex = self.pickDayWorkInfo?.countLeft ?? Int()
                 }
-                DispatchQueue.global().sync {
-                    print("third")
+                DispatchQueue.main.async {
                     self.calendarDailyTableView.reloadData()
                 }
-                
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
