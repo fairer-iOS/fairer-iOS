@@ -164,6 +164,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             secondCell.isSelected = true
             datePickedByOthers = self.fullDateList[indexPath.row]
         }
+        NotificationCenter.default.post(name: Notification.Name.date, object: nil, userInfo: [NotificationKey.date: datePickedByOthers])
     }
 }
 
@@ -207,4 +208,14 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         }
         return cell
     }
+}
+
+// MARK: - notification
+
+extension Notification.Name {
+    static let date = Notification.Name("date")
+}
+
+enum NotificationKey {
+    case date
 }
