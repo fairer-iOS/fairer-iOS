@@ -13,20 +13,20 @@ final class HouseWorksAPI {
     private let provider = MoyaProvider<HouseWorksRouter>(plugins: [MoyaLoggerPlugin()])
     
     private enum ResponseData {
-        case getHouseWorks
+        case getHouseWorksByDate
     }
     
-    public func getDateHouseWork(
+    public func getHouseWorksByDate(
         fromDate: String,
         toDate: String,
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        provider.request(.getHouseWorks(fromDate: fromDate, toDate: toDate)) { result in
+        provider.request(.getHouseWorksByDate(fromDate: fromDate, toDate: toDate)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getHouseWorks)
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getHouseWorksByDate)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -40,7 +40,7 @@ final class HouseWorksAPI {
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .getHouseWorks:
+            case .getHouseWorksByDate:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400..<500:
@@ -59,7 +59,7 @@ final class HouseWorksAPI {
         let decoder = JSONDecoder()
         
         switch responseData {
-        case .getHouseWorks:
+        case .getHouseWorksByDate:
             guard let decodedData = try? decoder.decode(WorkInfoReponse.self, from: data) else {
                 return .pathErr
             }
