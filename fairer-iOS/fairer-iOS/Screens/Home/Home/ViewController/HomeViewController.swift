@@ -18,7 +18,6 @@ final class HomeViewController: BaseViewController {
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var divideIndex: Int = 0
     private var finishedWorkSum: Int = 0
-    private var workInfoReponse: WorkInfoReponse?
     private var pickDayWorkInfo: DayHouseWorks?
     
     // MARK: - property
@@ -90,6 +89,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.setupDelegate()
         self.setWeekCalendarSwipeGesture()
         self.setButtonEvent()
@@ -99,10 +99,18 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.getDivideIndex()
-        self.getWeekHouseWorks(
-            startDate: homeWeekCalendarCollectionView.fullDateList.first ?? String(),
-            endDate: homeWeekCalendarCollectionView.fullDateList.last ?? String()
-        )
+        
+        if homeWeekCalendarCollectionView.datePickedByOthers == "" {
+            self.getHouseWorksByDate(
+                startDate: homeWeekCalendarCollectionView.todayDateInString,
+                endDate: homeWeekCalendarCollectionView.todayDateInString
+            )
+        }else {
+            self.getHouseWorksByDate(
+                startDate: homeWeekCalendarCollectionView.datePickedByOthers,
+                endDate: homeWeekCalendarCollectionView.datePickedByOthers
+            )
+        }
     }
     
     override func configUI() {
@@ -318,9 +326,9 @@ final class HomeViewController: BaseViewController {
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(yearInString)년 \(monthInString)월", for: .normal)
             self.homeWeekCalendarCollectionView.datePickedByOthers = pickedDate.dateToString
             self.datePickerView.isHidden = true
-            self.getWeekHouseWorks(
-                startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
-                endDate: self.homeWeekCalendarCollectionView.fullDateList.last ?? String()
+            self.getHouseWorksByDate(
+                startDate: pickedDate.dateToString,
+                endDate: pickedDate.dateToString
             )
             self.setupNavigationBar()
         }
@@ -344,7 +352,6 @@ final class HomeViewController: BaseViewController {
             if divider.success == true { continue }
             self.divideIndex = self.divideIndex + 1
         }
-        print("divideIndex",self.divideIndex)
     }
     
     private func listCompleteHouseWorkLast(WorkList: [HouseWorkData]) -> [HouseWorkData] {
@@ -364,8 +371,8 @@ final class HomeViewController: BaseViewController {
         }
         return finishedHouseWorkNum
     }
-
-    private func getWeekHouseWorks(startDate: String, endDate: String) {
+    
+    private func getHouseWorksByDate(startDate: String, endDate: String) {
         DispatchQueue.main.async {
             LoadingView.showLoading()
         }
@@ -373,7 +380,22 @@ final class HomeViewController: BaseViewController {
             self.getDateHouseWork(
                 fromDate: startDate.replacingOccurrences(of: ".", with: "-")
                 , toDate: endDate.replacingOccurrences(of: ".", with: "-")
-            )
+            ) { response in
+                DispatchQueue.main.async {
+                    LoadingView.hideLoading()
+                    self.pickDayWorkInfo = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]
+                    self.finishedWorkSum = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countDone ?? 0
+                    self.divideIndex = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countLeft ?? 0
+                    if (self.pickDayWorkInfo?.countDone ?? 0) + (self.pickDayWorkInfo?.countLeft ?? 0) != 0 {
+                        self.emptyHouseWorkImage.isHidden = true
+                        self.calendarDailyTableView.isHidden = false
+                    }else {
+                        self.emptyHouseWorkImage.isHidden = false
+                        self.calendarDailyTableView.isHidden = true
+                    }
+                    self.calendarDailyTableView.reloadData()
+                }
+            }
         }
     }
     
@@ -385,17 +407,11 @@ final class HomeViewController: BaseViewController {
     
     @objc func observeWeekCalendar(notification: Notification) {
         guard let object = notification.userInfo?[NotificationKey.date] as? String else { return }
-        self.pickDayWorkInfo = self.workInfoReponse?[object.replacingOccurrences(of: ".", with: "-")]
-        self.getDivideIndex()
-        self.finishedWorkSum = self.countDoneHouseWork(WorkList: self.pickDayWorkInfo?.houseWorks ?? [HouseWorkData]())
-        if (self.pickDayWorkInfo?.countDone ?? Int()) + (self.pickDayWorkInfo?.countLeft ?? Int()) != 0 {
-            self.emptyHouseWorkImage.isHidden = true
-        }else {
-            self.emptyHouseWorkImage.isHidden = false
-        }
-        DispatchQueue.main.async {
-            self.calendarDailyTableView.reloadData()
-        }
+
+        self.getHouseWorksByDate(
+            startDate: object,
+            endDate: object
+        )
     }
     
     @objc
@@ -412,9 +428,9 @@ final class HomeViewController: BaseViewController {
         if (sender.direction == .right) {
             self.homeWeekCalendarCollectionView.getBeforeWeekDate()
         }
-        self.getWeekHouseWorks(
+        self.getHouseWorksByDate(
             startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
-            endDate: self.homeWeekCalendarCollectionView.fullDateList.last ?? String()
+            endDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String()
         )
     }
     
@@ -424,9 +440,9 @@ final class HomeViewController: BaseViewController {
         self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
         self.homeWeekCalendarCollectionView.collectionView.reloadData()
         self.homeWeekCalendarCollectionView.datePickedByOthers = Date().dateToString
-        self.getWeekHouseWorks(
-            startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
-            endDate: self.homeWeekCalendarCollectionView.fullDateList.last ?? String()
+        self.getHouseWorksByDate(
+            startDate: self.homeWeekCalendarCollectionView.datePickedByOthers,
+            endDate: self.homeWeekCalendarCollectionView.datePickedByOthers
         )
     }
     
@@ -445,7 +461,7 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollOffset = scrollView.contentOffset.y
-        // MARK: - fix for main view scroll
+        
         if scrollOffset <= 1 {
             scrollDidEnd()
             isScrolled = false
@@ -589,26 +605,12 @@ extension HomeViewController {
         }
     }
     
-    func getDateHouseWork(fromDate: String, toDate: String) {
+    func getDateHouseWork(fromDate: String, toDate: String, completion: @escaping (WorkInfoReponse) -> Void) {
         NetworkService.shared.houseWorks.getDateHouseWork(fromDate: fromDate, toDate: toDate) { result in
             switch result {
             case .success(let response):
                 guard let houseWorkResponse = response as? WorkInfoReponse else { return }
-                DispatchQueue.main.async {
-                    LoadingView.hideLoading()
-                }
-                DispatchQueue.global().sync {
-                    self.workInfoReponse = houseWorkResponse
-                    self.pickDayWorkInfo = houseWorkResponse[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]
-                    self.finishedWorkSum = self.pickDayWorkInfo?.countDone ?? Int()
-                    self.divideIndex = self.pickDayWorkInfo?.countLeft ?? Int()
-                }
-                DispatchQueue.main.async {
-                    if (self.pickDayWorkInfo?.countDone ?? Int()) + (self.pickDayWorkInfo?.countLeft ?? Int()) != 0 {
-                        self.emptyHouseWorkImage.isHidden = true
-                    }
-                    self.calendarDailyTableView.reloadData()
-                }
+                completion(houseWorkResponse)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:

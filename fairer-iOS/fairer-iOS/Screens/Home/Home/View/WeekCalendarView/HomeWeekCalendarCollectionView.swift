@@ -21,7 +21,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     lazy var fullDateList = [String]()
     lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
-    private var todayDateInString = Date().dateToString
+    lazy var todayDateInString = Date().dateToString
     lazy var datePickedByOthers = ""
     var yearMonthDateByTouchedCell: ((String)->())?
     private enum Size {
