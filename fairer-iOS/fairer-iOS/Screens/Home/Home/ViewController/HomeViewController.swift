@@ -348,6 +348,7 @@ final class HomeViewController: BaseViewController {
     
     private func getDivideIndex() {
         self.divideIndex = 0
+        
         for divider in self.pickDayWorkInfo?.houseWorks ?? [HouseWorkData]() {
             if divider.success == true { continue }
             self.divideIndex = self.divideIndex + 1
@@ -357,6 +358,7 @@ final class HomeViewController: BaseViewController {
     private func listCompleteHouseWorkLast(WorkList: [HouseWorkData]) -> [HouseWorkData] {
         var notFinishedList = [HouseWorkData]()
         var finishedList = [HouseWorkData]()
+        
         for dummy in WorkList {
             if dummy.success == true { finishedList.append(dummy) }
             else { notFinishedList.append(dummy) }
@@ -366,6 +368,7 @@ final class HomeViewController: BaseViewController {
     
     private func countDoneHouseWork(WorkList: [HouseWorkData]) -> Int {
         var finishedHouseWorkNum = 0
+        
         for dummy in WorkList {
             if dummy.success == true { finishedHouseWorkNum = finishedHouseWorkNum + 1}
         }
@@ -393,6 +396,7 @@ final class HomeViewController: BaseViewController {
                         self.emptyHouseWorkImage.isHidden = false
                         self.calendarDailyTableView.isHidden = true
                     }
+                    self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.houseWorks ?? [HouseWorkData]())
                     self.calendarDailyTableView.reloadData()
                 }
             }
@@ -421,13 +425,8 @@ final class HomeViewController: BaseViewController {
     }
     
     @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
-        if (sender.direction == .left) {
-            self.homeWeekCalendarCollectionView.getAfterWeekDate()
-        }
-            
-        if (sender.direction == .right) {
-            self.homeWeekCalendarCollectionView.getBeforeWeekDate()
-        }
+        if (sender.direction == .left) { self.homeWeekCalendarCollectionView.getAfterWeekDate() }
+        if (sender.direction == .right) { self.homeWeekCalendarCollectionView.getBeforeWeekDate() }
         self.getHouseWorksByDate(
             startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
             endDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String()
@@ -483,7 +482,7 @@ extension HomeViewController: UITableViewDelegate {
             selectedCell.shadowLayer.backgroundColor = .blue
             let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
                 self.completeHouseWork(houseWorkId: selectedCell.houseWorkId, scheduledDate: selectedCell.scheduledDate) { response in
-                    selectedCell.houseWorkCompleteId = response.houseWorkCompleteId ?? Int()
+                    self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkCompleteId = response.houseWorkCompleteId ?? Int()
                 }
                 self.pickDayWorkInfo?.houseWorks?[indexPath.section].success = true
                 self.finishedWorkSum = self.countDoneHouseWork(WorkList: self.pickDayWorkInfo?.houseWorks ?? [HouseWorkData]())
