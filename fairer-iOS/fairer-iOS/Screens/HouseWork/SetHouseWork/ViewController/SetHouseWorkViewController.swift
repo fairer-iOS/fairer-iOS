@@ -423,8 +423,9 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
                 $0.bottom.equalToSuperview().inset(40)
             }
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
-            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
+            houseWorks[selectedHouseWorkIndex].repeatCycle = RepeatCycleType.week.rawValue
+            houseWorks[selectedHouseWorkIndex].repeatPattern = Date().dayOfWeekToAPIString
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.week.repeatLabel
             updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
             repeatCycleCollectionView.selectedDaysOfWeek = []
         } else {
@@ -441,8 +442,8 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             }
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = nil
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern = nil
+            houseWorks[selectedHouseWorkIndex].repeatCycle = RepeatCycleType.once.rawValue
+            houseWorks[selectedHouseWorkIndex].repeatPattern = Date().dateToAPIString
             repeatCycleMenu.isHidden = true
         }
         addAnimation()
@@ -455,11 +456,16 @@ final class SetHouseWorkViewController: BaseViewController {
     private func didTappedRepeatCycleMenuButton() {
         repeatCycleMenu.didTappedRepeatCycleMenuButton = { [weak self] repeatCycle in
             switch repeatCycle {
+            case .once:
+                break
+            case .daily:
+                break
             case .week:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }
                 self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
+//                houseWorks[selectedHouseWorkIndex]
                 HouseWork.mockHouseWork[0].repeatPattern = nil
                 self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             case .month:
@@ -468,7 +474,7 @@ final class SetHouseWorkViewController: BaseViewController {
                 }
                 self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
-            HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
+//            HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.rawValue
             self?.repeatCycleMenu.isHidden = true
         }
@@ -565,8 +571,12 @@ final class SetHouseWorkViewController: BaseViewController {
         repeatCycleDayLabel.isHidden = true
     }
     
-    private func updateRepeatCycleDayLabel(_ type: RepeatType, _ repeatDay: String) {
+    private func updateRepeatCycleDayLabel(_ type: RepeatCycleType, _ repeatDay: String) {
         switch type {
+        case .once:
+            break
+        case .daily:
+            break
         case .week:
             repeatCycleDayLabel.text = TextLiteral.everyWeekText + repeatDay + TextLiteral.weekText + TextLiteral.repeatText
             repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.weekText, with: .positive20)
