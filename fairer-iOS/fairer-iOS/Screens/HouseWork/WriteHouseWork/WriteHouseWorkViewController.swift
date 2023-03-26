@@ -516,8 +516,12 @@ final class WriteHouseWorkViewController: BaseViewController {
         }, completion: nil)
     }
     
-    private func updateRepeatCycleDayLabel(_ type: RepeatType, _ repeatDay: String) {
+    private func updateRepeatCycleDayLabel(_ type: RepeatCycleType, _ repeatDay: String) {
         switch type {
+        case .once:
+            break
+        case .daily:
+            break
         case .week:
             repeatCycleDayLabel.text = TextLiteral.everyWeekText + repeatDay + TextLiteral.weekText + TextLiteral.repeatText
             repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.weekText, with: .positive20)
