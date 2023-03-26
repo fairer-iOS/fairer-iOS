@@ -23,7 +23,7 @@ final class SelectManagerCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    let profileImage = UIImageView(image: ImageLiterals.profileLightBlue1)
+    let profileImage = UIImageView(image: ImageLiterals.profileNone)
     let profileName: UILabel = {
         let label = UILabel()
         label.textColor = .gray800
