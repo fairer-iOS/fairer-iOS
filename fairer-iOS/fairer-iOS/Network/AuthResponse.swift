@@ -17,3 +17,9 @@ struct AuthResponse: Codable {
         case memberName, refreshToken, refreshTokenExpireTime
     }
 }
+
+
+struct AuthRequest: Codable {
+    var clientType = "IOS"
+    var socialType = "GOOGLE"
+}

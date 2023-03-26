@@ -12,7 +12,7 @@ import Moya
 final class OauthAPI {
     private let authProvider = MoyaProvider<OauthRouter>(plugins: [MoyaLoggerPlugin()])
     
-    public func postSignIn(socialType: String,
+    public func postSignIn(socialType: AuthRequest,
                            completion: @escaping (NetworkResult<Any>) -> Void) {
         authProvider.request(.oauthLogin(socialType: socialType)) { result in
             switch result {

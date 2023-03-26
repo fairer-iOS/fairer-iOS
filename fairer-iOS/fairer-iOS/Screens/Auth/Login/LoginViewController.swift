@@ -14,7 +14,8 @@ final class LoginViewController: BaseViewController {
 
     // MARK: - property
     static var idToken = String()
-    private let signInConfig = GIDConfiguration.init(clientID: "720771356142-t2db67dm1gpclm8vkj1upc12bkijdjdj.apps.googleusercontent.com")
+    private let signInConfig = GIDConfiguration.init(clientID: "720771356142-t2db67dm1gpclm8vkj1upc12bkijdjdj.apps.googleusercontent.com", serverClientID: "720771356142-qae75m7290099120eqfih689376on2or.apps.googleusercontent.com")
+    private let OauthRequestData = AuthRequest()
     private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
         let label = UILabel()
@@ -107,10 +108,11 @@ final class LoginViewController: BaseViewController {
     }
 
     private func googleSignIn() {
-        GIDSignIn.sharedInstance.signIn(with: self.signInConfig, presenting: self) { user, error in
+        GIDSignIn.sharedInstance.signIn(with: self.signInConfig, presenting: self) { signInResult, error in
             guard error == nil else { return }
-            guard let user = user else { return }
-            user.authentication.do { [self] authentication, error in
+            guard let signInResult = signInResult else { return }
+            
+            signInResult.authentication.do { [self] authentication, error in
                 guard error == nil else {
                     print(error as Any)
                     return
@@ -120,14 +122,14 @@ final class LoginViewController: BaseViewController {
                 // MARK: - Fix UserDefault
                 LoginViewController.idToken = idToken!
                 print("idToken : ", idToken!)
-//                print("grantedScopes :",user.grantedScopes as Any)
+                print("refresh : ",authentication.refreshToken)
                 self.postSignIn()
             }
         }
     }
-
+    
     func postSignIn() {
-        NetworkService.shared.oauth.postSignIn(socialType: "GOOGLE") { result in
+        NetworkService.shared.oauth.postSignIn(socialType: OauthRequestData) { result in
             switch result {
             case .success(let response):
                 guard let data = response as? AuthResponse else { return }
