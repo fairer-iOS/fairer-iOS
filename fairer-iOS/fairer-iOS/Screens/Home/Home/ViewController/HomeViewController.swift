@@ -566,6 +566,11 @@ extension HomeViewController: UITableViewDataSource {
             cell.mainBackground.backgroundColor = .positive10
             cell.houseWorkCompleteId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkCompleteId ?? Int()
         }
+        
+        cell.memberListProfilePath = self.pickDayWorkInfo?.houseWorks?[indexPath.section].assignees ?? [Assignee]()
+        
+        print("cell.memberListProfilePath = ", cell.memberListProfilePath)
+
         return cell
     }
     
