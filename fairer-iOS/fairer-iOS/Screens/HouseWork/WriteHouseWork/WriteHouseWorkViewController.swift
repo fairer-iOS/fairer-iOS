@@ -517,6 +517,10 @@ final class WriteHouseWorkViewController: BaseViewController {
     private func didTappedRepeatCycleMenuButton() {
         repeatCycleMenu.didTappedRepeatCycleMenuButton = { [weak self] repeatCycle in
             switch repeatCycle {
+            case .once:
+                break
+            case .daily:
+                break
             case .week:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
@@ -529,7 +533,7 @@ final class WriteHouseWorkViewController: BaseViewController {
                 }
                 self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
-            HouseWork.mockHouseWork[0].repeatCycle = repeatCycle
+//            HouseWork.mockHouseWork[0].repeatCycle = repeatCycle
             HouseWork.mockHouseWork[0].repeatPattern = nil
             self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.rawValue
