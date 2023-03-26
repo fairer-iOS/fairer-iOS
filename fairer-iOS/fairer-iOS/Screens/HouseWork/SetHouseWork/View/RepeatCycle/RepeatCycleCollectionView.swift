@@ -12,11 +12,7 @@ import SnapKit
 final class RepeatCycleCollectionView: BaseUIView {
     
     var selectedIndex: Int?
-    var selectedHouseWorkIndex: Int = 0 {
-        didSet {
-            selectedDaysOfWeek = HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern ?? []
-        }
-    }
+    var selectedHouseWorkIndex: Int = 0
     private let daysOfWeekList: [String] = TextLiteral.repeatCycleCollectionViewDaysOfWeekList
     var selectedDaysOfWeek: [String] = [] {
         didSet {

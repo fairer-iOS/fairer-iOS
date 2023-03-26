@@ -56,7 +56,6 @@
 		52136FD72983DE1A0022D465 /* RepeatCycleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */; };
 		52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */; };
 		52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */; };
-		52136FDE29867AB60022D465 /* HouseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FDD29867AB60022D465 /* HouseWork.swift */; };
 		52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */; };
 		5226860A299E1190007943EF /* PickDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52268609299E1190007943EF /* PickDateButton.swift */; };
 		522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */; };
@@ -201,7 +200,6 @@
 		52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleMenu.swift; sourceTree = "<group>"; };
 		52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionViewCell.swift; sourceTree = "<group>"; };
 		52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionView.swift; sourceTree = "<group>"; };
-		52136FDD29867AB60022D465 /* HouseWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWork.swift; sourceTree = "<group>"; };
 		52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteHouseWorkViewController.swift; sourceTree = "<group>"; };
 		52268609299E1190007943EF /* PickDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateButton.swift; sourceTree = "<group>"; };
 		522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkViewController.swift; sourceTree = "<group>"; };
@@ -544,14 +542,6 @@
 			path = RepeatCycle;
 			sourceTree = "<group>";
 		};
-		52136FDC29867A810022D465 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				52136FDD29867AB60022D465 /* HouseWork.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		52136FDF298A72020022D465 /* WriteHouseWork */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,7 +553,6 @@
 		522714E6297917AF006BADBC /* SetHouseWork */ = {
 			isa = PBXGroup;
 			children = (
-				52136FDC29867A810022D465 /* Model */,
 				5A99A2A829A5FE42006FE9B2 /* ViewController */,
 				522714E9297918DB006BADBC /* View */,
 			);
@@ -1226,7 +1215,6 @@
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
 				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
-				52136FDE29867AB60022D465 /* HouseWork.swift in Sources */,
 				917D8B6129A632EC00E26B73 /* MembersRouter.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
