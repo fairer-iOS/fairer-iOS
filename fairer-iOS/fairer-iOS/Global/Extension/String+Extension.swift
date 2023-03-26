@@ -87,5 +87,26 @@ extension String {
             return ""
         }
     }
+    
+    func englishToDayOfWeekString() -> String {
+        switch self {
+        case "MONDAY":
+            return "0월"
+        case "TUESDAY":
+            return "1화"
+        case "WEDNESDAY":
+            return "2수"
+        case "THURSDAY":
+            return "3목"
+        case "FRIDAY":
+            return "4금"
+        case "SATURDAY":
+            return "5토"
+        case "SUNDAY":
+            return "6일"
+        default:
+            return ""
+        }
+    }
 }
 

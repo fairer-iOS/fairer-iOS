@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct HouseWorksResponse: Codable {
+typealias HouseWorksResponse = [HouseWorkResponse]
+
+struct HouseWorkResponse: Codable {
     let assignees: [MemberResponse]
     let houseWorkCompleteId: Int
     let houseWorkId: Int

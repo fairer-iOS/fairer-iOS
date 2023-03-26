@@ -143,7 +143,8 @@ final class SetHouseWorkViewController: BaseViewController {
     // MARK: - life cycle
     
     override init() {
-        self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "창 청소", scheduledDate: Date().dateToAPIString, space: "거실"), HouseWorksRequest(assignees: [], houseWorkName: "거실 청소", scheduledDate: Date().dateToAPIString, space: "거실"), HouseWorksRequest(assignees: [], houseWorkName: "물건 정리정돈", scheduledDate: Date().dateToAPIString, space: "거실")]
+        // FIXME: SelectHouseWork에서 받은 값으로 binding
+        self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "창 청소", space: "LIVINGROOM"), HouseWorksRequest(assignees: [], houseWorkName: "거실 청소", space: "LIVINGROOM"), HouseWorksRequest(assignees: [], houseWorkName: "물건 정리정돈", space: "LIVINGROOM")]
         super.init()
     }
     
@@ -492,7 +493,7 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
             self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
-            self?.houseWorks[selectedHouseWorkIndex].repeatPattern = sortedDaysInAPIString.joined(separator: ", ")
+            self?.houseWorks[selectedHouseWorkIndex].repeatPattern = sortedDaysInAPIString.joined(separator: ",")
         }
     }
     
@@ -513,18 +514,21 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func isRepeatSelected(_ houseWork: Int) {
-        switch HouseWork.mockHouseWork[houseWork].repeatCycle {
-        case .week:
+        switch houseWorks[houseWork].repeatCycle {
+        case "W":
             setRepeatToggle.isOn = true
             openRepeatCycleView()
-            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.week.repeatLabel
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(40)
             }
-            repeatCycleCollectionView.selectedHouseWorkIndex = houseWork
+            var dayOfWeeks = houseWorks[houseWork].repeatPattern.components(separatedBy: ",")
+            dayOfWeeks.indices.forEach { dayOfWeeks[$0] = dayOfWeeks[$0].englishToDayOfWeekString() }
+            repeatCycleCollectionView.selectedDaysOfWeek = dayOfWeeks
             repeatCycleCollectionView.collectionView.reloadData()
-            updateRepeatCycleDayLabel(.week, HouseWork.mockHouseWork[houseWork].repeatPattern?.joined(separator: ", ") ?? Date().dayOfWeekToKoreanString)
-        case .month:
+            dayOfWeeks.indices.forEach { dayOfWeeks[$0] = String(dayOfWeeks[$0].dropFirst(1)) }
+            updateRepeatCycleDayLabel(.week, dayOfWeeks.joined(separator: ", "))
+        case "M":
             setRepeatToggle.isOn = true
             openRepeatCycleView()
             repeatCycleCollectionView.snp.updateConstraints {
@@ -532,12 +536,14 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             repeatCycleView.repeatCycleButtonLabel.text = RepeatType.month.rawValue
             updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
-        case .none:
+        case "O", "D":
             setRepeatToggle.isOn = false
             closeRepeatCycleView()
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
+        default:
+            break
         }
     }
     
@@ -601,18 +607,11 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func setDoneButton() {
         let action = UIAction { [weak self] _ in
-            self?.prepareHouseWorksRequest()
             if let houseWorks = self?.houseWorks {
                 self?.postAddHouseWorks(body: houseWorks)
             }
         }
         doneButton.addAction(action, for: .touchUpInside)
-    }
-    
-    private func prepareHouseWorksRequest() {
-        // FIXME: - data binding & model 수정 필요
-        let houseWork = HouseWorksRequest(assignees: [1, 2], houseWorkName: "창 청소", repeatCycle: "W", repeatPattern: "monday, sunday", scheduledDate: "2022-07-02", scheduledTime: "10:00", space: "LIVINGROOM")
-        self.houseWorks.append(houseWork)
     }
 }
 
@@ -639,18 +638,22 @@ extension SetHouseWorkViewController {
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
-                print("error")
+                break
             }
         }
     }
-}
-
-// MARK: - extension
-
-extension SetHouseWorkViewController {
+    
     private func postAddHouseWorks(body: [HouseWorksRequest]) {
-        NetworkService.shared.houseWorks.postAddHouseWorksAPI(body: body) { response in
-            
+        NetworkService.shared.houseWorks.postAddHouseWorksAPI(body: body) { result in
+            switch result {
+            case .success(let response):
+                dump(response)
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
+            }
         }
     }
 }
