@@ -6,16 +6,14 @@
 //
 
 struct AuthResponse: Codable {
-    let accessToken, accessTokenExpireTime: String
-    let hasTeam, isNewMember: Bool
-    let memberID: Int
-    let memberName, refreshToken, refreshTokenExpireTime: String
-
-    enum CodingKeys: String, CodingKey {
-        case accessToken, accessTokenExpireTime, hasTeam, isNewMember
-        case memberID = "memberId"
-        case memberName, refreshToken, refreshTokenExpireTime
-    }
+    let accessToken: String?
+    let accessTokenExpireTime: String?
+    let hasTeam: Bool?
+    let isNewMember: Bool?
+    let memberId: Int?
+    let memberName: String?
+    let refreshToken: String?
+    let refreshTokenExpireTime: String?
 }
 
 

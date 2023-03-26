@@ -13,8 +13,8 @@ import GoogleSignIn
 final class LoginViewController: BaseViewController {
 
     // MARK: - property
-    static var idToken = String()
-    private let signInConfig = GIDConfiguration.init(clientID: "720771356142-t2db67dm1gpclm8vkj1upc12bkijdjdj.apps.googleusercontent.com", serverClientID: "720771356142-qae75m7290099120eqfih689376on2or.apps.googleusercontent.com")
+
+    private let signInConfig = GIDConfiguration.init(clientID: "", serverClientID: "")
     private let OauthRequestData = AuthRequest()
     private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
@@ -119,10 +119,7 @@ final class LoginViewController: BaseViewController {
                 }
                 guard let authentication = authentication else { return }
                 let idToken = authentication.idToken
-                // MARK: - Fix UserDefault
-                LoginViewController.idToken = idToken!
-                print("idToken : ", idToken!)
-                print("refresh : ",authentication.refreshToken)
+                UserDefaults.standard.set(idToken, forKey: "OauthIdToken")
                 self.postSignIn()
             }
         }
