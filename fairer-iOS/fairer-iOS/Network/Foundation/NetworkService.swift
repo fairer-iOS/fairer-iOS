@@ -24,11 +24,11 @@ final class NetworkService {
 //
 //    let presets = PresetsAPI()
 //
-//    let rules = RulesAPI()
+    let rules = RulesAPI()
 //
 //    let statistics = StatisticsAPI()
 //
-//    let teams = TeamsAPI()
+    let teams = TeamsAPI()
     
 
 }
