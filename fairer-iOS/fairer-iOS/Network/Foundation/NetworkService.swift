@@ -14,7 +14,7 @@ final class NetworkService {
 //
 //    let fcm = FcmAPI()
 //
-//    let houseWorkCompleteRouter = HouseWorkCompleteRouterAPI()
+    let houseWorkCompleteRouter = HouseWorkCompleteRouterAPI()
 //
 //    let houseWorks = HouseWorksAPI()
 //
@@ -24,11 +24,11 @@ final class NetworkService {
 //
 //    let presets = PresetsAPI()
 //
-//    let rules = RulesAPI()
+    let rules = RulesAPI()
 //
 //    let statistics = StatisticsAPI()
 //
-//    let teams = TeamsAPI()
+    let teams = TeamsAPI()
     
 
 }

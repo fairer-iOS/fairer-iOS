@@ -17,7 +17,7 @@ final class PickDateView: BaseUIView {
     var dismissClosure: ((Date,Date,String,String)->())?
     private lazy var changeDateResult = Date()
     private lazy var changeDateStartDateWeekResult = Date()
-    private lazy var datePicker: UIDatePicker = {
+    lazy var datePicker: UIDatePicker = {
         let view = UIDatePicker()
         view.datePickerMode = .date
         view.preferredDatePickerStyle = .inline
