@@ -14,7 +14,7 @@ final class SetHouseWorkViewController: BaseViewController {
     private var selectedHouseWorkIndex: Int = 0
     private var selectedDay: Date = Date() {
         didSet {
-            if HouseWork.mockHouseWork[0].repeatCycle == .week {
+            if houseWorks[selectedHouseWorkIndex].repeatCycle == "W" {
                 updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
             } else {
                 updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
@@ -483,13 +483,16 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didSelectDaysOfWeek() {
         repeatCycleCollectionView.didSelectDaysOfWeek = { [weak self] selectedDays in
+            guard let selectedHouseWorkIndex = self?.selectedHouseWorkIndex else { return }
             var sortedDays: [String] = []
+            var sortedDaysInAPIString: [String] = []
             for day in selectedDays.sorted(){
                 sortedDays.append(String(day.dropFirst(1)))
+                sortedDaysInAPIString.append(day.dayOfWeekToAPIString())
             }
             let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
             self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
-            HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatPattern = sortedDays
+            self?.houseWorks[selectedHouseWorkIndex].repeatPattern = sortedDaysInAPIString.joined(separator: ", ")
         }
     }
     
