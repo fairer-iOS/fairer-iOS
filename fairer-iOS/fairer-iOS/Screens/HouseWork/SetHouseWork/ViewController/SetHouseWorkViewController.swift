@@ -396,7 +396,8 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(setTimeLabel.snp.bottom)
                 $0.height.equalTo(0)
             }
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].time = TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel
+            houseWorks[selectedHouseWorkIndex].scheduledTime = ""
+            setHouseWorkCollectionView.totalHouseWorks[selectedHouseWorkIndex].scheduledTime = ""
             setHouseWorkCollectionView.collectionView.reloadData()
         }
     }
