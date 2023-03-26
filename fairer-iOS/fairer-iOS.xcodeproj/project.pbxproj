@@ -97,11 +97,15 @@
 		52F1E1A129228C9500DDAA75 /* SettingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
+		5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E711129BEF88B003FD32F /* BlankResponse.swift */; };
 		5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */; };
 		5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */; };
 		5A99A2DB29A8C3F3006FE9B2 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */; };
 		5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */; };
 		5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */; };
+		5A9BD08829C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BD08729C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift */; };
+		5AB8068629BEE842009EB243 /* ServerErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8068529BEE842009EB243 /* ServerErrorResponse.swift */; };
+		5ABB7FB229B48DED008D5C15 /* RulesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
 		7E1F2E2E28D2168300A5744A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */; };
 		7E1F2E2F28D2168300A5744A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */; };
@@ -239,11 +243,15 @@
 		52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileViewController.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
+		5A4E711129BEF88B003FD32F /* BlankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankResponse.swift; sourceTree = "<group>"; };
 		5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleViewController.swift; sourceTree = "<group>"; };
 		5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleTableViewCell.swift; sourceTree = "<group>"; };
 		5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		5A9BD08729C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleHeaderView.swift; sourceTree = "<group>"; };
+		5AB8068529BEE842009EB243 /* ServerErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorResponse.swift; sourceTree = "<group>"; };
+		5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RulesResponse.swift; path = "fairer-iOS/Network/DTO/Rules/RulesResponse.swift"; sourceTree = SOURCE_ROOT; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		7E1F2E2B28D2168200A5744A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		7E1F2E2C28D2168200A5744A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -768,7 +776,6 @@
 			isa = PBXGroup;
 			children = (
 				5A99A29D29A5FCD5006FE9B2 /* ViewController */,
-				5A99A29E29A5FCF0006FE9B2 /* View */,
 			);
 			path = SettingHomeRule;
 			sourceTree = "<group>";
@@ -834,6 +841,7 @@
 			isa = PBXGroup;
 			children = (
 				5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */,
+				5A99A29E29A5FCF0006FE9B2 /* View */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -842,6 +850,7 @@
 			isa = PBXGroup;
 			children = (
 				5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */,
+				5A9BD08729C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -932,6 +941,14 @@
 				917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */,
 			);
 			path = MoyaPlugin;
+			sourceTree = "<group>";
+		};
+		5A9BD08629C1A21100ADD3CC /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */,
+			);
+			path = Rules;
 			sourceTree = "<group>";
 		};
 		7E1F2E2628D212E000A5744A /* Fonts */ = {
@@ -1047,12 +1064,15 @@
 		917D8B5329A62F9B00E26B73 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				5A9BD08629C1A21100ADD3CC /* Rules */,
 				52A53DCC29B0771700C4BB4C /* HouseWorks */,
 				52A53DD329B086A200C4BB4C /* MemberResponse.swift */,
 				52A53DC729B06DD200C4BB4C /* Teams */,
 				52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */,
 				914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */,
+				5AB8068529BEE842009EB243 /* ServerErrorResponse.swift */,
 				914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */,
+				5A4E711129BEF88B003FD32F /* BlankResponse.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1162,6 +1182,7 @@
 				5205053F28D76B0C00355055 /* TextLiteral.swift in Sources */,
 				917D8B8229A6355500E26B73 /* FCMRouter.swift in Sources */,
 				52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */,
+				5A9BD08829C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift in Sources */,
 				911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */,
 				917D8B7729A633B900E26B73 /* PresetsAPI.swift in Sources */,
 				5205055828E1C50600355055 /* InfoLabelView.swift in Sources */,
@@ -1177,6 +1198,7 @@
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
 				52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */,
 				39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */,
+				5ABB7FB229B48DED008D5C15 /* RulesResponse.swift in Sources */,
 				39EEF66D28CBB59D00437654 /* UICollectionView+Extension.swift in Sources */,
 				39EEF67728CBB61600437654 /* Date+Extension.swift in Sources */,
 				39EEF66928CBB57F00437654 /* UIViewController+Extension.swift in Sources */,
@@ -1225,6 +1247,7 @@
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
+				5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */,
 				917D8B5A29A632A100E26B73 /* AlarmRouter.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
 				52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */,
@@ -1260,6 +1283,7 @@
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */,
 				52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */,
+				5AB8068629BEE842009EB243 /* ServerErrorResponse.swift in Sources */,
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
 				39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */,
 				5204AABC2950BC50002FB6CA /* SettingInquiryViewController.swift in Sources */,
