@@ -147,7 +147,6 @@
 		917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8729A63AA500E26B73 /* FcmAPI.swift */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
 		91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */; };
-		91D6A0C829AE2C660051FFE2 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6A0C729AE2C660051FFE2 /* ErrorResponse.swift */; };
 		91F9886429B49518008D7AB7 /* WorkInfoReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -291,7 +290,6 @@
 		917D8B8729A63AA500E26B73 /* FcmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmAPI.swift; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
 		91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthResponse.swift; path = "fairer-iOS/Network/AuthResponse.swift"; sourceTree = SOURCE_ROOT; };
-		91D6A0C729AE2C660051FFE2 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorResponse.swift; path = "fairer-iOS/Network/ErrorResponse.swift"; sourceTree = SOURCE_ROOT; };
 		91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkInfoReponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1057,7 +1055,6 @@
 			isa = PBXGroup;
 			children = (
 				91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */,
-				91D6A0C729AE2C660051FFE2 /* ErrorResponse.swift */,
 				5A9BD08629C1A21100ADD3CC /* Rules */,
 				52A53DC729B06DD200C4BB4C /* Teams */,
 				52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */,
@@ -1250,7 +1247,6 @@
 				917D8B5C29A632BE00E26B73 /* HouseWorksCompleteRouter.swift in Sources */,
 				39F1C12A28D604B000585B83 /* HomeGroupCollectionViewCell.swift in Sources */,
 				522714EF29792936006BADBC /* SetHouseWorkCollectionView.swift in Sources */,
-				91D6A0C829AE2C660051FFE2 /* ErrorResponse.swift in Sources */,
 				39EEF67528CBB61200437654 /* String+Extension.swift in Sources */,
 				5226860A299E1190007943EF /* PickDateButton.swift in Sources */,
 				917D8B6B29A6334800E26B73 /* TeamsRouter.swift in Sources */,

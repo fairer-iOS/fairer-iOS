@@ -133,7 +133,7 @@ final class LoginViewController: BaseViewController {
                 print(data)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
-                guard let data = errorResponse as? ErrorResponse else { return }
+                guard let data = errorResponse as? UserErrorResponse else { return }
                 print(data.errorMessage)
             default:
                 print("sign in error")
