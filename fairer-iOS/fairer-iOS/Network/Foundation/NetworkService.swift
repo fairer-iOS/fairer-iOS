@@ -15,8 +15,8 @@ final class NetworkService {
 //    let fcm = FcmAPI()
 //
     let houseWorkCompleteRouter = HouseWorkCompleteRouterAPI()
-//
-//    let houseWorks = HouseWorksAPI()
+    
+    let houseWorks = HouseWorksAPI()
 //
 //    let members = MembersAPI()
 //
