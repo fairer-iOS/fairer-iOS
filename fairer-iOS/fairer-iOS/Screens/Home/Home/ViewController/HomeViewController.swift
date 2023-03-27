@@ -273,40 +273,6 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    private func scrollDidStart(){
-        self.homeRuleView.homeRuleLabel.isHidden = true
-        self.homeRuleView.homeRuleDescriptionLabel.isHidden = true
-        self.homeGroupCollectionView.snp.updateConstraints {
-            $0.height.equalTo(0)
-        }
-        self.homeRuleView.snp.updateConstraints {
-            $0.height.equalTo(0)
-        }
-        self.homeDivider.snp.updateConstraints {
-            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(16)
-        }
-        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
-            self.view.layoutIfNeeded()
-        })
-    }
-    
-    private func scrollDidEnd() {
-        self.homeDivider.snp.updateConstraints {
-            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(144)
-        }
-        self.homeGroupCollectionView.snp.updateConstraints {
-            $0.height.equalTo(70)
-        }
-        self.homeRuleView.snp.updateConstraints {
-            $0.height.equalTo(35)
-        }
-        self.homeRuleView.homeRuleLabel.isHidden = false
-        self.homeRuleView.homeRuleDescriptionLabel.isHidden = false
-        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
-            self.view.layoutIfNeeded()
-        })
-    }
-    
     private func setWeekCalendarSwipeGesture() {
         leftSwipeGestureRecognizer.direction = .left
         rightSwipeGestureRecognizer.direction = .right
@@ -453,22 +419,56 @@ final class HomeViewController: BaseViewController {
         self.view.bringSubviewToFront(datePickerView)
         self.setupAlphaNavigationBar()
     }
+    
+    private func scrollDidStart(){
+        print("scorllDidStart")
+        self.homeRuleView.homeRuleLabel.isHidden = true
+        self.homeRuleView.homeRuleDescriptionLabel.isHidden = true
+        self.homeGroupCollectionView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        self.homeRuleView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        self.homeDivider.snp.updateConstraints {
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(16)
+        }
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    private func scrollDidEnd() {
+        print("scorllDidEnd")
+        self.homeDivider.snp.updateConstraints {
+            $0.top.equalTo(self.homeGroupLabel.snp.bottom).offset(144)
+        }
+        self.homeGroupCollectionView.snp.updateConstraints {
+            $0.height.equalTo(70)
+        }
+        self.homeRuleView.snp.updateConstraints {
+            $0.height.equalTo(35)
+        }
+        self.homeRuleView.homeRuleLabel.isHidden = false
+        self.homeRuleView.homeRuleDescriptionLabel.isHidden = false
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
 }
 
     // MARK: - extension
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let scrollOffset = scrollView.contentOffset.y
-        
-        if scrollOffset <= 1 {
-            scrollDidEnd()
-            isScrolled = false
-        } else {
-            if !isScrolled {
+        if scrollView.contentOffset.y > 0.1 {
+            if isScrolled == false {
                 scrollDidStart()
                 isScrolled = true
             }
+        }else {
+            scrollDidEnd()
+            isScrolled = false
         }
     }
 }
