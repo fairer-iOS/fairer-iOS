@@ -610,7 +610,7 @@ extension HomeViewController {
     }
     
     func getDateHouseWork(fromDate: String, toDate: String, completion: @escaping (WorkInfoReponse) -> Void) {
-        NetworkService.shared.houseWorks.getDateHouseWork(fromDate: fromDate, toDate: toDate) { result in
+        NetworkService.shared.houseWorks.getHouseWorksByDate(fromDate: fromDate, toDate: toDate) { result in
             switch result {
             case .success(let response):
                 guard let houseWorkResponse = response as? WorkInfoReponse else { return }
