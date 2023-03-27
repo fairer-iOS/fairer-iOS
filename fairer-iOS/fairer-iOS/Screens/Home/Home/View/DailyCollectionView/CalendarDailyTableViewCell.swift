@@ -179,7 +179,6 @@ extension CalendarDailyTableViewCell: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        // MARK: - api 연결 시 수정
         cell.workerIconImage.load(from: self.memberListProfilePath[indexPath.row].profilePath ?? String())
         return cell
     }
