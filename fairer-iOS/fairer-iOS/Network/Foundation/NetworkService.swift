@@ -20,7 +20,7 @@ final class NetworkService {
 //
 //    let members = MembersAPI()
 //
-//    let oauth = OauthAPI()
+    let oauth = OauthAPI()
 //
 //    let presets = PresetsAPI()
 //
