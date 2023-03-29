@@ -70,7 +70,12 @@ final class TeamsAPI {
             case .getTeamInfo, .postAddTeam, .postJoinTeam:
                 return isValidData(data: data, responseData: responseData)
             }
-        case 400..<500:
+        case 400:
+            guard let decodedData = try? decoder.decode(UserErrorResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .requestErr(decodedData)
+        case 401..<500:
             guard let decodedData = try? decoder.decode(ErrorResponse.self, from: data) else {
                 return .pathErr
             }

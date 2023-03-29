@@ -110,9 +110,8 @@ final class EnterHouseViewController: BaseViewController {
     }
     
     private func touchUpToShowToast() {
-        //FIXME: - 예외 케이스에 따라 분기처리
-        showToast(TextLiteral.enterHouseViewControllerToastWrongCode, 36)
-        showToast(TextLiteral.enterHouseViewControllerToastHouseFull, 56)
+        guard let inviteCode = enterHouseCodeTextfield.text else { return }
+        postJoinTeam(inviteCode: inviteCode)
     }
     
     private func showToast(_ message: String, _ height: Int) {
@@ -164,6 +163,22 @@ extension EnterHouseViewController : UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+}
+
+extension EnterHouseViewController {
+    private func postJoinTeam(inviteCode: String) {
+        NetworkService.shared.teams.postJoinTeam(inviteCode: inviteCode) { result in
+            switch result {
+            case .success:
+                self.navigationController?.pushViewController(HouseInfoViewController(), animated: true)
+            case .requestErr(let error):
+                guard let errorResponse = error as? UserErrorResponse else { return }
+                self.showToast(errorResponse.errorMessage, 55)
+            default:
+                print("server error")
+            }
+        }
     }
 }
 
