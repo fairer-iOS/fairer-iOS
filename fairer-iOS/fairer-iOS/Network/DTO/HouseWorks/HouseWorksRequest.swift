@@ -13,7 +13,7 @@ struct HouseWorksRequest: Codable {
     var repeatCycle: RepeatCycleType.RawValue = RepeatCycleType.once.rawValue
     var repeatPattern: String = Date().dateToAPIString
     var scheduledDate: String = Date().dateToAPIString
-    var scheduledTime: String = ""
+    var scheduledTime: String = String()
     var space: String
 }
 

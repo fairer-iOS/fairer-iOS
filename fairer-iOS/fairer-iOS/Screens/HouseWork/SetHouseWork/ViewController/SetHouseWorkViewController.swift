@@ -306,11 +306,12 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didTappedHouseWork() {
         setHouseWorkCollectionView.didTappedHouseWork = { [weak self] selectedHouseWorkIndex in
-            self?.selectedHouseWorkIndex = selectedHouseWorkIndex
-            self?.repeatCycleCollectionView.selectedHouseWorkIndex = selectedHouseWorkIndex
-            self?.repeatCycleCollectionView.collectionView.reloadData()
-            self?.updateManagerTimeRepeat(selectedHouseWorkIndex)
-            self?.selectManagerView.snp.updateConstraints {
+            guard let self = self else { return }
+            self.selectedHouseWorkIndex = selectedHouseWorkIndex
+            self.repeatCycleCollectionView.selectedHouseWorkIndex = selectedHouseWorkIndex
+            self.repeatCycleCollectionView.collectionView.reloadData()
+            self.updateManagerTimeRepeat(selectedHouseWorkIndex)
+            self.selectManagerView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
         }
@@ -318,23 +319,25 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didDeleteHouseWork() {
         setHouseWorkCollectionView.didDeleteHouseWork = { [weak self] deletedHouseWorkIndex in
-            self?.houseWorks.remove(at: deletedHouseWorkIndex)
-            self?.setHouseWorkCollectionView.totalHouseWorks = self?.houseWorks ?? []
+            guard let self = self else { return }
             
-            if self?.houseWorks.count == 0 {
+            self.houseWorks.remove(at: deletedHouseWorkIndex)
+            self.setHouseWorkCollectionView.totalHouseWorks = self.houseWorks
+            
+            if self.houseWorks.count == 0 {
                 // FIXME: - 이전 페이지로 이동
-            } else if deletedHouseWorkIndex == self?.houseWorks.endIndex && deletedHouseWorkIndex == self?.selectedHouseWorkIndex ?? 0 {
-                self?.selectedHouseWorkIndex -= 1
-                self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
-                self?.updateManagerTimeRepeat(deletedHouseWorkIndex - 1)
-            } else if deletedHouseWorkIndex == self?.selectedHouseWorkIndex {
-                self?.updateManagerTimeRepeat(deletedHouseWorkIndex)
-            } else if deletedHouseWorkIndex < self?.selectedHouseWorkIndex ?? 0 {
-                self?.selectedHouseWorkIndex -= 1
-                self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
-                self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
+            } else if deletedHouseWorkIndex == self.houseWorks.endIndex && deletedHouseWorkIndex == self.selectedHouseWorkIndex {
+                self.selectedHouseWorkIndex -= 1
+                self.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
+                self.updateManagerTimeRepeat(deletedHouseWorkIndex - 1)
+            } else if deletedHouseWorkIndex == self.selectedHouseWorkIndex {
+                self.updateManagerTimeRepeat(deletedHouseWorkIndex)
+            } else if deletedHouseWorkIndex < self.selectedHouseWorkIndex {
+                self.selectedHouseWorkIndex -= 1
+                self.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
+                self.updateManagerTimeRepeat(self.selectedHouseWorkIndex)
             } else {
-                self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
+                self.updateManagerTimeRepeat(self.selectedHouseWorkIndex)
             }
         }
     }
