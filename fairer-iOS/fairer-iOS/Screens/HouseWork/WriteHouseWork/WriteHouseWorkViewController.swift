@@ -157,9 +157,9 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    override init() {
+    init(houseWorks: [HouseWorksRequest]) {
         self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "", space: "ETC")]
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) { nil }
