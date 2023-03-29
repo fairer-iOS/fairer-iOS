@@ -98,6 +98,10 @@ enum ImageLiterals {
     static var oneDot: UIImage { .load(name: "dot") }
     static var twoDots: UIImage { .load(name: "2dot") }
     static var threeDots: UIImage { .load(name: "3dot") }
+    
+    // MARK: - exception handling
+    
+    static var emptyHouseWork: UIImage { .load(name: "emptyHouseWork") }
 }
 
 extension UIImage {
