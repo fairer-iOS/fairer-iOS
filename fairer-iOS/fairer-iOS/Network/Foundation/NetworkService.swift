@@ -15,12 +15,12 @@ final class NetworkService {
 //    let fcm = FcmAPI()
 //
     let houseWorkCompleteRouter = HouseWorkCompleteRouterAPI()
-//
+    
     let houseWorks = HouseWorksAPI()
 //
 //    let members = MembersAPI()
 //
-//    let oauth = OauthAPI()
+    let oauth = OauthAPI()
 //
 //    let presets = PresetsAPI()
 //

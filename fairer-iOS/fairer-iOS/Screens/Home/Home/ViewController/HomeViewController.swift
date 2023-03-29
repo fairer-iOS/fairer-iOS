@@ -26,7 +26,7 @@ struct dummyWorkCard {
 final class HomeViewController: BaseViewController {
     
     // TODO: - 추후 api연결 + UserDefault
-
+    
     private var dummy = [dummyWorkCard]()
     private var dummy1 = dummyWorkCard(work: "바닥 청소", time: "오전 9:30", room: "방", status: WorkState.overdue)
     private var dummy2 = dummyWorkCard(work: "설거지", time: "오후 8:00", room: "부엌", status: WorkState.overdue)
@@ -43,12 +43,10 @@ final class HomeViewController: BaseViewController {
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var divideIndex: Int = 0
-    
-    // MARK: - FIX ME
-    var finishedWorkSum = 3
+    private var finishedWorkSum: Int?
     
     // MARK: - property
-
+    
     private let logoImage = UIImageView(image: ImageLiterals.imgHomeLogo)
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
@@ -126,8 +124,12 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.addDummyData()
         self.getDivideIndex()
+        self.getWeekHouseWorks(
+            startDate: homeWeekCalendarCollectionView.fullDateList.first ?? String(),
+            endDate: homeWeekCalendarCollectionView.fullDateList.last ?? String()
+        )
     }
-
+    
     override func configUI() {
         super.configUI()
         setupToolBarGesture()
@@ -147,7 +149,7 @@ final class HomeViewController: BaseViewController {
                          homeCalenderView,
                          homeWeekCalendarCollectionView,
                          calendarDailyTableView)
-
+        
         toolBarView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(76)
@@ -164,19 +166,19 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(18)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-
+        
         homeGroupLabel.snp.makeConstraints {
             $0.leading.equalTo(houseImageView.snp.trailing).offset(4)
             $0.height.equalTo(18)
             $0.centerY.equalTo(houseImageView.snp.centerY)
         }
-
+        
         homeGroupCollectionView.snp.makeConstraints {
             $0.top.equalTo(houseImageView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(70)
         }
-
+        
         homeRuleView.snp.makeConstraints {
             $0.top.equalTo(homeGroupCollectionView.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
@@ -200,7 +202,7 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(95)
         }
-
+        
         calendarDailyTableView.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(-15)
             $0.leading.trailing.equalToSuperview()
@@ -214,10 +216,10 @@ final class HomeViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-
+        
         let logoView = makeBarButtonItem(with: logoImage)
         let rightButton = makeBarButtonItem(with: profileButton)
-
+        
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = logoView
@@ -335,6 +337,10 @@ final class HomeViewController: BaseViewController {
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(yearInString)년 \(monthInString)월", for: .normal)
             self.homeWeekCalendarCollectionView.datePickedByOthers = pickedDate.dateToString
             self.datePickerView.isHidden = true
+            self.getWeekHouseWorks(
+                startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
+                endDate: self.homeWeekCalendarCollectionView.fullDateList.last ?? String()
+            )
             self.setupNavigationBar()
         }
         datePickerView.changeClosure = { [weak self] val in
@@ -388,7 +394,19 @@ final class HomeViewController: BaseViewController {
         self.dummy.append(dummy8)
         self.dummy.append(dummy9)
     }
-
+    
+    private func getWeekHouseWorks(startDate: String, endDate: String) {
+        DispatchQueue.main.async {
+            LoadingView.showLoading()
+        }
+        DispatchQueue.global().async {
+            self.getDateHouseWork(
+                fromDate: startDate.replacingOccurrences(of: ".", with: "-")
+                , toDate: endDate.replacingOccurrences(of: ".", with: "-")
+            )
+        }
+    }
+    
     // MARK: - selector
     
     @objc
@@ -405,6 +423,10 @@ final class HomeViewController: BaseViewController {
         if (sender.direction == .right) {
             self.homeWeekCalendarCollectionView.getBeforeWeekDate()
         }
+        self.getWeekHouseWorks(
+            startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
+            endDate: self.homeWeekCalendarCollectionView.fullDateList.last ?? String()
+        )
     }
     
     private func moveToTodayDate() {
@@ -413,6 +435,10 @@ final class HomeViewController: BaseViewController {
         self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
         self.homeWeekCalendarCollectionView.collectionView.reloadData()
         self.homeWeekCalendarCollectionView.datePickedByOthers = Date().dateToString
+        self.getWeekHouseWorks(
+            startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
+            endDate: self.homeWeekCalendarCollectionView.fullDateList.last ?? String()
+        )
     }
     
     private func moveToDatePicker() {
@@ -491,7 +517,7 @@ extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UILabel()
-        header.text = "끝낸 집안일 \(self.finishedWorkSum)"
+        header.text = "끝낸 집안일 \(String(describing: self.finishedWorkSum))"
         header.font = .title2
         header.textColor = .black
         return section == self.divideIndex ? header : UIView()
@@ -553,6 +579,23 @@ extension HomeViewController {
         NetworkService.shared.houseWorkCompleteRouter.deleteCompleteHouseWork(houseWorkCompleteId: houseWorkCompleteId) { result in
             switch result {
             case .success: break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
+    }
+    
+    func getDateHouseWork(fromDate: String, toDate: String) {
+        NetworkService.shared.houseWorks.getHouseWorksByDate(fromDate: fromDate, toDate: toDate) { result in
+            switch result {
+            case .success(let response):
+                guard let houseWorkResponse = response as? WorkInfoReponse else { return }
+                DispatchQueue.main.async {
+                    LoadingView.hideLoading()
+                }
+                print(houseWorkResponse)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:

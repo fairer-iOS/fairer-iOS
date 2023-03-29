@@ -99,6 +99,7 @@
 		5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E711129BEF88B003FD32F /* BlankResponse.swift */; };
 		5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */; };
 		5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */; };
+		5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */; };
 		5A99A2DB29A8C3F3006FE9B2 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */; };
 		5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */; };
 		5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */; };
@@ -124,6 +125,7 @@
 		914C69CE29AA2F03008EA9EE /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */; };
 		914C69D029AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */; };
 		916945B029A376F900E560F7 /* WorkerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */; };
+		916E892E29BEED7A0047B26F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E892D29BEED7A0047B26F /* LoadingView.swift */; };
 		917D8B5529A6315F00E26B73 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */; };
 		917D8B5829A631C500E26B73 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 917D8B5729A631C500E26B73 /* Moya */; };
 		917D8B5A29A632A100E26B73 /* AlarmRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B5929A632A100E26B73 /* AlarmRouter.swift */; };
@@ -148,6 +150,8 @@
 		917D8B8229A6355500E26B73 /* FCMRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8129A6355500E26B73 /* FCMRouter.swift */; };
 		917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8729A63AA500E26B73 /* FcmAPI.swift */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
+		91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */; };
+		91F9886429B49518008D7AB7 /* WorkInfoReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -244,6 +248,7 @@
 		5A4E711129BEF88B003FD32F /* BlankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankResponse.swift; sourceTree = "<group>"; };
 		5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleViewController.swift; sourceTree = "<group>"; };
 		5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleTableViewCell.swift; sourceTree = "<group>"; };
+		5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeamResponse.swift; sourceTree = "<group>"; };
 		5A99A2DA29A8C3F3006FE9B2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
@@ -268,6 +273,7 @@
 		914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorkCompleteResponse.swift; sourceTree = "<group>"; };
 		916945AF29A376F900E560F7 /* WorkerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCollectionViewCell.swift; sourceTree = "<group>"; };
+		916E892D29BEED7A0047B26F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		917D8B5429A6315F00E26B73 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		917D8B5929A632A100E26B73 /* AlarmRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRouter.swift; sourceTree = "<group>"; };
 		917D8B5B29A632BE00E26B73 /* HouseWorksCompleteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksCompleteRouter.swift; sourceTree = "<group>"; };
@@ -291,6 +297,8 @@
 		917D8B8129A6355500E26B73 /* FCMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRouter.swift; sourceTree = "<group>"; };
 		917D8B8729A63AA500E26B73 /* FcmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmAPI.swift; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
+		91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthResponse.swift; path = "fairer-iOS/Network/AuthResponse.swift"; sourceTree = SOURCE_ROOT; };
+		91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkInfoReponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +350,7 @@
 				5275397828EC2F78002D8280 /* BackButton.swift */,
 				52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */,
 				52268609299E1190007943EF /* PickDateButton.swift */,
+				916E892D29BEED7A0047B26F /* LoadingView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -654,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */,
+				5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */,
 			);
 			path = Teams;
 			sourceTree = "<group>";
@@ -1053,6 +1063,7 @@
 		917D8B5329A62F9B00E26B73 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */,
 				5A9BD08629C1A21100ADD3CC /* Rules */,
 				52A53DCC29B0771700C4BB4C /* HouseWorks */,
 				52A53DD329B086A200C4BB4C /* MemberResponse.swift */,
@@ -1061,6 +1072,7 @@
 				914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */,
 				5AB8068529BEE842009EB243 /* ServerErrorResponse.swift */,
 				914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */,
+				91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */,
 				5A4E711129BEF88B003FD32F /* BlankResponse.swift */,
 			);
 			path = DTO;
@@ -1197,6 +1209,7 @@
 				52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */,
 				917D8B6929A6333C00E26B73 /* StatisticsRouter.swift in Sources */,
 				7EEE2FA028E449610067FA7B /* Space.swift in Sources */,
+				916E892E29BEED7A0047B26F /* LoadingView.swift in Sources */,
 				917D8B5529A6315F00E26B73 /* MoyaLoggerPlugin.swift in Sources */,
 				52A53DC929B06DF200C4BB4C /* TeamInfoResponse.swift in Sources */,
 				911E968329719CA400F3AF35 /* UIView+Extension.swift in Sources */,
@@ -1231,7 +1244,9 @@
 				5204AACC296C6447002FB6CA /* SelectHouseWorkDetailCollectionView.swift in Sources */,
 				52EBF04B28EC29200062EB41 /* TextField.swift in Sources */,
 				39FABBDC28DB35020053EFD2 /* HomeCalendarView.swift in Sources */,
+				91F9886429B49518008D7AB7 /* WorkInfoReponse.swift in Sources */,
 				52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */,
+				5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
@@ -1259,6 +1274,7 @@
 				5204AAB629507238002FB6CA /* SettingAlarmViewController.swift in Sources */,
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
 				917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */,
+				91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */,
 				7EFAA87328DA088900737DF0 /* SelectHouseWorkSpaceCollectionViewCell.swift in Sources */,
 				5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */,
 				52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */,

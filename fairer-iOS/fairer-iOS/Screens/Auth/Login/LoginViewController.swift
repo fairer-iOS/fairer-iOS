@@ -8,11 +8,14 @@
 import UIKit
 
 import SnapKit
+import GoogleSignIn
 
 final class LoginViewController: BaseViewController {
-    
+
     // MARK: - property
-    
+
+    private let signInConfig = GIDConfiguration.init(clientID: "", serverClientID: "")
+    private let OauthRequestData = AuthRequest()
     private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
         let label = UILabel()
@@ -52,7 +55,18 @@ final class LoginViewController: BaseViewController {
         return button
     }()
     
+    private func setButtonEvent(){
+        let moveToGoogleLogin = UIAction { [weak self] _ in
+            self?.googleSignIn()
+        }
+        self.googleButton.addAction(moveToGoogleLogin, for: .touchUpInside)
+    }
+    
     // MARK: - lifecycle
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.setButtonEvent()
+    }
     
     override func configUI() {
         view.backgroundColor = .blue
@@ -91,5 +105,39 @@ final class LoginViewController: BaseViewController {
     override func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .blue
+    }
+
+    private func googleSignIn() {
+        GIDSignIn.sharedInstance.signIn(with: self.signInConfig, presenting: self) { signInResult, error in
+            guard error == nil else { return }
+            guard let signInResult = signInResult else { return }
+            
+            signInResult.authentication.do { [self] authentication, error in
+                guard error == nil else {
+                    print(error as Any)
+                    return
+                }
+                guard let authentication = authentication else { return }
+                let idToken = authentication.idToken
+                UserDefaults.standard.set(idToken, forKey: "OauthIdToken")
+                self.postSignIn()
+            }
+        }
+    }
+    
+    func postSignIn() {
+        NetworkService.shared.oauth.postSignIn(socialType: OauthRequestData) { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? AuthResponse else { return }
+                print(data)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+                guard let data = errorResponse as? UserErrorResponse else { return }
+                print(data.errorMessage)
+            default:
+                print("sign in error")
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ extension BaseTargetType {
     var headers: [String: String]? {
         let header = [
             "Content-Type": "application/json",
-            "Authorization": ""
+            "Authorization": UserDefaults.standard.string(forKey: "OauthIdToken") ?? String()
         ]
         return header
     }
@@ -28,5 +28,4 @@ extension BaseTargetType {
     var sampleData: Data {
         return Data()
     }
-
 }
