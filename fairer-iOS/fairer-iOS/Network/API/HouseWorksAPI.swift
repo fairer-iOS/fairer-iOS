@@ -37,7 +37,7 @@ final class HouseWorksAPI {
     }
     
     func postAddHouseWorksAPI(body: [HouseWorksRequest], completion: @escaping (NetworkResult<Any>) -> Void) {
-        houseWorksProvider.request(.postAddHouseWorks(body: body)) { result in
+        provider.request(.postAddHouseWorks(body: body)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
