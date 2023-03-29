@@ -73,10 +73,31 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    var dayOfWeekToAPIString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_KR")
+        formatter.dateFormat = "EEEE"
+        return formatter.string(from: self).uppercased()
+    }
+    
     var singleDayToKoreanString: String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier:"ko_KR")
         formatter.dateFormat = "d"
+        return formatter.string(from: self)
+    }
+    
+    var dateToAPIString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
+    }
+    
+    var dateToTimeString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "H:mm"
         return formatter.string(from: self)
     }
 }

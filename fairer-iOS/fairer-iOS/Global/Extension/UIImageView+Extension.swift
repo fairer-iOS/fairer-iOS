@@ -12,7 +12,7 @@ extension UIImageView {
     func load(from url: String) {
         
         let cacheKey = NSString(string: url)
-        if let cachedImage = dummyImageCacheManager.shared.object(forKey: cacheKey) {
+        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) {
             self.image = cachedImage
             return
         }
@@ -22,6 +22,7 @@ extension UIImageView {
                let data = try? Data(contentsOf: imageUrl) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
+                        ImageCacheManager.shared.setObject(image, forKey: cacheKey)
                         self.image = image
                     }
                 }

@@ -12,10 +12,10 @@ import SnapKit
 final class SelectManagerCollectionView: BaseUIView {
     
     var selectedIndex: Int? = 0
-    var totalMemberList: [MemberResponse] = [] {
+    var totalMemberList: [MemberResponse] = []
+    var selectedManagerList: [MemberResponse] = [] {
         didSet { collectionView.reloadData() }
     }
-    var selectedManagerList: [MemberResponse] = []
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
