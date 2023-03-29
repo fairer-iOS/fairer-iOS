@@ -30,9 +30,8 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    
     // MARK: - property
-    
+
     let workDot: UIImageView = {
         let imgView = UIImageView()
         return imgView

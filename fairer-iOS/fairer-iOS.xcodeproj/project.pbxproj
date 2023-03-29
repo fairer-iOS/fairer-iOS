@@ -150,6 +150,7 @@
 		917D8B8229A6355500E26B73 /* FCMRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8129A6355500E26B73 /* FCMRouter.swift */; };
 		917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8729A63AA500E26B73 /* FcmAPI.swift */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
+		91F62B4729D1809400F28F5F /* dummyImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F62B4629D1809400F28F5F /* dummyImageCacheManager.swift */; };
 		91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */; };
 		91F9886429B49518008D7AB7 /* WorkInfoReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */; };
 /* End PBXBuildFile section */
@@ -297,6 +298,7 @@
 		917D8B8129A6355500E26B73 /* FCMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRouter.swift; sourceTree = "<group>"; };
 		917D8B8729A63AA500E26B73 /* FcmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmAPI.swift; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
+		91F62B4629D1809400F28F5F /* dummyImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummyImageCacheManager.swift; sourceTree = "<group>"; };
 		91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthResponse.swift; path = "fairer-iOS/Network/AuthResponse.swift"; sourceTree = SOURCE_ROOT; };
 		91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkInfoReponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1011,8 +1013,8 @@
 			isa = PBXGroup;
 			children = (
 				39FABBDB28DB35020053EFD2 /* HomeCalendarView.swift */,
-				911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */,
 				911E9678297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift */,
+				911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */,
 				91CB591B29977B09002A3295 /* PickDateView.swift */,
 			);
 			path = WeekCalendarView;
@@ -1087,6 +1089,7 @@
 				917D8B7F29A634CA00E26B73 /* URLConstant.swift */,
 				914C69CB29AA0D17008EA9EE /* BaseURLConstant.swift */,
 				52A53DDF29C6E51100C4BB4C /* ImageCacheManager.swift */,
+				91F62B4629D1809400F28F5F /* dummyImageCacheManager.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1197,6 +1200,7 @@
 				917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */,
 				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
+				91F62B4729D1809400F28F5F /* dummyImageCacheManager.swift in Sources */,
 				52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */,
 				39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */,
 				5ABB7FB229B48DED008D5C15 /* RulesResponse.swift in Sources */,

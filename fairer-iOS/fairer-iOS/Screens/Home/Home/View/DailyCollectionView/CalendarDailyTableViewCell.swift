@@ -13,6 +13,8 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     
     static let identifier = "CellId"
     
+    lazy var memberListProfilePath = [Assignee]()
+    
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
         static let collectionVerticalSpacing: CGFloat = 0
@@ -25,9 +27,8 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
             right: collectionHorizontalSpacing)
     }
     
-    // MARK: - FIX ME
-    var houseWorkId = 0
-    var scheduledDate = "dummyDate"
+    var houseWorkId = Int()
+    var scheduledDate = String()
     var houseWorkCompleteId = Int()
     
     // MARK: - property
@@ -170,7 +171,7 @@ extension CalendarDailyTableViewCell: UICollectionViewDelegate {}
 extension CalendarDailyTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return self.memberListProfilePath.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -178,8 +179,7 @@ extension CalendarDailyTableViewCell: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        // MARK: - api 연결 시 수정
-        cell.workerIconImage.image = ImageLiterals.profilePink1
+        cell.workerIconImage.load(from: self.memberListProfilePath[indexPath.row].profilePath ?? String())
         return cell
     }
 }
