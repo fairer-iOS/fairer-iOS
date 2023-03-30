@@ -101,6 +101,7 @@
 		5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */; };
 		5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */; };
 		5A9BD08829C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BD08729C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift */; };
+		5AB1B9C329D55FC300DCA8FE /* ToastPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1B9C229D55FC300DCA8FE /* ToastPaddingLabel.swift */; };
 		5AB8068629BEE842009EB243 /* UserErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8068529BEE842009EB243 /* UserErrorResponse.swift */; };
 		5ABB7FB229B48DED008D5C15 /* RulesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */; };
 		7E1F2E2528D2123B00A5744A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F2E2428D2123B00A5744A /* SnapKit */; };
@@ -247,6 +248,7 @@
 		5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		5A9BD08729C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleHeaderView.swift; sourceTree = "<group>"; };
+		5AB1B9C229D55FC300DCA8FE /* ToastPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPaddingLabel.swift; sourceTree = "<group>"; };
 		5AB8068529BEE842009EB243 /* UserErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserErrorResponse.swift; sourceTree = "<group>"; };
 		5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RulesResponse.swift; path = "fairer-iOS/Network/DTO/Rules/RulesResponse.swift"; sourceTree = SOURCE_ROOT; };
 		7E1F2E2A28D2168200A5744A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */,
 				52268609299E1190007943EF /* PickDateButton.swift */,
 				916E892D29BEED7A0047B26F /* LoadingView.swift */,
+				5AB1B9C229D55FC300DCA8FE /* ToastPaddingLabel.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -1289,6 +1292,7 @@
 				917D8B7D29A633D800E26B73 /* TeamsAPI.swift in Sources */,
 				52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */,
 				52A53DCB29B06E9100C4BB4C /* MemberResponse.swift in Sources */,
+				5AB1B9C329D55FC300DCA8FE /* ToastPaddingLabel.swift in Sources */,
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,
 				917D8B7329A633A200E26B73 /* MembersAPI.swift in Sources */,
