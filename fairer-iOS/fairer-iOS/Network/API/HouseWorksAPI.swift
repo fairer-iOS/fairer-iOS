@@ -56,9 +56,7 @@ final class HouseWorksAPI {
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .getHouseWorksByDate:
-                return isValidData(data: data, responseData: responseData)
-            case .postAddHouseWorks:
+            case .getHouseWorksByDate, .postAddHouseWorks:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400..<500:
