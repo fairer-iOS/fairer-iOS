@@ -10,10 +10,12 @@ import UIKit
 import SnapKit
 
 final class HouseMemberCollectionView: BaseUIView, UICollectionViewDelegate {
-    
-    // FIXME: - 추후 api 연결하면 삭제할 내용
-    let profileNameList: [String] = ["진저", "이드", "호야", "케미", "메리"]
-    let profileImageList: [UIImage] = [ImageLiterals.profileBlue3, ImageLiterals.profileBlue4, ImageLiterals.profileOrange1, ImageLiterals.profilePink1, ImageLiterals.profilePink3]
+       
+    var teamInfoData:[MemberResponse] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 29
@@ -60,7 +62,7 @@ final class HouseMemberCollectionView: BaseUIView, UICollectionViewDelegate {
 
 extension HouseMemberCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return profileNameList.count
+        return teamInfoData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -68,8 +70,13 @@ extension HouseMemberCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        cell.profileImage.image = profileImageList[indexPath.item]
-        cell.profileName.setTextWithLineHeight(text: profileNameList[indexPath.item], lineHeight: 26)
+        
+        guard let memberName = teamInfoData[indexPath.row].memberName,
+              let memberImage = teamInfoData[indexPath.row].profilePath  else { return UICollectionViewCell() }
+        if let memberImagePath = URL(string: memberImage) {
+            cell.profileImage.load(from: memberImagePath)
+        }
+        cell.profileName.setTextWithLineHeight(text: memberName, lineHeight: 26)
         return cell
     }
 }

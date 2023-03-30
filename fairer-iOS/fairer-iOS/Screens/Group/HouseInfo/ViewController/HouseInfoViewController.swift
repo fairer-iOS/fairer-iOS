@@ -9,12 +9,10 @@ import UIKit
 
 import SnapKit
 
-class HouseInfoViewController: BaseViewController {
+final class HouseInfoViewController: BaseViewController {
+        
+    var houseName = ""
     
-    // FIXME: - api 연결 후 변경 (현재 임의 지정)
-    
-    let houseName: String = "즐거운 우리집"
-
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -53,6 +51,11 @@ class HouseInfoViewController: BaseViewController {
     }()
     
     // MARK: - lifecycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getTeamInfo()
+    }
     
     override func render() {
         view.addSubview(welcomeImageView)
@@ -105,5 +108,28 @@ class HouseInfoViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+}
+
+extension HouseInfoViewController {
+    
+    func getTeamInfo() {
+        NetworkService.shared.teams.getTeamInfo { [weak self] result in
+            switch result {
+            case .success(let response):
+                guard let teamInfo = response as? TeamInfoResponse else { return }
+                guard let membersInfo = teamInfo.members else { return }
+                guard let teamName = teamInfo.teamName else { return }
+                
+                DispatchQueue.main.async {
+                    self?.houseMemberCollectionView.teamInfoData = membersInfo
+                    self?.houseName = teamName
+                }
+            case .requestErr(let error):
+                dump(error)
+            default:
+                print("server error")
+            }
+        }
     }
 }
