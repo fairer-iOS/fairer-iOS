@@ -75,11 +75,7 @@ final class HomeViewController: BaseViewController {
         let view = PickDateView()
         return view
     }()
-    let emptyHouseWorkImage: UIImageView = {
-        let imgView = UIImageView()
-        imgView.image = ImageLiterals.emptyHouseWork
-        return imgView
-    }()
+    private let emptyHouseWorkImage = UIImageView(image: ImageLiterals.emptyHouseWork)
     
     // MARK: - life cycle
     
@@ -105,7 +101,7 @@ final class HomeViewController: BaseViewController {
                 startDate: homeWeekCalendarCollectionView.todayDateInString,
                 endDate: homeWeekCalendarCollectionView.todayDateInString
             )
-        }else {
+        } else {
             self.getHouseWorksByDate(
                 startDate: homeWeekCalendarCollectionView.datePickedByOthers,
                 endDate: homeWeekCalendarCollectionView.datePickedByOthers
@@ -546,18 +542,6 @@ extension HomeViewController: UITableViewDataSource {
         cell.room.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].space
         cell.time.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime
         
-        switch self.pickDayWorkInfo?.houseWorks?[indexPath.section].space {
-        case "BATHROOM": cell.room.text = "화장실"
-        case "ENTRANCE": cell.room.text = "현관"
-        case "ETC": cell.room.text = "기타"
-        case "KITCHEN": cell.room.text = "부엌"
-        case "LIVINGROOM": cell.room.text = "거실"
-        case "OUTSIDE": cell.room.text = "외부"
-        case "ROOM": cell.room.text = "방"
-        case .none: break
-        case .some(_): break
-        }
-        
         if self.pickDayWorkInfo?.houseWorks?[indexPath.section].success == false {
             cell.mainBackground.backgroundColor = .white
             cell.houseWorkId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkId ?? Int()
@@ -566,10 +550,19 @@ extension HomeViewController: UITableViewDataSource {
             cell.mainBackground.backgroundColor = .positive10
             cell.houseWorkCompleteId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkCompleteId ?? Int()
         }
-        
         cell.memberListProfilePath = self.pickDayWorkInfo?.houseWorks?[indexPath.section].assignees ?? [Assignee]()
-        
-        print("cell.memberListProfilePath = ", cell.memberListProfilePath)
+
+        guard let pickDayHouseWork = self.pickDayWorkInfo?.houseWorks?[indexPath.section].space else { return cell }
+        switch pickDayHouseWork {
+        case "BATHROOM": cell.room.text = Space.bathroom.rawValue
+        case "ENTRANCE": cell.room.text = Space.entrance.rawValue
+        case "KITCHEN": cell.room.text = Space.kitchen.rawValue
+        case "LIVINGROOM": cell.room.text = Space.livingRoom.rawValue
+        case "OUTSIDE": cell.room.text = Space.outside.rawValue
+        case "ROOM": cell.room.text = Space.room.rawValue
+        case "ETC": cell.room.text = "기타"
+        default: cell.room.text = ""
+        }
 
         return cell
     }
