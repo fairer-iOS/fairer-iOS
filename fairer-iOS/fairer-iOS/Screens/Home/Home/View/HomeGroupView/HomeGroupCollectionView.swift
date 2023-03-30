@@ -26,7 +26,7 @@ final class HomeGroupCollectionView: BaseUIView {
     
     // MARK: - TODO.API
     
-    private let userList = ["고가혜", "권진혁", "최지혜", "신동빈", "김수연"]
+    var userList: [MemberResponse] = [MemberResponse]()
     
     // MARK: - property
     
@@ -38,7 +38,7 @@ final class HomeGroupCollectionView: BaseUIView {
         flowLayout.minimumLineSpacing = 8
         return flowLayout
     }()
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
@@ -79,8 +79,8 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        cell.titleLabel.text = userList[indexPath.item]
-        cell.titleImage.image = ImageLiterals.profileLightBlue1
+        cell.titleLabel.text = userList[indexPath.item].memberName
+        cell.titleImage.load(from: userList[indexPath.item].profilePath ?? String())
         if cell.isSelected == true { cell.onSelected() }
         else { cell.onDeselected() }
         return cell

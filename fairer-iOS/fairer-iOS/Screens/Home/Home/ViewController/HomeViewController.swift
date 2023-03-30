@@ -12,6 +12,7 @@ import SnapKit
 final class HomeViewController: BaseViewController {
     
     let userName: String = "고가혜"
+    private var teamId: Int?
     private var ruleArray: [RuleData]?
     private var isScrolled = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
@@ -46,7 +47,7 @@ final class HomeViewController: BaseViewController {
     }()
     private let homeGroupLabel: UILabel = {
         let label = UILabel()
-        label.text = "즐거운 우리집"
+//        label.text = "즐거운 우리집"
         label.font = .caption1
         label.textColor = .gray400
         return label
@@ -108,6 +109,7 @@ final class HomeViewController: BaseViewController {
             )
         }
         self.getRules()
+        self.getTeamInfo()
     }
     
     override func configUI() {
@@ -367,9 +369,20 @@ final class HomeViewController: BaseViewController {
     }
     
     private func getRules() {
-        self.getRulesForServer() { response in
+        self.getRulesFromServer() { response in
             self.ruleArray = response.ruleResponseDtos
             self.setHomeRuleLabel()
+        }
+    }
+    
+    private func getTeamInfo() {
+        self.getTeamInfoFromServer() { response in
+            print(response)
+            self.homeGroupLabel.text = response.teamName
+            self.teamId = response.teamId
+            guard let teamMember = response.members else { return }
+            self.homeGroupCollectionView.userList = teamMember
+            self.homeGroupCollectionView.collectionView.reloadData()
         }
     }
     
@@ -624,11 +637,25 @@ extension HomeViewController {
         }
     }
     
-    func getRulesForServer(completion: @escaping (RulesResponse) -> Void) {
+    func getRulesFromServer(completion: @escaping (RulesResponse) -> Void) {
         NetworkService.shared.rules.getRules() { result in
             switch result {
             case .success(let response):
                 guard let rules = response as? RulesResponse else { return }
+                completion(rules)
+            case .requestErr(let errResponse):
+                dump(errResponse)
+            default:
+                print("error")
+            }
+        }
+    }
+    
+    func getTeamInfoFromServer(completion: @escaping (TeamInfoResponse) -> Void) {
+        NetworkService.shared.teams.getTeamInfo() { result in
+            switch result {
+            case .success(let response):
+                guard let rules = response as? TeamInfoResponse else { return }
                 completion(rules)
             case .requestErr(let errResponse):
                 dump(errResponse)
