@@ -12,7 +12,7 @@ import SnapKit
 final class HomeViewController: BaseViewController {
     
     let userName: String = "고가혜"
-    let ruleArray: [String] = ["설거지는 바로바로", "신발 정리하기", "화분 물주기", "밥 다먹은 사람이 치우기"]
+    private var ruleArray: [RuleData]?
     private var isScrolled = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
@@ -107,12 +107,12 @@ final class HomeViewController: BaseViewController {
                 endDate: homeWeekCalendarCollectionView.datePickedByOthers
             )
         }
+        self.getRules()
     }
     
     override func configUI() {
         super.configUI()
         setupToolBarGesture()
-        setHomeRuleLabel()
     }
     
     override func render() {
@@ -254,17 +254,18 @@ final class HomeViewController: BaseViewController {
     
     private func setHomeRuleLabel() {
         var index = 0
-        if ruleArray.isEmpty {
+        
+        guard let rules = ruleArray else {
             homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
-        } else {
-            homeRuleView.homeRuleDescriptionLabel.text = ruleArray[index]
-            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
-                guard let count = self?.ruleArray.count else { return }
-                self?.homeRuleView.homeRuleDescriptionLabel.text = self?.ruleArray[index]
-                index += 1
-                if index > count - 1 {
-                    index = 0
-                }
+            return
+        }
+        homeRuleView.homeRuleDescriptionLabel.text = rules[index].ruleName
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            guard let count = self?.ruleArray?.count else { return }
+            self?.homeRuleView.homeRuleDescriptionLabel.text = self?.ruleArray?[index].ruleName
+            index += 1
+            if index > count - 1 {
+                index = 0
             }
         }
     }
@@ -362,6 +363,13 @@ final class HomeViewController: BaseViewController {
                     self.calendarDailyTableView.reloadData()
                 }
             }
+        }
+    }
+    
+    private func getRules() {
+        self.getRulesForServer() { response in
+            self.ruleArray = response.ruleResponseDtos
+            self.setHomeRuleLabel()
         }
     }
     
@@ -610,6 +618,20 @@ extension HomeViewController {
                 completion(houseWorkResponse)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
+    }
+    
+    func getRulesForServer(completion: @escaping (RulesResponse) -> Void) {
+        NetworkService.shared.rules.getRules() { result in
+            switch result {
+            case .success(let response):
+                guard let rules = response as? RulesResponse else { return }
+                completion(rules)
+            case .requestErr(let errResponse):
+                dump(errResponse)
             default:
                 print("error")
             }
