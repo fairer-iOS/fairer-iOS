@@ -11,7 +11,7 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
-    let userName: String = "고가혜"
+    private var userName: String = ""
     private var teamId: Int?
     private var ruleArray: [RuleData]?
     private var isScrolled = false
@@ -31,13 +31,25 @@ final class HomeViewController: BaseViewController {
         return button
     }()
     private let toolBarView = HomeViewControllerToolBar()
-    private lazy var titleLabel: UILabel = {
+    private lazy var nameTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(userName)님\n아직 집안일을 하지 않으셨네요."
         label.font = .title1
         label.applyColor(to: userName, with: .blue)
         label.numberOfLines = 2
         return label
+    }()
+    private lazy var countDoneTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .title1
+        label.applyColor(to: userName, with: .blue)
+        label.numberOfLines = 2
+        return label
+    }()
+    private lazy var titleLabelStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        return stackView
     }()
     private let houseImageView: UIImageView = {
         let imageView = UIImageView()
@@ -47,7 +59,6 @@ final class HomeViewController: BaseViewController {
     }()
     private let homeGroupLabel: UILabel = {
         let label = UILabel()
-//        label.text = "즐거운 우리집"
         label.font = .caption1
         label.textColor = .gray400
         return label
@@ -108,8 +119,8 @@ final class HomeViewController: BaseViewController {
                 endDate: homeWeekCalendarCollectionView.datePickedByOthers
             )
         }
-        self.getRules()
         self.getTeamInfo()
+        self.getRules()
     }
     
     override func configUI() {
@@ -119,7 +130,7 @@ final class HomeViewController: BaseViewController {
     
     override func render() {
         view.addSubviews(toolBarView,
-                         titleLabel,
+                         titleLabelStackView,
                          houseImageView,
                          homeGroupLabel,
                          homeGroupCollectionView,
@@ -136,14 +147,17 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(76)
         }
         
-        titleLabel.snp.makeConstraints {
+        titleLabelStackView.addArrangedSubview(nameTitleLabel)
+        titleLabelStackView.addArrangedSubview(countDoneTitleLabel)
+        
+        titleLabelStackView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(8)
             $0.height.equalTo(45)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         houseImageView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.top.equalTo(titleLabelStackView.snp.bottom).offset(16)
             $0.height.equalTo(18)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
@@ -352,7 +366,6 @@ final class HomeViewController: BaseViewController {
                 DispatchQueue.main.async {
                     LoadingView.hideLoading()
                     self.pickDayWorkInfo = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]
-                    self.finishedWorkSum = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countDone ?? 0
                     self.divideIndex = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countLeft ?? 0
                     if (self.pickDayWorkInfo?.countDone ?? 0) + (self.pickDayWorkInfo?.countLeft ?? 0) != 0 {
                         self.emptyHouseWorkImage.isHidden = true
@@ -363,6 +376,14 @@ final class HomeViewController: BaseViewController {
                     }
                     self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.houseWorks ?? [HouseWorkData]())
                     self.calendarDailyTableView.reloadData()
+                    
+                    // MARK: - fix me : getSuccessCount 붙이고 바꾸자!
+                    guard let finishedWorkSum = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countDone else {
+                        self.countDoneTitleLabel.text = "아직 집안일을 하지 않으셨네요."
+                        self.finishedWorkSum = 0
+                        return
+                    }
+                    self.finishedWorkSum = finishedWorkSum
                 }
             }
         }
@@ -380,6 +401,9 @@ final class HomeViewController: BaseViewController {
             print(response)
             self.homeGroupLabel.text = response.teamName
             self.teamId = response.teamId
+            guard let userName = response.members?[0].memberName else { return }
+            self.userName = userName
+            self.nameTitleLabel.text = "\(userName)님"
             guard let teamMember = response.members else { return }
             self.homeGroupCollectionView.userList = teamMember
             self.homeGroupCollectionView.collectionView.reloadData()
