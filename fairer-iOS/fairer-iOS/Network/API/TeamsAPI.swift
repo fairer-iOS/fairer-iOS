@@ -53,7 +53,7 @@ final class TeamsAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postAddTeam)
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postJoinTeam)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -90,7 +90,7 @@ final class TeamsAPI {
     private func isValidData(data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch responseData {
-        case .getTeamInfo, .postJoinTeam:
+        case .getTeamInfo:
             guard let decodedData = try? decoder.decode(TeamInfoResponse.self, from: data) else {
                 return .pathErr
             }
@@ -100,6 +100,8 @@ final class TeamsAPI {
                 return .pathErr
             }
             return .success(decodedData)
+        case .postJoinTeam:
+            return .success(())
         }
     }
 }
