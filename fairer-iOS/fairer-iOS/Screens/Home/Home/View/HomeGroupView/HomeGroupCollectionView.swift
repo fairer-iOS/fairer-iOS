@@ -93,5 +93,5 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
     }
-    
 }
+

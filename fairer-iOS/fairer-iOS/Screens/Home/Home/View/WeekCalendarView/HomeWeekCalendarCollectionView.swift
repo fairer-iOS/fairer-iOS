@@ -188,7 +188,6 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         cell.workDot.image = dotList[indexPath.item]
         guard self.datePickedByOthers != "" else {
             if fullDateList[indexPath.item] == self.todayDateInString {
-                self.isSelected = true
                 self.selectedCell = indexPath.row
                 self.cellIndexPath = indexPath
                 cell.globalView.backgroundColor = UIColor.gray100

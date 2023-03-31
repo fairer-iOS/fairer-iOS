@@ -24,6 +24,16 @@ final class HomeViewController: BaseViewController {
             self.calendarDailyTableView.reloadData()
         }
     }
+    private var countWorkDoneInWeek: Int? {
+        didSet {
+            guard let countWorkDoneInWeek = countWorkDoneInWeek else { return }
+            if countWorkDoneInWeek == 0 {
+                self.countDoneTitleLabel.text = "아직 집안일을 하지 않으셨네요."
+            } else {
+                self.countDoneTitleLabel.text = "이번주에 \(countWorkDoneInWeek)개 만큼 해주셨어요!"
+            }
+        }
+    }
     
     // MARK: - property
     
@@ -46,6 +56,7 @@ final class HomeViewController: BaseViewController {
         let label = UILabel()
         label.font = .title1
         label.applyColor(to: userName, with: .blue)
+        label.text = "아직 집안일을 하지 않으셨네요."
         label.numberOfLines = 2
         return label
     }()
@@ -111,7 +122,6 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.getDivideIndex()
-        
         if homeWeekCalendarCollectionView.datePickedByOthers == "" {
             self.getHouseWorksByDate(
                 startDate: homeWeekCalendarCollectionView.todayDateInString,
@@ -426,8 +436,8 @@ final class HomeViewController: BaseViewController {
         }
         DispatchQueue.global().async {
             self.getDateHouseWork(
-                fromDate: startDate.replacingOccurrences(of: ".", with: "-")
-                , toDate: endDate.replacingOccurrences(of: ".", with: "-")
+                fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
+                toDate: endDate.replacingOccurrences(of: ".", with: "-")
             ) { response in
                 DispatchQueue.main.async {
                     LoadingView.hideLoading()
@@ -441,10 +451,9 @@ final class HomeViewController: BaseViewController {
                         self.calendarDailyTableView.isHidden = true
                     }
                     self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.houseWorks ?? [HouseWorkData]())
-
+                    self.bindWeekWorkDoneLable()
                     // MARK: - fix me : getSuccessCount 붙이고 바꾸자!
                     guard let finishedWorkSum = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countDone else {
-                        self.countDoneTitleLabel.text = "아직 집안일을 하지 않으셨네요."
                         self.finishedWorkSum = 0
                         return
                     }
@@ -470,6 +479,24 @@ final class HomeViewController: BaseViewController {
             self.nameTitleLabel.text = "\(userName)님"
             guard let teamMember = response.members else { return }
             self.homeGroupCollectionView.userList = teamMember
+        }
+    }
+    
+    private func bindWeekWorkDoneLable() {
+        guard let firstDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.first else { return }
+        guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
+        var doneWorkSum: Int = 0
+        DispatchQueue.global().async {
+            self.getWeekHouseWork(
+                fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
+            ) { response in
+                for date in self.homeWeekCalendarCollectionView.fullDateList {
+                    guard let workDoneInWeek = response[date.replacingOccurrences(of: ".", with: "-")] else { return }
+                    doneWorkSum = doneWorkSum + workDoneInWeek.countDone
+                }
+                self.countWorkDoneInWeek = doneWorkSum
+            }
         }
     }
 
@@ -626,6 +653,7 @@ extension HomeViewController {
             switch result {
             case .success(let response):
                 guard let houseWorkCompleteId = response as? HouseWorkCompleteResponse else { return }
+                self.bindWeekWorkDoneLable()
                 completion(houseWorkCompleteId)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
@@ -638,7 +666,8 @@ extension HomeViewController {
     func deleteCompleteHouseWork(houseWorkCompleteId: Int) {
         NetworkService.shared.houseWorkCompleteRouter.deleteCompleteHouseWork(houseWorkCompleteId: houseWorkCompleteId) { result in
             switch result {
-            case .success: break
+            case .success:
+                self.bindWeekWorkDoneLable()
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
@@ -648,6 +677,20 @@ extension HomeViewController {
     }
     
     func getDateHouseWork(fromDate: String, toDate: String, completion: @escaping (WorkInfoReponse) -> Void) {
+        NetworkService.shared.houseWorks.getHouseWorksByDate(fromDate: fromDate, toDate: toDate) { result in
+            switch result {
+            case .success(let response):
+                guard let houseWorkResponse = response as? WorkInfoReponse else { return }
+                completion(houseWorkResponse)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
+    }
+    
+    func getWeekHouseWork(fromDate: String, toDate: String, completion: @escaping (WorkInfoReponse) -> Void) {
         NetworkService.shared.houseWorks.getHouseWorksByDate(fromDate: fromDate, toDate: toDate) { result in
             switch result {
             case .success(let response):
@@ -679,8 +722,8 @@ extension HomeViewController {
         NetworkService.shared.teams.getTeamInfo() { result in
             switch result {
             case .success(let response):
-                guard let rules = response as? TeamInfoResponse else { return }
-                completion(rules)
+                guard let team = response as? TeamInfoResponse else { return }
+                completion(team)
             case .requestErr(let errResponse):
                 dump(errResponse)
             default:
