@@ -16,9 +16,10 @@ final class HouseWorksAPI {
     private enum ResponseData {
         case getHouseWorksByDate
         case postAddHouseWorks
+        case getMemberHouseWorksByDate
     }
     
-    public func getHouseWorksByDate(
+    func getHouseWorksByDate(
         fromDate: String,
         toDate: String,
         completion: @escaping (NetworkResult<Any>) -> Void
@@ -50,13 +51,32 @@ final class HouseWorksAPI {
         }
     }
     
+    func getMemberHouseWorksByDate(
+        fromDate: String,
+        toDate: String,
+        teamMemberId: Int,
+        completion: @escaping (NetworkResult<Any>) -> Void
+    ) {
+        provider.request(.getMemberHouseWorksByDate(fromDate: fromDate, toDate: toDate, teamMemberId: teamMemberId)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getMemberHouseWorksByDate)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .getHouseWorksByDate, .postAddHouseWorks:
+            case .getHouseWorksByDate, .postAddHouseWorks, .getMemberHouseWorksByDate:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400..<500:
@@ -82,6 +102,11 @@ final class HouseWorksAPI {
             return .success(decodedData)
         case .postAddHouseWorks:
             guard let decodedData = try? decoder.decode(HouseWorksResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
+        case .getMemberHouseWorksByDate:
+            guard let decodedData = try? decoder.decode(WorkInfoReponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)

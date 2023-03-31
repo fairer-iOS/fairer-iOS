@@ -11,7 +11,11 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
-    private var userName: String = ""
+    private var userName: String = String() {
+        didSet {
+            self.nameTitleLabel.text = userName
+        }
+    }
     private var teamId: Int?
     private var ruleArray: [RuleData]?
     private var isScrolled = false
@@ -19,6 +23,8 @@ final class HomeViewController: BaseViewController {
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var divideIndex: Int = 0
     private var finishedWorkSum: Int = 0
+    private var selectedMemberId: Int?
+    private var myId: Int?
     private var pickDayWorkInfo: DayHouseWorks? {
         didSet {
             self.calendarDailyTableView.reloadData()
@@ -128,11 +134,13 @@ final class HomeViewController: BaseViewController {
         self.getDivideIndex()
         if homeWeekCalendarCollectionView.datePickedByOthers == "" {
             self.getHouseWorksByDate(
+                isOwn: self.checkMemeberCellIsOwn(),
                 startDate: homeWeekCalendarCollectionView.todayDateInString,
                 endDate: homeWeekCalendarCollectionView.todayDateInString
             )
         } else {
             self.getHouseWorksByDate(
+                isOwn: self.checkMemeberCellIsOwn(),
                 startDate: homeWeekCalendarCollectionView.datePickedByOthers,
                 endDate: homeWeekCalendarCollectionView.datePickedByOthers
             )
@@ -275,6 +283,7 @@ final class HomeViewController: BaseViewController {
     
     private func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(observeWeekCalendar(notification:)), name: Notification.Name.date, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(observeMemberCollectionView(notification:)), name: Notification.Name.member, object: nil)
     }
     
     // MARK: - func
@@ -329,6 +338,7 @@ final class HomeViewController: BaseViewController {
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(yearInString)년 \(monthInString)월", for: .normal)
             self.datePickerView.isHidden = true
             self.getHouseWorksByDate(
+                isOwn: self.checkMemeberCellIsOwn(),
                 startDate: pickedDate.dateToString,
                 endDate: pickedDate.dateToString
             )
@@ -383,6 +393,7 @@ final class HomeViewController: BaseViewController {
         self.homeWeekCalendarCollectionView.datePickedByOthers = Date().dateToString
         self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
         self.getHouseWorksByDate(
+            isOwn: self.checkMemeberCellIsOwn(),
             startDate: self.homeWeekCalendarCollectionView.datePickedByOthers,
             endDate: self.homeWeekCalendarCollectionView.datePickedByOthers
         )
@@ -430,38 +441,71 @@ final class HomeViewController: BaseViewController {
             self.view.layoutIfNeeded()
         })
     }
+    
+    private func checkMemeberCellIsOwn() -> Bool {
+        if myId == selectedMemberId { return true }
+        else { return false }
+    }
 
     
-    // MARK: - networking data binging
+    // MARK: - networking data binding
     
-    private func getHouseWorksByDate(startDate: String, endDate: String) {
+    private func getHouseWorksByDate(isOwn: Bool, startDate: String, endDate: String) {
         DispatchQueue.main.async {
             LoadingView.showLoading()
         }
         DispatchQueue.global().async {
-            self.getDateHouseWork(
-                fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
-                toDate: endDate.replacingOccurrences(of: ".", with: "-")
-            ) { response in
-                DispatchQueue.main.async {
-                    LoadingView.hideLoading()
-                    self.pickDayWorkInfo = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]
-                    self.divideIndex = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countLeft ?? 0
-                    if (self.pickDayWorkInfo?.countDone ?? 0) + (self.pickDayWorkInfo?.countLeft ?? 0) != 0 {
-                        self.emptyHouseWorkImage.isHidden = true
-                        self.calendarDailyTableView.isHidden = false
-                    }else {
-                        self.emptyHouseWorkImage.isHidden = false
-                        self.calendarDailyTableView.isHidden = true
+            if isOwn {
+                self.getDateHouseWork(
+                    fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
+                    toDate: endDate.replacingOccurrences(of: ".", with: "-")
+                ) { response in
+                    DispatchQueue.main.async {
+                        LoadingView.hideLoading()
+                        self.pickDayWorkInfo = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]
+                        self.divideIndex = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countLeft ?? 0
+                        if (self.pickDayWorkInfo?.countDone ?? 0) + (self.pickDayWorkInfo?.countLeft ?? 0) != 0 {
+                            self.emptyHouseWorkImage.isHidden = true
+                            self.calendarDailyTableView.isHidden = false
+                        }else {
+                            self.emptyHouseWorkImage.isHidden = false
+                            self.calendarDailyTableView.isHidden = true
+                        }
+                        self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.houseWorks ?? [HouseWorkData]())
+                        self.bindWeekWorkDoneLable(isOwn: isOwn)
+                        guard let finishedWorkSum = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countDone else {
+                            self.finishedWorkSum = 0
+                            return
+                        }
+                        self.finishedWorkSum = finishedWorkSum
                     }
-                    self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.houseWorks ?? [HouseWorkData]())
-                    self.bindWeekWorkDoneLable()
-                    // MARK: - fix me : getSuccessCount 붙이고 바꾸자!
-                    guard let finishedWorkSum = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countDone else {
-                        self.finishedWorkSum = 0
-                        return
+                }
+            } else {
+                guard let selectedMemberId = self.selectedMemberId else { return }
+                self.getMemberDateHouseWork(
+                    fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
+                    toDate: endDate.replacingOccurrences(of: ".", with: "-"),
+                    teamMemberId: selectedMemberId
+                ) { response in
+                    DispatchQueue.main.async {
+                        LoadingView.hideLoading()
+                        self.pickDayWorkInfo = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]
+                        self.divideIndex = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countLeft ?? 0
+                        if (self.pickDayWorkInfo?.countDone ?? 0) + (self.pickDayWorkInfo?.countLeft ?? 0) != 0 {
+                            self.emptyHouseWorkImage.isHidden = true
+                            self.calendarDailyTableView.isHidden = false
+                        }else {
+                            self.emptyHouseWorkImage.isHidden = false
+                            self.calendarDailyTableView.isHidden = true
+                        }
+                        self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.houseWorks ?? [HouseWorkData]())
+                        self.bindWeekWorkDoneLable(isOwn: isOwn)
+                        guard let finishedWorkSum = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countDone else {
+                            self.finishedWorkSum = 0
+                            return
+                        }
+                        self.finishedWorkSum = finishedWorkSum
                     }
-                    self.finishedWorkSum = finishedWorkSum
                 }
             }
         }
@@ -477,6 +521,8 @@ final class HomeViewController: BaseViewController {
     private func getTeamInfo() {
         self.getTeamInfoFromServer() { response in
             self.homeGroupLabel.text = response.teamName
+            self.myId = response.members?.first?.memberId
+            self.selectedMemberId = response.members?.first?.memberId
             self.teamId = response.teamId
             guard let userName = response.members?[0].memberName else { return }
             self.userName = userName
@@ -486,20 +532,35 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    private func bindWeekWorkDoneLable() {
+    private func bindWeekWorkDoneLable(isOwn: Bool) {
         guard let firstDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.first else { return }
         guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
         var doneWorkSum: Int = 0
         DispatchQueue.global().async {
-            self.getWeekHouseWork(
-                fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
-                toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
-            ) { response in
-                for date in self.homeWeekCalendarCollectionView.fullDateList {
-                    guard let workDoneInWeek = response[date.replacingOccurrences(of: ".", with: "-")] else { return }
-                    doneWorkSum = doneWorkSum + workDoneInWeek.countDone
+            if isOwn {
+                self.getDateHouseWork(
+                    fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                    toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
+                ) { response in
+                    for date in self.homeWeekCalendarCollectionView.fullDateList {
+                        guard let workDoneInWeek = response[date.replacingOccurrences(of: ".", with: "-")] else { return }
+                        doneWorkSum = doneWorkSum + workDoneInWeek.countDone
+                    }
+                    self.countWorkDoneInWeek = doneWorkSum
                 }
-                self.countWorkDoneInWeek = doneWorkSum
+            } else {
+                guard let selectedMemberId = self.selectedMemberId else { return }
+                self.getMemberDateHouseWork(
+                    fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                    toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                    teamMemberId: selectedMemberId
+                ) { response in
+                    for date in self.homeWeekCalendarCollectionView.fullDateList {
+                        guard let workDoneInWeek = response[date.replacingOccurrences(of: ".", with: "-")] else { return }
+                        doneWorkSum = doneWorkSum + workDoneInWeek.countDone
+                    }
+                    self.countWorkDoneInWeek = doneWorkSum
+                }
             }
         }
     }
@@ -510,8 +571,20 @@ final class HomeViewController: BaseViewController {
         guard let object = notification.userInfo?[NotificationKey.date] as? String else { return }
 
         self.getHouseWorksByDate(
+            isOwn: self.checkMemeberCellIsOwn(),
             startDate: object,
             endDate: object
+        )
+    }
+
+    @objc func observeMemberCollectionView(notification: Notification) {
+        self.userName = self.homeGroupCollectionView.selectedMemberName
+        guard let object = notification.userInfo?[NotificationKey.member] as? Int else { return }
+        self.selectedMemberId = object
+        self.getHouseWorksByDate (
+            isOwn: self.checkMemeberCellIsOwn(),
+            startDate: Date().dateToString,
+            endDate: Date().dateToString
         )
     }
     
@@ -525,6 +598,7 @@ final class HomeViewController: BaseViewController {
         if (sender.direction == .left) { self.homeWeekCalendarCollectionView.getAfterWeekDate() }
         if (sender.direction == .right) { self.homeWeekCalendarCollectionView.getBeforeWeekDate() }
         self.getHouseWorksByDate(
+            isOwn: self.checkMemeberCellIsOwn(),
             startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
             endDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String()
         )
@@ -657,7 +731,7 @@ extension HomeViewController {
             switch result {
             case .success(let response):
                 guard let houseWorkCompleteId = response as? HouseWorkCompleteResponse else { return }
-                self.bindWeekWorkDoneLable()
+                self.bindWeekWorkDoneLable(isOwn: true)
                 completion(houseWorkCompleteId)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
@@ -671,7 +745,7 @@ extension HomeViewController {
         NetworkService.shared.houseWorkCompleteRouter.deleteCompleteHouseWork(houseWorkCompleteId: houseWorkCompleteId) { result in
             switch result {
             case .success:
-                self.bindWeekWorkDoneLable()
+                self.bindWeekWorkDoneLable(isOwn: true)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
@@ -694,12 +768,12 @@ extension HomeViewController {
         }
     }
     
-    func getWeekHouseWork(fromDate: String, toDate: String, completion: @escaping (WorkInfoReponse) -> Void) {
-        NetworkService.shared.houseWorks.getHouseWorksByDate(fromDate: fromDate, toDate: toDate) { result in
+    func getMemberDateHouseWork(fromDate: String, toDate: String, teamMemberId: Int, completion: @escaping (WorkInfoReponse) -> Void) {
+        NetworkService.shared.houseWorks.getMemberHouseWorksByDate(fromDate: fromDate, toDate: toDate, teamMemberId: teamMemberId) { result in
             switch result {
             case .success(let response):
-                guard let houseWorkResponse = response as? WorkInfoReponse else { return }
-                completion(houseWorkResponse)
+                guard let memberHouseWorkResponse = response as? WorkInfoReponse else { return }
+                completion(memberHouseWorkResponse)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:

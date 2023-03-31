@@ -213,13 +213,3 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         return cell
     }
 }
-
-// MARK: - notification
-
-extension Notification.Name {
-    static let date = Notification.Name("date")
-}
-
-enum NotificationKey {
-    case date
-}

@@ -17,6 +17,7 @@ final class HomeGroupCollectionView: BaseUIView {
         }
     }
     private var selectedIndex = 0
+    lazy var selectedMemberName = ""
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
         static let collectionVerticalSpacing: CGFloat = 0
@@ -67,6 +68,9 @@ extension HomeGroupCollectionView: UICollectionViewDelegate {
         let selectedCell  = collectionView.cellForItem(at: indexPath) as! HomeGroupCollectionViewCell
         self.selectedIndex = indexPath.row
         selectedCell.isSelected = true
+        self.selectedMemberName = userList[indexPath.row].memberName ?? String()
+        // MARK: - fix me : 본인 선택 시 다시
+        NotificationCenter.default.post(name: Notification.Name.member, object: nil, userInfo: [NotificationKey.member: userList[indexPath.row].memberId ?? Int()])
     }
 }
 
@@ -94,4 +98,3 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
         }
     }
 }
-
