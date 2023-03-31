@@ -12,10 +12,10 @@ import SnapKit
 final class SelectManagerCollectionView: BaseUIView {
     
     var selectedIndex: Int? = 0
-    var totalMemberList: [MemberResponse] = [] {
+    var totalMemberList: [MemberResponse] = []
+    var selectedManagerList: [MemberResponse] = [] {
         didSet { collectionView.reloadData() }
     }
-    var selectedManagerList: [MemberResponse] = []
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -94,9 +94,7 @@ extension SelectManagerCollectionView: UICollectionViewDataSource {
         }
         
         cell.profileName.setTextWithLineHeight(text: memberName, lineHeight: 26)
-        if let memberImagePath = URL(string: memberImage) {
-            cell.profileImage.load(from: memberImagePath)
-        }
+        cell.profileImage.load(from: memberImage)
         
         return cell
     }

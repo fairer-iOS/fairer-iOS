@@ -11,7 +11,7 @@ import SnapKit
 
 final class RepeatCycleMenu: BaseUIView {
     
-    var didTappedRepeatCycleMenuButton: ((RepeatType) -> ())?
+    var didTappedRepeatCycleMenuButton: ((RepeatCycleType) -> ())?
     
     // MARK: - property
     

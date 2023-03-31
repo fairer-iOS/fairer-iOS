@@ -56,7 +56,6 @@
 		52136FD72983DE1A0022D465 /* RepeatCycleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */; };
 		52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */; };
 		52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */; };
-		52136FDE29867AB60022D465 /* HouseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FDD29867AB60022D465 /* HouseWork.swift */; };
 		52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */; };
 		5226860A299E1190007943EF /* PickDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52268609299E1190007943EF /* PickDateButton.swift */; };
 		522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */; };
@@ -73,7 +72,11 @@
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
 		52A53DC929B06DF200C4BB4C /* TeamInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */; };
 		52A53DCB29B06E9100C4BB4C /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */; };
+		52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */; };
+		52A53DD029B0864500C4BB4C /* HouseWorksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */; };
+		52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DD329B086A200C4BB4C /* MemberResponse.swift */; };
 		52A53DDE29BC5E0400C4BB4C /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DDD29BC5E0400C4BB4C /* UIImageView+Extension.swift */; };
+		52A53DE029C6E51100C4BB4C /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DDF29C6E51100C4BB4C /* ImageCacheManager.swift */; };
 		52A673F0292293B800F3E6DA /* ProfileImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */; };
 		52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */; };
 		52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */; };
@@ -202,7 +205,6 @@
 		52136FD62983DE1A0022D465 /* RepeatCycleMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleMenu.swift; sourceTree = "<group>"; };
 		52136FD82983E87F0022D465 /* RepeatCycleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionViewCell.swift; sourceTree = "<group>"; };
 		52136FDA2983E9920022D465 /* RepeatCycleCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCycleCollectionView.swift; sourceTree = "<group>"; };
-		52136FDD29867AB60022D465 /* HouseWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWork.swift; sourceTree = "<group>"; };
 		52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteHouseWorkViewController.swift; sourceTree = "<group>"; };
 		52268609299E1190007943EF /* PickDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateButton.swift; sourceTree = "<group>"; };
 		522714E7297917C3006BADBC /* SetHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHouseWorkViewController.swift; sourceTree = "<group>"; };
@@ -220,7 +222,11 @@
 		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
 		52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoResponse.swift; sourceTree = "<group>"; };
 		52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
+		52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksRequest.swift; sourceTree = "<group>"; };
+		52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksResponse.swift; sourceTree = "<group>"; };
+		52A53DD329B086A200C4BB4C /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		52A53DDD29BC5E0400C4BB4C /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		52A53DDF29C6E51100C4BB4C /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButtonView.swift; sourceTree = "<group>"; };
 		52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileImageViewController.swift; sourceTree = "<group>"; };
 		52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageHouseViewController.swift; sourceTree = "<group>"; };
@@ -548,14 +554,6 @@
 			path = RepeatCycle;
 			sourceTree = "<group>";
 		};
-		52136FDC29867A810022D465 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				52136FDD29867AB60022D465 /* HouseWork.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		52136FDF298A72020022D465 /* WriteHouseWork */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,7 +565,6 @@
 		522714E6297917AF006BADBC /* SetHouseWork */ = {
 			isa = PBXGroup;
 			children = (
-				52136FDC29867A810022D465 /* Model */,
 				5A99A2A829A5FE42006FE9B2 /* ViewController */,
 				522714E9297918DB006BADBC /* View */,
 			);
@@ -672,6 +669,15 @@
 				5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */,
 			);
 			path = Teams;
+			sourceTree = "<group>";
+		};
+		52A53DCC29B0771700C4BB4C /* HouseWorks */ = {
+			isa = PBXGroup;
+			children = (
+				52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */,
+				52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */,
+			);
+			path = HouseWorks;
 			sourceTree = "<group>";
 		};
 		52A673F129265EC800F3E6DA /* SettingProfileImage */ = {
@@ -1008,8 +1014,8 @@
 			isa = PBXGroup;
 			children = (
 				39FABBDB28DB35020053EFD2 /* HomeCalendarView.swift */,
-				911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */,
 				911E9678297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift */,
+				911E967A297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift */,
 				91CB591B29977B09002A3295 /* PickDateView.swift */,
 			);
 			path = WeekCalendarView;
@@ -1062,6 +1068,8 @@
 			children = (
 				91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */,
 				5A9BD08629C1A21100ADD3CC /* Rules */,
+				52A53DCC29B0771700C4BB4C /* HouseWorks */,
+				52A53DD329B086A200C4BB4C /* MemberResponse.swift */,
 				52A53DC729B06DD200C4BB4C /* Teams */,
 				52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */,
 				914C69CD29AA2F03008EA9EE /* ErrorResponse.swift */,
@@ -1081,6 +1089,7 @@
 				5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */,
 				917D8B7F29A634CA00E26B73 /* URLConstant.swift */,
 				914C69CB29AA0D17008EA9EE /* BaseURLConstant.swift */,
+				52A53DDF29C6E51100C4BB4C /* ImageCacheManager.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1184,12 +1193,14 @@
 				5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */,
 				911E9679297150E600F3AF35 /* HomeWeekCalendarCollectionView.swift in Sources */,
 				917D8B6329A6330300E26B73 /* OauthRouter.swift in Sources */,
+				52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */,
 				5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */,
 				39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */,
 				522714EB297918EC006BADBC /* CalendarSpaceView.swift in Sources */,
 				917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */,
 				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
+				52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */,
 				39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */,
 				5ABB7FB229B48DED008D5C15 /* RulesResponse.swift in Sources */,
 				39EEF66D28CBB59D00437654 /* UICollectionView+Extension.swift in Sources */,
@@ -1220,7 +1231,6 @@
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
 				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
-				52136FDE29867AB60022D465 /* HouseWork.swift in Sources */,
 				917D8B6129A632EC00E26B73 /* MembersRouter.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
@@ -1257,9 +1267,11 @@
 				39EEF67528CBB61200437654 /* String+Extension.swift in Sources */,
 				5226860A299E1190007943EF /* PickDateButton.swift in Sources */,
 				917D8B6B29A6334800E26B73 /* TeamsRouter.swift in Sources */,
+				52A53DE029C6E51100C4BB4C /* ImageCacheManager.swift in Sources */,
 				911E967B297152DA00F3AF35 /* HomeWeekCalendarCollectionViewCell.swift in Sources */,
 				52F1E1A129228C9500DDAA75 /* SettingProfileViewController.swift in Sources */,
 				52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */,
+				52A53DD029B0864500C4BB4C /* HouseWorksResponse.swift in Sources */,
 				5A99A2DB29A8C3F3006FE9B2 /* BaseTargetType.swift in Sources */,
 				52A53DDE29BC5E0400C4BB4C /* UIImageView+Extension.swift in Sources */,
 				5204AAB629507238002FB6CA /* SettingAlarmViewController.swift in Sources */,

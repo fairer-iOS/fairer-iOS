@@ -12,11 +12,7 @@ import SnapKit
 final class RepeatCycleCollectionView: BaseUIView {
     
     var selectedIndex: Int?
-    var selectedHouseWorkIndex: Int = 0 {
-        didSet {
-            selectedDaysOfWeek = HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern ?? []
-        }
-    }
+    var selectedHouseWorkIndex: Int = 0
     private let daysOfWeekList: [String] = TextLiteral.repeatCycleCollectionViewDaysOfWeekList
     var selectedDaysOfWeek: [String] = [] {
         didSet {
@@ -70,7 +66,6 @@ final class RepeatCycleCollectionView: BaseUIView {
 
 extension RepeatCycleCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedIndex = indexPath.item
         selectedDaysOfWeek.append(daysOfWeekList[indexPath.item])
         didSelectDaysOfWeek?(selectedDaysOfWeek)
     }
@@ -92,12 +87,10 @@ extension RepeatCycleCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if let houseWorkPattern = HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern {
-            if houseWorkPattern.contains(String(daysOfWeekList[indexPath.item].dropFirst(1))) {
+            if selectedDaysOfWeek.contains(String(daysOfWeekList[indexPath.item])) {
                 cell.isSelected = true
                 collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
             }
-        }
         
         cell.weekOfDayLabel.text = String(daysOfWeekList[indexPath.item].dropFirst(1))
         

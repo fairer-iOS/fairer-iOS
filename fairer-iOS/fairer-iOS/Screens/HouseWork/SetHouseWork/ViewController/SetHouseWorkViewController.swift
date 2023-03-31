@@ -14,13 +14,14 @@ final class SetHouseWorkViewController: BaseViewController {
     private var selectedHouseWorkIndex: Int = 0
     private var selectedDay: Date = Date() {
         didSet {
-            if HouseWork.mockHouseWork[0].repeatCycle == .week {
+            if houseWorks[selectedHouseWorkIndex].repeatCycle == "W" {
                 updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
             } else {
                 updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
             }
         }
     }
+    private var houseWorks: [HouseWorksRequest]
     
     // MARK: - property
     
@@ -141,13 +142,22 @@ final class SetHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    init(houseWorks: [HouseWorksRequest]) {
+        self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "창 청소", space: "LIVINGROOM"), HouseWorksRequest(assignees: [], houseWorkName: "거실 청소", space: "LIVINGROOM"), HouseWorksRequest(assignees: [], houseWorkName: "물건 정리정돈", space: "LIVINGROOM")]
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) { nil }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setInitialHouseWork()
         setDatePicker()
         didTappedHouseWork()
         didDeleteHouseWork()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
+        setDoneButton()
         getTeamInfo()
     }
     
@@ -279,6 +289,10 @@ final class SetHouseWorkViewController: BaseViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
+    private func setInitialHouseWork() {
+        setHouseWorkCollectionView.totalHouseWorks = houseWorks
+    }
+    
     private func setDatePicker() {
         datePickerView.isHidden = true
         datePickerView.setAction()
@@ -291,11 +305,12 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didTappedHouseWork() {
         setHouseWorkCollectionView.didTappedHouseWork = { [weak self] selectedHouseWorkIndex in
-            self?.selectedHouseWorkIndex = selectedHouseWorkIndex
-            self?.repeatCycleCollectionView.selectedHouseWorkIndex = selectedHouseWorkIndex
-            self?.repeatCycleCollectionView.collectionView.reloadData()
-            self?.updateManagerTimeRepeat(selectedHouseWorkIndex)
-            self?.selectManagerView.snp.updateConstraints {
+            guard let self = self else { return }
+            self.selectedHouseWorkIndex = selectedHouseWorkIndex
+            self.repeatCycleCollectionView.selectedHouseWorkIndex = selectedHouseWorkIndex
+            self.repeatCycleCollectionView.collectionView.reloadData()
+            self.updateManagerTimeRepeat(selectedHouseWorkIndex)
+            self.selectManagerView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
         }
@@ -303,20 +318,25 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didDeleteHouseWork() {
         setHouseWorkCollectionView.didDeleteHouseWork = { [weak self] deletedHouseWorkIndex in
-            if HouseWork.mockHouseWork.count == 0 {
+            guard let self = self else { return }
+            
+            self.houseWorks.remove(at: deletedHouseWorkIndex)
+            self.setHouseWorkCollectionView.totalHouseWorks = self.houseWorks
+            
+            if self.houseWorks.count == 0 {
                 // FIXME: - 이전 페이지로 이동
-            } else if deletedHouseWorkIndex == HouseWork.mockHouseWork.endIndex && deletedHouseWorkIndex == self?.selectedHouseWorkIndex ?? 0 {
-                self?.selectedHouseWorkIndex -= 1
-                self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
-                self?.updateManagerTimeRepeat(deletedHouseWorkIndex - 1)
-            } else if deletedHouseWorkIndex == self?.selectedHouseWorkIndex {
-                self?.updateManagerTimeRepeat(deletedHouseWorkIndex)
-            } else if deletedHouseWorkIndex < self?.selectedHouseWorkIndex ?? 0 {
-                self?.selectedHouseWorkIndex -= 1
-                self?.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
-                self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
+            } else if deletedHouseWorkIndex == self.houseWorks.endIndex && deletedHouseWorkIndex == self.selectedHouseWorkIndex {
+                self.selectedHouseWorkIndex -= 1
+                self.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
+                self.updateManagerTimeRepeat(deletedHouseWorkIndex - 1)
+            } else if deletedHouseWorkIndex == self.selectedHouseWorkIndex {
+                self.updateManagerTimeRepeat(deletedHouseWorkIndex)
+            } else if deletedHouseWorkIndex < self.selectedHouseWorkIndex {
+                self.selectedHouseWorkIndex -= 1
+                self.repeatCycleCollectionView.selectedHouseWorkIndex -= 1
+                self.updateManagerTimeRepeat(self.selectedHouseWorkIndex)
             } else {
-                self?.updateManagerTimeRepeat(self?.selectedHouseWorkIndex ?? 0)
+                self.updateManagerTimeRepeat(self.selectedHouseWorkIndex)
             }
         }
     }
@@ -346,8 +366,11 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
-            // FIXME: - 집안일 생성을 위한 모델에 적용
-            // HouseWork.mockHouseWork[selectedHouseWorkIndex].manager = selectManagerView.selectManagerCollectionView.selectedManagerList
+            selectManagerView.selectManagerCollectionView.selectedManagerList.forEach {
+                if let memberId = $0.memberId, !houseWorks[selectedHouseWorkIndex].assignees.contains(memberId) {
+                    houseWorks[selectedHouseWorkIndex].assignees.append(memberId)
+                }
+            }
         }
     }
     
@@ -376,15 +399,16 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(setTimeLabel.snp.bottom)
                 $0.height.equalTo(0)
             }
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].time = TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel
+            houseWorks[selectedHouseWorkIndex].scheduledTime = ""
+            setHouseWorkCollectionView.totalHouseWorks[selectedHouseWorkIndex].scheduledTime = ""
             setHouseWorkCollectionView.collectionView.reloadData()
         }
     }
     
     private func didTimeChanged() {
-        let time = timePicker.date.timeToKoreanString
-        HouseWork.mockHouseWork[selectedHouseWorkIndex].time = time
-        setHouseWorkCollectionView.collectionView.reloadData()
+        let time = timePicker.date.dateToTimeString
+        houseWorks[selectedHouseWorkIndex].scheduledTime = time
+        setHouseWorkCollectionView.totalHouseWorks[selectedHouseWorkIndex].scheduledTime = time
     }
     
     private func didTappedRepeatToggle() {
@@ -402,8 +426,9 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
                 $0.bottom.equalToSuperview().inset(40)
             }
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = RepeatType.week
-            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
+            houseWorks[selectedHouseWorkIndex].repeatCycle = RepeatCycleType.week.rawValue
+            houseWorks[selectedHouseWorkIndex].repeatPattern = Date().dayOfWeekToAPIString
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.week.repeatLabel
             updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
             repeatCycleCollectionView.selectedDaysOfWeek = []
         } else {
@@ -420,8 +445,8 @@ final class SetHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
                 $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             }
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatCycle = nil
-            HouseWork.mockHouseWork[selectedHouseWorkIndex].repeatPattern = nil
+            houseWorks[selectedHouseWorkIndex].repeatCycle = RepeatCycleType.once.rawValue
+            houseWorks[selectedHouseWorkIndex].repeatPattern = Date().dateToAPIString
             repeatCycleMenu.isHidden = true
         }
         addAnimation()
@@ -433,40 +458,49 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func didTappedRepeatCycleMenuButton() {
         repeatCycleMenu.didTappedRepeatCycleMenuButton = { [weak self] repeatCycle in
+            guard let selectedHouseWorkIndex = self?.selectedHouseWorkIndex else { return }
             switch repeatCycle {
+            case .once:
+                break
+            case .daily:
+                break
             case .week:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }
                 self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
-                HouseWork.mockHouseWork[0].repeatPattern = nil
+                self?.houseWorks[selectedHouseWorkIndex].repeatPattern = Date().dayOfWeekToAPIString
                 self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             case .month:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
+                self?.houseWorks[selectedHouseWorkIndex].repeatPattern = Date().singleDayToKoreanString
                 self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
-            HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatCycle = repeatCycle
-            self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.rawValue
+            self?.houseWorks[selectedHouseWorkIndex].repeatCycle = repeatCycle.rawValue
+            self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.repeatLabel
             self?.repeatCycleMenu.isHidden = true
         }
     }
     
     private func didSelectDaysOfWeek() {
         repeatCycleCollectionView.didSelectDaysOfWeek = { [weak self] selectedDays in
+            guard let selectedHouseWorkIndex = self?.selectedHouseWorkIndex else { return }
             var sortedDays: [String] = []
+            var sortedDaysInAPIString: [String] = []
             for day in selectedDays.sorted(){
                 sortedDays.append(String(day.dropFirst(1)))
+                sortedDaysInAPIString.append(day.dayOfWeekToAPIString())
             }
             let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
             self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
-            HouseWork.mockHouseWork[self?.selectedHouseWorkIndex ?? 0].repeatPattern = sortedDays
+            self?.houseWorks[selectedHouseWorkIndex].repeatPattern = sortedDaysInAPIString.joined(separator: ",")
         }
     }
     
     private func isTimeSelected(_ houseWork: Int) {
-        if HouseWork.mockHouseWork[houseWork].time == TextLiteral.setHouseWorkCollectionViewCellDefaultTimeLabel {
+        if houseWorks[houseWork].scheduledTime == "" {
             setTimeToggle.isOn = false
             timePicker.snp.updateConstraints {
                 $0.top.equalTo(setTimeLabel.snp.bottom)
@@ -482,18 +516,21 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     private func isRepeatSelected(_ houseWork: Int) {
-        switch HouseWork.mockHouseWork[houseWork].repeatCycle {
-        case .week:
+        switch houseWorks[houseWork].repeatCycle {
+        case "W":
             setRepeatToggle.isOn = true
             openRepeatCycleView()
-            repeatCycleView.repeatCycleButtonLabel.text = RepeatType.week.rawValue
+            repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.week.repeatLabel
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(40)
             }
-            repeatCycleCollectionView.selectedHouseWorkIndex = houseWork
+            var dayOfWeeks = houseWorks[houseWork].repeatPattern.components(separatedBy: ",")
+            dayOfWeeks.indices.forEach { dayOfWeeks[$0] = dayOfWeeks[$0].englishToDayOfWeekString() }
+            repeatCycleCollectionView.selectedDaysOfWeek = dayOfWeeks
             repeatCycleCollectionView.collectionView.reloadData()
-            updateRepeatCycleDayLabel(.week, HouseWork.mockHouseWork[houseWork].repeatPattern?.joined(separator: ", ") ?? Date().dayOfWeekToKoreanString)
-        case .month:
+            dayOfWeeks.indices.forEach { dayOfWeeks[$0] = String(dayOfWeeks[$0].dropFirst(1)) }
+            updateRepeatCycleDayLabel(.week, dayOfWeeks.joined(separator: ", "))
+        case "M":
             setRepeatToggle.isOn = true
             openRepeatCycleView()
             repeatCycleCollectionView.snp.updateConstraints {
@@ -501,18 +538,23 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             repeatCycleView.repeatCycleButtonLabel.text = RepeatType.month.rawValue
             updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
-        case .none:
+        case "O", "D":
             setRepeatToggle.isOn = false
             closeRepeatCycleView()
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(0)
             }
+        default:
+            break
         }
     }
     
     private func updateManagerTimeRepeat(_ houseWork: Int) {
-        // FIXME: - 집안일 생성을 위한 모델에 적용
-        // getManagerView.getManagerCollectionView.selectedMemberList = HouseWork.mockHouseWork[houseWork].manager
+        var updateMembers: [MemberResponse] = []
+        for assignee in houseWorks[houseWork].assignees {
+            updateMembers += selectManagerView.selectManagerCollectionView.totalMemberList.filter { $0.memberId == assignee }
+        }
+        getManagerView.getManagerCollectionView.selectedMemberList = updateMembers
         isTimeSelected(houseWork)
         isRepeatSelected(houseWork)
     }
@@ -541,7 +583,7 @@ final class SetHouseWorkViewController: BaseViewController {
         repeatCycleDayLabel.isHidden = true
     }
     
-    private func updateRepeatCycleDayLabel(_ type: RepeatType, _ repeatDay: String) {
+    private func updateRepeatCycleDayLabel(_ type: RepeatCycleType, _ repeatDay: String) {
         switch type {
         case .week:
             repeatCycleDayLabel.text = TextLiteral.everyWeekText + repeatDay + TextLiteral.weekText + TextLiteral.repeatText
@@ -549,6 +591,8 @@ final class SetHouseWorkViewController: BaseViewController {
         case .month:
             repeatCycleDayLabel.text = TextLiteral.everyMonthText + repeatDay + TextLiteral.dayText + TextLiteral.repeatText
             repeatCycleDayLabel.applyColor(to: repeatDay + TextLiteral.dayText, with: .positive20)
+        default:
+            return
         }
     }
     
@@ -559,6 +603,15 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.setHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
             self?.selectedDay = pickedDate
         }
+    }
+    
+    private func setDoneButton() {
+        let action = UIAction { [weak self] _ in
+            if let houseWorks = self?.houseWorks {
+                self?.postAddHouseWorks(body: houseWorks)
+            }
+        }
+        doneButton.addAction(action, for: .touchUpInside)
     }
 }
 
@@ -573,6 +626,10 @@ extension SetHouseWorkViewController {
                 guard let membersInfo = teamInfo.members else { return }
                 DispatchQueue.main.async {
                     // FIXME: 첫번째 멤버 대신 user item 넣어주기
+                    guard let memberId = membersInfo[0].memberId else { return }
+                    for index in self.houseWorks.indices {
+                        self.houseWorks[index].assignees.append(memberId)
+                    }
                     self.getManagerView.getManagerCollectionView.selectedMemberList = [membersInfo[0]]
                     self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
                     self.selectManagerView.selectManagerCollectionView.selectedManagerList = [membersInfo[0]]
@@ -581,7 +638,21 @@ extension SetHouseWorkViewController {
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
-                print("error")
+                break
+            }
+        }
+    }
+    
+    private func postAddHouseWorks(body: [HouseWorksRequest]) {
+        NetworkService.shared.houseWorks.postAddHouseWorksAPI(body: body) { result in
+            switch result {
+            case .success(let response):
+                dump(response)
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
             }
         }
     }

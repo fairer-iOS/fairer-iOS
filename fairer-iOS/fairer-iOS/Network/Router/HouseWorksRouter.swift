@@ -11,6 +11,7 @@ import Moya
 
 enum HouseWorksRouter {
     case getHouseWorksByDate(fromDate: String, toDate: String)
+    case postAddHouseWorks(body: [HouseWorksRequest])
 }
 
 extension HouseWorksRouter: BaseTargetType {
@@ -18,6 +19,8 @@ extension HouseWorksRouter: BaseTargetType {
         switch self {
         case .getHouseWorksByDate:
             return URLConstant.houseWorks + "/list/query"
+        case .postAddHouseWorks(_):
+            return URLConstant.houseWorks
         }
     }
     
@@ -25,6 +28,8 @@ extension HouseWorksRouter: BaseTargetType {
         switch self {
         case .getHouseWorksByDate:
             return .get
+        case .postAddHouseWorks(_):
+            return .post
         }
     }
     
@@ -32,6 +37,8 @@ extension HouseWorksRouter: BaseTargetType {
         switch self {
         case .getHouseWorksByDate(let fromDate,let toDate):
             return .requestParameters(parameters: ["fromDate": fromDate, "toDate": toDate], encoding: URLEncoding.queryString)
+        case .postAddHouseWorks(let body):
+            return .requestJSONEncodable(body)
         }
     }
 }

@@ -49,5 +49,64 @@ extension String {
         }
         return false
     }
+    
+    func twentyFourToTwelve() -> String {
+        let time = self.split(separator: ":")
+        if var hour = Int(time[0]), let minute = Int(time[1]) {
+            if hour > 1 && hour < 12 {
+                return "오전\n\(hour)시 \(minute)분"
+            } else if hour == 12 {
+                return "오후\n12시 \(minute)분"
+            } else if hour == 0 {
+                return "오전\n12시 \(minute)분"
+            } else {
+                hour = hour - 12
+                return "오후\n\(hour)시 \(minute)분"
+            }
+        }
+        return ""
+    }
+    
+    func dayOfWeekToAPIString() -> String {
+        switch self {
+        case "0월":
+            return "MONDAY"
+        case "1화":
+            return "TUESDAY"
+        case "2수":
+            return "WEDNESDAY"
+        case "3목":
+            return "THURSDAY"
+        case "4금":
+            return "FRIDAY"
+        case "5토":
+            return "SATURDAY"
+        case "6일":
+            return "SUNDAY"
+        default:
+            return ""
+        }
+    }
+    
+    func englishToDayOfWeekString() -> String {
+        switch self {
+        case "MONDAY":
+            return "0월"
+        case "TUESDAY":
+            return "1화"
+        case "WEDNESDAY":
+            return "2수"
+        case "THURSDAY":
+            return "3목"
+        case "FRIDAY":
+            return "4금"
+        case "SATURDAY":
+            return "5토"
+        case "SUNDAY":
+            return "6일"
+        default:
+            return ""
+        }
+    }
 }
 
