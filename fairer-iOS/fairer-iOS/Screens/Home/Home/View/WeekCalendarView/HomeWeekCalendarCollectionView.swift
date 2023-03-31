@@ -12,13 +12,18 @@ import SnapKit
 final class HomeWeekCalendarCollectionView: BaseUIView {
 
     static var indentifer = "reusableView"
+
+    var fullDateList: [String] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     private var isSelected = false
     private var selectedCell = Int()
     private var cellIndexPath = IndexPath()
     private let dotList = [ImageLiterals.oneDot,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.threeDots,ImageLiterals.twoDots]
     private let dayList = ["일","월","화","수","목","금","토"]
-    lazy var fullDateList = [String]()
     lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
     lazy var todayDateInString = Date().dateToString

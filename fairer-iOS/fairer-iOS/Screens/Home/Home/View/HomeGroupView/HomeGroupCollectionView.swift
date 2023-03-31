@@ -11,6 +11,12 @@ import SnapKit
 
 final class HomeGroupCollectionView: BaseUIView {
     
+    var userList: [MemberResponse] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    private var selectedIndex = 0
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
         static let collectionVerticalSpacing: CGFloat = 0
@@ -22,11 +28,6 @@ final class HomeGroupCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
-    private var selectedIndex = 0
-    
-    // MARK: - TODO.API
-    
-    var userList: [MemberResponse] = [MemberResponse]()
     
     // MARK: - property
     
