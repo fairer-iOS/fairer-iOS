@@ -156,6 +156,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
             firstCell.isSelected = true
             datePickedByOthers = self.fullDateList[indexPath.row]
+            self.collectionView.reloadData()
         }else if indexPath.row != self.selectedCell {
             let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
             resetCell.workDot.image = dotList[self.cellIndexPath.row]
@@ -168,6 +169,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
             secondCell.isSelected = true
             datePickedByOthers = self.fullDateList[indexPath.row]
+            self.collectionView.reloadData()
         }
         NotificationCenter.default.post(name: Notification.Name.date, object: nil, userInfo: [NotificationKey.date: datePickedByOthers])
     }
