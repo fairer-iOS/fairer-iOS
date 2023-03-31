@@ -73,9 +73,8 @@ extension HouseMemberCollectionView: UICollectionViewDataSource {
         
         guard let memberName = teamInfoData[indexPath.row].memberName,
               let memberImage = teamInfoData[indexPath.row].profilePath else { return UICollectionViewCell() }
-        if let memberImagePath = URL(string: memberImage) {
-            cell.profileImage.load(from: memberImagePath)
-        }
+        
+        cell.profileImage.load(from: memberImage)
         cell.profileName.setTextWithLineHeight(text: memberName, lineHeight: 26)
         return cell
     }

@@ -71,7 +71,6 @@
 		5275397928EC2F78002D8280 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397828EC2F78002D8280 /* BackButton.swift */; };
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
 		52A53DC929B06DF200C4BB4C /* TeamInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */; };
-		52A53DCB29B06E9100C4BB4C /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */; };
 		52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */; };
 		52A53DD029B0864500C4BB4C /* HouseWorksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */; };
 		52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DD329B086A200C4BB4C /* MemberResponse.swift */; };
@@ -1303,7 +1302,6 @@
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
 				917D8B7D29A633D800E26B73 /* TeamsAPI.swift in Sources */,
 				52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */,
-				52A53DCB29B06E9100C4BB4C /* MemberResponse.swift in Sources */,
 				5AB1B9C329D55FC300DCA8FE /* ToastPaddingLabel.swift in Sources */,
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,
 				39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */,
