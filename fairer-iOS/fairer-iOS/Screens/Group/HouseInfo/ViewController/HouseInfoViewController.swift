@@ -11,7 +11,12 @@ import SnapKit
 
 final class HouseInfoViewController: BaseViewController {
         
-    var houseName = ""
+    var houseName:String = "" {
+        didSet {
+            welcomeLabel.setTextWithLineHeight(text: (houseName) + TextLiteral.houseInfoViewControllerWelcomeLabel, lineHeight: 28)
+            welcomeLabel.applyColor(to: houseName, with: .blue)
+        }
+    }
     
     // MARK: - property
     
@@ -24,10 +29,8 @@ final class HouseInfoViewController: BaseViewController {
     }()
     private lazy var welcomeLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: houseName + TextLiteral.houseInfoViewControllerWelcomeLabel, lineHeight: 28)
         label.font = .h2
         label.textColor = .gray800
-        label.applyColor(to: houseName, with: .blue)
         return label
     }()
     private let houseInfoDivider: UIView = {
@@ -69,6 +72,7 @@ final class HouseInfoViewController: BaseViewController {
         welcomeLabel.snp.makeConstraints {
             $0.top.equalTo(welcomeImageView.snp.bottom).offset(SizeLiteral.componentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(28)
         }
         
         view.addSubview(houseInfoDivider)
