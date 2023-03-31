@@ -565,7 +565,7 @@ final class HomeViewController: BaseViewController {
         }
     }
 
-    // MARK: - selector
+    // MARK: - observer
     
     @objc func observeWeekCalendar(notification: Notification) {
         guard let object = notification.userInfo?[NotificationKey.date] as? String else { return }
@@ -580,6 +580,7 @@ final class HomeViewController: BaseViewController {
     @objc func observeMemberCollectionView(notification: Notification) {
         self.userName = self.homeGroupCollectionView.selectedMemberName
         guard let object = notification.userInfo?[NotificationKey.member] as? Int else { return }
+        
         self.selectedMemberId = object
         self.getHouseWorksByDate (
             isOwn: self.checkMemeberCellIsOwn(),
@@ -587,6 +588,8 @@ final class HomeViewController: BaseViewController {
             endDate: Date().dateToString
         )
     }
+    
+    // MARK: - selector
     
     @objc
     private func addTapGesture() {
@@ -722,7 +725,7 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - network
+    // MARK: - network
 
 extension HomeViewController {
     
