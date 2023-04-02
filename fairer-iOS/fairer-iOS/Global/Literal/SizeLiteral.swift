@@ -24,5 +24,5 @@ enum SizeLiteral {
     
     // MARK: - HomeViewCollectionViewCell
     
-    static let homeViewWorkCellHeight: CGFloat = 105
+    static let homeViewWorkCellHeight: CGFloat = 94
 }

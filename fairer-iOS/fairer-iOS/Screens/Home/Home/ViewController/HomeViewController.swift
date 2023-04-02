@@ -11,20 +11,27 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
-    private var userName: String = String() {
-        didSet {
-            self.nameTitleLabel.text = userName
-        }
-    }
     private var teamId: Int?
     private var ruleArray: [RuleData]?
     private var isScrolled = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-    private lazy var divideIndex: Int = 0
-    private var finishedWorkSum: Int = 0
     private var selectedMemberId: Int?
     private var myId: Int?
+    private lazy var divideIndex: Int = 0
+    private lazy var workTotalNum: Int = 0
+    private lazy var notFinishedWorkSum: Int = 0
+    private lazy var finishedWorkSum: Int = 0 {
+        didSet {
+            self.notFinishedWorkSum = workTotalNum - finishedWorkSum
+            self.homeWeekCalendarCollectionView.countWorkLeft = String(notFinishedWorkSum)
+        }
+    }
+    private lazy var userName: String = String() {
+        didSet {
+            self.nameTitleLabel.text = userName
+        }
+    }
     private var pickDayWorkInfo: DayHouseWorks? {
         didSet {
             self.calendarDailyTableView.reloadData()
@@ -286,39 +293,6 @@ final class HomeViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(observeMemberCollectionView(notification:)), name: Notification.Name.member, object: nil)
     }
     
-    // MARK: - func
-    
-    private func setButtonEvent() {
-        self.datePickerView.setAction()
-        let moveToTodayDateButtonAction = UIAction { [weak self] _ in
-            self?.moveToTodayDate()
-        }
-        let moveToTodayDatePickerButtonAction = UIAction { [weak self] _ in
-            self?.moveToDatePicker()
-        }
-        self.homeCalenderView.todayButton.addAction(moveToTodayDateButtonAction, for: .touchUpInside)
-        self.homeCalenderView.calendarMonthLabelButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
-        self.homeCalenderView.calendarMonthPickButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
-    }
-    
-    private func setHomeRuleLabel() {
-        var index = 0
-        
-        guard let rules = ruleArray else {
-            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
-            return
-        }
-        homeRuleView.homeRuleDescriptionLabel.text = rules[index].ruleName
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
-            guard let count = self?.ruleArray?.count else { return }
-            self?.homeRuleView.homeRuleDescriptionLabel.text = self?.ruleArray?[index].ruleName
-            index += 1
-            if index > count - 1 {
-                index = 0
-            }
-        }
-    }
-    
     private func setWeekCalendarSwipeGesture() {
         leftSwipeGestureRecognizer.direction = .left
         rightSwipeGestureRecognizer.direction = .right
@@ -355,6 +329,39 @@ final class HomeViewController: BaseViewController {
             }
             let seporateResult = yearDate.components(separatedBy: ".")
             self.homeCalenderView.calendarMonthLabelButton.setTitle("\(seporateResult[0])년 \(seporateResult[1])월", for: .normal)
+        }
+    }
+    
+    // MARK: - func
+    
+    private func setButtonEvent() {
+        self.datePickerView.setAction()
+        let moveToTodayDateButtonAction = UIAction { [weak self] _ in
+            self?.moveToTodayDate()
+        }
+        let moveToTodayDatePickerButtonAction = UIAction { [weak self] _ in
+            self?.moveToDatePicker()
+        }
+        self.homeCalenderView.todayButton.addAction(moveToTodayDateButtonAction, for: .touchUpInside)
+        self.homeCalenderView.calendarMonthLabelButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
+        self.homeCalenderView.calendarMonthPickButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
+    }
+    
+    private func setHomeRuleLabel() {
+        var index = 0
+        
+        guard let rules = ruleArray else {
+            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
+            return
+        }
+        homeRuleView.homeRuleDescriptionLabel.text = rules[index].ruleName
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            guard let count = self?.ruleArray?.count else { return }
+            self?.homeRuleView.homeRuleDescriptionLabel.text = self?.ruleArray?[index].ruleName
+            index += 1
+            if index > count - 1 {
+                index = 0
+            }
         }
     }
     
@@ -462,22 +469,21 @@ final class HomeViewController: BaseViewController {
                 ) { response in
                     DispatchQueue.main.async {
                         LoadingView.hideLoading()
-                        self.pickDayWorkInfo = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]
-                        self.divideIndex = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countLeft ?? 0
-                        if (self.pickDayWorkInfo?.countDone ?? 0) + (self.pickDayWorkInfo?.countLeft ?? 0) != 0 {
-                            self.emptyHouseWorkImage.isHidden = true
-                            self.calendarDailyTableView.isHidden = false
-                        }else {
-                            self.emptyHouseWorkImage.isHidden = false
-                            self.calendarDailyTableView.isHidden = true
+                        if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
+                            self.pickDayWorkInfo = response
+                            self.divideIndex = response.countLeft
+                            self.workTotalNum = response.countLeft + response.countDone
+                            self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response.houseWorks ?? [HouseWorkData]())
+                            if response.countDone + response.countLeft != 0 {
+                                self.emptyHouseWorkImage.isHidden = true
+                                self.calendarDailyTableView.isHidden = false
+                            } else {
+                                self.emptyHouseWorkImage.isHidden = false
+                                self.calendarDailyTableView.isHidden = true
+                            }
+                            self.finishedWorkSum = response.countDone
                         }
-                        self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.houseWorks ?? [HouseWorkData]())
                         self.bindWeekWorkDoneLable(isOwn: isOwn)
-                        guard let finishedWorkSum = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countDone else {
-                            self.finishedWorkSum = 0
-                            return
-                        }
-                        self.finishedWorkSum = finishedWorkSum
                     }
                 }
             } else {
@@ -489,22 +495,21 @@ final class HomeViewController: BaseViewController {
                 ) { response in
                     DispatchQueue.main.async {
                         LoadingView.hideLoading()
-                        self.pickDayWorkInfo = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]
-                        self.divideIndex = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countLeft ?? 0
-                        if (self.pickDayWorkInfo?.countDone ?? 0) + (self.pickDayWorkInfo?.countLeft ?? 0) != 0 {
-                            self.emptyHouseWorkImage.isHidden = true
-                            self.calendarDailyTableView.isHidden = false
-                        }else {
-                            self.emptyHouseWorkImage.isHidden = false
-                            self.calendarDailyTableView.isHidden = true
+                        if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
+                            self.pickDayWorkInfo = response
+                            self.divideIndex = response.countLeft
+                            self.workTotalNum = response.countLeft + response.countDone
+                            self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response.houseWorks ?? [HouseWorkData]())
+                            if response.countDone + response.countLeft != 0 {
+                                self.emptyHouseWorkImage.isHidden = true
+                                self.calendarDailyTableView.isHidden = false
+                            } else {
+                                self.emptyHouseWorkImage.isHidden = false
+                                self.calendarDailyTableView.isHidden = true
+                            }
+                            self.finishedWorkSum = response.countDone
                         }
-                        self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.houseWorks ?? [HouseWorkData]())
                         self.bindWeekWorkDoneLable(isOwn: isOwn)
-                        guard let finishedWorkSum = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")]?.countDone else {
-                            self.finishedWorkSum = 0
-                            return
-                        }
-                        self.finishedWorkSum = finishedWorkSum
                     }
                 }
             }
@@ -721,7 +726,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 94
+        return SizeLiteral.homeViewWorkCellHeight
     }
 }
 

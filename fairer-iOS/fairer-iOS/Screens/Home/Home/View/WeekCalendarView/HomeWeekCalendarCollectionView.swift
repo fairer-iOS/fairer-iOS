@@ -13,12 +13,16 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
 
     static var indentifer = "reusableView"
 
-    var fullDateList: [String] = [] {
+    lazy var fullDateList: [String] = [] {
         didSet {
             self.collectionView.reloadData()
         }
     }
-    
+    lazy var countWorkLeft: String = String() {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     private var isSelected = false
     private var selectedCell = Int()
     private var cellIndexPath = IndexPath()
@@ -152,17 +156,38 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
             let firstCell  = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
-            firstCell.workDot.image = ImageLiterals.selectedCalendarCell
+            if Int(countWorkLeft) == 0 {
+                firstCell.workDot.image = dotList[self.cellIndexPath.row]
+                firstCell.workBlueBadge.isHidden = true
+                firstCell.workLeftLabel.isHidden = true
+            } else {
+                firstCell.workDot.isHidden = true
+                firstCell.workBlueBadge.isHidden = false
+                firstCell.workLeftLabel.isHidden = false
+                firstCell.workLeftLabel.text = self.countWorkLeft
+            }
             yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
             firstCell.isSelected = true
             datePickedByOthers = self.fullDateList[indexPath.row]
             self.collectionView.reloadData()
         }else if indexPath.row != self.selectedCell {
             let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
+            resetCell.workDot.isHidden = false
             resetCell.workDot.image = dotList[self.cellIndexPath.row]
+            resetCell.workBlueBadge.isHidden = true
+            resetCell.workLeftLabel.isHidden = true
             resetCell.isSelected = false
             let secondCell = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
-            secondCell.workDot.image = ImageLiterals.selectedCalendarCell
+            if Int(countWorkLeft) == 0 {
+                secondCell.workDot.image = dotList[self.cellIndexPath.row]
+                secondCell.workBlueBadge.isHidden = true
+                secondCell.workLeftLabel.isHidden = true
+            } else {
+                secondCell.workDot.isHidden = true
+                secondCell.workBlueBadge.isHidden = false
+                secondCell.workLeftLabel.isHidden = false
+                secondCell.workLeftLabel.text = self.countWorkLeft
+            }
             self.isSelected = true
             self.selectedCell = indexPath.row
             self.cellIndexPath = indexPath
@@ -188,6 +213,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = seporateDate[2]
         cell.workDot.image = dotList[indexPath.item]
+        cell.workLeftLabel.text = self.countWorkLeft
         guard self.datePickedByOthers != "" else {
             if fullDateList[indexPath.item] == self.todayDateInString {
                 self.selectedCell = indexPath.row
@@ -197,7 +223,16 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
                 cell.dayLabel.textColor = UIColor.blue
                 cell.dayLabel.font = .title2
                 cell.dateLabel.font = .title2
-                cell.workDot.image = ImageLiterals.selectedCalendarCell
+                if Int(countWorkLeft) == 0 {
+                    cell.workDot.image = dotList[self.cellIndexPath.row]
+                    cell.workBlueBadge.isHidden = true
+                    cell.workLeftLabel.isHidden = true
+                } else {
+                    cell.workDot.isHidden = true
+                    cell.workBlueBadge.isHidden = false
+                    cell.workLeftLabel.isHidden = false
+                    cell.workLeftLabel.text = self.countWorkLeft
+                }
             }
             return cell
         }
@@ -210,7 +245,16 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
             cell.dayLabel.textColor = UIColor.blue
             cell.dayLabel.font = .title2
             cell.dateLabel.font = .title2
-            cell.workDot.image = ImageLiterals.selectedCalendarCell
+            if Int(countWorkLeft) == 0 {
+                cell.workDot.image = dotList[self.cellIndexPath.row]
+                cell.workBlueBadge.isHidden = true
+                cell.workLeftLabel.isHidden = true
+            } else {
+                cell.workDot.isHidden = true
+                cell.workBlueBadge.isHidden = false
+                cell.workLeftLabel.isHidden = false
+                cell.workLeftLabel.text = self.countWorkLeft
+            }
         }
         return cell
     }
