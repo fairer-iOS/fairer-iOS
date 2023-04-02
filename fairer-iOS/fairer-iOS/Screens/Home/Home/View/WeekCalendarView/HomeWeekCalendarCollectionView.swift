@@ -23,11 +23,15 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
             self.collectionView.reloadData()
         }
     }
+    lazy var dotList: [UIImage] = [UIImage]() {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     private var isSelected = false
     private var selectedCell = Int()
     private var cellIndexPath = IndexPath()
-    private let dotList = [ImageLiterals.oneDot,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.threeDots,ImageLiterals.twoDots]
-    private let dayList = ["일","월","화","수","목","금","토"]
+    private let dayList = TextLiteral.homeCalendarViewDaysTitle
     lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
     lazy var todayDateInString = Date().dateToString
@@ -212,7 +216,11 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         let seporateDate = fullDateList[indexPath.row].components(separatedBy: ".")
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = seporateDate[2]
-        cell.workDot.image = dotList[indexPath.item]
+        if dotList.isEmpty == true {
+            cell.workDot.isHidden = true
+        } else {
+            cell.workDot.image = dotList[indexPath.row]
+        }
         cell.workLeftLabel.text = self.countWorkLeft
         guard self.datePickedByOthers != "" else {
             if fullDateList[indexPath.item] == self.todayDateInString {

@@ -483,7 +483,9 @@ final class HomeViewController: BaseViewController {
                             }
                             self.finishedWorkSum = response.countDone
                         }
-                        self.bindWeekWorkDoneLable(isOwn: isOwn)
+                    }
+                    DispatchQueue.global().async {
+                        self.getHouseWorksByWeek(isOwn: isOwn)
                     }
                 }
             } else {
@@ -509,7 +511,9 @@ final class HomeViewController: BaseViewController {
                             }
                             self.finishedWorkSum = response.countDone
                         }
-                        self.bindWeekWorkDoneLable(isOwn: isOwn)
+                    }
+                    DispatchQueue.global().async {
+                        self.getHouseWorksByWeek(isOwn: isOwn)
                     }
                 }
             }
@@ -537,7 +541,7 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    private func bindWeekWorkDoneLable(isOwn: Bool) {
+    private func getHouseWorksByWeek(isOwn: Bool) {
         guard let firstDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.first else { return }
         guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
         var doneWorkSum: Int = 0
@@ -547,11 +551,27 @@ final class HomeViewController: BaseViewController {
                     fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
                 ) { response in
+                    self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                     for date in self.homeWeekCalendarCollectionView.fullDateList {
-                        guard let workDoneInWeek = response[date.replacingOccurrences(of: ".", with: "-")] else { return }
-                        doneWorkSum = doneWorkSum + workDoneInWeek.countDone
+                        if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                            doneWorkSum = doneWorkSum + workDate.countDone
+                            switch workDate.countLeft {
+                            case 0:
+                                self.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                            case 1...3:
+                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                            case 4...6:
+                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                            default:
+                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
+                            }
+                        }
                     }
                     self.countWorkDoneInWeek = doneWorkSum
+                    
+                    // MARK: - fix me
+                    self.homeWeekCalendarCollectionView.collectionView.reloadData()
+                    self.calendarDailyTableView.reloadData()
                 }
             } else {
                 guard let selectedMemberId = self.selectedMemberId else { return }
@@ -560,16 +580,32 @@ final class HomeViewController: BaseViewController {
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     teamMemberId: selectedMemberId
                 ) { response in
+                    self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                     for date in self.homeWeekCalendarCollectionView.fullDateList {
-                        guard let workDoneInWeek = response[date.replacingOccurrences(of: ".", with: "-")] else { return }
-                        doneWorkSum = doneWorkSum + workDoneInWeek.countDone
+                        if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                            doneWorkSum = doneWorkSum + workDate.countDone
+                            switch workDate.countLeft {
+                            case 0:
+                                self.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                            case 1...3:
+                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                            case 4...6:
+                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                            default:
+                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
+                            }
+                        }
                     }
                     self.countWorkDoneInWeek = doneWorkSum
+                    
+                    // MARK: - fix me
+                    self.homeWeekCalendarCollectionView.collectionView.reloadData()
+                    self.calendarDailyTableView.reloadData()
                 }
             }
         }
     }
-
+    
     // MARK: - observer
     
     @objc func observeWeekCalendar(notification: Notification) {
@@ -739,7 +775,7 @@ extension HomeViewController {
             switch result {
             case .success(let response):
                 guard let houseWorkCompleteId = response as? HouseWorkCompleteResponse else { return }
-                self.bindWeekWorkDoneLable(isOwn: true)
+                self.getHouseWorksByWeek(isOwn: true)
                 completion(houseWorkCompleteId)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
@@ -753,7 +789,7 @@ extension HomeViewController {
         NetworkService.shared.houseWorkCompleteRouter.deleteCompleteHouseWork(houseWorkCompleteId: houseWorkCompleteId) { result in
             switch result {
             case .success:
-                self.bindWeekWorkDoneLable(isOwn: true)
+                self.getHouseWorksByWeek(isOwn: true)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
