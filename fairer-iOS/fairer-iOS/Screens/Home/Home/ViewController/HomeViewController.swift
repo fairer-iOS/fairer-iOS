@@ -473,7 +473,9 @@ final class HomeViewController: BaseViewController {
         let currentTime = Date().dateToTimeString
         let currentTimeInInt = Int(currentTime.components(separatedBy: [":"]).joined()) ?? Int()
         let inputTimeInInt = Int(inputTime.components(separatedBy: [":"]).joined()) ?? Int()
-        if currentTimeInInt < inputTimeInInt {
+        if Date().dateCompare(fromDate: self.homeWeekCalendarCollectionView.datePickedByOthers.stringToDate ?? Date()) == "Past" {
+            return "over"
+        } else if currentTimeInInt < inputTimeInInt {
             return "notOver"
         } else {
             return "over"
