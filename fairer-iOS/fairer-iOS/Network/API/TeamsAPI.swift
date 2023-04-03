@@ -17,6 +17,7 @@ final class TeamsAPI {
         case getTeamInfo
         case postAddTeam
         case postJoinTeam
+        case patchTeamInfo
     }
     
     func getTeamInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
@@ -61,13 +62,27 @@ final class TeamsAPI {
         }
     }
     
+    func patchTeamInfo(teamName: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        teamsProvider.request(.patchTeamInfo(teamName: teamName)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .patchTeamInfo)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
 
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .getTeamInfo, .postAddTeam, .postJoinTeam:
+            case .getTeamInfo, .postAddTeam, .postJoinTeam, .patchTeamInfo:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400:
@@ -100,7 +115,7 @@ final class TeamsAPI {
                 return .pathErr
             }
             return .success(decodedData)
-        case .postJoinTeam:
+        case .postJoinTeam, .patchTeamInfo:
             return .success(())
         }
     }
