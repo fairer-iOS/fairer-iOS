@@ -483,6 +483,7 @@ final class HomeViewController: BaseViewController {
                             }
                             self.finishedWorkSum = response.countDone
                         }
+                        self.calendarDailyTableView.reloadData()
                     }
                     DispatchQueue.global().async {
                         self.getHouseWorksByWeek(isOwn: isOwn)
@@ -568,8 +569,6 @@ final class HomeViewController: BaseViewController {
                         }
                     }
                     self.countWorkDoneInWeek = doneWorkSum
-                    
-                    // MARK: - fix me
                     self.homeWeekCalendarCollectionView.collectionView.reloadData()
                     self.calendarDailyTableView.reloadData()
                 }
@@ -597,8 +596,6 @@ final class HomeViewController: BaseViewController {
                         }
                     }
                     self.countWorkDoneInWeek = doneWorkSum
-                    
-                    // MARK: - fix me
                     self.homeWeekCalendarCollectionView.collectionView.reloadData()
                     self.calendarDailyTableView.reloadData()
                 }
@@ -623,11 +620,19 @@ final class HomeViewController: BaseViewController {
         guard let object = notification.userInfo?[NotificationKey.member] as? Int else { return }
         
         self.selectedMemberId = object
-        self.getHouseWorksByDate (
-            isOwn: self.checkMemeberCellIsOwn(),
-            startDate: Date().dateToString,
-            endDate: Date().dateToString
-        )
+        if self.homeWeekCalendarCollectionView.datePickedByOthers != "" {
+            self.getHouseWorksByDate (
+                isOwn: self.checkMemeberCellIsOwn(),
+                startDate: self.homeWeekCalendarCollectionView.datePickedByOthers,
+                endDate: self.homeWeekCalendarCollectionView.datePickedByOthers
+            )
+        } else {
+            self.getHouseWorksByDate (
+                isOwn: self.checkMemeberCellIsOwn(),
+                startDate: Date().dateToString,
+                endDate: Date().dateToString
+            )
+        }
     }
     
     // MARK: - selector
