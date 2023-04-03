@@ -28,7 +28,6 @@ final class ChangeHouseNameViewController: BaseViewController {
     }()
     private let houseNameTextField: TextField = {
         let textField = TextField(type: .large, placeHolder: TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder)
-        // FIXME: - 하우스 이름 불러오기
         return textField
     }()
     private lazy var changeHouseNameDoneButton: MainButton = {

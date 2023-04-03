@@ -149,6 +149,8 @@ final class ManageHouseViewController: BaseViewController {
         manageHouseTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.cellId)
         manageHouseTableView.rowHeight = 56
         manageHouseTableView.separatorStyle = .none
+        manageHouseTableView.isScrollEnabled = false
+        
     }
     
     private func touchUpToShowBubble() {
@@ -181,7 +183,8 @@ extension ManageHouseViewController: UITableViewDelegate, UITableViewDataSource 
         
         cell.cellLabel.text = ManageHouseModel.manageHouseData[indexPath.row].cellLabel
         cell.cellImage.image = ManageHouseModel.manageHouseData[indexPath.row].cellImage
-        
+        cell.selectionStyle = .none
+
         return cell
     }
     
