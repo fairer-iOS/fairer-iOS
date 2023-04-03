@@ -10,10 +10,3 @@
  Moya | 서버 통신 | 15.0.0 | SPM
  SnapKit | UI Layout | 5.6.0 | SPM
  GoogleSignIn | 구글 로그인 | 6.2.3 | SPM
- 
- ## iOS Developers
-
-
-| 김유나 | 홍준혁 | 김규철 |
-| :---------:|:----------:|:---------:|
-| [Guel-git](https://github.com/Guel-git) | [hongjunehuke](https://github.com/hongjunehuke) | [kimkyuchul](https://github.com/kimkyuchul) |
