@@ -29,7 +29,12 @@ final class HomeViewController: BaseViewController {
     }
     private lazy var userName: String = String() {
         didSet {
-            self.nameTitleLabel.text = userName
+            self.nameTitleLabel.text = "\(userName)님"
+            if let text = self.nameTitleLabel.text {
+                let attributeString = NSMutableAttributedString(string: text)
+                attributeString.addAttribute(.foregroundColor, value: UIColor.blue, range: (text as NSString).range(of: "\(userName)"))
+                self.nameTitleLabel.attributedText = attributeString
+            }
         }
     }
     private var pickDayWorkInfo: DayHouseWorks? {
@@ -45,9 +50,19 @@ final class HomeViewController: BaseViewController {
             if countWorkDoneInWeek == 0 {
                 self.countDoneTitleLabel.text = "아직 집안일을 하지 않으셨네요."
             } else if Date().dateCompare(fromDate: finalLastDateInFullDateList) == "Past" {
-                self.countDoneTitleLabel.text = "저번주에 \(countWorkDoneInWeek)개 만큼 해주셨어요!"
+                self.countDoneTitleLabel.text = "저번주에 \(countWorkDoneInWeek)개나 해주셨어요!"
+                if let text = self.countDoneTitleLabel.text {
+                    let attributeString = NSMutableAttributedString(string: text)
+                    attributeString.addAttribute(.foregroundColor, value: UIColor.blue, range: (text as NSString).range(of: "\(String(countWorkDoneInWeek))개"))
+                    self.countDoneTitleLabel.attributedText = attributeString
+                }
             } else {
-                self.countDoneTitleLabel.text = "이번주에 \(countWorkDoneInWeek)개 만큼 해주셨어요!"
+                self.countDoneTitleLabel.text = "이번주에 \(countWorkDoneInWeek)개나 해주셨어요!"
+                if let text = self.countDoneTitleLabel.text {
+                    let attributeString = NSMutableAttributedString(string: text)
+                    attributeString.addAttribute(.foregroundColor, value: UIColor.blue, range: (text as NSString).range(of: "\(String(countWorkDoneInWeek))개"))
+                    self.countDoneTitleLabel.attributedText = attributeString
+                }
             }
         }
     }
@@ -537,6 +552,11 @@ final class HomeViewController: BaseViewController {
             guard let userName = response.members?[0].memberName else { return }
             self.userName = userName
             self.nameTitleLabel.text = "\(userName)님"
+            if let text = self.nameTitleLabel.text {
+                let attributeString = NSMutableAttributedString(string: text)
+                attributeString.addAttribute(.foregroundColor, value: UIColor.blue, range: (text as NSString).range(of: "\(userName)"))
+                self.nameTitleLabel.attributedText = attributeString
+            }
             guard let teamMember = response.members else { return }
             self.homeGroupCollectionView.userList = teamMember
         }
