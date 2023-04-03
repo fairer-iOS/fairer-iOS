@@ -184,4 +184,11 @@ extension ManageHouseViewController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            self.navigationController?.pushViewController(ChangeHouseNameViewController(), animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
 }
