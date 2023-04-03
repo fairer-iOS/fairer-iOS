@@ -73,7 +73,7 @@ final class HomeViewController: BaseViewController {
         let label = UILabel()
         label.font = .title1
         label.applyColor(to: userName, with: .blue)
-        label.text = "아직 집안일을 하지 않으셨네요."
+        label.text = TextLiteral.homeViewDefaultCountDoneTitleLabel
         label.numberOfLines = 2
         return label
     }()
