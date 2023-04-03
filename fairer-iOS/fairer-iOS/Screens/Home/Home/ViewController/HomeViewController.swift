@@ -255,7 +255,7 @@ final class HomeViewController: BaseViewController {
         datePickerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-
+        
         emptyHouseWorkImage.snp.makeConstraints {
             $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
             $0.centerX.equalToSuperview()
@@ -468,7 +468,17 @@ final class HomeViewController: BaseViewController {
         if myId == selectedMemberId { return true }
         else { return false }
     }
-
+    
+    private func compareTime(inputTime: String) -> String {
+        let currentTime = Date().dateToTimeString
+        let currentTimeInInt = Int(currentTime.components(separatedBy: [":"]).joined()) ?? Int()
+        let inputTimeInInt = Int(inputTime.components(separatedBy: [":"]).joined()) ?? Int()
+        if currentTimeInInt < inputTimeInInt {
+            return "notOver"
+        } else {
+            return "over"
+        }
+    }
     
     // MARK: - networking data binding
     
@@ -627,14 +637,14 @@ final class HomeViewController: BaseViewController {
     
     @objc func observeWeekCalendar(notification: Notification) {
         guard let object = notification.userInfo?[NotificationKey.date] as? String else { return }
-
-        self.getHouseWorksByDate(
+        
+        self.getHouseWorksByDate (
             isOwn: self.checkMemeberCellIsOwn(),
             startDate: object,
             endDate: object
         )
     }
-
+    
     @objc func observeMemberCollectionView(notification: Notification) {
         self.userName = self.homeGroupCollectionView.selectedMemberName
         guard let object = notification.userInfo?[NotificationKey.member] as? Int else { return }
@@ -674,7 +684,7 @@ final class HomeViewController: BaseViewController {
     }
 }
 
-    // MARK: - extension
+// MARK: - extension
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -683,7 +693,7 @@ extension HomeViewController: UIScrollViewDelegate {
                 scrollDidStart()
                 isScrolled = true
             }
-        }else {
+        } else {
             scrollDidEnd()
             isScrolled = false
         }
@@ -737,7 +747,7 @@ extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Int(self.pickDayWorkInfo?.countDone ?? 0) + Int(self.pickDayWorkInfo?.countLeft ?? 0)
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UILabel()
         header.text = "끝낸 집안일 \(String(describing: self.finishedWorkSum))"
@@ -762,15 +772,23 @@ extension HomeViewController: UITableViewDataSource {
         cell.time.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime
         
         if self.pickDayWorkInfo?.houseWorks?[indexPath.section].success == false {
-            cell.mainBackground.backgroundColor = .white
             cell.houseWorkId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkId ?? Int()
             cell.scheduledDate = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate ?? String()
+            if compareTime(inputTime: self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime ?? String()) == "notOver" {
+                cell.errorImage.isHidden = true
+                cell.mainBackground.backgroundColor = .white
+            } else {
+                cell.errorImage.isHidden = false
+                cell.setErrorImageView()
+                cell.mainBackground.backgroundColor = .negative0
+                cell.mainBackground.layer.borderColor = UIColor.negative10.cgColor
+            }
         }else {
             cell.mainBackground.backgroundColor = .positive10
             cell.houseWorkCompleteId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkCompleteId ?? Int()
         }
         cell.memberListProfilePath = self.pickDayWorkInfo?.houseWorks?[indexPath.section].assignees ?? [Assignee]()
-
+        
         guard let pickDayHouseWork = self.pickDayWorkInfo?.houseWorks?[indexPath.section].space else { return cell }
         switch pickDayHouseWork {
         case "BATHROOM": cell.room.text = Space.bathroom.rawValue
@@ -782,7 +800,7 @@ extension HomeViewController: UITableViewDataSource {
         case "ETC": cell.room.text = "기타"
         default: cell.room.text = ""
         }
-
+        
         return cell
     }
     
@@ -791,7 +809,7 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
-    // MARK: - network
+// MARK: - network
 
 extension HomeViewController {
     

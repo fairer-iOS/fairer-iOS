@@ -56,7 +56,7 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         imageView.image = ImageLiterals.locationPin
         return imageView
     }()
-    private let errorImage: UIImageView = {
+    let errorImage: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
