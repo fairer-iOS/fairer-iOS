@@ -38,9 +38,9 @@ final class HomeViewController: BaseViewController {
             if countWorkDoneInWeek == 0 {
                 self.countDoneTitleLabel.text = "아직 집안일을 하지 않으셨네요."
             } else if Date().dateCompare(fromDate: finalLastDateInFullDateList) == "Past" {
-                self.countDoneTitleLabel.text = "저번주에 \(countWorkDoneInWeek)개 만큼 해주셨어요!"
+                self.countDoneTitleLabel.text = "저번주에 \(countWorkDoneInWeek)개나 해주셨어요!"
             } else {
-                self.countDoneTitleLabel.text = "이번주에 \(countWorkDoneInWeek)개 만큼 해주셨어요!"
+                self.countDoneTitleLabel.text = "이번주에 \(countWorkDoneInWeek)개나 해주셨어요!"
             }
         }
     }
