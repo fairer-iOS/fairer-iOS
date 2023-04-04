@@ -28,13 +28,11 @@ final class ChangeHouseNameViewController: BaseViewController {
     }()
     private let houseNameTextField: TextField = {
         let textField = TextField(type: .large, placeHolder: TextLiteral.houseMakeNameViewControllerTextFieldPlaceholder)
-        // FIXME: - 하우스 이름 불러오기
-        textField.text = "즐거운 우리집"
         return textField
     }()
     private lazy var changeHouseNameDoneButton: MainButton = {
         let button = MainButton()
-        button.isDisabled = false
+        button.isDisabled = true
         button.title = TextLiteral.changeHouseNameViewControllerDoneButtonText
         let action = UIAction { [weak self] _ in
             self?.didTapDoneButton()
@@ -127,11 +125,13 @@ final class ChangeHouseNameViewController: BaseViewController {
     }
     
     private func didTapDoneButton() {
+        guard let text = houseNameTextField.text else { return }
+        
         if houseNameTextField.text!.hasCharacters() {
             houseNameTextField.layer.borderWidth = 0
             disableLabel.isHidden = true
-            
-            // FIXME: - 하우스 이름 업데이트 api 연결
+    
+            patchTeamInfo(teamName: text)
         } else {
             houseNameTextField.layer.borderWidth = 1
             houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
@@ -163,5 +163,20 @@ extension ChangeHouseNameViewController : UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         houseNameTextField.layer.borderWidth = 0
         view.endEditing(true)
+    }
+}
+
+extension ChangeHouseNameViewController {
+    func patchTeamInfo(teamName: String) {
+        NetworkService.shared.teams.patchTeamInfo(teamName: teamName) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.navigationController?.popViewController(animated: true)
+            case .requestErr(let error):
+                dump(error)
+            default:
+                print("server error")
+            }
+        }
     }
 }
