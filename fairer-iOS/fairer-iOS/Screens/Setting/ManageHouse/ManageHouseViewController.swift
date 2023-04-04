@@ -166,8 +166,10 @@ final class ManageHouseViewController: BaseViewController {
     }
     
     private func touchUpToLeaveHouse() {
-        // FIXME: - 하우스 나가기 api 연결
-        self.makeRequestAlert(title: TextLiteral.manageHouseViewControllerAlertTitle, message: TextLiteral.manageHouseViewControllerAlertMessage, okTitle: TextLiteral.manageHouseViewControllerAlertOkTitle, cancelTitle: TextLiteral.manageHouseViewControllerAlertCancelTitle, okAction: { _ in print("하우스에서 나가기") }, cancelAction: nil, completion: nil)
+        self.makeRequestAlert(title: TextLiteral.manageHouseViewControllerAlertTitle, message: TextLiteral.manageHouseViewControllerAlertMessage, okTitle: TextLiteral.manageHouseViewControllerAlertOkTitle, cancelTitle: TextLiteral.manageHouseViewControllerAlertCancelTitle, okAction: { [weak self] _ in
+            self?.postLeaveTeam()
+            
+        }, cancelAction: nil, completion: nil)
     }
 }
 
@@ -192,6 +194,25 @@ extension ManageHouseViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(ChangeHouseNameViewController(), animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+}
+
+extension ManageHouseViewController {
+    func postLeaveTeam() {
+        NetworkService.shared.teams.postLeaveTeam { [weak self] result in
+            switch result {
+            case .success(_):
+                let pushVC = GroupMainViewController()
+                if let navigationController = self?.navigationController {
+                    navigationController.pushViewController(pushVC, animated: true)
+                    navigationController.setViewControllers([pushVC], animated: true)
+                }
+            case .requestErr(let error):
+                dump(error)
+            default:
+                print("server Error")
+            }
         }
     }
 }
