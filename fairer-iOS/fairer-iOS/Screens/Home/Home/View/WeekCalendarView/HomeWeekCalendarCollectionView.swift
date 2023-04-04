@@ -23,7 +23,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
             self.collectionView.reloadData()
         }
     }
-    lazy var dotList: [UIImage] = [UIImage]() {
+    lazy var dotList: [UIImage] = [] {
         didSet {
             self.collectionView.reloadData()
         }
@@ -157,45 +157,48 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
         if self.isSelected == false {
             self.isSelected = true
             self.selectedCell = indexPath.row
-            let firstCell  = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
-            if Int(countWorkLeft) == 0 {
-                firstCell.workDot.image = dotList[indexPath.row]
-                firstCell.workBlueBadge.isHidden = true
-                firstCell.workLeftLabel.isHidden = true
-            } else {
-                firstCell.workDot.isHidden = true
-                firstCell.workBlueBadge.isHidden = false
-                firstCell.workLeftLabel.isHidden = false
-                firstCell.workLeftLabel.text = self.countWorkLeft
+            if let firstCell  = collectionView.cellForItem(at: indexPath) as? HomeWeekCalendarCollectionViewCell {
+                if Int(countWorkLeft) == 0 {
+                    firstCell.workDot.image = dotList[indexPath.row]
+                    firstCell.workBlueBadge.isHidden = true
+                    firstCell.workLeftLabel.isHidden = true
+                } else {
+                    firstCell.workDot.isHidden = true
+                    firstCell.workBlueBadge.isHidden = false
+                    firstCell.workLeftLabel.isHidden = false
+                    firstCell.workLeftLabel.text = self.countWorkLeft
+                }
+                yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
+                firstCell.isSelected = true
+                datePickedByOthers = self.fullDateList[indexPath.row]
+                self.collectionView.reloadData()
             }
-            yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
-            firstCell.isSelected = true
-            datePickedByOthers = self.fullDateList[indexPath.row]
-            self.collectionView.reloadData()
         }else if indexPath.row != self.selectedCell {
-            let resetCell  = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
-            resetCell.workDot.isHidden = false
-            resetCell.workDot.image = dotList[indexPath.row]
-            resetCell.workBlueBadge.isHidden = true
-            resetCell.workLeftLabel.isHidden = true
-            resetCell.isSelected = false
-            let secondCell = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
-            if Int(countWorkLeft) == 0 {
-                secondCell.workDot.image = dotList[indexPath.row]
-                secondCell.workBlueBadge.isHidden = true
-                secondCell.workLeftLabel.isHidden = true
-            } else {
-                secondCell.workDot.isHidden = true
-                secondCell.workBlueBadge.isHidden = false
-                secondCell.workLeftLabel.isHidden = false
-                secondCell.workLeftLabel.text = self.countWorkLeft
+            if let resetCell  = collectionView.cellForItem(at: indexPath) as? HomeWeekCalendarCollectionViewCell {
+                resetCell.workDot.isHidden = false
+                resetCell.workDot.image = dotList[indexPath.row]
+                resetCell.workBlueBadge.isHidden = true
+                resetCell.workLeftLabel.isHidden = true
+                resetCell.isSelected = false
             }
-            self.isSelected = true
-            self.selectedCell = indexPath.row
-            yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
-            secondCell.isSelected = true
-            datePickedByOthers = self.fullDateList[indexPath.row]
-            self.collectionView.reloadData()
+            if let secondCell = collectionView.cellForItem(at: indexPath) as? HomeWeekCalendarCollectionViewCell {
+                if Int(countWorkLeft) == 0 {
+                    secondCell.workDot.image = dotList[indexPath.row]
+                    secondCell.workBlueBadge.isHidden = true
+                    secondCell.workLeftLabel.isHidden = true
+                } else {
+                    secondCell.workDot.isHidden = true
+                    secondCell.workBlueBadge.isHidden = false
+                    secondCell.workLeftLabel.isHidden = false
+                    secondCell.workLeftLabel.text = self.countWorkLeft
+                }
+                self.isSelected = true
+                self.selectedCell = indexPath.row
+                yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
+                secondCell.isSelected = true
+                datePickedByOthers = self.fullDateList[indexPath.row]
+                self.collectionView.reloadData()
+            }
         }
         NotificationCenter.default.post(name: Notification.Name.date, object: nil, userInfo: [NotificationKey.date: datePickedByOthers])
     }
@@ -213,7 +216,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         let seporateDate = fullDateList[indexPath.row].components(separatedBy: ".")
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = seporateDate[2]
-        if dotList.isEmpty == true {
+        if dotList.isEmpty {
             cell.workDot.isHidden = true
         } else {
             cell.workDot.image = dotList[indexPath.row]
