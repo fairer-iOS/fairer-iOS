@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum NotificationKey {
     case date
     case member
@@ -15,7 +14,5 @@ enum NotificationKey {
 
 extension Notification.Name {
     static let date = Notification.Name("date")
-    static let member =
-    Notification.Name("member")
+    static let member = Notification.Name("member")
 }
-
