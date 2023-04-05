@@ -17,6 +17,7 @@ final class HouseWorksAPI {
         case getHouseWorksByDate
         case postAddHouseWorks
         case putEditHouseWork
+        case deleteHouseWork
     }
     
     public func getHouseWorksByDate(
@@ -51,7 +52,7 @@ final class HouseWorksAPI {
         }
     }
     
-    func putEditHouseWork(body: EditHouseWorkRequest, completion: @escaping (NetworkResult<Any> -> Void)) {
+    func putEditHouseWork(body: EditHouseWorkRequest, completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.putEditHouseWork(body: body)) { result in
             switch result {
             case .success(let response):
@@ -65,6 +66,19 @@ final class HouseWorksAPI {
         }
     }
     
+    func deleteHouseWork(body: DeleteHouseWorkRequest, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.deleteHouseWork(body: body)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteHouseWork)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         
@@ -76,6 +90,8 @@ final class HouseWorksAPI {
             case .postAddHouseWorks:
                 return isValidData(data: data, responseData: responseData)
             case .putEditHouseWork:
+                return isValidData(data: data, responseData: responseData)
+            case .deleteHouseWork:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400..<500:
@@ -105,7 +121,9 @@ final class HouseWorksAPI {
             }
             return .success(decodedData)
         case .putEditHouseWork:
-              return .success(BlankResponse())
+            return .success(BlankResponse())
+        case .deleteHouseWork:
+            return .success(BlankResponse())
         }
     }
 }

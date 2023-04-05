@@ -94,6 +94,7 @@
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		52F1E1A129228C9500DDAA75 /* SettingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */; };
 		52FDBD4A29DD609100FE45CD /* EditHouseWorkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FDBD4929DD609100FE45CD /* EditHouseWorkRequest.swift */; };
+		52FDBD4E29DD7CE100FE45CD /* DeleteHouseWorkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FDBD4D29DD7CE100FE45CD /* DeleteHouseWorkRequest.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
 		5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E711129BEF88B003FD32F /* BlankResponse.swift */; };
@@ -245,6 +246,7 @@
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileViewController.swift; sourceTree = "<group>"; };
 		52FDBD4929DD609100FE45CD /* EditHouseWorkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHouseWorkRequest.swift; sourceTree = "<group>"; };
+		52FDBD4D29DD7CE100FE45CD /* DeleteHouseWorkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteHouseWorkRequest.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
 		5A4E711129BEF88B003FD32F /* BlankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankResponse.swift; sourceTree = "<group>"; };
@@ -678,6 +680,7 @@
 				52FDBD4929DD609100FE45CD /* EditHouseWorkRequest.swift */,
 				52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */,
 				52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */,
+				52FDBD4D29DD7CE100FE45CD /* DeleteHouseWorkRequest.swift */,
 			);
 			path = HouseWorks;
 			sourceTree = "<group>";
@@ -1305,6 +1308,7 @@
 				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
 				917D8B7D29A633D800E26B73 /* TeamsAPI.swift in Sources */,
+				52FDBD4E29DD7CE100FE45CD /* DeleteHouseWorkRequest.swift in Sources */,
 				52136FDB2983E9920022D465 /* RepeatCycleCollectionView.swift in Sources */,
 				5AB1B9C329D55FC300DCA8FE /* ToastPaddingLabel.swift in Sources */,
 				7EFAA87128DA04FB00737DF0 /* SelectHouseWorkSpaceCollectionView.swift in Sources */,

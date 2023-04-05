@@ -13,6 +13,7 @@ enum HouseWorksRouter {
     case getHouseWorksByDate(fromDate: String, toDate: String)
     case postAddHouseWorks(body: [HouseWorksRequest])
     case putEditHouseWork(body: EditHouseWorkRequest)
+    case deleteHouseWork(body: DeleteHouseWorkRequest)
 }
 
 extension HouseWorksRouter: BaseTargetType {
@@ -23,6 +24,8 @@ extension HouseWorksRouter: BaseTargetType {
         case .postAddHouseWorks(_):
             return URLConstant.houseWorks
         case .putEditHouseWork(_):
+            return URLConstant.houseWorks + "/v2"
+        case .deleteHouseWork(_):
             return URLConstant.houseWorks + "/v2"
         }
     }
@@ -35,6 +38,8 @@ extension HouseWorksRouter: BaseTargetType {
             return .post
         case .putEditHouseWork(_):
             return .put
+        case .deleteHouseWork(_):
+            return .delete
         }
     }
     
@@ -45,6 +50,8 @@ extension HouseWorksRouter: BaseTargetType {
         case .postAddHouseWorks(let body):
             return .requestJSONEncodable(body)
         case .putEditHouseWork(let body):
+            return .requestJSONEncodable(body)
+        case .deleteHouseWork(let body):
             return .requestJSONEncodable(body)
         }
     }
