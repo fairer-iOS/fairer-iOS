@@ -121,7 +121,10 @@ final class HouseWorksAPI {
             }
             return .success(decodedData)
         case .putEditHouseWork:
-            return .success(BlankResponse())
+            guard let decodedData = try? decoder.decode(EditHouseWorkResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
         case .deleteHouseWork:
             return .success(BlankResponse())
         }
