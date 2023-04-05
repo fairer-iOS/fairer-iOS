@@ -11,19 +11,21 @@ import SnapKit
 
 final class GroupMainViewController: BaseViewController {
     
-    let userName: String = "고가혜"
-    
+    private var userName:String = String() {
+        didSet {
+            titleLabel.text = "안녕하세요. \(userName)님!\n새로 하우스를 만들거나 참여해주세요."
+            titleLabel.applyColor(to: userName, with: .blue)
+        }
+    }
     // MARK: - property
     
     private let backButton = BackButton()
-    private lazy var titleLabel: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "안녕하세요. \(userName)님!\n새로 하우스를 만들거나 참여해주세요."
+        label.text = "안녕하세요. 님!\n새로 하우스를 만들거나 참여해주세요."
         label.font = .h2
         label.textColor = .gray800
-        label.applyColor(to: userName, with: .blue)
         label.numberOfLines = 0
-        // TODO: - LoginView pull 받아서 lineheight extension 적용
         return label
     }()
     private let houseMakeLabel: UILabel = {
@@ -77,6 +79,12 @@ final class GroupMainViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getMemberInfo()
+    }
+    
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
@@ -128,6 +136,24 @@ final class GroupMainViewController: BaseViewController {
             $0.top.equalTo(houseEnterButton.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(44)
+        }
+    }
+}
+
+extension GroupMainViewController {
+    func getMemberInfo() {
+        NetworkService.shared.members.getMemberInfo { [weak self] result in
+            switch result {
+            case .success(let response):
+                guard let memberData = response as? MemberResponse else { return }
+                if let memberName = memberData.memberName {
+                    self?.userName = memberName
+                }
+            case .requestErr(let error):
+                dump(error)
+            default:
+                print("server Error")
+            }
         }
     }
 }
