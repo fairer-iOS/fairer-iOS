@@ -29,7 +29,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let deleteButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("삭제", for: .normal)
+        button.setTitle(TextLiteral.writeHouseWorkViewControllerDeleteLabel, for: .normal)
         button.setTitleColor(.negative20, for: .normal)
         button.titleLabel?.font = .caption1
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
