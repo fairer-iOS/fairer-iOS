@@ -94,7 +94,6 @@
 		52EBF04B28EC29200062EB41 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBF04A28EC291F0062EB41 /* TextField.swift */; };
 		52F1E1A129228C9500DDAA75 /* SettingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */; };
 		52FDBD4A29DD609100FE45CD /* EditHouseWorkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FDBD4929DD609100FE45CD /* EditHouseWorkRequest.swift */; };
-		52FDBD4C29DD609D00FE45CD /* EditHouseWorkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FDBD4B29DD609D00FE45CD /* EditHouseWorkResponse.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
 		5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E711129BEF88B003FD32F /* BlankResponse.swift */; };
@@ -246,7 +245,6 @@
 		52EBF04A28EC291F0062EB41 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		52F1E1A029228C9500DDAA75 /* SettingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileViewController.swift; sourceTree = "<group>"; };
 		52FDBD4929DD609100FE45CD /* EditHouseWorkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHouseWorkRequest.swift; sourceTree = "<group>"; };
-		52FDBD4B29DD609D00FE45CD /* EditHouseWorkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHouseWorkResponse.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
 		5A4E711129BEF88B003FD32F /* BlankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankResponse.swift; sourceTree = "<group>"; };
@@ -677,7 +675,7 @@
 		52A53DCC29B0771700C4BB4C /* HouseWorks */ = {
 			isa = PBXGroup;
 			children = (
-				52FDBD4829DD608000FE45CD /* EditHouseWork */,
+				52FDBD4929DD609100FE45CD /* EditHouseWorkRequest.swift */,
 				52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */,
 				52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */,
 			);
@@ -759,15 +757,6 @@
 				52A673EF292293B800F3E6DA /* ProfileImageButtonView.swift */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		52FDBD4829DD608000FE45CD /* EditHouseWork */ = {
-			isa = PBXGroup;
-			children = (
-				52FDBD4929DD609100FE45CD /* EditHouseWorkRequest.swift */,
-				52FDBD4B29DD609D00FE45CD /* EditHouseWorkResponse.swift */,
-			);
-			path = EditHouseWork;
 			sourceTree = "<group>";
 		};
 		52FFDFB028FA983100DE1AE8 /* EnterHouse */ = {
@@ -1272,7 +1261,6 @@
 				52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */,
 				39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */,
 				917D8B6729A6332400E26B73 /* RulesRouter.swift in Sources */,
-				52FDBD4C29DD609D00FE45CD /* EditHouseWorkResponse.swift in Sources */,
 				5275397928EC2F78002D8280 /* BackButton.swift in Sources */,
 				914C69D029AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift in Sources */,
 				917D8B5C29A632BE00E26B73 /* HouseWorksCompleteRouter.swift in Sources */,
