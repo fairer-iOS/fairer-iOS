@@ -638,11 +638,37 @@ extension WriteHouseWorkViewController {
             }
         }
     }
-}
 
-extension WriteHouseWorkViewController {
     private func postAddHouseWorks(body: [HouseWorksRequest]) {
         NetworkService.shared.houseWorks.postAddHouseWorksAPI(body: body) { result in
+            switch result {
+            case .success(let response):
+                dump(response)
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
+            }
+        }
+    }
+    
+    private func putEditHouseWork(body: EditHouseWorkRequest) {
+        NetworkService.shared.houseWorks.putEditHouseWork(body: body) { result in
+            switch result {
+            case .success(let response):
+                dump(response)
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
+            }
+        }
+    }
+    
+    private func deleteHouseWork(body: DeleteHouseWorkRequest) {
+        NetworkService.shared.houseWorks.deleteHouseWork(body: body) { result in
             switch result {
             case .success(let response):
                 dump(response)
