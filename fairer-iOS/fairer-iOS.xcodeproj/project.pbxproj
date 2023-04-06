@@ -103,6 +103,7 @@
 		5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */; };
 		5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */; };
 		5A9BD08829C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BD08729C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift */; };
+		5AA510FD29DE6AF100C977EF /* InviteCodeInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA510FC29DE6AF100C977EF /* InviteCodeInfoResponse.swift */; };
 		5AB1B9C329D55FC300DCA8FE /* ToastPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1B9C229D55FC300DCA8FE /* ToastPaddingLabel.swift */; };
 		5AB8068629BEE842009EB243 /* UserErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8068529BEE842009EB243 /* UserErrorResponse.swift */; };
 		5ABB7FB229B48DED008D5C15 /* RulesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */; };
@@ -276,6 +277,7 @@
 		5A99A2DC29A8C42A006FE9B2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5A99A2DE29A8C45D006FE9B2 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		5A9BD08729C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleHeaderView.swift; sourceTree = "<group>"; };
+		5AA510FC29DE6AF100C977EF /* InviteCodeInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeInfoResponse.swift; sourceTree = "<group>"; };
 		5AB1B9C229D55FC300DCA8FE /* ToastPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPaddingLabel.swift; sourceTree = "<group>"; };
 		5AB8068529BEE842009EB243 /* UserErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserErrorResponse.swift; sourceTree = "<group>"; };
 		5ABB7FB129B48DED008D5C15 /* RulesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RulesResponse.swift; path = "fairer-iOS/Network/DTO/Rules/RulesResponse.swift"; sourceTree = SOURCE_ROOT; };
@@ -713,6 +715,7 @@
 			children = (
 				52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */,
 				5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */,
+				5AA510FC29DE6AF100C977EF /* InviteCodeInfoResponse.swift */,
 			);
 			path = Teams;
 			sourceTree = "<group>";
@@ -1307,6 +1310,7 @@
 				5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */,
 				5205055128DCB63D00355055 /* LoginViewController.swift in Sources */,
 				5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */,
+				5AA510FD29DE6AF100C977EF /* InviteCodeInfoResponse.swift in Sources */,
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
 				52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */,
 				522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */,
