@@ -15,6 +15,7 @@ final class TeamsAPI {
     
     private enum ResponseData {
         case getTeamInfo
+        case getInviteCodeInfo
         case postAddTeam
         case postJoinTeam
         case patchTeamInfo
@@ -27,6 +28,20 @@ final class TeamsAPI {
                 let statusCode = response.statusCode
                 let data = response.data
                 let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getTeamInfo)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
+    func getInviteCodeInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
+        teamsProvider.request(.getTeamInfo) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getInviteCodeInfo)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -82,7 +97,7 @@ final class TeamsAPI {
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .getTeamInfo, .postAddTeam, .postJoinTeam, .patchTeamInfo:
+            case .getTeamInfo, .getInviteCodeInfo, .postAddTeam, .postJoinTeam, .patchTeamInfo:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400:
@@ -107,6 +122,11 @@ final class TeamsAPI {
         switch responseData {
         case .getTeamInfo:
             guard let decodedData = try? decoder.decode(TeamInfoResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
+        case .getInviteCodeInfo:
+            guard let decodedData = try? decoder.decode(InviteCodeInfoResponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)
