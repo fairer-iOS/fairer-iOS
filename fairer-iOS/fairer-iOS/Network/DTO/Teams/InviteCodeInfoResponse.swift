@@ -6,7 +6,7 @@
 //
 
 struct InviteCodeInfoResponse: Codable {
-    let inviteCode: String
-    let inviteCodeExpirationDateTime: String
-    let teamName: Int
+    let inviteCode: String?
+    let inviteCodeExpirationDateTime: String?
+    let teamName: String?
 }
