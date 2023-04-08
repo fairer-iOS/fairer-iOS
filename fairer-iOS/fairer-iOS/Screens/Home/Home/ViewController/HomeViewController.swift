@@ -48,7 +48,7 @@ final class HomeViewController: BaseViewController {
             guard let lastDateInFullDateList = homeWeekCalendarCollectionView.fullDateList.last?.stringToDate else { return }
             guard let finalLastDateInFullDateList = Calendar.current.date(byAdding: .day, value: 1, to: lastDateInFullDateList) else { return }
             if countWorkDoneInWeek == 0 {
-                self.countDoneTitleLabel.text = "아직 집안일을 하지 않으셨네요."
+                self.countDoneTitleLabel.text = TextLiteral.homeViewDefaultCountDoneTitleLabel
             } else if Date().dateCompare(fromDate: finalLastDateInFullDateList) == "Past" {
                 self.countDoneTitleLabel.text = "저번주에 \(countWorkDoneInWeek)개나 해주셨어요!"
                 if let text = self.countDoneTitleLabel.text {
