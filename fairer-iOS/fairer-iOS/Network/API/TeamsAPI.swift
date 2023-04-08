@@ -36,7 +36,7 @@ final class TeamsAPI {
     }
     
     func getInviteCodeInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
-        teamsProvider.request(.getTeamInfo) { result in
+        teamsProvider.request(.getInviteCodeInfo) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
