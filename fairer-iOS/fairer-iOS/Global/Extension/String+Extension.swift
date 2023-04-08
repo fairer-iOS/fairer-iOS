@@ -20,6 +20,21 @@ extension String {
         return formatter.date(from: self)
     }
     
+    var iso8601ToDay: Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return formatter.date(from: self)
+    }
+    
+    var iso8601ToKoreanString: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        guard let date = dateFormatter.date(from: self) else { return nil }
+        
+        dateFormatter.dateFormat = "yyyy년 M월 d일 H시 mm분"
+        return dateFormatter.string(from: date)
+    }
+    
     func subStringToDate() -> String {
         let startIdx: String.Index = self.index(self.startIndex, offsetBy: 2)
         return String(self[startIdx...])
