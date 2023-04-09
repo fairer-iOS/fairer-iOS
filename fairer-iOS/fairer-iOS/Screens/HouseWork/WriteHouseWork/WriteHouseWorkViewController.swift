@@ -27,6 +27,14 @@ final class WriteHouseWorkViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
+    private let deleteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(TextLiteral.writeHouseWorkViewControllerDeleteLabel, for: .normal)
+        button.setTitleColor(.negative20, for: .normal)
+        button.titleLabel?.font = .caption1
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        return button
+    }()
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let writeHouseWorkCalendarView = CalendarSpaceView()
@@ -166,6 +174,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDeleteButton()
         setDatePicker()
         setupNotificationCenter()
         setupDelegation()
@@ -305,14 +314,23 @@ final class WriteHouseWorkViewController: BaseViewController {
         super.setupNavigationBar()
         
         let backButton = makeBarButtonItem(with: backButton)
+        let deleteButton = makeBarButtonItem(with: deleteButton)
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = deleteButton
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func setDeleteButton() {
+        let action = UIAction { [weak self] _ in
+            self?.deleteHouseWork()
+        }
+        deleteButton.addAction(action, for: .touchUpInside)
     }
     
     private func setDatePicker() {
@@ -323,6 +341,10 @@ final class WriteHouseWorkViewController: BaseViewController {
             self?.presentPickDateView()
         }
         writeHouseWorkCalendarView.pickDateButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func deleteHouseWork() {
+        // FIXME: - 집안일 삭제 api 연결
     }
     
     private func setupDelegation() {
@@ -549,7 +571,7 @@ final class WriteHouseWorkViewController: BaseViewController {
                 self?.houseWorks[0].repeatPattern = Date().singleDayToKoreanString
                 self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
-          self?.houseWorks[0].repeatCycle = repeatCycle.rawValue
+            self?.houseWorks[0].repeatCycle = repeatCycle.rawValue
             self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.repeatLabel
             self?.repeatCycleMenu.isHidden = true
@@ -616,11 +638,37 @@ extension WriteHouseWorkViewController {
             }
         }
     }
-}
 
-extension WriteHouseWorkViewController {
     private func postAddHouseWorks(body: [HouseWorksRequest]) {
         NetworkService.shared.houseWorks.postAddHouseWorksAPI(body: body) { result in
+            switch result {
+            case .success(let response):
+                dump(response)
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
+            }
+        }
+    }
+    
+    private func putEditHouseWork(body: EditHouseWorkRequest) {
+        NetworkService.shared.houseWorks.putEditHouseWork(body: body) { result in
+            switch result {
+            case .success(let response):
+                dump(response)
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
+            }
+        }
+    }
+    
+    private func deleteHouseWork(body: DeleteHouseWorkRequest) {
+        NetworkService.shared.houseWorks.deleteHouseWork(body: body) { result in
             switch result {
             case .success(let response):
                 dump(response)
