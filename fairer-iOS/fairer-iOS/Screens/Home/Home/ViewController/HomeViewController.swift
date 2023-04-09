@@ -589,6 +589,7 @@ final class HomeViewController: BaseViewController {
                     fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
                 ) { response in
+                    self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                     self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                     for date in self.homeWeekCalendarCollectionView.fullDateList {
                         if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
@@ -616,6 +617,7 @@ final class HomeViewController: BaseViewController {
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     teamMemberId: selectedMemberId
                 ) { response in
+                    self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                     self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                     for date in self.homeWeekCalendarCollectionView.fullDateList {
                         if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
