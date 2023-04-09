@@ -18,7 +18,7 @@ final class NetworkService {
     
     let houseWorks = HouseWorksAPI()
 //
-//    let members = MembersAPI()
+    let members = MembersAPI()
 //
     let oauth = OauthAPI()
 //
