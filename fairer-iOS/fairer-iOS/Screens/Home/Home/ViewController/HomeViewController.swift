@@ -776,7 +776,10 @@ extension HomeViewController: UITableViewDataSource {
         if self.pickDayWorkInfo?.houseWorks?[indexPath.section].success == false {
             cell.houseWorkId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkId ?? Int()
             cell.scheduledDate = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate ?? String()
-            if compareTime(inputTime: self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime ?? String()) == "notOver" {
+            if Date().dateCompare(fromDate: self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate?.stringToDate ?? Date()) == "Future" {
+                cell.errorImage.isHidden = true
+                cell.mainBackground.backgroundColor = .white
+            } else if compareTime(inputTime: self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime ?? String()) == "notOver" {
                 cell.errorImage.isHidden = true
                 cell.mainBackground.backgroundColor = .white
             } else {
@@ -785,7 +788,7 @@ extension HomeViewController: UITableViewDataSource {
                 cell.mainBackground.backgroundColor = .negative0
                 cell.mainBackground.layer.borderColor = UIColor.negative10.cgColor
             }
-        }else {
+        } else {
             cell.mainBackground.backgroundColor = .positive10
             cell.houseWorkCompleteId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkCompleteId ?? Int()
         }

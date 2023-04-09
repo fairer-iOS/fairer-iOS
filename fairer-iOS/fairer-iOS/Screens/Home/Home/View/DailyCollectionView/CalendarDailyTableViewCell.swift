@@ -56,10 +56,7 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         imageView.image = ImageLiterals.locationPin
         return imageView
     }()
-    let errorImage: UIImageView = {
-        let imageView = UIImageView()
-        return imageView
-    }()
+    let errorImage = UIImageView()
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal

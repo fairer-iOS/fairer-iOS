@@ -30,10 +30,8 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
     }
     
     // MARK: - property
-    let workDot: UIImageView = {
-        let imgView = UIImageView()
-        return imgView
-    }()
+    
+    let workDot = UIImageView()
     let workBlueBadge: UIView = {
         let view = UIView()
         view.backgroundColor = .blue
