@@ -11,6 +11,8 @@ import SnapKit
 
 final class RepeatAlertView: BaseUIView {
     
+    private let tableViewList = ["이 일정", "이 일정 및 향후 일정", "모든 일정"]
+    
     // MARK: - property
     
     private let blurView: UIView = {
@@ -31,6 +33,7 @@ final class RepeatAlertView: BaseUIView {
         label.textColor = .gray800
         return label
     }()
+    private let tableView = UITableView()
     
     // MARK: - life cycle
     
@@ -55,4 +58,31 @@ final class RepeatAlertView: BaseUIView {
     }
     
     // MARK: - func
+    
+    private func setupDelegate() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    private func setupAttribute() {
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.cellId)
+        tableView.rowHeight = 56
+        tableView.separatorStyle = .none
+    }
+}
+
+// MARK: - extension
+
+extension RepeatAlertView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableViewList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.cellId, for: indexPath) as! SettingTableViewCell
+        
+        cell.cellLabel.text = tableViewList[indexPath.row]
+        
+        return cell
+    }
 }
