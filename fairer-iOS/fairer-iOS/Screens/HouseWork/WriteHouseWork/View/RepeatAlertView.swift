@@ -15,13 +15,13 @@ final class RepeatAlertView: BaseUIView {
     
     private let blurView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
-        view.layer.opacity = 0.3
+        view.backgroundColor = .black.withAlphaComponent(0.3)
         return view
     }()
     private let backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        view.layer.cornerRadius = 12
         return view
     }()
     private let titleLabel: UILabel = {

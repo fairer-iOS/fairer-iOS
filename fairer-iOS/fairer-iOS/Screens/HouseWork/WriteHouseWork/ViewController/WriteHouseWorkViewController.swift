@@ -162,6 +162,11 @@ final class WriteHouseWorkViewController: BaseViewController {
         return button
     }()
     private let datePickerView = PickDateView()
+    private let repeatAlertView: RepeatAlertView = {
+        let view = RepeatAlertView()
+        view.isHidden = true
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -187,7 +192,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(scrollView, doneButton, selectManagerView, managerToastLabel, datePickerView)
+        view.addSubviews(scrollView, doneButton, selectManagerView, managerToastLabel, datePickerView, repeatAlertView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleMenu, repeatCycleDayLabel)
         
@@ -306,6 +311,10 @@ final class WriteHouseWorkViewController: BaseViewController {
         datePickerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        repeatAlertView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     // MARK: - func
@@ -328,7 +337,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     private func setDeleteButton() {
         let action = UIAction { [weak self] _ in
-            self?.deleteHouseWork()
+            self?.repeatAlertView.isHidden = false
         }
         deleteButton.addAction(action, for: .touchUpInside)
     }
@@ -341,10 +350,6 @@ final class WriteHouseWorkViewController: BaseViewController {
             self?.presentPickDateView()
         }
         writeHouseWorkCalendarView.pickDateButton.addAction(action, for: .touchUpInside)
-    }
-    
-    private func deleteHouseWork() {
-        // FIXME: - 집안일 삭제 api 연결
     }
     
     private func setupDelegation() {
