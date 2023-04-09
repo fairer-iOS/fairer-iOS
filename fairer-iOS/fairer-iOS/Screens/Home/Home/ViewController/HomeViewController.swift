@@ -486,7 +486,7 @@ final class HomeViewController: BaseViewController {
     
     private func getHouseWorksByDate(isOwn: Bool, startDate: String, endDate: String) {
         DispatchQueue.main.async {
-            LoadingView.showLoading()
+            self.view.isUserInteractionEnabled = false
         }
         DispatchQueue.global().async {
             if isOwn {
@@ -495,7 +495,7 @@ final class HomeViewController: BaseViewController {
                     toDate: endDate.replacingOccurrences(of: ".", with: "-")
                 ) { response in
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
@@ -524,7 +524,7 @@ final class HomeViewController: BaseViewController {
                     teamMemberId: selectedMemberId
                 ) { response in
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
@@ -584,7 +584,7 @@ final class HomeViewController: BaseViewController {
         guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
         var doneWorkSum: Int = 0
         DispatchQueue.main.async {
-            LoadingView.showLoading()
+            self.view.isUserInteractionEnabled = false
         }
         DispatchQueue.global().async {
             if isOwn {
@@ -593,7 +593,7 @@ final class HomeViewController: BaseViewController {
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
                 ) { response in
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {
@@ -624,7 +624,7 @@ final class HomeViewController: BaseViewController {
                     teamMemberId: selectedMemberId
                 ) { response in
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {

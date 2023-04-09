@@ -131,7 +131,6 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         self.fullDateList = resultFullWeekData
         self.datePickedByOthers = self.fullDateList.first ?? String()
         yearMonthDateByTouchedCell?(self.fullDateList.first ?? String())
-        collectionView.reloadData()
     }
     
     func getBeforeWeekDate() {
@@ -147,7 +146,6 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
         self.fullDateList = resultFullWeekData
         self.datePickedByOthers = self.fullDateList.first ?? String()
         yearMonthDateByTouchedCell?(self.fullDateList.first ?? String())
-        collectionView.reloadData()
     }
 }
 
