@@ -100,6 +100,7 @@
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
 		5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E711129BEF88B003FD32F /* BlankResponse.swift */; };
+		5A6AAF1929E2A0970055BEE8 /* SettingInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */; };
 		5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */; };
 		5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */; };
 		5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */; };
@@ -278,6 +279,7 @@
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
 		5A4E711129BEF88B003FD32F /* BlankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankResponse.swift; sourceTree = "<group>"; };
+		5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingInviteCodeViewController.swift; sourceTree = "<group>"; };
 		5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleViewController.swift; sourceTree = "<group>"; };
 		5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleTableViewCell.swift; sourceTree = "<group>"; };
 		5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeamResponse.swift; sourceTree = "<group>"; };
@@ -835,6 +837,14 @@
 			path = HouseInfo;
 			sourceTree = "<group>";
 		};
+		5A6AAF1529E27D220055BEE8 /* SettingInviteCode */ = {
+			isa = PBXGroup;
+			children = (
+				5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */,
+			);
+			path = SettingInviteCode;
+			sourceTree = "<group>";
+		};
 		5A8030802990D8B1005C7909 /* SettingHomeRule */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,6 +879,7 @@
 		5A99A29A29A5FB78006FE9B2 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				5A6AAF1529E27D220055BEE8 /* SettingInviteCode */,
 				52C09CF129115EFF00B46F15 /* SettingMain */,
 				52F1E19F29228C7D00DDAA75 /* SettingProfile */,
 				52A673F129265EC800F3E6DA /* SettingProfileImage */,
@@ -1347,6 +1358,7 @@
 				52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */,
 				5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
+				5A6AAF1929E2A0970055BEE8 /* SettingInviteCodeViewController.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
 				5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */,
