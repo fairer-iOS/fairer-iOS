@@ -119,7 +119,7 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     private let homeCalenderView = HomeCalendarView()
-    private let homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
+    private var homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
     private let calendarDailyTableView: UITableView = {
         let calendarDailyTableView = UITableView(frame: .zero, style: .insetGrouped)
         calendarDailyTableView.register(CalendarDailyTableViewCell.self, forCellReuseIdentifier: CalendarDailyTableViewCell.identifier)
@@ -592,6 +592,7 @@ final class HomeViewController: BaseViewController {
                     self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                     for date in self.homeWeekCalendarCollectionView.fullDateList {
                         if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                            self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
                             doneWorkSum = doneWorkSum + workDate.countDone
                             switch workDate.countLeft {
                             case 0:
@@ -606,7 +607,6 @@ final class HomeViewController: BaseViewController {
                         }
                     }
                     self.countWorkDoneInWeek = doneWorkSum
-                    self.homeWeekCalendarCollectionView.collectionView.reloadData()
                     self.calendarDailyTableView.reloadData()
                 }
             } else {
@@ -619,6 +619,7 @@ final class HomeViewController: BaseViewController {
                     self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                     for date in self.homeWeekCalendarCollectionView.fullDateList {
                         if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                            self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
                             doneWorkSum = doneWorkSum + workDate.countDone
                             switch workDate.countLeft {
                             case 0:
@@ -633,7 +634,6 @@ final class HomeViewController: BaseViewController {
                         }
                     }
                     self.countWorkDoneInWeek = doneWorkSum
-                    self.homeWeekCalendarCollectionView.collectionView.reloadData()
                     self.calendarDailyTableView.reloadData()
                 }
             }
