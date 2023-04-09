@@ -27,20 +27,35 @@ final class RepeatAlertView: BaseUIView {
         return view
     }()
     private let titleLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "반복 일정 삭제"
         label.font = .h3
         label.textColor = .gray800
         return label
     }()
-    private let tableView = UITableView()
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(RepeatAlertTableViewCell.self, forCellReuseIdentifier: RepeatAlertTableViewCell.cellId)
+        tableView.rowHeight = 57
+        tableView.separatorStyle = .none
+        return tableView
+    }()
     
     // MARK: - life cycle
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        render()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func render() {
         self.addSubview(blurView)
         blurView.addSubview(backgroundView)
-        backgroundView.addSubviews(titleLabel)
+        backgroundView.addSubviews(titleLabel, tableView)
         
         blurView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -53,21 +68,14 @@ final class RepeatAlertView: BaseUIView {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().inset(24)
+            $0.top.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-    }
-    
-    // MARK: - func
-    
-    private func setupDelegate() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-    private func setupAttribute() {
-        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.cellId)
-        tableView.rowHeight = 56
-        tableView.separatorStyle = .none
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(24)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(171)
+        }
     }
 }
 
@@ -79,9 +87,10 @@ extension RepeatAlertView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.cellId, for: indexPath) as! SettingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: RepeatAlertTableViewCell.cellId, for: indexPath) as! RepeatAlertTableViewCell
         
-        cell.cellLabel.text = tableViewList[indexPath.row]
+        cell.label.text = tableViewList[indexPath.row]
+        cell.selectionStyle = .none
         
         return cell
     }
