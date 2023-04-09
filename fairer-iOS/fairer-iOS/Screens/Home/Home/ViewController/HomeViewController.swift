@@ -583,32 +583,38 @@ final class HomeViewController: BaseViewController {
         guard let firstDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.first else { return }
         guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
         var doneWorkSum: Int = 0
+        DispatchQueue.main.async {
+            LoadingView.showLoading()
+        }
         DispatchQueue.global().async {
             if isOwn {
                 self.getDateHouseWork(
                     fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
                 ) { response in
-                    self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
-                    self.homeWeekCalendarCollectionView.dotList = [UIImage]()
-                    for date in self.homeWeekCalendarCollectionView.fullDateList {
-                        if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
-                            self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
-                            doneWorkSum = doneWorkSum + workDate.countDone
-                            switch workDate.countLeft {
-                            case 0:
-                                self.homeWeekCalendarCollectionView.dotList.append(UIImage())
-                            case 1...3:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
-                            case 4...6:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
-                            default:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
+                    DispatchQueue.main.async {
+                        LoadingView.hideLoading()
+                        self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
+                        self.homeWeekCalendarCollectionView.dotList = [UIImage]()
+                        for date in self.homeWeekCalendarCollectionView.fullDateList {
+                            if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                                self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
+                                doneWorkSum = doneWorkSum + workDate.countDone
+                                switch workDate.countLeft {
+                                case 0:
+                                    self.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                                case 1...3:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                                case 4...6:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                                default:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
+                                }
                             }
                         }
+                        self.countWorkDoneInWeek = doneWorkSum
+                        self.calendarDailyTableView.reloadData()
                     }
-                    self.countWorkDoneInWeek = doneWorkSum
-                    self.calendarDailyTableView.reloadData()
                 }
             } else {
                 guard let selectedMemberId = self.selectedMemberId else { return }
@@ -617,26 +623,29 @@ final class HomeViewController: BaseViewController {
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     teamMemberId: selectedMemberId
                 ) { response in
-                    self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
-                    self.homeWeekCalendarCollectionView.dotList = [UIImage]()
-                    for date in self.homeWeekCalendarCollectionView.fullDateList {
-                        if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
-                            self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
-                            doneWorkSum = doneWorkSum + workDate.countDone
-                            switch workDate.countLeft {
-                            case 0:
-                                self.homeWeekCalendarCollectionView.dotList.append(UIImage())
-                            case 1...3:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
-                            case 4...6:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
-                            default:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
+                    DispatchQueue.main.async {
+                        LoadingView.hideLoading()
+                        self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
+                        self.homeWeekCalendarCollectionView.dotList = [UIImage]()
+                        for date in self.homeWeekCalendarCollectionView.fullDateList {
+                            if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                                self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
+                                doneWorkSum = doneWorkSum + workDate.countDone
+                                switch workDate.countLeft {
+                                case 0:
+                                    self.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                                case 1...3:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                                case 4...6:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                                default:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
+                                }
                             }
                         }
+                        self.countWorkDoneInWeek = doneWorkSum
+                        self.calendarDailyTableView.reloadData()
                     }
-                    self.countWorkDoneInWeek = doneWorkSum
-                    self.calendarDailyTableView.reloadData()
                 }
             }
         }
