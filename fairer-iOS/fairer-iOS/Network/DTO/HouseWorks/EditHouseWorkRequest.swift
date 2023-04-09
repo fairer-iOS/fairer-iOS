@@ -8,16 +8,16 @@
 import Foundation
 
 struct EditHouseWorkRequest: Codable {
-    var assignees: [Int]
-    var houseWorkId: Int
-    var houseWorkName: String
-    var repeatCycle: String
-    var repeatDayOfWeek: String
-    var repeatEndDate: String
-    var repeatPattern: String
-    var scheduledDate: String
-    var scheduledTime: String
-    var space: String
-    var type: String
-    var updateStandardDate: String
+    var assignees: [Int]?
+    var houseWorkId: Int?
+    var houseWorkName: String?
+    var repeatCycle: String?
+    var repeatDayOfWeek: String?
+    var repeatEndDate: String?
+    var repeatPattern: String?
+    var scheduledDate: String?
+    var scheduledTime: String?
+    var space: String?
+    var type: String?
+    var updateStandardDate: String?
 }

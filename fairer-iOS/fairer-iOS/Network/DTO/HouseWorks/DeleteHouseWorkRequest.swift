@@ -8,7 +8,7 @@
 import Foundation
 
 struct DeleteHouseWorkRequest: Codable {
-    var deleteStandardDate: String
-    var houseWorkId: Int
-    var type: String
+    var deleteStandardDate: String?
+    var houseWorkId: Int?
+    var type: String?
 }
