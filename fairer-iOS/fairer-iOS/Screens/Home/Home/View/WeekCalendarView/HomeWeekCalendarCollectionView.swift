@@ -12,13 +12,18 @@ import SnapKit
 final class HomeWeekCalendarCollectionView: BaseUIView {
 
     static var indentifer = "reusableView"
+
+    var fullDateList: [String] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     private var isSelected = false
     private var selectedCell = Int()
     private var cellIndexPath = IndexPath()
     private let dotList = [ImageLiterals.oneDot,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.threeDots,ImageLiterals.twoDots]
     private let dayList = ["일","월","화","수","목","금","토"]
-    lazy var fullDateList = [String]()
     lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
     lazy var todayDateInString = Date().dateToString
@@ -151,6 +156,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
             firstCell.isSelected = true
             datePickedByOthers = self.fullDateList[indexPath.row]
+            self.collectionView.reloadData()
         }else if indexPath.row != self.selectedCell {
             let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
             resetCell.workDot.image = dotList[self.cellIndexPath.row]
@@ -163,6 +169,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
             yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
             secondCell.isSelected = true
             datePickedByOthers = self.fullDateList[indexPath.row]
+            self.collectionView.reloadData()
         }
         NotificationCenter.default.post(name: Notification.Name.date, object: nil, userInfo: [NotificationKey.date: datePickedByOthers])
     }
@@ -183,7 +190,6 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         cell.workDot.image = dotList[indexPath.item]
         guard self.datePickedByOthers != "" else {
             if fullDateList[indexPath.item] == self.todayDateInString {
-                self.isSelected = true
                 self.selectedCell = indexPath.row
                 self.cellIndexPath = indexPath
                 cell.globalView.backgroundColor = UIColor.gray100
@@ -208,14 +214,4 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         }
         return cell
     }
-}
-
-// MARK: - notification
-
-extension Notification.Name {
-    static let date = Notification.Name("date")
-}
-
-enum NotificationKey {
-    case date
 }
