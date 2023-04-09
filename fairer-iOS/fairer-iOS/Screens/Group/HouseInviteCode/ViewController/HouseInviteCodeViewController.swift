@@ -11,17 +11,15 @@ import SnapKit
 
 final class HouseInviteCodeViewController: BaseViewController {
     
-    // FIXME: - 사용자 지정 하우스 이름, 서버에서 받은 초대코드, 코드 유효 시간으로 변경
     var houseName: String
     var inviteCode: String
-    let validTime: Date = Calendar.current.date(byAdding: .hour, value: +1, to: Date())!
-    
+
     init(houseName: String, inviteCode: String) {
         self.houseName = houseName
         self.inviteCode = inviteCode
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -59,7 +57,6 @@ final class HouseInviteCodeViewController: BaseViewController {
     }()
     private lazy var validTimeLabel: InfoLabelView = {
         let view = InfoLabelView()
-        view.text = validTime.dateToKoreanString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
         view.textColor = .negative20
         view.imageColor = .negative20
         return view
@@ -73,14 +70,18 @@ final class HouseInviteCodeViewController: BaseViewController {
     }()
     private lazy var inviteCodeButtonView: InviteCodeButtonView = {
         let view = InviteCodeButtonView()
+        view.isHidden = true
         view.code = inviteCode
         return view
     }()
-    private let refreshCodeButton: MainButton = {
+    private lazy var refreshCodeButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.houseInviteCodeViewControllerRefreshButtonText
-        button.isDisabled = false
         button.isHidden = true
+        let action = UIAction { [weak self] _ in
+            self?.touchUpToRefeshButton()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
@@ -88,7 +89,11 @@ final class HouseInviteCodeViewController: BaseViewController {
     
     override func configUI() {
         super.configUI()
-        setupButtonLayer()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getinviteCodeExpirationDateTime()
     }
     
     override func render() {
@@ -155,10 +160,54 @@ final class HouseInviteCodeViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
-    private func setupButtonLayer() {
-        if validTime < Date() {
-            inviteCodeButtonView.isHidden = true
+    private func setupButtonLayer(validTime: Date) {
+        if validTime > Date() {
+            inviteCodeButtonView.isHidden = false
+        } else {
             refreshCodeButton.isHidden = false
+        }
+    }
+    
+    private func bindViewData(inviteCode: String, inviteCodeTimeString: String) {
+        inviteCodeView.code = inviteCode
+        inviteCodeButtonView.code = inviteCode
+        validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
+    }
+    
+     private func touchUpToRefeshButton() {
+         getInviteCodeInfo { [weak self] data in
+             guard let inviteCode = data.inviteCode else { return }
+             guard let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString else { return }
+             guard let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay else { return }
+             
+             self?.bindViewData(inviteCode: inviteCode, inviteCodeTimeString: inviteCodeTimeString)
+             self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+         }
+    }
+    
+    private func getinviteCodeExpirationDateTime() {
+        getInviteCodeInfo { [weak self] data in
+            guard let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString else { return }
+            guard let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay else { return }
+            
+            self?.validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
+            self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+        }
+    }
+}
+
+extension HouseInviteCodeViewController {
+    func getInviteCodeInfo(completion: @escaping (InviteCodeInfoResponse) -> Void) {
+        NetworkService.shared.teams.getInviteCodeInfo { result in
+            switch result {
+            case .success(let response):
+                guard let inviteCodeInfoData = response as? InviteCodeInfoResponse else { return }
+                completion(inviteCodeInfoData)
+            case .requestErr(let error):
+                dump(error)
+            default:
+                print("server error")
+            }
         }
     }
 }
