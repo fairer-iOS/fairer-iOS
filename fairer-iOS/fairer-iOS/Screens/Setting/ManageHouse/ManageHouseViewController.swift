@@ -205,7 +205,6 @@ extension ManageHouseViewController {
             case .success(_):
                 let pushVC = GroupMainViewController()
                 if let navigationController = self?.navigationController {
-                    navigationController.pushViewController(pushVC, animated: true)
                     navigationController.setViewControllers([pushVC], animated: true)
                 }
             case .requestErr(let error):
