@@ -191,6 +191,7 @@ enum TextLiteral {
     static let writeHouseWorkViewControllerHouseWorkNameLabel = "집안일 이름"
     static let writeHouseWorkViewControllerHouseWorkNameTextFieldPlaceholderText = "직접 입력"
     static let writeHouseWorkViewControllerHouseWorkNameWarningLabel = "텍스트는 16글자를 초과하여 입력하실 수 없어요."
+    static let writeHouseWorkViewControllerDeleteLabel = "삭제"
     
     // MARK: - SettingProfileViewController
     
