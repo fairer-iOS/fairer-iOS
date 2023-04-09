@@ -10,20 +10,14 @@ import UIKit
 import SnapKit
 
 final class GroupMainViewController: BaseViewController {
-    
-    private var userName:String = String() {
-        didSet {
-            titleLabel.text = "안녕하세요. \(userName)님!\n새로 하우스를 만들거나 참여해주세요."
-            titleLabel.applyColor(to: userName, with: .blue)
-        }
-    }
+
     // MARK: - property
     
     private let backButton = BackButton()
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "안녕하세요. 님!\n새로 하우스를 만들거나 참여해주세요."
         label.font = .h2
+        label.text = "안녕하세요. " + TextLiteral.groupMainViewControllerHouseTitleLabel
         label.textColor = .gray800
         label.numberOfLines = 0
         return label
@@ -79,10 +73,9 @@ final class GroupMainViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getMemberInfo()
+        bindGroupMemberInfo()
     }
     
     override func render() {
@@ -138,17 +131,26 @@ final class GroupMainViewController: BaseViewController {
             $0.height.equalTo(44)
         }
     }
+    
+    // MARK: - functions
+    
+    private func bindGroupMemberInfo() {
+        getMemberInfo { [weak self] data in
+            guard let userName = data.memberName else { return }
+
+            self?.titleLabel.text = "안녕하세요. " + userName + TextLiteral.groupMainViewControllerHouseTitleLabel
+            self?.titleLabel.applyColor(to: userName, with: .blue)
+        }
+    }
 }
 
 extension GroupMainViewController {
-    func getMemberInfo() {
-        NetworkService.shared.members.getMemberInfo { [weak self] result in
+    func getMemberInfo(completion: @escaping (MemberResponse) -> Void) {
+        NetworkService.shared.members.getMemberInfo { result in
             switch result {
             case .success(let response):
                 guard let memberData = response as? MemberResponse else { return }
-                if let memberName = memberData.memberName {
-                    self?.userName = memberName
-                }
+                completion(memberData)
             case .requestErr(let error):
                 dump(error)
             default:
