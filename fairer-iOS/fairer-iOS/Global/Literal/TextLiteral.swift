@@ -56,6 +56,7 @@ enum TextLiteral {
 
     // MARK: - GroupMainViewController
     
+    static let groupMainViewControllerHouseTitleLabel: String = "님!\n새로 하우스를 만들거나 참여해주세요."
     static let groupMainViewControllerHouseMakeLabel: String = "집안일 하우스 생성"
     static let groupMainViewControllerHouseMakeButtonText: String = "집안일 하우스 만들기"
     static let groupMainViewControllerHouseMakeInfoLabel: String = "개인 혹은 여러명이 집안일을 관리할 수 있는 하우스를\n만들 수 있습니다."
