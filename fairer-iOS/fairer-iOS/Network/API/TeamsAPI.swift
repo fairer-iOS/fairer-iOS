@@ -112,8 +112,7 @@ final class TeamsAPI {
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .getTeamInfo, .getInviteCodeInfo, .postAddTeam, .postJoinTeam, .patchTeamInfo:
-            case .getTeamInfo, .postAddTeam, .postJoinTeam, .patchTeamInfo, .postLeaveTeam:
+            case .getTeamInfo, .postAddTeam, .postJoinTeam, .patchTeamInfo, .postLeaveTeam, .getInviteCodeInfo:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400:
