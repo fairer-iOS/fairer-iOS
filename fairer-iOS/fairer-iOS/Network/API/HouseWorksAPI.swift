@@ -16,6 +16,9 @@ final class HouseWorksAPI {
     private enum ResponseData {
         case getHouseWorksByDate
         case postAddHouseWorks
+        case getMemberHouseWorksByDate
+        case putEditHouseWork
+        case deleteHouseWork
     }
     
     public func getHouseWorksByDate(
@@ -50,15 +53,64 @@ final class HouseWorksAPI {
         }
     }
     
+    func getMemberHouseWorksByDate(
+        fromDate: String,
+        toDate: String,
+        teamMemberId: Int,
+        completion: @escaping (NetworkResult<Any>) -> Void
+    ) {
+        provider.request(.getMemberHouseWorksByDate(fromDate: fromDate, toDate: toDate, teamMemberId: teamMemberId)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getMemberHouseWorksByDate)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+
+    func putEditHouseWork(body: EditHouseWorkRequest, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.putEditHouseWork(body: body)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .putEditHouseWork)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
+    func deleteHouseWork(body: DeleteHouseWorkRequest, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.deleteHouseWork(body: body)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteHouseWork)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .getHouseWorksByDate:
+            case .getHouseWorksByDate, .postAddHouseWorks, .getMemberHouseWorksByDate:
                 return isValidData(data: data, responseData: responseData)
-            case .postAddHouseWorks:
+            case .putEditHouseWork:
+                return isValidData(data: data, responseData: responseData)
+            case .deleteHouseWork:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400..<500:
@@ -87,6 +139,18 @@ final class HouseWorksAPI {
                 return .pathErr
             }
             return .success(decodedData)
+        case .getMemberHouseWorksByDate:
+            guard let decodedData = try? decoder.decode(WorkInfoReponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
+        case .putEditHouseWork:
+            guard let decodedData = try? decoder.decode(EditHouseWorkResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
+        case .deleteHouseWork:
+            return .success(BlankResponse())
         }
     }
 }

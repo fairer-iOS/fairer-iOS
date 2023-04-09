@@ -11,6 +11,14 @@ import SnapKit
 
 final class HomeGroupCollectionView: BaseUIView {
     
+    
+    var userList: [MemberResponse] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    private var selectedIndex = 0
+    lazy var selectedMemberName = ""
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
         static let collectionVerticalSpacing: CGFloat = 0
@@ -22,11 +30,6 @@ final class HomeGroupCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
-    private var selectedIndex = 0
-    
-    // MARK: - TODO.API
-    
-    private let userList = ["고가혜", "권진혁", "최지혜", "신동빈", "김수연"]
     
     // MARK: - property
     
@@ -38,7 +41,7 @@ final class HomeGroupCollectionView: BaseUIView {
         flowLayout.minimumLineSpacing = 8
         return flowLayout
     }()
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
@@ -66,6 +69,9 @@ extension HomeGroupCollectionView: UICollectionViewDelegate {
         let selectedCell  = collectionView.cellForItem(at: indexPath) as! HomeGroupCollectionViewCell
         self.selectedIndex = indexPath.row
         selectedCell.isSelected = true
+        self.selectedMemberName = userList[indexPath.row].memberName ?? String()
+        // MARK: - fix me : 본인 선택 시 다시
+        NotificationCenter.default.post(name: Notification.Name.member, object: nil, userInfo: [NotificationKey.member: userList[indexPath.row].memberId ?? Int()])
     }
 }
 
@@ -79,8 +85,8 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        cell.titleLabel.text = userList[indexPath.item]
-        cell.titleImage.image = ImageLiterals.profileLightBlue1
+        cell.titleLabel.text = userList[indexPath.item].memberName
+        cell.titleImage.load(from: userList[indexPath.item].profilePath ?? String())
         if cell.isSelected == true { cell.onSelected() }
         else { cell.onDeselected() }
         return cell
@@ -92,5 +98,4 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
     }
-    
 }

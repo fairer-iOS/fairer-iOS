@@ -56,6 +56,7 @@ enum TextLiteral {
 
     // MARK: - GroupMainViewController
     
+    static let groupMainViewControllerHouseTitleLabel: String = "님!\n새로 하우스를 만들거나 참여해주세요."
     static let groupMainViewControllerHouseMakeLabel: String = "집안일 하우스 생성"
     static let groupMainViewControllerHouseMakeButtonText: String = "집안일 하우스 만들기"
     static let groupMainViewControllerHouseMakeInfoLabel: String = "개인 혹은 여러명이 집안일을 관리할 수 있는 하우스를\n만들 수 있습니다."
@@ -67,10 +68,12 @@ enum TextLiteral {
     
     static let homeViewAddWorkLabel: String = "집안일을 추가해 보세요!"
     static let homeViewFinishWorkTitle: String = "끝낸 집안일"
-    
+    static let homeViewDefaultCountDoneTitleLabel: String = "아직 집안일을 하지 않으셨네요."
+
     // MARK: - HomeCalendarView
     
     static let homeCalendarViewTodayTitle: String = "오늘"
+    static let homeCalendarViewDaysTitle: [String] = ["일","월","화","수","목","금","토"]
     
     // MARK: - HouseInviteCodeViewController
     
@@ -189,6 +192,7 @@ enum TextLiteral {
     static let writeHouseWorkViewControllerHouseWorkNameLabel = "집안일 이름"
     static let writeHouseWorkViewControllerHouseWorkNameTextFieldPlaceholderText = "직접 입력"
     static let writeHouseWorkViewControllerHouseWorkNameWarningLabel = "텍스트는 16글자를 초과하여 입력하실 수 없어요."
+    static let writeHouseWorkViewControllerDeleteLabel = "삭제"
     
     // MARK: - SettingProfileViewController
     

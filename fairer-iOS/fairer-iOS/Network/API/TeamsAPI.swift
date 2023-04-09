@@ -19,6 +19,7 @@ final class TeamsAPI {
         case postAddTeam
         case postJoinTeam
         case patchTeamInfo
+        case postLeaveTeam
     }
     
     func getTeamInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
@@ -90,6 +91,20 @@ final class TeamsAPI {
             }
         }
     }
+    
+    func postLeaveTeam(completion: @escaping (NetworkResult<Any>) -> Void) {
+        teamsProvider.request(.postLeaveTeam) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postLeaveTeam)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
 
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
@@ -98,6 +113,7 @@ final class TeamsAPI {
         case 200..<300:
             switch responseData {
             case .getTeamInfo, .getInviteCodeInfo, .postAddTeam, .postJoinTeam, .patchTeamInfo:
+            case .getTeamInfo, .postAddTeam, .postJoinTeam, .patchTeamInfo, .postLeaveTeam:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400:
@@ -135,7 +151,7 @@ final class TeamsAPI {
                 return .pathErr
             }
             return .success(decodedData)
-        case .postJoinTeam, .patchTeamInfo:
+        case .postJoinTeam, .patchTeamInfo, .postLeaveTeam:
             return .success(())
         }
     }

@@ -19,8 +19,7 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
                 dayLabel.textColor = UIColor.blue
                 dayLabel.font = .title2
                 dateLabel.font = .title2
-                workDot.image = ImageLiterals.selectedCalendarCell
-            }else {
+            } else {
                 globalView.backgroundColor = .systemBackground
                 dateLabel.textColor = .gray400
                 dayLabel.textColor = .gray400
@@ -31,10 +30,22 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
     }
     
     // MARK: - property
-
-    let workDot: UIImageView = {
-        let imgView = UIImageView()
-        return imgView
+    
+    let workDot = UIImageView()
+    let workBlueBadge: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.layer.cornerRadius = 8
+        view.isHidden = true
+        return view
+    }()
+    let workLeftLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.caption1
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
     }()
     let dayLabel: UILabel = {
         let label = UILabel()
@@ -63,14 +74,26 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubviews(workDot,globalView)
+        self.addSubviews(workDot,workBlueBadge,globalView)
         globalView.addSubviews(dayLabel,dateLabel)
+        workBlueBadge.addSubview(workLeftLabel)
         self.bringSubviewToFront(workDot)
+        self.bringSubviewToFront(workBlueBadge)
         
         workDot.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(16)
             $0.bottom.equalTo(globalView.snp.top).offset(3)
+        }
+        
+        workBlueBadge.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(16)
+            $0.bottom.equalTo(globalView.snp.top).offset(3)
+        }
+        
+        workLeftLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
         globalView.snp.makeConstraints {
@@ -102,5 +125,8 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
         self.dayLabel.font = .body2
         self.dateLabel.font = .body2
         self.workDot.image = nil
+        self.workDot.isHidden = false
+        self.workLeftLabel.isHidden = true
+        self.workBlueBadge.isHidden = true
     }
 }

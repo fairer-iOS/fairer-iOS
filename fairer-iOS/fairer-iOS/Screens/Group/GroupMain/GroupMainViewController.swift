@@ -10,20 +10,16 @@ import UIKit
 import SnapKit
 
 final class GroupMainViewController: BaseViewController {
-    
-    let userName: String = "고가혜"
-    
+
     // MARK: - property
     
     private let backButton = BackButton()
-    private lazy var titleLabel: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "안녕하세요. \(userName)님!\n새로 하우스를 만들거나 참여해주세요."
         label.font = .h2
+        label.text = "안녕하세요. " + TextLiteral.groupMainViewControllerHouseTitleLabel
         label.textColor = .gray800
-        label.applyColor(to: userName, with: .blue)
         label.numberOfLines = 0
-        // TODO: - LoginView pull 받아서 lineheight extension 적용
         return label
     }()
     private let houseMakeLabel: UILabel = {
@@ -77,6 +73,11 @@ final class GroupMainViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bindGroupMemberInfo()
+    }
+    
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
@@ -128,6 +129,33 @@ final class GroupMainViewController: BaseViewController {
             $0.top.equalTo(houseEnterButton.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(44)
+        }
+    }
+    
+    // MARK: - functions
+    
+    private func bindGroupMemberInfo() {
+        getMemberInfo { [weak self] data in
+            guard let userName = data.memberName else { return }
+
+            self?.titleLabel.text = "안녕하세요. " + userName + TextLiteral.groupMainViewControllerHouseTitleLabel
+            self?.titleLabel.applyColor(to: userName, with: .blue)
+        }
+    }
+}
+
+extension GroupMainViewController {
+    func getMemberInfo(completion: @escaping (MemberResponse) -> Void) {
+        NetworkService.shared.members.getMemberInfo { result in
+            switch result {
+            case .success(let response):
+                guard let memberData = response as? MemberResponse else { return }
+                completion(memberData)
+            case .requestErr(let error):
+                dump(error)
+            default:
+                print("server Error")
+            }
         }
     }
 }

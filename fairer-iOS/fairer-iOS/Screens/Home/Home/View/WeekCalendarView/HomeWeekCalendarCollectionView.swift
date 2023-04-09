@@ -11,14 +11,26 @@ import SnapKit
 
 final class HomeWeekCalendarCollectionView: BaseUIView {
 
-    static var indentifer = "reusableView"
-    
+    static let indentifer = "reusableView"
+
+    lazy var fullDateList: [String] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    lazy var countWorkLeft: String = String() {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    lazy var dotList: [UIImage] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     private var isSelected = false
     private var selectedCell = Int()
-    private var cellIndexPath = IndexPath()
-    private let dotList = [ImageLiterals.oneDot,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.oneDot,ImageLiterals.twoDots,ImageLiterals.threeDots,ImageLiterals.twoDots]
-    private let dayList = ["일","월","화","수","목","금","토"]
-    lazy var fullDateList = [String]()
+    private let dayList = TextLiteral.homeCalendarViewDaysTitle
     lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
     lazy var todayDateInString = Date().dateToString
@@ -142,28 +154,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
 
 extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.isSelected == false {
-            self.isSelected = true
-            self.selectedCell = indexPath.row
-            self.cellIndexPath = indexPath
-            let firstCell  = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
-            firstCell.workDot.image = ImageLiterals.selectedCalendarCell
-            yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
-            firstCell.isSelected = true
-            datePickedByOthers = self.fullDateList[indexPath.row]
-        }else if indexPath.row != self.selectedCell {
-            let resetCell  = collectionView.cellForItem(at: self.cellIndexPath) as! HomeWeekCalendarCollectionViewCell
-            resetCell.workDot.image = dotList[self.cellIndexPath.row]
-            resetCell.isSelected = false
-            let secondCell = collectionView.cellForItem(at: indexPath) as! HomeWeekCalendarCollectionViewCell
-            secondCell.workDot.image = ImageLiterals.selectedCalendarCell
-            self.isSelected = true
-            self.selectedCell = indexPath.row
-            self.cellIndexPath = indexPath
-            yearMonthDateByTouchedCell?(self.fullDateList[indexPath.row])
-            secondCell.isSelected = true
-            datePickedByOthers = self.fullDateList[indexPath.row]
-        }
+        datePickedByOthers = self.fullDateList[indexPath.row]
         NotificationCenter.default.post(name: Notification.Name.date, object: nil, userInfo: [NotificationKey.date: datePickedByOthers])
     }
 }
@@ -180,42 +171,53 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         let seporateDate = fullDateList[indexPath.row].components(separatedBy: ".")
         cell.dayLabel.text = dayList[indexPath.item]
         cell.dateLabel.text = seporateDate[2]
-        cell.workDot.image = dotList[indexPath.item]
+        if dotList.isEmpty {
+            cell.workDot.isHidden = true
+        } else {
+            cell.workDot.image = dotList[indexPath.row]
+        }
+        cell.workLeftLabel.text = self.countWorkLeft
         guard self.datePickedByOthers != "" else {
             if fullDateList[indexPath.item] == self.todayDateInString {
                 self.isSelected = true
                 self.selectedCell = indexPath.row
-                self.cellIndexPath = indexPath
                 cell.globalView.backgroundColor = UIColor.gray100
                 cell.dateLabel.textColor = UIColor.blue
                 cell.dayLabel.textColor = UIColor.blue
                 cell.dayLabel.font = .title2
                 cell.dateLabel.font = .title2
-                cell.workDot.image = ImageLiterals.selectedCalendarCell
+                if Int(countWorkLeft) == 0 {
+                    cell.workDot.image = dotList[indexPath.row]
+                    cell.workBlueBadge.isHidden = true
+                    cell.workLeftLabel.isHidden = true
+                } else {
+                    cell.workDot.isHidden = true
+                    cell.workBlueBadge.isHidden = false
+                    cell.workLeftLabel.isHidden = false
+                    cell.workLeftLabel.text = self.countWorkLeft
+                }
             }
             return cell
         }
         if fullDateList[indexPath.item] == self.datePickedByOthers {
             self.isSelected = true
             self.selectedCell = indexPath.row
-            self.cellIndexPath = indexPath
             cell.globalView.backgroundColor = UIColor.gray100
             cell.dateLabel.textColor = UIColor.blue
             cell.dayLabel.textColor = UIColor.blue
             cell.dayLabel.font = .title2
             cell.dateLabel.font = .title2
-            cell.workDot.image = ImageLiterals.selectedCalendarCell
+            if Int(countWorkLeft) == 0 {
+                cell.workDot.image = dotList[indexPath.row]
+                cell.workBlueBadge.isHidden = true
+                cell.workLeftLabel.isHidden = true
+            } else {
+                cell.workDot.isHidden = true
+                cell.workBlueBadge.isHidden = false
+                cell.workLeftLabel.isHidden = false
+                cell.workLeftLabel.text = self.countWorkLeft
+            }
         }
         return cell
     }
-}
-
-// MARK: - notification
-
-extension Notification.Name {
-    static let date = Notification.Name("date")
-}
-
-enum NotificationKey {
-    case date
 }
