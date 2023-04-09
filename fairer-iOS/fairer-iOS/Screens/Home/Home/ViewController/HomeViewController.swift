@@ -167,8 +167,8 @@ final class HomeViewController: BaseViewController {
                 endDate: homeWeekCalendarCollectionView.datePickedByOthers
             )
         }
-        self.getTeamInfo()
         self.getRules()
+        self.getMyInfo()
     }
     
     override func configUI() {
@@ -555,22 +555,27 @@ final class HomeViewController: BaseViewController {
         }
     }
     
+    private func getMyInfo() {
+        self.getMyInfoFromServer { response in
+            self.myId = response.memberId
+            self.getTeamInfo()
+        }
+    }
+    
     private func getTeamInfo() {
         self.getTeamInfoFromServer() { response in
             self.homeGroupLabel.text = response.teamName
-            self.myId = response.members?.first?.memberId
-            self.selectedMemberId = response.members?.first?.memberId
+            self.selectedMemberId = self.myId
             self.teamId = response.teamId
-            guard let userName = response.members?[0].memberName else { return }
-            self.userName = userName
-            self.nameTitleLabel.text = "\(userName)님"
-            if let text = self.nameTitleLabel.text {
-                let attributeString = NSMutableAttributedString(string: text)
-                attributeString.addAttribute(.foregroundColor, value: UIColor.blue, range: (text as NSString).range(of: "\(userName)"))
-                self.nameTitleLabel.attributedText = attributeString
-            }
             guard let teamMember = response.members else { return }
-            self.homeGroupCollectionView.userList = teamMember
+            for member in teamMember {
+                if self.myId == member.memberId {
+                    self.homeGroupCollectionView.userList.insert(member, at: 0)
+                    self.userName = member.memberName ?? ""
+                } else {
+                    self.homeGroupCollectionView.userList.append(member)
+                }
+            }
         }
     }
     
@@ -894,6 +899,20 @@ extension HomeViewController {
             case .success(let response):
                 guard let team = response as? TeamInfoResponse else { return }
                 completion(team)
+            case .requestErr(let errResponse):
+                dump(errResponse)
+            default:
+                print("error")
+            }
+        }
+    }
+    
+    func getMyInfoFromServer(completion: @escaping (MemberResponse) -> Void) {
+        NetworkService.shared.members.getMemberInfo() { result in
+            switch result {
+            case .success(let response):
+                guard let myInfo = response as? MemberResponse else { return }
+                completion(myInfo)
             case .requestErr(let errResponse):
                 dump(errResponse)
             default:
