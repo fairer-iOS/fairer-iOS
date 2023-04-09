@@ -110,32 +110,23 @@ final class EnterHouseViewController: BaseViewController {
     }
     
     private func touchUpToShowToast() {
-        //FIXME: - 예외 케이스에 따라 분기처리
-        showToast(TextLiteral.enterHouseViewControllerToastWrongCode, 36)
-        showToast(TextLiteral.enterHouseViewControllerToastHouseFull, 56)
+        guard let inviteCode = enterHouseCodeTextfield.text else { return }
+        postJoinTeam(inviteCode: inviteCode)
     }
     
-    private func showToast(_ message: String, _ height: Int) {
-        let toastLabel = UILabel()
-        toastLabel.text = message
-        toastLabel.textColor = .white
-        toastLabel.font = .title2
-        toastLabel.numberOfLines = 0
-        toastLabel.backgroundColor = .gray700
-        toastLabel.textAlignment = .center
-        toastLabel.layer.cornerRadius = 8
-        toastLabel.clipsToBounds = true
-        toastLabel.alpha = 0
+    private func showToast(_ message: String) {
+        let toastLabel = ToastPaddingLabel(text: message)
+        
         view.addSubview(toastLabel)
         toastLabel.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(height)
         }
+        
         UIView.animate(withDuration: 0.8, animations: {
             toastLabel.alpha = 1.0
         }, completion: { isCompleted in
-            UIView.animate(withDuration: 1.2, animations: {
+            UIView.animate(withDuration: 2.2, animations: {
                 toastLabel.alpha = 0
             }, completion: { isCompleted in
                 toastLabel.removeFromSuperview()
@@ -164,6 +155,22 @@ extension EnterHouseViewController : UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+}
+
+extension EnterHouseViewController {
+    private func postJoinTeam(inviteCode: String) {
+        NetworkService.shared.teams.postJoinTeam(inviteCode: inviteCode) { [weak self] result in
+            switch result {
+            case .success:
+                    self?.navigationController?.pushViewController(HouseInfoViewController(), animated: true)
+            case .requestErr(let error):
+                guard let errorResponse = error as? UserErrorResponse else { return }
+                self?.showToast(errorResponse.errorMessage)
+            default:
+                print("server Error")
+            }
+        }
     }
 }
 

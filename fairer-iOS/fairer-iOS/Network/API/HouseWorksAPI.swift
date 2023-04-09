@@ -19,7 +19,7 @@ final class HouseWorksAPI {
         case getMemberHouseWorksByDate
     }
     
-    func getHouseWorksByDate(
+    public func getHouseWorksByDate(
         fromDate: String,
         toDate: String,
         completion: @escaping (NetworkResult<Any>) -> Void

@@ -179,6 +179,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
         cell.workLeftLabel.text = self.countWorkLeft
         guard self.datePickedByOthers != "" else {
             if fullDateList[indexPath.item] == self.todayDateInString {
+                self.isSelected = true
                 self.selectedCell = indexPath.row
                 cell.globalView.backgroundColor = UIColor.gray100
                 cell.dateLabel.textColor = UIColor.blue

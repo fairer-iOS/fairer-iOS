@@ -11,6 +11,7 @@ import SnapKit
 
 final class HomeGroupCollectionView: BaseUIView {
     
+    
     var userList: [MemberResponse] = [] {
         didSet {
             self.collectionView.reloadData()
