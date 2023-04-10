@@ -137,8 +137,8 @@ final class HouseInviteCodeViewController: BaseViewController {
         view.addSubview(inviteCodeButtonView)
         inviteCodeButtonView.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(184)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(refreshCodeButton)
