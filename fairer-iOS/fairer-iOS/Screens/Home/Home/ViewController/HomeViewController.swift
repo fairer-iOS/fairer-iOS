@@ -493,7 +493,10 @@ final class HomeViewController: BaseViewController {
                 self.getDateHouseWork(
                     fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
                     toDate: endDate.replacingOccurrences(of: ".", with: "-")
-                ) { response in
+                ) { [weak self] response in
+                    guard let self = self else {
+                        return
+                    }
                     DispatchQueue.main.async {
                         self.view.isUserInteractionEnabled = true
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
@@ -522,7 +525,10 @@ final class HomeViewController: BaseViewController {
                     fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
                     toDate: endDate.replacingOccurrences(of: ".", with: "-"),
                     teamMemberId: selectedMemberId
-                ) { response in
+                ) { [weak self] response in
+                    guard let self = self else {
+                        return
+                    }
                     DispatchQueue.main.async {
                         self.view.isUserInteractionEnabled = true
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
@@ -549,31 +555,41 @@ final class HomeViewController: BaseViewController {
     }
     
     private func getRules() {
-        self.getRulesFromServer() { response in
+        self.getRulesFromServer() { [weak self] response in
+            guard let self = self else {
+                return
+            }
             self.ruleArray = response.ruleResponseDtos
             self.setHomeRuleLabel()
         }
     }
     
     private func getMyInfo() {
-        self.getMyInfoFromServer { response in
+        self.getMyInfoFromServer { [weak self] response in
+            guard let self = self else {
+                return
+            }
             self.myId = response.memberId
             self.getTeamInfo()
         }
     }
     
     private func getTeamInfo() {
-        self.getTeamInfoFromServer() { response in
+        self.getTeamInfoFromServer() { [weak self] response in
+            guard let self = self else {
+                return
+            }
             self.homeGroupLabel.text = response.teamName
             self.selectedMemberId = self.myId
             self.teamId = response.teamId
-            guard let teamMember = response.members else { return }
-            for member in teamMember {
-                if self.myId == member.memberId {
-                    self.homeGroupCollectionView.userList.insert(member, at: 0)
-                    self.userName = member.memberName ?? ""
-                } else {
-                    self.homeGroupCollectionView.userList.append(member)
+            if let teamMember = response.members {
+                for member in teamMember {
+                    if self.myId == member.memberId {
+                        self.homeGroupCollectionView.userList.insert(member, at: 0)
+                        self.userName = member.memberName ?? ""
+                    } else {
+                        self.homeGroupCollectionView.userList.append(member)
+                    }
                 }
             }
         }
@@ -591,7 +607,10 @@ final class HomeViewController: BaseViewController {
                 self.getDateHouseWork(
                     fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
-                ) { response in
+                ) { [weak self] response in
+                    guard let self = self else {
+                        return
+                    }
                     DispatchQueue.main.async {
                         self.view.isUserInteractionEnabled = true
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
@@ -622,7 +641,10 @@ final class HomeViewController: BaseViewController {
                     fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     teamMemberId: selectedMemberId
-                ) { response in
+                ) { [weak self] response in
+                    guard let self = self else {
+                        return
+                    }
                     DispatchQueue.main.async {
                         self.view.isUserInteractionEnabled = true
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
@@ -642,6 +664,7 @@ final class HomeViewController: BaseViewController {
                                     self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
                                 }
                             }
+                            
                         }
                         self.countWorkDoneInWeek = doneWorkSum
                         self.calendarDailyTableView.reloadData()
