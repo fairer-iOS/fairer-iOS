@@ -176,22 +176,24 @@ final class HouseInviteCodeViewController: BaseViewController {
     
      private func touchUpToRefeshButton() {
          getInviteCodeInfo { [weak self] data in
-             guard let inviteCode = data.inviteCode else { return }
-             guard let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString else { return }
-             guard let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay else { return }
-             
-             self?.bindViewData(inviteCode: inviteCode, inviteCodeTimeString: inviteCodeTimeString)
-             self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+             if let inviteCode = data.inviteCode,
+                let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
+                let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay
+             {
+                 self?.bindViewData(inviteCode: inviteCode, inviteCodeTimeString: inviteCodeTimeString)
+                 self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+             }
          }
     }
     
     private func getinviteCodeExpirationDateTime() {
         getInviteCodeInfo { [weak self] data in
-            guard let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString else { return }
-            guard let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay else { return }
-            
-            self?.validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
-            self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+            if let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
+               let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay
+            {
+                self?.validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
+                self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+            }
         }
     }
 }
