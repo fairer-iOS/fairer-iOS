@@ -159,28 +159,30 @@ final class SettingInviteCodeViewController: BaseViewController {
         validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
     }
     
-     private func touchUpToRefeshButton() {
-         getInviteCodeInfo { [weak self] data in
-             guard let inviteCode = data.inviteCode else { return }
-             guard let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString else { return }
-             guard let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay else { return }
-             
-             self?.inviteCodeView.code = inviteCode
-             self?.inviteCodeButtonView.code = inviteCode
-             self?.validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
-             self?.setupButtonLayer(validTime: inviteCodeTimeDate)
-         }
+    private func touchUpToRefeshButton() {
+        getInviteCodeInfo { [weak self] data in
+            if let inviteCode = data.inviteCode,
+               let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
+               let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay
+            {
+                self?.inviteCodeView.code = inviteCode
+                self?.inviteCodeButtonView.code = inviteCode
+                self?.validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
+                self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+            }
+        }
     }
     
     private func getInviteCodeViewInfo() {
         getInviteCodeInfo { [weak self] data in
-            guard let houseName = data.teamName else { return }
-            guard let inviteCode = data.inviteCode else { return }
-            guard let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString else { return }
-            guard let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay else { return }
-            
-            self?.bindViewData(houseName: houseName, inviteCode: inviteCode, inviteCodeTimeString: inviteCodeTimeString)
-            self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+            if let houseName = data.teamName,
+               let inviteCode = data.inviteCode,
+               let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
+               let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay
+            {
+                self?.bindViewData(houseName: houseName, inviteCode: inviteCode, inviteCodeTimeString: inviteCodeTimeString)
+                self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+            }
         }
     }
 }
