@@ -47,8 +47,7 @@ extension TeamsRouter: BaseTargetType {
     
     var task: Moya.Task {
         switch self {
-        case .getTeamInfo, .getInviteCodeInfo:
-        case .getTeamInfo, .postLeaveTeam:
+        case .getTeamInfo, .postLeaveTeam, .getInviteCodeInfo:
             return .requestPlain
         case .postAddTeam(let teamName), .patchTeamInfo(let teamName):
             return .requestParameters(parameters: ["teamName": teamName], encoding: JSONEncoding.default)

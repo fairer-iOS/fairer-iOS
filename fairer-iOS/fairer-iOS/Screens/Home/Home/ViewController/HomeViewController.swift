@@ -119,7 +119,7 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     private let homeCalenderView = HomeCalendarView()
-    private let homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
+    private var homeWeekCalendarCollectionView = HomeWeekCalendarCollectionView()
     private let calendarDailyTableView: UITableView = {
         let calendarDailyTableView = UITableView(frame: .zero, style: .insetGrouped)
         calendarDailyTableView.register(CalendarDailyTableViewCell.self, forCellReuseIdentifier: CalendarDailyTableViewCell.identifier)
@@ -167,8 +167,8 @@ final class HomeViewController: BaseViewController {
                 endDate: homeWeekCalendarCollectionView.datePickedByOthers
             )
         }
-        self.getTeamInfo()
         self.getRules()
+        self.getMyInfo()
     }
     
     override func configUI() {
@@ -486,16 +486,19 @@ final class HomeViewController: BaseViewController {
     
     private func getHouseWorksByDate(isOwn: Bool, startDate: String, endDate: String) {
         DispatchQueue.main.async {
-            LoadingView.showLoading()
+            self.view.isUserInteractionEnabled = false
         }
         DispatchQueue.global().async {
             if isOwn {
                 self.getDateHouseWork(
                     fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
                     toDate: endDate.replacingOccurrences(of: ".", with: "-")
-                ) { response in
+                ) { [weak self] response in
+                    guard let self = self else {
+                        return
+                    }
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
@@ -522,9 +525,12 @@ final class HomeViewController: BaseViewController {
                     fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
                     toDate: endDate.replacingOccurrences(of: ".", with: "-"),
                     teamMemberId: selectedMemberId
-                ) { response in
+                ) { [weak self] response in
+                    guard let self = self else {
+                        return
+                    }
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
@@ -549,28 +555,43 @@ final class HomeViewController: BaseViewController {
     }
     
     private func getRules() {
-        self.getRulesFromServer() { response in
+        self.getRulesFromServer() { [weak self] response in
+            guard let self = self else {
+                return
+            }
             self.ruleArray = response.ruleResponseDtos
             self.setHomeRuleLabel()
         }
     }
     
-    private func getTeamInfo() {
-        self.getTeamInfoFromServer() { response in
-            self.homeGroupLabel.text = response.teamName
-            self.myId = response.members?.first?.memberId
-            self.selectedMemberId = response.members?.first?.memberId
-            self.teamId = response.teamId
-            guard let userName = response.members?[0].memberName else { return }
-            self.userName = userName
-            self.nameTitleLabel.text = "\(userName)님"
-            if let text = self.nameTitleLabel.text {
-                let attributeString = NSMutableAttributedString(string: text)
-                attributeString.addAttribute(.foregroundColor, value: UIColor.blue, range: (text as NSString).range(of: "\(userName)"))
-                self.nameTitleLabel.attributedText = attributeString
+    private func getMyInfo() {
+        self.getMyInfoFromServer { [weak self] response in
+            guard let self = self else {
+                return
             }
-            guard let teamMember = response.members else { return }
-            self.homeGroupCollectionView.userList = teamMember
+            self.myId = response.memberId
+            self.getTeamInfo()
+        }
+    }
+    
+    private func getTeamInfo() {
+        self.getTeamInfoFromServer() { [weak self] response in
+            guard let self = self else {
+                return
+            }
+            self.homeGroupLabel.text = response.teamName
+            self.selectedMemberId = self.myId
+            self.teamId = response.teamId
+            if let teamMember = response.members {
+                for member in teamMember {
+                    if self.myId == member.memberId {
+                        self.homeGroupCollectionView.userList.insert(member, at: 0)
+                        self.userName = member.memberName ?? ""
+                    } else {
+                        self.homeGroupCollectionView.userList.append(member)
+                    }
+                }
+            }
         }
     }
     
@@ -578,31 +599,41 @@ final class HomeViewController: BaseViewController {
         guard let firstDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.first else { return }
         guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
         var doneWorkSum: Int = 0
+        DispatchQueue.main.async {
+            self.view.isUserInteractionEnabled = false
+        }
         DispatchQueue.global().async {
             if isOwn {
                 self.getDateHouseWork(
                     fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
-                ) { response in
-                    self.homeWeekCalendarCollectionView.dotList = [UIImage]()
-                    for date in self.homeWeekCalendarCollectionView.fullDateList {
-                        if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
-                            doneWorkSum = doneWorkSum + workDate.countDone
-                            switch workDate.countLeft {
-                            case 0:
-                                self.homeWeekCalendarCollectionView.dotList.append(UIImage())
-                            case 1...3:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
-                            case 4...6:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
-                            default:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
+                ) { [weak self] response in
+                    guard let self = self else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.view.isUserInteractionEnabled = true
+                        self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
+                        self.homeWeekCalendarCollectionView.dotList = [UIImage]()
+                        for date in self.homeWeekCalendarCollectionView.fullDateList {
+                            if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                                self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
+                                doneWorkSum = doneWorkSum + workDate.countDone
+                                switch workDate.countLeft {
+                                case 0:
+                                    self.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                                case 1...3:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                                case 4...6:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                                default:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
+                                }
                             }
                         }
+                        self.countWorkDoneInWeek = doneWorkSum
+                        self.calendarDailyTableView.reloadData()
                     }
-                    self.countWorkDoneInWeek = doneWorkSum
-                    self.homeWeekCalendarCollectionView.collectionView.reloadData()
-                    self.calendarDailyTableView.reloadData()
                 }
             } else {
                 guard let selectedMemberId = self.selectedMemberId else { return }
@@ -610,26 +641,34 @@ final class HomeViewController: BaseViewController {
                     fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
                     teamMemberId: selectedMemberId
-                ) { response in
-                    self.homeWeekCalendarCollectionView.dotList = [UIImage]()
-                    for date in self.homeWeekCalendarCollectionView.fullDateList {
-                        if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
-                            doneWorkSum = doneWorkSum + workDate.countDone
-                            switch workDate.countLeft {
-                            case 0:
-                                self.homeWeekCalendarCollectionView.dotList.append(UIImage())
-                            case 1...3:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
-                            case 4...6:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
-                            default:
-                                self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
-                            }
-                        }
+                ) { [weak self] response in
+                    guard let self = self else {
+                        return
                     }
-                    self.countWorkDoneInWeek = doneWorkSum
-                    self.homeWeekCalendarCollectionView.collectionView.reloadData()
-                    self.calendarDailyTableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.view.isUserInteractionEnabled = true
+                        self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
+                        self.homeWeekCalendarCollectionView.dotList = [UIImage]()
+                        for date in self.homeWeekCalendarCollectionView.fullDateList {
+                            if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                                self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
+                                doneWorkSum = doneWorkSum + workDate.countDone
+                                switch workDate.countLeft {
+                                case 0:
+                                    self.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                                case 1...3:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                                case 4...6:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                                default:
+                                    self.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
+                                }
+                            }
+                            
+                        }
+                        self.countWorkDoneInWeek = doneWorkSum
+                        self.calendarDailyTableView.reloadData()
+                    }
                 }
             }
         }
@@ -894,6 +933,20 @@ extension HomeViewController {
             case .success(let response):
                 guard let team = response as? TeamInfoResponse else { return }
                 completion(team)
+            case .requestErr(let errResponse):
+                dump(errResponse)
+            default:
+                print("error")
+            }
+        }
+    }
+    
+    func getMyInfoFromServer(completion: @escaping (MemberResponse) -> Void) {
+        NetworkService.shared.members.getMemberInfo() { result in
+            switch result {
+            case .success(let response):
+                guard let myInfo = response as? MemberResponse else { return }
+                completion(myInfo)
             case .requestErr(let errResponse):
                 dump(errResponse)
             default:
