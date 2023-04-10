@@ -53,7 +53,7 @@ final class SettingInviteCodeViewController: BaseViewController {
         return view
     }()
     private lazy var inviteCodeButtonView: InviteCodeButtonView = {
-        let view = InviteCodeButtonView()
+        let view = InviteCodeButtonView(skipButtonisHidden: true)
         view.isHidden = true
         return view
     }()
@@ -120,8 +120,8 @@ final class SettingInviteCodeViewController: BaseViewController {
         view.addSubview(inviteCodeButtonView)
         inviteCodeButtonView.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(184)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(refreshCodeButton)
