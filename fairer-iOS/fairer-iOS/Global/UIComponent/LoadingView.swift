@@ -17,7 +17,7 @@ final class LoadingView {
                     loadingView.startAnimating()
                     return
                 }
-                let loadingView = UIActivityIndicatorView(style: .large)
+                let loadingView = UIActivityIndicatorView(style: .medium)
                 loadingView.frame = window.bounds
                 loadingView.color = .darkGray
                 window.addSubview(loadingView)

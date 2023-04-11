@@ -1,35 +1,18 @@
 //
-//  HouseInviteCodeViewController.swift
+//  SettingInviteCodeViewController.swift
 //  fairer-iOS
 //
-//  Created by 김유나 on 2022/10/04.
+//  Created by 김규철 on 2023/04/09.
 //
 
 import UIKit
 
 import SnapKit
-import KakaoSDKShare
-import SafariServices
 
-final class HouseInviteCodeViewController: BaseViewController {
-    
-    var houseName: String
-    var inviteCode: String
-    private let templateId: Int = 92371
+final class SettingInviteCodeViewController: BaseViewController {
 
-    init(houseName: String, inviteCode: String) {
-        self.houseName = houseName
-        self.inviteCode = inviteCode
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - property
     
-    private var safariViewController : SFSafariViewController?
     private let backButton = BackButton()
     private let houseInvitePrimaryLabel: UILabel = {
         let label = UILabel()
@@ -48,15 +31,12 @@ final class HouseInviteCodeViewController: BaseViewController {
     }()
     private lazy var inviteCodeLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: houseName + TextLiteral.houseInviteCodeViewControllerInviteCodeLabel, lineHeight: 22)
         label.font = .title1
         label.textColor = .gray600
-        label.applyColor(to: houseName, with: .blue)
         return label
     }()
     private lazy var inviteCodeView: InviteCodeView = {
         let view = InviteCodeView()
-        view.code = inviteCode
         return view
     }()
     private lazy var validTimeLabel: InfoLabelView = {
@@ -73,9 +53,8 @@ final class HouseInviteCodeViewController: BaseViewController {
         return view
     }()
     private lazy var inviteCodeButtonView: InviteCodeButtonView = {
-        let view = InviteCodeButtonView()
+        let view = InviteCodeButtonView(skipButtonisHidden: true)
         view.isHidden = true
-        view.code = inviteCode
         return view
     }()
     private lazy var refreshCodeButton: MainButton = {
@@ -97,8 +76,7 @@ final class HouseInviteCodeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setButtonAction()
-        getinviteCodeExpirationDateTime()
+        getInviteCodeViewInfo()
     }
     
     override func render() {
@@ -173,69 +151,43 @@ final class HouseInviteCodeViewController: BaseViewController {
         }
     }
     
-    private func setButtonAction() {
-        let kakaoShare = UIAction { [weak self] _ in
-            self?.sharedKakaoAPI()
-        }
-        self.inviteCodeButtonView.kakaoShareButton.addAction(kakaoShare, for: .touchUpInside)
-    }
-    
-    private func bindViewData(inviteCode: String, inviteCodeTimeString: String) {
+    private func bindViewData(houseName: String, inviteCode: String, inviteCodeTimeString: String) {
+        inviteCodeLabel.setTextWithLineHeight(text: houseName + TextLiteral.houseInviteCodeViewControllerInviteCodeLabel, lineHeight: 22)
+        inviteCodeLabel.applyColor(to: houseName, with: .blue)
         inviteCodeView.code = inviteCode
         inviteCodeButtonView.code = inviteCode
         validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
     }
     
-     private func touchUpToRefeshButton() {
-         getInviteCodeInfo { [weak self] data in
-             if let inviteCode = data.inviteCode,
-                let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
-                let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay
-             {
-                 self?.bindViewData(inviteCode: inviteCode, inviteCodeTimeString: inviteCodeTimeString)
-                 self?.setupButtonLayer(validTime: inviteCodeTimeDate)
-             }
-         }
-    }
-    
-    private func getinviteCodeExpirationDateTime() {
+    private func touchUpToRefeshButton() {
         getInviteCodeInfo { [weak self] data in
-            if let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
+            if let inviteCode = data.inviteCode,
+               let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
                let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay
             {
+                self?.inviteCodeView.code = inviteCode
+                self?.inviteCodeButtonView.code = inviteCode
                 self?.validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
                 self?.setupButtonLayer(validTime: inviteCodeTimeDate)
             }
         }
     }
     
-    private func sharedKakaoAPI() {
-        if ShareApi.isKakaoTalkSharingAvailable() {
-            ShareApi.shared.shareCustom(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) {(sharingResult, error) in
-                if let error = error {
-                    print(error)
-                }
-                else {
-                    print("shareCustom() success.")
-                    if let sharingResult = sharingResult {
-                        UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
-                    }
-                }
-            }
-        } else {
-            if let url = ShareApi.shared.makeCustomUrl(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) {
-                self.safariViewController = SFSafariViewController(url: url)
-                self.safariViewController?.modalTransitionStyle = .crossDissolve
-                self.safariViewController?.modalPresentationStyle = .overCurrentContext
-                self.present(self.safariViewController!, animated: true) {
-                    print("웹 present success")
-                }
+    private func getInviteCodeViewInfo() {
+        getInviteCodeInfo { [weak self] data in
+            if let houseName = data.teamName,
+               let inviteCode = data.inviteCode,
+               let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
+               let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay
+            {
+                self?.bindViewData(houseName: houseName, inviteCode: inviteCode, inviteCodeTimeString: inviteCodeTimeString)
+                self?.setupButtonLayer(validTime: inviteCodeTimeDate)
             }
         }
     }
 }
 
-extension HouseInviteCodeViewController {
+extension SettingInviteCodeViewController {
     func getInviteCodeInfo(completion: @escaping (InviteCodeInfoResponse) -> Void) {
         NetworkService.shared.teams.getInviteCodeInfo { result in
             switch result {
@@ -250,3 +202,4 @@ extension HouseInviteCodeViewController {
         }
     }
 }
+
