@@ -17,6 +17,7 @@ final class RepeatAlertView: BaseUIView {
             setupAttribute()
         }
     }
+    var selectedIndex: Int?
     
     // MARK: - property
     
@@ -119,6 +120,7 @@ final class RepeatAlertView: BaseUIView {
         titleLabel.text = isDelete ? "반복 일정 삭제" : "반복 일정 수정"
         actionButton.setTitle(isDelete ? "삭제" : "수정", for: .normal)
         actionButton.setTitleColor(isDelete ? .negative20 : .blue, for: .normal)
+        tableView.selectRow(at: nil, animated: false, scrollPosition: .none)
     }
     
     private func setCancelButton() {
