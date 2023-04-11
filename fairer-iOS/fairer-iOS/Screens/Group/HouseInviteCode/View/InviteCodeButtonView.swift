@@ -52,7 +52,7 @@ final class InviteCodeButtonView: UIView {
         button.backgroundColor = UIColor(red: 0.992, green: 0.945, blue: 0.38, alpha: 1)
         return button
     }()
-    private let skipButton: UIButton = {
+    let skipButton: UIButton = {
         let button = UIButton()
         button.setTitle(TextLiteral.houseInviteCodeViewControllerSkipButtonText, for: .normal)
         button.titleLabel?.font = .title1

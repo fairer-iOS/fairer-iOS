@@ -39,10 +39,6 @@ class OnboardingProfileViewController: BaseViewController {
         let button = MainButton()
         button.title = TextLiteral.onboardingProfileViewControllerDoneButtonText
         button.isDisabled = true
-        let action = UIAction { [weak self] _ in
-            self?.didTapDoneButton()
-        }
-        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
@@ -51,6 +47,10 @@ class OnboardingProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didTapImage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setButtonAction()
     }
     
     override func render() {
@@ -89,10 +89,6 @@ class OnboardingProfileViewController: BaseViewController {
     
     // MARK: - functions
     
-    @objc private func didTapDoneButton() {
-        print("버튼 누름")
-    }
-    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -111,5 +107,20 @@ class OnboardingProfileViewController: BaseViewController {
                 self?.profileDoneButton.isDisabled = false
             }
         }
+    }
+}
+
+extension OnboardingProfileViewController {
+
+    private func setButtonAction() {
+        let didTapDoneAction = UIAction { [weak self] _ in
+            self?.didTapDoneButton()
+        }
+        self.profileDoneButton.addAction(didTapDoneAction, for: .touchUpInside)
+    }
+    
+    private func didTapDoneButton() {
+        let groupMainViewController = GroupMainViewController()
+        self.navigationController?.pushViewController(groupMainViewController, animated: true)
     }
 }
