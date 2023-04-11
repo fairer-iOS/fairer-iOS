@@ -26,9 +26,8 @@ final class RepeatAlertView: BaseUIView {
         view.layer.cornerRadius = 12
         return view
     }()
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "반복 일정 삭제"
         label.font = .h3
         label.textColor = .gray800
         return label
@@ -52,11 +51,9 @@ final class RepeatAlertView: BaseUIView {
         button.layer.cornerRadius = 4
         return button
     }()
-    private let actionButton: UIButton = {
+    let actionButton: UIButton = {
         let button = UIButton()
-        button.setTitle("삭제", for: .normal)
         button.setBackgroundColor(.normal0, for: .normal)
-        button.setTitleColor(.negative20, for: .normal)
         button.titleLabel?.font = .title2
         button.clipsToBounds = true
         button.layer.cornerRadius = 4
@@ -68,6 +65,7 @@ final class RepeatAlertView: BaseUIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
+        setCancelButton()
     }
     
     required init?(coder: NSCoder) { nil }
@@ -110,6 +108,13 @@ final class RepeatAlertView: BaseUIView {
             $0.width.equalTo(134)
             $0.height.equalTo(42)
         }
+    }
+    
+    private func setCancelButton() {
+        let action = UIAction { [weak self] _ in
+            self?.isHidden = true
+        }
+        cancelButton.addAction(action, for: .touchUpInside)
     }
 }
 
