@@ -14,13 +14,8 @@ final class RepeatAlertTableViewCell: BaseTableViewCell {
     static let cellId = "cellId"
     
     override func setSelected(_ selected: Bool, animated: Bool) {
-        if selected {
-            button.setImage(ImageLiterals.repeatAlertSelectedButton, for: .normal)
-            button.tintColor = .blue
-        } else {
-            button.setImage(ImageLiterals.repeatAlertDeSelectedButton, for: .normal)
-            button.tintColor = .gray800
-        }
+        button.setImage(selected ? ImageLiterals.repeatAlertSelectedButton : ImageLiterals.repeatAlertDeSelectedButton, for: .normal)
+        button.tintColor = selected ? .blue : .gray800
     }
     
     // MARK: - property
