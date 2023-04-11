@@ -110,5 +110,3 @@ final class RulesAPI {
         }
     }
 }
-
-

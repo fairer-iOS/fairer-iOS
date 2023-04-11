@@ -142,7 +142,6 @@
 		917D8B6329A6330300E26B73 /* OauthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6229A6330300E26B73 /* OauthRouter.swift */; };
 		917D8B6529A6331100E26B73 /* PresetsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6429A6331100E26B73 /* PresetsRouter.swift */; };
 		917D8B6729A6332400E26B73 /* RulesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6629A6332400E26B73 /* RulesRouter.swift */; };
-		917D8B6929A6333C00E26B73 /* StatisticsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6829A6333C00E26B73 /* StatisticsRouter.swift */; };
 		917D8B6B29A6334800E26B73 /* TeamsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6A29A6334800E26B73 /* TeamsRouter.swift */; };
 		917D8B6D29A6337B00E26B73 /* AlarmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6C29A6337B00E26B73 /* AlarmAPI.swift */; };
 		917D8B6F29A6338C00E26B73 /* HouseWorkCompleteRouterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B6E29A6338C00E26B73 /* HouseWorkCompleteRouterAPI.swift */; };
@@ -151,7 +150,6 @@
 		917D8B7529A633AF00E26B73 /* OauthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7429A633AF00E26B73 /* OauthAPI.swift */; };
 		917D8B7729A633B900E26B73 /* PresetsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7629A633B900E26B73 /* PresetsAPI.swift */; };
 		917D8B7929A633C500E26B73 /* RulesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7829A633C500E26B73 /* RulesAPI.swift */; };
-		917D8B7B29A633CF00E26B73 /* StatisticsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7A29A633CF00E26B73 /* StatisticsAPI.swift */; };
 		917D8B7D29A633D800E26B73 /* TeamsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7C29A633D800E26B73 /* TeamsAPI.swift */; };
 		917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B7F29A634CA00E26B73 /* URLConstant.swift */; };
 		917D8B8229A6355500E26B73 /* FCMRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8129A6355500E26B73 /* FCMRouter.swift */; };
@@ -319,7 +317,6 @@
 		917D8B6229A6330300E26B73 /* OauthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthRouter.swift; sourceTree = "<group>"; };
 		917D8B6429A6331100E26B73 /* PresetsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsRouter.swift; sourceTree = "<group>"; };
 		917D8B6629A6332400E26B73 /* RulesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesRouter.swift; sourceTree = "<group>"; };
-		917D8B6829A6333C00E26B73 /* StatisticsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsRouter.swift; sourceTree = "<group>"; };
 		917D8B6A29A6334800E26B73 /* TeamsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsRouter.swift; sourceTree = "<group>"; };
 		917D8B6C29A6337B00E26B73 /* AlarmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmAPI.swift; sourceTree = "<group>"; };
 		917D8B6E29A6338C00E26B73 /* HouseWorkCompleteRouterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorkCompleteRouterAPI.swift; sourceTree = "<group>"; };
@@ -328,7 +325,6 @@
 		917D8B7429A633AF00E26B73 /* OauthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthAPI.swift; sourceTree = "<group>"; };
 		917D8B7629A633B900E26B73 /* PresetsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsAPI.swift; sourceTree = "<group>"; };
 		917D8B7829A633C500E26B73 /* RulesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesAPI.swift; sourceTree = "<group>"; };
-		917D8B7A29A633CF00E26B73 /* StatisticsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsAPI.swift; sourceTree = "<group>"; };
 		917D8B7C29A633D800E26B73 /* TeamsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsAPI.swift; sourceTree = "<group>"; };
 		917D8B7F29A634CA00E26B73 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		917D8B8129A6355500E26B73 /* FCMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRouter.swift; sourceTree = "<group>"; };
@@ -1120,7 +1116,6 @@
 				917D8B6229A6330300E26B73 /* OauthRouter.swift */,
 				917D8B6429A6331100E26B73 /* PresetsRouter.swift */,
 				917D8B6629A6332400E26B73 /* RulesRouter.swift */,
-				917D8B6829A6333C00E26B73 /* StatisticsRouter.swift */,
 				917D8B6A29A6334800E26B73 /* TeamsRouter.swift */,
 			);
 			path = Router;
@@ -1137,7 +1132,6 @@
 				917D8B7429A633AF00E26B73 /* OauthAPI.swift */,
 				917D8B7629A633B900E26B73 /* PresetsAPI.swift */,
 				917D8B7829A633C500E26B73 /* RulesAPI.swift */,
-				917D8B7A29A633CF00E26B73 /* StatisticsAPI.swift */,
 				917D8B7C29A633D800E26B73 /* TeamsAPI.swift */,
 			);
 			path = API;
@@ -1315,7 +1309,6 @@
 				9141B6A329E26C8800136671 /* NotificationKey.swift in Sources */,
 				7EF87A3828E1A17800DFE353 /* SpaceNameLabel.swift in Sources */,
 				52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */,
-				917D8B6929A6333C00E26B73 /* StatisticsRouter.swift in Sources */,
 				7EEE2FA028E449610067FA7B /* Space.swift in Sources */,
 				916E892E29BEED7A0047B26F /* LoadingView.swift in Sources */,
 				917D8B5529A6315F00E26B73 /* MoyaLoggerPlugin.swift in Sources */,
@@ -1392,7 +1385,6 @@
 				52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */,
 				5204AACE296C647A002FB6CA /* SelectHouseWorkDetailCollectionViewCell.swift in Sources */,
 				5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */,
-				917D8B7B29A633CF00E26B73 /* StatisticsAPI.swift in Sources */,
 				52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */,
 				917D8B6529A6331100E26B73 /* PresetsRouter.swift in Sources */,
 				7EFAA86E28DA032800737DF0 /* SelectHouseWorkViewController.swift in Sources */,
