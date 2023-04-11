@@ -17,7 +17,6 @@ final class RepeatAlertView: BaseUIView {
             setupAttribute()
         }
     }
-    var selectedIndex: Int?
     
     // MARK: - property
     
