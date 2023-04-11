@@ -51,7 +51,7 @@ final class RepeatAlertTableViewCell: BaseTableViewCell {
         
         divider.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom).offset(17)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(1)
         }
     }

@@ -42,6 +42,26 @@ final class RepeatAlertView: BaseUIView {
         tableView.separatorStyle = .none
         return tableView
     }()
+    private let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("취소", for: .normal)
+        button.setBackgroundColor(.normal0, for: .normal)
+        button.setTitleColor(.gray800, for: .normal)
+        button.titleLabel?.font = .title2
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 4
+        return button
+    }()
+    private let actionButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("삭제", for: .normal)
+        button.setBackgroundColor(.normal0, for: .normal)
+        button.setTitleColor(.negative20, for: .normal)
+        button.titleLabel?.font = .title2
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 4
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -55,7 +75,7 @@ final class RepeatAlertView: BaseUIView {
     override func render() {
         self.addSubview(blurView)
         blurView.addSubview(backgroundView)
-        backgroundView.addSubviews(titleLabel, tableView)
+        backgroundView.addSubviews(titleLabel, tableView, cancelButton, actionButton)
         
         blurView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -75,6 +95,20 @@ final class RepeatAlertView: BaseUIView {
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(171)
+        }
+        
+        cancelButton.snp.makeConstraints {
+            $0.bottom.equalTo(backgroundView.snp.bottom).inset(19)
+            $0.leading.equalToSuperview().inset(20)
+            $0.width.equalTo(134)
+            $0.height.equalTo(42)
+        }
+        
+        actionButton.snp.makeConstraints {
+            $0.bottom.equalTo(backgroundView.snp.bottom).inset(19)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo(134)
+            $0.height.equalTo(42)
         }
     }
 }
