@@ -9,10 +9,42 @@ import UIKit
 
 import SnapKit
 
+enum RepeatAlertType {
+    case delete
+    case edit
+    
+    var title: String {
+        switch self {
+        case .delete:
+            return TextLiteral.repeatAlertTableViewDeleteTitleLabel
+        case .edit:
+            return TextLiteral.repeatAlertTableViewEditTitleLabel
+        }
+    }
+    
+    var actionButtonTitle: String {
+        switch self {
+        case .delete:
+            return TextLiteral.repeatAlertTableViewDeleteButtonText
+        case .edit:
+            return TextLiteral.repeatAlertTableViewEditButtonText
+        }
+    }
+    
+    var actionButtonColor: UIColor {
+        switch self {
+        case .delete:
+            return .negative20
+        case .edit:
+            return .blue
+        }
+    }
+}
+
 final class RepeatAlertView: BaseUIView {
     
     private let tableViewList = TextLiteral.repeatTableViewList
-    var isDelete: Bool = true {
+    var alertType: RepeatAlertType = .delete {
         didSet {
             setupAttribute()
         }
@@ -116,9 +148,9 @@ final class RepeatAlertView: BaseUIView {
     }
     
     private func setupAttribute() {
-        titleLabel.text = isDelete ? TextLiteral.repeatAlertTableViewDeleteTitleLabel : TextLiteral.repeatAlertTableViewEditTitleLabel
-        actionButton.setTitle(isDelete ? TextLiteral.repeatAlertTableViewDeleteButtonText : TextLiteral.repeatAlertTableViewEditButtonText, for: .normal)
-        actionButton.setTitleColor(isDelete ? .negative20 : .blue, for: .normal)
+        titleLabel.text = alertType.title
+        actionButton.setTitle(alertType.actionButtonTitle, for: .normal)
+        actionButton.setTitleColor(alertType.actionButtonColor, for: .normal)
         tableView.selectRow(at: nil, animated: false, scrollPosition: .none)
     }
     

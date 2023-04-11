@@ -338,7 +338,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     private func setDeleteButton() {
         let action = UIAction { [weak self] _ in
             self?.repeatAlertView.isHidden = false
-            self?.repeatAlertView.isDelete = true
+            self?.repeatAlertView.alertType = .delete
         }
         deleteButton.addAction(action, for: .touchUpInside)
     }
@@ -602,7 +602,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         let action = UIAction { [weak self] _ in
             if let houseWorks = self?.houseWorks {
                 if self?.isCorrection == true {
-                    self?.repeatAlertView.isDelete = false
+                    self?.repeatAlertView.alertType = .edit
                     self?.repeatAlertView.isHidden = false
                 } else {
                     self?.postAddHouseWorks(body: houseWorks)
