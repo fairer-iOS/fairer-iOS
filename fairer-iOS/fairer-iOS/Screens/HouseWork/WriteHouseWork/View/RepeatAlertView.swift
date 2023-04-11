@@ -12,6 +12,11 @@ import SnapKit
 final class RepeatAlertView: BaseUIView {
     
     private let tableViewList = ["이 일정", "이 일정 및 향후 일정", "모든 일정"]
+    var isDelete: Bool = true {
+        didSet {
+            setupAttribute()
+        }
+    }
     
     // MARK: - property
     
@@ -26,7 +31,7 @@ final class RepeatAlertView: BaseUIView {
         view.layer.cornerRadius = 12
         return view
     }()
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .h3
         label.textColor = .gray800
@@ -51,7 +56,7 @@ final class RepeatAlertView: BaseUIView {
         button.layer.cornerRadius = 4
         return button
     }()
-    let actionButton: UIButton = {
+    private let actionButton: UIButton = {
         let button = UIButton()
         button.setBackgroundColor(.normal0, for: .normal)
         button.titleLabel?.font = .title2
@@ -108,6 +113,12 @@ final class RepeatAlertView: BaseUIView {
             $0.width.equalTo(134)
             $0.height.equalTo(42)
         }
+    }
+    
+    private func setupAttribute() {
+        titleLabel.text = isDelete ? "반복 일정 삭제" : "반복 일정 수정"
+        actionButton.setTitle(isDelete ? "삭제" : "수정", for: .normal)
+        actionButton.setTitleColor(isDelete ? .negative20 : .blue, for: .normal)
     }
     
     private func setCancelButton() {

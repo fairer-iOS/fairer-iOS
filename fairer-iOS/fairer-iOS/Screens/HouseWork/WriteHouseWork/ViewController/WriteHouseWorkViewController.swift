@@ -337,16 +337,10 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     private func setDeleteButton() {
         let action = UIAction { [weak self] _ in
-            self?.showDeleteRepeatAlertView()
+            self?.repeatAlertView.isHidden = false
+            self?.repeatAlertView.isDelete = true
         }
         deleteButton.addAction(action, for: .touchUpInside)
-    }
-    
-    private func showDeleteRepeatAlertView() {
-        repeatAlertView.isHidden = false
-        repeatAlertView.titleLabel.text = "반복 일정 삭제"
-        repeatAlertView.actionButton.setTitle("삭제", for: .normal)
-        repeatAlertView.actionButton.setTitleColor(.negative20, for: .normal)
     }
     
     private func setDatePicker() {
@@ -607,21 +601,15 @@ final class WriteHouseWorkViewController: BaseViewController {
     private func setDoneButton() {
         let action = UIAction { [weak self] _ in
             if let houseWorks = self?.houseWorks {
-                if (self?.isCorrection == true) {
-                    self?.showEditRepeatAlertView()
+                if self?.isCorrection == true {
+                    self?.repeatAlertView.isDelete = false
+                    self?.repeatAlertView.isHidden = false
                 } else {
                     self?.postAddHouseWorks(body: houseWorks)
                 }
             }
         }
         doneButton.addAction(action, for: .touchUpInside)
-    }
-    
-    private func showEditRepeatAlertView() {
-        repeatAlertView.isHidden = false
-        repeatAlertView.titleLabel.text = "반복 일정 수정"
-        repeatAlertView.actionButton.setTitle("수정", for: .normal)
-        repeatAlertView.actionButton.setTitleColor(.blue, for: .normal)
     }
 }
 
