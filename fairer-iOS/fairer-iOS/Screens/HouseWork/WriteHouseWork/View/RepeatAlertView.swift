@@ -11,7 +11,7 @@ import SnapKit
 
 final class RepeatAlertView: BaseUIView {
     
-    private let tableViewList = ["이 일정", "이 일정 및 향후 일정", "모든 일정"]
+    private let tableViewList = TextLiteral.repeatTableViewList
     var isDelete: Bool = true {
         didSet {
             setupAttribute()
@@ -49,7 +49,7 @@ final class RepeatAlertView: BaseUIView {
     }()
     private let cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("취소", for: .normal)
+        button.setTitle(TextLiteral.repeatAlertTableViewCancelButtonText, for: .normal)
         button.setBackgroundColor(.normal0, for: .normal)
         button.setTitleColor(.gray800, for: .normal)
         button.titleLabel?.font = .title2
@@ -117,8 +117,8 @@ final class RepeatAlertView: BaseUIView {
     }
     
     private func setupAttribute() {
-        titleLabel.text = isDelete ? "반복 일정 삭제" : "반복 일정 수정"
-        actionButton.setTitle(isDelete ? "삭제" : "수정", for: .normal)
+        titleLabel.text = isDelete ? TextLiteral.repeatAlertTableViewDeleteTitleLabel : TextLiteral.repeatAlertTableViewEditTitleLabel
+        actionButton.setTitle(isDelete ? TextLiteral.repeatAlertTableViewDeleteButtonText : TextLiteral.repeatAlertTableViewEditButtonText, for: .normal)
         actionButton.setTitleColor(isDelete ? .negative20 : .blue, for: .normal)
         tableView.selectRow(at: nil, animated: false, scrollPosition: .none)
     }

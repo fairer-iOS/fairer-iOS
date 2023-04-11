@@ -194,6 +194,15 @@ enum TextLiteral {
     static let writeHouseWorkViewControllerHouseWorkNameWarningLabel = "텍스트는 16글자를 초과하여 입력하실 수 없어요."
     static let writeHouseWorkViewControllerDeleteLabel = "삭제"
     
+    // MARK: - RepeatAlertTableView
+    
+    static let repeatTableViewList = ["이 일정", "이 일정 및 향후 일정", "모든 일정"]
+    static let repeatAlertTableViewDeleteTitleLabel = "반복 일정 삭제"
+    static let repeatAlertTableViewEditTitleLabel = "반복 일정 수정"
+    static let repeatAlertTableViewDeleteButtonText = "삭제"
+    static let repeatAlertTableViewEditButtonText = "수정"
+    static let repeatAlertTableViewCancelButtonText = "취소"
+    
     // MARK: - SettingProfileViewController
     
     static let settingProfileViewControllerTitleLabel = "프로필을 설정해주세요."
