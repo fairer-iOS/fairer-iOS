@@ -130,6 +130,7 @@ final class SettingViewController: BaseViewController {
         settingTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.cellId)
         settingTableView.rowHeight = 56
         settingTableView.separatorStyle = .none
+        settingTableView.isScrollEnabled = false
     }
     
     private func touchUpToLogout() {
@@ -152,6 +153,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.cellLabel.text = SettingModel.settingData[indexPath.row].cellLabel
         cell.cellImage.image = SettingModel.settingData[indexPath.row].cellImage
+        cell.selectionStyle = .none
         
         return cell
     }
