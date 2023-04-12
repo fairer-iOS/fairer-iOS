@@ -14,6 +14,14 @@ struct SettingModel {
     let cellLabel: String
     
     static let settingData: [SettingModel] = [SettingModel(cellImage: ImageLiterals.settingProfile, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[0]), SettingModel(cellImage: ImageLiterals.settingPeople, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[1]), SettingModel(cellImage: ImageLiterals.settingBell, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[2]), SettingModel(cellImage: ImageLiterals.settingExclamation, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[3]), SettingModel(cellImage: ImageLiterals.settingInfo, cellLabel: TextLiteral.settingViewControllerTableViewCellLabelList[4])]
+    
+    static let pushView: [UIViewController] = [
+        SettingProfileViewController(),
+        ManageHouseViewController(),
+        SettingAlarmViewController(),
+        SettingInquiryViewController(),
+        SettingPolicyViewController()
+    ]
 }
 
 final class SettingViewController: BaseViewController {
@@ -143,7 +151,7 @@ final class SettingViewController: BaseViewController {
 
 // MARK: - extension
 
-extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
+extension SettingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SettingModel.settingData.count
     }
@@ -156,5 +164,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         
         return cell
+    }
+}
+
+extension SettingViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(SettingModel.pushView[indexPath.row], animated: true)
     }
 }
