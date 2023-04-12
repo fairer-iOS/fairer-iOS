@@ -161,6 +161,10 @@ final class SetHouseWorkViewController: BaseViewController {
         getTeamInfo()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setUpGesture()
+    }
+    
     override func render() {
         view.addSubviews(setHouseWorkCalendarView, setHouseWorkCollectionView, doneButton, scrollView, selectManagerView, managerToastLabel, datePickerView)
         scrollView.addSubview(contentView)
@@ -655,5 +659,21 @@ extension SetHouseWorkViewController {
                 break
             }
         }
+    }
+}
+
+extension SetHouseWorkViewController {
+    
+    private func setUpGesture() {
+        let tapSelectHouseWorkGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))
+        
+        // MARK: - fix me : 상단 전체적으로 제스처 추가시켜두어서, 중간 부분 제스처 제외 시켜야함
+        setHouseWorkCalendarView.addGestureRecognizer(tapSelectHouseWorkGesture)
+    }
+    
+    @objc
+    private func addTapGesture() {
+        let selectHouseWorkView = SelectHouseWorkViewController()
+        self.navigationController?.pushViewController(selectHouseWorkView, animated: true)
     }
 }
