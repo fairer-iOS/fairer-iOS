@@ -11,24 +11,20 @@ final class NetworkService {
     private init() { }
     
 //    let alarm = AlarmAPI()
-//
+
 //    let fcm = FcmAPI()
-//
+
     let houseWorkCompleteRouter = HouseWorkCompleteRouterAPI()
     
     let houseWorks = HouseWorksAPI()
-//
-    let members = MembersAPI()
-//
-    let oauth = OauthAPI()
-//
-//    let presets = PresetsAPI()
-//
-    let rules = RulesAPI()
-//
-//    let statistics = StatisticsAPI()
-//
-    let teams = TeamsAPI()
     
+    let members = MembersAPI()
 
+    let oauth = OauthAPI()
+
+//    let presets = PresetsAPI()
+
+    let rules = RulesAPI()
+    
+    let teams = TeamsAPI()
 }

@@ -19,6 +19,5 @@ struct URLConstant {
     static let oauth = "/oauth"
     static let presets = "/preset"
     static let rules = "/rules"
-    static let statistics = "/statistics"
     static let teams = "/teams"
 }
