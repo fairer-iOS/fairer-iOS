@@ -347,8 +347,12 @@ final class HomeViewController: BaseViewController {
     
     private func setHomeRuleLabel() {
         var index = 0
-        
         guard let rules = ruleArray else {
+            print("out!!!")
+            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
+            return
+        }
+        if rules.count == 0 {
             homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
             return
         }
