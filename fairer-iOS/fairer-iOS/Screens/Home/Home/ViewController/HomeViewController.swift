@@ -148,7 +148,6 @@ final class HomeViewController: BaseViewController {
         self.setupDelegate()
         self.setWeekCalendarSwipeGesture()
         self.setDatePicker()
-        self.setNotification()
         self.setButtonEvent()
     }
     
@@ -170,6 +169,7 @@ final class HomeViewController: BaseViewController {
         }
         self.getRules()
         self.getMyInfo()
+        self.setNotification()
     }
     
     override func configUI() {
@@ -348,11 +348,10 @@ final class HomeViewController: BaseViewController {
     private func setHomeRuleLabel() {
         var index = 0
         guard let rules = ruleArray else {
-            print("out!!!")
             homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
             return
         }
-        if rules.count == 0 {
+        if self.ruleArray?.isEmpty == true {
             homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
             return
         }
@@ -567,7 +566,7 @@ final class HomeViewController: BaseViewController {
         guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
         var doneWorkSum: Int = 0
         DispatchQueue.main.async {
-            LoadingView.showLoading()
+            self.view.isUserInteractionEnabled = false
         }
         DispatchQueue.global().async {
             if isOwn {
@@ -579,7 +578,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {
@@ -613,7 +612,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {
