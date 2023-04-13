@@ -645,7 +645,8 @@ final class HomeViewController: BaseViewController {
     
     @objc func observeWeekCalendar(notification: Notification) {
         guard let object = notification.userInfo?[NotificationKey.date] as? String else { return }
-        
+        let dateArray = object.split(separator: ".")
+        self.homeCalenderView.calendarMonthLabelButton.setTitle("\(dateArray[0])년 \(dateArray[1])월", for: .normal)
         self.getHouseWorksByDate (
             isOwn: self.checkMemeberCellIsOwn(),
             startDate: object,
@@ -946,7 +947,6 @@ extension HomeViewController {
     
     @objc
     private func addTapGesture() {
-
         let selectHouseWorkView = SelectHouseWorkViewController()
         self.navigationController?.pushViewController(selectHouseWorkView, animated: true)
     }
