@@ -184,7 +184,6 @@ extension HouseMakeNameViewController {
         if text.hasCharacters() {
             houseNameTextField.layer.borderWidth = 0
             disableLabel.isHidden = true
-            
             postAddTeam(teamName: text) { [weak self] result in
                 let inviteCode = result.inviteCode
                 let houseInviteCodeView = HouseInviteCodeViewController(houseName: text, inviteCode: inviteCode)

@@ -193,7 +193,10 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func didTappedNextButton() {
-        self.navigationController?.popViewController(animated: true)
+        
+        // MARK: - fix me : SetHouseWorkViewController init 처리 필요
+        let setHouseWorkView = SetHouseWorkViewController(houseWorks: [])
+        self.navigationController?.pushViewController(setHouseWorkView, animated: true)
     }
     
     private func didTappedSpace() {

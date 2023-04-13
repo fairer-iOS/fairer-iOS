@@ -946,10 +946,9 @@ extension HomeViewController {
     
     @objc
     private func addTapGesture() {
-        
-        // FIXME: - SetHouseWorkViewController init에 houseWorks 받도록 수정
-        let setHouseWorkView = SetHouseWorkViewController(houseWorks: [HouseWorksRequest]())
-        self.navigationController?.pushViewController(setHouseWorkView, animated: true)
+
+        let selectHouseWorkView = SelectHouseWorkViewController()
+        self.navigationController?.pushViewController(selectHouseWorkView, animated: true)
     }
     
     @objc

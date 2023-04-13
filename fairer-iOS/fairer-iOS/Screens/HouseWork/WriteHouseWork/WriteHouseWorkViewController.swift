@@ -183,11 +183,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
         getTeamInfo()
-        setDoneButton()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        setUpGesture()
+        addButtonAction()
     }
     
     override func render() {
@@ -595,15 +591,6 @@ final class WriteHouseWorkViewController: BaseViewController {
             self?.houseWorks[0].repeatPattern = sortedDaysInAPIString.joined(separator: ",")
         }
     }
-    
-    private func setDoneButton() {
-        let action = UIAction { [weak self] _ in
-            if let houseWorks = self?.houseWorks {
-                self?.postAddHouseWorks(body: houseWorks)
-            }
-        }
-        doneButton.addAction(action, for: .touchUpInside)
-    }
 }
 
 // MARK: - extension
@@ -688,16 +675,18 @@ extension WriteHouseWorkViewController {
 
 extension WriteHouseWorkViewController {
     
-    private func setUpGesture() {
-        let tapSelectHouseWorkGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))
+    private func addButtonAction() {
+        let action = UIAction { [weak self] _ in
+            if let houseWorks = self?.houseWorks {
+                self?.postAddHouseWorks(body: houseWorks)
+            }
+            self?.popToHome()
+        }
         
-        // MARK: - fix me : 상단 전체적으로 제스처 추가시켜두어서, 중간 부분 제스처 제외 시켜야함
-        writeHouseWorkCalendarView.addGestureRecognizer(tapSelectHouseWorkGesture)
+        doneButton.addAction(action, for: .touchUpInside)
     }
     
-    @objc
-    private func addTapGesture() {
-        let selectHouseWorkView = SelectHouseWorkViewController()
-        self.navigationController?.pushViewController(selectHouseWorkView, animated: true)
+    private func popToHome() {
+        self.navigationController?.popToViewController(ofClass: HomeViewController.self)
     }
 }

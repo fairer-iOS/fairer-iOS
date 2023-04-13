@@ -178,6 +178,7 @@
 		91AAF95329DD900B00CB1E1A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 91AAF95229DD900B00CB1E1A /* FirebaseStorage */; };
 		91AAF95529DD900B00CB1E1A /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 91AAF95429DD900B00CB1E1A /* FirebaseStorageCombine-Community */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
+		91D6870629E7DCC90046AAA8 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */; };
 		91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */; };
 		91F9886429B49518008D7AB7 /* WorkInfoReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */; };
 /* End PBXBuildFile section */
@@ -332,6 +333,7 @@
 		917D8B8129A6355500E26B73 /* FCMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRouter.swift; sourceTree = "<group>"; };
 		917D8B8729A63AA500E26B73 /* FcmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmAPI.swift; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
+		91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthResponse.swift; path = "fairer-iOS/Network/AuthResponse.swift"; sourceTree = SOURCE_ROOT; };
 		91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkInfoReponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -393,6 +395,7 @@
 				911E968229719CA400F3AF35 /* UIView+Extension.swift */,
 				52A53DDD29BC5E0400C4BB4C /* UIImageView+Extension.swift */,
 				915BA73E29E6C081002E7EF5 /* UIApplication+Extension.swift */,
+				91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1381,6 +1384,7 @@
 				52FDBD4A29DD609100FE45CD /* EditHouseWorkRequest.swift in Sources */,
 				52A53DDE29BC5E0400C4BB4C /* UIImageView+Extension.swift in Sources */,
 				5204AAB629507238002FB6CA /* SettingAlarmViewController.swift in Sources */,
+				91D6870629E7DCC90046AAA8 /* UINavigationController+Extension.swift in Sources */,
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
 				917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */,
 				91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */,
@@ -1560,7 +1564,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1587,7 +1591,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
