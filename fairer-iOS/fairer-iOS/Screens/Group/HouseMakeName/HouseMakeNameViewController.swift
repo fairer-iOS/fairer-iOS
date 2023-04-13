@@ -51,9 +51,6 @@ final class HouseMakeNameViewController: BaseViewController {
         super.viewDidLoad()
         setupDelegation()
         setupNotificationCenter()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         setButtonAction()
     }
 

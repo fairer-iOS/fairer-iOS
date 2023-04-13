@@ -56,8 +56,8 @@ final class LoginViewController: BaseViewController {
     }()
     
     // MARK: - lifecycle
-
-    override func viewWillAppear(_ animated: Bool) {
+    
+    override func viewDidLoad() {
         self.setButtonAction()
     }
     

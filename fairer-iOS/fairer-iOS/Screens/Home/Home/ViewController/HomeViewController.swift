@@ -149,6 +149,7 @@ final class HomeViewController: BaseViewController {
         self.setWeekCalendarSwipeGesture()
         self.setDatePicker()
         self.setNotification()
+        self.setButtonEvent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,7 +170,6 @@ final class HomeViewController: BaseViewController {
         }
         self.getRules()
         self.getMyInfo()
-        self.setButtonEvent()
     }
     
     override func configUI() {

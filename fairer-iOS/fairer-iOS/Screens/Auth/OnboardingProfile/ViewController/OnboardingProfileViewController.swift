@@ -47,9 +47,6 @@ class OnboardingProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didTapImage()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         setButtonAction()
     }
     

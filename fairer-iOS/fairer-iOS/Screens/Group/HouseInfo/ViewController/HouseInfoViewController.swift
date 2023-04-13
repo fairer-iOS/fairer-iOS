@@ -55,10 +55,13 @@ final class HouseInfoViewController: BaseViewController {
     
     // MARK: - lifecycle
     
+    override func viewDidLoad() {
+        setButtonAction()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getTeamInfo()
-        setButtonAction()
     }
     
     override func render() {
