@@ -89,6 +89,18 @@ class OnboardingProfileViewController: BaseViewController {
     
     // MARK: - functions
     
+    private func setButtonAction() {
+        let didTapDoneAction = UIAction { [weak self] _ in
+            self?.didTapDoneButton()
+        }
+        self.profileDoneButton.addAction(didTapDoneAction, for: .touchUpInside)
+    }
+    
+    func didTapDoneButton() {
+        let groupMainViewController = GroupMainViewController()
+        self.navigationController?.pushViewController(groupMainViewController, animated: true)
+    }
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -107,20 +119,5 @@ class OnboardingProfileViewController: BaseViewController {
                 self?.profileDoneButton.isDisabled = false
             }
         }
-    }
-}
-
-extension OnboardingProfileViewController {
-
-    private func setButtonAction() {
-        let didTapDoneAction = UIAction { [weak self] _ in
-            self?.didTapDoneButton()
-        }
-        self.profileDoneButton.addAction(didTapDoneAction, for: .touchUpInside)
-    }
-    
-    private func didTapDoneButton() {
-        let groupMainViewController = GroupMainViewController()
-        self.navigationController?.pushViewController(groupMainViewController, animated: true)
     }
 }

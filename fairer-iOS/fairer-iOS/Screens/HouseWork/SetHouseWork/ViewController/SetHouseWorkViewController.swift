@@ -162,6 +162,7 @@ final class SetHouseWorkViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setUpGesture()
     }
     
@@ -608,15 +609,6 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.selectedDay = pickedDate
         }
     }
-    
-    private func setDoneButton() {
-        let action = UIAction { [weak self] _ in
-            if let houseWorks = self?.houseWorks {
-                self?.postAddHouseWorks(body: houseWorks)
-            }
-        }
-        doneButton.addAction(action, for: .touchUpInside)
-    }
 }
 
 // MARK: - extension
@@ -663,6 +655,24 @@ extension SetHouseWorkViewController {
 }
 
 extension SetHouseWorkViewController {
+    
+    private func setDoneButton() {
+        let action = UIAction { [weak self] _ in
+            if let houseWorks = self?.houseWorks {
+                self?.postAddHouseWorks(body: houseWorks)
+            }
+        }
+        let popAcion = UIAction { [weak self] _ in
+            self?.popFunc()
+        }
+        
+        doneButton.addAction(action, for: .touchUpInside)
+        doneButton.addAction(popAcion, for: .touchUpInside)
+    }
+    
+    private func popFunc() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     private func setUpGesture() {
         let tapSelectHouseWorkGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))

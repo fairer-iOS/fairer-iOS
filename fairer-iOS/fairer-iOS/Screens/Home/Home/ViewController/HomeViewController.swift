@@ -152,6 +152,7 @@ final class HomeViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.getDivideIndex()
         if homeWeekCalendarCollectionView.datePickedByOthers == "" {
             self.getHouseWorksByDate(
@@ -447,7 +448,7 @@ final class HomeViewController: BaseViewController {
     
     private func getHouseWorksByDate(isOwn: Bool, startDate: String, endDate: String) {
         DispatchQueue.main.async {
-            self.view.isUserInteractionEnabled = false
+            LoadingView.showLoading()
         }
         DispatchQueue.global().async {
             if isOwn {
@@ -459,7 +460,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
+                        LoadingView.hideLoading()
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
@@ -491,7 +492,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
+                        LoadingView.hideLoading()
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
@@ -543,6 +544,7 @@ final class HomeViewController: BaseViewController {
             self.homeGroupLabel.text = response.teamName
             self.selectedMemberId = self.myId
             self.teamId = response.teamId
+            self.homeGroupCollectionView.userList = []
             if let teamMember = response.members {
                 for member in teamMember {
                     if self.myId == member.memberId {
@@ -561,7 +563,7 @@ final class HomeViewController: BaseViewController {
         guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
         var doneWorkSum: Int = 0
         DispatchQueue.main.async {
-            self.view.isUserInteractionEnabled = false
+            LoadingView.showLoading()
         }
         DispatchQueue.global().async {
             if isOwn {
@@ -573,7 +575,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
+                        LoadingView.hideLoading()
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {
@@ -607,7 +609,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
+                        LoadingView.hideLoading()
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {

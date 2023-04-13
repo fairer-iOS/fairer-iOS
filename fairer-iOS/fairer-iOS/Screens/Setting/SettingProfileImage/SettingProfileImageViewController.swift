@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SettingProfileImageViewController: OnboardingProfileViewController {
+class SettingProfileImageViewController: OnboardingProfileViewController {
 
     // FIXME: - api 연결로 대체
     private let lastProfileImage = ImageLiterals.profileBlue3
@@ -23,5 +23,9 @@ final class SettingProfileImageViewController: OnboardingProfileViewController {
     
     private func setupProfileImage() {
         super.selectedProfileImageView.image = lastProfileImage
+    }
+    
+    override func didTapDoneButton() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

@@ -16,6 +16,7 @@ final class BackButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configUI()
+        setBackButtonAction()
     }
     
     required init?(coder: NSCoder) {
@@ -27,5 +28,9 @@ final class BackButton: UIButton {
         self.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         self.setImage(ImageLiterals.navigationBarBackButton, for: .normal)
         self.tintColor = UIColor(hex: "#323232")
+    }
+    
+    private func setBackButtonAction() {
+        self.popViewController()
     }
 }
