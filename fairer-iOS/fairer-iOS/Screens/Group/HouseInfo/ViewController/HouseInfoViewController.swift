@@ -56,6 +56,7 @@ final class HouseInfoViewController: BaseViewController {
     // MARK: - lifecycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         setButtonAction()
     }
     
