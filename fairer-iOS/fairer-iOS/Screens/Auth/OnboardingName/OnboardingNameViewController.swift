@@ -44,8 +44,11 @@ final class OnboardingNameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegation()
-        setupNotificationCenter()
         setButtonAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNotificationCenter()
     }
     
     override func configUI() {
