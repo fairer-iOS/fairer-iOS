@@ -703,12 +703,12 @@ final class HomeViewController: BaseViewController {
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0.1 {
+        if scrollView.contentOffset.y > 2 {
             if isScrolled == false {
                 scrollDidStart()
                 isScrolled = true
             }
-        } else {
+        } else if scrollView.contentOffset.y < 0 {
             scrollDidEnd()
             isScrolled = false
         }
