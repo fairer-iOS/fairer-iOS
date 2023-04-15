@@ -111,26 +111,29 @@ final class OnboardingNameViewController: BaseViewController {
         })
     }
     
+    @objc func textDidChange(noti: NSNotification) {
+        if let text = nameTextField.text {
+            if text.count >= nameMaxLength {
+                let fixedText = text.subString(from: 0, to: nameMaxLength - 1)
+                nameTextField.text = fixedText
+                let when = DispatchTime.now() + 0.01
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.nameTextField.text = fixedText
+                }
+            }
+        }
+    }
+    
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextField.textDidChangeNotification, object: nil)
     }
 }
 
 // MARK: - extension
 
 extension OnboardingNameViewController : UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let char = string.cString(using: String.Encoding.utf8) {
-            let isBackSpace = strcmp(char, "\\b")
-            if isBackSpace == -92 {
-                return true
-            }
-        }
-        guard textField.text!.count < 5 else { return false }
-        return true
-    }
-    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let hasText = nameTextField.hasText
         nameDoneButton.isDisabled = !hasText
