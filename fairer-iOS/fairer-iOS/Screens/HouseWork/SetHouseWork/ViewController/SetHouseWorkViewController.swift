@@ -604,15 +604,6 @@ final class SetHouseWorkViewController: BaseViewController {
             self?.selectedDay = pickedDate
         }
     }
-    
-    private func setDoneButton() {
-        let action = UIAction { [weak self] _ in
-            if let houseWorks = self?.houseWorks {
-                self?.postAddHouseWorks(body: houseWorks)
-            }
-        }
-        doneButton.addAction(action, for: .touchUpInside)
-    }
 }
 
 // MARK: - extension
@@ -655,5 +646,23 @@ extension SetHouseWorkViewController {
                 break
             }
         }
+    }
+}
+
+extension SetHouseWorkViewController {
+    
+    private func setDoneButton() {
+        let action = UIAction { [weak self] _ in
+            if let houseWorks = self?.houseWorks {
+                self?.postAddHouseWorks(body: houseWorks)
+            }
+            self?.popToHome()
+        }
+        
+        doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func popToHome() {
+        self.navigationController?.popToViewController(ofClass: HomeViewController.self)
     }
 }

@@ -147,12 +147,13 @@ final class HomeViewController: BaseViewController {
         
         self.setupDelegate()
         self.setWeekCalendarSwipeGesture()
-        self.setButtonEvent()
         self.setDatePicker()
         self.setNotification()
+        self.setButtonEvent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.getDivideIndex()
         if homeWeekCalendarCollectionView.datePickedByOthers == "" {
             self.getHouseWorksByDate(
@@ -297,12 +298,7 @@ final class HomeViewController: BaseViewController {
         self.calendarDailyTableView.delegate = self
         self.calendarDailyTableView.dataSource = self
     }
-    
-    private func setupToolBarGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))
-        toolBarView.addGestureRecognizer(tapGesture)
-    }
-    
+
     private func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(observeWeekCalendar(notification:)), name: Notification.Name.date, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(observeMemberCollectionView(notification:)), name: Notification.Name.member, object: nil)
@@ -349,23 +345,14 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - func
     
-    private func setButtonEvent() {
-        self.datePickerView.setAction()
-        let moveToTodayDateButtonAction = UIAction { [weak self] _ in
-            self?.moveToTodayDate()
-        }
-        let moveToTodayDatePickerButtonAction = UIAction { [weak self] _ in
-            self?.moveToDatePicker()
-        }
-        self.homeCalenderView.todayButton.addAction(moveToTodayDateButtonAction, for: .touchUpInside)
-        self.homeCalenderView.calendarMonthLabelButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
-        self.homeCalenderView.calendarMonthPickButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
-    }
-    
     private func setHomeRuleLabel() {
         var index = 0
-        
         guard let rules = ruleArray else {
+            print("out!!!")
+            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
+            return
+        }
+        if rules.count == 0 {
             homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
             return
         }
@@ -407,27 +394,6 @@ final class HomeViewController: BaseViewController {
             if dummy.success == true { finishedHouseWorkNum = finishedHouseWorkNum + 1}
         }
         return finishedHouseWorkNum
-    }
-    
-    private func moveToTodayDate() {
-        self.homeCalenderView.calendarMonthLabelButton.setTitle("\(Date().yearToString)년 \(Date().monthToString)월", for: .normal)
-        self.homeWeekCalendarCollectionView.startOfWeekDate = Date().startOfWeek
-        self.homeWeekCalendarCollectionView.datePickedByOthers = Date().dateToString
-        self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
-        self.getHouseWorksByDate(
-            isOwn: self.checkMemeberCellIsOwn(),
-            startDate: self.homeWeekCalendarCollectionView.datePickedByOthers,
-            endDate: self.homeWeekCalendarCollectionView.datePickedByOthers
-        )
-    }
-    
-    private func moveToDatePicker() {
-        if self.homeWeekCalendarCollectionView.datePickedByOthers != "" {
-            self.datePickerView.datePicker.setDate(self.homeWeekCalendarCollectionView.datePickedByOthers.stringToDate ?? Date(), animated: false)
-        }
-        self.datePickerView.isHidden = false
-        self.view.bringSubviewToFront(datePickerView)
-        self.setupAlphaNavigationBar()
     }
     
     private func scrollDidStart(){
@@ -486,7 +452,7 @@ final class HomeViewController: BaseViewController {
     
     private func getHouseWorksByDate(isOwn: Bool, startDate: String, endDate: String) {
         DispatchQueue.main.async {
-            self.view.isUserInteractionEnabled = false
+            LoadingView.showLoading()
         }
         DispatchQueue.global().async {
             if isOwn {
@@ -498,7 +464,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
+                        LoadingView.hideLoading()
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
@@ -530,7 +496,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
+                        LoadingView.hideLoading()
                         if let response = response[self.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
@@ -582,6 +548,7 @@ final class HomeViewController: BaseViewController {
             self.homeGroupLabel.text = response.teamName
             self.selectedMemberId = self.myId
             self.teamId = response.teamId
+            self.homeGroupCollectionView.userList = []
             if let teamMember = response.members {
                 for member in teamMember {
                     if self.myId == member.memberId {
@@ -600,7 +567,7 @@ final class HomeViewController: BaseViewController {
         guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
         var doneWorkSum: Int = 0
         DispatchQueue.main.async {
-            self.view.isUserInteractionEnabled = false
+            LoadingView.showLoading()
         }
         DispatchQueue.global().async {
             if isOwn {
@@ -612,7 +579,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
+                        LoadingView.hideLoading()
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {
@@ -646,7 +613,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
+                        LoadingView.hideLoading()
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {
@@ -707,13 +674,7 @@ final class HomeViewController: BaseViewController {
     }
     
     // MARK: - selector
-    
-    @objc
-    private func addTapGesture() {
-        // FIXME: - 집안일 추가 뷰로 연결
-        print("tap")
-    }
-    
+
     @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
         if (sender.direction == .left) { self.homeWeekCalendarCollectionView.getAfterWeekDate() }
         if (sender.direction == .right) { self.homeWeekCalendarCollectionView.getBeforeWeekDate() }
@@ -953,5 +914,72 @@ extension HomeViewController {
                 print("error")
             }
         }
+    }
+}
+
+extension HomeViewController {
+    
+    private func setButtonEvent() {
+        self.datePickerView.setAction()
+        let moveToTodayDateButtonAction = UIAction { [weak self] _ in
+            self?.moveToTodayDate()
+        }
+        let moveToTodayDatePickerButtonAction = UIAction { [weak self] _ in
+            self?.moveToDatePicker()
+        }
+        let moveToSettingViewAction = UIAction { [weak self] _ in
+            self?.moveToSettingView()
+        }
+        
+        self.homeCalenderView.todayButton.addAction(moveToTodayDateButtonAction, for: .touchUpInside)
+        self.homeCalenderView.calendarMonthLabelButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
+        self.homeCalenderView.calendarMonthPickButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
+        self.profileButton.addAction(moveToSettingViewAction, for: .touchUpInside)
+    }
+    
+    private func setupToolBarGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapGesture))
+        let tapRuleGesture = UITapGestureRecognizer(target: self, action: #selector(moveToSettingHomeRuleView))
+        toolBarView.addGestureRecognizer(tapGesture)
+        homeRuleView.addGestureRecognizer(tapRuleGesture)
+    }
+    
+    @objc
+    private func addTapGesture() {
+
+        let selectHouseWorkView = SelectHouseWorkViewController()
+        self.navigationController?.pushViewController(selectHouseWorkView, animated: true)
+    }
+    
+    @objc
+    private func moveToSettingHomeRuleView() {
+        let settingHomeRuleView = SettingHomeRuleViewController()
+        self.navigationController?.pushViewController(settingHomeRuleView, animated: true)
+    }
+    
+    private func moveToTodayDate() {
+        self.homeCalenderView.calendarMonthLabelButton.setTitle("\(Date().yearToString)년 \(Date().monthToString)월", for: .normal)
+        self.homeWeekCalendarCollectionView.startOfWeekDate = Date().startOfWeek
+        self.homeWeekCalendarCollectionView.datePickedByOthers = Date().dateToString
+        self.homeWeekCalendarCollectionView.fullDateList = self.homeWeekCalendarCollectionView.getThisWeekInDate()
+        self.getHouseWorksByDate(
+            isOwn: self.checkMemeberCellIsOwn(),
+            startDate: self.homeWeekCalendarCollectionView.datePickedByOthers,
+            endDate: self.homeWeekCalendarCollectionView.datePickedByOthers
+        )
+    }
+    
+    private func moveToDatePicker() {
+        if self.homeWeekCalendarCollectionView.datePickedByOthers != "" {
+            self.datePickerView.datePicker.setDate(self.homeWeekCalendarCollectionView.datePickedByOthers.stringToDate ?? Date(), animated: false)
+        }
+        self.datePickerView.isHidden = false
+        self.view.bringSubviewToFront(datePickerView)
+        self.setupAlphaNavigationBar()
+    }
+    
+    private func moveToSettingView() {
+        let settingView = SettingViewController()
+        self.navigationController?.pushViewController(settingView, animated: true)
     }
 }

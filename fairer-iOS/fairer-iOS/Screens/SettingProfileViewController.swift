@@ -187,13 +187,13 @@ final class SettingProfileViewController: BaseViewController {
     }
     
     private func pushSettingProfileImageViewController() {
-        // FIXME: - 프로필 이미지 선정 뷰로 이동
-        print("프로필 이미지")
+        let settingProfileImageView = SettingProfileImageViewController()
+        self.navigationController?.pushViewController(settingProfileImageView, animated: true)
     }
     
     private func didTappedDoneButton() {
         // FIXME: - 서버에 프로필 정보 업데이트
-        print("입력 완료")
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func didTappedTextField() {

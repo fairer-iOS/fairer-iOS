@@ -91,6 +91,10 @@ final class HouseInviteCodeViewController: BaseViewController {
         super.configUI()
     }
     
+    override func viewDidLoad() {
+        setButtonAction()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getinviteCodeExpirationDateTime()
@@ -211,5 +215,24 @@ extension HouseInviteCodeViewController {
                 print("server error")
             }
         }
+    }
+}
+
+// MARK: - navigation control
+
+extension HouseInviteCodeViewController {
+    
+    private func setButtonAction() {
+        let moveToHomeViewAction = UIAction { [weak self] _ in
+            self?.moveToHomeView()
+        }
+        
+        //MARK: - to do 카카오 공유하기 버튼 연결 추가로 해야함
+        self.inviteCodeButtonView.skipButton.addAction(moveToHomeViewAction, for: .touchUpInside)
+    }
+    
+    private func moveToHomeView() {
+        let homeViewController = HomeViewController()
+        self.navigationController?.pushViewController(homeViewController, animated: true)
     }
 }

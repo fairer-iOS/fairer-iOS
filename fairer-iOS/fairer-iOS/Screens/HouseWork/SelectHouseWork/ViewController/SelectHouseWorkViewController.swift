@@ -186,13 +186,17 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func didTappedWriteHouseWorkButton() {
-        // FIXME: - 집안일 직접 입력하기 페이지로 이동
-        print("집안일 직접 입력하기")
+        
+        // MARK: - fix me : WriteHouseWorkViewController init 처리 필요
+        let writeHouseWorkView = WriteHouseWorkViewController(houseWorks: [HouseWorksRequest]())
+        self.navigationController?.pushViewController(writeHouseWorkView, animated: true)
     }
     
     private func didTappedNextButton() {
-        // FIXME: - 집안일 설정하기 페이지로 이동
-        print("다음")
+        
+        // MARK: - fix me : SetHouseWorkViewController init 처리 필요
+        let setHouseWorkView = SetHouseWorkViewController(houseWorks: [])
+        self.navigationController?.pushViewController(setHouseWorkView, animated: true)
     }
     
     private func didTappedSpace() {

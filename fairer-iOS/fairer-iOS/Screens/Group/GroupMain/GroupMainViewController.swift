@@ -73,6 +73,10 @@ final class GroupMainViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        setButtonAction()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bindGroupMemberInfo()
@@ -134,6 +138,16 @@ final class GroupMainViewController: BaseViewController {
     
     // MARK: - functions
     
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let backButton = makeBarButtonItem(with: backButton)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
     private func bindGroupMemberInfo() {
         getMemberInfo { [weak self] data in
             guard let userName = data.memberName else { return }
@@ -157,5 +171,32 @@ extension GroupMainViewController {
                 print("server Error")
             }
         }
+    }
+}
+
+// MARK: - navigation control
+
+extension GroupMainViewController {
+    
+    private func setButtonAction() {
+        let moveToHouseMakeNameViewAction = UIAction { [weak self] _ in
+            self?.moveToHouseMakeNameView()
+        }
+        let moveToHouseEnterViewAction = UIAction { [weak self] _ in
+            self?.moveToHouseEnterView()
+        }
+        
+        self.houseMakeButton.addAction(moveToHouseMakeNameViewAction, for: .touchUpInside)
+        self.houseEnterButton.addAction(moveToHouseEnterViewAction, for: .touchUpInside)
+    }
+    
+    private func moveToHouseMakeNameView() {
+        let houseMakeNameViewController = HouseMakeNameViewController()
+        self.navigationController?.pushViewController(houseMakeNameViewController, animated: true)
+    }
+    
+    private func moveToHouseEnterView() {
+        let houseEnterViewController = EnterHouseViewController()
+        self.navigationController?.pushViewController(houseEnterViewController, animated: true)
     }
 }

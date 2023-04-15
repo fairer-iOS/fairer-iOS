@@ -42,7 +42,6 @@ final class HouseMakeNameViewController: BaseViewController {
         let button = MainButton()
         button.title = TextLiteral.doneButtonText
         button.isDisabled = true
-        button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
     }()
     
@@ -52,6 +51,7 @@ final class HouseMakeNameViewController: BaseViewController {
         super.viewDidLoad()
         setupDelegation()
         setupNotificationCenter()
+        setButtonAction()
     }
 
     override func render() {
@@ -100,28 +100,6 @@ final class HouseMakeNameViewController: BaseViewController {
     
     private func setupDelegation() {
         houseNameTextField.delegate = self
-    }
-    
-    @objc private func didTapDoneButton() {
-        guard let text = houseNameTextField.text else { return }
-        
-        if text.hasCharacters() {
-            houseNameTextField.layer.borderWidth = 0
-            disableLabel.isHidden = true
-            
-            postAddTeam(teamName: text) { [weak self] result in
-                let inviteCode = result.inviteCode
-                let houseInviteCodeView = HouseInviteCodeViewController(houseName: text, inviteCode: inviteCode)
-                
-                self?.navigationController?.pushViewController(houseInviteCodeView, animated: true)
-            }
-
-        } else {
-            houseNameTextField.layer.borderWidth = 1
-            houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
-            houseNameDoneButton.isDisabled = true
-            disableLabel.isHidden = false
-        }
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -181,6 +159,40 @@ extension HouseMakeNameViewController {
             default:
                 print("server error")
             }
+        }
+    }
+}
+
+// MARK: - navigation control
+
+extension HouseMakeNameViewController {
+    
+    private func setButtonAction() {
+        let moveToHouseInviteViewAction = UIAction { [weak self] _ in
+            self?.moveToHouseInviteCodeView()
+        }
+        
+        self.houseNameDoneButton.addAction(moveToHouseInviteViewAction, for: .touchUpInside)
+    }
+    
+    private func moveToHouseInviteCodeView() {
+        guard let text = houseNameTextField.text else { return }
+        
+        if text.hasCharacters() {
+            houseNameTextField.layer.borderWidth = 0
+            disableLabel.isHidden = true
+            postAddTeam(teamName: text) { [weak self] result in
+                let inviteCode = result.inviteCode
+                let houseInviteCodeView = HouseInviteCodeViewController(houseName: text, inviteCode: inviteCode)
+                
+                self?.navigationController?.pushViewController(houseInviteCodeView, animated: true)
+            }
+
+        } else {
+            houseNameTextField.layer.borderWidth = 1
+            houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
+            houseNameDoneButton.isDisabled = true
+            disableLabel.isHidden = false
         }
     }
 }

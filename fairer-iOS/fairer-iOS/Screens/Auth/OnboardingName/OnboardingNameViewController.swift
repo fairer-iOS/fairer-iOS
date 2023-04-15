@@ -28,7 +28,6 @@ final class OnboardingNameViewController: BaseViewController {
         let button = MainButton()
         button.title = TextLiteral.doneButtonText
         button.isDisabled = true
-        button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
     }()
     private let disableLabel: UILabel = {
@@ -46,6 +45,7 @@ final class OnboardingNameViewController: BaseViewController {
         super.viewDidLoad()
         setupDelegation()
         setupNotificationCenter()
+        setButtonAction()
     }
     
     override func configUI() {
@@ -93,22 +93,7 @@ final class OnboardingNameViewController: BaseViewController {
     private func setupDelegation() {
         nameTextField.delegate = self
     }
-    
-    @objc private func didTapDoneButton() {
-        if nameTextField.text!.hasCharacters() {
-            nameTextField.layer.borderWidth = 0
-            disableLabel.isHidden = true
-            
-            // TODO: - userdefault에 이름 저장
-            
-        } else {
-            nameTextField.layer.borderWidth = 1
-            nameTextField.layer.borderColor = UIColor.negative20.cgColor
-            nameDoneButton.isDisabled = true
-            disableLabel.isHidden = false
-        }
-    }
-    
+
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
@@ -151,5 +136,35 @@ extension OnboardingNameViewController : UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nameTextField.layer.borderWidth = 0
         view.endEditing(true)
+    }
+}
+
+// MARK: - navigation control
+
+extension OnboardingNameViewController {
+    
+    private func setButtonAction() {
+        let didTapDoneAction = UIAction { [weak self] _ in
+            self?.didTapDoneButton()
+        }
+        
+        self.nameDoneButton.addAction(didTapDoneAction, for: .touchUpInside)
+    }
+    
+    private func didTapDoneButton() {
+        if nameTextField.text!.hasCharacters() {
+            nameTextField.layer.borderWidth = 0
+            disableLabel.isHidden = true
+            
+            // TODO: - userdefault에 이름 저장
+            let onBoardingProfileViewController = OnboardingProfileViewController()
+            self.navigationController?.pushViewController(onBoardingProfileViewController, animated: true)
+            
+        } else {
+            nameTextField.layer.borderWidth = 1
+            nameTextField.layer.borderColor = UIColor.negative20.cgColor
+            nameDoneButton.isDisabled = true
+            disableLabel.isHidden = false
+        }
     }
 }

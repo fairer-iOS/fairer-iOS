@@ -55,6 +55,10 @@ final class HouseInfoViewController: BaseViewController {
     
     // MARK: - lifecycle
     
+    override func viewDidLoad() {
+        setButtonAction()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getTeamInfo()
@@ -135,5 +139,23 @@ extension HouseInfoViewController {
                 print("server error")
             }
         }
+    }
+}
+
+// MARK: - navigation control
+
+extension HouseInfoViewController {
+    
+    private func setButtonAction() {
+        let moveToHomeViewAction = UIAction { [weak self] _ in
+            self?.moveToHomeView()
+        }
+        
+        self.houseInfoDoneButton.addAction(moveToHomeViewAction, for: .touchUpInside)
+    }
+    
+    private func moveToHomeView() {
+        let homeViewController = HomeViewController()
+        self.navigationController?.pushViewController(homeViewController, animated: true)
     }
 }

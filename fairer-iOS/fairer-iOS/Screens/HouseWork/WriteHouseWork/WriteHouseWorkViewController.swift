@@ -183,7 +183,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
         getTeamInfo()
-        setDoneButton()
+        addButtonAction()
     }
     
     override func render() {
@@ -591,15 +591,6 @@ final class WriteHouseWorkViewController: BaseViewController {
             self?.houseWorks[0].repeatPattern = sortedDaysInAPIString.joined(separator: ",")
         }
     }
-    
-    private func setDoneButton() {
-        let action = UIAction { [weak self] _ in
-            if let houseWorks = self?.houseWorks {
-                self?.postAddHouseWorks(body: houseWorks)
-            }
-        }
-        doneButton.addAction(action, for: .touchUpInside)
-    }
 }
 
 // MARK: - extension
@@ -679,5 +670,23 @@ extension WriteHouseWorkViewController {
                 break
             }
         }
+    }
+}
+
+extension WriteHouseWorkViewController {
+    
+    private func addButtonAction() {
+        let action = UIAction { [weak self] _ in
+            if let houseWorks = self?.houseWorks {
+                self?.postAddHouseWorks(body: houseWorks)
+            }
+            self?.popToHome()
+        }
+        
+        doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func popToHome() {
+        self.navigationController?.popToViewController(ofClass: HomeViewController.self)
     }
 }
