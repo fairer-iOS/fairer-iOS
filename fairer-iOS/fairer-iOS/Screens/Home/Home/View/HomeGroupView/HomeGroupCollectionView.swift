@@ -85,8 +85,10 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        cell.titleLabel.text = userList[indexPath.item].memberName
-        cell.titleImage.load(from: userList[indexPath.item].profilePath ?? String())
+        guard let memberName = userList[indexPath.item].memberName,
+              let memberImage = userList[indexPath.item].profilePath else { return UICollectionViewCell() }
+        cell.titleImage.load(from: memberImage)
+        cell.titleLabel.text = memberName
         if cell.isSelected == true { cell.onSelected() }
         else { cell.onDeselected() }
         return cell
