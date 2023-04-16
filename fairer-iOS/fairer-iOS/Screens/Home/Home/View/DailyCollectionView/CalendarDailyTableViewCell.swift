@@ -13,7 +13,11 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     
     static let identifier = "CellId"
     
-    lazy var memberListProfilePath = [Assignee]()
+    lazy var memberListProfilePath = [Assignee]() {
+        didSet {
+            workerCollectionView.reloadData()
+        }
+    }
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
@@ -176,7 +180,9 @@ extension CalendarDailyTableViewCell: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        cell.workerIconImage.load(from: self.memberListProfilePath[indexPath.row].profilePath ?? String())
+        if let profile = self.memberListProfilePath[indexPath.row].profilePath {
+            cell.workerIconImage.load(from: profile)
+        }
         return cell
     }
 }

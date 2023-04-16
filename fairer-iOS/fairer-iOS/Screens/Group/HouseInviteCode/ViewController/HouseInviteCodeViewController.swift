@@ -87,17 +87,18 @@ final class HouseInviteCodeViewController: BaseViewController {
     
     // MARK: - lifecycle
     
-    override func configUI() {
-        super.configUI()
-    }
-    
     override func viewDidLoad() {
+        super.viewDidLoad()
         setButtonAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getinviteCodeExpirationDateTime()
+    }
+    
+    override func configUI() {
+        super.configUI()
     }
     
     override func render() {

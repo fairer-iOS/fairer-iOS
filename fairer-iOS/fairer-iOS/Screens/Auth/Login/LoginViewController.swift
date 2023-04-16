@@ -58,7 +58,12 @@ final class LoginViewController: BaseViewController {
     // MARK: - lifecycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.setButtonAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
     }
     
     override func configUI() {
@@ -93,11 +98,16 @@ final class LoginViewController: BaseViewController {
         }
     }
     
-    // MARK: - helper func
+    // MARK: - func
     
     override func setupNavigationBar() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
         let appearance = UINavigationBarAppearance()
+        appearance.shadowColor = .clear
         appearance.backgroundColor = .blue
+        navigationBar.standardAppearance = appearance
+        navigationBar.compactAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
     }
 
     private func googleSignIn() {

@@ -12,7 +12,12 @@ import SnapKit
 final class HomeViewController: BaseViewController {
     
     private var teamId: Int?
-    private var ruleArray: [RuleData]?
+    private var ruleArray: [RuleData]? {
+        didSet {
+            self.ruleArrayIndex = 0
+        }
+    }
+    private var ruleArrayIndex = 0
     private var isScrolled = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
@@ -148,8 +153,8 @@ final class HomeViewController: BaseViewController {
         self.setupDelegate()
         self.setWeekCalendarSwipeGesture()
         self.setDatePicker()
-        self.setNotification()
         self.setButtonEvent()
+        self.setHomeRuleLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -170,6 +175,7 @@ final class HomeViewController: BaseViewController {
         }
         self.getRules()
         self.getMyInfo()
+        self.setNotification()
     }
     
     override func configUI() {
@@ -311,6 +317,26 @@ final class HomeViewController: BaseViewController {
         homeWeekCalendarCollectionView.addGestureRecognizer(rightSwipeGestureRecognizer)
     }
     
+    private func setHomeRuleLabel() {
+        if ruleArray?.isEmpty == true {
+            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
+        } else {
+            homeRuleView.homeRuleDescriptionLabel.text = ruleArray?[self.ruleArrayIndex].ruleName
+        }
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            guard let count = self?.ruleArray?.count else { return }
+            if self?.ruleArray?.isEmpty == true {
+                self?.homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
+            } else {
+                self?.homeRuleView.homeRuleDescriptionLabel.text = self?.ruleArray?[self?.ruleArrayIndex ?? Int()].ruleName
+                self?.ruleArrayIndex += 1
+                if self?.ruleArrayIndex ?? Int() > count - 1 {
+                    self?.ruleArrayIndex = 0
+                }
+            }
+        }
+    }
+    
     private func setDatePicker() {
         datePickerView.isHidden = true
         datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
@@ -344,28 +370,6 @@ final class HomeViewController: BaseViewController {
     }
     
     // MARK: - func
-    
-    private func setHomeRuleLabel() {
-        var index = 0
-        guard let rules = ruleArray else {
-            print("out!!!")
-            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
-            return
-        }
-        if rules.count == 0 {
-            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
-            return
-        }
-        homeRuleView.homeRuleDescriptionLabel.text = rules[index].ruleName
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
-            guard let count = self?.ruleArray?.count else { return }
-            self?.homeRuleView.homeRuleDescriptionLabel.text = self?.ruleArray?[index].ruleName
-            index += 1
-            if index > count - 1 {
-                index = 0
-            }
-        }
-    }
     
     private func getDivideIndex() {
         self.divideIndex = 0
@@ -526,7 +530,15 @@ final class HomeViewController: BaseViewController {
                 return
             }
             self.ruleArray = response.ruleResponseDtos
-            self.setHomeRuleLabel()
+            self.setHomeRuleLableAfterSettingRules()
+        }
+    }
+    
+    private func setHomeRuleLableAfterSettingRules() {
+        if ruleArray?.isEmpty == true {
+            homeRuleView.homeRuleDescriptionLabel.text = TextLiteral.homeRuleViewRuleDescriptionLabel
+        } else {
+            homeRuleView.homeRuleDescriptionLabel.text = ruleArray?[self.ruleArrayIndex].ruleName
         }
     }
     
@@ -567,7 +579,7 @@ final class HomeViewController: BaseViewController {
         guard let lastDateInFullDateList = self.homeWeekCalendarCollectionView.fullDateList.last else { return }
         var doneWorkSum: Int = 0
         DispatchQueue.main.async {
-            LoadingView.showLoading()
+            self.view.isUserInteractionEnabled = false
         }
         DispatchQueue.global().async {
             if isOwn {
@@ -579,7 +591,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {
@@ -613,7 +625,7 @@ final class HomeViewController: BaseViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
+                        self.view.isUserInteractionEnabled = true
                         self.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
                         self.homeWeekCalendarCollectionView.dotList = [UIImage]()
                         for date in self.homeWeekCalendarCollectionView.fullDateList {
@@ -645,7 +657,8 @@ final class HomeViewController: BaseViewController {
     
     @objc func observeWeekCalendar(notification: Notification) {
         guard let object = notification.userInfo?[NotificationKey.date] as? String else { return }
-        
+        let dateArray = object.split(separator: ".")
+        self.homeCalenderView.calendarMonthLabelButton.setTitle("\(dateArray[0])년 \(dateArray[1])월", for: .normal)
         self.getHouseWorksByDate (
             isOwn: self.checkMemeberCellIsOwn(),
             startDate: object,
@@ -690,12 +703,12 @@ final class HomeViewController: BaseViewController {
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0.1 {
+        if scrollView.contentOffset.y > 2 {
             if isScrolled == false {
                 scrollDidStart()
                 isScrolled = true
             }
-        } else {
+        } else if scrollView.contentOffset.y < 0 {
             scrollDidEnd()
             isScrolled = false
         }
@@ -741,7 +754,9 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // MARK: - 집안일 수정 뷰로 이동
+        // MARK: - fix me, houseWorks 빈배열 대체
+        let editHouseWorkView = WriteHouseWorkViewController(houseWorks: [])
+        self.navigationController?.pushViewController(editHouseWorkView, animated: true)
     }
 }
 extension HomeViewController: UITableViewDataSource {
@@ -946,7 +961,6 @@ extension HomeViewController {
     
     @objc
     private func addTapGesture() {
-
         let selectHouseWorkView = SelectHouseWorkViewController()
         self.navigationController?.pushViewController(selectHouseWorkView, animated: true)
     }

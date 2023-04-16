@@ -74,6 +74,7 @@ final class GroupMainViewController: BaseViewController {
     // MARK: - life cycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         setButtonAction()
     }
     
