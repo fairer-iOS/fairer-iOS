@@ -101,6 +101,8 @@
 		5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E711129BEF88B003FD32F /* BlankResponse.swift */; };
 		5A6AAF1929E2A0970055BEE8 /* SettingInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */; };
 		5A6AAF4C29EBE7810055BEE8 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */; };
+		5A6AAF4F29EBF5210055BEE8 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF4E29EBF5200055BEE8 /* UserDefault.swift */; };
+		5A6AAF5229EBF8880055BEE8 /* UserDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF5129EBF8880055BEE8 /* UserDefaultHandler.swift */; };
 		5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */; };
 		5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */; };
 		5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */; };
@@ -260,6 +262,8 @@
 		5A4E711129BEF88B003FD32F /* BlankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankResponse.swift; sourceTree = "<group>"; };
 		5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingInviteCodeViewController.swift; sourceTree = "<group>"; };
 		5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
+		5A6AAF4E29EBF5200055BEE8 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		5A6AAF5129EBF8880055BEE8 /* UserDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHandler.swift; sourceTree = "<group>"; };
 		5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleViewController.swift; sourceTree = "<group>"; };
 		5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleTableViewCell.swift; sourceTree = "<group>"; };
 		5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeamResponse.swift; sourceTree = "<group>"; };
@@ -632,6 +636,7 @@
 		5227556428B302C00080DD65 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				5A6AAF4D29EBF50A0055BEE8 /* Util */,
 				9141B6A129E26C5F00136671 /* NotificaitonCenter */,
 				39EEF68328CBB7FE00437654 /* Base */,
 				39EEF68028CBB7D000437654 /* Literal */,
@@ -804,6 +809,15 @@
 				5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */,
 			);
 			path = SettingInviteCode;
+			sourceTree = "<group>";
+		};
+		5A6AAF4D29EBF50A0055BEE8 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				5A6AAF4E29EBF5200055BEE8 /* UserDefault.swift */,
+				5A6AAF5129EBF8880055BEE8 /* UserDefaultHandler.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		5A8030802990D8B1005C7909 /* SettingHomeRule */ = {
@@ -1292,6 +1306,7 @@
 				5204AAC4295A020E002FB6CA /* SettingPolicyViewController.swift in Sources */,
 				5204AACC296C6447002FB6CA /* SelectHouseWorkDetailCollectionView.swift in Sources */,
 				52EBF04B28EC29200062EB41 /* TextField.swift in Sources */,
+				5A6AAF5229EBF8880055BEE8 /* UserDefaultHandler.swift in Sources */,
 				39FABBDC28DB35020053EFD2 /* HomeCalendarView.swift in Sources */,
 				91F9886429B49518008D7AB7 /* WorkInfoReponse.swift in Sources */,
 				52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */,
@@ -1303,6 +1318,7 @@
 				5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */,
 				915BA73F29E6C081002E7EF5 /* UIApplication+Extension.swift in Sources */,
 				917D8B5A29A632A100E26B73 /* AlarmRouter.swift in Sources */,
+				5A6AAF4F29EBF5210055BEE8 /* UserDefault.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
 				52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */,
 				917D8B6729A6332400E26B73 /* RulesRouter.swift in Sources */,
