@@ -100,6 +100,7 @@
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
 		5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E711129BEF88B003FD32F /* BlankResponse.swift */; };
 		5A6AAF1929E2A0970055BEE8 /* SettingInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */; };
+		5A6AAF4C29EBE7810055BEE8 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */; };
 		5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */; };
 		5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */; };
 		5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */; };
@@ -258,6 +259,7 @@
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
 		5A4E711129BEF88B003FD32F /* BlankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankResponse.swift; sourceTree = "<group>"; };
 		5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingInviteCodeViewController.swift; sourceTree = "<group>"; };
+		5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleViewController.swift; sourceTree = "<group>"; };
 		5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleTableViewCell.swift; sourceTree = "<group>"; };
 		5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeamResponse.swift; sourceTree = "<group>"; };
@@ -1127,6 +1129,7 @@
 				917D8B7F29A634CA00E26B73 /* URLConstant.swift */,
 				914C69CB29AA0D17008EA9EE /* BaseURLConstant.swift */,
 				52A53DDF29C6E51100C4BB4C /* ImageCacheManager.swift */,
+				5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1334,6 +1337,7 @@
 				7EFAA86E28DA032800737DF0 /* SelectHouseWorkViewController.swift in Sources */,
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */,
+				5A6AAF4C29EBE7810055BEE8 /* Interceptor.swift in Sources */,
 				52E4C08A297CF66C002AC755 /* SelectManagerView.swift in Sources */,
 				5AB8068629BEE842009EB243 /* UserErrorResponse.swift in Sources */,
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
