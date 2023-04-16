@@ -157,6 +157,8 @@
 		917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8729A63AA500E26B73 /* FcmAPI.swift */; };
 		91AF387929E9DA73000C4EFD /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 91AF387829E9DA73000C4EFD /* FirebaseDynamicLinks */; };
 		91AF387B29E9DA73000C4EFD /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 91AF387A29E9DA73000C4EFD /* FirebaseMessaging */; };
+		91C9C41B29EBF85F002B3B66 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C9C41A29EBF85F002B3B66 /* NetworkMonitor.swift */; };
+		91C9C41D29EBFA37002B3B66 /* NoNetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C9C41C29EBFA37002B3B66 /* NoNetworkView.swift */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
 		91D6870629E7DCC90046AAA8 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */; };
 		91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */; };
@@ -312,6 +314,8 @@
 		917D8B7F29A634CA00E26B73 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		917D8B8129A6355500E26B73 /* FCMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRouter.swift; sourceTree = "<group>"; };
 		917D8B8729A63AA500E26B73 /* FcmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmAPI.swift; sourceTree = "<group>"; };
+		91C9C41A29EBF85F002B3B66 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		91C9C41C29EBFA37002B3B66 /* NoNetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkView.swift; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
 		91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthResponse.swift; path = "fairer-iOS/Network/AuthResponse.swift"; sourceTree = SOURCE_ROOT; };
@@ -413,6 +417,7 @@
 		39EEF68A28CBB9D600437654 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				91C9C41E29EC215A002B3B66 /* NetworkMonitor */,
 				5A99A2E029A8C483006FE9B2 /* MoyaPlugin */,
 				917D8B7E29A6342400E26B73 /* Foundation */,
 				917D8B5129A62F8C00E26B73 /* Router */,
@@ -1134,6 +1139,15 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		91C9C41E29EC215A002B3B66 /* NetworkMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				91C9C41C29EBFA37002B3B66 /* NoNetworkView.swift */,
+				91C9C41A29EBF85F002B3B66 /* NetworkMonitor.swift */,
+			);
+			path = NetworkMonitor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1245,6 +1259,7 @@
 				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
 				52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */,
+				91C9C41B29EBF85F002B3B66 /* NetworkMonitor.swift in Sources */,
 				39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */,
 				5ABB7FB229B48DED008D5C15 /* RulesResponse.swift in Sources */,
 				39EEF66D28CBB59D00437654 /* UICollectionView+Extension.swift in Sources */,
@@ -1302,6 +1317,7 @@
 				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
 				5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */,
 				915BA73F29E6C081002E7EF5 /* UIApplication+Extension.swift in Sources */,
+				91C9C41D29EBFA37002B3B66 /* NoNetworkView.swift in Sources */,
 				917D8B5A29A632A100E26B73 /* AlarmRouter.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
 				52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */,
@@ -1493,7 +1509,7 @@
 				CODE_SIGN_ENTITLEMENTS = "fairer-iOS/Global/Supports/fairer-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D96A3BCL3R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "fairer-iOS/Global/Supports/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1504,7 +1520,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1520,7 +1536,7 @@
 				CODE_SIGN_ENTITLEMENTS = "fairer-iOS/Global/Supports/fairer-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D96A3BCL3R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "fairer-iOS/Global/Supports/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1531,7 +1547,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
