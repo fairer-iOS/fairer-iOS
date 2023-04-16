@@ -18,7 +18,6 @@
 		39EEF67528CBB61200437654 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67428CBB61200437654 /* String+Extension.swift */; };
 		39EEF67728CBB61600437654 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67628CBB61600437654 /* Date+Extension.swift */; };
 		39EEF67928CBB64500437654 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67828CBB64500437654 /* UIButton+Extension.swift */; };
-		39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67A28CBB65000437654 /* UserDefault+Extension.swift */; };
 		39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF67D28CBB66F00437654 /* MainButton.swift */; };
 		39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF68128CBB7DE00437654 /* ImageLiteral.swift */; };
 		39EEF68528CBB80800437654 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EEF68428CBB80800437654 /* BaseViewController.swift */; };
@@ -175,7 +174,6 @@
 		39EEF67428CBB61200437654 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		39EEF67628CBB61600437654 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		39EEF67828CBB64500437654 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
-		39EEF67A28CBB65000437654 /* UserDefault+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+Extension.swift"; sourceTree = "<group>"; };
 		39EEF67D28CBB66F00437654 /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		39EEF68128CBB7DE00437654 /* ImageLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiteral.swift; sourceTree = "<group>"; };
 		39EEF68428CBB80800437654 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -349,7 +347,6 @@
 				39EEF67428CBB61200437654 /* String+Extension.swift */,
 				39EEF67628CBB61600437654 /* Date+Extension.swift */,
 				39EEF67828CBB64500437654 /* UIButton+Extension.swift */,
-				39EEF67A28CBB65000437654 /* UserDefault+Extension.swift */,
 				5205053C28D7382900355055 /* UITextField+Extension.swift */,
 				39F1C12528D5FB4100585B83 /* UILabel+Extension.swift */,
 				911E968229719CA400F3AF35 /* UIView+Extension.swift */,
@@ -1305,7 +1302,6 @@
 				917D8B5A29A632A100E26B73 /* AlarmRouter.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
 				52E4C086297CE8D2002AC755 /* GetManagerView.swift in Sources */,
-				39EEF67B28CBB65000437654 /* UserDefault+Extension.swift in Sources */,
 				917D8B6729A6332400E26B73 /* RulesRouter.swift in Sources */,
 				5275397928EC2F78002D8280 /* BackButton.swift in Sources */,
 				914C69D029AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift in Sources */,
