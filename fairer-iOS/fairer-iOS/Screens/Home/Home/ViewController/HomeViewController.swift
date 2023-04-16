@@ -754,7 +754,9 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // MARK: - 집안일 수정 뷰로 이동
+        // MARK: - fix me, houseWorks 빈배열 대체
+        let editHouseWorkView = WriteHouseWorkViewController(houseWorks: [])
+        self.navigationController?.pushViewController(editHouseWorkView, animated: true)
     }
 }
 extension HomeViewController: UITableViewDataSource {
