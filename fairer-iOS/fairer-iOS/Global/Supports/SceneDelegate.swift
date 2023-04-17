@@ -13,9 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     private var errorWindow: UIWindow?
-    private var isCheckTwice = false
-    
-    var networkMonitor: NetworkMonitor = NetworkMonitor()
+    private var networkMonitor: NetworkMonitor = NetworkMonitor()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         startMonitoringNetwork(on: scene)
@@ -72,8 +70,7 @@ extension SceneDelegate {
             case .unsatisfied:
                 self?.loadNetworkErrorWindow(on: scene)
                 print("No Internet!! show network Error View")
-            default:
-                break
+            default: break
             }
         })
     }
