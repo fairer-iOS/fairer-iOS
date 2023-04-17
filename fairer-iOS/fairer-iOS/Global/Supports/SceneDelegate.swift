@@ -64,12 +64,8 @@ extension SceneDelegate {
     private func startMonitoringNetwork(on scene: UIScene) {
         networkMonitor.startMonitoring(statusUpdateHandler: { [weak self] connectionStatus in
             switch connectionStatus {
-            case .satisfied:
-                self?.removeNetworkErrorWindow()
-                print("dismiss networkError View if is present")
-            case .unsatisfied:
-                self?.loadNetworkErrorWindow(on: scene)
-                print("No Internet!! show network Error View")
+            case .satisfied: self?.removeNetworkErrorWindow()
+            case .unsatisfied: self?.loadNetworkErrorWindow(on: scene)
             default: break
             }
         })
