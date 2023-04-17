@@ -158,6 +158,8 @@
 		91AF387929E9DA73000C4EFD /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 91AF387829E9DA73000C4EFD /* FirebaseDynamicLinks */; };
 		91AF387B29E9DA73000C4EFD /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 91AF387A29E9DA73000C4EFD /* FirebaseMessaging */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
+		91D4185629EDBF9F00EC2786 /* MemberPatchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D4185529EDBF9F00EC2786 /* MemberPatchRequest.swift */; };
+		91D4185829EDC18200EC2786 /* MemberPatchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D4185729EDC18200EC2786 /* MemberPatchResponse.swift */; };
 		91D6870629E7DCC90046AAA8 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */; };
 		91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */; };
 		91F9886429B49518008D7AB7 /* WorkInfoReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */; };
@@ -313,6 +315,8 @@
 		917D8B8129A6355500E26B73 /* FCMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRouter.swift; sourceTree = "<group>"; };
 		917D8B8729A63AA500E26B73 /* FcmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmAPI.swift; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
+		91D4185529EDBF9F00EC2786 /* MemberPatchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPatchRequest.swift; sourceTree = "<group>"; };
+		91D4185729EDC18200EC2786 /* MemberPatchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPatchResponse.swift; sourceTree = "<group>"; };
 		91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthResponse.swift; path = "fairer-iOS/Network/AuthResponse.swift"; sourceTree = SOURCE_ROOT; };
 		91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkInfoReponse.swift; sourceTree = "<group>"; };
@@ -1117,6 +1121,8 @@
 				914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */,
 				91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */,
 				5A4E711129BEF88B003FD32F /* BlankResponse.swift */,
+				91D4185529EDBF9F00EC2786 /* MemberPatchRequest.swift */,
+				91D4185729EDC18200EC2786 /* MemberPatchResponse.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1298,6 +1304,7 @@
 				5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				5A6AAF1929E2A0970055BEE8 /* SettingInviteCodeViewController.swift in Sources */,
+				91D4185829EDC18200EC2786 /* MemberPatchResponse.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
 				5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */,
@@ -1331,6 +1338,7 @@
 				7EFAA87328DA088900737DF0 /* SelectHouseWorkSpaceCollectionViewCell.swift in Sources */,
 				5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */,
 				52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */,
+				91D4185629EDBF9F00EC2786 /* MemberPatchRequest.swift in Sources */,
 				5204AACE296C647A002FB6CA /* SelectHouseWorkDetailCollectionViewCell.swift in Sources */,
 				5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */,
 				52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */,

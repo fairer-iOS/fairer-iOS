@@ -9,7 +9,7 @@ import Moya
 
 enum MemberRouter {
     case getmemberInfo
-
+    case petchMemberInfo(body: MemberPatchRequest)
 }
 
 extension MemberRouter: BaseTargetType {
@@ -17,6 +17,8 @@ extension MemberRouter: BaseTargetType {
         switch self {
         case .getmemberInfo:
             return URLConstant.members + "/me"
+        case .petchMemberInfo:
+            return URLConstant.members
         }
     }
     
@@ -24,6 +26,8 @@ extension MemberRouter: BaseTargetType {
         switch self {
         case .getmemberInfo:
             return .get
+        case .petchMemberInfo:
+            return .patch
         }
     }
     
@@ -31,6 +35,8 @@ extension MemberRouter: BaseTargetType {
         switch self {
         case .getmemberInfo:
             return .requestPlain
+        case .petchMemberInfo(let body):
+            return .requestJSONEncodable(body)
         }
     }
 }

@@ -11,13 +11,31 @@ import SnapKit
 
 final class SettingProfileViewController: BaseViewController {
     
-    // FIXME: - api 로 profile image, name, status 불러오기
-    private let lastProfileImage = ImageLiterals.profileBlue3
-    private let lastName = "진저"
-    private let lastStatus: String? = ""
+    private var firstProfileImage: String?
+    private var firstName: String?
+    private var firstStatus: String?
+    
+    private var lastProfileImage: String? {
+        didSet {
+            if let imageString = lastProfileImage {
+                settingProfileButtonView.profileImageView.load(from: imageString)
+            }
+        }
+    }
+    private var lastName: String? {
+        didSet {
+            settingProfileNameTextField.text = lastName
+        }
+    }
+    private var lastStatus: String? {
+        didSet {
+            settingProfileStatusTextField.text = lastStatus
+        }
+    }
     
     private var isNameSatisfied = true
     private var isStatusSatisfied = true
+
     
     // MARK: - property
     
@@ -31,7 +49,10 @@ final class SettingProfileViewController: BaseViewController {
     }()
     private lazy var settingProfileButtonView: ProfileImageButtonView = {
         let profileImageButtonView = ProfileImageButtonView()
-        profileImageButtonView.image = lastProfileImage
+        let UIImageView = UIImageView()
+        if let imageString = lastProfileImage {
+            profileImageButtonView.profileImageView.load(from: imageString)
+        }
         let action = UIAction { [weak self] _ in
             self?.pushSettingProfileImageViewController()
         }
@@ -114,6 +135,11 @@ final class SettingProfileViewController: BaseViewController {
         setupNotificationCenter()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getMyInfo()
+    }
+    
     override func render() {
         view.addSubviews(settingProfileTitleLabel, settingProfileButtonView, settingProfileNameLabel, settingProfileNameTextField, settingProfileNameStackView, settingProfileStatusLabel, settingProfileStatusTextField, settingProfileStatusWarningLabel, settingProfileDoneButton)
         
@@ -192,7 +218,7 @@ final class SettingProfileViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        // FIXME: - 서버에 프로필 정보 업데이트
+        self.petchMyInfo()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -228,6 +254,7 @@ final class SettingProfileViewController: BaseViewController {
                 settingProfileNameTextField.layer.borderWidth = 0
                 if text.count > 0 {
                     isNameSatisfied = true
+                    lastName = text
                 } else {
                     isNameSatisfied = false
                 }
@@ -260,15 +287,37 @@ final class SettingProfileViewController: BaseViewController {
                 settingProfileStatusTextField.layer.borderWidth = 0
                 settingProfileStatusWarningLabel.isHidden = true
                 isStatusSatisfied = true
+                lastStatus = text
             }
         }
     }
     
     private func checkDoneButton() {
-        if isNameSatisfied && isStatusSatisfied  && !(settingProfileNameTextField.text == lastName && settingProfileStatusTextField.text == lastStatus) {
+        if isNameSatisfied && isStatusSatisfied  && !(settingProfileNameTextField.text == firstName && settingProfileStatusTextField.text == firstStatus) {
             settingProfileDoneButton.isDisabled = false
         } else {
             settingProfileDoneButton.isDisabled = true
+        }
+    }
+    
+    private func getMyInfo() {
+        self.getMyInfoFromServer() { [weak self] response in
+            guard let self = self else {
+                return
+            }
+            self.firstName = response.memberName
+            self.firstStatus = response.statusMessage
+            self.firstProfileImage = response.profilePath
+            self.lastName = response.memberName
+            self.lastStatus = response.statusMessage
+            self.lastProfileImage = response.profilePath
+        }
+    }
+    
+    private func petchMyInfo() {
+        let memberPatchRequest = MemberPatchRequest(memberName: self.lastName, profilePath: self.lastProfileImage, statusMessage: self.lastStatus)
+        self.petchMemberInfoFromServer(body: memberPatchRequest) { [weak self] response in
+            guard self != nil else { return }
         }
     }
     
@@ -307,5 +356,37 @@ extension SettingProfileViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+}
+
+// MARK: - network
+
+extension SettingProfileViewController {
+    private func getMyInfoFromServer(completion: @escaping (MemberResponse) -> Void) {
+        NetworkService.shared.members.getMemberInfo { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? MemberResponse else { return }
+                completion(data)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
+    }
+
+    private func petchMemberInfoFromServer(body: MemberPatchRequest, completion: @escaping (MemberPatchResponse) -> Void) {
+        NetworkService.shared.members.petchMemberInfo(body: body) { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? MemberPatchResponse else { return }
+                completion(data)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
     }
 }
