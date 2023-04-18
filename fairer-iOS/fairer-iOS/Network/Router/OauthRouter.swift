@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 enum OauthRouter {
-    case oauthLogin(socialType: AuthRequest)
+    case oauthLogin(clientType: String, socialType: SocialType)
 }
 
 extension OauthRouter: BaseTargetType {
@@ -30,8 +30,11 @@ extension OauthRouter: BaseTargetType {
     
     var task: Moya.Task {
         switch self {
-        case .oauthLogin(let socialType):
-            return .requestJSONEncodable(socialType)
+        case .oauthLogin(let clientType, let socialType):
+            return .requestParameters(parameters: [
+                "clientType": clientType,
+                "socialType": socialType
+            ], encoding: JSONEncoding.default)
         }
     }
 }
