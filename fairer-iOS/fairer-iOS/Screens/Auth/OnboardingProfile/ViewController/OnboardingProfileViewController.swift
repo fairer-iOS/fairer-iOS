@@ -34,8 +34,8 @@ class OnboardingProfileViewController: BaseViewController {
         label.textColor = .gray600
         return label
     }()
-    private let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
-    private lazy var profileDoneButton: MainButton = {
+    let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
+    lazy var profileDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.onboardingProfileViewControllerDoneButtonText
         button.isDisabled = true
@@ -108,7 +108,7 @@ class OnboardingProfileViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
-    private func didTapImage() {
+    func didTapImage() {
         onboardingProfileGroupCollectionView.didTappedImage = { [weak self] image in
             self?.selectedProfileImageView.image = image
             guard let selectedImage = self?.selectedProfileImageView.image else { return }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct MemberPatchRequest: Codable, Equatable {
-    let memberName: String?
-    let profilePath: String?
-    let statusMessage: String?
+    var memberName: String?
+    var profilePath: String?
+    var statusMessage: String?
 }

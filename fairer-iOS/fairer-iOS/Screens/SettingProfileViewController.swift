@@ -53,10 +53,6 @@ final class SettingProfileViewController: BaseViewController {
         if let imageString = lastProfileImage {
             profileImageButtonView.profileImageView.load(from: imageString)
         }
-        let action = UIAction { [weak self] _ in
-            self?.pushSettingProfileImageViewController()
-        }
-        profileImageButtonView.addAction(action, for: .touchUpInside)
         return profileImageButtonView
     }()
     private let settingProfileNameLabel: UILabel = {
@@ -120,10 +116,6 @@ final class SettingProfileViewController: BaseViewController {
         let button = MainButton()
         button.isDisabled = true
         button.title = TextLiteral.doneButtonText
-        let action = UIAction {[weak self] _ in
-            self?.didTappedDoneButton()
-        }
-        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
@@ -133,6 +125,7 @@ final class SettingProfileViewController: BaseViewController {
         super.viewDidLoad()
         setupDelegation()
         setupNotificationCenter()
+        setButtomAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -210,16 +203,6 @@ final class SettingProfileViewController: BaseViewController {
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    private func pushSettingProfileImageViewController() {
-        let settingProfileImageView = SettingProfileImageViewController()
-        self.navigationController?.pushViewController(settingProfileImageView, animated: true)
-    }
-    
-    private func didTappedDoneButton() {
-        self.petchMyInfo()
-        self.navigationController?.popViewController(animated: true)
     }
     
     private func didTappedTextField() {
@@ -315,7 +298,7 @@ final class SettingProfileViewController: BaseViewController {
     }
     
     private func petchMyInfo() {
-        let memberPatchRequest = MemberPatchRequest(memberName: self.lastName, profilePath: self.lastProfileImage, statusMessage: self.lastStatus)
+        let memberPatchRequest = MemberPatchRequest(memberName: lastName, profilePath: lastProfileImage, statusMessage: lastStatus)
         self.petchMemberInfoFromServer(body: memberPatchRequest) { [weak self] response in
             guard self != nil else { return }
         }
@@ -358,6 +341,38 @@ extension SettingProfileViewController: UITextFieldDelegate {
         view.endEditing(true)
     }
 }
+
+// MARK: - set buttom action
+
+extension SettingProfileViewController {
+    private func setButtomAction() {
+        let doneAction = UIAction {[weak self] _ in
+            self?.didTappedDoneButton()
+        }
+        let action = UIAction { [weak self] _ in
+            self?.pushSettingProfileImageViewController()
+        }
+
+        settingProfileDoneButton.addAction(doneAction, for: .touchUpInside)
+        settingProfileButtonView.addAction(action, for: .touchUpInside)
+    }
+    
+    private func didTappedDoneButton() {
+        self.petchMyInfo()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func pushSettingProfileImageViewController() {
+        let settingProfileImageView = SettingProfileImageViewController()
+        if let image = lastProfileImage,
+           let name = lastName,
+           let status = lastStatus {
+            settingProfileImageView.setupProfile(image: image, name: name, status: status)
+        }
+        self.navigationController?.pushViewController(settingProfileImageView, animated: true)
+    }
+}
+
 
 // MARK: - network
 
