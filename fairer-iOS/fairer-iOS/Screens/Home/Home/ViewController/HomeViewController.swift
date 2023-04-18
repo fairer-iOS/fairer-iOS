@@ -285,6 +285,11 @@ final class HomeViewController: BaseViewController {
         navigationItem.rightBarButtonItem = rightButton
     }
     
+    override func setupNavigationPopGesture() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    }
+    
     func setupAlphaNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         let logoView = makeBarButtonItem(with: logoImage)

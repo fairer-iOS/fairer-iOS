@@ -53,7 +53,7 @@ class BaseViewController: UIViewController {
         navigationBar.scrollEdgeAppearance = appearance
     }
     
-    private func setupNavigationPopGesture() {
+    func setupNavigationPopGesture() {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }

@@ -10,18 +10,20 @@ import UIKit
 import GoogleSignIn
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
-
+    private var errorWindow: UIWindow?
+    private var networkMonitor: NetworkMonitor = NetworkMonitor()
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        startMonitoringNetwork(on: scene)
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let rootViewController = UINavigationController(rootViewController: HomeViewController())
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }
-    
+
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             GIDSignIn.sharedInstance.handle(url)
@@ -33,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+        networkMonitor.stopMonitoring()
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -57,3 +60,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+extension SceneDelegate {
+    private func startMonitoringNetwork(on scene: UIScene) {
+        networkMonitor.startMonitoring(statusUpdateHandler: { [weak self] connectionStatus in
+            switch connectionStatus {
+            case .satisfied: self?.removeNetworkErrorWindow()
+            case .unsatisfied: self?.loadNetworkErrorWindow(on: scene)
+            default: break
+            }
+        })
+    }
+    
+    private func removeNetworkErrorWindow() {
+        DispatchQueue.main.async { [weak self] in
+            self?.errorWindow?.resignKey()
+            self?.errorWindow?.isHidden = true
+            self?.errorWindow = nil
+        }
+    }
+    
+    private func loadNetworkErrorWindow(on scene: UIScene) {
+        if let windowScene = scene as? UIWindowScene {
+            DispatchQueue.main.async { [weak self] in
+                let window = UIWindow(windowScene: windowScene)
+                window.windowLevel = .statusBar
+                window.makeKeyAndVisible()
+                let noNetworkView = NoNetworkView(frame: window.bounds)
+                window.addSubview(noNetworkView)
+                self?.errorWindow = window
+            }
+        }
+    }
+}
