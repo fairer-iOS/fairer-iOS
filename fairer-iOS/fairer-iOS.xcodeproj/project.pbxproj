@@ -103,6 +103,7 @@
 		5A6AAF4C29EBE7810055BEE8 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */; };
 		5A6AAF4F29EBF5210055BEE8 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF4E29EBF5200055BEE8 /* UserDefault.swift */; };
 		5A6AAF5229EBF8880055BEE8 /* UserDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF5129EBF8880055BEE8 /* UserDefaultHandler.swift */; };
+		5A6AAF5529ED3BF90055BEE8 /* socialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF5429ED3BF90055BEE8 /* socialType.swift */; };
 		5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */; };
 		5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */; };
 		5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */; };
@@ -264,6 +265,7 @@
 		5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		5A6AAF4E29EBF5200055BEE8 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		5A6AAF5129EBF8880055BEE8 /* UserDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHandler.swift; sourceTree = "<group>"; };
+		5A6AAF5429ED3BF90055BEE8 /* socialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = socialType.swift; sourceTree = "<group>"; };
 		5A8030812990D902005C7909 /* SettingHomeRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleViewController.swift; sourceTree = "<group>"; };
 		5A80308B29925146005C7909 /* SettingHomeRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHomeRuleTableViewCell.swift; sourceTree = "<group>"; };
 		5A8400EF29C9B75A00C569E9 /* AddTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeamResponse.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 		5205054F28DCB62800355055 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				5A6AAF5329ED3BEB0055BEE8 /* Model */,
 				5205055028DCB63D00355055 /* LoginViewController.swift */,
 			);
 			path = Login;
@@ -818,6 +821,14 @@
 				5A6AAF5129EBF8880055BEE8 /* UserDefaultHandler.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		5A6AAF5329ED3BEB0055BEE8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A6AAF5429ED3BF90055BEE8 /* socialType.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		5A8030802990D8B1005C7909 /* SettingHomeRule */ = {
@@ -1256,6 +1267,7 @@
 				39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */,
 				522714EB297918EC006BADBC /* CalendarSpaceView.swift in Sources */,
 				917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */,
+				5A6AAF5529ED3BF90055BEE8 /* socialType.swift in Sources */,
 				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
 				52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */,
