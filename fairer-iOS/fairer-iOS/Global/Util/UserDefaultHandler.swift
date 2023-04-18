@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserDefaultHandler {
+struct UserDefaultHandler {
     static var shared = UserDefaultHandler()
     
     @UserDefault(key: "accessToken", defaultValue: "")
@@ -16,9 +16,13 @@ class UserDefaultHandler {
     @UserDefault(key: "refreshToken", defaultValue: "")
     var refershToken: String
     
-    func removeAll() {
-        _acceesToken.reset()
-        _refershToken.reset()
-    }
+    @UserDefault(key: "socialType", defaultValue: SocialType.google)
+    var socialType: SocialType
     
+    func clearUserInformations() {
+        _acceesToken.removeAll()
+        _refershToken.removeAll()
+        _socialType.removeAll()
+    }
 }
+
