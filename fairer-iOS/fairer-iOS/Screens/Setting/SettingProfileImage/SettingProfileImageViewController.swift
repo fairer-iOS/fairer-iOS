@@ -12,9 +12,9 @@ class SettingProfileImageViewController: OnboardingProfileViewController {
     private var firstProfileImage: String?
     private var firstName: String?
     private var firstStatus: String?
-    
     private var lastProfileImage: String?
     
+    var profileImageChangeClosure: ((String) -> Void)?
     
     // MARK: - life cycle
     
@@ -25,6 +25,9 @@ class SettingProfileImageViewController: OnboardingProfileViewController {
     // MARK: - func
     
     override func didTapDoneButton() {
+        if let lastProfileImage = lastProfileImage {
+            profileImageChangeClosure?(lastProfileImage)
+        }
         petchMyInfo()
         self.navigationController?.popViewController(animated: true)
     }

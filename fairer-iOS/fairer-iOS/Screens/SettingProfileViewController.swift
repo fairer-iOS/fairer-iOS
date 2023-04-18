@@ -11,6 +11,7 @@ import SnapKit
 
 final class SettingProfileViewController: BaseViewController {
     
+    private var loadFirstTime: Bool = true
     private var firstProfileImage: String?
     private var firstName: String?
     private var firstStatus: String?
@@ -50,9 +51,6 @@ final class SettingProfileViewController: BaseViewController {
     private lazy var settingProfileButtonView: ProfileImageButtonView = {
         let profileImageButtonView = ProfileImageButtonView()
         let UIImageView = UIImageView()
-        if let imageString = lastProfileImage {
-            profileImageButtonView.profileImageView.load(from: imageString)
-        }
         return profileImageButtonView
     }()
     private let settingProfileNameLabel: UILabel = {
@@ -130,7 +128,14 @@ final class SettingProfileViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getMyInfo()
+        if loadFirstTime == false {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                self?.getMyInfo()
+            }
+        } else {
+            getMyInfo()
+            loadFirstTime = false
+        }
     }
     
     override func render() {
@@ -368,6 +373,9 @@ extension SettingProfileViewController {
            let name = lastName,
            let status = lastStatus {
             settingProfileImageView.setupProfile(image: image, name: name, status: status)
+        }
+        settingProfileImageView.profileImageChangeClosure = {[weak self] imageString in
+            self?.lastProfileImage = imageString
         }
         self.navigationController?.pushViewController(settingProfileImageView, animated: true)
     }
