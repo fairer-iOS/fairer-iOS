@@ -11,11 +11,11 @@ import SnapKit
 
 final class SettingProfileViewController: BaseViewController {
     
-    private var loadFirstTime: Bool = true
     private var firstProfileImage: String?
     private var firstName: String?
     private var firstStatus: String?
     
+    private var isSettingProfileViewPoped = false
     private var lastProfileImage: String? {
         didSet {
             if let imageString = lastProfileImage {
@@ -36,7 +36,6 @@ final class SettingProfileViewController: BaseViewController {
     
     private var isNameSatisfied = true
     private var isStatusSatisfied = true
-
     
     // MARK: - property
     
@@ -128,14 +127,14 @@ final class SettingProfileViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if loadFirstTime == false {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                self?.getMyInfo()
-            }
-        } else {
+        if isSettingProfileViewPoped == false {
             getMyInfo()
-            loadFirstTime = false
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isSettingProfileViewPoped = false
     }
     
     override func render() {
@@ -369,13 +368,16 @@ extension SettingProfileViewController {
     
     private func pushSettingProfileImageViewController() {
         let settingProfileImageView = SettingProfileImageViewController()
-        if let image = lastProfileImage,
-           let name = lastName,
-           let status = lastStatus {
+        if let image = firstProfileImage,
+           let name = firstName,
+           let status = firstStatus {
             settingProfileImageView.setupProfile(image: image, name: name, status: status)
         }
-        settingProfileImageView.profileImageChangeClosure = {[weak self] imageString in
+        settingProfileImageView.profileImageChangeClosure = { [weak self] imageString in
             self?.lastProfileImage = imageString
+        }
+        settingProfileImageView.settingProfileViewDidPop = { [weak self] didPop in
+            self?.isSettingProfileViewPoped = didPop
         }
         self.navigationController?.pushViewController(settingProfileImageView, animated: true)
     }

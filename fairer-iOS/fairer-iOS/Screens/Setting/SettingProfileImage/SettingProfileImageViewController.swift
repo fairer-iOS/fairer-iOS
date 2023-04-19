@@ -15,6 +15,7 @@ class SettingProfileImageViewController: OnboardingProfileViewController {
     private var lastProfileImage: String?
     
     var profileImageChangeClosure: ((String) -> Void)?
+    var settingProfileViewDidPop: ((Bool) -> Void)?
     
     // MARK: - life cycle
     
@@ -30,6 +31,11 @@ class SettingProfileImageViewController: OnboardingProfileViewController {
         }
         petchMyInfo()
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        settingProfileViewDidPop?(true)
     }
     
     override func didTapImage() {
