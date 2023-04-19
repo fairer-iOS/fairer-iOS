@@ -142,13 +142,12 @@ final class SettingViewController: BaseViewController {
     }
     
     private func touchUpToLogout() {
-        
-        // FIXME: - 로그아웃 연결
         self.makeRequestAlert(
             title: "로그아웃 하시겠습니까?",
             message: "",
             okTitle: "로그아웃", cancelTitle: "취소",
             okAction: { [weak self] _ in
+                // MARK: - fix me : UserDefaults refreshToken 값으로 수정
                 self?.postLogout(authorization: "refreshToken")
             }
         )
@@ -158,6 +157,7 @@ final class SettingViewController: BaseViewController {
         self.postLogout(Authorization: authorization) { [weak self] response in
             guard self != nil else { return }
             UserDefaults.resetDefaults()
+            self?.navigationController?.popToViewController(ofClass: LoginViewController.self)
         }
     }
 }
