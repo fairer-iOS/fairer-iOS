@@ -20,9 +20,9 @@ final class HomeGroupCollectionView: BaseUIView {
     private var selectedIndex = 0
     lazy var selectedMemberName = ""
     private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 24
+        static let collectionHorizontalSpacing: CGFloat = 17
         static let collectionVerticalSpacing: CGFloat = 0
-        static let cellWidth: CGFloat = 48
+        static let cellWidth: CGFloat = 55
         static let cellHeight: CGFloat = 70
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
