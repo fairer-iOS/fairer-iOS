@@ -19,7 +19,7 @@ final class ProfileImageButtonView: UIButton {
     
     // MARK: - property
     
-    private lazy var profileImageView = UIImageView()
+    lazy var profileImageView = UIImageView()
     private let profileBrushImageView = UIImageView(image: ImageLiterals.settingProfileImageBrushButton)
     
     // MARK: - life cycle
