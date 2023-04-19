@@ -15,9 +15,3 @@ struct AuthResponse: Codable {
     let refreshToken: String?
     let refreshTokenExpireTime: String?
 }
-
-
-struct AuthRequest: Codable {
-    var clientType = "IOS"
-    var socialType = "GOOGLE"
-}
