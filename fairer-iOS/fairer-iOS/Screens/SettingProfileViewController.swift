@@ -11,7 +11,6 @@ import SnapKit
 
 final class SettingProfileViewController: BaseViewController {
     
-    private var firstProfileImage: String?
     private var firstName: String?
     private var firstStatus: String?
     
@@ -294,7 +293,6 @@ final class SettingProfileViewController: BaseViewController {
             }
             self.firstName = response.memberName
             self.firstStatus = response.statusMessage
-            self.firstProfileImage = response.profilePath
             self.lastName = response.memberName
             self.lastStatus = response.statusMessage
             self.lastProfileImage = response.profilePath
@@ -368,7 +366,7 @@ extension SettingProfileViewController {
     
     private func pushSettingProfileImageViewController() {
         let settingProfileImageView = SettingProfileImageViewController()
-        if let image = firstProfileImage,
+        if let image = lastProfileImage,
            let name = firstName,
            let status = firstStatus {
             settingProfileImageView.setupProfile(image: image, name: name, status: status)
