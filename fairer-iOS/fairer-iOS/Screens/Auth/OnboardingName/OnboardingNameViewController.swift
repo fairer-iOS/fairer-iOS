@@ -161,11 +161,10 @@ extension OnboardingNameViewController {
         if nameTextField.text!.hasCharacters() {
             nameTextField.layer.borderWidth = 0
             disableLabel.isHidden = true
-            
-            // TODO: - userdefault에 이름 저장
             let onBoardingProfileViewController = OnboardingProfileViewController()
+            if let name = nameTextField.text{            onBoardingProfileViewController.setUserName(name: name)
+            }
             self.navigationController?.pushViewController(onBoardingProfileViewController, animated: true)
-            
         } else {
             nameTextField.layer.borderWidth = 1
             nameTextField.layer.borderColor = UIColor.negative20.cgColor
