@@ -16,8 +16,8 @@ struct UserDefaultHandler {
     @UserDefault(key: "refreshToken", defaultValue: "")
     var refershToken: String
     
-    @UserDefault(key: "socialType", defaultValue: SocialType.google)
-    var socialType: SocialType
+    @UserDefault(key: "socialType", defaultValue: "")
+    var socialType: String
     
     func clearUserInformations() {
         _acceesToken.removeAll()

@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 enum OauthRouter {
-    case oauthLogin(clientType: String, socialType: SocialType)
+    case oauthLogin(clientType: String, socialType: String)
 }
 
 extension OauthRouter: BaseTargetType {

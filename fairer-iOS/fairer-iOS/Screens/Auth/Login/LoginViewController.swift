@@ -120,16 +120,17 @@ final class LoginViewController: BaseViewController {
                     print(error as Any)
                     return
                 }
-                guard let authentication = authentication else { return }
-                let idToken = authentication.idToken
-                UserDefaults.standard.set(idToken, forKey: "OauthIdToken")
-                self.postSignIn()
+                
+                guard let idToken = authentication?.idToken else { return }
+                UserDefaultHandler.shared.acceesToken = idToken
+                UserDefaultHandler.shared.socialType = SocialType.google.rawValue
+                self.postSignIn(socialType: SocialType.google.rawValue)
             }
         }
     }
     
-    func postSignIn() {
-        NetworkService.shared.oauth.postSignIn(socialType: OauthRequestData) { result in
+    func postSignIn(socialType: String) {
+        NetworkService.shared.oauth.postSignIn(socialType: socialType) { result in
             switch result {
             case .success(let response):
                 guard let data = response as? AuthResponse else { return }
