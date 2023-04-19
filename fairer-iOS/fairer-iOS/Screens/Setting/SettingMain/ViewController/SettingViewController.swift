@@ -152,16 +152,14 @@ final class SettingViewController: BaseViewController {
                 self?.postLogout(authorization: "refreshToken")
             }
         )
-        print("로그아웃")
     }
     
     private func postLogout(authorization: String) {
-//        self.postLogout(Authorization: authorization) { [weak self] response in
-//            guard self != nil else { return }
-//        }
+        self.postLogout(Authorization: authorization) { [weak self] response in
+            guard self != nil else { return }
+            UserDefaults.resetDefaults()
+        }
     }
-    
-    
 }
 
 // MARK: - extension
