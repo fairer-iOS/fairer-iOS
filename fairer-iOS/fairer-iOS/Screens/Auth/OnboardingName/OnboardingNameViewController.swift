@@ -162,7 +162,8 @@ extension OnboardingNameViewController {
             nameTextField.layer.borderWidth = 0
             disableLabel.isHidden = true
             let onBoardingProfileViewController = OnboardingProfileViewController()
-            if let name = nameTextField.text{            onBoardingProfileViewController.setUserName(name: name)
+            if let name = nameTextField.text{
+                onBoardingProfileViewController.setUserName(name: name)
             }
             self.navigationController?.pushViewController(onBoardingProfileViewController, animated: true)
         } else {
