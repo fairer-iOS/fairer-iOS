@@ -144,9 +144,24 @@ final class SettingViewController: BaseViewController {
     private func touchUpToLogout() {
         
         // FIXME: - 로그아웃 연결
-        
+        self.makeRequestAlert(
+            title: "로그아웃 하시겠습니까?",
+            message: "",
+            okTitle: "로그아웃", cancelTitle: "취소",
+            okAction: { [weak self] _ in
+                self?.postLogout(authorization: "refreshToken")
+            }
+        )
         print("로그아웃")
     }
+    
+    private func postLogout(authorization: String) {
+//        self.postLogout(Authorization: authorization) { [weak self] response in
+//            guard self != nil else { return }
+//        }
+    }
+    
+    
 }
 
 // MARK: - extension
@@ -170,5 +185,23 @@ extension SettingViewController: UITableViewDataSource {
 extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.navigationController?.pushViewController(SettingModel.pushView[indexPath.row], animated: true)
+    }
+}
+
+// MARK: - network
+
+extension SettingViewController {
+    func postLogout(Authorization: String, completion: @escaping (String) -> Void) {
+        NetworkService.shared.oauth.postLogout(Authorization: Authorization) { result in
+            switch result {
+            case .success(let response):
+                guard let response = response as? String else { return }
+                completion(response)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
     }
 }

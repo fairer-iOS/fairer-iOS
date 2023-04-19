@@ -11,6 +11,7 @@ import Moya
 
 enum OauthRouter {
     case oauthLogin(socialType: AuthRequest)
+    case logout(Authorization: String)
 }
 
 extension OauthRouter: BaseTargetType {
@@ -18,12 +19,14 @@ extension OauthRouter: BaseTargetType {
         switch self {
         case .oauthLogin:
             return URLConstant.oauth + "/login"
+        case .logout:
+            return URLConstant.oauth + "/logout"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .oauthLogin:
+        case .oauthLogin, .logout:
             return .post
         }
     }
@@ -32,6 +35,8 @@ extension OauthRouter: BaseTargetType {
         switch self {
         case .oauthLogin(let socialType):
             return .requestJSONEncodable(socialType)
+        case .logout(let Authorization):
+            return .requestParameters(parameters: ["Authorization": Authorization], encoding: JSONEncoding.default)
         }
     }
 }
