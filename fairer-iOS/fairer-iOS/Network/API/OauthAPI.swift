@@ -13,9 +13,24 @@ final class OauthAPI {
 
     private let authProvider = MoyaProvider<OauthRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
-    public func postSignIn(socialType: String,
+    func postSignIn(socialType: String,
                            completion: @escaping (NetworkResult<Any>) -> Void) {
         authProvider.request(.oauthLogin(clientType: "IOS", socialType: socialType)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func getToken(socialType: String,
+                           completion: @escaping (NetworkResult<Any>) -> Void) {
+        authProvider.request(.getToken(clientType: "IOS", socialType: socialType)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
