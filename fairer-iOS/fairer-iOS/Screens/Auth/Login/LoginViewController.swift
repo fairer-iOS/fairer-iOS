@@ -123,8 +123,9 @@ final class LoginViewController: BaseViewController {
                 
                 guard let idToken = authentication?.idToken else { return }
                 UserDefaultHandler.shared.acceesToken = idToken
-                UserDefaultHandler.shared.socialType = SocialType.google.rawValue
                 self.postSignIn(socialType: SocialType.google.rawValue)
+                let onBoardingNameViewController = OnboardingNameViewController()
+                self.navigationController?.pushViewController(onBoardingNameViewController, animated: true)
             }
         }
     }
@@ -134,7 +135,12 @@ final class LoginViewController: BaseViewController {
             switch result {
             case .success(let response):
                 guard let data = response as? AuthResponse else { return }
-                print(data)
+                UserDefaultHandler.shared.clearUserInformations()
+                if let acceesToken = data.accessToken, let refershToken = data.refreshToken {
+                    UserDefaultHandler.shared.acceesToken = acceesToken
+                    UserDefaultHandler.shared.refershToken = refershToken
+                    UserDefaultHandler.shared.socialType = SocialType.google.rawValue
+                }
             case .requestErr(let errorResponse):
                 dump(errorResponse)
                 guard let data = errorResponse as? UserErrorResponse else { return }
@@ -152,16 +158,13 @@ extension LoginViewController {
     
     private func setButtonAction() {
         let moveToOnboardingView = UIAction { [weak self] _ in
-            self?.moveToOnboardingView()
+            self?.googlelogin()
         }
         
-        // MARK: - fix me : 토큰 처리할 때 moveToGoogleLogin, appleLogin 으로 연결
         self.googleButton.addAction(moveToOnboardingView, for: .touchUpInside)
-        self.appleButton.addAction(moveToOnboardingView, for: .touchUpInside)
     }
-    
-    private func moveToOnboardingView() {
-        let onBoardingViewController = OnboardingNameViewController()
-        self.navigationController?.pushViewController(onBoardingViewController, animated: true)
+
+    private func googlelogin() {
+        googleSignIn()
     }
 }
