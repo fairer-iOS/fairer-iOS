@@ -10,7 +10,7 @@ import Moya
 
 final class MembersAPI {
     
-    private var membersProvider = MoyaProvider<MemberRouter>(plugins: [MoyaLoggerPlugin()])
+    private var membersProvider = MoyaProvider<MemberRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
     private enum ResponseData {
         case getMemberInfo

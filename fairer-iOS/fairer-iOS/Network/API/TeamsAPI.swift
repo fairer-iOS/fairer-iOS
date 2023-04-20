@@ -11,7 +11,7 @@ import Moya
 
 final class TeamsAPI {
     
-    private var teamsProvider = MoyaProvider<TeamsRouter>(plugins: [MoyaLoggerPlugin()])
+    private var teamsProvider = MoyaProvider<TeamsRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
     private enum ResponseData {
         case getTeamInfo

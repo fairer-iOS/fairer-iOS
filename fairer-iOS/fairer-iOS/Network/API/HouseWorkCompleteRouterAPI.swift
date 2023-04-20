@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 final class HouseWorkCompleteRouterAPI {
-    private let provider = MoyaProvider<HouseWorksCompleteRouter>(plugins: [MoyaLoggerPlugin()])
+    private let provider = MoyaProvider<HouseWorksCompleteRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
     private enum ResponseData {
         case deleteCompleteHouseWork

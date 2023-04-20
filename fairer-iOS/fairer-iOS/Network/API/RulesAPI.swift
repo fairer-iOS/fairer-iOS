@@ -11,7 +11,7 @@ import Moya
 
 final class RulesAPI {
     
-    private var rulesProvider = MoyaProvider<RulesRouter>(plugins: [MoyaLoggerPlugin()])
+    private var rulesProvider = MoyaProvider<RulesRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
     init() {}
     

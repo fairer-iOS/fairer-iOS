@@ -11,7 +11,7 @@ import Moya
 
 final class HouseWorksAPI {
     
-    private let provider = MoyaProvider<HouseWorksRouter>(plugins: [MoyaLoggerPlugin()])
+    private let provider = MoyaProvider<HouseWorksRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
     private enum ResponseData {
         case getHouseWorksByDate
