@@ -10,9 +10,17 @@ import UIKit
 import SnapKit
 
 final class GroupMainViewController: BaseViewController {
-
+    
     // MARK: - property
     
+    private var userName: String? {
+        didSet {
+            if let userName = userName {
+                titleLabel.text = "안녕하세요. " + userName + TextLiteral.groupMainViewControllerHouseTitleLabel
+                titleLabel.applyColor(to: userName, with: .blue)
+            }
+        }
+    }
     private let backButton = BackButton()
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -77,12 +85,7 @@ final class GroupMainViewController: BaseViewController {
         super.viewDidLoad()
         setButtonAction()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        bindGroupMemberInfo()
-    }
-    
+
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
@@ -148,30 +151,9 @@ final class GroupMainViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
     }
-    
-    private func bindGroupMemberInfo() {
-        getMemberInfo { [weak self] data in
-            guard let userName = data.memberName else { return }
 
-            self?.titleLabel.text = "안녕하세요. " + userName + TextLiteral.groupMainViewControllerHouseTitleLabel
-            self?.titleLabel.applyColor(to: userName, with: .blue)
-        }
-    }
-}
-
-extension GroupMainViewController {
-    func getMemberInfo(completion: @escaping (MemberResponse) -> Void) {
-        NetworkService.shared.members.getMemberInfo { result in
-            switch result {
-            case .success(let response):
-                guard let memberData = response as? MemberResponse else { return }
-                completion(memberData)
-            case .requestErr(let error):
-                dump(error)
-            default:
-                print("server Error")
-            }
-        }
+    func setUserName(name: String) {
+        userName = name
     }
 }
 
