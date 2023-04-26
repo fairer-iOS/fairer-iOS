@@ -104,6 +104,7 @@ enum ImageLiterals {
     // MARK: - exception handling
     
     static var emptyHouseWork: UIImage { .load(name: "emptyHouseWork") }
+    static var networkError: UIImage { .load(name: "networkError") }
 }
 
 extension UIImage {

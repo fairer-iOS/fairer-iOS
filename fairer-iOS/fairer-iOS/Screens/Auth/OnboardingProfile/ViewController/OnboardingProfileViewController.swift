@@ -11,6 +11,9 @@ import SnapKit
 
 class OnboardingProfileViewController: BaseViewController {
     
+    private var userName: String?
+    private var userImage: String?
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -34,15 +37,11 @@ class OnboardingProfileViewController: BaseViewController {
         label.textColor = .gray600
         return label
     }()
-    private let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
-    private lazy var profileDoneButton: MainButton = {
+    let onboardingProfileGroupCollectionView = OnboardingProfileGroupCollectionView()
+    lazy var profileDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.onboardingProfileViewControllerDoneButtonText
         button.isDisabled = true
-        let action = UIAction { [weak self] _ in
-            self?.didTapDoneButton()
-        }
-        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
@@ -51,6 +50,7 @@ class OnboardingProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didTapImage()
+        setButtonAction()
     }
     
     override func render() {
@@ -89,8 +89,20 @@ class OnboardingProfileViewController: BaseViewController {
     
     // MARK: - functions
     
-    @objc private func didTapDoneButton() {
-        print("버튼 누름")
+    private func setButtonAction() {
+        let didTapDoneAction = UIAction { [weak self] _ in
+            self?.didTapDoneButton()
+            self?.petchMyInfo()
+        }
+        self.profileDoneButton.addAction(didTapDoneAction, for: .touchUpInside)
+    }
+    
+    func didTapDoneButton() {
+        let groupMainViewController = GroupMainViewController()
+        if let name = userName {
+            groupMainViewController.setUserName(name: name)
+        }
+        self.navigationController?.pushViewController(groupMainViewController, animated: true)
     }
     
     override func setupNavigationBar() {
@@ -103,12 +115,46 @@ class OnboardingProfileViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
-    private func didTapImage() {
+    func didTapImage() {
         onboardingProfileGroupCollectionView.didTappedImage = { [weak self] image in
             self?.selectedProfileImageView.image = image
+            if let imageString = image.accessibilityIdentifier {
+                self?.userImage = imageString.profileAssetStringToString(imageAssetString: imageString)
+            }
             guard let selectedImage = self?.selectedProfileImageView.image else { return }
             if selectedImage != ImageLiterals.profileNone {
                 self?.profileDoneButton.isDisabled = false
+            }
+        }
+    }
+    
+    func setUserName(name: String) {
+        userName = name
+    }
+    
+    private func petchMyInfo() {
+        guard let name = userName,
+              let image = userImage else { return }
+        let memberPatchRequest = MemberPatchRequest(memberName: name, profilePath: image, statusMessage: String())
+        self.petchMemberInfoFromServer(body: memberPatchRequest) { [weak self] response in
+            guard self != nil else { return }
+        }
+    }
+}
+
+// MARK: - network
+
+extension OnboardingProfileViewController {
+    private func petchMemberInfoFromServer(body: MemberPatchRequest, completion: @escaping (MemberPatchResponse) -> Void) {
+        NetworkService.shared.members.petchMemberInfo(body: body) { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? MemberPatchResponse else { return }
+                completion(data)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
             }
         }
     }

@@ -10,9 +10,17 @@ import UIKit
 import SnapKit
 
 final class GroupMainViewController: BaseViewController {
-
+    
     // MARK: - property
     
+    private var userName: String? {
+        didSet {
+            if let userName = userName {
+                titleLabel.text = "안녕하세요. " + userName + TextLiteral.groupMainViewControllerHouseTitleLabel
+                titleLabel.applyColor(to: userName, with: .blue)
+            }
+        }
+    }
     private let backButton = BackButton()
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -73,11 +81,11 @@ final class GroupMainViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        bindGroupMemberInfo()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setButtonAction()
     }
-    
+
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
@@ -134,28 +142,44 @@ final class GroupMainViewController: BaseViewController {
     
     // MARK: - functions
     
-    private func bindGroupMemberInfo() {
-        getMemberInfo { [weak self] data in
-            guard let userName = data.memberName else { return }
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let backButton = makeBarButtonItem(with: backButton)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = backButton
+    }
 
-            self?.titleLabel.text = "안녕하세요. " + userName + TextLiteral.groupMainViewControllerHouseTitleLabel
-            self?.titleLabel.applyColor(to: userName, with: .blue)
-        }
+    func setUserName(name: String) {
+        userName = name
     }
 }
 
+// MARK: - navigation control
+
 extension GroupMainViewController {
-    func getMemberInfo(completion: @escaping (MemberResponse) -> Void) {
-        NetworkService.shared.members.getMemberInfo { result in
-            switch result {
-            case .success(let response):
-                guard let memberData = response as? MemberResponse else { return }
-                completion(memberData)
-            case .requestErr(let error):
-                dump(error)
-            default:
-                print("server Error")
-            }
+    
+    private func setButtonAction() {
+        let moveToHouseMakeNameViewAction = UIAction { [weak self] _ in
+            self?.moveToHouseMakeNameView()
         }
+        let moveToHouseEnterViewAction = UIAction { [weak self] _ in
+            self?.moveToHouseEnterView()
+        }
+        
+        self.houseMakeButton.addAction(moveToHouseMakeNameViewAction, for: .touchUpInside)
+        self.houseEnterButton.addAction(moveToHouseEnterViewAction, for: .touchUpInside)
+    }
+    
+    private func moveToHouseMakeNameView() {
+        let houseMakeNameViewController = HouseMakeNameViewController()
+        self.navigationController?.pushViewController(houseMakeNameViewController, animated: true)
+    }
+    
+    private func moveToHouseEnterView() {
+        let houseEnterViewController = EnterHouseViewController()
+        self.navigationController?.pushViewController(houseEnterViewController, animated: true)
     }
 }

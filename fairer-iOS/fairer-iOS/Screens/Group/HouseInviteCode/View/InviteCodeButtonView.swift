@@ -52,13 +52,20 @@ final class InviteCodeButtonView: UIView {
         button.backgroundColor = UIColor(red: 0.992, green: 0.945, blue: 0.38, alpha: 1)
         return button
     }()
-    private let skipButton: UIButton = {
+    let skipButton: UIButton = {
         let button = UIButton()
         button.setTitle(TextLiteral.houseInviteCodeViewControllerSkipButtonText, for: .normal)
         button.titleLabel?.font = .title1
         button.setTitleColor(.gray800, for: .normal)
         button.backgroundColor = .white
         return button
+    }()
+    private let buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.distribution = .fillEqually
+        return stackView
     }()
 
     // MARK: - init
@@ -68,36 +75,28 @@ final class InviteCodeButtonView: UIView {
         render()
     }
     
+    convenience init(skipButtonisHidden: Bool) {
+        self.init()
+        skipButton.isHidden = skipButtonisHidden
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         render()
     }
     
     private func render() {
-        self.addSubview(copyCodeButton)
+        [copyCodeButton, kakaoShareButton, skipButton].forEach {
+            buttonStackView.addArrangedSubview($0)
+        }
+        
         copyCodeButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.width.equalTo(Size.width)
             $0.height.equalTo(56)
         }
         
-        self.addSubview(kakaoShareButton)
-        kakaoShareButton.snp.makeConstraints {
-            $0.top.equalTo(copyCodeButton.snp.bottom).offset(8)
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(56)
-        }
-        
-        self.addSubview(skipButton)
-        skipButton.snp.makeConstraints {
-            $0.top.equalTo(kakaoShareButton.snp.bottom).offset(8)
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(56)
-        }
-        
-        self.snp.makeConstraints {
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(Size.height)
+        self.addSubview(buttonStackView)
+        buttonStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     

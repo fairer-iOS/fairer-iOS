@@ -20,9 +20,9 @@ final class HomeGroupCollectionView: BaseUIView {
     private var selectedIndex = 0
     lazy var selectedMemberName = ""
     private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 24
+        static let collectionHorizontalSpacing: CGFloat = 17
         static let collectionVerticalSpacing: CGFloat = 0
-        static let cellWidth: CGFloat = 48
+        static let cellWidth: CGFloat = 55
         static let cellHeight: CGFloat = 70
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
@@ -85,8 +85,10 @@ extension HomeGroupCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        cell.titleLabel.text = userList[indexPath.item].memberName
-        cell.titleImage.load(from: userList[indexPath.item].profilePath ?? String())
+        guard let memberName = userList[indexPath.item].memberName,
+              let memberImage = userList[indexPath.item].profilePath else { return UICollectionViewCell() }
+        cell.titleImage.load(from: memberImage)
+        cell.titleLabel.text = memberName
         if cell.isSelected == true { cell.onSelected() }
         else { cell.onDeselected() }
         return cell

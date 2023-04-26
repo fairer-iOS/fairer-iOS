@@ -14,15 +14,15 @@ final class CalendarSpaceView: BaseUIView {
     // MARK: - property
     
     let pickDateButton = PickDateButton()
-    private let spaceLabel: UILabel = {
+    let spaceLabel: UILabel = {
         let label = UILabel()
         label.text = Space.livingRoom.rawValue
         label.textColor = .black
         label.font = .title1
         return label
     }()
-    private let spacePin = UIImageView(image: ImageLiterals.spacePin)
-    
+    let spacePin = UIImageView(image: ImageLiterals.spacePin)
+
     
     // MARK: - life cycle
     

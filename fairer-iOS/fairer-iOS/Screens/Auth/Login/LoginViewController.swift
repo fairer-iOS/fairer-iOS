@@ -55,17 +55,15 @@ final class LoginViewController: BaseViewController {
         return button
     }()
     
-    private func setButtonEvent(){
-        let moveToGoogleLogin = UIAction { [weak self] _ in
-            self?.googleSignIn()
-        }
-        self.googleButton.addAction(moveToGoogleLogin, for: .touchUpInside)
+    // MARK: - lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setButtonAction()
     }
     
-    // MARK: - lifecycle
-
     override func viewWillAppear(_ animated: Bool) {
-        self.setButtonEvent()
+        setupNavigationBar()
     }
     
     override func configUI() {
@@ -100,11 +98,16 @@ final class LoginViewController: BaseViewController {
         }
     }
     
-    // MARK: - helper func
+    // MARK: - func
     
     override func setupNavigationBar() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
         let appearance = UINavigationBarAppearance()
+        appearance.shadowColor = .clear
         appearance.backgroundColor = .blue
+        navigationBar.standardAppearance = appearance
+        navigationBar.compactAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
     }
 
     private func googleSignIn() {
@@ -139,5 +142,25 @@ final class LoginViewController: BaseViewController {
                 print("sign in error")
             }
         }
+    }
+}
+
+// MARK: - navigation control
+
+extension LoginViewController {
+    
+    private func setButtonAction() {
+        let moveToOnboardingView = UIAction { [weak self] _ in
+            self?.moveToOnboardingView()
+        }
+        
+        // MARK: - fix me : 토큰 처리할 때 moveToGoogleLogin, appleLogin 으로 연결
+        self.googleButton.addAction(moveToOnboardingView, for: .touchUpInside)
+        self.appleButton.addAction(moveToOnboardingView, for: .touchUpInside)
+    }
+    
+    private func moveToOnboardingView() {
+        let onBoardingViewController = OnboardingNameViewController()
+        self.navigationController?.pushViewController(onBoardingViewController, animated: true)
     }
 }

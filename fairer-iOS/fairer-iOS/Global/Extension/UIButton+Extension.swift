@@ -29,4 +29,16 @@ extension UIButton {
         )
         setAttributedTitle(attributedString, for: .normal)
     }
+    
+    func popViewController() {
+        let popAction = UIAction { [weak self] _ in
+            self?.pop()
+        }
+
+        self.addAction(popAction, for: .touchUpInside)
+    }
+    
+    private func pop() {
+        UIApplication.topViewController()?.navigationController?.popViewController(animated: true)
+    }
 }

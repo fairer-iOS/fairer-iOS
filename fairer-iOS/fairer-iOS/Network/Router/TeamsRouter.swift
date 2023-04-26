@@ -11,6 +11,7 @@ import Moya
 
 enum TeamsRouter {
     case getTeamInfo
+    case getInviteCodeInfo
     case postAddTeam(teamName: String)
     case postJoinTeam(inviteCode: String)
     case patchTeamInfo(teamName: String)
@@ -22,6 +23,8 @@ extension TeamsRouter: BaseTargetType {
         switch self {
         case .getTeamInfo:
             return URLConstant.teams + "/my"
+        case .getInviteCodeInfo:
+            return URLConstant.teams + "/invite-codes"
         case .postAddTeam, .patchTeamInfo:
             return URLConstant.teams
         case .postJoinTeam:
@@ -33,7 +36,7 @@ extension TeamsRouter: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getTeamInfo:
+        case .getTeamInfo, .getInviteCodeInfo:
             return .get
         case .postAddTeam, .postJoinTeam, .postLeaveTeam:
             return .post
@@ -44,7 +47,7 @@ extension TeamsRouter: BaseTargetType {
     
     var task: Moya.Task {
         switch self {
-        case .getTeamInfo, .postLeaveTeam:
+        case .getTeamInfo, .postLeaveTeam, .getInviteCodeInfo:
             return .requestPlain
         case .postAddTeam(let teamName), .patchTeamInfo(let teamName):
             return .requestParameters(parameters: ["teamName": teamName], encoding: JSONEncoding.default)

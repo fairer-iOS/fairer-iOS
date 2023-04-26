@@ -28,7 +28,6 @@ final class OnboardingNameViewController: BaseViewController {
         let button = MainButton()
         button.title = TextLiteral.doneButtonText
         button.isDisabled = true
-        button.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         return button
     }()
     private let disableLabel: UILabel = {
@@ -45,6 +44,10 @@ final class OnboardingNameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegation()
+        setButtonAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setupNotificationCenter()
     }
     
@@ -93,22 +96,7 @@ final class OnboardingNameViewController: BaseViewController {
     private func setupDelegation() {
         nameTextField.delegate = self
     }
-    
-    @objc private func didTapDoneButton() {
-        if nameTextField.text!.hasCharacters() {
-            nameTextField.layer.borderWidth = 0
-            disableLabel.isHidden = true
-            
-            // TODO: - userdefault에 이름 저장
-            
-        } else {
-            nameTextField.layer.borderWidth = 1
-            nameTextField.layer.borderColor = UIColor.negative20.cgColor
-            nameDoneButton.isDisabled = true
-            disableLabel.isHidden = false
-        }
-    }
-    
+
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
@@ -123,26 +111,29 @@ final class OnboardingNameViewController: BaseViewController {
         })
     }
     
+    @objc func textDidChange(noti: NSNotification) {
+        if let text = nameTextField.text {
+            if text.count >= nameMaxLength {
+                let fixedText = text.subString(from: 0, to: nameMaxLength - 1)
+                nameTextField.text = fixedText
+                let when = DispatchTime.now() + 0.01
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.nameTextField.text = fixedText
+                }
+            }
+        }
+    }
+    
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextField.textDidChangeNotification, object: nil)
     }
 }
 
 // MARK: - extension
 
 extension OnboardingNameViewController : UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let char = string.cString(using: String.Encoding.utf8) {
-            let isBackSpace = strcmp(char, "\\b")
-            if isBackSpace == -92 {
-                return true
-            }
-        }
-        guard textField.text!.count < 5 else { return false }
-        return true
-    }
-    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let hasText = nameTextField.hasText
         nameDoneButton.isDisabled = !hasText
@@ -151,5 +142,35 @@ extension OnboardingNameViewController : UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nameTextField.layer.borderWidth = 0
         view.endEditing(true)
+    }
+}
+
+// MARK: - navigation control
+
+extension OnboardingNameViewController {
+    
+    private func setButtonAction() {
+        let didTapDoneAction = UIAction { [weak self] _ in
+            self?.didTapDoneButton()
+        }
+        
+        self.nameDoneButton.addAction(didTapDoneAction, for: .touchUpInside)
+    }
+    
+    private func didTapDoneButton() {
+        if nameTextField.text!.hasCharacters() {
+            nameTextField.layer.borderWidth = 0
+            disableLabel.isHidden = true
+            let onBoardingProfileViewController = OnboardingProfileViewController()
+            if let name = nameTextField.text{
+                onBoardingProfileViewController.setUserName(name: name)
+            }
+            self.navigationController?.pushViewController(onBoardingProfileViewController, animated: true)
+        } else {
+            nameTextField.layer.borderWidth = 1
+            nameTextField.layer.borderColor = UIColor.negative20.cgColor
+            nameDoneButton.isDisabled = true
+            disableLabel.isHidden = false
+        }
     }
 }
