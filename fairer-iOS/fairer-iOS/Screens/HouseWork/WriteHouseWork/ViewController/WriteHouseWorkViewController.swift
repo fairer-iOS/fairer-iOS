@@ -597,20 +597,6 @@ final class WriteHouseWorkViewController: BaseViewController {
             self?.houseWorks[0].repeatPattern = sortedDaysInAPIString.joined(separator: ",")
         }
     }
-    
-    private func setDoneButton() {
-        let action = UIAction { [weak self] _ in
-            if let houseWorks = self?.houseWorks {
-                if self?.isCorrection == true {
-                    self?.repeatAlertView.alertType = .edit
-                    self?.repeatAlertView.isHidden = false
-                } else {
-                    self?.postAddHouseWorks(body: houseWorks)
-                }
-            }
-        }
-        doneButton.addAction(action, for: .touchUpInside)
-    }
 }
 
 // MARK: - extension
@@ -698,7 +684,12 @@ extension WriteHouseWorkViewController {
     private func addButtonAction() {
         let action = UIAction { [weak self] _ in
             if let houseWorks = self?.houseWorks {
-                self?.postAddHouseWorks(body: houseWorks)
+                if self?.isCorrection == true {
+                    self?.repeatAlertView.alertType = .edit
+                    self?.repeatAlertView.isHidden = false
+                } else {
+                    self?.postAddHouseWorks(body: houseWorks)
+                }
             }
             self?.popToHome()
         }
