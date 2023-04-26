@@ -72,6 +72,8 @@ enum ImageLiterals {
     static var moveToCalendarButton: UIImage { .load(name: "keyboard_arrow_down") }
     static var addManagerButton: UIImage { .load(name: "managerplus") }
     static var repeatCycleChevronButton: UIImage { .load(name: "repeatcyclechevron") }
+    static var repeatAlertSelectedButton: UIImage { .load(systemName: "circle.circle.fill") }
+    static var repeatAlertDeSelectedButton: UIImage { .load(systemName: "circle")}
     
     // MARK: - icon
     

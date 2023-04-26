@@ -80,6 +80,8 @@
 		52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */; };
 		52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */; };
 		52A7204429E276D1005E29C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52A7204329E276D1005E29C6 /* GoogleService-Info.plist */; };
+		52A7204829E27804005E29C6 /* RepeatAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7204729E27804005E29C6 /* RepeatAlertView.swift */; };
+		52A7204A29E27DAD005E29C6 /* RepeatAlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */; };
 		52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */; };
 		52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */; };
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
@@ -243,6 +245,8 @@
 		52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileImageViewController.swift; sourceTree = "<group>"; };
 		52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageHouseViewController.swift; sourceTree = "<group>"; };
 		52A7204329E276D1005E29C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		52A7204729E27804005E29C6 /* RepeatAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatAlertView.swift; sourceTree = "<group>"; };
+		52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatAlertTableViewCell.swift; sourceTree = "<group>"; };
 		52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionView.swift; sourceTree = "<group>"; };
 		52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -586,7 +590,8 @@
 		52136FDF298A72020022D465 /* WriteHouseWork */ = {
 			isa = PBXGroup;
 			children = (
-				52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */,
+				52A7204629E277D0005E29C6 /* ViewController */,
+				52A7204529E277C6005E29C6 /* View */,
 			);
 			path = WriteHouseWork;
 			sourceTree = "<group>";
@@ -728,6 +733,23 @@
 				52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */,
 			);
 			path = ManageHouse;
+			sourceTree = "<group>";
+		};
+		52A7204529E277C6005E29C6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52A7204729E27804005E29C6 /* RepeatAlertView.swift */,
+				52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52A7204629E277D0005E29C6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		52C09CF029113D5C00B46F15 /* View */ = {
@@ -1259,6 +1281,7 @@
 				917D8B6329A6330300E26B73 /* OauthRouter.swift in Sources */,
 				52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */,
 				5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */,
+				52A7204829E27804005E29C6 /* RepeatAlertView.swift in Sources */,
 				39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */,
 				522714EB297918EC006BADBC /* CalendarSpaceView.swift in Sources */,
 				917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */,
@@ -1359,6 +1382,7 @@
 				5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */,
 				52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */,
 				917D8B6529A6331100E26B73 /* PresetsRouter.swift in Sources */,
+				52A7204A29E27DAD005E29C6 /* RepeatAlertTableViewCell.swift in Sources */,
 				7EFAA86E28DA032800737DF0 /* SelectHouseWorkViewController.swift in Sources */,
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */,
