@@ -663,6 +663,8 @@ final class HomeViewController: BaseViewController {
     @objc func observeWeekCalendar(notification: Notification) {
         guard let object = notification.userInfo?[NotificationKey.date] as? String else { return }
         let dateArray = object.split(separator: ".")
+        self.scrollDidEnd()
+        self.isScrolled = false
         self.homeCalenderView.calendarMonthLabelButton.setTitle("\(dateArray[0])년 \(dateArray[1])월", for: .normal)
         self.getHouseWorksByDate (
             isOwn: self.checkMemeberCellIsOwn(),
@@ -694,8 +696,14 @@ final class HomeViewController: BaseViewController {
     // MARK: - selector
 
     @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
-        if (sender.direction == .left) { self.homeWeekCalendarCollectionView.getAfterWeekDate() }
-        if (sender.direction == .right) { self.homeWeekCalendarCollectionView.getBeforeWeekDate() }
+        self.scrollDidEnd()
+        isScrolled = false
+        if (sender.direction == .left) {
+            self.homeWeekCalendarCollectionView.getAfterWeekDate()
+        }
+        if (sender.direction == .right) {
+            self.homeWeekCalendarCollectionView.getBeforeWeekDate()
+        }
         self.getHouseWorksByDate(
             isOwn: self.checkMemeberCellIsOwn(),
             startDate: self.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
@@ -942,9 +950,13 @@ extension HomeViewController {
     private func setButtonEvent() {
         self.datePickerView.setAction()
         let moveToTodayDateButtonAction = UIAction { [weak self] _ in
+            self?.scrollDidEnd()
+            self?.isScrolled = false
             self?.moveToTodayDate()
         }
         let moveToTodayDatePickerButtonAction = UIAction { [weak self] _ in
+            self?.scrollDidEnd()
+            self?.isScrolled = false
             self?.moveToDatePicker()
         }
         let moveToSettingViewAction = UIAction { [weak self] _ in
