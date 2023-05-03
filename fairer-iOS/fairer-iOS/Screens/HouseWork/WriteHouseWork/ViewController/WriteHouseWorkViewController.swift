@@ -188,7 +188,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
         getTeamInfo()
-        addButtonAction()
+        setMainButtonAction()
     }
     
     override func render() {
@@ -681,7 +681,7 @@ extension WriteHouseWorkViewController {
 
 extension WriteHouseWorkViewController {
     
-    private func addButtonAction() {
+    private func setMainButtonAction() {
         let action = UIAction { [weak self] _ in
             if let houseWorks = self?.houseWorks {
                 if self?.isCorrection == true {
