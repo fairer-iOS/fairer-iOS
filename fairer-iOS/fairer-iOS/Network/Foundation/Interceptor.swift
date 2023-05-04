@@ -16,14 +16,13 @@ final class Interceptor: RequestInterceptor {
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var urlRequest = urlRequest
-        urlRequest.setValue(UserDefaultHandler.shared.acceesToken, forHTTPHeaderField: "Authorization")
+        urlRequest.setValue(UserDefaultHandler.accessToken, forHTTPHeaderField: "Authorization")
         
-        print("adator 적용 \(urlRequest.headers)")
+        print("adapt 적용 \(urlRequest.headers)")
         completion(.success(urlRequest))
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        print("retry 진입")
         guard let response = request.task?.response as? HTTPURLResponse else {
             completion(.doNotRetryWithError(error))
             return
@@ -35,9 +34,7 @@ final class Interceptor: RequestInterceptor {
             return
         }
         
-        UserDefaultHandler.shared.acceesToken = UserDefaultHandler.shared.refershToken
-        
-        getToken { isSuccess in
+        changerefershToken { isSuccess in
             if isSuccess {
                 completion(.retry)
             } else {
@@ -46,24 +43,12 @@ final class Interceptor: RequestInterceptor {
         }
     }
     
-    private func getToken(completion: @escaping(Bool) -> Void) {
-        NetworkService.shared.oauth.getToken(socialType: UserDefaultHandler.shared.socialType) { result in
-            switch result {
-            case .success(let data):
-                guard let token = data as? AuthResponse else { return }
-                guard let accessToken = token.accessToken else { return }
-                guard let refreshToken = token.refreshToken else { return }
-                UserDefaultHandler.shared.acceesToken = accessToken
-                UserDefaultHandler.shared.refershToken = refreshToken
-                completion(true)
-            case .requestErr(let error):
-                dump(error)
-                UserDefaultHandler.shared.refershToken = ""
-                UserDefaultHandler.shared.acceesToken = ""
-                RootHandler.shared.change()
-            default:
-                completion(false)
-            }
+    private func changerefershToken(completion: @escaping(Bool) -> Void) {
+        UserDefaultHandler.accessToken = UserDefaultHandler.refreshToken
+        if UserDefaultHandler.accessToken == UserDefaultHandler.refreshToken {
+            completion(true)
+        } else {
+            completion(false)
         }
     }
 }
