@@ -31,7 +31,8 @@ final class HouseWorksAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getHouseWorksByDate)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getHouseWorksByDate)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -45,7 +46,8 @@ final class HouseWorksAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postAddHouseWorks)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .postAddHouseWorks)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -64,7 +66,8 @@ final class HouseWorksAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getMemberHouseWorksByDate)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getMemberHouseWorksByDate)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -78,7 +81,8 @@ final class HouseWorksAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .putEditHouseWork)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .putEditHouseWork)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -92,7 +96,8 @@ final class HouseWorksAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteHouseWork)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .deleteHouseWork)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -100,11 +105,16 @@ final class HouseWorksAPI {
         }
     }
     
-    private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
+    private func judgeStatus(by statusCode: Int, _ data: Data, response: HTTPURLResponse?, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         
         switch statusCode {
         case 200..<300:
+            if let authorization = response?.allHeaderFields["Authorization"] as? String,
+               let token = authorization.split(separator: " ").last {
+                UserDefaultHandler.accessToken = String(token)
+                print("현재 적용 헤더 \(UserDefaultHandler.accessToken)")
+            }
             switch responseData {
             case .getHouseWorksByDate, .postAddHouseWorks, .getMemberHouseWorksByDate:
                 return isValidData(data: data, responseData: responseData)

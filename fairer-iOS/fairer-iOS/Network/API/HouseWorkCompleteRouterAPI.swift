@@ -26,7 +26,8 @@ final class HouseWorkCompleteRouterAPI {
             case.success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteCompleteHouseWork)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .deleteCompleteHouseWork)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -44,7 +45,8 @@ final class HouseWorkCompleteRouterAPI {
             case.success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .addCompleteHouseWork)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .addCompleteHouseWork)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -52,7 +54,7 @@ final class HouseWorkCompleteRouterAPI {
         }
     }
     
-    private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
+    private func judgeStatus(by statusCode: Int, _ data: Data, response: HTTPURLResponse?, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         print("statusCode: ", statusCode)
         switch statusCode {
