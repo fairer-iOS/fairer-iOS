@@ -5,7 +5,7 @@
 //  Created by Mingwan Choi on 2022/09/10.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     var stringToDate: Date? {
@@ -128,6 +128,28 @@ extension String {
         let startIndex = self.index(self.startIndex, offsetBy: from)
         let endIndex = self.index(self.startIndex, offsetBy: to)
         return String(self[startIndex...endIndex])
+    }
+    
+    func profileAssetStringToString(imageAssetString: String) -> String {
+        switch imageAssetString {
+        case "profileblue3": return TextLiteral.profileImageURL[0]
+        case "profileblue4": return TextLiteral.profileImageURL[1]
+        case "profilepink1": return TextLiteral.profileImageURL[2]
+        case "profileorange1": return TextLiteral.profileImageURL[3]
+        case "profilepink3": return TextLiteral.profileImageURL[4]
+        case "profilepurple1": return TextLiteral.profileImageURL[5]
+        case "profilepurple2": return TextLiteral.profileImageURL[6]
+        case "profilepurple3": return TextLiteral.profileImageURL[7]
+        case "profileorange2": return TextLiteral.profileImageURL[8]
+        case "profileyellow2": return TextLiteral.profileImageURL[9]
+        case "profileindigo3": return TextLiteral.profileImageURL[10]
+        case "profilegreen1": return TextLiteral.profileImageURL[11]
+        case "profileyellow1": return TextLiteral.profileImageURL[12]
+        case "profilegreen3": return TextLiteral.profileImageURL[13]
+        case "profilelightblue1": return TextLiteral.profileImageURL[14]
+        case "profilelightblue2": return TextLiteral.profileImageURL[15]
+        default: return String()
+        }
     }
 }
 

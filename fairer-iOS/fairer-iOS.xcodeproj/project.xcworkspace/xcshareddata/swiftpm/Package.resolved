@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "8dd85aee02e39dd280c75eef88ffdb86eed4b07b",
-        "version" : "5.6.2"
+        "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
+        "version" : "5.6.4"
       }
     },
     {
@@ -104,8 +104,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kakao/kakao-ios-sdk",
       "state" : {
-        "revision" : "8a68442660d411031888e6e42c4f628933f62401",
-        "version" : "2.11.1"
+        "revision" : "d788f9a5a888f16253b9c3d9f3bd794835708c3f",
+        "version" : "2.15.0"
       }
     },
     {
@@ -123,7 +123,7 @@
       "location" : "https://github.com/Moya/Moya",
       "state" : {
         "branch" : "master",
-        "revision" : "77e67c0b25ebd785c6fe56cad544885f67c8c2c4"
+        "revision" : "963654cd4f82d17d7546b9d6127c29f6df091717"
       }
     },
     {
@@ -178,15 +178,6 @@
       "state" : {
         "revision" : "0af9125c4eae12a4973fb66574c53a54962a9e1e",
         "version" : "1.21.0"
-      }
-    },
-    {
-      "identity" : "swiftsvg",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mchoe/SwiftSVG",
-      "state" : {
-        "branch" : "master",
-        "revision" : "88b9ee086b29019e35f6f49c8e30e5552eb8fa9d"
       }
     }
   ],

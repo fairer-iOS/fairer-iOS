@@ -79,6 +79,8 @@
 		52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */; };
 		52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */; };
 		52A7204429E276D1005E29C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52A7204329E276D1005E29C6 /* GoogleService-Info.plist */; };
+		52A7204829E27804005E29C6 /* RepeatAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7204729E27804005E29C6 /* RepeatAlertView.swift */; };
+		52A7204A29E27DAD005E29C6 /* RepeatAlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */; };
 		52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */; };
 		52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */; };
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
@@ -161,7 +163,12 @@
 		917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D8B8729A63AA500E26B73 /* FcmAPI.swift */; };
 		91AF387929E9DA73000C4EFD /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 91AF387829E9DA73000C4EFD /* FirebaseDynamicLinks */; };
 		91AF387B29E9DA73000C4EFD /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 91AF387A29E9DA73000C4EFD /* FirebaseMessaging */; };
+		91C860B229FE367F007F7C72 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C860B129FE367F007F7C72 /* HomeView.swift */; };
+		91C9C41B29EBF85F002B3B66 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C9C41A29EBF85F002B3B66 /* NetworkMonitor.swift */; };
+		91C9C41D29EBFA37002B3B66 /* NoNetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C9C41C29EBFA37002B3B66 /* NoNetworkView.swift */; };
 		91CB591C29977B09002A3295 /* PickDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB591B29977B09002A3295 /* PickDateView.swift */; };
+		91D4185629EDBF9F00EC2786 /* MemberPatchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D4185529EDBF9F00EC2786 /* MemberPatchRequest.swift */; };
+		91D4185829EDC18200EC2786 /* MemberPatchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D4185729EDC18200EC2786 /* MemberPatchResponse.swift */; };
 		91D6870629E7DCC90046AAA8 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */; };
 		91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */; };
 		91F9886429B49518008D7AB7 /* WorkInfoReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */; };
@@ -242,6 +249,8 @@
 		52A673F229265EE300F3E6DA /* SettingProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileImageViewController.swift; sourceTree = "<group>"; };
 		52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageHouseViewController.swift; sourceTree = "<group>"; };
 		52A7204329E276D1005E29C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		52A7204729E27804005E29C6 /* RepeatAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatAlertView.swift; sourceTree = "<group>"; };
+		52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatAlertTableViewCell.swift; sourceTree = "<group>"; };
 		52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionView.swift; sourceTree = "<group>"; };
 		52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -320,7 +329,12 @@
 		917D8B7F29A634CA00E26B73 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		917D8B8129A6355500E26B73 /* FCMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMRouter.swift; sourceTree = "<group>"; };
 		917D8B8729A63AA500E26B73 /* FcmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmAPI.swift; sourceTree = "<group>"; };
+		91C860B129FE367F007F7C72 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		91C9C41A29EBF85F002B3B66 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		91C9C41C29EBFA37002B3B66 /* NoNetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkView.swift; sourceTree = "<group>"; };
 		91CB591B29977B09002A3295 /* PickDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDateView.swift; sourceTree = "<group>"; };
+		91D4185529EDBF9F00EC2786 /* MemberPatchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPatchRequest.swift; sourceTree = "<group>"; };
+		91D4185729EDC18200EC2786 /* MemberPatchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPatchResponse.swift; sourceTree = "<group>"; };
 		91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthResponse.swift; path = "fairer-iOS/Network/AuthResponse.swift"; sourceTree = SOURCE_ROOT; };
 		91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkInfoReponse.swift; sourceTree = "<group>"; };
@@ -420,6 +434,7 @@
 		39EEF68A28CBB9D600437654 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				91C9C41E29EC215A002B3B66 /* NetworkMonitor */,
 				5A99A2E029A8C483006FE9B2 /* MoyaPlugin */,
 				917D8B7E29A6342400E26B73 /* Foundation */,
 				917D8B5129A62F8C00E26B73 /* Router */,
@@ -441,9 +456,10 @@
 		39F1C12228D5C02900585B83 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				91C860B129FE367F007F7C72 /* HomeView.swift */,
+				91C860B429FE3C50007F7C72 /* RuleView */,
+				91C860B329FE3C45007F7C72 /* ToolBar */,
 				911455C4297E8C76002CCDF9 /* Model */,
-				39F1C12328D5C04F00585B83 /* HomeViewControllerToolBar.swift */,
-				39F1C12F28DABDE900585B83 /* HomeRuleView.swift */,
 				911455C2297E8BFC002CCDF9 /* HomeGroupView */,
 				911455C3297E8C1A002CCDF9 /* WeekCalendarView */,
 				911455C1297E8B79002CCDF9 /* DailyCollectionView */,
@@ -585,7 +601,8 @@
 		52136FDF298A72020022D465 /* WriteHouseWork */ = {
 			isa = PBXGroup;
 			children = (
-				52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */,
+				52A7204629E277D0005E29C6 /* ViewController */,
+				52A7204529E277C6005E29C6 /* View */,
 			);
 			path = WriteHouseWork;
 			sourceTree = "<group>";
@@ -728,6 +745,23 @@
 				52A673F52928956D00F3E6DA /* ManageHouseViewController.swift */,
 			);
 			path = ManageHouse;
+			sourceTree = "<group>";
+		};
+		52A7204529E277C6005E29C6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52A7204729E27804005E29C6 /* RepeatAlertView.swift */,
+				52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52A7204629E277D0005E29C6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				52136FE0298A72130022D465 /* WriteHouseWorkViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		52C09CF029113D5C00B46F15 /* View */ = {
@@ -1144,6 +1178,8 @@
 				914C69CF29AA2F7F008EA9EE /* HouseWorkCompleteResponse.swift */,
 				91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */,
 				5A4E711129BEF88B003FD32F /* BlankResponse.swift */,
+				91D4185529EDBF9F00EC2786 /* MemberPatchRequest.swift */,
+				91D4185729EDC18200EC2786 /* MemberPatchResponse.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1160,6 +1196,31 @@
 				5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */,
 			);
 			path = Foundation;
+			sourceTree = "<group>";
+		};
+		91C860B329FE3C45007F7C72 /* ToolBar */ = {
+			isa = PBXGroup;
+			children = (
+				39F1C12328D5C04F00585B83 /* HomeViewControllerToolBar.swift */,
+			);
+			path = ToolBar;
+			sourceTree = "<group>";
+		};
+		91C860B429FE3C50007F7C72 /* RuleView */ = {
+			isa = PBXGroup;
+			children = (
+				39F1C12F28DABDE900585B83 /* HomeRuleView.swift */,
+			);
+			path = RuleView;
+			sourceTree = "<group>";
+		};
+		91C9C41E29EC215A002B3B66 /* NetworkMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				91C9C41C29EBFA37002B3B66 /* NoNetworkView.swift */,
+				91C9C41A29EBF85F002B3B66 /* NetworkMonitor.swift */,
+			);
+			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1267,6 +1328,7 @@
 				917D8B6329A6330300E26B73 /* OauthRouter.swift in Sources */,
 				52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */,
 				5A99A2DF29A8C45D006FE9B2 /* NetworkResult.swift in Sources */,
+				52A7204829E27804005E29C6 /* RepeatAlertView.swift in Sources */,
 				39F1C12828D5FD2500585B83 /* HomeGroupCollectionView.swift in Sources */,
 				522714EB297918EC006BADBC /* CalendarSpaceView.swift in Sources */,
 				917D8B8029A634CA00E26B73 /* URLConstant.swift in Sources */,
@@ -1274,6 +1336,7 @@
 				39EEF67328CBB60B00437654 /* Encodable+Extension.swift in Sources */,
 				39EEF68228CBB7DE00437654 /* ImageLiteral.swift in Sources */,
 				52A53DD429B086A200C4BB4C /* MemberResponse.swift in Sources */,
+				91C9C41B29EBF85F002B3B66 /* NetworkMonitor.swift in Sources */,
 				39F1C12428D5C04F00585B83 /* HomeViewControllerToolBar.swift in Sources */,
 				5ABB7FB229B48DED008D5C15 /* RulesResponse.swift in Sources */,
 				39EEF66D28CBB59D00437654 /* UICollectionView+Extension.swift in Sources */,
@@ -1328,10 +1391,12 @@
 				5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
 				5A6AAF1929E2A0970055BEE8 /* SettingInviteCodeViewController.swift in Sources */,
+				91D4185829EDC18200EC2786 /* MemberPatchResponse.swift in Sources */,
 				39EEF66F28CBB5A600437654 /* NSObject+Extension.swift in Sources */,
 				52E4C08E297D06F5002AC755 /* SelectManagerCollectionView.swift in Sources */,
 				5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */,
 				915BA73F29E6C081002E7EF5 /* UIApplication+Extension.swift in Sources */,
+				91C9C41D29EBFA37002B3B66 /* NoNetworkView.swift in Sources */,
 				917D8B5A29A632A100E26B73 /* AlarmRouter.swift in Sources */,
 				5A6AAF4F29EBF5210055BEE8 /* UserDefault.swift in Sources */,
 				39EEF68928CBB85C00437654 /* BaseTableViewCell.swift in Sources */,
@@ -1358,13 +1423,16 @@
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,
 				917D8B8829A63AA500E26B73 /* FcmAPI.swift in Sources */,
 				91D6A0C629AE2BFA0051FFE2 /* AuthResponse.swift in Sources */,
+				91C860B229FE367F007F7C72 /* HomeView.swift in Sources */,
 				7EFAA87328DA088900737DF0 /* SelectHouseWorkSpaceCollectionViewCell.swift in Sources */,
 				5227555028B219DC0080DD65 /* AppDelegate.swift in Sources */,
 				52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */,
+				91D4185629EDBF9F00EC2786 /* MemberPatchRequest.swift in Sources */,
 				5204AACE296C647A002FB6CA /* SelectHouseWorkDetailCollectionViewCell.swift in Sources */,
 				5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */,
 				52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */,
 				917D8B6529A6331100E26B73 /* PresetsRouter.swift in Sources */,
+				52A7204A29E27DAD005E29C6 /* RepeatAlertTableViewCell.swift in Sources */,
 				7EFAA86E28DA032800737DF0 /* SelectHouseWorkViewController.swift in Sources */,
 				5227555228B219DC0080DD65 /* SceneDelegate.swift in Sources */,
 				52A673F329265EE300F3E6DA /* SettingProfileImageViewController.swift in Sources */,
@@ -1523,9 +1591,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "fairer-iOS/Global/Supports/fairer-iOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7PQ6FMV22H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "fairer-iOS/Global/Supports/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1538,6 +1609,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "fairer Development";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1550,9 +1623,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "fairer-iOS/Global/Supports/fairer-iOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7PQ6FMV22H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "fairer-iOS/Global/Supports/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1565,6 +1641,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.fairer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "fairer Release";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

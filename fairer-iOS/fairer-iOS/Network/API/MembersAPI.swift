@@ -14,6 +14,7 @@ final class MembersAPI {
     
     private enum ResponseData {
         case getMemberInfo
+        case petchMemberInfo
     }
     
     func getMemberInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
@@ -31,7 +32,25 @@ final class MembersAPI {
         }
     }
     
+
     private func judgeStatus(by statusCode: Int, _ data: Data, response: HTTPURLResponse?,  responseData: ResponseData) -> NetworkResult<Any> {
+
+    func petchMemberInfo(body: MemberPatchRequest, completion: @escaping (NetworkResult<Any>) -> Void) {
+        membersProvider.request(.petchMemberInfo(body: body)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getMemberInfo)
+                completion(networkResult)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+        
+    
+    private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch statusCode {
         case 200..<300:
@@ -41,7 +60,7 @@ final class MembersAPI {
                 print("현재 적용 헤더 \(UserDefaultHandler.accessToken)")
             }
             switch responseData {
-            case .getMemberInfo:
+            case .getMemberInfo, .petchMemberInfo:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400:
@@ -66,6 +85,11 @@ final class MembersAPI {
         switch responseData {
         case .getMemberInfo:
             guard let decodedData = try? decoder.decode(MemberResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
+        case .petchMemberInfo:
+            guard let decodedData = try? decoder.decode(MemberPatchResponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)
