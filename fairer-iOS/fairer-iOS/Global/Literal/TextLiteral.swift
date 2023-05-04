@@ -200,4 +200,7 @@ enum TextLiteral {
     static let settingProfileViewControllerProfileNameLabel = "이름"
     static let settingProfileViewControllerProfileStatusLabel = "상태 메세지"
     static let settingProfileViewControllerPlaceholderText = "Text"
+    
+    // MARK: - clientType
+    static let clientType = "IOS"
 }

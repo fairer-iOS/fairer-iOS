@@ -14,7 +14,7 @@ final class RootHandler {
         let LoginViewController = OnboardingNameViewController()
         guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
         
-        // 로그인 뷰로 이동
+        // MARK: - 로그인 뷰로 이동
         sceneDelegate.window?.rootViewController = LoginViewController
         LoginViewController.navigationController?.setViewControllers([LoginViewController], animated: true)
     }

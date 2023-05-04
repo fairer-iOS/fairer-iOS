@@ -15,7 +15,7 @@ final class OauthAPI {
     
     func postSignIn(socialType: String,
                            completion: @escaping (NetworkResult<Any>) -> Void) {
-        authProvider.request(.oauthLogin(clientType: "IOS", socialType: socialType)) { result in
+        authProvider.request(.oauthLogin(clientType: TextLiteral.clientType, socialType: socialType)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
@@ -27,22 +27,7 @@ final class OauthAPI {
             }
         }
     }
-    
-    func getToken(socialType: String,
-                           completion: @escaping (NetworkResult<Any>) -> Void) {
-        authProvider.request(.getToken(clientType: "IOS", socialType: socialType)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
+        
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch statusCode {
