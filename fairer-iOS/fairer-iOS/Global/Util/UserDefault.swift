@@ -25,8 +25,4 @@ struct UserDefault<T> {
             UserDefaults.standard.set(newValue, forKey: key)
         }
     }
-    
-    func removeAll() {
-        UserDefaults.standard.removeObject(forKey: key)
-    }
 }
