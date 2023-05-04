@@ -8,21 +8,13 @@
 import Foundation
 
 struct UserDefaultHandler {
-    static var shared = UserDefaultHandler()
-    
     @UserDefault(key: "accessToken", defaultValue: "")
-    var acceesToken: String
+    static var accessToken: String
     
     @UserDefault(key: "refreshToken", defaultValue: "")
-    var refershToken: String
+    static var refreshToken: String
     
     @UserDefault(key: "socialType", defaultValue: "")
-    var socialType: String
-    
-    func clearUserInformations() {
-        _acceesToken.removeAll()
-        _refershToken.removeAll()
-        _socialType.removeAll()
-    }
+    static var socialType: String
 }
 
