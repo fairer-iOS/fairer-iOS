@@ -122,7 +122,7 @@ final class LoginViewController: BaseViewController {
                 }
                 
                 guard let idToken = authentication?.idToken else { return }
-                UserDefaultHandler.shared.acceesToken = idToken
+                UserDefaultHandler.accessToken = idToken
                 self.postSignIn(socialType: SocialType.google.rawValue)
                 let onBoardingNameViewController = OnboardingNameViewController()
                 self.navigationController?.pushViewController(onBoardingNameViewController, animated: true)
@@ -135,11 +135,9 @@ final class LoginViewController: BaseViewController {
             switch result {
             case .success(let response):
                 guard let data = response as? AuthResponse else { return }
-                UserDefaultHandler.shared.clearUserInformations()
                 if let acceesToken = data.accessToken, let refershToken = data.refreshToken {
-                    UserDefaultHandler.shared.acceesToken = acceesToken
-                    UserDefaultHandler.shared.refershToken = refershToken
-                    UserDefaultHandler.shared.socialType = SocialType.google.rawValue
+                    UserDefaultHandler.accessToken = acceesToken
+                    UserDefaultHandler.refreshToken = refershToken
                 }
             case .requestErr(let errorResponse):
                 dump(errorResponse)
