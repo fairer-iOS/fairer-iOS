@@ -172,11 +172,13 @@ final class WriteHouseWorkViewController: BaseViewController {
     // MARK: - life cycle
     
     init(houseWorks: [HouseWorksRequest]) {
+        // FIXME: - isCorrection 파라미터 or fromView 파라미터 추가하기
         self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "", space: "ETC")]
         super.init(nibName: nil, bundle: nil)
     }
     
     init(editHouseWork: EditHouseWorkRequest) {
+        // FIXME: - isCorrection 파라미터 or fromView 파라미터 추가하기
         self.editHouseWork = EditHouseWorkRequest(assignees: [11, 38], houseWorkId: 609, houseWorkName: "창 청소", repeatCycle: "W", repeatPattern: "MONDAY,SUNDAY", scheduledDate: "2023-05-02", scheduledTime: "16:02", space: "LIVINGROOM")
         super.init(nibName: nil, bundle: nil)
     }
@@ -637,7 +639,15 @@ extension WriteHouseWorkViewController {
                 DispatchQueue.main.async {
                     // FIXME: 첫번째 멤버 대신 user item 넣어주기
                     if self.isCorrection {
-                        // FIXME: - editHouseWork의 assignees와 membersInfo 속 memberId 가 동일할 경우에만 getManagerView와 selectManagerVie에 넣어주기
+                        // FIXME: - editHouseWork의 assignees와 membersInfo 속 memberId 가 동일할 경우에만 getManagerView와 selectManagerView에 넣어주기
+                        let selectedMemberList = membersInfo.filter { member in
+                            self.editHouseWork?.assignees?.contains { assignee in
+                                member.memberId == assignee
+                            } ?? false
+                        }
+                        self.getManagerView.getManagerCollectionView.selectedMemberList = selectedMemberList
+                        self.selectManagerView.selectManagerCollectionView.selectedManagerList = selectedMemberList
+                        self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
                     } else {
                         guard let memberId = membersInfo[0].memberId else { return }
                         self.houseWorks[0].assignees.append(memberId)
