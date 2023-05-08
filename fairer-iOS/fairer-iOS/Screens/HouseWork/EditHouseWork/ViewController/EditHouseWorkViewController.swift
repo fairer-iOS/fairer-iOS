@@ -21,7 +21,13 @@ final class EditHouseWorkViewController: BaseViewController {
             }
         }
     }
-    private var editHouseWork: EditHouseWorkRequest?
+    private var editHouseWork: EditHouseWorkRequest? {
+        didSet {
+            if oldValue != editHouseWork {
+                self.doneButton.isDisabled = false
+            }
+        }
+    }
     
     // MARK: - property
     
