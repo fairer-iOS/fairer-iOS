@@ -383,6 +383,47 @@ final class WriteHouseWorkViewController: BaseViewController {
                 }
                 timePicker.date = time
             }
+            
+            if editHouseWork?.repeatCycle != "O" {
+                setRepeatToggle.isOn = true
+                repeatCycleView.snp.updateConstraints {
+                    $0.height.equalTo(36)
+                }
+                repeatCycleCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(40)
+                }
+                setRepeatToggle.snp.remakeConstraints {
+                    $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+                    $0.trailing.equalToSuperview().inset(20)
+                }
+                repeatCycleDayLabel.snp.remakeConstraints {
+                    $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+                    $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                    $0.bottom.equalToSuperview().inset(40)
+                }
+                repeatCycleView.repeatCycleLabel.isHidden = false
+                repeatCycleView.repeatCycleButton.isHidden = false
+                repeatCycleDayLabel.isHidden = false
+                if editHouseWork?.repeatCycle == "W" {
+                    if let dayOfWeek = editHouseWork?.repeatPattern?.components(separatedBy: ",") {
+                        var koreanDayOfWeek: [String] = []
+                        var collectionViewDayOfWeek: [String] = []
+                        for day in dayOfWeek {
+                            koreanDayOfWeek.append(String(day.englishToDayOfWeekString().dropFirst(1)))
+                            collectionViewDayOfWeek.append(day.englishToDayOfWeekString())
+                        }
+                        updateRepeatCycleDayLabel(.week, koreanDayOfWeek.joined(separator: ", "))
+                        repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.week.repeatLabel
+                        repeatCycleCollectionView.selectedDaysOfWeek = collectionViewDayOfWeek
+                    }
+                } else {
+                    repeatCycleCollectionView.snp.updateConstraints {
+                        $0.height.equalTo(0)
+                    }
+                    repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.month.repeatLabel
+                    updateRepeatCycleDayLabel(.month, editHouseWork?.repeatPattern ?? Date().dayToString)
+                }
+            }
         }
     }
     
@@ -449,9 +490,19 @@ final class WriteHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
-            selectManagerView.selectManagerCollectionView.selectedManagerList.forEach {
-                if let memberId = $0.memberId, !houseWorks[0].assignees.contains(memberId) {
-                    houseWorks[0].assignees.append(memberId)
+            if isCorrection {
+                editHouseWork?.assignees = []
+                selectManagerView.selectManagerCollectionView.selectedManagerList.forEach {
+                    if let memberId = $0.memberId {
+                        editHouseWork?.assignees?.append(memberId)
+                    }
+                }
+            } else {
+                houseWorks[0].assignees = []
+                selectManagerView.selectManagerCollectionView.selectedManagerList.forEach {
+                    if let memberId = $0.memberId {
+                        houseWorks[0].assignees.append(memberId)
+                    }
                 }
             }
         }
@@ -586,15 +637,27 @@ final class WriteHouseWorkViewController: BaseViewController {
                     $0.height.equalTo(40)
                 }
                 self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
-                self?.houseWorks[0].repeatPattern = Date().dayOfWeekToAPIString
+                if self?.isCorrection == true {
+                    self?.editHouseWork?.repeatPattern = Date().dayOfWeekToAPIString
+                } else {
+                    self?.houseWorks[0].repeatPattern = Date().dayOfWeekToAPIString
+                }
             case .month:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
-                self?.houseWorks[0].repeatPattern = Date().singleDayToKoreanString
+                if self?.isCorrection == true {
+                    self?.editHouseWork?.repeatPattern = Date().singleDayToKoreanString
+                } else {
+                    self?.houseWorks[0].repeatPattern = Date().singleDayToKoreanString
+                }
                 self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
-            self?.houseWorks[0].repeatCycle = repeatCycle.rawValue
+            if self?.isCorrection == true {
+                self?.editHouseWork?.repeatCycle = repeatCycle.rawValue
+            } else {
+                self?.houseWorks[0].repeatCycle = repeatCycle.rawValue
+            }
             self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.repeatLabel
             self?.repeatCycleMenu.isHidden = true
@@ -611,7 +674,11 @@ final class WriteHouseWorkViewController: BaseViewController {
             }
             let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
             self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
-            self?.houseWorks[0].repeatPattern = sortedDaysInAPIString.joined(separator: ",")
+            if self?.isCorrection == true {
+                self?.editHouseWork?.repeatPattern = sortedDaysInAPIString.joined(separator: ",")
+            } else {
+                self?.houseWorks[0].repeatPattern = sortedDaysInAPIString.joined(separator: ",")
+            }
         }
     }
 }
@@ -716,6 +783,7 @@ extension WriteHouseWorkViewController {
                 if self?.isCorrection == true {
                     self?.repeatAlertView.alertType = .edit
                     self?.repeatAlertView.isHidden = false
+//                    print(self?.editHouseWork)
                 } else {
                     self?.postAddHouseWorks(body: houseWorks)
                 }
