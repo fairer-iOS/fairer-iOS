@@ -470,8 +470,8 @@ final class EditHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
+            editHouseWork?.assignees = []
             selectManagerView.selectManagerCollectionView.selectedManagerList.forEach {
-                editHouseWork?.assignees = []
                 if let memberId = $0.memberId {
                     editHouseWork?.assignees?.append(memberId)
                 }

@@ -12,7 +12,6 @@ import SnapKit
 final class WriteHouseWorkViewController: BaseViewController {
     
     private let houseWorkMaxLength = 16
-    var isCorrection: Bool = true
     private var selectedDay: Date = Date() {
         didSet {
             if houseWorks[0].repeatCycle == "W" {
@@ -162,11 +161,6 @@ final class WriteHouseWorkViewController: BaseViewController {
         return button
     }()
     private let datePickerView = PickDateView()
-    private let repeatAlertView: RepeatAlertView = {
-        let view = RepeatAlertView()
-        view.isHidden = true
-        return view
-    }()
     
     // MARK: - life cycle
     
@@ -179,11 +173,9 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDeleteButton()
         setDatePicker()
         setupNotificationCenter()
         setupDelegation()
-        setupCorrection()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
@@ -192,7 +184,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(scrollView, doneButton, selectManagerView, managerToastLabel, datePickerView, repeatAlertView)
+        view.addSubviews(scrollView, doneButton, selectManagerView, managerToastLabel, datePickerView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleMenu, repeatCycleDayLabel)
         
@@ -311,10 +303,6 @@ final class WriteHouseWorkViewController: BaseViewController {
         datePickerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
-        repeatAlertView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
     }
     
     // MARK: - func
@@ -323,24 +311,14 @@ final class WriteHouseWorkViewController: BaseViewController {
         super.setupNavigationBar()
         
         let backButton = makeBarButtonItem(with: backButton)
-        let deleteButton = makeBarButtonItem(with: deleteButton)
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = deleteButton
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-    
-    private func setDeleteButton() {
-        let action = UIAction { [weak self] _ in
-            self?.repeatAlertView.isHidden = false
-            self?.repeatAlertView.alertType = .delete
-        }
-        deleteButton.addAction(action, for: .touchUpInside)
     }
     
     private func setDatePicker() {
@@ -360,13 +338,6 @@ final class WriteHouseWorkViewController: BaseViewController {
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    private func setupCorrection() {
-        if isCorrection {
-            // FIXME: - 집안일 정보 불러오는 api 연결 후 ui 업데이트
-            doneButton.title = "수정 완료"
-        }
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -432,8 +403,9 @@ final class WriteHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
+            houseWorks[0].assignees = []
             selectManagerView.selectManagerCollectionView.selectedManagerList.forEach {
-                if let memberId = $0.memberId, !houseWorks[0].assignees.contains(memberId) {
+                if let memberId = $0.memberId {
                     houseWorks[0].assignees.append(memberId)
                 }
             }
@@ -635,37 +607,9 @@ extension WriteHouseWorkViewController {
             }
         }
     }
-
+    
     private func postAddHouseWorks(body: [HouseWorksRequest]) {
         NetworkService.shared.houseWorks.postAddHouseWorksAPI(body: body) { result in
-            switch result {
-            case .success(let response):
-                dump(response)
-                break
-            case .requestErr(let errorResponse):
-                dump(errorResponse)
-            default:
-                break
-            }
-        }
-    }
-    
-    private func putEditHouseWork(body: EditHouseWorkRequest) {
-        NetworkService.shared.houseWorks.putEditHouseWork(body: body) { result in
-            switch result {
-            case .success(let response):
-                dump(response)
-                break
-            case .requestErr(let errorResponse):
-                dump(errorResponse)
-            default:
-                break
-            }
-        }
-    }
-    
-    private func deleteHouseWork(body: DeleteHouseWorkRequest) {
-        NetworkService.shared.houseWorks.deleteHouseWork(body: body) { result in
             switch result {
             case .success(let response):
                 dump(response)
@@ -680,16 +624,10 @@ extension WriteHouseWorkViewController {
 }
 
 extension WriteHouseWorkViewController {
-    
     private func addButtonAction() {
         let action = UIAction { [weak self] _ in
             if let houseWorks = self?.houseWorks {
-                if self?.isCorrection == true {
-                    self?.repeatAlertView.alertType = .edit
-                    self?.repeatAlertView.isHidden = false
-                } else {
-                    self?.postAddHouseWorks(body: houseWorks)
-                }
+                self?.postAddHouseWorks(body: houseWorks)
             }
             self?.popToHome()
         }
