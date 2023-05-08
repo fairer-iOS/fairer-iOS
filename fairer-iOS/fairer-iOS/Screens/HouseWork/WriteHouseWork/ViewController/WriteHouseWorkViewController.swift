@@ -23,6 +23,7 @@ final class WriteHouseWorkViewController: BaseViewController {
         }
     }
     private var houseWorks: [HouseWorksRequest] = []
+    private var editHouseWork: EditHouseWorkRequest?
     
     // MARK: - property
     
@@ -172,6 +173,11 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     init(houseWorks: [HouseWorksRequest]) {
         self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "", space: "ETC")]
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(editHouseWork: EditHouseWorkRequest) {
+        self.editHouseWork = EditHouseWorkRequest(assignees: [11, 38], houseWorkId: 609, houseWorkName: "창 청소", repeatCycle: "W", repeatPattern: "MONDAY,SUNDAY", scheduledDate: "2023-05-02", scheduledTime: "16:02", space: "LIVINGROOM")
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -364,8 +370,17 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     private func setupCorrection() {
         if isCorrection {
-            // FIXME: - 집안일 정보 불러오는 api 연결 후 ui 업데이트
+            houseWorkNameTextField.text = editHouseWork?.houseWorkName
             doneButton.title = "수정 완료"
+            
+            if let time = editHouseWork?.scheduledTime?.stringToTime {
+                setTimeToggle.isOn = true
+                timePicker.snp.updateConstraints {
+                    $0.top.equalTo(setTimeLabel.snp.bottom).offset(8)
+                    $0.height.equalTo(196.2)
+                }
+                timePicker.date = time
+            }
         }
     }
     
@@ -621,11 +636,15 @@ extension WriteHouseWorkViewController {
                 guard let membersInfo = teamInfo.members else { return }
                 DispatchQueue.main.async {
                     // FIXME: 첫번째 멤버 대신 user item 넣어주기
-                    guard let memberId = membersInfo[0].memberId else { return }
-                    self.houseWorks[0].assignees.append(memberId)
-                    self.getManagerView.getManagerCollectionView.selectedMemberList = [membersInfo[0]]
-                    self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
-                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = [membersInfo[0]]
+                    if self.isCorrection {
+                        // FIXME: - editHouseWork의 assignees와 membersInfo 속 memberId 가 동일할 경우에만 getManagerView와 selectManagerVie에 넣어주기
+                    } else {
+                        guard let memberId = membersInfo[0].memberId else { return }
+                        self.houseWorks[0].assignees.append(memberId)
+                        self.getManagerView.getManagerCollectionView.selectedMemberList = [membersInfo[0]]
+                        self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
+                        self.selectManagerView.selectManagerCollectionView.selectedManagerList = [membersInfo[0]]
+                    }
                 }
                 break
             case .requestErr(let errorResponse):
