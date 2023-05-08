@@ -56,7 +56,7 @@ final class RepeatAlertView: BaseUIView {
         }
     }
     var actionType: ScheduleActionType?
-    var didTappedActionType: ((ScheduleActionType) -> ())?
+    var didConfirmActionType: ((ScheduleActionType, RepeatAlertType) -> ())?
     
     // MARK: - property
     
@@ -172,8 +172,8 @@ final class RepeatAlertView: BaseUIView {
     
     private func setActionButton() {
         let action = UIAction { [weak self] _ in
-            if let actionType = self?.actionType {
-                self?.didTappedActionType?(actionType)
+            if let actionType = self?.actionType, let alertType = self?.alertType {
+                self?.didConfirmActionType?(actionType, alertType)
                 self?.isHidden = true
             }
         }

@@ -194,6 +194,7 @@ final class EditHouseWorkViewController: BaseViewController {
         hidekeyboardWhenTappedAround()
         getTeamInfo()
         addButtonAction()
+        didConfirmRepeatAlertActionType()
     }
     
     override func render() {
@@ -644,6 +645,29 @@ final class EditHouseWorkViewController: BaseViewController {
         repeatCycleDayLabel.isHidden = true
         repeatCycleMenu.isHidden = true
     }
+    
+    private func didConfirmRepeatAlertActionType() {
+        repeatAlertView.didConfirmActionType = { [weak self] actionType, alertType in
+            switch alertType {
+            case .edit:
+                DispatchQueue.main.async {
+                    self?.editHouseWork?.type = actionType.rawValue
+                    self?.editHouseWork?.repeatEndDate = self?.editHouseWork?.scheduledDate
+                    self?.editHouseWork?.updateStandardDate = Date().dateToAPIString
+                    if let editHouseWork = self?.editHouseWork {
+                        self?.putEditHouseWork(body: editHouseWork)
+                    }
+                }
+            case .delete:
+                DispatchQueue.main.async {
+                    if let editHouseWork = self?.editHouseWork {
+                        self?.deleteHouseWork(body: DeleteHouseWorkRequest(deleteStandardDate: Date().dateToAPIString, houseWorkId:  editHouseWork.houseWorkId, type: actionType.rawValue))
+                    }
+                }
+            }
+            self?.popToHome()
+        }
+    }
 }
 
 // MARK: - extension
@@ -719,7 +743,6 @@ extension EditHouseWorkViewController {
         let action = UIAction { [weak self] _ in
             self?.repeatAlertView.alertType = .edit
             self?.repeatAlertView.isHidden = false
-            self?.popToHome()
         }
         doneButton.addAction(action, for: .touchUpInside)
     }
