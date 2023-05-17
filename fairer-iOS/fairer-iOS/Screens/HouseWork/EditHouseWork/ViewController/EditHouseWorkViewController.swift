@@ -661,9 +661,9 @@ final class EditHouseWorkViewController: BaseViewController {
                 }
             case .delete:
                 DispatchQueue.main.async {
-                    print(alertType)
                     if let editHouseWork = self?.editHouseWork {
-                        self?.deleteHouseWork(body: DeleteHouseWorkRequest(deleteStandardDate: Date().dateToAPIString, houseWorkId:  editHouseWork.houseWorkId, type: actionType.rawValue))
+                        let requestBody = DeleteHouseWorkRequest(deleteStandardDate: Date().dateToAPIString, houseWorkId: editHouseWork.houseWorkId, type: actionType.rawValue)
+                        self?.deleteHouseWork(body: requestBody)
                     }
                 }
             }
