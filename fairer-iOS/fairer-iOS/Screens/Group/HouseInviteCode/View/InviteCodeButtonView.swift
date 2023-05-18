@@ -38,7 +38,7 @@ final class InviteCodeButtonView: UIView {
         button.addAction(buttonAction, for: .touchUpInside)
         return button
     }()
-    private let kakaoShareButton: UIButton = {
+    lazy var kakaoShareButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.image = ImageLiterals.imgKakaoShare
         config.imagePlacement = .leading

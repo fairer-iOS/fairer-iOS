@@ -8,11 +8,14 @@
 import UIKit
 
 import SnapKit
+import KakaoSDKShare
+import SafariServices
 
 final class HouseInviteCodeViewController: BaseViewController {
     
     var houseName: String
     var inviteCode: String
+    private let templateId: Int = 92371
 
     init(houseName: String, inviteCode: String) {
         self.houseName = houseName
@@ -26,6 +29,7 @@ final class HouseInviteCodeViewController: BaseViewController {
     
     // MARK: - property
     
+    private var safariViewController : SFSafariViewController?
     private let backButton = BackButton()
     private let houseInvitePrimaryLabel: UILabel = {
         let label = UILabel()
@@ -94,6 +98,7 @@ final class HouseInviteCodeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setButtonAction()
         getinviteCodeExpirationDateTime()
     }
     
@@ -173,6 +178,13 @@ final class HouseInviteCodeViewController: BaseViewController {
         }
     }
     
+    private func setButtonAction() {
+        let kakaoShare = UIAction { [weak self] _ in
+            self?.sharedKakaoAPI()
+        }
+        self.inviteCodeButtonView.kakaoShareButton.addAction(kakaoShare, for: .touchUpInside)
+    }
+    
     private func bindViewData(inviteCode: String, inviteCodeTimeString: String) {
         inviteCodeView.code = inviteCode
         inviteCodeButtonView.code = inviteCode
@@ -198,6 +210,31 @@ final class HouseInviteCodeViewController: BaseViewController {
             {
                 self?.validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
                 self?.setupButtonLayer(validTime: inviteCodeTimeDate)
+            }
+        }
+    }
+    
+    private func sharedKakaoAPI() {
+        if ShareApi.isKakaoTalkSharingAvailable() {
+            ShareApi.shared.shareCustom(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) {(sharingResult, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("shareCustom() success.")
+                    if let sharingResult = sharingResult {
+                        UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+        } else {
+            if let url = ShareApi.shared.makeCustomUrl(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) {
+                self.safariViewController = SFSafariViewController(url: url)
+                self.safariViewController?.modalTransitionStyle = .crossDissolve
+                self.safariViewController?.modalPresentationStyle = .overCurrentContext
+                self.present(self.safariViewController!, animated: true) {
+                    print("웹 present success")
+                }
             }
         }
     }
