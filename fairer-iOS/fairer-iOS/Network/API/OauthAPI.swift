@@ -10,11 +10,12 @@ import Foundation
 import Moya
 
 final class OauthAPI {
-    private let authProvider = MoyaProvider<OauthRouter>(plugins: [MoyaLoggerPlugin()])
+
+    private let authProvider = MoyaProvider<OauthRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
-    public func postSignIn(socialType: AuthRequest,
+    func postSignIn(socialType: String,
                            completion: @escaping (NetworkResult<Any>) -> Void) {
-        authProvider.request(.oauthLogin(socialType: socialType)) { result in
+        authProvider.request(.oauthLogin(clientType: TextLiteral.clientType, socialType: socialType)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
@@ -26,7 +27,7 @@ final class OauthAPI {
             }
         }
     }
-    
+        
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch statusCode {

@@ -10,7 +10,7 @@ import Moya
 
 final class MembersAPI {
     
-    private var membersProvider = MoyaProvider<MemberRouter>(plugins: [MoyaLoggerPlugin()])
+    private var membersProvider = MoyaProvider<MemberRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
     private enum ResponseData {
         case getMemberInfo
@@ -23,7 +23,8 @@ final class MembersAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getMemberInfo)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getMemberInfo)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -31,6 +32,9 @@ final class MembersAPI {
         }
     }
     
+
+    private func judgeStatus(by statusCode: Int, _ data: Data, response: HTTPURLResponse?,  responseData: ResponseData) -> NetworkResult<Any> {
+
     func petchMemberInfo(body: MemberPatchRequest, completion: @escaping (NetworkResult<Any>) -> Void) {
         membersProvider.request(.petchMemberInfo(body: body)) { result in
             switch result {
@@ -48,9 +52,12 @@ final class MembersAPI {
     
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-
         switch statusCode {
         case 200..<300:
+            if let authorization = response?.allHeaderFields["Authorization"] as? String,
+               let token = authorization.split(separator: " ").last {
+                UserDefaultHandler.accessToken = String(token)
+            }
             switch responseData {
             case .getMemberInfo, .petchMemberInfo:
                 return isValidData(data: data, responseData: responseData)

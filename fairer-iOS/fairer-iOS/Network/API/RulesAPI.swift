@@ -11,7 +11,7 @@ import Moya
 
 final class RulesAPI {
     
-    private var rulesProvider = MoyaProvider<RulesRouter>(plugins: [MoyaLoggerPlugin()])
+    private var rulesProvider = MoyaProvider<RulesRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
     init() {}
     
@@ -27,8 +27,8 @@ final class RulesAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getRules)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getRules)
                 completion(networkResult)
                 
             case .failure(let error):
@@ -43,8 +43,8 @@ final class RulesAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getRules)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getRules)
                 completion(networkResult)
                 
             case .failure(let error):
@@ -59,8 +59,8 @@ final class RulesAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteRules)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse , responseData: .deleteRules)
                 completion(networkResult)
                 
             case .failure(let error):
@@ -70,11 +70,15 @@ final class RulesAPI {
     }
 
     
-    private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
+    private func judgeStatus(by statusCode: Int, _ data: Data, response: HTTPURLResponse?, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         
         switch statusCode {
         case 200..<300:
+            if let authorization = response?.allHeaderFields["Authorization"] as? String,
+               let token = authorization.split(separator: " ").last {
+                UserDefaultHandler.accessToken = String(token)
+            }
             switch responseData {
             case .getRules, .postRules, .deleteRules:
                 return isValidData(data: data, responseData: responseData)

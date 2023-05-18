@@ -20,12 +20,16 @@ extension BaseTargetType {
     var headers: [String: String]? {
         let header = [
             "Content-Type": "application/json",
-            "Authorization": UserDefaults.standard.string(forKey: "OauthIdToken") ?? String()
+            "Authorization": UserDefaultHandler.accessToken
         ]
         return header
     }
 
     var sampleData: Data {
         return Data()
+    }
+    
+    var validationType: ValidationType {
+        return .successCodes
     }
 }

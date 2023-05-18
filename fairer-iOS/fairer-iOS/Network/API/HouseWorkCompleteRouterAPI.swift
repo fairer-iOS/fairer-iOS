@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 final class HouseWorkCompleteRouterAPI {
-    private let provider = MoyaProvider<HouseWorksCompleteRouter>(plugins: [MoyaLoggerPlugin()])
+    private let provider = MoyaProvider<HouseWorksCompleteRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
     private enum ResponseData {
         case deleteCompleteHouseWork
@@ -26,7 +26,8 @@ final class HouseWorkCompleteRouterAPI {
             case.success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteCompleteHouseWork)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .deleteCompleteHouseWork)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -44,7 +45,8 @@ final class HouseWorkCompleteRouterAPI {
             case.success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .addCompleteHouseWork)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .addCompleteHouseWork)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -52,11 +54,16 @@ final class HouseWorkCompleteRouterAPI {
         }
     }
     
-    private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
+    private func judgeStatus(by statusCode: Int, _ data: Data, response: HTTPURLResponse?, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        print("statusCode: ", statusCode)
         switch statusCode {
         case 200..<300:
+        case 200..<300:
+            if let authorization = response?.allHeaderFields["Authorization"] as? String,
+               let token = authorization.split(separator: " ").last {
+                UserDefaultHandler.accessToken = String(token)
+            }
+
             switch responseData {
             case .deleteCompleteHouseWork, .addCompleteHouseWork:
                 return isValidData(data: data, responseData: responseData)

@@ -210,6 +210,10 @@ enum TextLiteral {
     static let settingProfileViewControllerProfileStatusLabel = "상태 메세지"
     static let settingProfileViewControllerPlaceholderText = "Text"
     
+
+    // MARK: - clientType
+    static let clientType = "IOS"
+    
     // MARK: - profileImageURLString
     
     static let profileImageURL = [

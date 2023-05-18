@@ -11,7 +11,7 @@ import Moya
 
 final class TeamsAPI {
     
-    private var teamsProvider = MoyaProvider<TeamsRouter>(plugins: [MoyaLoggerPlugin()])
+    private var teamsProvider = MoyaProvider<TeamsRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
     
     private enum ResponseData {
         case getTeamInfo
@@ -28,7 +28,8 @@ final class TeamsAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getTeamInfo)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getTeamInfo)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -42,7 +43,8 @@ final class TeamsAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getInviteCodeInfo)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getInviteCodeInfo)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -56,7 +58,8 @@ final class TeamsAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postAddTeam)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .postAddTeam)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -70,7 +73,8 @@ final class TeamsAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postJoinTeam)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .postJoinTeam)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -84,7 +88,8 @@ final class TeamsAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .patchTeamInfo)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .patchTeamInfo)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -98,19 +103,23 @@ final class TeamsAPI {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postLeaveTeam)
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .postLeaveTeam)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
             }
         }
     }
-
-    private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
+    
+    private func judgeStatus(by statusCode: Int, _ data: Data, response: HTTPURLResponse?,  responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-
         switch statusCode {
         case 200..<300:
+            if let authorization = response?.allHeaderFields["Authorization"] as? String,
+               let token = authorization.split(separator: " ").last {
+                UserDefaultHandler.accessToken = String(token)
+            }
             switch responseData {
             case .getTeamInfo, .getInviteCodeInfo, .postAddTeam, .postJoinTeam, .postLeaveTeam, .patchTeamInfo:
                 return isValidData(data: data, responseData: responseData)
@@ -131,7 +140,7 @@ final class TeamsAPI {
             return .networkFail
         }
     }
-    
+
     private func isValidData(data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch responseData {
