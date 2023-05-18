@@ -20,6 +20,12 @@ extension String {
         return formatter.date(from: self)
     }
     
+    var stringToTime: Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.date(from: self)
+    }
+    
     var iso8601ToDay: Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

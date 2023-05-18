@@ -84,6 +84,7 @@
 		52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */; };
 		52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */; };
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
+		52CB11202A093131009E3646 /* EditHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB111F2A093131009E3646 /* EditHouseWorkViewController.swift */; };
 		52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB590D29116AC8003590DF /* SettingTableViewCell.swift */; };
 		52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */; };
 		52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */; };
@@ -254,6 +255,7 @@
 		52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionView.swift; sourceTree = "<group>"; };
 		52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		52CB111F2A093131009E3646 /* EditHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHouseWorkViewController.swift; sourceTree = "<group>"; };
 		52DB590D29116AC8003590DF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeButtonView.swift; sourceTree = "<group>"; };
 		52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -602,7 +604,6 @@
 			isa = PBXGroup;
 			children = (
 				52A7204629E277D0005E29C6 /* ViewController */,
-				52A7204529E277C6005E29C6 /* View */,
 			);
 			path = WriteHouseWork;
 			sourceTree = "<group>";
@@ -790,6 +791,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		52CB111E2A093121009E3646 /* EditHouseWork */ = {
+			isa = PBXGroup;
+			children = (
+				52CB11212A093143009E3646 /* ViewController */,
+				52A7204529E277C6005E29C6 /* View */,
+			);
+			path = EditHouseWork;
+			sourceTree = "<group>";
+		};
+		52CB11212A093143009E3646 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				52CB111F2A093131009E3646 /* EditHouseWorkViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		52E4C084297CE8B5002AC755 /* GetManagerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -879,6 +897,7 @@
 		5A99A29829A5FA97006FE9B2 /* HouseWork */ = {
 			isa = PBXGroup;
 			children = (
+				52CB111E2A093121009E3646 /* EditHouseWork */,
 				522714E6297917AF006BADBC /* SetHouseWork */,
 				52136FDF298A72020022D465 /* WriteHouseWork */,
 				7EFAA86C28DA02ED00737DF0 /* SelectHouseWork */,
@@ -1418,6 +1437,7 @@
 				5A99A2DB29A8C3F3006FE9B2 /* BaseTargetType.swift in Sources */,
 				52FDBD4A29DD609100FE45CD /* EditHouseWorkRequest.swift in Sources */,
 				52A53DDE29BC5E0400C4BB4C /* UIImageView+Extension.swift in Sources */,
+				52CB11202A093131009E3646 /* EditHouseWorkViewController.swift in Sources */,
 				5204AAB629507238002FB6CA /* SettingAlarmViewController.swift in Sources */,
 				91D6870629E7DCC90046AAA8 /* UINavigationController+Extension.swift in Sources */,
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,

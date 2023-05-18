@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EditHouseWorkRequest: Codable {
+struct EditHouseWorkRequest: Codable, Equatable {
     var assignees: [Int]?
     var houseWorkId: Int?
     var houseWorkName: String?

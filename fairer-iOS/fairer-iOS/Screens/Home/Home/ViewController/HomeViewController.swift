@@ -259,7 +259,7 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // MARK: - fix me, houseWorks 빈 배열 대체
-        let editHouseWorkView = WriteHouseWorkViewController(houseWorks: [])
+        let editHouseWorkView = EditHouseWorkViewController(editHouseWork: EditHouseWorkRequest())
         self.navigationController?.pushViewController(editHouseWorkView, animated: true)
     }
 }

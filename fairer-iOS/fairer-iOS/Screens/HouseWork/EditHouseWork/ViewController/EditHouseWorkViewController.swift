@@ -1,27 +1,33 @@
 //
-//  WriteHouseWorkViewController.swift
+//  EditHouseWorkViewController.swift
 //  fairer-iOS
 //
-//  Created by 김유나 on 2023/02/01.
+//  Created by 김유나 on 2023/05/08.
 //
 
 import UIKit
 
 import SnapKit
 
-final class WriteHouseWorkViewController: BaseViewController {
+final class EditHouseWorkViewController: BaseViewController {
     
     private let houseWorkMaxLength = 16
     private var selectedDay: Date = Date() {
         didSet {
-            if houseWorks[0].repeatCycle == "W" {
+            if editHouseWork?.repeatCycle == "W" {
                 updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
             } else {
                 updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
             }
         }
     }
-    private var houseWorks: [HouseWorksRequest] = []
+    private var editHouseWork: EditHouseWorkRequest? {
+        didSet {
+            if oldValue != editHouseWork {
+                self.doneButton.isDisabled = false
+            }
+        }
+    }
     
     // MARK: - property
     
@@ -156,16 +162,21 @@ final class WriteHouseWorkViewController: BaseViewController {
     }()
     private let doneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.houseWorkDoneButtonText
-        button.isDisabled = false
+        button.title = TextLiteral.editHouseWorkViewControllerDoneButtonText
+        button.isDisabled = true
         return button
     }()
     private let datePickerView = PickDateView()
+    private let repeatAlertView: RepeatAlertView = {
+        let view = RepeatAlertView()
+        view.isHidden = true
+        return view
+    }()
     
     // MARK: - life cycle
     
-    init(houseWorks: [HouseWorksRequest]) {
-        self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "", space: "ETC")]
+    init(editHouseWork: EditHouseWorkRequest) {
+        self.editHouseWork = EditHouseWorkRequest(assignees: [11, 38], houseWorkId: 609, houseWorkName: "창 청소", repeatCycle: "W", repeatPattern: "MONDAY,SUNDAY", scheduledDate: "2023-05-02", scheduledTime: "16:02", space: "LIVINGROOM")
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -173,6 +184,8 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLatestContents()
+        setDeleteButton()
         setDatePicker()
         setupNotificationCenter()
         setupDelegation()
@@ -184,7 +197,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(scrollView, doneButton, selectManagerView, managerToastLabel, datePickerView)
+        view.addSubviews(scrollView, doneButton, selectManagerView, managerToastLabel, datePickerView, repeatAlertView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(writeHouseWorkCalendarView, houseWorkNameLabel, houseWorkNameTextField, houseWorkNameWarningLabel, getManagerView, setTimeLabel, setTimeToggle, timePicker, divider, setRepeatLabel, setRepeatToggle, repeatCycleView, repeatCycleCollectionView, repeatCycleMenu, repeatCycleDayLabel)
         
@@ -303,6 +316,10 @@ final class WriteHouseWorkViewController: BaseViewController {
         datePickerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        repeatAlertView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     // MARK: - func
@@ -311,14 +328,24 @@ final class WriteHouseWorkViewController: BaseViewController {
         super.setupNavigationBar()
         
         let backButton = makeBarButtonItem(with: backButton)
+        let deleteButton = makeBarButtonItem(with: deleteButton)
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = deleteButton
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func setDeleteButton() {
+        let action = UIAction { [weak self] _ in
+            self?.repeatAlertView.isHidden = false
+            self?.repeatAlertView.alertType = .delete
+        }
+        deleteButton.addAction(action, for: .touchUpInside)
     }
     
     private func setDatePicker() {
@@ -329,6 +356,46 @@ final class WriteHouseWorkViewController: BaseViewController {
             self?.presentPickDateView()
         }
         writeHouseWorkCalendarView.pickDateButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setLatestContents() {
+        houseWorkNameTextField.text = editHouseWork?.houseWorkName
+        
+        if let time = editHouseWork?.scheduledTime?.stringToTime {
+            setTimeToggle.isOn = true
+            timePicker.snp.updateConstraints {
+                $0.top.equalTo(setTimeLabel.snp.bottom).offset(8)
+                $0.height.equalTo(196.2)
+            }
+            timePicker.date = time
+        }
+        
+        if editHouseWork?.repeatCycle != "O" {
+            setRepeatToggle.isOn = true
+            showRepeatComponents()
+            if editHouseWork?.repeatCycle == "W" {
+                if let dayOfWeek = editHouseWork?.repeatPattern?.components(separatedBy: ",") {
+                    var koreanDayOfWeek: [String] = []
+                    var collectionViewDayOfWeek: [String] = []
+                    for day in dayOfWeek {
+                        koreanDayOfWeek.append(String(day.englishToDayOfWeekString().dropFirst(1)))
+                        collectionViewDayOfWeek.append(day.englishToDayOfWeekString())
+                    }
+                    updateRepeatCycleDayLabel(.week, koreanDayOfWeek.joined(separator: ", "))
+                    repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.week.repeatLabel
+                    repeatCycleCollectionView.selectedDaysOfWeek = collectionViewDayOfWeek
+                }
+            } else {
+                repeatCycleCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+                repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.month.repeatLabel
+                updateRepeatCycleDayLabel(.month, editHouseWork?.repeatPattern ?? Date().dayToString)
+            }
+        } else {
+            setRepeatToggle.isOn = false
+            hideRepeatComponents()
+        }
     }
     
     private func setupDelegation() {
@@ -373,7 +440,7 @@ final class WriteHouseWorkViewController: BaseViewController {
                 getManagerView.snp.updateConstraints {
                     $0.top.equalTo(houseWorkNameTextField.snp.bottom).offset(8)
                 }
-                houseWorks[0].houseWorkName = text
+                editHouseWork?.houseWorkName = text
             }
         }
     }
@@ -403,10 +470,10 @@ final class WriteHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
-            houseWorks[0].assignees = []
+            editHouseWork?.assignees = []
             selectManagerView.selectManagerCollectionView.selectedManagerList.forEach {
                 if let memberId = $0.memberId {
-                    houseWorks[0].assignees.append(memberId)
+                    editHouseWork?.assignees?.append(memberId)
                 }
             }
         }
@@ -437,7 +504,7 @@ final class WriteHouseWorkViewController: BaseViewController {
                 $0.top.equalTo(setTimeLabel.snp.bottom)
                 $0.height.equalTo(0)
             }
-            houseWorks[0].scheduledTime = ""
+            editHouseWork?.scheduledTime = ""
         }
     }
     
@@ -452,56 +519,21 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     private func didTimeChanged() {
         let time = timePicker.date.dateToTimeString
-        houseWorks[0].scheduledTime = time
+        editHouseWork?.scheduledTime = time
     }
     
     private func didTappedRepeatToggle() {
         if setRepeatToggle.isOn {
-            repeatCycleView.snp.updateConstraints {
-                $0.height.equalTo(36)
-            }
-            repeatCycleCollectionView.snp.updateConstraints {
-                $0.height.equalTo(40)
-            }
-            setRepeatToggle.snp.remakeConstraints {
-                $0.centerY.equalTo(setRepeatLabel.snp.centerY)
-                $0.trailing.equalToSuperview().inset(20)
-            }
-            repeatCycleDayLabel.snp.remakeConstraints {
-                $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
-                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-                $0.bottom.equalToSuperview().inset(40)
-            }
-            repeatCycleView.repeatCycleLabel.isHidden = false
-            repeatCycleView.repeatCycleButton.isHidden = false
-            repeatCycleDayLabel.isHidden = false
+            showRepeatComponents()
             repeatCycleCollectionView.selectedDaysOfWeek = []
-            houseWorks[0].repeatCycle = RepeatCycleType.week.rawValue
-            houseWorks[0].repeatPattern = Date().dayOfWeekToAPIString
             repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.week.repeatLabel
             updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
+            editHouseWork?.repeatCycle = RepeatCycleType.week.rawValue
+            editHouseWork?.repeatPattern = Date().dayOfWeekToAPIString
         } else {
-            repeatCycleView.snp.updateConstraints {
-                $0.height.equalTo(0)
-            }
-            repeatCycleCollectionView.snp.updateConstraints {
-                $0.height.equalTo(0)
-            }
-            setRepeatToggle.snp.remakeConstraints {
-                $0.centerY.equalTo(setRepeatLabel.snp.centerY)
-                $0.trailing.equalToSuperview().inset(20)
-                $0.bottom.equalTo(0)
-            }
-            repeatCycleDayLabel.snp.remakeConstraints {
-                $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
-                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            }
-            repeatCycleView.repeatCycleLabel.isHidden = true
-            repeatCycleView.repeatCycleButton.isHidden = true
-            repeatCycleDayLabel.isHidden = true
-            repeatCycleMenu.isHidden = true
-            houseWorks[0].repeatCycle = RepeatCycleType.once.rawValue
-            houseWorks[0].repeatPattern = Date().dateToAPIString
+            hideRepeatComponents()
+            editHouseWork?.repeatCycle = RepeatCycleType.once.rawValue
+            editHouseWork?.repeatPattern = Date().dateToAPIString
         }
         addAnimation()
     }
@@ -541,15 +573,15 @@ final class WriteHouseWorkViewController: BaseViewController {
                     $0.height.equalTo(40)
                 }
                 self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
-                self?.houseWorks[0].repeatPattern = Date().dayOfWeekToAPIString
+                self?.editHouseWork?.repeatPattern = Date().dayOfWeekToAPIString
             case .month:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
-                self?.houseWorks[0].repeatPattern = Date().singleDayToKoreanString
+                self?.editHouseWork?.repeatPattern = Date().singleDayToKoreanString
                 self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
-            self?.houseWorks[0].repeatCycle = repeatCycle.rawValue
+            self?.editHouseWork?.repeatCycle = repeatCycle.rawValue
             self?.repeatCycleCollectionView.selectedDaysOfWeek = []
             self?.repeatCycleView.repeatCycleButtonLabel.text = repeatCycle.repeatLabel
             self?.repeatCycleMenu.isHidden = true
@@ -566,14 +598,57 @@ final class WriteHouseWorkViewController: BaseViewController {
             }
             let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
             self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
-            self?.houseWorks[0].repeatPattern = sortedDaysInAPIString.joined(separator: ",")
+            self?.editHouseWork?.repeatPattern = sortedDaysInAPIString.joined(separator: ",")
         }
+    }
+    
+    private func showRepeatComponents() {
+        repeatCycleView.snp.updateConstraints {
+            $0.height.equalTo(36)
+        }
+        repeatCycleCollectionView.snp.updateConstraints {
+            $0.height.equalTo(40)
+        }
+        setRepeatToggle.snp.remakeConstraints {
+            $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+        repeatCycleDayLabel.snp.remakeConstraints {
+            $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalToSuperview().inset(40)
+        }
+        repeatCycleView.repeatCycleLabel.isHidden = false
+        repeatCycleView.repeatCycleButton.isHidden = false
+        repeatCycleDayLabel.isHidden = false
+    }
+    
+    private func hideRepeatComponents() {
+        repeatCycleView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        repeatCycleCollectionView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        setRepeatToggle.snp.remakeConstraints {
+            $0.centerY.equalTo(setRepeatLabel.snp.centerY)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(0)
+        }
+        repeatCycleDayLabel.snp.remakeConstraints {
+            $0.top.equalTo(repeatCycleCollectionView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        repeatCycleView.repeatCycleLabel.isHidden = true
+        repeatCycleView.repeatCycleButton.isHidden = true
+        repeatCycleDayLabel.isHidden = true
+        repeatCycleMenu.isHidden = true
     }
 }
 
 // MARK: - extension
 
-extension WriteHouseWorkViewController: UITextFieldDelegate {
+extension EditHouseWorkViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         checkMaxLength()
     }
@@ -584,7 +659,7 @@ extension WriteHouseWorkViewController: UITextFieldDelegate {
     }
 }
 
-extension WriteHouseWorkViewController {
+extension EditHouseWorkViewController {
     private func getTeamInfo() {
         NetworkService.shared.teams.getTeamInfo { result in
             switch result {
@@ -592,12 +667,14 @@ extension WriteHouseWorkViewController {
                 guard let teamInfo = response as? TeamInfoResponse else { return }
                 guard let membersInfo = teamInfo.members else { return }
                 DispatchQueue.main.async {
-                    // FIXME: 첫번째 멤버 대신 user item 넣어주기
-                    guard let memberId = membersInfo[0].memberId else { return }
-                    self.houseWorks[0].assignees.append(memberId)
-                    self.getManagerView.getManagerCollectionView.selectedMemberList = [membersInfo[0]]
+                    let selectedMemberList = membersInfo.filter { member in
+                        self.editHouseWork?.assignees?.contains { assignee in
+                            member.memberId == assignee
+                        } ?? false
+                    }
+                    self.getManagerView.getManagerCollectionView.selectedMemberList = selectedMemberList
+                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = selectedMemberList
                     self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
-                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = [membersInfo[0]]
                 }
                 break
             case .requestErr(let errorResponse):
@@ -608,8 +685,22 @@ extension WriteHouseWorkViewController {
         }
     }
     
-    private func postAddHouseWorks(body: [HouseWorksRequest]) {
-        NetworkService.shared.houseWorks.postAddHouseWorksAPI(body: body) { result in
+    private func putEditHouseWork(body: EditHouseWorkRequest) {
+        NetworkService.shared.houseWorks.putEditHouseWork(body: body) { result in
+            switch result {
+            case .success(let response):
+                dump(response)
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
+            }
+        }
+    }
+    
+    private func deleteHouseWork(body: DeleteHouseWorkRequest) {
+        NetworkService.shared.houseWorks.deleteHouseWork(body: body) { result in
             switch result {
             case .success(let response):
                 dump(response)
@@ -623,15 +714,13 @@ extension WriteHouseWorkViewController {
     }
 }
 
-extension WriteHouseWorkViewController {
+extension EditHouseWorkViewController {
     private func addButtonAction() {
         let action = UIAction { [weak self] _ in
-            if let houseWorks = self?.houseWorks {
-                self?.postAddHouseWorks(body: houseWorks)
-            }
+            self?.repeatAlertView.alertType = .edit
+            self?.repeatAlertView.isHidden = false
             self?.popToHome()
         }
-        
         doneButton.addAction(action, for: .touchUpInside)
     }
     
