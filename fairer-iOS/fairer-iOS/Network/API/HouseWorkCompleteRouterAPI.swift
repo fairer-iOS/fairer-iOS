@@ -56,9 +56,14 @@ final class HouseWorkCompleteRouterAPI {
     
     private func judgeStatus(by statusCode: Int, _ data: Data, response: HTTPURLResponse?, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        print("statusCode: ", statusCode)
         switch statusCode {
         case 200..<300:
+        case 200..<300:
+            if let authorization = response?.allHeaderFields["Authorization"] as? String,
+               let token = authorization.split(separator: " ").last {
+                UserDefaultHandler.accessToken = String(token)
+            }
+
             switch responseData {
             case .deleteCompleteHouseWork, .addCompleteHouseWork:
                 return isValidData(data: data, responseData: responseData)

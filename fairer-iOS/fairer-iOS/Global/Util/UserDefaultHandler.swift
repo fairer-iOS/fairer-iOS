@@ -17,4 +17,3 @@ struct UserDefaultHandler {
     @UserDefault(key: "socialType", defaultValue: "")
     static var socialType: String
 }
-

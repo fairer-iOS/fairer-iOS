@@ -34,7 +34,7 @@ final class Interceptor: RequestInterceptor {
             return
         }
         
-        changerefershToken { isSuccess in
+        changeRefreshToken { isSuccess in
             if isSuccess {
                 completion(.retry)
             } else {
@@ -43,7 +43,7 @@ final class Interceptor: RequestInterceptor {
         }
     }
     
-    private func changerefershToken(completion: @escaping(Bool) -> Void) {
+    private func changeRefreshToken(completion: @escaping(Bool) -> Void) {
         UserDefaultHandler.accessToken = UserDefaultHandler.refreshToken
         if UserDefaultHandler.accessToken == UserDefaultHandler.refreshToken {
             completion(true)

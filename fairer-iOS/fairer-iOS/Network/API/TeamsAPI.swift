@@ -119,7 +119,6 @@ final class TeamsAPI {
             if let authorization = response?.allHeaderFields["Authorization"] as? String,
                let token = authorization.split(separator: " ").last {
                 UserDefaultHandler.accessToken = String(token)
-                print("현재 적용 헤더 \(UserDefaultHandler.accessToken)")
             }
             switch responseData {
             case .getTeamInfo, .getInviteCodeInfo, .postAddTeam, .postJoinTeam, .postLeaveTeam, .patchTeamInfo:

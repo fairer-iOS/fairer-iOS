@@ -1,5 +1,5 @@
 //
-//  socialType.swift
+//  SocialType.swift
 //  fairer-iOS
 //
 //  Created by 김규철 on 2023/04/17.
