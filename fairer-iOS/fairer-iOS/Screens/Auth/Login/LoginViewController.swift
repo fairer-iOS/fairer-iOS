@@ -9,6 +9,7 @@ import UIKit
 
 import SnapKit
 import GoogleSignIn
+import AuthenticationServices
 
 final class LoginViewController: BaseViewController {
 
@@ -128,6 +129,17 @@ final class LoginViewController: BaseViewController {
                 self.navigationController?.pushViewController(onBoardingNameViewController, animated: true)
             }
         }
+    }
+    
+    private func appleSignIn() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
     }
     
     func postSignIn(socialType: String) {
