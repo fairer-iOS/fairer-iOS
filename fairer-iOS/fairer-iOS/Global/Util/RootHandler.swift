@@ -16,6 +16,6 @@ final class RootHandler {
         
         // MARK: - 로그인 뷰로 이동
         sceneDelegate.window?.rootViewController = loginViewController
-        LoginViewController.navigationController?.setViewControllers([loginViewController], animated: true)
+        loginViewController.navigationController?.setViewControllers([loginViewController], animated: true)
     }
 }

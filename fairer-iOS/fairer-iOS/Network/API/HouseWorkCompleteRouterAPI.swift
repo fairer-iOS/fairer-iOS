@@ -58,7 +58,6 @@ final class HouseWorkCompleteRouterAPI {
         let decoder = JSONDecoder()
         switch statusCode {
         case 200..<300:
-        case 200..<300:
             if let authorization = response?.allHeaderFields["Authorization"] as? String,
                let token = authorization.split(separator: " ").last {
                 UserDefaultHandler.accessToken = String(token)

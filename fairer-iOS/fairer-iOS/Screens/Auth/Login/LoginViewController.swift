@@ -16,7 +16,6 @@ final class LoginViewController: BaseViewController {
     // MARK: - property
 
     private let signInConfig = GIDConfiguration.init(clientID: "", serverClientID: "")
-    private let OauthRequestData = AuthRequest()
     private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
         let label = UILabel()
@@ -208,10 +207,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
                    let authString = String(data: authorizationCode, encoding: .utf8),
                    let tokenString = String(data: identityToken, encoding: .utf8) {
 
-                    print("authorizationCode: \(authorizationCode)")
-                    print("identityToken: \(identityToken)")
-                    print("authString: \(authString)")
-                    print("tokenString: \(tokenString)")
+                    print("authorizationCode String: \(authString)")
+                    print("identityToken String: \(tokenString)")
                 }
                 
                 print("User ID : \(userIdentifier)")
