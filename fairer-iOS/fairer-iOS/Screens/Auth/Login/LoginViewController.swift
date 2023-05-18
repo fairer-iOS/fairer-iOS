@@ -192,6 +192,37 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
     }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+            switch authorization.credential {
+               case let appleIDCredential as ASAuthorizationAppleIDCredential:
+
+                // Create an account in your system.
+                let userIdentifier = appleIDCredential.user
+                let fullName = appleIDCredential.fullName
+                let name =  (fullName?.familyName ?? "") + (fullName?.givenName ?? "")
+                let email = appleIDCredential.email
+
+                if let authorizationCode = appleIDCredential.authorizationCode,
+                   let identityToken = appleIDCredential.identityToken,
+                   let authString = String(data: authorizationCode, encoding: .utf8),
+                   let tokenString = String(data: identityToken, encoding: .utf8) {
+
+                    print("authorizationCode: \(authorizationCode)")
+                    print("identityToken: \(identityToken)")
+                    print("authString: \(authString)")
+                    print("tokenString: \(tokenString)")
+                }
+
+                print("User ID : \(userIdentifier)")
+                print("User Email : \(email ?? "")")
+                print("User Name : \(name)")
+
+            default:
+                break
+            }
+        }
+
 }
 
 
