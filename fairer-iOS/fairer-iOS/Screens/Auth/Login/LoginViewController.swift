@@ -155,14 +155,24 @@ final class LoginViewController: BaseViewController {
 extension LoginViewController {
     
     private func setButtonAction() {
-        let moveToOnboardingView = UIAction { [weak self] _ in
-            self?.googlelogin()
+        let moveToGoogleLogin = UIAction { [weak self] _ in
+            self?.googleLogin()
         }
         
-        self.googleButton.addAction(moveToOnboardingView, for: .touchUpInside)
+        let moveToAppleLogin = UIAction { [weak self] _ in
+            self?.appleSignIn()
+        }
+        
+        self.googleButton.addAction(moveToGoogleLogin, for: .touchUpInside)
+        self.appleButton.addAction(moveToAppleLogin, for: .touchUpInside)
     }
 
-    private func googlelogin() {
+    private func googleLogin() {
         googleSignIn()
     }
+    
+    private func appleLogin() {
+        appleSignIn()
+    }
 }
+
