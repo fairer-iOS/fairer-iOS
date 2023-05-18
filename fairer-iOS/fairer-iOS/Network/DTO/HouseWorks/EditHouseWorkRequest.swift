@@ -12,7 +12,6 @@ struct EditHouseWorkRequest: Codable, Equatable {
     var houseWorkId: Int?
     var houseWorkName: String?
     var repeatCycle: String?
-    var repeatDayOfWeek: String?
     var repeatEndDate: String?
     var repeatPattern: String?
     var scheduledDate: String?

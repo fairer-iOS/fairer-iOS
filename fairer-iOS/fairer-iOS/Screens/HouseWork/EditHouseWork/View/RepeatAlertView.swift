@@ -41,6 +41,12 @@ enum RepeatAlertType {
     }
 }
 
+enum ScheduleActionType: String {
+    case once = "O"
+    case here = "H"
+    case all = "A"
+}
+
 final class RepeatAlertView: BaseUIView {
     
     private let tableViewList = TextLiteral.repeatTableViewList
@@ -49,6 +55,8 @@ final class RepeatAlertView: BaseUIView {
             setupAttribute()
         }
     }
+    var actionType: ScheduleActionType?
+    var didConfirmActionType: ((ScheduleActionType, RepeatAlertType) -> ())?
     
     // MARK: - property
     
@@ -103,6 +111,7 @@ final class RepeatAlertView: BaseUIView {
         super.init(frame: frame)
         render()
         setCancelButton()
+        setActionButton()
     }
     
     required init?(coder: NSCoder) { nil }
@@ -160,11 +169,34 @@ final class RepeatAlertView: BaseUIView {
         }
         cancelButton.addAction(action, for: .touchUpInside)
     }
+    
+    private func setActionButton() {
+        let action = UIAction { [weak self] _ in
+            if let actionType = self?.actionType, let alertType = self?.alertType {
+                self?.didConfirmActionType?(actionType, alertType)
+                self?.isHidden = true
+            }
+        }
+        actionButton.addAction(action, for: .touchUpInside)
+    }
 }
 
 // MARK: - extension
 
 extension RepeatAlertView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.item {
+        case 0:
+            actionType = .once
+        case 1:
+            actionType = .here
+        case 2:
+            actionType = .all
+        default:
+            return
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewList.count
     }

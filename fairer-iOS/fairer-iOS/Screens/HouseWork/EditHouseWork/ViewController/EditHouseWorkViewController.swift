@@ -14,7 +14,7 @@ final class EditHouseWorkViewController: BaseViewController {
     private let houseWorkMaxLength = 16
     private var selectedDay: Date = Date() {
         didSet {
-            if editHouseWork?.repeatCycle == "W" {
+            if editHouseWork?.repeatCycle == RepeatCycleType.week.rawValue {
                 updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
             } else {
                 updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
@@ -176,7 +176,8 @@ final class EditHouseWorkViewController: BaseViewController {
     // MARK: - life cycle
     
     init(editHouseWork: EditHouseWorkRequest) {
-        self.editHouseWork = EditHouseWorkRequest(assignees: [11, 38], houseWorkId: 609, houseWorkName: "창 청소", repeatCycle: "W", repeatPattern: "MONDAY,SUNDAY", scheduledDate: "2023-05-02", scheduledTime: "16:02", space: "LIVINGROOM")
+        // FIXME: - Home 집안일과 연결
+        self.editHouseWork = EditHouseWorkRequest(assignees: [11], houseWorkId: 603, houseWorkName: "마중 나가기", repeatCycle: "O", repeatPattern: "2023-04-21", scheduledDate: "2023-04-21", space: "OUTSIDE")
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -194,6 +195,7 @@ final class EditHouseWorkViewController: BaseViewController {
         hidekeyboardWhenTappedAround()
         getTeamInfo()
         addButtonAction()
+        didConfirmRepeatAlertActionType()
     }
     
     override func render() {
@@ -370,10 +372,10 @@ final class EditHouseWorkViewController: BaseViewController {
             timePicker.date = time
         }
         
-        if editHouseWork?.repeatCycle != "O" {
+        if editHouseWork?.repeatCycle != RepeatCycleType.once.rawValue {
             setRepeatToggle.isOn = true
             showRepeatComponents()
-            if editHouseWork?.repeatCycle == "W" {
+            if editHouseWork?.repeatCycle == RepeatCycleType.week.rawValue {
                 if let dayOfWeek = editHouseWork?.repeatPattern?.components(separatedBy: ",") {
                     var koreanDayOfWeek: [String] = []
                     var collectionViewDayOfWeek: [String] = []
@@ -644,6 +646,30 @@ final class EditHouseWorkViewController: BaseViewController {
         repeatCycleDayLabel.isHidden = true
         repeatCycleMenu.isHidden = true
     }
+    
+    private func didConfirmRepeatAlertActionType() {
+        repeatAlertView.didConfirmActionType = { [weak self] actionType, alertType in
+            switch alertType {
+            case .edit:
+                DispatchQueue.main.async {
+                    self?.editHouseWork?.type = actionType.rawValue
+                    self?.editHouseWork?.repeatEndDate = self?.editHouseWork?.scheduledDate
+                    self?.editHouseWork?.updateStandardDate = Date().dateToAPIString
+                    if let editHouseWork = self?.editHouseWork {
+                        self?.putEditHouseWork(body: editHouseWork)
+                    }
+                }
+            case .delete:
+                DispatchQueue.main.async {
+                    if let editHouseWork = self?.editHouseWork {
+                        let requestBody = DeleteHouseWorkRequest(deleteStandardDate: Date().dateToAPIString, houseWorkId: editHouseWork.houseWorkId, type: actionType.rawValue)
+                        self?.deleteHouseWork(body: requestBody)
+                    }
+                }
+            }
+            self?.popToHome()
+        }
+    }
 }
 
 // MARK: - extension
@@ -719,7 +745,6 @@ extension EditHouseWorkViewController {
         let action = UIAction { [weak self] _ in
             self?.repeatAlertView.alertType = .edit
             self?.repeatAlertView.isHidden = false
-            self?.popToHome()
         }
         doneButton.addAction(action, for: .touchUpInside)
     }
