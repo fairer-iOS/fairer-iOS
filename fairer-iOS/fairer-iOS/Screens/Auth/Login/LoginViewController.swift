@@ -213,16 +213,20 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
                     print("authString: \(authString)")
                     print("tokenString: \(tokenString)")
                 }
-
+                
                 print("User ID : \(userIdentifier)")
                 print("User Email : \(email ?? "")")
                 print("User Name : \(name)")
-
+                
             default:
                 break
             }
-        }
-
+    }
+    
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Apple Error")
+    }
 }
 
 
