@@ -336,7 +336,7 @@
 		91D4185529EDBF9F00EC2786 /* MemberPatchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPatchRequest.swift; sourceTree = "<group>"; };
 		91D4185729EDC18200EC2786 /* MemberPatchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPatchResponse.swift; sourceTree = "<group>"; };
 		91D6870529E7DCC90046AAA8 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
-		91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthResponse.swift; path = "fairer-iOS/Network/AuthResponse.swift"; sourceTree = SOURCE_ROOT; };
+		91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthResponse.swift; path = "fairer-iOS/Network/DTO/AuthResponse.swift"; sourceTree = SOURCE_ROOT; };
 		91F9886329B49518008D7AB7 /* WorkInfoReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkInfoReponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
