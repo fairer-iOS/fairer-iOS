@@ -9,13 +9,13 @@ import UIKit
 
 import SnapKit
 import GoogleSignIn
+import AuthenticationServices
 
 final class LoginViewController: BaseViewController {
 
     // MARK: - property
 
     private let signInConfig = GIDConfiguration.init(clientID: "", serverClientID: "")
-    private let OauthRequestData = AuthRequest()
     private let logoImage = UIImageView(image: ImageLiterals.imgLogoLogin)
     private let loginLabel: UILabel = {
         let label = UILabel()
@@ -130,6 +130,17 @@ final class LoginViewController: BaseViewController {
         }
     }
     
+    private func appleSignIn() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
     func postSignIn(socialType: String) {
         NetworkService.shared.oauth.postSignIn(socialType: socialType) { result in
             switch result {
@@ -155,14 +166,64 @@ final class LoginViewController: BaseViewController {
 extension LoginViewController {
     
     private func setButtonAction() {
-        let moveToOnboardingView = UIAction { [weak self] _ in
-            self?.googlelogin()
+        let moveToGoogleLogin = UIAction { [weak self] _ in
+            self?.googleLogin()
         }
         
-        self.googleButton.addAction(moveToOnboardingView, for: .touchUpInside)
+        let moveToAppleLogin = UIAction { [weak self] _ in
+            self?.appleSignIn()
+        }
+        
+        self.googleButton.addAction(moveToGoogleLogin, for: .touchUpInside)
+        self.appleButton.addAction(moveToAppleLogin, for: .touchUpInside)
     }
 
-    private func googlelogin() {
+    private func googleLogin() {
         googleSignIn()
     }
+    
+    private func appleLogin() {
+        appleSignIn()
+    }
 }
+
+extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+            switch authorization.credential {
+               case let appleIDCredential as ASAuthorizationAppleIDCredential:
+
+                // Create an account in your system.
+                let userIdentifier = appleIDCredential.user
+                let fullName = appleIDCredential.fullName
+                let name =  (fullName?.familyName ?? "") + (fullName?.givenName ?? "")
+                let email = appleIDCredential.email
+
+                if let authorizationCode = appleIDCredential.authorizationCode,
+                   let identityToken = appleIDCredential.identityToken,
+                   let authString = String(data: authorizationCode, encoding: .utf8),
+                   let tokenString = String(data: identityToken, encoding: .utf8) {
+
+                    print("authorizationCode String: \(authString)")
+                    print("identityToken String: \(tokenString)")
+                }
+                
+                print("User ID : \(userIdentifier)")
+                print("User Email : \(email ?? "")")
+                print("User Name : \(name)")
+                
+            default:
+                break
+            }
+    }
+    
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Apple Error")
+    }
+}
+
+
