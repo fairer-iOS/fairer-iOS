@@ -178,13 +178,6 @@ final class HouseInviteCodeViewController: BaseViewController {
         }
     }
     
-    private func setButtonAction() {
-        let kakaoShare = UIAction { [weak self] _ in
-            self?.sharedKakaoAPI()
-        }
-        self.inviteCodeButtonView.kakaoShareButton.addAction(kakaoShare, for: .touchUpInside)
-    }
-    
     private func bindViewData(inviteCode: String, inviteCodeTimeString: String) {
         inviteCodeView.code = inviteCode
         inviteCodeButtonView.code = inviteCode
@@ -265,8 +258,14 @@ extension HouseInviteCodeViewController {
             self?.moveToHomeView()
         }
         
+        let kakaoShare = UIAction { [weak self] _ in
+            self?.sharedKakaoAPI()
+        }
+        
         //MARK: - to do 카카오 공유하기 버튼 연결 추가로 해야함
         self.inviteCodeButtonView.skipButton.addAction(moveToHomeViewAction, for: .touchUpInside)
+        
+        self.inviteCodeButtonView.kakaoShareButton.addAction(kakaoShare, for: .touchUpInside)
     }
     
     private func moveToHomeView() {
