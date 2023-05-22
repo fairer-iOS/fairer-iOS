@@ -264,7 +264,6 @@ extension HouseInviteCodeViewController {
         
         //MARK: - to do 카카오 공유하기 버튼 연결 추가로 해야함
         self.inviteCodeButtonView.skipButton.addAction(moveToHomeViewAction, for: .touchUpInside)
-        
         self.inviteCodeButtonView.kakaoShareButton.addAction(kakaoShare, for: .touchUpInside)
     }
     
