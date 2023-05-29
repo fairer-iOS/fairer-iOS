@@ -28,6 +28,7 @@ final class EditHouseWorkViewController: BaseViewController {
             }
         }
     }
+    private var houseWorkId: Int = 0
     
     // MARK: - property
     
@@ -175,10 +176,8 @@ final class EditHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(editHouseWork: EditHouseWorkRequest) {
-        // FIXME: - Home 집안일과 연결
-        self.editHouseWork = editHouseWork
-        print("수정화면에서 확인", self.editHouseWork)
+    init(houseWorkId: Int) {
+        self.houseWorkId = houseWorkId
         super.init(nibName: nil, bundle: nil)
     }
     
