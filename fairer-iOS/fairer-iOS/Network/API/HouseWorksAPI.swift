@@ -19,6 +19,7 @@ final class HouseWorksAPI {
         case getMemberHouseWorksByDate
         case putEditHouseWork
         case deleteHouseWork
+        case getHouseWorkById
     }
     
     public func getHouseWorksByDate(
@@ -105,6 +106,20 @@ final class HouseWorksAPI {
         }
     }
     
+    func getHouseWorkById(houseWorkId: Int, completion: (NetworkResult<Any>) -> Void) {
+        provider.request(.getHouseWorkById(houseWorkId: houseWorkId)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let httpUrlResponse = response.response
+                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getHouseWorkById)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
     private func judgeStatus(by statusCode: Int, _ data: Data, response: HTTPURLResponse?, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         
@@ -115,11 +130,7 @@ final class HouseWorksAPI {
                 UserDefaultHandler.accessToken = String(token)
             }
             switch responseData {
-            case .getHouseWorksByDate, .postAddHouseWorks, .getMemberHouseWorksByDate:
-                return isValidData(data: data, responseData: responseData)
-            case .putEditHouseWork:
-                return isValidData(data: data, responseData: responseData)
-            case .deleteHouseWork:
+            case .getHouseWorksByDate, .postAddHouseWorks, .getMemberHouseWorksByDate, .getHouseWorkById, .putEditHouseWork, .deleteHouseWork:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400..<500:
@@ -160,6 +171,11 @@ final class HouseWorksAPI {
             return .success(decodedData)
         case .deleteHouseWork:
             return .success(BlankResponse())
+        case .getHouseWorkById:
+            guard let decodedData = try? decoder.decode(HouseWorkResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
         }
     }
 }
