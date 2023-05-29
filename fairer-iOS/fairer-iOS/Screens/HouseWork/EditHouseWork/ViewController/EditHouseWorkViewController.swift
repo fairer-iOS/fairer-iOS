@@ -177,7 +177,8 @@ final class EditHouseWorkViewController: BaseViewController {
     
     init(editHouseWork: EditHouseWorkRequest) {
         // FIXME: - Home 집안일과 연결
-        self.editHouseWork = EditHouseWorkRequest(assignees: [11], houseWorkId: 603, houseWorkName: "마중 나가기", repeatCycle: "O", repeatPattern: "2023-04-21", scheduledDate: "2023-04-21", space: "OUTSIDE")
+        self.editHouseWork = editHouseWork
+        print("수정화면에서 확인", self.editHouseWork)
         super.init(nibName: nil, bundle: nil)
     }
     
