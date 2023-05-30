@@ -22,10 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         guard UserDefaultHandler.isLogin == true else {
-            RootHandler.shared.changeLogin(root: .login)
+            RootHandler.shared.change(root: .login)
             return
         }
-        RootHandler.shared.changeLogin(root: .Home)
+        RootHandler.shared.change(root: .Home)
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

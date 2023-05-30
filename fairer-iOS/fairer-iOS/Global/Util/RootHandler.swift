@@ -15,7 +15,7 @@ final class RootHandler {
         case Home
     }
     
-    func changeLogin(root: Root) {
+    func change(root: Root) {
         guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
         
         switch root {
@@ -23,11 +23,13 @@ final class RootHandler {
             let loginViewController = LoginViewController()
             // MARK: - 로그인 뷰로 이동
             sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+            loginViewController.navigationController?.setViewControllers([loginViewController], animated: true)
             
         case .Home:
             let homeViewController = HomeViewController()
             // MARK: - Home 뷰로 이동
             sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: homeViewController)
+            homeViewController.navigationController?.setViewControllers([homeViewController], animated: true)
         }
     }
 }
