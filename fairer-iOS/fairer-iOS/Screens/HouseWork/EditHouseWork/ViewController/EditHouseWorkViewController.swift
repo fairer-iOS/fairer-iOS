@@ -29,6 +29,7 @@ final class EditHouseWorkViewController: BaseViewController {
         }
     }
     private var houseWorkId: Int = 0
+    private var houseWork: HouseWorkResponse?
     
     // MARK: - property
     
@@ -185,6 +186,7 @@ final class EditHouseWorkViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getHouseWorkById()
         setLatestContents()
         setDeleteButton()
         setDatePicker()
@@ -731,6 +733,20 @@ extension EditHouseWorkViewController {
             case .success(let response):
                 dump(response)
                 break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
+            }
+        }
+    }
+    
+    private func getHouseWorkById() {
+        NetworkService.shared.houseWorks.getHouseWorkById(houseWorkId: houseWorkId) { result in
+            switch result {
+            case .success(let response):
+                self.houseWork = response as? HouseWorkResponse
+                dump(response)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
