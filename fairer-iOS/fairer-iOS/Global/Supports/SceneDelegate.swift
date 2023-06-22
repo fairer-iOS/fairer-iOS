@@ -19,9 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         startMonitoringNetwork(on: scene)
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let rootViewController = UINavigationController(rootViewController: HomeViewController())
-        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
+        
+        guard UserDefaultHandler.isLogin == true else {
+            RootHandler.shared.change(root: .login)
+            return
+        }
+        RootHandler.shared.change(root: .Home)
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

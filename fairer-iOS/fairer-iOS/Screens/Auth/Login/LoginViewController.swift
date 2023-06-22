@@ -124,8 +124,6 @@ final class LoginViewController: BaseViewController {
                 guard let idToken = authentication?.idToken else { return }
                 UserDefaultHandler.accessToken = idToken
                 self.postSignIn(socialType: SocialType.google.rawValue)
-                let onBoardingNameViewController = OnboardingNameViewController()
-                self.navigationController?.pushViewController(onBoardingNameViewController, animated: true)
             }
         }
     }
@@ -134,7 +132,7 @@ final class LoginViewController: BaseViewController {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
-        
+
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
@@ -142,7 +140,7 @@ final class LoginViewController: BaseViewController {
     }
     
     func postSignIn(socialType: String) {
-        NetworkService.shared.oauth.postSignIn(socialType: socialType) { result in
+        NetworkService.shared.oauth.postSignIn(socialType: socialType) { [weak self] result in
             switch result {
             case .success(let response):
                 guard let data = response as? AuthResponse else { return }
@@ -150,6 +148,14 @@ final class LoginViewController: BaseViewController {
                     UserDefaultHandler.accessToken = acceesToken
                     UserDefaultHandler.refreshToken = refershToken
                 }
+                UserDefaultHandler.isLogin = true
+                
+                guard let isNewMember = data.isNewMember, isNewMember == true else {
+                    RootHandler.shared.change(root: .Home)
+                    return }
+                
+                let onBoardingNameViewController = OnboardingNameViewController()
+                self?.navigationController?.setViewControllers([onBoardingNameViewController], animated: true)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
                 guard let data = errorResponse as? UserErrorResponse else { return }

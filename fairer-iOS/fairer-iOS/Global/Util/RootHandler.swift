@@ -10,12 +10,26 @@ import UIKit
 final class RootHandler {
     static let shared = RootHandler()
     
-    func change() {
-        let loginViewController = LoginViewController()
+    enum Root {
+        case login
+        case Home
+    }
+    
+    func change(root: Root) {
         guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
         
-        // MARK: - 로그인 뷰로 이동
-        sceneDelegate.window?.rootViewController = loginViewController
-        loginViewController.navigationController?.setViewControllers([loginViewController], animated: true)
+        switch root {
+        case .login:
+            let loginViewController = LoginViewController()
+            // MARK: - 로그인 뷰로 이동
+            sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+            loginViewController.navigationController?.setViewControllers([loginViewController], animated: true)
+            
+        case .Home:
+            let homeViewController = HomeViewController()
+            // MARK: - Home 뷰로 이동
+            sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: homeViewController)
+            homeViewController.navigationController?.setViewControllers([homeViewController], animated: true)
+        }
     }
 }
