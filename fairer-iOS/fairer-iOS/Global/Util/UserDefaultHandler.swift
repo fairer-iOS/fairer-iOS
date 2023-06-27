@@ -16,4 +16,7 @@ struct UserDefaultHandler {
     
     @UserDefault(key: "socialType", defaultValue: "")
     static var socialType: String
+    
+    @UserDefault(key: "isLogin", defaultValue: false)
+    static var isLogin: Bool
 }
