@@ -30,6 +30,7 @@ struct HouseWorkIdResponse: Codable {
     let houseWorkName: String
     let assignees: [MemberResponse]
     let scheduledDate: String
+    let scheduledTime: String?
     let success: Bool
     let repeatCycle: String
     let repeatPattern: String

@@ -364,7 +364,7 @@ final class EditHouseWorkViewController: BaseViewController {
     private func setLatestContents() {
         houseWorkNameTextField.text = houseWork?.houseWorkName
         
-        if let time = editHouseWork?.scheduledTime?.stringToTime {
+        if let time = houseWork?.scheduledTime?.stringToTime {
             setTimeToggle.isOn = true
             timePicker.snp.updateConstraints {
                 $0.top.equalTo(setTimeLabel.snp.bottom).offset(8)
@@ -373,11 +373,11 @@ final class EditHouseWorkViewController: BaseViewController {
             timePicker.date = time
         }
         
-        if editHouseWork?.repeatCycle != RepeatCycleType.once.rawValue {
+        if houseWork?.repeatCycle != RepeatCycleType.once.rawValue {
             setRepeatToggle.isOn = true
             showRepeatComponents()
-            if editHouseWork?.repeatCycle == RepeatCycleType.week.rawValue {
-                if let dayOfWeek = editHouseWork?.repeatPattern?.components(separatedBy: ",") {
+            if houseWork?.repeatCycle == RepeatCycleType.week.rawValue {
+                if let dayOfWeek = houseWork?.repeatPattern.components(separatedBy: ",") {
                     var koreanDayOfWeek: [String] = []
                     var collectionViewDayOfWeek: [String] = []
                     for day in dayOfWeek {
@@ -399,6 +399,8 @@ final class EditHouseWorkViewController: BaseViewController {
             setRepeatToggle.isOn = false
             hideRepeatComponents()
         }
+        
+        
     }
     
     private func setupDelegation() {
@@ -693,14 +695,15 @@ extension EditHouseWorkViewController {
             case .success(let response):
                 guard let teamInfo = response as? TeamInfoResponse else { return }
                 guard let membersInfo = teamInfo.members else { return }
+                let selectedMemberList = self.houseWork?.assignees.map { $0.memberId }
                 DispatchQueue.main.async {
-                    let selectedMemberList = membersInfo.filter { member in
-                        self.editHouseWork?.assignees?.contains { assignee in
+                    let selectedMemberInfo = membersInfo.filter { member in
+                        selectedMemberList?.contains { assignee in
                             member.memberId == assignee
                         } ?? false
                     }
-                    self.getManagerView.getManagerCollectionView.selectedMemberList = selectedMemberList
-                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = selectedMemberList
+                    self.getManagerView.getManagerCollectionView.selectedMemberList = selectedMemberInfo
+                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = selectedMemberInfo
                     self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
                 }
                 break
