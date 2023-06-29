@@ -188,8 +188,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func didTappedWriteHouseWorkButton() {
-        // MARK: - fix me : WriteHouseWorkViewController init 처리 필요
-        let writeHouseWorkView = WriteHouseWorkViewController(houseWorks: [HouseWorksRequest]())
+        let writeHouseWorkView = WriteHouseWorkViewController()
         self.navigationController?.pushViewController(writeHouseWorkView, animated: true)
     }
     

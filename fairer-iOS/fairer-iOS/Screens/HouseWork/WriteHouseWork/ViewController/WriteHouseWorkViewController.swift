@@ -164,7 +164,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(houseWorks: [HouseWorksRequest]) {
+    init() {
         self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "", space: "ETC")]
         super.init(nibName: nil, bundle: nil)
     }
