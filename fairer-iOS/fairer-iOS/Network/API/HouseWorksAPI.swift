@@ -173,7 +173,7 @@ final class HouseWorksAPI {
         case .deleteHouseWork:
             return .success(BlankResponse())
         case .getHouseWorkById:
-            guard let decodedData = try? decoder.decode(HouseWorkIdResponse.self, from: data) else {
+            guard let decodedData = try? decoder.decode(HouseWorkResponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)
