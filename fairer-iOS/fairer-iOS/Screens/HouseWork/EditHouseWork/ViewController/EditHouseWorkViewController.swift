@@ -29,7 +29,6 @@ final class EditHouseWorkViewController: BaseViewController {
         }
     }
     private var houseWorkId: Int = 0
-    private var houseWork: HouseWorkResponse?
     
     // MARK: - property
     
@@ -361,13 +360,6 @@ final class EditHouseWorkViewController: BaseViewController {
         writeHouseWorkCalendarView.pickDateButton.addAction(action, for: .touchUpInside)
     }
     
-    private func setEditHouseWork(houseWork: HouseWorkResponse) {
-        editHouseWork = EditHouseWorkRequest(assignees: houseWork.assignees.map { $0.memberId ?? .zero }, houseWorkId: houseWork.houseWorkId, houseWorkName: houseWork.houseWorkName, repeatCycle: houseWork.repeatCycle, repeatEndDate: houseWork.repeatEndDate, repeatPattern: houseWork.repeatPattern, scheduledDate: houseWork.scheduledDate, scheduledTime: houseWork.scheduledTime, space: houseWork.space)
-        DispatchQueue.main.async {
-            self.setLatestContents()
-        }
-    }
-    
     private func setLatestContents() {
         houseWorkNameTextField.text = editHouseWork.houseWorkName
         
@@ -406,8 +398,6 @@ final class EditHouseWorkViewController: BaseViewController {
             setRepeatToggle.isOn = false
             hideRepeatComponents()
         }
-        
-        
     }
     
     private func setupDelegation() {
@@ -703,13 +693,13 @@ extension EditHouseWorkViewController {
                 guard let teamInfo = response as? TeamInfoResponse else { return }
                 guard let membersInfo = teamInfo.members else { return }
                 DispatchQueue.main.async {
-                    let selectedMemberInfo = membersInfo.filter { member in
+                    let selectedMemberList = membersInfo.filter { member in
                         self.editHouseWork.assignees?.contains { assignee in
                             member.memberId == assignee
                         } ?? false
                     }
-                    self.getManagerView.getManagerCollectionView.selectedMemberList = selectedMemberInfo
-                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = selectedMemberInfo
+                    self.getManagerView.getManagerCollectionView.selectedMemberList = selectedMemberList
+                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = selectedMemberList
                     self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
                 }
                 break
@@ -754,7 +744,10 @@ extension EditHouseWorkViewController {
             switch result {
             case .success(let response):
                 if let houseWork = response as? HouseWorkResponse {
-                    self.setEditHouseWork(houseWork: houseWork)
+                    self.editHouseWork = EditHouseWorkRequest(assignees: houseWork.assignees.map { $0.memberId ?? .zero }, houseWorkId: houseWork.houseWorkId, houseWorkName: houseWork.houseWorkName, repeatCycle: houseWork.repeatCycle, repeatEndDate: houseWork.repeatEndDate, repeatPattern: houseWork.repeatPattern, scheduledDate: houseWork.scheduledDate, scheduledTime: houseWork.scheduledTime, space: houseWork.space)
+                    DispatchQueue.main.async {
+                        self.setLatestContents()
+                    }
                 }
                 dump(response)
             case .requestErr(let errorResponse):
