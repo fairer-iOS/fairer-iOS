@@ -29,7 +29,7 @@ final class EditHouseWorkViewController: BaseViewController {
         }
     }
     private var houseWorkId: Int = 0
-    private var houseWork: HouseWorkResponse?
+    private var houseWork: HouseWorkIdResponse?
     
     // MARK: - property
     
@@ -187,7 +187,6 @@ final class EditHouseWorkViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getHouseWorkById()
-        setLatestContents()
         setDeleteButton()
         setDatePicker()
         setupNotificationCenter()
@@ -363,7 +362,7 @@ final class EditHouseWorkViewController: BaseViewController {
     }
     
     private func setLatestContents() {
-        houseWorkNameTextField.text = editHouseWork?.houseWorkName
+        houseWorkNameTextField.text = houseWork?.houseWorkName
         
         if let time = editHouseWork?.scheduledTime?.stringToTime {
             setTimeToggle.isOn = true
@@ -745,8 +744,12 @@ extension EditHouseWorkViewController {
         NetworkService.shared.houseWorks.getHouseWorkById(houseWorkId: houseWorkId) { result in
             switch result {
             case .success(let response):
-                self.houseWork = response as? HouseWorkResponse
+                guard let houseWork = response as? HouseWorkIdResponse else { return }
+                self.houseWork = houseWork
                 dump(response)
+                DispatchQueue.main.async {
+                    self.setLatestContents()
+                }
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:

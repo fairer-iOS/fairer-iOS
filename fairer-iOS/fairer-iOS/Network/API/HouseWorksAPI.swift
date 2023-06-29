@@ -106,7 +106,7 @@ final class HouseWorksAPI {
         }
     }
     
-    func getHouseWorkById(houseWorkId: Int, completion: (NetworkResult<Any>) -> Void) {
+    func getHouseWorkById(houseWorkId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.getHouseWorkById(houseWorkId: houseWorkId)) { result in
             switch result {
             case .success(let response):
@@ -114,6 +114,7 @@ final class HouseWorksAPI {
                 let data = response.data
                 let httpUrlResponse = response.response
                 let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getHouseWorkById)
+                completion(networkResult)
             case .failure(let err):
                 print(err)
             }
@@ -172,7 +173,7 @@ final class HouseWorksAPI {
         case .deleteHouseWork:
             return .success(BlankResponse())
         case .getHouseWorkById:
-            guard let decodedData = try? decoder.decode(HouseWorkResponse.self, from: data) else {
+            guard let decodedData = try? decoder.decode(HouseWorkIdResponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)

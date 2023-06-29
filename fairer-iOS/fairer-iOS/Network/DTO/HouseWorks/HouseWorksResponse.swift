@@ -23,3 +23,14 @@ struct HouseWorkResponse: Codable {
     let success: Bool
     let successDateTime: String
 }
+
+struct HouseWorkIdResponse: Codable {
+    let houseWorkId: Int
+    let space: String
+    let houseWorkName: String
+    let assignees: [MemberResponse]
+    let scheduledDate: String
+    let success: Bool
+    let repeatCycle: String
+    let repeatPattern: String
+}

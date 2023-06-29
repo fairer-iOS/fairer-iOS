@@ -63,8 +63,8 @@ extension HouseWorksRouter: BaseTargetType {
             return .requestJSONEncodable(body)
         case .deleteHouseWork(let body):
             return .requestJSONEncodable(body)
-        case .getHouseWorkById(_):
-            return .requestPlain
+        case .getHouseWorkById(let houseWorkId):
+            return .requestParameters(parameters: ["houseWorkId": houseWorkId], encoding: URLEncoding.default)
         }
     }
 }
