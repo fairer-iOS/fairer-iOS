@@ -12,6 +12,8 @@ import SnapKit
 final class SelectHouseWorkViewController: BaseViewController {
     
     var selectedSpace: Space?
+    var houseWorks: [String] = []
+    var houseWorksRequest: [HouseWorksRequest] = []
     
     // MARK: - property
     
@@ -186,16 +188,16 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func didTappedWriteHouseWorkButton() {
-        
         // MARK: - fix me : WriteHouseWorkViewController init 처리 필요
         let writeHouseWorkView = WriteHouseWorkViewController(houseWorks: [HouseWorksRequest]())
         self.navigationController?.pushViewController(writeHouseWorkView, animated: true)
     }
     
     private func didTappedNextButton() {
-        
-        // MARK: - fix me : SetHouseWorkViewController init 처리 필요
-        let setHouseWorkView = SetHouseWorkViewController(houseWorks: [])
+        self.houseWorksRequest = houseWorks.map { houseWorkName in
+            HouseWorksRequest(assignees: [], houseWorkName: houseWorkName, space: selectedSpace?.spaceUpper ?? "")
+        }
+        let setHouseWorkView = SetHouseWorkViewController(houseWorks: houseWorksRequest)
         self.navigationController?.pushViewController(setHouseWorkView, animated: true)
     }
     
@@ -214,6 +216,7 @@ final class SelectHouseWorkViewController: BaseViewController {
             } else {
                 self?.nextButton.isDisabled = true
             }
+            self?.houseWorks = houseWork
         }
     }
     

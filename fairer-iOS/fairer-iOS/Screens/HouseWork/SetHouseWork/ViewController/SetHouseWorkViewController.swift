@@ -143,7 +143,7 @@ final class SetHouseWorkViewController: BaseViewController {
     // MARK: - life cycle
     
     init(houseWorks: [HouseWorksRequest]) {
-        self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "창 청소", space: "LIVINGROOM"), HouseWorksRequest(assignees: [], houseWorkName: "거실 청소", space: "LIVINGROOM"), HouseWorksRequest(assignees: [], houseWorkName: "물건 정리정돈", space: "LIVINGROOM")]
+        self.houseWorks = houseWorks
         super.init(nibName: nil, bundle: nil)
     }
     
