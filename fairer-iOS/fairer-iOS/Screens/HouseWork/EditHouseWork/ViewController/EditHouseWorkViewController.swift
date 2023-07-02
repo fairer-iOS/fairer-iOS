@@ -361,6 +361,8 @@ final class EditHouseWorkViewController: BaseViewController {
     }
     
     private func setLatestContents() {
+        writeHouseWorkCalendarView.spaceLabel.text = Space.allCases.first { $0.spaceUpper == editHouseWork.space}?.rawValue
+        
         houseWorkNameTextField.text = editHouseWork.houseWorkName
         
         if let time = editHouseWork.scheduledTime?.stringToTime {

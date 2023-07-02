@@ -322,6 +322,8 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     private func setDatePicker() {
+        writeHouseWorkCalendarView.spaceLabel.text = "기타 공간"
+        
         datePickerView.isHidden = true
         datePickerView.setAction()
         
