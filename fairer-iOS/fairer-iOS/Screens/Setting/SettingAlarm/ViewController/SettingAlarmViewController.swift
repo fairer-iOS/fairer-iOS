@@ -11,6 +11,9 @@ import SnapKit
 
 final class SettingAlarmViewController: BaseViewController {
     
+    private var scheduledTimeStatus: Bool = false
+    private var notCompleteStatus: Bool = false
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -26,6 +29,11 @@ final class SettingAlarmViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getAlarmStatus()
+    }
     
     override func render() {
         view.addSubview(timeAlarmCell)
@@ -53,5 +61,31 @@ final class SettingAlarmViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func setAlarmStatus(alarmStatus: AlarmResponse) {
+        guard let scheduledTimeStatus = alarmStatus.scheduledTimeStatus, let notCompleteStatus = alarmStatus.notCompleteStatus else { return }
+        timeAlarmCell.cellToggle.isOn = scheduledTimeStatus
+        remindAlarmCell.cellToggle.isOn = notCompleteStatus
+    }
+}
+
+// MARK: - api
+
+extension SettingAlarmViewController {
+    func getAlarmStatus() {
+        NetworkService.shared.alarm.getAlarmStatus { result in
+            switch result {
+            case .success(let response):
+                if let alarmStatus = response as? AlarmResponse {
+                    self.setAlarmStatus(alarmStatus: alarmStatus)
+                }
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
+            }
+        }
     }
 }

@@ -26,6 +26,7 @@ final class AlarmAPI {
                 let data = response.data
                 let httpUrlResponse = response.response
                 let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .getAlarmStatus)
+                completion(networkResult)
             case .failure(let err):
                 print(err)
             }
@@ -40,6 +41,7 @@ final class AlarmAPI {
                 let data = response.data
                 let httpUrlResponse = response.response
                 let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .putAlarmStatus)
+                completion(networkResult)
             case .failure(let err):
                 print(err)
             }
