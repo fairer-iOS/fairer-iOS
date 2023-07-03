@@ -32,8 +32,8 @@ final class AlarmAPI {
         }
     }
     
-    func putAlarmStatus(completion: @escaping (NetworkResult<Any>) -> Void) {
-        alarmProvider.request(.putAlarmStatus) { result in
+    func putAlarmStatus(body: AlarmRequest, completion: @escaping (NetworkResult<Any>) -> Void) {
+        alarmProvider.request(.putAlarmStatus(body: body)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
@@ -75,16 +75,10 @@ final class AlarmAPI {
         let decoder = JSONDecoder()
         
         switch responseData {
-        case .getAlarmStatus:
-            guard let decodedData = try? decoder.decode(WorkInfoReponse.self, from: data) else {
+        case .getAlarmStatus, .putAlarmStatus:
+            guard let decodedData = try? decoder.decode(AlarmResponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)
-        case .putAlarmStatus:
-            guard let decodedData = try? decoder.decode(HouseWorksResponse.self, from: data) else {
-                return .pathErr
-            }
-            return .success(decodedData)
-        }
     }
 }

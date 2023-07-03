@@ -11,7 +11,7 @@ import Moya
 
 enum AlarmRouter {
     case getAlarmStatus
-    case putAlarmStatus
+    case putAlarmStatus(body: AlarmRequest)
 }
 
 extension AlarmRouter: BaseTargetType {
@@ -33,8 +33,10 @@ extension AlarmRouter: BaseTargetType {
     
     var task: Moya.Task {
         switch self {
-        case .getAlarmStatus, .putAlarmStatus:
+        case .getAlarmStatus:
             return .requestPlain
+        case .putAlarmStatus(let body):
+            return .requestJSONEncodable(body)
         }
     }
 }

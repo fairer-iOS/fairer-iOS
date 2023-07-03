@@ -85,6 +85,8 @@
 		52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */; };
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
 		52CB11202A093131009E3646 /* EditHouseWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB111F2A093131009E3646 /* EditHouseWorkViewController.swift */; };
+		52D075642A5310A700B5C692 /* AlarmResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D075632A5310A700B5C692 /* AlarmResponse.swift */; };
+		52D075662A53110300B5C692 /* AlarmRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D075652A53110300B5C692 /* AlarmRequest.swift */; };
 		52DB590E29116AC8003590DF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB590D29116AC8003590DF /* SettingTableViewCell.swift */; };
 		52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */; };
 		52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */; };
@@ -256,6 +258,8 @@
 		52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		52CB111F2A093131009E3646 /* EditHouseWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHouseWorkViewController.swift; sourceTree = "<group>"; };
+		52D075632A5310A700B5C692 /* AlarmResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmResponse.swift; sourceTree = "<group>"; };
+		52D075652A53110300B5C692 /* AlarmRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRequest.swift; sourceTree = "<group>"; };
 		52DB590D29116AC8003590DF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		52E442A428F16A6400706A74 /* InviteCodeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeButtonView.swift; sourceTree = "<group>"; };
 		52E4C082297CE586002AC755 /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -808,6 +812,15 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		52D075622A53109200B5C692 /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				52D075632A5310A700B5C692 /* AlarmResponse.swift */,
+				52D075652A53110300B5C692 /* AlarmRequest.swift */,
+			);
+			name = Alarm;
+			sourceTree = "<group>";
+		};
 		52E4C084297CE8B5002AC755 /* GetManagerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1186,6 +1199,7 @@
 		917D8B5329A62F9B00E26B73 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				52D075622A53109200B5C692 /* Alarm */,
 				91D6A0C529AE2BFA0051FFE2 /* AuthResponse.swift */,
 				5A9BD08629C1A21100ADD3CC /* Rules */,
 				52A53DCC29B0771700C4BB4C /* HouseWorks */,
@@ -1382,6 +1396,7 @@
 				520D6FF2291133A800CF65B2 /* AlreadyInGroupViewController.swift in Sources */,
 				39F1C12628D5FB4100585B83 /* UILabel+Extension.swift in Sources */,
 				914C69CC29AA0D17008EA9EE /* BaseURLConstant.swift in Sources */,
+				52D075662A53110300B5C692 /* AlarmRequest.swift in Sources */,
 				914C69CE29AA2F03008EA9EE /* ErrorResponse.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
@@ -1406,6 +1421,7 @@
 				5A6AAF5229EBF8880055BEE8 /* UserDefaultHandler.swift in Sources */,
 				39FABBDC28DB35020053EFD2 /* HomeCalendarView.swift in Sources */,
 				91F9886429B49518008D7AB7 /* WorkInfoReponse.swift in Sources */,
+				52D075642A5310A700B5C692 /* AlarmResponse.swift in Sources */,
 				52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */,
 				5A8400F029C9B75A00C569E9 /* AddTeamResponse.swift in Sources */,
 				5204AABF2950BE43002FB6CA /* SettingInquiryCellView.swift in Sources */,
