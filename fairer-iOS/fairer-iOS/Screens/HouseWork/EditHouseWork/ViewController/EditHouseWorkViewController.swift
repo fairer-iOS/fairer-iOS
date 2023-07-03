@@ -29,6 +29,7 @@ final class EditHouseWorkViewController: BaseViewController {
         }
     }
     private var houseWorkId: Int = 0
+    private var houseWorkDate: String = ""
     
     // MARK: - property
     
@@ -176,8 +177,9 @@ final class EditHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(houseWorkId: Int) {
+    init(houseWorkId: Int, houseWorkDate: String) {
         self.houseWorkId = houseWorkId
+        self.houseWorkDate = houseWorkDate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -656,7 +658,7 @@ final class EditHouseWorkViewController: BaseViewController {
                 DispatchQueue.main.async {
                     self?.editHouseWork.type = actionType.rawValue
                     self?.editHouseWork.repeatEndDate = self?.editHouseWork.scheduledDate
-                    self?.editHouseWork.updateStandardDate = Date().dateToAPIString
+                    self?.editHouseWork.updateStandardDate = self?.houseWorkDate
                     if let editHouseWork = self?.editHouseWork {
                         self?.putEditHouseWork(body: editHouseWork)
                     }
@@ -664,7 +666,7 @@ final class EditHouseWorkViewController: BaseViewController {
             case .delete:
                 DispatchQueue.main.async {
                     if let editHouseWork = self?.editHouseWork {
-                        let requestBody = DeleteHouseWorkRequest(deleteStandardDate: Date().dateToAPIString, houseWorkId: editHouseWork.houseWorkId, type: actionType.rawValue)
+                        let requestBody = DeleteHouseWorkRequest(deleteStandardDate: self?.houseWorkDate, houseWorkId: editHouseWork.houseWorkId, type: actionType.rawValue)
                         self?.deleteHouseWork(body: requestBody)
                     }
                 }
