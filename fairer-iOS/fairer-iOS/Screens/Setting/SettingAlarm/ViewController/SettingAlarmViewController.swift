@@ -24,11 +24,6 @@ final class SettingAlarmViewController: BaseViewController {
         cell.labelText = TextLiteral.settingAlarmViewControllerRemindAlarmCellText
         return cell
     }()
-    private let morningAlarmCell: SettingAlarmViewCell = {
-        let cell = SettingAlarmViewCell()
-        cell.labelText = TextLiteral.settingAlarmViewControllerMorningAlarmCellText
-        return cell
-    }()
     
     // MARK: - life cycle
     
@@ -43,13 +38,6 @@ final class SettingAlarmViewController: BaseViewController {
         view.addSubview(remindAlarmCell)
         remindAlarmCell.snp.makeConstraints {
             $0.top.equalTo(timeAlarmCell.snp.bottom)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(56)
-        }
-        
-        view.addSubview(morningAlarmCell)
-        morningAlarmCell.snp.makeConstraints {
-            $0.top.equalTo(remindAlarmCell.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(56)
         }
