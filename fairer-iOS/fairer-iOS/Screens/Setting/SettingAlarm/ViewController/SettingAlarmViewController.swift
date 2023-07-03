@@ -11,8 +11,7 @@ import SnapKit
 
 final class SettingAlarmViewController: BaseViewController {
     
-    private var scheduledTimeStatus: Bool = false
-    private var notCompleteStatus: Bool = false
+    private var alarmRequest = AlarmRequest(notCompleteStatus: false, scheduledTimeStatus: false)
     
     // MARK: - property
     
@@ -32,6 +31,7 @@ final class SettingAlarmViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setButtonAction()
         getAlarmStatus()
     }
     
@@ -63,10 +63,24 @@ final class SettingAlarmViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
+    private func setButtonAction() {
+        let alarmAction = UIAction {[weak self] _ in
+            self?.didTappedToggle()
+        }
+        timeAlarmCell.cellToggle.addAction(alarmAction, for: .touchUpInside)
+        remindAlarmCell.cellToggle.addAction(alarmAction, for: .touchUpInside)
+    }
+    
     private func setAlarmStatus(alarmStatus: AlarmResponse) {
         guard let scheduledTimeStatus = alarmStatus.scheduledTimeStatus, let notCompleteStatus = alarmStatus.notCompleteStatus else { return }
         timeAlarmCell.cellToggle.isOn = scheduledTimeStatus
         remindAlarmCell.cellToggle.isOn = notCompleteStatus
+    }
+    
+    private func didTappedToggle() {
+        alarmRequest.scheduledTimeStatus = timeAlarmCell.cellToggle.isOn
+        alarmRequest.notCompleteStatus = remindAlarmCell.cellToggle.isOn
+        putAlarmStatus(body: alarmRequest)
     }
 }
 
@@ -80,6 +94,19 @@ extension SettingAlarmViewController {
                 if let alarmStatus = response as? AlarmResponse {
                     self.setAlarmStatus(alarmStatus: alarmStatus)
                 }
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
+            }
+        }
+    }
+    
+    func putAlarmStatus(body: AlarmRequest) {
+        NetworkService.shared.alarm.putAlarmStatus(body: body) { result in
+            switch result {
+            case .success(let response):
                 break
             case .requestErr(let errorResponse):
                 dump(errorResponse)

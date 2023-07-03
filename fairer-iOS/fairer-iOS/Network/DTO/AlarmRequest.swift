@@ -6,6 +6,6 @@
 //
 
 struct AlarmRequest: Codable {
-    let notCompleteStatus: Bool?
-    let scheduledTimeStatus: Bool?
+    var notCompleteStatus: Bool?
+    var scheduledTimeStatus: Bool?
 }
