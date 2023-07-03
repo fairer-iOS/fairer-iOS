@@ -80,5 +80,6 @@ final class AlarmAPI {
                 return .pathErr
             }
             return .success(decodedData)
+        }
     }
 }
