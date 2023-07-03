@@ -6,3 +6,35 @@
 //
 
 import Foundation
+
+import Moya
+
+enum AlarmRouter {
+    case getAlarmStatus
+    case putAlarmStatus
+}
+
+extension AlarmRouter: BaseTargetType {
+    var path: String {
+        switch self {
+        case .getAlarmStatus, .putAlarmStatus:
+            return URLConstant.alarm
+        }
+    }
+    
+    var method: Moya.Method {
+        switch self {
+        case .getAlarmStatus:
+            return .get
+        case .putAlarmStatus:
+            return .put
+        }
+    }
+    
+    var task: Moya.Task {
+        switch self {
+        case .getAlarmStatus, .putAlarmStatus:
+            return .requestPlain
+        }
+    }
+}
