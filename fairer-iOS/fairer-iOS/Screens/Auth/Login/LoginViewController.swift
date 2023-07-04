@@ -215,12 +215,15 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
 
                     print("authorizationCode String: \(authString)")
                     print("identityToken String: \(tokenString)")
+                    print("\(identityToken)")
+                    UserDefaultHandler.accessToken = tokenString
                 }
                 
                 print("User ID : \(userIdentifier)")
                 print("User Email : \(email ?? "")")
                 print("User Name : \(name)")
                 
+                self.postSignIn(socialType: TextLiteral.clientType)
             default:
                 break
             }
