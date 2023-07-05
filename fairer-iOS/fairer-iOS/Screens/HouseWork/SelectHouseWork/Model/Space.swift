@@ -82,5 +82,22 @@ enum Space: String, CaseIterable {
             return SizeLiteral.houseWorkDetailThreeLineHeight
         }
     }
+    
+    var spaceUpper: String {
+        switch self {
+        case .entrance:
+            return "ENTRANCE"
+        case .livingRoom:
+            return "LIVINGROOM"
+        case .bathroom:
+            return "BATHROOM"
+        case .outside:
+            return "OUTSIDE"
+        case .room:
+            return "ROOM"
+        case .kitchen:
+            return "KITCHEN"
+        }
+    }
 }
 

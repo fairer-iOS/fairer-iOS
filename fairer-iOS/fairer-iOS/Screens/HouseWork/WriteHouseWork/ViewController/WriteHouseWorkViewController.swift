@@ -164,7 +164,7 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(houseWorks: [HouseWorksRequest]) {
+    init() {
         self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "", space: "ETC")]
         super.init(nibName: nil, bundle: nil)
     }
@@ -322,6 +322,8 @@ final class WriteHouseWorkViewController: BaseViewController {
     }
     
     private func setDatePicker() {
+        writeHouseWorkCalendarView.spaceLabel.text = TextLiteral.writeHouseWorkViewControllerSpaceLabel
+        
         datePickerView.isHidden = true
         datePickerView.setAction()
         

@@ -14,9 +14,8 @@ final class CalendarSpaceView: BaseUIView {
     // MARK: - property
     
     let pickDateButton = PickDateButton()
-    let spaceLabel: UILabel = {
+    var spaceLabel: UILabel = {
         let label = UILabel()
-        label.text = Space.livingRoom.rawValue
         label.textColor = .black
         label.font = .title1
         return label
