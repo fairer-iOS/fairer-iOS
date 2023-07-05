@@ -11,15 +11,15 @@ typealias HouseWorksResponse = [HouseWorkResponse]
 
 struct HouseWorkResponse: Codable {
     let assignees: [MemberResponse]
-    let houseWorkCompleteId: Int
+    let houseWorkCompleteId: Int?
     let houseWorkId: Int
     let houseWorkName: String
     let repeatCycle: String
-    let repeatEndDate: String
+    let repeatEndDate: String?
     let repeatPattern: String
     let scheduledDate: String
-    let scheduledTime: String
+    let scheduledTime: String?
     let space: String
     let success: Bool
-    let successDateTime: String
+    let successDateTime: String?
 }

@@ -143,7 +143,7 @@ final class SetHouseWorkViewController: BaseViewController {
     // MARK: - life cycle
     
     init(houseWorks: [HouseWorksRequest]) {
-        self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "창 청소", space: "LIVINGROOM"), HouseWorksRequest(assignees: [], houseWorkName: "거실 청소", space: "LIVINGROOM"), HouseWorksRequest(assignees: [], houseWorkName: "물건 정리정돈", space: "LIVINGROOM")]
+        self.houseWorks = houseWorks
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -291,6 +291,7 @@ final class SetHouseWorkViewController: BaseViewController {
     
     private func setInitialHouseWork() {
         setHouseWorkCollectionView.totalHouseWorks = houseWorks
+        setHouseWorkCalendarView.spaceLabel.text = Space.allCases.first { $0.spaceUpper == houseWorks[0].space}?.rawValue
     }
     
     private func setDatePicker() {
@@ -324,7 +325,7 @@ final class SetHouseWorkViewController: BaseViewController {
             self.setHouseWorkCollectionView.totalHouseWorks = self.houseWorks
             
             if self.houseWorks.count == 0 {
-                // FIXME: - 이전 페이지로 이동
+                self.navigationController?.popToViewController(ofClass: SelectHouseWorkViewController.self)
             } else if deletedHouseWorkIndex == self.houseWorks.endIndex && deletedHouseWorkIndex == self.selectedHouseWorkIndex {
                 self.selectedHouseWorkIndex -= 1
                 self.repeatCycleCollectionView.selectedHouseWorkIndex -= 1

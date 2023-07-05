@@ -258,8 +258,9 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // MARK: - fix me, houseWorks 빈 배열 대체
-        let editHouseWorkView = EditHouseWorkViewController(editHouseWork: EditHouseWorkRequest())
+        guard let selectedHouseWorkId = pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkId else { return }
+        guard let selectedHouseWorkDate = pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate else { return }
+        let editHouseWorkView = EditHouseWorkViewController(houseWorkId: selectedHouseWorkId, houseWorkDate: selectedHouseWorkDate)
         self.navigationController?.pushViewController(editHouseWorkView, animated: true)
     }
 }
