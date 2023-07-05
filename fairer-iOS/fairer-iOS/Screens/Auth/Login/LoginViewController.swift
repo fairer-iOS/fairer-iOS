@@ -139,7 +139,7 @@ final class LoginViewController: BaseViewController {
         authorizationController.performRequests()
     }
     
-    func postSignIn(socialType: String) {
+    private func postSignIn(socialType: String) {
         NetworkService.shared.oauth.postSignIn(socialType: socialType) { [weak self] result in
             switch result {
             case .success(let response):
@@ -223,7 +223,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
                 print("User Email : \(email ?? "")")
                 print("User Name : \(name)")
                 
-                self.postSignIn(socialType: TextLiteral.clientType)
+                self.postSignIn(socialType: "APPLE")
             default:
                 break
             }
