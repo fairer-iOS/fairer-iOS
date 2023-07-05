@@ -10,7 +10,7 @@ final class NetworkService {
 
     private init() { }
     
-//    let alarm = AlarmAPI()
+    let alarm = AlarmAPI()
 
 //    let fcm = FcmAPI()
 

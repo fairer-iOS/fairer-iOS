@@ -23,7 +23,7 @@ final class SettingAlarmViewCell: UIView {
         label.font = .body2
         return label
     }()
-    private let cellToggle: UISwitch = {
+    let cellToggle: UISwitch = {
         let toggle = UISwitch()
         toggle.onTintColor = .blue
         toggle.isOn = false
