@@ -12,7 +12,7 @@ final class NetworkService {
     
 //    let alarm = AlarmAPI()
 
-//    let fcm = FcmAPI()
+    let fcm = FcmAPI()
 
     let houseWorkCompleteRouter = HouseWorkCompleteRouterAPI()
     
