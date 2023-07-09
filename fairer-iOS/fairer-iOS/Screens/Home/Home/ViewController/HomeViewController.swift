@@ -447,7 +447,7 @@ private extension HomeViewController {
             self.selectedMemberId = self.myId
             self.teamId = response.teamId
             self.homewView.homeGroupCollectionView.userList = []
-            if var teamMember = response.members {
+            if let teamMember = response.members {
                 let sortedTeamMember = teamMember.sorted { $0.memberName ?? "" < $1.memberName ?? "" }
                 print(sortedTeamMember)
                 for member in sortedTeamMember {
