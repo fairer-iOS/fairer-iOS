@@ -162,7 +162,7 @@ extension String {
         if self.count >= 5 {
             var managedNickname = self
             managedNickname.removeSubrange(self.index(self.startIndex, offsetBy: 4)..<self.endIndex)
-            managedNickname.append("...")
+            managedNickname.append("..")
             return managedNickname
         } else {
             return self

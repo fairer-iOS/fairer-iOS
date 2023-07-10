@@ -30,6 +30,7 @@ final class EditHouseWorkViewController: BaseViewController {
     }
     private var houseWorkId: Int = 0
     private var houseWorkDate: String = ""
+    private var myId: Int?
     
     // MARK: - property
     
@@ -195,6 +196,7 @@ final class EditHouseWorkViewController: BaseViewController {
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
+        getMyInfo()
         getTeamInfo()
         addButtonAction()
         didConfirmRepeatAlertActionType()
@@ -697,14 +699,21 @@ extension EditHouseWorkViewController {
                 guard let teamInfo = response as? TeamInfoResponse else { return }
                 guard let membersInfo = teamInfo.members else { return }
                 DispatchQueue.main.async {
-                    let selectedMemberList = membersInfo.filter { member in
+                    let sortedTeamMember = membersInfo.sorted { $0.memberName ?? "" < $1.memberName ?? "" }
+                    let selectedMemberList = sortedTeamMember.filter { member in
                         self.editHouseWork.assignees?.contains { assignee in
                             member.memberId == assignee
                         } ?? false
                     }
+                    for member in sortedTeamMember {
+                        if let memberId = member.memberId, self.myId == memberId {
+                            self.selectManagerView.selectManagerCollectionView.totalMemberList.insert(member, at: 0)
+                        } else {
+                            self.selectManagerView.selectManagerCollectionView.totalMemberList.append(member)
+                        }
+                    }
                     self.getManagerView.getManagerCollectionView.selectedMemberList = selectedMemberList
                     self.selectManagerView.selectManagerCollectionView.selectedManagerList = selectedMemberList
-                    self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
                 }
                 break
             case .requestErr(let errorResponse):
@@ -758,6 +767,20 @@ extension EditHouseWorkViewController {
                 dump(errorResponse)
             default:
                 break
+            }
+        }
+    }
+    
+    private func getMyInfo() {
+        NetworkService.shared.members.getMemberInfo() { result in
+            switch result {
+            case .success(let response):
+                guard let myInfo = response as? MemberResponse else { return }
+                self.myId = myInfo.memberId
+            case .requestErr(let errResponse):
+                dump(errResponse)
+            default:
+                print("error")
             }
         }
     }
