@@ -250,10 +250,4 @@ extension SettingHomeRuleViewController {
             }
         }
     }
-    
-    func asd() {
-        if let headerView = homeRuleTableView.headerView(forSection: 0) as? SettingHomeRuleHeaderView {
-            headerView.hiddenTitleLabel()
-        }
-    }
 }
