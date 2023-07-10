@@ -160,7 +160,7 @@ final class SetHouseWorkViewController: BaseViewController {
         didSelectDaysOfWeek()
         setDoneButton()
         getTeamInfo()
-        getMyInfoFromServer()
+        getMyInfo()
     }
     
     override func render() {
@@ -656,7 +656,7 @@ extension SetHouseWorkViewController {
         }
     }
     
-    private func getMyInfoFromServer() {
+    private func getMyInfo() {
         NetworkService.shared.members.getMemberInfo() { result in
             switch result {
             case .success(let response):
