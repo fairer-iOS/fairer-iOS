@@ -42,7 +42,7 @@ final class SettingHomeRuleHeaderView: UITableViewHeaderFooterView {
         label.imageColor = .gray200
         return label
     }()
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.homeRuleViewRuleLabel
         label.textColor = .gray600
@@ -116,5 +116,9 @@ extension SettingHomeRuleHeaderView {
         self.settingHomeRuleTextFieldeWarningLabel.snp.updateConstraints {
             $0.height.equalTo(0)
         }
+    }
+    
+    func hiddenTitleLabel() {
+        self.titleLabel.isHidden = true
     }
 }
