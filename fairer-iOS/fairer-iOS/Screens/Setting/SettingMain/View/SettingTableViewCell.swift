@@ -44,7 +44,8 @@ final class SettingTableViewCell: BaseTableViewCell {
         cellImage.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.centerY.equalToSuperview()
-            $0.width.equalTo(21)
+            $0.width.equalTo(20)
+            $0.height.equalTo(20)
         }
         
         self.addSubview(cellLabel)
