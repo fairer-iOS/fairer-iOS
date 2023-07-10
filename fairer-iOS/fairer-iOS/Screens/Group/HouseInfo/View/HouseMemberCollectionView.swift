@@ -71,7 +71,7 @@ extension HouseMemberCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        guard let memberName = teamInfoData[indexPath.row].memberName,
+        guard let memberName = teamInfoData[indexPath.row].memberName?.manageNicknameLength(),
               let memberImage = teamInfoData[indexPath.row].profilePath else { return UICollectionViewCell() }
         
         cell.profileImage.load(from: memberImage)
