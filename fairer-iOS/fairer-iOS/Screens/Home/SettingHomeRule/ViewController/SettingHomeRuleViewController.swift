@@ -14,13 +14,12 @@ import Moya
 final class SettingHomeRuleViewController: BaseViewController {
     
     private var ruleData: [RuleData] = []
-    
     private let maxLength = 16
     
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    private let HomeRuleHeaderView = SettingHomeRuleHeaderView()
+    private let homeRuleHeaderView = SettingHomeRuleHeaderView()
     private let homeRuleTableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: - life cycle
@@ -76,6 +75,10 @@ final class SettingHomeRuleViewController: BaseViewController {
         self.ruleData.remove(at: indexPath.row)
         homeRuleTableView.deleteRows(at: [indexPath], with: .automatic)
         
+        if ruleData.isEmpty {
+            homeRuleTableView.reloadData()
+        }
+        
         deleteRules(ruleId: ruleId)
     
       }
@@ -84,12 +87,12 @@ final class SettingHomeRuleViewController: BaseViewController {
             
         if let text = textfield.text {
                     if text.count > maxLength {
-                    HomeRuleHeaderView.settingHomeRuleTextField.layer.borderColor = UIColor.negative20.cgColor
-                    HomeRuleHeaderView.settingHomeRuleTextField.layer.borderWidth = 1
+                    homeRuleHeaderView.settingHomeRuleTextField.layer.borderColor = UIColor.negative20.cgColor
+                    homeRuleHeaderView.settingHomeRuleTextField.layer.borderWidth = 1
                     NotificationCenter.default.post(name: Notification.Name("showWarningLabel"), object: nil)
                 } else {
-                    HomeRuleHeaderView.settingHomeRuleTextField.layer.borderColor = UIColor.gray200.cgColor
-                    HomeRuleHeaderView.settingHomeRuleTextField.layer.borderWidth = 1
+                    homeRuleHeaderView.settingHomeRuleTextField.layer.borderColor = UIColor.gray200.cgColor
+                    homeRuleHeaderView.settingHomeRuleTextField.layer.borderWidth = 1
                     NotificationCenter.default.post(name: Notification.Name("hideWarningLabel"), object: nil)
                 }
             }
@@ -113,6 +116,14 @@ extension SettingHomeRuleViewController: UITableViewDelegate, UITableViewDataSou
         headerView.tintColor = .white
         
         return headerView
+    }
+        
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if self.ruleData.isEmpty {
+            if let headerView = view as? SettingHomeRuleHeaderView {
+                headerView.hiddenTitleLabel()
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -143,13 +154,13 @@ extension SettingHomeRuleViewController: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        HomeRuleHeaderView.settingHomeRuleTextField = textField as! TextField
+        homeRuleHeaderView.settingHomeRuleTextField = textField as! TextField
         
         checkMaxLength(textfield: textField)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        HomeRuleHeaderView.settingHomeRuleTextField = textField as! TextField
+        homeRuleHeaderView.settingHomeRuleTextField = textField as! TextField
         
         if !isEditing {
             isEditing = true
@@ -161,13 +172,13 @@ extension SettingHomeRuleViewController: UITextFieldDelegate {
         
         if isEditing {
             isEditing = false
-            HomeRuleHeaderView.settingHomeRuleTextField.layer.borderWidth = 0
+            homeRuleHeaderView.settingHomeRuleTextField.layer.borderWidth = 0
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if let text = HomeRuleHeaderView.settingHomeRuleTextField.text {
+        if let text = homeRuleHeaderView.settingHomeRuleTextField.text {
             if !text.isEmpty && text.count <= maxLength {
                 postRules(ruleName: text) { data in
                     guard let ruleData = data.ruleResponseDtos?.last else { return }
@@ -177,8 +188,8 @@ extension SettingHomeRuleViewController: UITextFieldDelegate {
                         self.homeRuleTableView.reloadData()
                     }
                     
-                    self.HomeRuleHeaderView.settingHomeRuleTextField.text =  ""
-                    self.HomeRuleHeaderView.settingHomeRuleTextField.resignFirstResponder()
+                    self.homeRuleHeaderView.settingHomeRuleTextField.text =  ""
+                    self.homeRuleHeaderView.settingHomeRuleTextField.resignFirstResponder()
                 }
             }
         }
@@ -196,13 +207,14 @@ extension SettingHomeRuleViewController: UITextFieldDelegate {
 
 extension SettingHomeRuleViewController {
     func getRules() {
-        NetworkService.shared.rules.getRules { result in
+        NetworkService.shared.rules.getRules { [weak self] result in
             switch result {
             case .success(let response):
                 guard let rules = response as? RulesResponse else { return }
                 guard let ruleData = rules.ruleResponseDtos else { return }
-                self.ruleData = ruleData
-                self.homeRuleTableView.reloadData()
+                self?.ruleData = ruleData
+
+                self?.homeRuleTableView.reloadData()
                 
             case .requestErr(let errorResponse):
                 dump(errorResponse)
