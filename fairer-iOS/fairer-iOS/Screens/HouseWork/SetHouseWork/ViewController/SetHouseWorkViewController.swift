@@ -22,6 +22,7 @@ final class SetHouseWorkViewController: BaseViewController {
         }
     }
     private var houseWorks: [HouseWorksRequest]
+    private var myId: Int?
     
     // MARK: - property
     
@@ -159,6 +160,7 @@ final class SetHouseWorkViewController: BaseViewController {
         didSelectDaysOfWeek()
         setDoneButton()
         getTeamInfo()
+        getMyInfo()
     }
     
     override func render() {
@@ -617,14 +619,19 @@ extension SetHouseWorkViewController {
                 guard let teamInfo = response as? TeamInfoResponse else { return }
                 guard let membersInfo = teamInfo.members else { return }
                 DispatchQueue.main.async {
-                    // FIXME: 첫번째 멤버 대신 user item 넣어주기
-                    guard let memberId = membersInfo[0].memberId else { return }
-                    for index in self.houseWorks.indices {
-                        self.houseWorks[index].assignees.append(memberId)
+                    let sortedTeamMember = membersInfo.sorted { $0.memberName ?? "" < $1.memberName ?? "" }
+                    for member in sortedTeamMember {
+                        if let memberId = member.memberId, self.myId == memberId {
+                            for index in self.houseWorks.indices {
+                                self.houseWorks[index].assignees.append(memberId)
+                            }
+                            self.selectManagerView.selectManagerCollectionView.totalMemberList.insert(member, at: 0)
+                            self.getManagerView.getManagerCollectionView.selectedMemberList = [member]
+                            self.selectManagerView.selectManagerCollectionView.selectedManagerList = [member]
+                        } else {
+                            self.selectManagerView.selectManagerCollectionView.totalMemberList.append(member)
+                        }
                     }
-                    self.getManagerView.getManagerCollectionView.selectedMemberList = [membersInfo[0]]
-                    self.selectManagerView.selectManagerCollectionView.totalMemberList = membersInfo
-                    self.selectManagerView.selectManagerCollectionView.selectedManagerList = [membersInfo[0]]
                 }
                 break
             case .requestErr(let errorResponse):
@@ -645,6 +652,20 @@ extension SetHouseWorkViewController {
                 dump(errorResponse)
             default:
                 break
+            }
+        }
+    }
+    
+    private func getMyInfo() {
+        NetworkService.shared.members.getMemberInfo() { result in
+            switch result {
+            case .success(let response):
+                guard let myInfo = response as? MemberResponse else { return }
+                self.myId = myInfo.memberId
+            case .requestErr(let errResponse):
+                dump(errResponse)
+            default:
+                print("error")
             }
         }
     }

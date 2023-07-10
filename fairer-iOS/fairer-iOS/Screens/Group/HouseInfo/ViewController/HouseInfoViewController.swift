@@ -131,7 +131,8 @@ extension HouseInfoViewController {
                 guard let teamName = teamInfo.teamName else { return }
                 
                 DispatchQueue.main.async {
-                    self?.houseMemberCollectionView.teamInfoData = membersInfo
+                    let sortedTeamMember = membersInfo.sorted { $0.memberName ?? "" < $1.memberName ?? "" }
+                    self?.houseMemberCollectionView.teamInfoData = sortedTeamMember
                     self?.houseName = teamName
                 }
             case .requestErr(let error):

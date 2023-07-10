@@ -157,5 +157,16 @@ extension String {
         default: return String()
         }
     }
+    
+    func manageNicknameLength() -> String {
+        if self.count >= 5 {
+            var managedNickname = self
+            managedNickname.removeSubrange(self.index(self.startIndex, offsetBy: 4)..<self.endIndex)
+            managedNickname.append("..")
+            return managedNickname
+        } else {
+            return self
+        }
+    }
 }
 

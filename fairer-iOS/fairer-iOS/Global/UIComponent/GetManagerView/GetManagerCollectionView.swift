@@ -71,7 +71,7 @@ extension GetManagerCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        guard let memberName = selectedMemberList[indexPath.item].memberName,
+        guard let memberName = selectedMemberList[indexPath.item].memberName?.manageNicknameLength(),
               let memberImage = selectedMemberList[indexPath.item].profilePath else { return UICollectionViewCell() }
         cell.profileImage.load(from: memberImage)
         cell.profileLabel.setTextWithLineHeight(text: memberName, lineHeight: 18)
