@@ -85,12 +85,9 @@ final class OnboardingNameViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-        
-        let backButton = makeBarButtonItem(with: backButton)
-        
+            
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.leftBarButtonItem = backButton
     }
     
     private func setupDelegation() {
