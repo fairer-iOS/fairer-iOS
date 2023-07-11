@@ -9,11 +9,11 @@ import UIKit
 
 import SnapKit
 import KakaoSDKShare
+import KakaoSDKCommon
+import KakaoSDKTemplate
 import SafariServices
 
 final class SettingInviteCodeViewController: BaseViewController {
-
-    private let templateId: Int = 92371
     
     // MARK: - property
     
@@ -75,14 +75,18 @@ final class SettingInviteCodeViewController: BaseViewController {
     
     // MARK: - lifecycle
     
-    override func configUI() {
-        super.configUI()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setButtonAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getInviteCodeViewInfo()
-        setButtonAction()
+    }
+    
+    override func configUI() {
+        super.configUI()
     }
     
     override func render() {
@@ -200,20 +204,41 @@ final class SettingInviteCodeViewController: BaseViewController {
     }
     
     private func sharedKakaoAPI() {
+        
+        // MARK: - templete
+        let appStoreURL = URL(string: TextLiteral.appStoreUrlText)!
+        let link = Link(webUrl: appStoreURL, mobileWebUrl: appStoreURL)
+        let content: Content = Content(
+            title: TextLiteral.contentTitleText,
+            imageUrl: URL(string: TextLiteral.contentImageUrlText)!,
+            link: link
+        )
+        let button: [Button] = [Button(title: TextLiteral.templeteButtonTitleText, link: link)]
+        let feedTemplate: FeedTemplate = FeedTemplate(
+            content: content,
+            buttons: button
+        )
+        
+        // MARK: - kakao share
         if ShareApi.isKakaoTalkSharingAvailable() {
-            ShareApi.shared.shareCustom(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) {(sharingResult, error) in
+            ShareApi.shared.shareDefault(templatable: feedTemplate) { (sharingResult, error) in
                 if let error = error {
                     print(error)
-                }
-                else {
-                    print("shareCustom() success.")
+                } else {
                     if let sharingResult = sharingResult {
-                        UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                        UIApplication.shared.open(
+                            sharingResult.url,
+                            options: [:],
+                            completionHandler: nil
+                        )
                     }
                 }
             }
         } else {
-            if let url = ShareApi.shared.makeCustomUrl(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) {
+            // 카카오톡 미설치: 웹 공유 사용 권장
+            // Custom WebView 또는 디폴트 브라우져 사용 가능
+            // 웹 공유 예시 코드
+            if let url = ShareApi.shared.makeDefaultUrl(templatable: feedTemplate) {
                 self.safariViewController = SFSafariViewController(url: url)
                 self.safariViewController?.modalTransitionStyle = .crossDissolve
                 self.safariViewController?.modalPresentationStyle = .overCurrentContext
