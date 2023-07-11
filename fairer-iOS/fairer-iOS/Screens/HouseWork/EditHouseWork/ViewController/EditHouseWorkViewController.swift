@@ -213,7 +213,8 @@ final class EditHouseWorkViewController: BaseViewController {
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(doneButton.snp.top).inset(-16)
         }
         
