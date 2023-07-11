@@ -206,14 +206,14 @@ final class SettingInviteCodeViewController: BaseViewController {
     private func sharedKakaoAPI() {
         
         // MARK: - templete
-        let appStoreURL = URL(string: "itms-apps://itunes.apple.com/")!
+        let appStoreURL = URL(string: TextLiteral.appStoreUrlText)!
         let link = Link(webUrl: appStoreURL, mobileWebUrl: appStoreURL)
         let content: Content = Content(
-            title: "집안일 관리와 분담을 도와주는 필수 앱 페어러",
-            imageUrl: URL(string: "https://firebasestorage.googleapis.com/v0/b/fairer-def59.appspot.com/o/meta-images%2Finvite-code.png?alt=media&token=f6117459-e48b-41d2-8a61-642ac8ec7e56")!,
+            title: TextLiteral.contentTitleText,
+            imageUrl: URL(string: TextLiteral.contentImageUrlText)!,
             link: link
         )
-        let button: [Button] = [Button(title: "초대 받기", link: link)]
+        let button: [Button] = [Button(title: TextLiteral.templeteButtonTitleText, link: link)]
         let feedTemplate: FeedTemplate = FeedTemplate(
             content: content,
             buttons: button
@@ -225,8 +225,6 @@ final class SettingInviteCodeViewController: BaseViewController {
                 if let error = error {
                     print(error)
                 } else {
-                    print("shareDefault() success.")
-                    
                     if let sharingResult = sharingResult {
                         UIApplication.shared.open(
                             sharingResult.url,

@@ -215,7 +215,13 @@ enum TextLiteral {
     static let settingProfileViewControllerProfileStatusLabel = "상태 메세지"
     static let settingProfileViewControllerPlaceholderText = "Text"
     
-
+    // MARK: - SttingInviteCodeViewController
+    
+    static let appStoreUrlText = "itms-apps://itunes.apple.com/"
+    static let contentTitleText = "집안일 관리와 분담을 도와주는 필수 앱 페어러"
+    static let contentImageUrlText = "https://firebasestorage.googleapis.com/v0/b/fairer-def59.appspot.com/o/meta-images%2Finvite-code.png?alt=media&token=f6117459-e48b-41d2-8a61-642ac8ec7e56"
+    static let templeteButtonTitleText = "초대 받기"
+    
     // MARK: - clientType
     static let clientType = "IOS"
     
