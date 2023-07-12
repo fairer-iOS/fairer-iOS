@@ -78,6 +78,7 @@ final class SelectHouseWorkViewController: BaseViewController {
         setDatePicker()
         didTappedSpace()
         didTappedHouseWork()
+        showDisableAlert()
     }
     
     override func render() {
@@ -202,9 +203,9 @@ final class SelectHouseWorkViewController: BaseViewController {
     
     private func didTappedSpace() {
         spaceCollectionView.didTappedSpace = {[weak self] space in
-            self?.didTappedDifferentSpace(space)
             self?.setDetailHouseWork(space)
             self?.setLabels()
+            self?.selectedSpace = space
         }
     }
     
@@ -212,6 +213,7 @@ final class SelectHouseWorkViewController: BaseViewController {
         detailCollectionView.didTappedHouseWork = {[weak self] houseWork in
             if houseWork.count > 0 {
                 self?.nextButton.isDisabled = false
+                self?.spaceCollectionView.didChangeSpaceWithHouseWork = true
             } else {
                 self?.nextButton.isDisabled = true
             }
@@ -219,13 +221,20 @@ final class SelectHouseWorkViewController: BaseViewController {
         }
     }
     
-    private func didTappedDifferentSpace(_ space: Space) {
-        if space != selectedSpace && detailCollectionView.selectedHouseWorkList.count > 0 {
-            makeAlert(title: TextLiteral.selectHouseWorkViewControllerAlertTitle, message: TextLiteral.selectHouseWorkViewControllerAlertMessage)
-            detailCollectionView.selectedHouseWorkList = []
-            nextButton.isDisabled = true
+    private func showDisableAlert() {
+        spaceCollectionView.showDisableAlert = {[weak self] showDisableAlert in
+            if showDisableAlert {
+                self?.makeAlert(title: TextLiteral.selectHouseWorkViewControllerAlertTitle, message: TextLiteral.selectHouseWorkViewControllerAlertMessage, okAction: { [weak self] _ in self?.resetSpace() })
+            }
         }
-        self.selectedSpace = space
+    }
+    
+    private func resetSpace() {
+        detailCollectionView.selectedHouseWorkList = []
+        detailCollectionView.collectionView.reloadData()
+        spaceCollectionView.collectionView.reloadData()
+        nextButton.isDisabled = true
+        spaceCollectionView.didChangeSpaceWithHouseWork = false
     }
     
     private func setDetailHouseWork(_ space: Space) {
