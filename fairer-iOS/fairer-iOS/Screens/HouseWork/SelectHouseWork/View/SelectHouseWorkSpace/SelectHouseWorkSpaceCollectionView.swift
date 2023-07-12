@@ -12,6 +12,8 @@ import SnapKit
 final class SelectHouseWorkSpaceCollectionView: BaseUIView {
     
     var didTappedSpace: ((Space) -> ())?
+    var showDisableAlert: ((Bool) -> ())?
+    var didChangeSpaceWithHouseWork: Bool = false
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 24
@@ -33,7 +35,7 @@ final class SelectHouseWorkSpaceCollectionView: BaseUIView {
         flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
         return flowLayout
     }()
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
@@ -55,10 +57,13 @@ final class SelectHouseWorkSpaceCollectionView: BaseUIView {
 // MARK: - extension
 
 extension SelectHouseWorkSpaceCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        showDisableAlert?(didChangeSpaceWithHouseWork)
+        return !didChangeSpaceWithHouseWork
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // FIXME: - api 연결할 때 공간 전달
         didTappedSpace?(Space.allCases[indexPath.item])
-        print(Space.allCases[indexPath.item])
     }
 }
 

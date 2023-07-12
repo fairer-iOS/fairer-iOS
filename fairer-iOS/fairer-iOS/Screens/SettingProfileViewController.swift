@@ -134,6 +134,7 @@ final class SettingProfileViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         isSettingProfileViewPoped = false
+        settingProfileDoneButton.isDisabled = true
     }
     
     override func render() {
@@ -362,6 +363,7 @@ extension SettingProfileViewController {
     private func didTappedDoneButton() {
         self.petchMyInfo()
         self.navigationController?.popViewController(animated: true)
+        self.settingProfileDoneButton.isDisabled = true
     }
     
     private func pushSettingProfileImageViewController() {
@@ -373,6 +375,7 @@ extension SettingProfileViewController {
         }
         settingProfileImageView.profileImageChangeClosure = { [weak self] imageString in
             self?.lastProfileImage = imageString
+            self?.settingProfileDoneButton.isDisabled = false
         }
         settingProfileImageView.settingProfileViewDidPop = { [weak self] didPop in
             self?.isSettingProfileViewPoped = didPop

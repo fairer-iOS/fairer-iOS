@@ -29,7 +29,6 @@ class SettingProfileImageViewController: OnboardingProfileViewController {
         if let lastProfileImage = lastProfileImage {
             profileImageChangeClosure?(lastProfileImage)
         }
-        petchMyInfo()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -57,28 +56,5 @@ class SettingProfileImageViewController: OnboardingProfileViewController {
         self.firstStatus = status
         self.firstName = name
         self.lastProfileImage = image
-    }
-    
-    private func petchMyInfo() {
-        let memberPatchRequest = MemberPatchRequest(memberName: firstName, profilePath: lastProfileImage, statusMessage: firstStatus)
-        self.petchMemberInfoFromServer(body: memberPatchRequest) { [weak self] response in
-            guard self != nil else { return }
-        }
-    }
-}
-
-extension SettingProfileImageViewController {
-    private func petchMemberInfoFromServer(body: MemberPatchRequest, completion: @escaping (MemberPatchResponse) -> Void) {
-        NetworkService.shared.members.petchMemberInfo(body: body) { result in
-            switch result {
-            case .success(let response):
-                guard let data = response as? MemberPatchResponse else { return }
-                completion(data)
-            case .requestErr(let errorResponse):
-                dump(errorResponse)
-            default:
-                print("error")
-            }
-        }
     }
 }
