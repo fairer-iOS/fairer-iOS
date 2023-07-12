@@ -12,8 +12,12 @@ import KakaoSDKShare
 import KakaoSDKCommon
 import KakaoSDKTemplate
 import SafariServices
+import FirebaseDynamicLinks
 
 final class SettingInviteCodeViewController: BaseViewController {
+    
+    private var inviteCode: String?
+    private var dynamicLink: String?
     
     // MARK: - property
     
@@ -175,6 +179,7 @@ final class SettingInviteCodeViewController: BaseViewController {
                let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
                let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay
             {
+                self?.inviteCode = data.inviteCode
                 self?.inviteCodeView.code = inviteCode
                 self?.inviteCodeButtonView.code = inviteCode
                 self?.validTimeLabel.text = inviteCodeTimeString + TextLiteral.houseInviteCodeViewControllerValidTimeLabel
@@ -190,6 +195,7 @@ final class SettingInviteCodeViewController: BaseViewController {
                let inviteCodeTimeString = data.inviteCodeExpirationDateTime?.iso8601ToKoreanString,
                let inviteCodeTimeDate = data.inviteCodeExpirationDateTime?.iso8601ToDay
             {
+                self?.inviteCode = data.inviteCode
                 self?.bindViewData(houseName: houseName, inviteCode: inviteCode, inviteCodeTimeString: inviteCodeTimeString)
                 self?.setupButtonLayer(validTime: inviteCodeTimeDate)
             }
@@ -198,13 +204,18 @@ final class SettingInviteCodeViewController: BaseViewController {
     
     private func setButtonAction() {
         let kakaoShare = UIAction { [weak self] _ in
-            self?.sharedKakaoAPI()
+            var dynamicLink: URL = URL(fileURLWithPath: "")
+            if let inviteCode = self?.inviteCode {
+                dynamicLink = self?.createDynamicLink(inviteCode: inviteCode) ?? URL(fileURLWithPath: "")
+            }
+            self?.sharedKakaoAPI(dynamicLink: dynamicLink)
         }
         self.inviteCodeButtonView.kakaoShareButton.addAction(kakaoShare, for: .touchUpInside)
     }
     
-    private func sharedKakaoAPI() {
-        
+    private func sharedKakaoAPI(
+        dynamicLink: URL
+    ) {
         // MARK: - templete
         let appStoreURL = URL(string: TextLiteral.appStoreUrlText)!
         let link = Link(webUrl: appStoreURL, mobileWebUrl: appStoreURL)
@@ -247,6 +258,26 @@ final class SettingInviteCodeViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    private func createDynamicLink(
+        inviteCode: String
+    ) -> URL {
+        guard let webLink = URL(string: "https://www.apple.com/kr/app-store/") else {
+            return URL(fileURLWithPath: "")
+        }
+        let dynamicLinksDomainURIPrefix = "https://example.com/\(inviteCode)"
+        let bundleID = "com.ios.fairer"
+        guard let linkBuilder = DynamicLinkComponents(link: webLink, domainURIPrefix: dynamicLinksDomainURIPrefix) else {
+            return URL(fileURLWithPath: "")
+        }
+        linkBuilder.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
+
+        guard let longDynamicLink = linkBuilder.url else {
+            return URL(fileURLWithPath: "")
+        }
+        print("The long URL is: \(longDynamicLink)")
+        return longDynamicLink
     }
 }
 
