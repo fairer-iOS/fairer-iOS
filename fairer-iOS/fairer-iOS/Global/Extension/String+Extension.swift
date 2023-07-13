@@ -14,6 +14,12 @@ extension String {
         return formatter.date(from: self)
     }
     
+    var apiStringToDate: Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: self)
+    }
+    
     var stringToDay: Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd"
@@ -167,6 +173,20 @@ extension String {
         } else {
             return self
         }
+    }
+    
+    func apiDateToDatePicker() -> String {
+        var apiDate = self.split(separator: "-")
+        
+        if apiDate[1].hasPrefix("0") {
+            apiDate[1].removeFirst()
+        }
+        
+        if apiDate[2].hasPrefix("0") {
+            apiDate[2].removeFirst()
+        }
+        
+        return apiDate[0] + "년 " + apiDate[1] + "월 " + apiDate[2] + "일"
     }
 }
 

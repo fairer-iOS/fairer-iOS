@@ -294,6 +294,8 @@ final class SetHouseWorkViewController: BaseViewController {
     private func setInitialHouseWork() {
         setHouseWorkCollectionView.totalHouseWorks = houseWorks
         setHouseWorkCalendarView.spaceLabel.text = Space.allCases.first { $0.spaceUpper == houseWorks[0].space}?.rawValue
+        setHouseWorkCalendarView.pickDateButton.dateLabel.text = houseWorks[0].scheduledDate.apiDateToDatePicker()
+        datePickerView.datePicker.date = houseWorks[0].scheduledDate.stringToDate ?? Date()
     }
     
     private func setDatePicker() {
