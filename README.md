@@ -2,7 +2,7 @@
 
 <img src="https://user-images.githubusercontent.com/77181984/175760346-a164f36f-3c12-41ab-9a06-2f86885baf9a.png" width="650"/><br/>
 집안일을 하는 모든 이들의 평화를 위한 집안일 관리, 분담 서비스 👨‍👧‍👧<br/>
-fairer의 백엔드 레포지토리 입니다.
+fairer의 iOS 레포지토리 입니다.
 > App Store :
 
 > Behance : [fairer.ㅣPeacemaker for Houseworker](https://www.behance.net/gallery/147276499/fairerPeacemaker-for-Houseworker)
