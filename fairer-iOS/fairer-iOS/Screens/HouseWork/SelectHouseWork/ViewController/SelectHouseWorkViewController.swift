@@ -190,7 +190,8 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func didTappedWriteHouseWorkButton() {
-        let writeHouseWorkView = WriteHouseWorkViewController()
+        self.houseWorksRequest = [HouseWorksRequest(assignees: [], houseWorkName: "", repeatPattern: self.scheduledDate, scheduledDate: self.scheduledDate, space: "ETC")]
+        let writeHouseWorkView = WriteHouseWorkViewController(houseWork: houseWorksRequest)
         self.navigationController?.pushViewController(writeHouseWorkView, animated: true)
     }
     
