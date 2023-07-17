@@ -217,14 +217,14 @@ final class SettingInviteCodeViewController: BaseViewController {
         dynamicLink: URL
     ) {
         // MARK: - templete
-        let appStoreURL = URL(string: TextLiteral.appStoreUrlText)!
-        let link = Link(webUrl: appStoreURL, mobileWebUrl: appStoreURL)
+        let appLink = Link(iosExecutionParams: ["inviteCode": dynamicLink.absoluteString])
+        
         let content: Content = Content(
             title: TextLiteral.contentTitleText,
             imageUrl: URL(string: TextLiteral.contentImageUrlText)!,
-            link: link
+            link: appLink
         )
-        let button: [Button] = [Button(title: TextLiteral.templeteButtonTitleText, link: link)]
+        let button: [Button] = [Button(title: TextLiteral.templeteButtonTitleText, link: appLink)]
         let feedTemplate: FeedTemplate = FeedTemplate(
             content: content,
             buttons: button
@@ -268,15 +268,15 @@ final class SettingInviteCodeViewController: BaseViewController {
         }
         let dynamicLinksDomainURIPrefix = "https://example.com/\(inviteCode)"
         let bundleID = "com.ios.fairer"
+        
         guard let linkBuilder = DynamicLinkComponents(link: webLink, domainURIPrefix: dynamicLinksDomainURIPrefix) else {
             return URL(fileURLWithPath: "")
         }
         linkBuilder.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
-
+        
         guard let longDynamicLink = linkBuilder.url else {
             return URL(fileURLWithPath: "")
         }
-        print("The long URL is: \(longDynamicLink)")
         return longDynamicLink
     }
 }
