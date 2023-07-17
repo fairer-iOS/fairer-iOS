@@ -259,8 +259,7 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedHouseWorkId = pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkId else { return }
-        guard let selectedHouseWorkDate = pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate else { return }
-        let editHouseWorkView = EditHouseWorkViewController(houseWorkId: selectedHouseWorkId, houseWorkDate: selectedHouseWorkDate)
+        let editHouseWorkView = EditHouseWorkViewController(houseWorkId: selectedHouseWorkId)
         self.navigationController?.pushViewController(editHouseWorkView, animated: true)
     }
 }
