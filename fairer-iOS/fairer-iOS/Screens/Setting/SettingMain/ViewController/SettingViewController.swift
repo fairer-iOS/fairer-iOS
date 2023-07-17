@@ -142,9 +142,14 @@ final class SettingViewController: BaseViewController {
     }
     
     private func touchUpToLogout() {
-        self.makeRequestAlert(title: "로그아웃 하시겠습니까?", message: "", okTitle: "로그아웃") { _ in
-            
+        self.makeRequestAlert(title: "로그아웃 하시겠습니까?", message: "", okTitle: "로그아웃") { [weak self] _ in
+            self?.postLogout()
         }
+    }
+    
+    private func postLogout() {
+        UserDefaults.resetDefaults()
+        RootHandler.shared.change(root: .login)
     }
 }
 
