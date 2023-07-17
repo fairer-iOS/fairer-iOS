@@ -35,7 +35,7 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     lazy var startOfWeekDate = Date().startOfWeek
     private var todayDate = Date()
     lazy var todayDateInString = Date().dateToString
-    lazy var datePickedByOthers = ""
+    lazy var datePickedByOthers = todayDateInString
     var yearMonthDateByTouchedCell: ((String)->())?
     private enum Size {
         static let collectionSpacing: CGFloat = 0
