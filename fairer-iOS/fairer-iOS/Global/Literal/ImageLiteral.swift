@@ -94,6 +94,7 @@ enum ImageLiterals {
     static var locationPin: UIImage { .load(name: "locationPin") }
     static var houseFill: UIImage { .load(systemName: "house.fill") }
     static var error: UIImage { .load(name: "error") }
+    static var homeIcon: UIImage { .load(name: "home") }
     
     // MARK: - dot
     
