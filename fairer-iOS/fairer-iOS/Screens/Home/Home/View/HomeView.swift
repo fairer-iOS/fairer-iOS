@@ -39,7 +39,7 @@ final class HomeView: BaseUIView {
     }()
     let houseImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.houseFill
+        imageView.image = ImageLiterals.homeIcon
         imageView.tintColor = .gray400
         return imageView
     }()
@@ -105,7 +105,7 @@ final class HomeView: BaseUIView {
         
         houseImageView.snp.makeConstraints {
             $0.top.equalTo(titleLabelStackView.snp.bottom).offset(16)
-            $0.height.equalTo(18)
+            $0.size.equalTo(16)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
