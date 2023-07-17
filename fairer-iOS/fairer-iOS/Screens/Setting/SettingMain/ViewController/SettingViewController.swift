@@ -142,10 +142,9 @@ final class SettingViewController: BaseViewController {
     }
     
     private func touchUpToLogout() {
-        
-        // FIXME: - 로그아웃 연결
-        
-        print("로그아웃")
+        self.makeRequestAlert(title: "로그아웃 하시겠습니까?", message: "", okTitle: "로그아웃") { _ in
+            
+        }
     }
 }
 
