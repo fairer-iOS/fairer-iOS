@@ -557,7 +557,7 @@ final class WriteHouseWorkViewController: BaseViewController {
                     $0.height.equalTo(40)
                 }
                 self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
-                self?.houseWorks[0].repeatPattern =  self?.selectedDay.dayOfWeekToAPIString ?? Date().dayOfWeekToAPIString
+                self?.houseWorks[0].repeatPattern = self?.selectedDay.dayOfWeekToAPIString ?? Date().dayOfWeekToAPIString
             case .month:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)

@@ -378,7 +378,7 @@ final class EditHouseWorkViewController: BaseViewController {
             }
             timePicker.date = time
         }
-
+        
         if editHouseWork.repeatCycle != RepeatCycleType.once.rawValue {
             setRepeatToggle.isOn = true
             showRepeatComponents()
