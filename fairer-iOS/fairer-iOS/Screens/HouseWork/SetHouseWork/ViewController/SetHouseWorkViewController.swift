@@ -604,18 +604,17 @@ final class SetHouseWorkViewController: BaseViewController {
     private func presentPickDateView() {
         datePickerView.isHidden = false
         datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
-            guard let self = self else { return }
-            self.datePickerView.isHidden = true
-            self.setHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
-            self.selectedDay = pickedDate
-            self.houseWorks.indices.forEach { index in
-                self.houseWorks[index].scheduledDate = pickedDate.dateToAPIString
-                if self.houseWorks[index].repeatCycle != "W" {
-                    self.houseWorks[index].repeatPattern = pickedDate.dateToAPIString
+            self?.datePickerView.isHidden = true
+            self?.setHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
+            self?.selectedDay = pickedDate
+            self?.houseWorks.indices.forEach { index in
+                self?.houseWorks[index].scheduledDate = pickedDate.dateToAPIString
+                if self?.houseWorks[index].repeatCycle == "W" {
+                    self?.houseWorks[index].repeatPattern = pickedDate.dayOfWeekToAPIString
+                    self?.updateRepeatCycleDayLabel(.week, pickedDate.dayOfWeekToKoreanString)
+                    self?.repeatCycleCollectionView.selectedDaysOfWeek = [pickedDate.dayOfWeekToAPIString.englishToDayOfWeekString()]
                 } else {
-                    self.houseWorks[index].repeatPattern = pickedDate.dayOfWeekToAPIString
-                    self.updateRepeatCycleDayLabel(.week, pickedDate.dayOfWeekToKoreanString)
-                    self.repeatCycleCollectionView.selectedDaysOfWeek = [pickedDate.dayOfWeekToAPIString.englishToDayOfWeekString()]
+                    self?.houseWorks[index].repeatPattern = pickedDate.dateToAPIString
                 }
             }
         }

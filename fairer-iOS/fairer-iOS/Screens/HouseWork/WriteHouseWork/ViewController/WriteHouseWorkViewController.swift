@@ -456,12 +456,12 @@ final class WriteHouseWorkViewController: BaseViewController {
             self?.writeHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
             self?.selectedDay = pickedDate
             self?.houseWorks[0].scheduledDate = pickedDate.dateToAPIString
-            if self?.houseWorks[0].repeatCycle != "W" {
-                self?.houseWorks[0].repeatPattern = pickedDate.dateToAPIString
-            } else {
+            if self?.houseWorks[0].repeatCycle == "W" {
                 self?.houseWorks[0].repeatPattern = pickedDate.dayOfWeekToAPIString
                 self?.updateRepeatCycleDayLabel(.week, pickedDate.dayOfWeekToKoreanString)
                 self?.repeatCycleCollectionView.selectedDaysOfWeek = [pickedDate.dayOfWeekToAPIString.englishToDayOfWeekString()]
+            } else {
+                self?.houseWorks[0].repeatPattern = pickedDate.dateToAPIString
             }
         }
     }

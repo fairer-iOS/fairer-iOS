@@ -198,6 +198,7 @@ enum TextLiteral {
     // MARK: - EditHouseWorkViewController
     
     static let editHouseWorkViewControllerDoneButtonText = "수정 완료"
+    static let editHouseWorkViewControllerOtherPlaceText = "기타"
     
     // MARK: - RepeatAlertTableView
     

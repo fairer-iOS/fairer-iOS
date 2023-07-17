@@ -364,7 +364,7 @@ final class EditHouseWorkViewController: BaseViewController {
     }
     
     private func setLatestContents() {
-        writeHouseWorkCalendarView.spaceLabel.text = Space.allCases.first { $0.spaceUpper == editHouseWork.space}?.rawValue ?? "기타"
+        writeHouseWorkCalendarView.spaceLabel.text = Space.allCases.first { $0.spaceUpper == editHouseWork.space}?.rawValue ?? TextLiteral.editHouseWorkViewControllerOtherPlaceText
         writeHouseWorkCalendarView.pickDateButton.dateLabel.text = editHouseWork.scheduledDate?.apiStringToDate?.dayToKoreanString
         datePickerView.datePicker.date = editHouseWork.scheduledDate?.apiStringToDate ?? Date()
         
@@ -524,12 +524,12 @@ final class EditHouseWorkViewController: BaseViewController {
             self?.doneButton.isDisabled = false
             self?.writeHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
             self?.editHouseWork.scheduledDate = pickedDate.dateToAPIString
-            if self?.editHouseWork.repeatCycle != "W" {
-                self?.editHouseWork.repeatPattern = pickedDate.dateToAPIString
-            } else {
+            if self?.editHouseWork.repeatCycle == "W" {
                 self?.editHouseWork.repeatPattern = pickedDate.dayOfWeekToAPIString
                 self?.updateRepeatCycleDayLabel(.week, pickedDate.dayOfWeekToKoreanString)
                 self?.repeatCycleCollectionView.selectedDaysOfWeek = [pickedDate.dayOfWeekToAPIString.englishToDayOfWeekString()]
+            } else {
+                self?.editHouseWork.repeatPattern = pickedDate.dateToAPIString
             }
         }
     }
