@@ -12,15 +12,6 @@ import SnapKit
 final class EditHouseWorkViewController: BaseViewController {
     
     private let houseWorkMaxLength = 16
-    private var selectedDay: Date = Date() {
-        didSet {
-            if editHouseWork.repeatCycle == RepeatCycleType.week.rawValue {
-                updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
-            } else {
-                updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
-            }
-        }
-    }
     private var editHouseWork: EditHouseWorkRequest = EditHouseWorkRequest() {
         didSet {
             if oldValue != editHouseWork && oldValue != EditHouseWorkRequest() {
@@ -29,6 +20,7 @@ final class EditHouseWorkViewController: BaseViewController {
         }
     }
     private var houseWorkId: Int = 0
+    private var houseWorkDate: String = Date().dateToAPIString
     private var myId: Int?
     
     // MARK: - property
@@ -177,8 +169,9 @@ final class EditHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(houseWorkId: Int) {
+    init(houseWorkId: Int, houseWorkDate: String) {
         self.houseWorkId = houseWorkId
+        self.houseWorkDate = houseWorkDate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -365,8 +358,8 @@ final class EditHouseWorkViewController: BaseViewController {
     
     private func setLatestContents() {
         writeHouseWorkCalendarView.spaceLabel.text = Space.allCases.first { $0.spaceUpper == editHouseWork.space}?.rawValue ?? TextLiteral.editHouseWorkViewControllerOtherPlaceText
-        writeHouseWorkCalendarView.pickDateButton.dateLabel.text = editHouseWork.scheduledDate?.apiStringToDate?.dayToKoreanString
-        datePickerView.datePicker.date = editHouseWork.scheduledDate?.apiStringToDate ?? Date()
+        writeHouseWorkCalendarView.pickDateButton.dateLabel.text = houseWorkDate.apiStringToDate?.dayToKoreanString
+        datePickerView.datePicker.date = houseWorkDate.apiStringToDate ?? Date()
         
         houseWorkNameTextField.text = editHouseWork.houseWorkName
         
