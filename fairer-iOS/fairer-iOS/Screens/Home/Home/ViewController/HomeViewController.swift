@@ -293,8 +293,11 @@ extension HomeViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.workLabel.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkName
         cell.room.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].space
-        cell.time.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime
-        
+        if self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime == nil {
+            cell.time.text = "하루 종일"
+        } else {
+            cell.time.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime
+        }
         if self.pickDayWorkInfo?.houseWorks?[indexPath.section].success == false {
             cell.houseWorkId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkId ?? Int()
             cell.scheduledDate = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate ?? String()
