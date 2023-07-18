@@ -100,4 +100,16 @@ extension SettingInquiryViewController: MFMailComposeViewControllerDelegate {
     private func setupDelegate() {
         composeVC.mailComposeDelegate = self
     }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .sent, .saved:
+            self.dismiss(animated: true)
+            self.makeAlert(title: TextLiteral.settingInquiryViewControllerMailSentAlertTitle, message: TextLiteral.settingInquiryViewControllerMailSentAlertMessage)
+        case .cancelled, .failed:
+            self.makeAlert(title: TextLiteral.settingInquiryViewControllerMailFailureAlertTitle, message: TextLiteral.settingInquiryViewControllerMailFailureAlertMessage)
+        default:
+            self.dismiss(animated: true)
+        }
+    }
 }

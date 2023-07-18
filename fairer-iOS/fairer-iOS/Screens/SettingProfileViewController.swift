@@ -120,12 +120,13 @@ final class SettingProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegation()
-        setupNotificationCenter()
         setButtomAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        setupNotificationCenter()
         if isSettingProfileViewPoped == false {
             getMyInfo()
         }
