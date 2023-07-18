@@ -146,6 +146,10 @@ enum TextLiteral {
     static let settingInquiryViewControllerMailBodyText = "문의 내용"
     static let settingInquiryViewControllerAlertTitle = "Mail 앱 연결 실패"
     static let settingInquiryViewControllerAlertMessage = "이메일 설정을 확인하고 다시 시도해주세요."
+    static let settingInquiryViewControllerMailSentAlertTitle = "전송 완료"
+    static let settingInquiryViewControllerMailSentAlertMessage = "빠른 시일 내에 답변 드리겠습니다"
+    static let settingInquiryViewControllerMailFailureAlertTitle = "전송 실패"
+    static let settingInquiryViewControllerMailFailureAlertMessage = "다시 시도해 주세요"
     
     // MARK: - SettingPolicyViewcController
     
