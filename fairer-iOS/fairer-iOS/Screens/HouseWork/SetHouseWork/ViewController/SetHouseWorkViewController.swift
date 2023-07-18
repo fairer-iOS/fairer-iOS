@@ -529,7 +529,7 @@ final class SetHouseWorkViewController: BaseViewController {
             repeatCycleCollectionView.snp.updateConstraints {
                 $0.height.equalTo(40)
             }
-            var dayOfWeeks = houseWorks[houseWork].repeatPattern != "" ? houseWorks[houseWork].repeatPattern.components(separatedBy: ",") : [selectedDay.dayOfWeekToAPIString]
+            var dayOfWeeks = !houseWorks[houseWork].repeatPattern.isEmpty ? houseWorks[houseWork].repeatPattern.components(separatedBy: ",") : [selectedDay.dayOfWeekToAPIString]
             dayOfWeeks.indices.forEach { dayOfWeeks[$0] = dayOfWeeks[$0].englishToDayOfWeekString() }
             repeatCycleCollectionView.selectedDaysOfWeek = dayOfWeeks
             repeatCycleCollectionView.collectionView.reloadData()
