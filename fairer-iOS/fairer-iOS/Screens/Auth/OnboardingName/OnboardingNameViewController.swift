@@ -155,7 +155,7 @@ extension OnboardingNameViewController {
     }
     
     private func didTapDoneButton() {
-        if nameTextField.text!.hasCharacters() {
+        if !nameTextField.text!.hasSpecialCharacters() {
             nameTextField.layer.borderWidth = 0
             disableLabel.isHidden = true
             let onBoardingProfileViewController = OnboardingProfileViewController()
