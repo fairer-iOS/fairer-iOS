@@ -90,8 +90,9 @@ final class HomeView: BaseUIView {
                          emptyHouseWorkImage)
         
         toolBarView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
-            $0.height.equalTo(76)
+            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(110)
         }
         
         titleLabelStackView.addArrangedSubview(nameTitleLabel)

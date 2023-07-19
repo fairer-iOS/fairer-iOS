@@ -294,7 +294,7 @@ extension HomeViewController: UITableViewDataSource {
         cell.workLabel.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkName
         cell.room.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].space
         if self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime == nil {
-            cell.time.text = "하루 종일"
+            cell.time.text = "하루종일"
         } else {
             cell.time.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime
         }
@@ -446,7 +446,7 @@ private extension HomeViewController {
             guard let self = self else {
                 return
             }
-            self.homewView.homeGroupLabel.text = response.teamName
+            self.homewView.homeGroupLabel.text = (response.teamName ?? "") + " " +  String(response.members?.count ?? 0)
             self.selectedMemberId = self.myId
             self.teamId = response.teamId
             self.homewView.homeGroupCollectionView.userList = []
