@@ -142,10 +142,16 @@ final class SettingViewController: BaseViewController {
     }
     
     private func touchUpToLogout() {
-        
-        // FIXME: - 로그아웃 연결
-        
-        print("로그아웃")
+        self.makeRequestAlert(title: "로그아웃 하시겠습니까?", message: "", okTitle: "로그아웃") { [weak self] _ in
+            self?.postLogout()
+        }
+    }
+    
+    private func postLogout() {
+        if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
+        RootHandler.shared.change(root: .login)
     }
 }
 

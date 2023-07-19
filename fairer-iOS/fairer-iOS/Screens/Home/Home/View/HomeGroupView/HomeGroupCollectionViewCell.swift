@@ -53,7 +53,7 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
         }
         checkCircleView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.centerX.equalToSuperview()
+            $0.center.equalToSuperview()
             $0.width.height.equalTo(48)
         }
         titleLabel.snp.makeConstraints {

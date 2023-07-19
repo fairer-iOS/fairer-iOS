@@ -27,13 +27,12 @@ final class HomeViewController: BaseViewController {
     private var myId: Int?
     private lazy var divideIndex: Int = 0
     private lazy var workTotalNum: Int = 0
-    private lazy var notFinishedWorkSum: Int = 0
-    private lazy var finishedWorkSum: Int = 0 {
+    private lazy var notFinishedWorkSum: Int = 0 {
         didSet {
-            notFinishedWorkSum = workTotalNum - finishedWorkSum
             homewView.homeWeekCalendarCollectionView.countWorkLeft = String(notFinishedWorkSum)
         }
     }
+    private lazy var finishedWorkSum: Int = 0
     private lazy var userName: String = String() {
         didSet {
             homewView.nameTitleLabel.text = "\(userName)님"
@@ -294,8 +293,11 @@ extension HomeViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.workLabel.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkName
         cell.room.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].space
-        cell.time.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime
-        
+        if self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime == nil {
+            cell.time.text = "하루종일"
+        } else {
+            cell.time.text = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime
+        }
         if self.pickDayWorkInfo?.houseWorks?[indexPath.section].success == false {
             cell.houseWorkId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkId ?? Int()
             cell.scheduledDate = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate ?? String()
@@ -344,7 +346,7 @@ private extension HomeViewController {
         DispatchQueue.main.async {
             LoadingView.showLoading()
         }
-        DispatchQueue.global().async {
+        DispatchQueue.main.async {
             if isOwn {
                 self.getDateHouseWork(
                     fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
@@ -353,27 +355,26 @@ private extension HomeViewController {
                     guard let self = self else {
                         return
                     }
-                    DispatchQueue.main.async {
-                        LoadingView.hideLoading()
-                        if let response = response[self.homewView.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
-                            self.pickDayWorkInfo = response
-                            self.divideIndex = response.countLeft
-                            self.workTotalNum = response.countLeft + response.countDone
-                            self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response.houseWorks ?? [HouseWorkData]())
-                            if response.countDone + response.countLeft != 0 {
-                                self.homewView.emptyHouseWorkImage.isHidden = true
-                                self.homewView.calendarDailyTableView.isHidden = false
-                            } else {
-                                self.homewView.emptyHouseWorkImage.isHidden = false
-                                self.homewView.calendarDailyTableView.isHidden = true
-                            }
-                            self.finishedWorkSum = response.countDone
+                    LoadingView.hideLoading()
+                    
+                    if let response = response[self.homewView.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
+                        self.pickDayWorkInfo = response
+                        self.divideIndex = response.countLeft
+                        self.workTotalNum = response.countLeft + response.countDone
+                        self.pickDayWorkInfo?.houseWorks = self.listCompleteHouseWorkLast(WorkList: response.houseWorks ?? [HouseWorkData]())
+                        if response.countDone + response.countLeft != 0 {
+                            self.homewView.emptyHouseWorkImage.isHidden = true
+                            self.homewView.calendarDailyTableView.isHidden = false
+                        } else {
+                            self.homewView.emptyHouseWorkImage.isHidden = false
+                            self.homewView.calendarDailyTableView.isHidden = true
                         }
-                        self.homewView.calendarDailyTableView.reloadData()
+                        self.finishedWorkSum = response.countDone
+                        
+                        self.notFinishedWorkSum = self.workTotalNum - self.finishedWorkSum
                     }
-                    DispatchQueue.global().async {
-                        self.getHouseWorksByWeek(isOwn: isOwn)
-                    }
+                    self.homewView.calendarDailyTableView.reloadData()
+                    self.getHouseWorksByWeek(isOwn: isOwn)
                 }
             } else {
                 guard let selectedMemberId = self.selectedMemberId else { return }
@@ -400,6 +401,8 @@ private extension HomeViewController {
                                 self.homewView.calendarDailyTableView.isHidden = true
                             }
                             self.finishedWorkSum = response.countDone
+                            
+                            self.notFinishedWorkSum = self.workTotalNum - self.finishedWorkSum
                         }
                     }
                     DispatchQueue.global().async {
@@ -443,7 +446,7 @@ private extension HomeViewController {
             guard let self = self else {
                 return
             }
-            self.homewView.homeGroupLabel.text = response.teamName
+            self.homewView.homeGroupLabel.text = (response.teamName ?? "") + " " +  String(response.members?.count ?? 0)
             self.selectedMemberId = self.myId
             self.teamId = response.teamId
             self.homewView.homeGroupCollectionView.userList = []

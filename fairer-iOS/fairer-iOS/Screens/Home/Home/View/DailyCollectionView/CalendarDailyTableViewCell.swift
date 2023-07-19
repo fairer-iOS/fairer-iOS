@@ -82,6 +82,7 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     }()
     private lazy var roomStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [pinImage,room])
+        stackView.spacing = 4
         stackView.axis = .horizontal
         stackView.alignment = .center
         return stackView
@@ -130,6 +131,7 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
         timeStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(SizeLiteral.componentPadding)
             $0.trailing.equalToSuperview().inset(SizeLiteral.componentPadding)
+            $0.height.equalTo(18)
         }
         
         roomStackView.snp.makeConstraints {

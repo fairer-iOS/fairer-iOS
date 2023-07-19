@@ -13,6 +13,15 @@ final class HomeViewControllerToolBar: UIView {
     
     // MARK: - property
     
+    private let contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderWidth = 0.7
+        let borderColor = UIColor.gray300.withAlphaComponent(0.2)
+        view.layer.borderColor = borderColor.cgColor
+        return view
+    }()
+    
     private let affairView: UIView = {
         let view = UIView()
         view.layer.borderColor = UIColor.gray200.cgColor
@@ -42,8 +51,13 @@ final class HomeViewControllerToolBar: UIView {
     }
     
     private func render() {
-        self.addSubview(affairView)
+        self.addSubview(contentView)
+        contentView.addSubview(affairView)
         affairView.addSubviews(affairLabel,plusImage)
+        
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
         affairView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
