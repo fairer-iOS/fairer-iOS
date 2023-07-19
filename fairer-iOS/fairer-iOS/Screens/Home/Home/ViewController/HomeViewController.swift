@@ -353,9 +353,6 @@ extension HomeViewController: UITableViewDataSource {
 private extension HomeViewController {
     func getHouseWorksByDate(isOwn: Bool, startDate: String, endDate: String) {
         DispatchQueue.main.async {
-            LoadingView.showLoading()
-        }
-        DispatchQueue.main.async {
             if isOwn {
                 self.getDateHouseWork(
                     fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
@@ -364,7 +361,6 @@ private extension HomeViewController {
                     guard let self = self else {
                         return
                     }
-                    LoadingView.hideLoading()
                     
                     if let response = response[self.homewView.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                         self.pickDayWorkInfo = response
@@ -396,7 +392,6 @@ private extension HomeViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
                         if let response = response[self.homewView.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
