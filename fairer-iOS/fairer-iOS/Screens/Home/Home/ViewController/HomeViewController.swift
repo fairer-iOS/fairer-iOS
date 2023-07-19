@@ -90,6 +90,12 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getDivideIndex()
+        self.getRules()
+        self.getMyInfo()
+        self.setNotification()
+    }
+    
+    override func viewDidLayoutSubviews() {
         if homewView.homeWeekCalendarCollectionView.datePickedByOthers == "" {
             self.getHouseWorksByDate(
                 isOwn: self.checkMemeberCellIsOwn(),
@@ -103,9 +109,6 @@ final class HomeViewController: BaseViewController {
                 endDate: homewView.homeWeekCalendarCollectionView.datePickedByOthers
             )
         }
-        self.getRules()
-        self.getMyInfo()
-        self.setNotification()
     }
     
     override func configUI() {
