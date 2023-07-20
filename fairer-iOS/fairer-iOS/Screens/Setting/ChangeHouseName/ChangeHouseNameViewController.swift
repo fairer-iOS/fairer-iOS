@@ -10,6 +10,7 @@ import UIKit
 final class ChangeHouseNameViewController: BaseViewController {
     
     private var isNameSatisfied = true
+    private var lastName: String?
     
     // MARK: - property
     
@@ -145,16 +146,11 @@ final class ChangeHouseNameViewController: BaseViewController {
     
     private func didTapDoneButton() {
         guard let text = houseNameTextField.text else { return }
-        
-        if houseNameTextField.text!.hasCharacters() {
-            houseNameTextField.layer.borderWidth = 0
+        patchTeamInfo(teamName: text)
+    }
     
-            patchTeamInfo(teamName: text)
-        } else {
-            houseNameTextField.layer.borderWidth = 1
-            houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
-            changeHouseNameDoneButton.isDisabled = true
-        }
+    private func checkDoneButton() {
+        changeHouseNameDoneButton.isDisabled = !isNameSatisfied || lastName == houseNameTextField.text
     }
     
     private func checkTextField() {
@@ -179,6 +175,7 @@ final class ChangeHouseNameViewController: BaseViewController {
 extension ChangeHouseNameViewController : UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         checkTextField()
+        checkDoneButton()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -208,6 +205,7 @@ extension ChangeHouseNameViewController {
                 guard let teamName = teamInfo.teamName else { return }
                 DispatchQueue.main.async {
                     self.houseNameTextField.text = teamName
+                    self.lastName = teamName
                 }
                 break
             case .requestErr(let errorResponse):
