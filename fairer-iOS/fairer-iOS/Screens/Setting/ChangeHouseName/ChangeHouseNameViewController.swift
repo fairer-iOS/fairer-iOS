@@ -9,6 +9,8 @@ import UIKit
 
 final class ChangeHouseNameViewController: BaseViewController {
     
+    private var isNameSatisfied = true
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -40,13 +42,29 @@ final class ChangeHouseNameViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let disableLabel: UILabel = {
+    private let houseNameNumWarningLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.textFieldWarningOverTwenty
+        label.textColor = .negative20
+        label.font = .body2
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    private let houseNameSpecialWarningLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.textFieldDisableSignLabel
         label.textColor = .negative20
         label.font = .body2
-        label.layer.isHidden = true
+        label.numberOfLines = 0
+        label.isHidden = true
         return label
+    }()
+    private lazy var changeHouseNameStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [houseNameNumWarningLabel, houseNameSpecialWarningLabel])
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        return stackView
     }()
     
     // MARK: - life cycle
@@ -77,10 +95,10 @@ final class ChangeHouseNameViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(disableLabel)
-        disableLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(houseNameTextField.snp.bottom).offset(8)
+        view.addSubview(changeHouseNameStackView)
+        changeHouseNameStackView.snp.makeConstraints {
+            $0.top.equalTo(houseNameTextField.snp.bottom).offset(6)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(changeHouseNameDoneButton)
@@ -130,14 +148,28 @@ final class ChangeHouseNameViewController: BaseViewController {
         
         if houseNameTextField.text!.hasCharacters() {
             houseNameTextField.layer.borderWidth = 0
-            disableLabel.isHidden = true
     
             patchTeamInfo(teamName: text)
         } else {
             houseNameTextField.layer.borderWidth = 1
             houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
             changeHouseNameDoneButton.isDisabled = true
-            disableLabel.isHidden = false
+        }
+    }
+    
+    private func checkTextField() {
+        if let text = houseNameTextField.text {
+            if text.count > 16 || text.hasSpecialCharacters() {
+                houseNameTextField.layer.borderWidth = 1
+                houseNameTextField.layer.borderColor = UIColor.negative20.cgColor
+                isNameSatisfied = false
+            } else {
+                houseNameTextField.layer.borderWidth = 0
+                isNameSatisfied = text.count > 0
+            }
+            
+            houseNameNumWarningLabel.isHidden = text.count <= 16
+            houseNameSpecialWarningLabel.isHidden = !text.hasSpecialCharacters()
         }
     }
 }
@@ -145,24 +177,11 @@ final class ChangeHouseNameViewController: BaseViewController {
 // MARK: - extension
 
 extension ChangeHouseNameViewController : UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let char = string.cString(using: String.Encoding.utf8) {
-            let isBackSpace = strcmp(char, "\\b")
-            if isBackSpace == -92 {
-                return true
-            }
-        }
-        guard textField.text!.count < 16 else { return false }
-        return true
-    }
-    
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        let hasText = houseNameTextField.hasText
-        changeHouseNameDoneButton.isDisabled = !hasText
+        checkTextField()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        houseNameTextField.layer.borderWidth = 0
         view.endEditing(true)
     }
 }
