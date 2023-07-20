@@ -90,6 +90,12 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getDivideIndex()
+        self.getRules()
+        self.getMyInfo()
+        self.setNotification()
+    }
+    
+    override func viewDidLayoutSubviews() {
         if homewView.homeWeekCalendarCollectionView.datePickedByOthers == "" {
             self.getHouseWorksByDate(
                 isOwn: self.checkMemeberCellIsOwn(),
@@ -103,9 +109,6 @@ final class HomeViewController: BaseViewController {
                 endDate: homewView.homeWeekCalendarCollectionView.datePickedByOthers
             )
         }
-        self.getRules()
-        self.getMyInfo()
-        self.setNotification()
     }
     
     override func configUI() {
@@ -223,6 +226,11 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let selectedCell = tableView.cellForRow(at: indexPath) as! CalendarDailyTableViewCell
         selectedCell.shadowLayer.layer.cornerRadius = 0
+        
+        if checkMemeberCellIsOwn() == false {
+            return nil
+        }
+        
         if indexPath.section < self.divideIndex {
             selectedCell.shadowLayer.backgroundColor = .blue
             let swipeAction = UIContextualAction(style: .normal, title: "완료", handler: { action, view, completionHaldler in
@@ -257,6 +265,10 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if checkMemeberCellIsOwn() == false {
+            return
+        }
+        
         guard let selectedHouseWorkId = pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkId else { return }
         guard let selectedHouseWorkDate = pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate else { return }
         let editHouseWorkView = EditHouseWorkViewController(houseWorkId: selectedHouseWorkId, houseWorkDate: selectedHouseWorkDate)
@@ -344,9 +356,6 @@ extension HomeViewController: UITableViewDataSource {
 private extension HomeViewController {
     func getHouseWorksByDate(isOwn: Bool, startDate: String, endDate: String) {
         DispatchQueue.main.async {
-            LoadingView.showLoading()
-        }
-        DispatchQueue.main.async {
             if isOwn {
                 self.getDateHouseWork(
                     fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
@@ -355,7 +364,6 @@ private extension HomeViewController {
                     guard let self = self else {
                         return
                     }
-                    LoadingView.hideLoading()
                     
                     if let response = response[self.homewView.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                         self.pickDayWorkInfo = response
@@ -387,7 +395,6 @@ private extension HomeViewController {
                         return
                     }
                     DispatchQueue.main.async {
-                        LoadingView.hideLoading()
                         if let response = response[self.homewView.homeWeekCalendarCollectionView.datePickedByOthers.replacingOccurrences(of: ".", with: "-")] {
                             self.pickDayWorkInfo = response
                             self.divideIndex = response.countLeft
