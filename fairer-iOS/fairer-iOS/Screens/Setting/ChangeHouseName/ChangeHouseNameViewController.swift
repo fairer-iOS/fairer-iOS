@@ -55,6 +55,7 @@ final class ChangeHouseNameViewController: BaseViewController {
         super.viewDidLoad()
         setupDelegation()
         setupNotificationCenter()
+        getTeamInfo()
     }
     
     override func render() {
@@ -167,7 +168,7 @@ extension ChangeHouseNameViewController : UITextFieldDelegate {
 }
 
 extension ChangeHouseNameViewController {
-    func patchTeamInfo(teamName: String) {
+    private func patchTeamInfo(teamName: String) {
         NetworkService.shared.teams.patchTeamInfo(teamName: teamName) { [weak self] result in
             switch result {
             case .success(_):
@@ -176,6 +177,24 @@ extension ChangeHouseNameViewController {
                 dump(error)
             default:
                 print("server error")
+            }
+        }
+    }
+    
+    private func getTeamInfo() {
+        NetworkService.shared.teams.getTeamInfo { result in
+            switch result {
+            case .success(let response):
+                guard let teamInfo = response as? TeamInfoResponse else { return }
+                guard let teamName = teamInfo.teamName else { return }
+                DispatchQueue.main.async {
+                    self.houseNameTextField.text = teamName
+                }
+                break
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                break
             }
         }
     }
