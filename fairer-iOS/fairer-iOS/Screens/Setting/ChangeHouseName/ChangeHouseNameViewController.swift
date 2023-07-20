@@ -45,7 +45,7 @@ final class ChangeHouseNameViewController: BaseViewController {
     }()
     private let houseNameNumWarningLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.textFieldWarningOverTwenty
+        label.text = TextLiteral.textFieldWarningOverSixteen
         label.textColor = .negative20
         label.font = .body2
         label.numberOfLines = 0
@@ -98,7 +98,7 @@ final class ChangeHouseNameViewController: BaseViewController {
         
         view.addSubview(changeHouseNameStackView)
         changeHouseNameStackView.snp.makeConstraints {
-            $0.top.equalTo(houseNameTextField.snp.bottom).offset(6)
+            $0.top.equalTo(houseNameTextField.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
