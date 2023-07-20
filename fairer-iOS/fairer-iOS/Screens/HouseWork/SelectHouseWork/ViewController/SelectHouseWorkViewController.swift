@@ -14,6 +14,7 @@ final class SelectHouseWorkViewController: BaseViewController {
     var selectedSpace: Space?
     var houseWorks: [String] = []
     var houseWorksRequest: [HouseWorksRequest] = []
+    var scheduledDate = Date().dateToAPIString
     
     // MARK: - property
     
@@ -189,13 +190,14 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func didTappedWriteHouseWorkButton() {
-        let writeHouseWorkView = WriteHouseWorkViewController()
+        self.houseWorksRequest = [HouseWorksRequest(assignees: [], houseWorkName: "", repeatPattern: self.scheduledDate, scheduledDate: self.scheduledDate, space: "ETC")]
+        let writeHouseWorkView = WriteHouseWorkViewController(houseWork: houseWorksRequest)
         self.navigationController?.pushViewController(writeHouseWorkView, animated: true)
     }
     
     private func didTappedNextButton() {
         self.houseWorksRequest = houseWorks.map { houseWorkName in
-            HouseWorksRequest(assignees: [], houseWorkName: houseWorkName, space: selectedSpace?.spaceUpper ?? "")
+            HouseWorksRequest(assignees: [], houseWorkName: houseWorkName, repeatPattern: self.scheduledDate, scheduledDate: self.scheduledDate, space: selectedSpace?.spaceUpper ?? "")
         }
         let setHouseWorkView = SetHouseWorkViewController(houseWorks: houseWorksRequest)
         self.navigationController?.pushViewController(setHouseWorkView, animated: true)
@@ -264,6 +266,7 @@ final class SelectHouseWorkViewController: BaseViewController {
         datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
             self?.datePickerView.isHidden = true
             self?.selectHouseWorkCalendar.dateLabel.text = pickedDate.dayToKoreanString
+            self?.scheduledDate = pickedDate.dateToAPIString
         }
     }
 }

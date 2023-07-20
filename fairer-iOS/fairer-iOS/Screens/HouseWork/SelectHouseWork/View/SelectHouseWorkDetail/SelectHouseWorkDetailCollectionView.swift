@@ -64,7 +64,6 @@ final class SelectHouseWorkDetailCollectionView: BaseUIView {
 
 extension SelectHouseWorkDetailCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // FIXME: - api 연결할 때 공간 전달
         selectedHouseWorkList.append(space?.houseWorkDetailList[indexPath.item] ?? "")
         didTappedHouseWork?(selectedHouseWorkList)
     }

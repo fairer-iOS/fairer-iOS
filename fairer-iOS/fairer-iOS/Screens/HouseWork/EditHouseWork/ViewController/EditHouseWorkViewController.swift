@@ -12,15 +12,6 @@ import SnapKit
 final class EditHouseWorkViewController: BaseViewController {
     
     private let houseWorkMaxLength = 16
-    private var selectedDay: Date = Date() {
-        didSet {
-            if editHouseWork.repeatCycle == RepeatCycleType.week.rawValue {
-                updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
-            } else {
-                updateRepeatCycleDayLabel(.month, selectedDay.singleDayToKoreanString)
-            }
-        }
-    }
     private var editHouseWork: EditHouseWorkRequest = EditHouseWorkRequest() {
         didSet {
             if oldValue != editHouseWork && oldValue != EditHouseWorkRequest() {
@@ -30,6 +21,7 @@ final class EditHouseWorkViewController: BaseViewController {
     }
     private var houseWorkId: Int = 0
     private var houseWorkDate: String = ""
+    private var lastHouseWorkDate: String = ""
     private var myId: Int?
     
     // MARK: - property
@@ -181,6 +173,7 @@ final class EditHouseWorkViewController: BaseViewController {
     init(houseWorkId: Int, houseWorkDate: String) {
         self.houseWorkId = houseWorkId
         self.houseWorkDate = houseWorkDate
+        self.lastHouseWorkDate = houseWorkDate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -366,7 +359,9 @@ final class EditHouseWorkViewController: BaseViewController {
     }
     
     private func setLatestContents() {
-        writeHouseWorkCalendarView.spaceLabel.text = Space.allCases.first { $0.spaceUpper == editHouseWork.space}?.rawValue
+        writeHouseWorkCalendarView.spaceLabel.text = Space.allCases.first { $0.spaceUpper == editHouseWork.space}?.rawValue ?? TextLiteral.editHouseWorkViewControllerOtherPlaceText
+        writeHouseWorkCalendarView.pickDateButton.dateLabel.text = houseWorkDate.apiStringToDate?.dayToKoreanString
+        datePickerView.datePicker.date = houseWorkDate.apiStringToDate ?? Date()
         
         houseWorkNameTextField.text = editHouseWork.houseWorkName
         
@@ -521,8 +516,16 @@ final class EditHouseWorkViewController: BaseViewController {
         datePickerView.isHidden = false
         datePickerView.dismissClosure = { [weak self] pickedDate, startDateWeek, yearInString, monthInString in
             self?.datePickerView.isHidden = true
+            self?.doneButton.isDisabled = false
             self?.writeHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
-            self?.selectedDay = pickedDate
+            self?.houseWorkDate = pickedDate.dateToAPIString
+            if self?.editHouseWork.repeatCycle == "W" {
+                self?.editHouseWork.repeatPattern = pickedDate.dayOfWeekToAPIString
+                self?.updateRepeatCycleDayLabel(.week, pickedDate.dayOfWeekToKoreanString)
+                self?.repeatCycleCollectionView.selectedDaysOfWeek = [pickedDate.dayOfWeekToAPIString.englishToDayOfWeekString()]
+            } else {
+                self?.editHouseWork.repeatPattern = pickedDate.dateToAPIString
+            }
         }
     }
     
@@ -536,13 +539,13 @@ final class EditHouseWorkViewController: BaseViewController {
             showRepeatComponents()
             repeatCycleCollectionView.selectedDaysOfWeek = []
             repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.week.repeatLabel
-            updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
+            updateRepeatCycleDayLabel(.week, houseWorkDate.apiStringToDate?.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
             editHouseWork.repeatCycle = RepeatCycleType.week.rawValue
-            editHouseWork.repeatPattern = Date().dayOfWeekToAPIString
+            editHouseWork.repeatPattern = houseWorkDate.apiStringToDate?.dayOfWeekToAPIString
         } else {
             hideRepeatComponents()
             editHouseWork.repeatCycle = RepeatCycleType.once.rawValue
-            editHouseWork.repeatPattern = Date().dateToAPIString
+            editHouseWork.repeatPattern = houseWorkDate
         }
         addAnimation()
     }
@@ -581,14 +584,14 @@ final class EditHouseWorkViewController: BaseViewController {
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(40)
                 }
-                self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
-                self?.editHouseWork.repeatPattern = Date().dayOfWeekToAPIString
+                self?.updateRepeatCycleDayLabel(.week, self?.houseWorkDate.apiStringToDate?.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
+                self?.editHouseWork.repeatPattern = self?.houseWorkDate.apiStringToDate?.dayOfWeekToKoreanString
             case .month:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
-                self?.editHouseWork.repeatPattern = Date().singleDayToKoreanString
-                self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
+                self?.editHouseWork.repeatPattern = self?.houseWorkDate.apiStringToDate?.singleDayToKoreanString
+                self?.updateRepeatCycleDayLabel(.month, self?.houseWorkDate.apiStringToDate?.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
             self?.editHouseWork.repeatCycle = repeatCycle.rawValue
             self?.repeatCycleCollectionView.selectedDaysOfWeek = []
@@ -605,7 +608,7 @@ final class EditHouseWorkViewController: BaseViewController {
                 sortedDays.append(String(day.dropFirst(1)))
                 sortedDaysInAPIString.append(day.dayOfWeekToAPIString())
             }
-            let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
+            let selectedDaysOfWeek = selectedDays.isEmpty ? self?.houseWorkDate.apiStringToDate?.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
             self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
             self?.editHouseWork.repeatPattern = sortedDaysInAPIString.joined(separator: ",")
         }
@@ -660,8 +663,7 @@ final class EditHouseWorkViewController: BaseViewController {
             case .edit:
                 DispatchQueue.main.async {
                     self?.editHouseWork.type = actionType.rawValue
-                    self?.editHouseWork.repeatEndDate = self?.editHouseWork.scheduledDate
-                    self?.editHouseWork.updateStandardDate = self?.houseWorkDate
+                    self?.editHouseWork.updateStandardDate = self?.lastHouseWorkDate
                     if let editHouseWork = self?.editHouseWork {
                         self?.putEditHouseWork(body: editHouseWork)
                     }
@@ -669,7 +671,7 @@ final class EditHouseWorkViewController: BaseViewController {
             case .delete:
                 DispatchQueue.main.async {
                     if let editHouseWork = self?.editHouseWork {
-                        let requestBody = DeleteHouseWorkRequest(deleteStandardDate: self?.houseWorkDate, houseWorkId: editHouseWork.houseWorkId, type: actionType.rawValue)
+                        let requestBody = DeleteHouseWorkRequest(deleteStandardDate: self?.editHouseWork.scheduledDate, houseWorkId: editHouseWork.houseWorkId, type: actionType.rawValue)
                         self?.deleteHouseWork(body: requestBody)
                     }
                 }

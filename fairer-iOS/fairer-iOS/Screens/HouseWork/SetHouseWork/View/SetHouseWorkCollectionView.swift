@@ -115,10 +115,6 @@ extension SetHouseWorkCollectionView {
         isSelectedDetailHouseWork.removeAll(where: { $0 == totalHouseWorks[sender.tag].houseWorkName })
         didDeleteHouseWork?(sender.tag)
         
-        if totalHouseWorks.isEmpty {
-            // FIXME: - 이전 페이지로 이동
-        }
-        
         if selectedIndex > sender.tag || (selectedIndex == sender.tag && sender.tag == totalHouseWorks.endIndex) {
             selectedIndex -= 1
         } else if sender.tag == selectedIndex {

@@ -165,8 +165,9 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init() {
-        self.houseWorks = [HouseWorksRequest(assignees: [], houseWorkName: "", space: "ETC")]
+    init(houseWork: [HouseWorksRequest]) {
+        self.houseWorks = houseWork
+        self.selectedDay = houseWork[0].scheduledDate.apiStringToDate ?? Date()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -326,6 +327,8 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     private func setDatePicker() {
         writeHouseWorkCalendarView.spaceLabel.text = TextLiteral.writeHouseWorkViewControllerSpaceLabel
+        writeHouseWorkCalendarView.pickDateButton.dateLabel.text = houseWorks[0].scheduledDate.apiDateToDatePicker()
+        datePickerView.datePicker.date = houseWorks[0].scheduledDate.stringToDate ?? Date()
         
         datePickerView.isHidden = true
         datePickerView.setAction()
@@ -452,6 +455,14 @@ final class WriteHouseWorkViewController: BaseViewController {
             self?.datePickerView.isHidden = true
             self?.writeHouseWorkCalendarView.pickDateButton.dateLabel.text = pickedDate.dayToKoreanString
             self?.selectedDay = pickedDate
+            self?.houseWorks[0].scheduledDate = pickedDate.dateToAPIString
+            if self?.houseWorks[0].repeatCycle == "W" {
+                self?.houseWorks[0].repeatPattern = pickedDate.dayOfWeekToAPIString
+                self?.updateRepeatCycleDayLabel(.week, pickedDate.dayOfWeekToKoreanString)
+                self?.repeatCycleCollectionView.selectedDaysOfWeek = [pickedDate.dayOfWeekToAPIString.englishToDayOfWeekString()]
+            } else {
+                self?.houseWorks[0].repeatPattern = pickedDate.dateToAPIString
+            }
         }
     }
     
@@ -482,7 +493,7 @@ final class WriteHouseWorkViewController: BaseViewController {
             repeatCycleDayLabel.isHidden = false
             repeatCycleCollectionView.selectedDaysOfWeek = []
             houseWorks[0].repeatCycle = RepeatCycleType.week.rawValue
-            houseWorks[0].repeatPattern = Date().dayOfWeekToAPIString
+            houseWorks[0].repeatPattern = selectedDay.dayOfWeekToAPIString
             repeatCycleView.repeatCycleButtonLabel.text = RepeatCycleType.week.repeatLabel
             updateRepeatCycleDayLabel(.week, selectedDay.dayOfWeekToKoreanString)
         } else {
@@ -506,7 +517,7 @@ final class WriteHouseWorkViewController: BaseViewController {
             repeatCycleDayLabel.isHidden = true
             repeatCycleMenu.isHidden = true
             houseWorks[0].repeatCycle = RepeatCycleType.once.rawValue
-            houseWorks[0].repeatPattern = Date().dateToAPIString
+            houseWorks[0].repeatPattern = selectedDay.dateToAPIString
         }
         addAnimation()
     }
@@ -546,12 +557,12 @@ final class WriteHouseWorkViewController: BaseViewController {
                     $0.height.equalTo(40)
                 }
                 self?.updateRepeatCycleDayLabel(.week, self?.selectedDay.dayOfWeekToKoreanString ?? Date().dayOfWeekToKoreanString)
-                self?.houseWorks[0].repeatPattern = Date().dayOfWeekToAPIString
+                self?.houseWorks[0].repeatPattern = self?.selectedDay.dayOfWeekToAPIString ?? Date().dayOfWeekToAPIString
             case .month:
                 self?.repeatCycleCollectionView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
-                self?.houseWorks[0].repeatPattern = Date().singleDayToKoreanString
+                self?.houseWorks[0].repeatPattern = self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString
                 self?.updateRepeatCycleDayLabel(.month, self?.selectedDay.singleDayToKoreanString ?? Date().singleDayToKoreanString)
             }
             self?.houseWorks[0].repeatCycle = repeatCycle.rawValue
@@ -570,7 +581,7 @@ final class WriteHouseWorkViewController: BaseViewController {
                 sortedDaysInAPIString.append(day.dayOfWeekToAPIString())
             }
             let selectedDaysOfWeek = selectedDays.isEmpty ? self?.selectedDay.dayOfWeekToKoreanString : sortedDays.joined(separator: ", ")
-            self?.updateRepeatCycleDayLabel(.week, selectedDaysOfWeek ?? Date().dayOfWeekToKoreanString)
+            self?.updateRepeatCycleDayLabel(.week, (selectedDaysOfWeek ?? self?.selectedDay.dayOfWeekToKoreanString) ?? Date().dayOfWeekToKoreanString)
             self?.houseWorks[0].repeatPattern = sortedDaysInAPIString.joined(separator: ",")
         }
     }
