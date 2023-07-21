@@ -70,6 +70,7 @@ final class TextField: UITextField {
     private func configUI() {
         self.backgroundColor = .normal0
         self.font = type.font
+        self.textColor = .gray800
         self.layer.cornerRadius = 8
         self.autocorrectionType = .no
         self.autocapitalizationType = .none
