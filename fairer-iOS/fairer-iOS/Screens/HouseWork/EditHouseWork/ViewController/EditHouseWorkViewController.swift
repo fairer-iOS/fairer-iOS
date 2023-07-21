@@ -730,8 +730,7 @@ extension EditHouseWorkViewController {
     private func putEditHouseWork(body: EditHouseWorkRequest) {
         NetworkService.shared.houseWorks.putEditHouseWork(body: body) { result in
             switch result {
-            case .success(let response):
-                dump(response)
+            case .success(_):
                 break
             case .requestErr(let errorResponse):
                 dump(errorResponse)
@@ -744,8 +743,7 @@ extension EditHouseWorkViewController {
     private func deleteHouseWork(body: DeleteHouseWorkRequest) {
         NetworkService.shared.houseWorks.deleteHouseWork(body: body) { result in
             switch result {
-            case .success(let response):
-                dump(response)
+            case .success(_):
                 break
             case .requestErr(let errorResponse):
                 dump(errorResponse)
@@ -765,7 +763,6 @@ extension EditHouseWorkViewController {
                         self.setLatestContents()
                     }
                 }
-                dump(response)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:

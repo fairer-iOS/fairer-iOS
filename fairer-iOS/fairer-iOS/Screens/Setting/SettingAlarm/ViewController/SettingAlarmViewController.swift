@@ -106,7 +106,7 @@ extension SettingAlarmViewController {
     func putAlarmStatus(body: AlarmRequest) {
         NetworkService.shared.alarm.putAlarmStatus(body: body) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 break
             case .requestErr(let errorResponse):
                 dump(errorResponse)
