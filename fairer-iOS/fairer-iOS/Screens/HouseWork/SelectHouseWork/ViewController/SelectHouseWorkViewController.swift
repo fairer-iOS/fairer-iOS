@@ -232,9 +232,22 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func resetSpace() {
-        detailCollectionView.selectedHouseWorkList = []
-        detailCollectionView.collectionView.reloadData()
         spaceCollectionView.collectionView.reloadData()
+        
+        spaceInfoLabel.isHidden = false
+        
+        detailHouseWorkLabel.isHidden = true
+        detailHouseWorkLabel.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        
+        detailCollectionView.selectedHouseWorkList = []
+        detailCollectionView.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        
+        writeHouseWorkLabel.isHidden = true
+        
         nextButton.isDisabled = true
         spaceCollectionView.didChangeSpaceWithHouseWork = false
     }
