@@ -232,8 +232,6 @@ final class SelectHouseWorkViewController: BaseViewController {
     }
     
     private func resetSpace() {
-        spaceCollectionView.collectionView.reloadData()
-        
         spaceInfoLabel.isHidden = false
         
         detailHouseWorkLabel.isHidden = true
@@ -247,6 +245,12 @@ final class SelectHouseWorkViewController: BaseViewController {
         }
         
         writeHouseWorkLabel.isHidden = true
+        
+        UIView.animate(withDuration: 0.6, delay: 0, options: .transitionCurlUp, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+        spaceCollectionView.collectionView.reloadData()
         
         nextButton.isDisabled = true
         spaceCollectionView.didChangeSpaceWithHouseWork = false
