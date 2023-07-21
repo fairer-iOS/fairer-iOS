@@ -632,8 +632,7 @@ extension WriteHouseWorkViewController {
     private func postAddHouseWorks(body: [HouseWorksRequest]) {
         NetworkService.shared.houseWorks.postAddHouseWorksAPI(body: body) { result in
             switch result {
-            case .success(let response):
-                dump(response)
+            case .success(_):
                 break
             case .requestErr(let errorResponse):
                 dump(errorResponse)
