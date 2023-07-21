@@ -873,9 +873,7 @@ private extension HomeViewController {
         let currentTime = Date().dateToTimeString
         let currentTimeInInt = Int(currentTime.components(separatedBy: [":"]).joined()) ?? Int()
         let inputTimeInInt = Int(inputTime.components(separatedBy: [":"]).joined()) ?? Int()
-        if Date().dateCompare(fromDate: homewView.homeWeekCalendarCollectionView.datePickedByOthers.stringToDate ?? Date()) == "Past" {
-            return "over"
-        } else if currentTimeInInt < inputTimeInInt {
+        if currentTimeInInt < inputTimeInInt {
             return "notOver"
         } else {
             return "over"
