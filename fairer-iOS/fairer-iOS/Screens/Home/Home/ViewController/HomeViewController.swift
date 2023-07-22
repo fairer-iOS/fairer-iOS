@@ -478,74 +478,67 @@ private extension HomeViewController {
         DispatchQueue.main.async {
             self.view.isUserInteractionEnabled = false
         }
-        DispatchQueue.global().async {
-            if isOwn {
-                self.getDateHouseWork(
-                    fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
-                    toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
-                ) { [weak self] response in
-                    guard let self = self else {
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
-                        self.homewView.homeWeekCalendarCollectionView.dotList = [UIImage]()
-                        for date in self.homewView.homeWeekCalendarCollectionView.fullDateList {
-                            if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
-                                self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
-                                doneWorkSum = doneWorkSum + workDate.countDone
-                                switch workDate.countLeft {
-                                case 0:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(UIImage())
-                                case 1...3:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
-                                case 4...6:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
-                                default:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
-                                }
-                            }
+        if isOwn {
+            self.getDateHouseWork(
+                fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
+            ) { [weak self] response in
+                guard let self = self else {
+                    return
+                }
+                self.view.isUserInteractionEnabled = true
+                self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
+                self.homewView.homeWeekCalendarCollectionView.dotList = [UIImage]()
+                for date in self.homewView.homeWeekCalendarCollectionView.fullDateList {
+                    if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                        self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
+                        doneWorkSum = doneWorkSum + workDate.countDone
+                        switch workDate.countLeft {
+                        case 0:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                        case 1...3:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                        case 4...6:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                        default:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
                         }
-                        self.countWorkDoneInWeek = doneWorkSum
-                        self.homewView.calendarDailyTableView.reloadData()
                     }
                 }
-            } else {
-                guard let selectedMemberId = self.selectedMemberId else { return }
-                self.getMemberDateHouseWork(
-                    fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
-                    toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
-                    teamMemberId: selectedMemberId
-                ) { [weak self] response in
-                    guard let self = self else {
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
-                        self.homewView.homeWeekCalendarCollectionView.dotList = [UIImage]()
-                        for date in self.homewView.homeWeekCalendarCollectionView.fullDateList {
-                            if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
-                                self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
-                                doneWorkSum = doneWorkSum + workDate.countDone
-                                switch workDate.countLeft {
-                                case 0:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(UIImage())
-                                case 1...3:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
-                                case 4...6:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
-                                default:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
-                                }
-                            }
-                            
+                self.countWorkDoneInWeek = doneWorkSum
+                self.homewView.calendarDailyTableView.reloadData()
+            }
+        } else {
+            guard let selectedMemberId = self.selectedMemberId else { return }
+            self.getMemberDateHouseWork(
+                fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                teamMemberId: selectedMemberId
+            ) { [weak self] response in
+                guard let self = self else {
+                    return
+                }
+                self.view.isUserInteractionEnabled = true
+                self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
+                self.homewView.homeWeekCalendarCollectionView.dotList = [UIImage]()
+                for date in self.homewView.homeWeekCalendarCollectionView.fullDateList {
+                    if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                        self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
+                        doneWorkSum = doneWorkSum + workDate.countDone
+                        switch workDate.countLeft {
+                        case 0:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                        case 1...3:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                        case 4...6:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                        default:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
                         }
-                        self.countWorkDoneInWeek = doneWorkSum
-                        self.homewView.calendarDailyTableView.reloadData()
                     }
                 }
+                self.countWorkDoneInWeek = doneWorkSum
+                self.homewView.calendarDailyTableView.reloadData()
             }
         }
     }

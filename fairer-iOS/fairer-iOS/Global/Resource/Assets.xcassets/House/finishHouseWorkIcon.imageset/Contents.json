@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "집안일 끝남 일러스트+텍스트.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
