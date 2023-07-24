@@ -102,6 +102,18 @@ extension Date {
     }
     
     public func dateCompare(fromDate: Date) -> String {
+        
+        
+        // NSDate 객체 생성
+        let date = NSDate(timeIntervalSinceReferenceDate: 711817200.0)
+
+        // 한국 시간대로 변환
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        let koreaTime = dateFormatter.string(from: date as Date)
+
         var strDateMessage:String = ""
         let result:ComparisonResult = self.compare(fromDate)
         switch result {

@@ -61,7 +61,7 @@ final class HomeViewControllerToolBar: UIView {
         
         affairView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().inset(16)
             $0.height.equalTo(44)
         }
 

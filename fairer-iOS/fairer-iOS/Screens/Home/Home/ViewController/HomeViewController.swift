@@ -313,17 +313,37 @@ extension HomeViewController: UITableViewDataSource {
         if self.pickDayWorkInfo?.houseWorks?[indexPath.section].success == false {
             cell.houseWorkId = self.pickDayWorkInfo?.houseWorks?[indexPath.section].houseWorkId ?? Int()
             cell.scheduledDate = self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate ?? String()
-            if Date().dateCompare(fromDate: self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate?.stringToDate ?? Date()) == "Future" {
-                cell.errorImage.isHidden = true
-                cell.mainBackground.backgroundColor = .white
-            } else if compareTime(inputTime: self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime ?? String()) == "notOver" {
-                cell.errorImage.isHidden = true
-                cell.mainBackground.backgroundColor = .white
+            let cellScheduledDate: Date = pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledDate?.stringToDate ?? Date()
+            let cellScheduledKoreaDate = cellScheduledDate.dateToAPIString
+            let strDateMessage: String = Date().dateCompare(fromDate: cellScheduledDate)
+            
+            // MARK: - today
+            if cellScheduledKoreaDate == Date().dateToAPIString {
+                if compareTime(inputTime: self.pickDayWorkInfo?.houseWorks?[indexPath.section].scheduledTime ?? String()) == "notOver" {
+                    cell.errorImage.isHidden = true
+                    cell.mainBackground.backgroundColor = .white
+                } else {
+                    cell.errorImage.isHidden = false
+                    cell.setErrorImageView()
+                    cell.mainBackground.backgroundColor = .negative0
+                    cell.mainBackground.layer.borderColor = UIColor.negative10.cgColor
+                }
             } else {
-                cell.errorImage.isHidden = false
-                cell.setErrorImageView()
-                cell.mainBackground.backgroundColor = .negative0
-                cell.mainBackground.layer.borderColor = UIColor.negative10.cgColor
+                switch strDateMessage {
+                    
+                    // MARK: - Future
+                case "Future":
+                    cell.errorImage.isHidden = true
+                    cell.mainBackground.backgroundColor = .white
+                    
+                    // MARK: - Past
+                case "Past":
+                    cell.errorImage.isHidden = false
+                    cell.setErrorImageView()
+                    cell.mainBackground.backgroundColor = .negative0
+                    cell.mainBackground.layer.borderColor = UIColor.negative10.cgColor
+                default: return cell
+                }
             }
         } else {
             cell.mainBackground.backgroundColor = .positive10
@@ -357,9 +377,10 @@ private extension HomeViewController {
     func getHouseWorksByDate(isOwn: Bool, startDate: String, endDate: String) {
         DispatchQueue.main.async {
             if isOwn {
-                self.getDateHouseWork(
+                self.getMemberDateHouseWork(
                     fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
-                    toDate: endDate.replacingOccurrences(of: ".", with: "-")
+                    toDate: endDate.replacingOccurrences(of: ".", with: "-"),
+                    teamMemberId: self.myId ?? Int()
                 ) { [weak self] response in
                     guard let self = self else {
                         return
@@ -478,74 +499,67 @@ private extension HomeViewController {
         DispatchQueue.main.async {
             self.view.isUserInteractionEnabled = false
         }
-        DispatchQueue.global().async {
-            if isOwn {
-                self.getDateHouseWork(
-                    fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
-                    toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
-                ) { [weak self] response in
-                    guard let self = self else {
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
-                        self.homewView.homeWeekCalendarCollectionView.dotList = [UIImage]()
-                        for date in self.homewView.homeWeekCalendarCollectionView.fullDateList {
-                            if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
-                                self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
-                                doneWorkSum = doneWorkSum + workDate.countDone
-                                switch workDate.countLeft {
-                                case 0:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(UIImage())
-                                case 1...3:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
-                                case 4...6:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
-                                default:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
-                                }
-                            }
+        if isOwn {
+            self.getDateHouseWork(
+                fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-")
+            ) { [weak self] response in
+                guard let self = self else {
+                    return
+                }
+                self.view.isUserInteractionEnabled = true
+                self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
+                self.homewView.homeWeekCalendarCollectionView.dotList = [UIImage]()
+                for date in self.homewView.homeWeekCalendarCollectionView.fullDateList {
+                    if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                        self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
+                        doneWorkSum = doneWorkSum + workDate.countDone
+                        switch workDate.countLeft {
+                        case 0:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                        case 1...3:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                        case 4...6:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                        default:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
                         }
-                        self.countWorkDoneInWeek = doneWorkSum
-                        self.homewView.calendarDailyTableView.reloadData()
                     }
                 }
-            } else {
-                guard let selectedMemberId = self.selectedMemberId else { return }
-                self.getMemberDateHouseWork(
-                    fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
-                    toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
-                    teamMemberId: selectedMemberId
-                ) { [weak self] response in
-                    guard let self = self else {
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
-                        self.homewView.homeWeekCalendarCollectionView.dotList = [UIImage]()
-                        for date in self.homewView.homeWeekCalendarCollectionView.fullDateList {
-                            if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
-                                self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
-                                doneWorkSum = doneWorkSum + workDate.countDone
-                                switch workDate.countLeft {
-                                case 0:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(UIImage())
-                                case 1...3:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
-                                case 4...6:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
-                                default:
-                                    self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
-                                }
-                            }
-                            
+                self.countWorkDoneInWeek = doneWorkSum
+                self.homewView.calendarDailyTableView.reloadData()
+            }
+        } else {
+            guard let selectedMemberId = self.selectedMemberId else { return }
+            self.getMemberDateHouseWork(
+                fromDate: firstDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                toDate: lastDateInFullDateList.replacingOccurrences(of: ".", with: "-"),
+                teamMemberId: selectedMemberId
+            ) { [weak self] response in
+                guard let self = self else {
+                    return
+                }
+                self.view.isUserInteractionEnabled = true
+                self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar = [Int]()
+                self.homewView.homeWeekCalendarCollectionView.dotList = [UIImage]()
+                for date in self.homewView.homeWeekCalendarCollectionView.fullDateList {
+                    if let workDate = response[date.replacingOccurrences(of: ".", with: "-")] {
+                        self.homewView.homeWeekCalendarCollectionView.countWorkLeftWeekCalendar?.append(workDate.countLeft)
+                        doneWorkSum = doneWorkSum + workDate.countDone
+                        switch workDate.countLeft {
+                        case 0:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(UIImage())
+                        case 1...3:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.oneDot)
+                        case 4...6:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.twoDots)
+                        default:
+                            self.homewView.homeWeekCalendarCollectionView.dotList.append(ImageLiterals.threeDots)
                         }
-                        self.countWorkDoneInWeek = doneWorkSum
-                        self.homewView.calendarDailyTableView.reloadData()
                     }
                 }
+                self.countWorkDoneInWeek = doneWorkSum
+                self.homewView.calendarDailyTableView.reloadData()
             }
         }
     }
@@ -866,16 +880,21 @@ private extension HomeViewController {
     
     func checkMemeberCellIsOwn() -> Bool {
         if myId == selectedMemberId { return true }
-        else { return false }
+        else {
+            
+            return false
+        }
     }
     
     func compareTime(inputTime: String) -> String {
         let currentTime = Date().dateToTimeString
         let currentTimeInInt = Int(currentTime.components(separatedBy: [":"]).joined()) ?? Int()
         let inputTimeInInt = Int(inputTime.components(separatedBy: [":"]).joined()) ?? Int()
-        if Date().dateCompare(fromDate: homewView.homeWeekCalendarCollectionView.datePickedByOthers.stringToDate ?? Date()) == "Past" {
-            return "over"
-        } else if currentTimeInInt < inputTimeInInt {
+        if inputTime == "" {
+            // MARK: - 당일, 하루종일
+            return "notOver"
+        }
+        if currentTimeInInt < inputTimeInInt {
             return "notOver"
         } else {
             return "over"
