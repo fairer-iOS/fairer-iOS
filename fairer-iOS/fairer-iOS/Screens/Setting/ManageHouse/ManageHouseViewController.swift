@@ -13,7 +13,16 @@ struct ManageHouseModel {
     let cellImage: UIImage
     let cellLabel: String
     
-    static let manageHouseData: [ManageHouseModel] = [ManageHouseModel(cellImage: ImageLiterals.settingProfile, cellLabel: TextLiteral.manageHouseViewControllerTableViewCellLabelList[0]), ManageHouseModel(cellImage: ImageLiterals.settingPeople, cellLabel: TextLiteral.manageHouseViewControllerTableViewCellLabelList[1])]
+    static let manageHouseData: [ManageHouseModel] = [
+        ManageHouseModel(
+            cellImage: ImageLiterals.settingProfile,
+            cellLabel: TextLiteral.manageHouseViewControllerTableViewCellLabelList[0]
+        ),
+        ManageHouseModel(
+            cellImage: ImageLiterals.settingPeople,
+            cellLabel: TextLiteral.manageHouseViewControllerTableViewCellLabelList[1]
+        )
+    ]
 }
 
 final class ManageHouseViewController: BaseViewController {
