@@ -21,7 +21,6 @@ final class GroupMainViewController: BaseViewController {
             }
         }
     }
-    private let backButton = BackButton()
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .h2
@@ -84,6 +83,7 @@ final class GroupMainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setButtonAction()
+        getMyInfoFromServer()
     }
 
     override func render() {
@@ -145,11 +145,8 @@ final class GroupMainViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
-        let backButton = makeBarButtonItem(with: backButton)
-        
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.leftBarButtonItem = backButton
     }
 
     func setUserName(name: String) {
@@ -181,5 +178,23 @@ extension GroupMainViewController {
     private func moveToHouseEnterView() {
         let houseEnterViewController = EnterHouseViewController()
         self.navigationController?.pushViewController(houseEnterViewController, animated: true)
+    }
+}
+
+// MARK: - api
+
+extension GroupMainViewController {
+    private func getMyInfoFromServer() {
+        NetworkService.shared.members.getMemberInfo { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? MemberResponse else { return }
+                self.userName = data.memberName
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
     }
 }
