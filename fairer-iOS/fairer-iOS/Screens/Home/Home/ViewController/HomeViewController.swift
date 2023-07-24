@@ -377,9 +377,10 @@ private extension HomeViewController {
     func getHouseWorksByDate(isOwn: Bool, startDate: String, endDate: String) {
         DispatchQueue.main.async {
             if isOwn {
-                self.getDateHouseWork(
+                self.getMemberDateHouseWork(
                     fromDate: startDate.replacingOccurrences(of: ".", with: "-"),
-                    toDate: endDate.replacingOccurrences(of: ".", with: "-")
+                    toDate: endDate.replacingOccurrences(of: ".", with: "-"),
+                    teamMemberId: self.myId ?? Int()
                 ) { [weak self] response in
                     guard let self = self else {
                         return
