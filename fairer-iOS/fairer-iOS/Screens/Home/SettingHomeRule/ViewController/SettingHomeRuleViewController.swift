@@ -65,6 +65,10 @@ final class SettingHomeRuleViewController: BaseViewController {
         homeRuleTableView.separatorStyle = .none
         homeRuleTableView.showsVerticalScrollIndicator = false
         homeRuleTableView.backgroundColor = .white
+        
+        if #available(iOS 15, *) {
+            homeRuleTableView.sectionHeaderTopPadding = 0
+        }
     }
     
     @objc func deleteBtnAction(_ sender: UIButton) {

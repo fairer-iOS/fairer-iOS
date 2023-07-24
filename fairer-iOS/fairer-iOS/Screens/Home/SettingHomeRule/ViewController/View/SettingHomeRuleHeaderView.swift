@@ -46,7 +46,7 @@ final class SettingHomeRuleHeaderView: UITableViewHeaderFooterView {
         let label = UILabel()
         label.text = TextLiteral.homeRuleViewRuleLabel
         label.textColor = .gray600
-        label.font = .h2
+        label.font = .title1
         return label
     }()
     
@@ -98,6 +98,7 @@ final class SettingHomeRuleHeaderView: UITableViewHeaderFooterView {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(settingHomeRuleInfoLabel.snp.bottom).offset(44)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalToSuperview().inset(15)
         }
         
     }
