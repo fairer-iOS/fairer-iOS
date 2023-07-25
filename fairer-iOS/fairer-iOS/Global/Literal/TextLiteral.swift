@@ -116,6 +116,11 @@ enum TextLiteral {
     static let settingViewControllerVersionLabel: String = "버전"
     static let settingViewControllerVersionText: String = "1.0.0"
     static let settingViewControllerLogoutButtonText: String = "로그아웃"
+    static let settingViewControllerLeaveButtonText: String = "회원탈퇴"
+    static let settingViewControllerLogoutAlertTitle: String = "로그아웃 하시겠습니까?"
+    static let settingViewControllerAlertOkTitle: String = "로그아웃"
+    static let settingViewControllerLeaveAlertTitle: String = "회원탈퇴 하시겠습니까?"
+    static let settingViewControllerLeaveAlertMessage: String = "모든 집안일 정보가 사라지며,\n되돌릴 수 없습니다."
     
     // MARK: - ManageHouseViewController
     

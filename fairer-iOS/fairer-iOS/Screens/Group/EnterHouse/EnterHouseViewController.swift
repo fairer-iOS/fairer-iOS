@@ -174,20 +174,10 @@ extension EnterHouseViewController {
         let moveToHouseInfoViewAction = UIAction { [weak self] _ in
             self?.moveToHouseInfoView()
         }
-        let toastAction = UIAction { [weak self] _ in
-            self?.touchUpToShowToast()
-        }
-        
-        self.enterHouseDoneButton.addAction(toastAction, for: .touchUpInside)
         self.enterHouseDoneButton.addAction(moveToHouseInfoViewAction, for: .touchUpInside)
     }
     
     private func moveToHouseInfoView() {
-        let houseInfoViewController = HouseInfoViewController()
-        self.navigationController?.pushViewController(houseInfoViewController, animated: true)
-    }
-    
-    private func touchUpToShowToast() {
         guard let inviteCode = enterHouseCodeTextfield.text else { return }
         postJoinTeam(inviteCode: inviteCode)
     }

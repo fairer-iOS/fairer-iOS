@@ -65,6 +65,22 @@ final class SettingViewController: BaseViewController {
         view.backgroundColor = .gray100
         return view
     }()
+    private lazy var leaveButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(TextLiteral.settingViewControllerLeaveButtonText, for: .normal)
+        button.setTitleColor(.negative20, for: .normal)
+        button.titleLabel?.font = .body2
+        let action = UIAction { [weak self] _ in
+            self?.touchUpToLeave()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
+    private let leaveDivider: UIView = {
+       let view = UIView()
+        view.backgroundColor = .gray100
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -114,6 +130,20 @@ final class SettingViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(1)
         }
+        
+        view.addSubview(leaveButton)
+        leaveButton.snp.makeConstraints {
+            $0.top.equalTo(logoutDivider).offset(17)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(22)
+        }
+        
+        view.addSubview(leaveDivider)
+        leaveDivider.snp.makeConstraints {
+            $0.top.equalTo(leaveButton.snp.bottom).offset(17)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(1)
+        }
     }
     
     // MARK: - func
@@ -142,7 +172,7 @@ final class SettingViewController: BaseViewController {
     }
     
     private func touchUpToLogout() {
-        self.makeRequestAlert(title: "로그아웃 하시겠습니까?", message: "", okTitle: "로그아웃") { [weak self] _ in
+        self.makeRequestAlert(title: TextLiteral.settingViewControllerLogoutAlertTitle, message: "", okTitle: TextLiteral.settingViewControllerAlertOkTitle) { [weak self] _ in
             self?.postLogout()
         }
     }
@@ -152,6 +182,12 @@ final class SettingViewController: BaseViewController {
             UserDefaults.standard.removePersistentDomain(forName: bundleID)
         }
         RootHandler.shared.change(root: .login)
+    }
+    
+    private func touchUpToLeave() {
+        self.makeRequestAlert(title: TextLiteral.settingViewControllerLeaveAlertTitle, message: TextLiteral.settingViewControllerLeaveAlertMessage, okTitle: TextLiteral.settingViewControllerLeaveButtonText) { [weak self] _ in
+            self?.postLogout()
+        }
     }
 }
 
