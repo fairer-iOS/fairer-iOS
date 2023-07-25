@@ -12,6 +12,7 @@ import SnapKit
 final class HomeWeekCalendarCollectionView: BaseUIView {
     
     static let indentifer = "reusableView"
+    private let weekDayCount: Int = 7
     
     lazy var fullDateList: [String] = [] {
         didSet {
@@ -160,7 +161,7 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDelegate {
 
 extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return weekDayCount
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeWeekCalendarCollectionViewCell.className, for: indexPath) as? HomeWeekCalendarCollectionViewCell else {
@@ -192,9 +193,14 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
                         cell.workLeftLabel.isHidden = true
                     } else {
                         cell.workDot.isHidden = true
-                        cell.workBlueBadge.isHidden = false
-                        cell.workLeftLabel.isHidden = false
-                        cell.workLeftLabel.text = self.countWorkLeft
+                        if self.countWorkLeft == "0" {
+                            cell.workLeftLabel.isHidden = true
+                            cell.workBlueBadge.isHidden = true
+                        } else {
+                            cell.workBlueBadge.isHidden = false
+                            cell.workLeftLabel.isHidden = false
+                            cell.workLeftLabel.text = self.countWorkLeft
+                        }
                     }
                 }
             }
@@ -215,9 +221,14 @@ extension HomeWeekCalendarCollectionView: UICollectionViewDataSource {
                     cell.workLeftLabel.isHidden = true
                 } else {
                     cell.workDot.isHidden = true
-                    cell.workBlueBadge.isHidden = false
-                    cell.workLeftLabel.isHidden = false
-                    cell.workLeftLabel.text = self.countWorkLeft
+                    if self.countWorkLeft == "0" {
+                        cell.workLeftLabel.isHidden = true
+                        cell.workBlueBadge.isHidden = true
+                    } else {
+                        cell.workBlueBadge.isHidden = false
+                        cell.workLeftLabel.isHidden = false
+                        cell.workLeftLabel.text = self.countWorkLeft
+                    }
                 }
             }
         }
