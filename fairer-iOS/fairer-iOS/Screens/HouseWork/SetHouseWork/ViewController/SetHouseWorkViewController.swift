@@ -371,8 +371,9 @@ final class SetHouseWorkViewController: BaseViewController {
             }
             addAnimation()
             getManagerView.getManagerCollectionView.selectedMemberList = selectManagerView.selectManagerCollectionView.selectedManagerList
+            houseWorks[selectedHouseWorkIndex].assignees = []
             selectManagerView.selectManagerCollectionView.selectedManagerList.forEach {
-                if let memberId = $0.memberId, !houseWorks[selectedHouseWorkIndex].assignees.contains(memberId) {
+                if let memberId = $0.memberId {
                     houseWorks[selectedHouseWorkIndex].assignees.append(memberId)
                 }
             }
