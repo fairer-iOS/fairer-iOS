@@ -11,7 +11,7 @@ import Moya
 
 final class OauthAPI {
 
-    private let authProvider = MoyaProvider<OauthRouter>(session : Moya.Session(interceptor: Interceptor()), plugins: [MoyaLoggerPlugin()])
+    private let authProvider = MoyaProvider<OauthRouter>(plugins: [MoyaLoggerPlugin()])
     
     func postSignIn(socialType: String,
                            completion: @escaping (NetworkResult<Any>) -> Void) {

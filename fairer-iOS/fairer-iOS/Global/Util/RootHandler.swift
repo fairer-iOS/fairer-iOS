@@ -13,6 +13,7 @@ final class RootHandler {
     enum Root {
         case login
         case Home
+        case groupMain
     }
     
     func change(root: Root) {
@@ -30,6 +31,12 @@ final class RootHandler {
             // MARK: - Home 뷰로 이동
             sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: homeViewController)
             homeViewController.navigationController?.setViewControllers([homeViewController], animated: true)
+            
+        case .groupMain:
+            let groupMainViewController = GroupMainViewController()
+            // MARK: - 그룹 참여 뷰로 이동
+            sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: groupMainViewController)
+            groupMainViewController.navigationController?.setViewControllers([groupMainViewController], animated: true)
         }
     }
 }

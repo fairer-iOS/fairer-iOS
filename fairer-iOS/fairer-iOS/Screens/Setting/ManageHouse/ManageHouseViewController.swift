@@ -213,6 +213,7 @@ extension ManageHouseViewController {
         NetworkService.shared.teams.postLeaveTeam { [weak self] result in
             switch result {
             case .success(_):
+                UserDefaultHandler.hasTeam = false
                 let pushVC = GroupMainViewController()
                 if let navigationController = self?.navigationController {
                     navigationController.setViewControllers([pushVC], animated: true)

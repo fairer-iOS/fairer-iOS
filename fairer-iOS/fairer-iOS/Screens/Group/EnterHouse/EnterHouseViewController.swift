@@ -155,6 +155,7 @@ extension EnterHouseViewController {
         NetworkService.shared.teams.postJoinTeam(inviteCode: inviteCode) { [weak self] result in
             switch result {
             case .success:
+                UserDefaultHandler.hasTeam = true
                     self?.navigationController?.pushViewController(HouseInfoViewController(), animated: true)
             case .requestErr(let error):
                 guard let errorResponse = error as? UserErrorResponse else { return }
