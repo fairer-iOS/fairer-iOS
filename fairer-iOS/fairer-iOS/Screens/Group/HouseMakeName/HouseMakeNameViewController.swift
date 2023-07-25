@@ -152,6 +152,8 @@ extension HouseMakeNameViewController {
         NetworkService.shared.teams.postAddTeam(teamName: teamName) { result in
             switch result {
             case .success(let response):
+                UserDefaultHandler.hasTeam = true
+                
                 guard let addPostTeamData = response as? AddTeamResponse else { return }
                 completion(addPostTeamData)
             case .requestErr(let error):
