@@ -150,12 +150,19 @@ final class LoginViewController: BaseViewController {
                 }
                 UserDefaultHandler.isLogin = true
                 
-                guard let isNewMember = data.isNewMember, isNewMember == true else {
-                    RootHandler.shared.change(root: .Home)
-                    return }
+                guard let isNewMember = data.isNewMember, let hasTeam = data.hasTeam, let userName = data.memberName else { return }
                 
-                let onBoardingNameViewController = OnboardingNameViewController()
-                self?.navigationController?.setViewControllers([onBoardingNameViewController], animated: true)
+                if isNewMember == false && hasTeam == true {
+                    UserDefaultHandler.hasTeam = true
+                    RootHandler.shared.change(root: .Home)
+                } else if isNewMember == false && hasTeam == false {
+                    let groupMainViewController = GroupMainViewController()
+                    groupMainViewController.setUserName(name: userName)
+                    RootHandler.shared.change(root: .groupMain)
+                } else if isNewMember == true && hasTeam == false  {
+                    let onBoardingNameViewController = OnboardingNameViewController()
+                    self?.navigationController?.setViewControllers([onBoardingNameViewController], animated: true)
+                }
             case .requestErr(let errorResponse):
                 dump(errorResponse)
                 guard let data = errorResponse as? UserErrorResponse else { return }
