@@ -93,6 +93,11 @@ final class HomeViewController: BaseViewController {
         self.getRules()
         self.getMyInfo()
         self.setNotification()
+        
+        if let myId = self.myId {
+            self.setSelectedMemberId(myId: myId)
+            self.homewView.homeGroupCollectionView.selectedIndex = 0
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -201,6 +206,12 @@ final class HomeViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    private func setSelectedMemberId(
+        myId: Int
+    ) {
+        selectedMemberId = myId
     }
 }
 
@@ -881,7 +892,6 @@ private extension HomeViewController {
     func checkMemeberCellIsOwn() -> Bool {
         if myId == selectedMemberId { return true }
         else {
-            
             return false
         }
     }
