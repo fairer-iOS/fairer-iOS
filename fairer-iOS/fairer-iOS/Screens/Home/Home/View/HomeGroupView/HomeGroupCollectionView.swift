@@ -16,7 +16,11 @@ final class HomeGroupCollectionView: BaseUIView {
             self.collectionView.reloadData()
         }
     }
-    private var selectedIndex = 0
+    var selectedIndex = 0 {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     lazy var selectedMemberName = ""
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 17
