@@ -22,11 +22,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
                 
-        if UserDefaultHandler.isLogin == true && UserDefaultHandler.hasTeam == true {
+        if UserDefaultHandler.isLogin && UserDefaultHandler.hasTeam {
             RootHandler.shared.change(root: .Home)
-        } else if UserDefaultHandler.isLogin == true && UserDefaultHandler.hasTeam == false {
+        } else if UserDefaultHandler.isLogin && !UserDefaultHandler.hasTeam {
             RootHandler.shared.change(root: .groupMain)
-        } else if UserDefaultHandler.isLogin == false {
+        } else if !UserDefaultHandler.isLogin {
             RootHandler.shared.change(root: .login)
         }
     }

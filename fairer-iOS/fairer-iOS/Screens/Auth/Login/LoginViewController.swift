@@ -152,14 +152,14 @@ final class LoginViewController: BaseViewController {
                 
                 guard let isNewMember = data.isNewMember, let hasTeam = data.hasTeam, let userName = data.memberName else { return }
                 
-                if isNewMember == false && hasTeam == true {
+                if !isNewMember && hasTeam {
                     UserDefaultHandler.hasTeam = true
                     RootHandler.shared.change(root: .Home)
-                } else if isNewMember == false && hasTeam == false {
+                } else if !isNewMember && !hasTeam {
                     let groupMainViewController = GroupMainViewController()
                     groupMainViewController.setUserName(name: userName)
                     RootHandler.shared.change(root: .groupMain)
-                } else if isNewMember == true && hasTeam == false  {
+                } else if isNewMember && !hasTeam  {
                     let onBoardingNameViewController = OnboardingNameViewController()
                     self?.navigationController?.setViewControllers([onBoardingNameViewController], animated: true)
                 }
