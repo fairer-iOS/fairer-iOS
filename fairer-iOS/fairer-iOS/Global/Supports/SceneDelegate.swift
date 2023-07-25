@@ -16,16 +16,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private var networkMonitor: NetworkMonitor = NetworkMonitor()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         startMonitoringNetwork(on: scene)
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
-        
-        guard UserDefaultHandler.isLogin == true else {
+                
+        if UserDefaultHandler.isLogin == true && UserDefaultHandler.hasTeam == true {
+            RootHandler.shared.change(root: .Home)
+        } else if UserDefaultHandler.isLogin == true && UserDefaultHandler.hasTeam == false {
+            RootHandler.shared.change(root: .groupMain)
+        } else if UserDefaultHandler.isLogin == false {
             RootHandler.shared.change(root: .login)
-            return
         }
-        RootHandler.shared.change(root: .Home)
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
