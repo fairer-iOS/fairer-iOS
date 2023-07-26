@@ -31,12 +31,14 @@ extension UIImageView {
     }
     
     func load(from url: String) {
-        let firstImageURL = url.components(separatedBy: "2F")[1]
         var finalImageURL = ""
-        if firstImageURL.contains("-3x") {
-            finalImageURL = firstImageURL.components(separatedBy: "-3x")[0]
-        } else {
-            finalImageURL = firstImageURL.components(separatedBy: ".svg")[0]
+        if url.contains("2F") {
+            let firstImageURL = url.components(separatedBy: "2F")[1]
+            if firstImageURL.contains("-3x") {
+                finalImageURL = firstImageURL.components(separatedBy: "-3x")[0]
+            } else if firstImageURL.contains(".svg") {
+                finalImageURL = firstImageURL.components(separatedBy: ".svg")[0]
+            }
         }
         switch finalImageURL {
         case "ic_profile1", "blue3": self.image = ImageLiterals.profileBlue3
