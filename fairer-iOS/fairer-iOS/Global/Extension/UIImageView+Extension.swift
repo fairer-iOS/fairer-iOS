@@ -31,26 +31,31 @@ extension UIImageView {
     }
     
     func load(from url: String) {
-        let firstImageURL = url.components(separatedBy: "Fic_")[1]
-        let finalImageURL = firstImageURL.components(separatedBy: ".svg")[0]
+        let firstImageURL = url.components(separatedBy: "2F")[1]
+        var finalImageURL = ""
+        if firstImageURL.contains("-3x") {
+            finalImageURL = firstImageURL.components(separatedBy: "-3x")[0]
+        } else {
+            finalImageURL = firstImageURL.components(separatedBy: ".svg")[0]
+        }
         switch finalImageURL {
-        case "profile1": self.image = ImageLiterals.profileBlue3
-        case "profile2": self.image = ImageLiterals.profileBlue4
-        case "profile3": self.image = ImageLiterals.profilePink1
-        case "profile4": self.image = ImageLiterals.profileOrange1
-        case "profile5": self.image = ImageLiterals.profilePink3
-        case "profile6": self.image = ImageLiterals.profilePurple1
-        case "profile7": self.image = ImageLiterals.profilePurple2
-        case "profile8": self.image = ImageLiterals.profilePurple3
-        case "profile9": self.image = ImageLiterals.profileOrange2
-        case "profile10": self.image = ImageLiterals.profileYellow2
-        case "profile11": self.image = ImageLiterals.profileIndigo3
-        case "profile12": self.image = ImageLiterals.profileGreen1
-        case "profile13": self.image = ImageLiterals.profileYellow1
-        case "profile14": self.image = ImageLiterals.profileGreen3
-        case "profile15": self.image = ImageLiterals.profileLightBlue1
-        case "profile16": self.image = ImageLiterals.profileLightBlue2
-        default: return
+        case "ic_profile1", "blue3": self.image = ImageLiterals.profileBlue3
+        case "ic_profile2", "blue4": self.image = ImageLiterals.profileBlue4
+        case "ic_profile3", "pink1": self.image = ImageLiterals.profilePink1
+        case "ic_profile4", "orange1": self.image = ImageLiterals.profileOrange1
+        case "ic_profile5", "pink3": self.image = ImageLiterals.profilePink3
+        case "ic_profile6", "purple1": self.image = ImageLiterals.profilePurple1
+        case "ic_profile7", "purple2": self.image = ImageLiterals.profilePurple2
+        case "ic_profile8", "purple3": self.image = ImageLiterals.profilePurple3
+        case "ic_profile9", "orange2": self.image = ImageLiterals.profileOrange2
+        case "ic_profile10", "yellow2": self.image = ImageLiterals.profileYellow2
+        case "ic_profile11", "indigo3": self.image = ImageLiterals.profileIndigo3
+        case "ic_profile12", "green1": self.image = ImageLiterals.profileGreen1
+        case "ic_profile13", "yellow1": self.image = ImageLiterals.profileYellow1
+        case "ic_profile14", "green3": self.image = ImageLiterals.profileGreen3
+        case "ic_profile15", "blue1": self.image = ImageLiterals.profileLightBlue1
+        case "ic_profile16", "blue2": self.image = ImageLiterals.profileLightBlue2
+        default: self.image = ImageLiterals.profileBlue3
         }
     }
 }
