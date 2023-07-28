@@ -98,7 +98,6 @@ final class HouseInviteCodeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setButtonAction()
         getinviteCodeExpirationDateTime()
     }
     
