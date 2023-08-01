@@ -156,10 +156,9 @@ extension EnterHouseViewController {
             switch result {
             case .success:
                 UserDefaultHandler.hasTeam = true
-                    self?.navigationController?.pushViewController(HouseInfoViewController(), animated: true)
-            case .requestErr(let error):
-                guard let errorResponse = error as? UserErrorResponse else { return }
-                self?.showToast(errorResponse.errorMessage)
+                self?.navigationController?.pushViewController(HouseInfoViewController(), animated: true)
+            case .requestErr(_):
+                self?.showToast(TextLiteral.enterHouseViewControllerToastWrongCode)
             default:
                 print("server Error")
             }
