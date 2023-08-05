@@ -28,7 +28,7 @@ enum TextLiteral {
     
     // MARK: - OnboardingNameViewController
     
-    static let onboardingNameViewControllerNameLabel: String = "이름을 입력해주세요."
+    static let onboardingNameViewControllerNameLabel: String = "닉네임을 입력해주세요."
     static let onboardingNameViewControllerTextFieldPlaceholder: String = "예) 홍길동"
     
     // MARK: - OnboardingProfileViewController
@@ -222,7 +222,7 @@ enum TextLiteral {
     // MARK: - SettingProfileViewController
     
     static let settingProfileViewControllerTitleLabel = "프로필을 설정해주세요."
-    static let settingProfileViewControllerProfileNameLabel = "이름"
+    static let settingProfileViewControllerProfileNameLabel = "닉네임"
     static let settingProfileViewControllerProfileStatusLabel = "상태 메세지"
     static let settingProfileViewControllerPlaceholderText = "Text"
     
