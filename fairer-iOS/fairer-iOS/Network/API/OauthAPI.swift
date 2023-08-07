@@ -15,7 +15,6 @@ final class OauthAPI {
     
     private enum ResponseData {
         case postSignIn
-        case postLogout
         case postSignout
     }
     
@@ -28,21 +27,6 @@ final class OauthAPI {
                 let data = response.data
                 let httpUrlResponse = response.response
                 let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .postSignIn)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    func postLogout(authorization: String, completion: @escaping (NetworkResult<Any>) -> Void) {
-        authProvider.request(.oauthLogout(authorization: authorization)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let httpUrlResponse = response.response
-                let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .postLogout)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -70,7 +54,7 @@ final class OauthAPI {
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .postSignIn, .postLogout, .postSignout:
+            case .postSignIn, .postSignout:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400..<500:
@@ -93,7 +77,7 @@ final class OauthAPI {
                 return .pathErr
             }
             return .success(decodedData)
-        case .postLogout, .postSignout:
+        case .postSignout:
             return .success(())
         }
     }

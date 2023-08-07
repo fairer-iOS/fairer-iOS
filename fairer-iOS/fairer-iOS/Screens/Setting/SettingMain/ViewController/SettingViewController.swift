@@ -186,7 +186,7 @@ final class SettingViewController: BaseViewController {
     
     private func touchUpToLeave() {
         self.makeRequestAlert(title: TextLiteral.settingViewControllerLeaveAlertTitle, message: TextLiteral.settingViewControllerLeaveAlertMessage, okTitle: TextLiteral.settingViewControllerLeaveButtonText) { [weak self] _ in
-            self?.postLogout()
+            self?.postSignout()
         }
     }
 }
@@ -212,5 +212,25 @@ extension SettingViewController: UITableViewDataSource {
 extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.navigationController?.pushViewController(SettingModel.pushView[indexPath.row], animated: true)
+    }
+}
+
+// MARK: - api
+
+extension SettingViewController {
+    private func postSignout() {
+        NetworkService.shared.oauth.postSignout { result in
+            switch result {
+            case .success(_):
+                for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                    UserDefaults.standard.removeObject(forKey: key.description)
+                }
+                RootHandler.shared.change(root: .login)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("server error")
+            }
+        }
     }
 }
