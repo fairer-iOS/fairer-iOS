@@ -40,8 +40,8 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     var yearMonthDateByTouchedCell: ((String)->())?
     private enum Size {
         static let collectionSpacing: CGFloat = 0
-        static let cellWidth: CGFloat = 40
-        static let cellHeight: CGFloat = 56
+        static let cellWidth: CGFloat = UIScreen.main.bounds.width * 0.10
+        static let cellHeight: CGFloat = 68
         static let collectionInsets = UIEdgeInsets(
             top: collectionSpacing,
             left: collectionSpacing,
@@ -53,10 +53,9 @@ final class HomeWeekCalendarCollectionView: BaseUIView {
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
+        flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionInsets
         flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
-        flowLayout.minimumLineSpacing = 8
         return flowLayout
     }()
     lazy var collectionView: UICollectionView = {

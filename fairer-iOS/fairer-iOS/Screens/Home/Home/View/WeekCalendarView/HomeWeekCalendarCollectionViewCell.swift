@@ -80,26 +80,26 @@ final class HomeWeekCalendarCollectionViewCell: BaseCollectionViewCell {
         self.bringSubviewToFront(workDot)
         self.bringSubviewToFront(workBlueBadge)
         
+        globalView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+            $0.bottom.equalToSuperview()
+        }
+        
         workDot.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(16)
-            $0.bottom.equalTo(globalView.snp.top).offset(3)
+            $0.top.equalToSuperview()
         }
         
         workBlueBadge.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(16)
-            $0.bottom.equalTo(globalView.snp.top).offset(3)
+            $0.top.equalToSuperview()
         }
         
         workLeftLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
-        }
-        
-        globalView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(60)
-            $0.bottom.equalToSuperview()
         }
         
         dayLabel.snp.makeConstraints {
