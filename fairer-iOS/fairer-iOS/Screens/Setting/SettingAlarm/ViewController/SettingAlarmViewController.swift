@@ -29,10 +29,14 @@ final class SettingAlarmViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getAlarmStatus()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setButtonAction()
-        getAlarmStatus()
     }
     
     override func render() {

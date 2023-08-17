@@ -150,17 +150,21 @@ final class SetHouseWorkViewController: BaseViewController {
     
     required init?(coder: NSCoder) { nil }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getTeamInfo()
+        getMyInfo()
+        setInitialHouseWork()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setInitialHouseWork()
         setDatePicker()
         didTappedHouseWork()
         didDeleteHouseWork()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
         setDoneButton()
-        getTeamInfo()
-        getMyInfo()
     }
     
     override func render() {

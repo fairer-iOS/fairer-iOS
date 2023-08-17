@@ -70,11 +70,15 @@ final class ChangeHouseNameViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getTeamInfo()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegation()
         setupNotificationCenter()
-        getTeamInfo()
     }
     
     override func render() {
