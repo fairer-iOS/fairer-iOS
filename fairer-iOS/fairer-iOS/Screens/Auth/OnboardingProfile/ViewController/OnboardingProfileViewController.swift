@@ -102,6 +102,7 @@ class OnboardingProfileViewController: BaseViewController {
         if let name = userName {
             groupMainViewController.setUserName(name: name)
         }
+        groupMainViewController.navigationItem.hidesBackButton = true
         self.navigationController?.pushViewController(groupMainViewController, animated: true)
     }
     

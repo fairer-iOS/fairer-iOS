@@ -44,6 +44,11 @@ final class AlreadyInGroupViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setButtonAction()
+    }
+    
     override func render() {
         view.addSubview(alreadyInGroupTitleLabel)
         alreadyInGroupTitleLabel.snp.makeConstraints {
@@ -71,4 +76,17 @@ final class AlreadyInGroupViewController: BaseViewController {
         }
     }
     
+    // MARK: - func
+    
+    private func setButtonAction() {
+        let backToMainAction = UIAction { [weak self] _ in
+            self?.navigateToHome()
+        }
+        
+        self.backToMainButton.addAction(backToMainAction, for: .touchUpInside)
+    }
+    
+    private func navigateToHome() {
+        RootHandler.shared.change(root: .Home)
+    }
 }
