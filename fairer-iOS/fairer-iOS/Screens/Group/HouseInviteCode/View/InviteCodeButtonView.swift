@@ -50,7 +50,6 @@ final class InviteCodeButtonView: UIView {
         let button = UIButton(configuration: config)
         button.layer.cornerRadius = 8
         button.backgroundColor = UIColor(red: 0.992, green: 0.945, blue: 0.38, alpha: 1)
-        button.isHidden = true
         return button
     }()
     let skipButton: UIButton = {
