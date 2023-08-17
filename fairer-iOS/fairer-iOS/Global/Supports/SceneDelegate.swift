@@ -34,6 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             GIDSignIn.sharedInstance.handle(url)
+            UserDefaultHandler.hasTeam ? navigateToAlreadyInGroup() : navigateToEnterHouse(url)
         }
     }
 
@@ -97,5 +98,28 @@ extension SceneDelegate {
                 self?.errorWindow = window
             }
         }
+    }
+    
+    private func navigateToEnterHouse(_ url: URL) {
+        if url.absoluteString.contains("example.com") {
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+            let enterHouseViewController = EnterHouseViewController()
+            sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: enterHouseViewController)
+            
+            let inviteCode = url.absoluteString.components(separatedBy: "example.com/")[1].components(separatedBy: "/?link")[0]
+            enterHouseViewController.enterHouseCodeTextfield.text = inviteCode
+            enterHouseViewController.enterHouseDoneButton.isDisabled = false
+            
+            enterHouseViewController.backButton.isHidden = true
+            enterHouseViewController.navigationItem.hidesBackButton = true
+            enterHouseViewController.navigationController?.setViewControllers([enterHouseViewController], animated: true)
+        }
+    }
+    
+    private func navigateToAlreadyInGroup() {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+        let alreadyInGroupViewController = AlreadyInGroupViewController()
+        sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: alreadyInGroupViewController)
+        alreadyInGroupViewController.navigationController?.setViewControllers([alreadyInGroupViewController], animated: true)
     }
 }

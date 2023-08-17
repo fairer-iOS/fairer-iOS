@@ -13,7 +13,7 @@ final class EnterHouseViewController: BaseViewController {
 
     // MARK: - property
     
-    private let backButton = BackButton()
+    let backButton = BackButton()
     private let enterHousePrimaryLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.enterHouseViewControllerPrimaryLabel, lineHeight: 28)
@@ -28,8 +28,8 @@ final class EnterHouseViewController: BaseViewController {
         label.textColor = .gray400
         return label
     }()
-    private let enterHouseCodeTextfield = TextField(type: .large, placeHolder: TextLiteral.enterHouseViewControllerTextfieldPlaceHolder)
-    private lazy var enterHouseDoneButton: MainButton = {
+    let enterHouseCodeTextfield = TextField(type: .large, placeHolder: TextLiteral.enterHouseViewControllerTextfieldPlaceHolder)
+    lazy var enterHouseDoneButton: MainButton = {
         let button = MainButton()
         button.isDisabled = true
         button.title = TextLiteral.doneButtonText
