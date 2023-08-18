@@ -12,7 +12,7 @@
   </a>
   <p3>&nbsp;&nbsp;</p3>
   <a href="https://www.behance.net/gallery/147276499/fairerPeacemaker-for-Houseworker">
-   <img src="https://github.com/fairer-iOS/fairer-iOS/assets/81340603/b4d633f6-ad91-4bc9-9a72-ecaa9878d9eb" width=60px />
+   <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/81340603/261529764-b4d633f6-ad91-4bc9-9a72-ecaa9878d9eb.png" width=60px />
   </a>
  </div>
 </div>
