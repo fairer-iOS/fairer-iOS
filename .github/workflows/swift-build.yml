@@ -25,6 +25,8 @@ jobs:
             static let base = ${{ secrets.BASE_URL_CONSTANT }}
         }
         EOF
+    - name: Move BaseURLContents file to directory
+      run: mv BaseURLContents.swift /Users/runner/work/fairer-iOS/fairer-iOS/fairer-iOS/fairer-iOS/Network/Foundation/
       
     - name: 🚀 Start XCode Build 🚀
       run: |
