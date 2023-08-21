@@ -21,7 +21,7 @@ jobs:
       run: echo "import Foundation\nstruct BaseURLConstant {\nstatic let base = ${{ secrets.BASE_URL_CONSTANT }}\n}" > BaseURLContents.swift
 
     - name: Move BaseURLContents file to directory
-      run: mv BaseURLContents.swift /Users/runner/work/fairer-iOS/fairer-iOS/fairer-iOS/fairer-iOS/Network/Foundation/
+      run: mv BaseURLContents.swift ./fairer-iOS/fairer-iOS/Network/Foundation/
       
     - name: 🚀 Start XCode Build 🚀
       run: |
