@@ -15,8 +15,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - name: 🧳 Checkout to repo 🧳
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
     - name: 🚀 Start XCode Build 🚀
       run: |
-        xcodebuild build -project ./fairer-iOS/fairer-iOS.xcodeproj -scheme fairer-iOS -destination "platform=iOS Simulator, name=iPhone 14, OS=latest"
+        xcodebuild clean test -project fairer-iOS.xcodeproj \
+        -scheme fairer-iOS \
+        -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest'
