@@ -18,13 +18,8 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Create and write BaseURLContents
-      run: |
-        cat > BaseURLConstant.swift <<EOF
-        import Foundation
-        struct BaseURLConstant {
-            static let base = ${{ secrets.BASE_URL_CONSTANT }}
-        }
-        EOF
+      run: echo "import Foundation\nstruct BaseURLConstant {\nstatic let base = ${{ secrets.BASE_URL_CONSTANT }}\n}" > BaseURLContents.swift
+
     - name: Move BaseURLContents file to directory
       run: mv BaseURLContents.swift /Users/runner/work/fairer-iOS/fairer-iOS/fairer-iOS/fairer-iOS/Network/Foundation/
       
