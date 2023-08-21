@@ -16,6 +16,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Create and write BaseURLContents
+      run: |
+        cat > BaseURLConstant.swift <<EOF
+        import Foundation
+        struct BaseURLConstant {
+            static let base = ${{ secrets.BASE_URL_CONSTANT }}
+        }
+        EOF
+      
     - name: 🚀 Start XCode Build 🚀
       run: |
         xcodebuild build -project ./fairer-iOS/fairer-iOS.xcodeproj -scheme fairer-iOS -destination "platform=iOS Simulator,name=iPhone 13,OS=latest"
