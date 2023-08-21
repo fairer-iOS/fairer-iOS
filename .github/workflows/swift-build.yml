@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Create and write BaseURLContent
-      run: echo "import Foundation\nstruct BaseURLConstant {\nstatic let base = \"${{ secrets.BASE_URL_CONSTANT }}\"\n}" > BaseURLConstant.swift
+      run: echo -e "import Foundation\nstruct BaseURLConstant {\n    static let base = \"${{ secrets.BASE_URL_CONSTANT }}\"\n}" > BaseURLConstant.swift
 
     - name: Move BaseURLConstant file to directory
       run: mv BaseURLConstant.swift ./fairer-iOS/fairer-iOS/Network/Foundation/
