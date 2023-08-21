@@ -28,7 +28,7 @@ enum TextLiteral {
     
     // MARK: - OnboardingNameViewController
     
-    static let onboardingNameViewControllerNameLabel: String = "이름을 입력해주세요."
+    static let onboardingNameViewControllerNameLabel: String = "닉네임을 입력해주세요."
     static let onboardingNameViewControllerTextFieldPlaceholder: String = "예) 홍길동"
     
     // MARK: - OnboardingProfileViewController
@@ -94,7 +94,7 @@ enum TextLiteral {
     static let enterHouseViewControllerPrimaryLabel: String = "초대코드를 입력해주세요."
     static let enterHouseViewControllerSecondaryLabel: String = "초대코드를 입력 후 바로 공간에 참여할 수 있어요!"
     static let enterHouseViewControllerTextfieldPlaceHolder: String = "12글자 입력"
-    static let enterHouseViewControllerToastWrongCode: String = "잘못된 코드입니다."
+    static let enterHouseViewControllerToastWrongCode: String = "해당하는 팀이 존재하지 않습니다"
     static let enterHouseViewControllerToastHouseFull: String = "하우스가 꽉 차서 참여할 수 없어요.\n6명까지만 참여할 수 있어요."
     
     // MARK: - HouseInfoViewController
@@ -114,7 +114,7 @@ enum TextLiteral {
     static let settingViewControllerNavigationBarTitleLabel: String = "설정"
     static let settingViewControllerTableViewCellLabelList: [String] = ["계정", "하우스 관리", "알림", "문의하기", "정보"]
     static let settingViewControllerVersionLabel: String = "버전"
-    static let settingViewControllerVersionText: String = "1.0.0"
+    static let settingViewControllerVersionText: String = "1.1.0"
     static let settingViewControllerLogoutButtonText: String = "로그아웃"
     static let settingViewControllerLeaveButtonText: String = "회원탈퇴"
     static let settingViewControllerLogoutAlertTitle: String = "로그아웃 하시겠습니까?"
@@ -222,7 +222,7 @@ enum TextLiteral {
     // MARK: - SettingProfileViewController
     
     static let settingProfileViewControllerTitleLabel = "프로필을 설정해주세요."
-    static let settingProfileViewControllerProfileNameLabel = "이름"
+    static let settingProfileViewControllerProfileNameLabel = "닉네임"
     static let settingProfileViewControllerProfileStatusLabel = "상태 메세지"
     static let settingProfileViewControllerPlaceholderText = "Text"
     

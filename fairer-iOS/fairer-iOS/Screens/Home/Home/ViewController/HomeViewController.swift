@@ -114,6 +114,7 @@ final class HomeViewController: BaseViewController {
                 endDate: homewView.homeWeekCalendarCollectionView.datePickedByOthers
             )
         }
+        self.getHouseWorksByWeek(isOwn: self.checkMemeberCellIsOwn())
     }
     
     override func configUI() {
@@ -414,7 +415,6 @@ private extension HomeViewController {
                         self.notFinishedWorkSum = self.workTotalNum - self.finishedWorkSum
                     }
                     self.homewView.calendarDailyTableView.reloadData()
-                    self.getHouseWorksByWeek(isOwn: isOwn)
                 }
             } else {
                 guard let selectedMemberId = self.selectedMemberId else { return }
@@ -443,9 +443,6 @@ private extension HomeViewController {
                             
                             self.notFinishedWorkSum = self.workTotalNum - self.finishedWorkSum
                         }
-                    }
-                    DispatchQueue.global().async {
-                        self.getHouseWorksByWeek(isOwn: isOwn)
                     }
                 }
             }
@@ -704,6 +701,7 @@ private extension HomeViewController {
         homewView.homeWeekCalendarCollectionView.startOfWeekDate = Date().startOfWeek
         homewView.homeWeekCalendarCollectionView.datePickedByOthers = Date().dateToString
         homewView.homeWeekCalendarCollectionView.fullDateList = homewView.homeWeekCalendarCollectionView.getThisWeekInDate()
+        self.getHouseWorksByWeek(isOwn: self.checkMemeberCellIsOwn())
         self.getHouseWorksByDate(
             isOwn: self.checkMemeberCellIsOwn(),
             startDate: homewView.homeWeekCalendarCollectionView.datePickedByOthers,
@@ -757,6 +755,7 @@ private extension HomeViewController {
                 startDate: pickedDate.dateToString,
                 endDate: pickedDate.dateToString
             )
+            self.getHouseWorksByWeek(isOwn: self.checkMemeberCellIsOwn())
             self.setupNavigationBar()
         }
         homewView.datePickerView.changeClosure = { [weak self] val in
@@ -820,6 +819,7 @@ private extension HomeViewController {
             startDate: homewView.homeWeekCalendarCollectionView.fullDateList.first ?? String(),
             endDate: homewView.homeWeekCalendarCollectionView.fullDateList.first ?? String()
         )
+        self.getHouseWorksByWeek(isOwn: checkMemeberCellIsOwn())
     }
 }
 

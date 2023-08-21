@@ -77,7 +77,7 @@ final class TeamsAPI {
                 let networkResult = self.judgeStatus(by: statusCode, data, response: httpUrlResponse, responseData: .postJoinTeam)
                 completion(networkResult)
             case .failure(let err):
-                print(err)
+                completion(.requestErr(err))
             }
         }
     }

@@ -178,8 +178,8 @@ final class SettingViewController: BaseViewController {
     }
     
     private func postLogout() {
-        if let bundleID = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        for key in UserDefaults.standard.dictionaryRepresentation().keys {
+            UserDefaults.standard.removeObject(forKey: key.description)
         }
         RootHandler.shared.change(root: .login)
     }

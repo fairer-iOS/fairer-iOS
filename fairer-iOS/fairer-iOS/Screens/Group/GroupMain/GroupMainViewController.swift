@@ -80,10 +80,14 @@ final class GroupMainViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getMyInfoFromServer()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setButtonAction()
-        getMyInfoFromServer()
     }
 
     override func render() {
