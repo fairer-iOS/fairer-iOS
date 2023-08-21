@@ -18,6 +18,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: 🚀 Start XCode Build 🚀
       run: |
-        xcodebuild clean test -project fairer-iOS.xcodeproj \
-        -scheme fairer-iOS \
-        -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest'
+        xcodebuild build -project ./fairer-iOS/fairer-iOS.xcodeproj -scheme fairer-iOS -destination "platform=iOS Simulator,name=iPhone 13,OS=latest"
+        xcpretty --color --simple
