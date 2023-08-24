@@ -791,17 +791,24 @@ private extension HomeViewController {
         
         self.selectedMemberId = object
         if homewView.homeWeekCalendarCollectionView.datePickedByOthers != "" {
-            self.getHouseWorksByDate (
-                isOwn: self.checkMemeberCellIsOwn(),
-                startDate: homewView.homeWeekCalendarCollectionView.datePickedByOthers,
-                endDate: homewView.homeWeekCalendarCollectionView.datePickedByOthers
-            )
+            DispatchQueue.main.async {
+                self.getHouseWorksByDate (
+                    isOwn: self.checkMemeberCellIsOwn(),
+                    startDate: self.homewView.homeWeekCalendarCollectionView.datePickedByOthers,
+                    endDate: self.homewView.homeWeekCalendarCollectionView.datePickedByOthers
+                )
+                self.getHouseWorksByWeek(isOwn: self.checkMemeberCellIsOwn())
+            }
         } else {
-            self.getHouseWorksByDate (
-                isOwn: self.checkMemeberCellIsOwn(),
-                startDate: Date().dateToString,
-                endDate: Date().dateToString
-            )
+            DispatchQueue.main.async {
+                self.getHouseWorksByDate (
+                    isOwn: self.checkMemeberCellIsOwn(),
+                    startDate: Date().dateToString,
+                    endDate: Date().dateToString
+                )
+            }
+            
+            self.getHouseWorksByWeek(isOwn: self.checkMemeberCellIsOwn())
         }
     }
     
