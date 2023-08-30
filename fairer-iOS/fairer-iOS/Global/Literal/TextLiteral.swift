@@ -114,7 +114,7 @@ enum TextLiteral {
     static let settingViewControllerNavigationBarTitleLabel: String = "설정"
     static let settingViewControllerTableViewCellLabelList: [String] = ["계정", "하우스 관리", "알림", "문의하기", "정보"]
     static let settingViewControllerVersionLabel: String = "버전"
-    static let settingViewControllerVersionText: String = "1.1.0"
+    static let settingViewControllerVersionText: String = "1.1.1"
     static let settingViewControllerLogoutButtonText: String = "로그아웃"
     static let settingViewControllerLeaveButtonText: String = "회원탈퇴"
     static let settingViewControllerLogoutAlertTitle: String = "로그아웃 하시겠습니까?"
