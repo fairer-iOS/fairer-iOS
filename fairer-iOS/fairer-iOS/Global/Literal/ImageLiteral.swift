@@ -106,6 +106,18 @@ enum ImageLiterals {
     
     static var emptyHouseWork: UIImage { .load(name: "emptyHouseWork") }
     static var networkError: UIImage { .load(name: "networkError") }
+    
+    // MARK: - emojis
+    
+    static var emojiAngry: UIImage { .load(name: "angry") }
+    static var emojiSad: UIImage { .load(name: "sad") }
+    static var emojiSmile: UIImage { .load(name: "smile") }
+    static var emojiHappy: UIImage { .load(name: "happy") }
+    static var emojiHeart: UIImage { .load(name: "heart") }
+    static var emojiPerfect: UIImage { .load(name: "perfect") }
+    static var emojiBlue: UIImage { .load(name: "blue") }
+    static var emojiList: [UIImage] = [emojiAngry, emojiSad, emojiSmile, emojiHappy, emojiHeart, emojiPerfect, emojiBlue]
+    
 }
 
 extension UIImage {
