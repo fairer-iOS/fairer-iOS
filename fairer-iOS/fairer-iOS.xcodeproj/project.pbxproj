@@ -83,6 +83,7 @@
 		52A7204A29E27DAD005E29C6 /* RepeatAlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */; };
 		52B6BD0D2A9F501000022A20 /* EmojiCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD0C2A9F501000022A20 /* EmojiCollectionView.swift */; };
 		52B6BD0F2A9F501F00022A20 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD0E2A9F501F00022A20 /* EmojiCollectionViewCell.swift */; };
+		52B6BD112A9FA2D100022A20 /* AddFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */; };
 		52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */; };
 		52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */; };
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
@@ -258,6 +259,7 @@
 		52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatAlertTableViewCell.swift; sourceTree = "<group>"; };
 		52B6BD0C2A9F501000022A20 /* EmojiCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionView.swift; sourceTree = "<group>"; };
 		52B6BD0E2A9F501F00022A20 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
+		52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackView.swift; sourceTree = "<group>"; };
 		52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionView.swift; sourceTree = "<group>"; };
 		52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -777,32 +779,9 @@
 			isa = PBXGroup;
 			children = (
 				52B6BD0B2A9F4FF300022A20 /* EmojiView */,
-				52B6BD0A2A9F4FC700022A20 /* HurryView */,
-				52B6BD092A9F4FC000022A20 /* EditFeedbackView */,
-				52B6BD082A9F4FB300022A20 /* AddFeedbackView */,
+				52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */,
 			);
 			path = FeedbackView;
-			sourceTree = "<group>";
-		};
-		52B6BD082A9F4FB300022A20 /* AddFeedbackView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AddFeedbackView;
-			sourceTree = "<group>";
-		};
-		52B6BD092A9F4FC000022A20 /* EditFeedbackView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = EditFeedbackView;
-			sourceTree = "<group>";
-		};
-		52B6BD0A2A9F4FC700022A20 /* HurryView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HurryView;
 			sourceTree = "<group>";
 		};
 		52B6BD0B2A9F4FF300022A20 /* EmojiView */ = {
@@ -1437,6 +1416,7 @@
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
 				52136FD4298299B90022D465 /* RepeatCycleView.swift in Sources */,
 				52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */,
+				52B6BD112A9FA2D100022A20 /* AddFeedbackView.swift in Sources */,
 				522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */,
 				52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */,
 				5204AAB929507319002FB6CA /* SettingAlarmTableViewCell.swift in Sources */,

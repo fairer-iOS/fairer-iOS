@@ -74,6 +74,7 @@ final class HomeView: BaseUIView {
         return view
     }()
     let emptyHouseWorkImage = UIImageView(image: ImageLiterals.emptyHouseWork)
+    let addFeedbackView = AddFeedbackView()
     
     override func render() {
         self.addSubviews(toolBarView,
@@ -87,7 +88,7 @@ final class HomeView: BaseUIView {
                          homeCalenderView,
                          homeWeekCalendarCollectionView,
                          calendarDailyTableView,
-                         emptyHouseWorkImage)
+                         emptyHouseWorkImage, addFeedbackView)
         
         toolBarView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
@@ -160,6 +161,13 @@ final class HomeView: BaseUIView {
             $0.bottom.equalTo(toolBarView.snp.top).offset(-10)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(emptyHouseWorkImage.snp.height).multipliedBy(0.65)
+        }
+        
+        addFeedbackView.snp.makeConstraints {
+            $0.top.equalTo(calendarDailyTableView.snp.bottom).offset(-10)
+            $0.leading.equalToSuperview().inset(10)
+            $0.width.equalTo(UIScreen.main.bounds.width * 0.9)
+            $0.height.equalTo(98)
         }
     }
 }

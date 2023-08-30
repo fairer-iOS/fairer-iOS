@@ -28,8 +28,6 @@ final class EmojiCollectionView: BaseUIView {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 8
-        view.layer.shadowOpacity = 0.24
-        view.layer.shadowRadius = 18
         return view
     }()
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
