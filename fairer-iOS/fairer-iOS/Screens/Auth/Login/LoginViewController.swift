@@ -165,6 +165,22 @@ final class LoginViewController: BaseViewController {
                     let onBoardingNameViewController = OnboardingNameViewController()
                     self?.navigationController?.setViewControllers([onBoardingNameViewController], animated: true)
                 }
+                self?.saveToken(UserDefaultHandler.fcmToken)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+                guard let data = errorResponse as? UserErrorResponse else { return }
+                print(data.errorMessage)
+            default:
+                print("sign in error")
+            }
+        }
+    }
+    
+    private func saveToken(_ fcmToken: String) {
+        NetworkService.shared.fcm.saveToken(token: fcmToken) { result in
+            switch result {
+            case .success(_):
+                break
             case .requestErr(let errorResponse):
                 dump(errorResponse)
                 guard let data = errorResponse as? UserErrorResponse else { return }
