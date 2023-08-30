@@ -13,6 +13,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setHierarchy()
         render()
         configUI()
     }
@@ -22,6 +23,10 @@ class BaseCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - func
+    
+    func setHierarchy() {
+        
+    }
     
     func render() {
         // Override Layout
