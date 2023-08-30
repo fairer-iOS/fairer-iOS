@@ -61,22 +61,6 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let fcmToken {
             UserDefaultHandler.fcmToken = fcmToken
-//            NetworkService.shared.fcm.saveToken(token: fcmToken) { result in
-//                switch result {
-//                case .success(let response):
-//                    guard let data = response as? FCMTokenResponse else { return }
-//
-//                    if let fcmToken = data.token {
-//                        UserDefaultHandler.fcmToken = fcmToken
-//                    }
-//                case .requestErr(let errorResponse):
-//                    dump(errorResponse)
-//                    guard let data = errorResponse as? UserErrorResponse else { return }
-//                    print(data.errorMessage)
-//                default:
-//                    print("sign in error")
-//                }
-//            }
         }
     }
 }
