@@ -84,6 +84,7 @@
 		52B6BD0D2A9F501000022A20 /* EmojiCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD0C2A9F501000022A20 /* EmojiCollectionView.swift */; };
 		52B6BD0F2A9F501F00022A20 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD0E2A9F501F00022A20 /* EmojiCollectionViewCell.swift */; };
 		52B6BD112A9FA2D100022A20 /* AddFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */; };
+		52B6BD132A9FACE000022A20 /* EditFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD122A9FACE000022A20 /* EditFeedbackView.swift */; };
 		52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */; };
 		52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */; };
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
@@ -260,6 +261,7 @@
 		52B6BD0C2A9F501000022A20 /* EmojiCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionView.swift; sourceTree = "<group>"; };
 		52B6BD0E2A9F501F00022A20 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackView.swift; sourceTree = "<group>"; };
+		52B6BD122A9FACE000022A20 /* EditFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedbackView.swift; sourceTree = "<group>"; };
 		52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionView.swift; sourceTree = "<group>"; };
 		52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 			children = (
 				52B6BD0B2A9F4FF300022A20 /* EmojiView */,
 				52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */,
+				52B6BD122A9FACE000022A20 /* EditFeedbackView.swift */,
 			);
 			path = FeedbackView;
 			sourceTree = "<group>";
@@ -1425,6 +1428,7 @@
 				5ACADCCC2A5559DA00B92C07 /* FCMTokenResponse.swift in Sources */,
 				914C69CC29AA0D17008EA9EE /* BaseURLConstant.swift in Sources */,
 				52D075662A53110300B5C692 /* AlarmRequest.swift in Sources */,
+				52B6BD132A9FACE000022A20 /* EditFeedbackView.swift in Sources */,
 				914C69CE29AA2F03008EA9EE /* ErrorResponse.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
