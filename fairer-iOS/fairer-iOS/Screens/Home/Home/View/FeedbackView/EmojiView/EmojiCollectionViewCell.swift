@@ -13,7 +13,7 @@ final class EmojiCollectionViewCell: BaseCollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            backView.backgroundColor = isSelected ? .clear : .gray200
+            backView.backgroundColor = isSelected ? .gray200 : .clear
         }
     }
     

@@ -12,8 +12,8 @@ import SnapKit
 final class EmojiCollectionView: BaseUIView {
     
     private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 5
-        static let collectionVerticalSpacing: CGFloat = 5
+        static let collectionHorizontalSpacing: CGFloat = 7
+        static let collectionVerticalSpacing: CGFloat = 7
         static let cellLength: CGFloat = UIScreen.main.bounds.width * 0.1
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
@@ -34,7 +34,6 @@ final class EmojiCollectionView: BaseUIView {
     }()
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionInsets
         flowLayout.itemSize = CGSize(width: Size.cellLength, height: Size.cellLength)
         return flowLayout
@@ -42,9 +41,9 @@ final class EmojiCollectionView: BaseUIView {
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
-        collectionView.isScrollEnabled = false
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.allowsMultipleSelection = true
         collectionView.register(EmojiCollectionViewCell.self, forCellWithReuseIdentifier: EmojiCollectionViewCell.className)
         return collectionView
     }()
@@ -68,6 +67,9 @@ final class EmojiCollectionView: BaseUIView {
 
 extension EmojiCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
     }
 }
 
