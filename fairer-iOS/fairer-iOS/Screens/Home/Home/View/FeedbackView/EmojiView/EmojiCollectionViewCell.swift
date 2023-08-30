@@ -11,24 +11,27 @@ import SnapKit
 
 final class EmojiCollectionViewCell: BaseCollectionViewCell {
     
+    override var isSelected: Bool {
+        didSet {
+            backView.backgroundColor = isSelected ? .clear : .gray200
+        }
+    }
+    
     // MARK: - property
     
     private let backView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray200
+        view.backgroundColor = .clear
         view.layer.cornerRadius = 8
         return view
     }()
-    private let emojiImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.emojiBlue
-        return imageView
-    }()
+    let emojiImageView = UIImageView()
     
     // MARK: - life cycle
     
     override func render() {
-        self.addSubviews(backView, emojiImageView)
+        self.addSubview(backView)
+        backView.addSubview(emojiImageView)
         
         backView.snp.makeConstraints {
             $0.edges.equalToSuperview()
