@@ -88,7 +88,7 @@ final class EditFeedbackView: BaseUIView {
         feedbackBackgroundView.snp.makeConstraints {
             $0.bottom.equalTo(emojiCollectionView.snp.top).offset(-4)
             $0.height.equalTo(84)
-            $0.leading.trailing.equalToSuperview()
+            $0.width.equalTo(272)
         }
         
         editFeedbackButton.snp.makeConstraints {

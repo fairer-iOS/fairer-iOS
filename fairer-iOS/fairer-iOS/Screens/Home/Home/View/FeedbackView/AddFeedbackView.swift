@@ -57,7 +57,7 @@ final class AddFeedbackView: BaseUIView {
         addFeedbackButton.snp.makeConstraints {
             $0.bottom.equalTo(emojiCollectionView.snp.top).offset(-4)
             $0.height.equalTo(42)
-            $0.leading.trailing.equalToSuperview()
+            $0.width.equalTo(272)
         }
         
         addFeedbackLabel.snp.makeConstraints {
