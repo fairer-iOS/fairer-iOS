@@ -111,7 +111,7 @@ final class HomeViewController: BaseViewController {
     override func configUI() {
         super.configUI()
         setupToolBarGesture()
-        setupLongPressGesture()
+        setupFeedbackViewGesture()
     }
     
     override func render() {
@@ -179,9 +179,12 @@ final class HomeViewController: BaseViewController {
         homeView.homeRuleView.addGestureRecognizer(tapRuleGesture)
     }
     
-    private func setupLongPressGesture() {
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(addLongPressGesture))
-        homeView.calendarDailyTableView.addGestureRecognizer(longPressGesture)
+    private func setupFeedbackViewGesture() {
+        let addViewGesture = UILongPressGestureRecognizer(target: self, action: #selector(addFeedbackViewGesture))
+        let removeViewGesture = UITapGestureRecognizer(target: self, action: #selector(removeFeedbackViewGesture))
+        
+        homeView.calendarDailyTableView.addGestureRecognizer(addViewGesture)
+        homeView.addGestureRecognizer(removeViewGesture)
     }
     
     @objc
@@ -192,7 +195,7 @@ final class HomeViewController: BaseViewController {
     }
     
     @objc
-    private func addLongPressGesture(_ sender: UILongPressGestureRecognizer) {
+    private func addFeedbackViewGesture(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             if let row = homeView.calendarDailyTableView.indexPathForRow(at: sender.location(in: self.homeView.calendarDailyTableView)) {
                 guard let houseWorkCard = self.pickDayWorkInfo?.houseWorks?[row[0]] else { return }
@@ -202,6 +205,13 @@ final class HomeViewController: BaseViewController {
                     // FIXME: - 텍스트 피드백 여부 확인
                 }
             }
+        }
+    }
+    
+    @objc
+    private func removeFeedbackViewGesture(_ sender: UITapGestureRecognizer) {
+        if homeView.hurryView.isDescendant(of: homeView) {
+            homeView.hurryView.removeFromSuperview()
         }
     }
     
