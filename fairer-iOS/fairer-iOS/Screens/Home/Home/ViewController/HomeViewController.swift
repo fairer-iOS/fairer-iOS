@@ -24,6 +24,8 @@ final class HomeViewController: BaseViewController {
     private var reloadHouseWork = false
     private lazy var leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     private lazy var rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    private var addViewGesture: UILongPressGestureRecognizer?
+    private var removeViewGesture: UITapGestureRecognizer?
     private var selectedMemberId: Int?
     private var myId: Int?
     private lazy var divideIndex: Int = 0
@@ -142,7 +144,22 @@ final class HomeViewController: BaseViewController {
 
         homeView.addFeedbackView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
-            $0.width.equalTo(UIScreen.main.bounds.width * 0.88)
+            $0.width.equalTo(UIScreen.main.bounds.width * 0.9)
+            $0.height.equalTo(98)
+            $0.top.equalToSuperview().inset(viewPosition.y - 104)
+        }
+    }
+    
+    private func addEditFeedbackView(_ row: IndexPath) {
+        let rectOfCellInTableView = self.homeView.calendarDailyTableView.rectForRow(at: IndexPath(row: row[1], section: row[0]))
+        let rectOfCellInSuperview = self.homeView.calendarDailyTableView.convert(rectOfCellInTableView, to: self.view)
+        let viewPosition = CGPoint(x: rectOfCellInSuperview.origin.x, y: rectOfCellInSuperview.origin.y)
+
+        view.addSubview(homeView.editFeedbackView)
+
+        homeView.editFeedbackView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.equalTo(UIScreen.main.bounds.width * 0.9)
             $0.height.equalTo(140)
             $0.top.equalToSuperview().inset(viewPosition.y - 146)
         }
@@ -195,13 +212,14 @@ final class HomeViewController: BaseViewController {
     }
     
     private func setupFeedbackViewGesture() {
-        let addViewGesture = UILongPressGestureRecognizer(target: self, action: #selector(addFeedbackViewGesture))
-        let removeViewGesture = UITapGestureRecognizer(target: self, action: #selector(removeFeedbackViewGesture))
+        addViewGesture = UILongPressGestureRecognizer(target: self, action: #selector(addFeedbackViewGesture))
+        removeViewGesture = UITapGestureRecognizer(target: self, action: #selector(removeFeedbackViewGesture))
+
+        homeView.calendarDailyTableView.addGestureRecognizer(addViewGesture!)
+        homeView.addGestureRecognizer(removeViewGesture!)
         
-        if !checkMemberCellIsOwn() {
-            homeView.addGestureRecognizer(removeViewGesture)
-            homeView.calendarDailyTableView.addGestureRecognizer(addViewGesture)
-        }
+        addViewGesture?.isEnabled = false
+        removeViewGesture?.isEnabled = false
     }
     
     @objc
@@ -220,11 +238,13 @@ final class HomeViewController: BaseViewController {
                     addHurryView(row)
                 } else {
                     // FIXME: - 텍스트 피드백 ? addEditFeedback : addAddFeedback
-                    addAddFeedbackView(row)
-//                    addEditFeedbackView(row)
+//                    addAddFeedbackView(row)
+                    addEditFeedbackView(row)
                 }
             }
         }
+        
+        removeViewGesture?.isEnabled = true
     }
     
     @objc
@@ -236,6 +256,12 @@ final class HomeViewController: BaseViewController {
         if homeView.addFeedbackView.isDescendant(of: homeView) {
             homeView.addFeedbackView.removeFromSuperview()
         }
+        
+        if homeView.editFeedbackView.isDescendant(of: homeView) {
+            homeView.editFeedbackView.removeFromSuperview()
+        }
+        
+        removeViewGesture?.isEnabled = false
     }
     
     @objc
@@ -714,6 +740,7 @@ private extension HomeViewController {
             )
             self.getHouseWorksByWeek()
         }
+        addViewGesture?.isEnabled = !checkMemberCellIsOwn()
     }
     
     @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
