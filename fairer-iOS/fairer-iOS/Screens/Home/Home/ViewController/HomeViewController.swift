@@ -129,7 +129,22 @@ final class HomeViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(16)
             $0.width.equalTo(UIScreen.main.bounds.width * 0.76)
             $0.height.equalTo(42)
-            $0.top.equalToSuperview().inset(viewPosition.y - 47)
+            $0.top.equalToSuperview().inset(viewPosition.y - 48)
+        }
+    }
+    
+    private func addAddFeedbackView(_ row: IndexPath) {
+        let rectOfCellInTableView = self.homeView.calendarDailyTableView.rectForRow(at: IndexPath(row: row[1], section: row[0]))
+        let rectOfCellInSuperview = self.homeView.calendarDailyTableView.convert(rectOfCellInTableView, to: self.view)
+        let viewPosition = CGPoint(x: rectOfCellInSuperview.origin.x, y: rectOfCellInSuperview.origin.y)
+
+        view.addSubview(homeView.addFeedbackView)
+
+        homeView.addFeedbackView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.equalTo(UIScreen.main.bounds.width * 0.88)
+            $0.height.equalTo(140)
+            $0.top.equalToSuperview().inset(viewPosition.y - 146)
         }
     }
     
@@ -183,8 +198,10 @@ final class HomeViewController: BaseViewController {
         let addViewGesture = UILongPressGestureRecognizer(target: self, action: #selector(addFeedbackViewGesture))
         let removeViewGesture = UITapGestureRecognizer(target: self, action: #selector(removeFeedbackViewGesture))
         
-        homeView.calendarDailyTableView.addGestureRecognizer(addViewGesture)
-        homeView.addGestureRecognizer(removeViewGesture)
+        if !checkMemberCellIsOwn() {
+            homeView.addGestureRecognizer(removeViewGesture)
+            homeView.calendarDailyTableView.addGestureRecognizer(addViewGesture)
+        }
     }
     
     @objc
@@ -202,7 +219,9 @@ final class HomeViewController: BaseViewController {
                 if houseWorkCard.success {
                     addHurryView(row)
                 } else {
-                    // FIXME: - 텍스트 피드백 여부 확인
+                    // FIXME: - 텍스트 피드백 ? addEditFeedback : addAddFeedback
+                    addAddFeedbackView(row)
+//                    addEditFeedbackView(row)
                 }
             }
         }
@@ -212,6 +231,10 @@ final class HomeViewController: BaseViewController {
     private func removeFeedbackViewGesture(_ sender: UITapGestureRecognizer) {
         if homeView.hurryView.isDescendant(of: homeView) {
             homeView.hurryView.removeFromSuperview()
+        }
+        
+        if homeView.addFeedbackView.isDescendant(of: homeView) {
+            homeView.addFeedbackView.removeFromSuperview()
         }
     }
     
