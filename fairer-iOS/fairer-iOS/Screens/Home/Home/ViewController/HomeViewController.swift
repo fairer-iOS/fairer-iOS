@@ -111,10 +111,26 @@ final class HomeViewController: BaseViewController {
     override func configUI() {
         super.configUI()
         setupToolBarGesture()
+        setupLongPressGesture()
     }
     
     override func render() {
         self.view = homeView
+    }
+    
+    private func addHurryView(_ row: IndexPath) {
+        let rectOfCellInTableView = self.homeView.calendarDailyTableView.rectForRow(at: IndexPath(row: row[1], section: row[0]))
+        let rectOfCellInSuperview = self.homeView.calendarDailyTableView.convert(rectOfCellInTableView, to: self.view)
+        let viewPosition = CGPoint(x: rectOfCellInSuperview.origin.x, y: rectOfCellInSuperview.origin.y)
+
+        view.addSubview(homeView.hurryView)
+
+        homeView.hurryView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.equalTo(UIScreen.main.bounds.width * 0.76)
+            $0.height.equalTo(42)
+            $0.top.equalToSuperview().inset(viewPosition.y - 47)
+        }
     }
     
     //MARK: - set up view
@@ -163,11 +179,30 @@ final class HomeViewController: BaseViewController {
         homeView.homeRuleView.addGestureRecognizer(tapRuleGesture)
     }
     
+    private func setupLongPressGesture() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(addLongPressGesture))
+        homeView.calendarDailyTableView.addGestureRecognizer(longPressGesture)
+    }
+    
     @objc
     private func addTapGesture() {
         reloadHouseWork = false
         let selectHouseWorkView = SelectHouseWorkViewController()
         self.navigationController?.pushViewController(selectHouseWorkView, animated: true)
+    }
+    
+    @objc
+    private func addLongPressGesture(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            if let row = homeView.calendarDailyTableView.indexPathForRow(at: sender.location(in: self.homeView.calendarDailyTableView)) {
+                guard let houseWorkCard = self.pickDayWorkInfo?.houseWorks?[row[0]] else { return }
+                if houseWorkCard.success {
+                    addHurryView(row)
+                } else {
+                    // FIXME: - 텍스트 피드백 여부 확인
+                }
+            }
+        }
     }
     
     @objc

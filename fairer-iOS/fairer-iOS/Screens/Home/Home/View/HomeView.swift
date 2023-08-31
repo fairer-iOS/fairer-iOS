@@ -74,7 +74,9 @@ final class HomeView: BaseUIView {
         return view
     }()
     let emptyHouseWorkImage = UIImageView(image: ImageLiterals.emptyHouseWork)
-    let editFeedbackView = HurryView()
+    let addFeedbackView = AddFeedbackView()
+    let editFeedbackView = EditFeedbackView()
+    let hurryView = HurryView()
     
     override func render() {
         self.addSubviews(toolBarView,
@@ -161,13 +163,6 @@ final class HomeView: BaseUIView {
             $0.bottom.equalTo(toolBarView.snp.top).offset(-10)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(emptyHouseWorkImage.snp.height).multipliedBy(0.65)
-        }
-        
-        editFeedbackView.snp.makeConstraints {
-            $0.top.equalTo(calendarDailyTableView.snp.bottom).offset(-40)
-            $0.leading.equalToSuperview().inset(10)
-            $0.width.equalTo(UIScreen.main.bounds.width * 0.76)
-            $0.height.equalTo(42)
         }
     }
 }
