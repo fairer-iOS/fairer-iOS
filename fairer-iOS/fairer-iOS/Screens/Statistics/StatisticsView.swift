@@ -19,13 +19,12 @@ final class StatisticsView: BaseUIView {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInsetAdjustmentBehavior = .never
-        collectionView.backgroundColor = .magenta
+        collectionView.backgroundColor = .white
         return collectionView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemPink
     }
     
     required init?(coder: NSCoder) {
@@ -51,29 +50,22 @@ final class StatisticsView: BaseUIView {
         return layout
     }
     
-    
-    // Height 240
     private func getLayoutRankSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
          let item = NSCollectionLayoutItem(layoutSize: itemSize)
          
          let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(75), heightDimension: .absolute(140))
          let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-         group.interItemSpacing = .fixed(9)
          
          let section =  NSCollectionLayoutSection(group: group)
-         section.contentInsets = NSDirectionalEdgeInsets(top: 22, leading: 24, bottom: 16, trailing: 16)
+         section.contentInsets = NSDirectionalEdgeInsets(top: 22, leading: 24, bottom: 16, trailing: 24)
          section.orthogonalScrollingBehavior = .continuous
-        section.interGroupSpacing = 22
+        section.interGroupSpacing = 8
          
          let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
          let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
-        
-        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(1))
-        let footerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomTrailing)
-         
-         section.boundarySupplementaryItems = [headerSupplementary, footerSupplementary]
+         section.boundarySupplementaryItems = [headerSupplementary]
          
          return section
     }
@@ -84,13 +76,13 @@ final class StatisticsView: BaseUIView {
          
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(90))
          let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-         group.interItemSpacing = .fixed(18)
+         group.interItemSpacing = .fixed(100)
          
          let section =  NSCollectionLayoutSection(group: group)
-         section.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 24, bottom: 18, trailing: 16)
-        section.interGroupSpacing = 22
+         section.contentInsets = NSDirectionalEdgeInsets(top: 18, leading: 24, bottom: 18, trailing: 24)
+        section.interGroupSpacing = 16
          
-         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(56))
+         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(85))
          let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
          section.boundarySupplementaryItems = [headerSupplementary]

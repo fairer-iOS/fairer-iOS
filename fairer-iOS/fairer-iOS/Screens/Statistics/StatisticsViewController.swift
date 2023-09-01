@@ -21,8 +21,9 @@ final class StatisticsViewController: BaseViewController {
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         mainView.collectionView.register(cell: RankCollectionViewCell.self)
-        mainView.collectionView.register(RankSectionFooterReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "RankSectionFooterReusableView")
+        mainView.collectionView.register(cell: MemberHouseWorkSectionCollectionViewCell.self)
         mainView.collectionView.register(RankSectionHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "RankSectionHeaderReusableView")
+        mainView.collectionView.register(MemberHouseWorkSectionHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MemberHouseWorkSectionHeaderReusableView")
     }
 }
 
@@ -50,16 +51,20 @@ extension StatisticsViewController: UICollectionViewDelegate, UICollectionViewDa
             
             if indexPath.row == 0  {
                 cell.setRankerViewisHidden(first: false, second: true, third: true)
+                cell.setMemberRankTypeUI(.first)
             } else if indexPath.row == 1 {
                 cell.setRankerViewisHidden(first: true, second: false, third: true)
+                cell.setMemberRankTypeUI(.second)
             } else if indexPath.row == 2 {
                 cell.setRankerViewisHidden(first: true, second: true, third: false)
+                cell.setMemberRankTypeUI(.third)
             } else {
                 cell.setRankerViewisHidden(first: true, second: true, third: true)
+                cell.setMemberRankTypeUI(.none)
             }
             return cell
         case .memberHouseWorkSection:
-            let cell: RankCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            let cell: MemberHouseWorkSectionCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
             return cell
         }
         
@@ -68,15 +73,13 @@ extension StatisticsViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let header: RankSectionHeaderReusableView = collectionView.dequeueHeaderView(forIndexPath: indexPath)
-            return header
-        case UICollectionView.elementKindSectionFooter:
-            let section = StatisticsSectionType.allCases[indexPath.section]
-            if section == .rankSection {
-                let footer: RankSectionFooterReusableView = collectionView.dequeueFooterView(forIndexPath: indexPath)
-                return footer
-            } else {
-                return UICollectionReusableView()
+            switch StatisticsSectionType.allCases[indexPath.section] {
+            case .rankSection:
+                let header: RankSectionHeaderReusableView = collectionView.dequeueHeaderView(forIndexPath: indexPath)
+                return header
+            case .memberHouseWorkSection:
+                let header: MemberHouseWorkSectionHeaderReusableView = collectionView.dequeueHeaderView(forIndexPath: indexPath)
+                return header
             }
         default:
             return UICollectionReusableView()
