@@ -11,50 +11,65 @@ final class RankCollectionViewCell: BaseCollectionViewCell {
     
     private let firstRankerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .blue
         view.isHidden = true
         return view
     }()
     private let secondRankerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .brown
+        view.backgroundColor = .positive10
         view.isHidden = true
         return view
     }()
     private let thirdRankerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .cyan
+        view.backgroundColor = .positive0
         view.isHidden = true
         return view
     }()
     
+    private var memberView = StatisticsMemberView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemPink
+        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        self.layer.cornerRadius = 8
+    }
+    
     override func setHierarchy() {
-        [firstRankerView, secondRankerView, thirdRankerView].forEach { view in
+        [memberView, firstRankerView, secondRankerView, thirdRankerView].forEach { view in
             self.addSubviews(view)
         }
+        
+        self.bringSubviewToFront(memberView)
     }
     
     override func render() {
+        memberView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(41)
+            make.leading.trailing.equalToSuperview().inset(13).priority(.low)
+            make.bottom.equalToSuperview().inset(14)
+            make.centerX.equalToSuperview()
+        }
+        
         firstRankerView.snp.makeConstraints { make in
             make.edges.equalTo(self)
         }
         
         secondRankerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(10)
+            make.top.equalToSuperview().inset(11)
             make.bottom.horizontalEdges.equalToSuperview()
         }
         
         thirdRankerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(16)
             make.bottom.horizontalEdges.equalToSuperview()
         }
     }
@@ -65,5 +80,9 @@ extension RankCollectionViewCell {
         firstRankerView.isHidden = first
         secondRankerView.isHidden = second
         thirdRankerView.isHidden = third
+    }
+    
+    func setMemberRankTypeUI(_ memberRankType: MemberRankType) {
+        self.memberView.setMemberRankTypeUI(memberRankType)
     }
 }
