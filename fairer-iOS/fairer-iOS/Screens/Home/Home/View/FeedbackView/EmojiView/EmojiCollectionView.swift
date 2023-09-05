@@ -21,7 +21,7 @@ final class EmojiCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
-    var selectedEmojiList = [Int:Bool]()
+    var selectedEmojiList = [Int : Bool]()
     
     // MARK: - property
 

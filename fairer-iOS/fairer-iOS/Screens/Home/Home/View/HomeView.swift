@@ -90,7 +90,7 @@ final class HomeView: BaseUIView {
                          homeCalenderView,
                          homeWeekCalendarCollectionView,
                          calendarDailyTableView,
-                         emptyHouseWorkImage, editFeedbackView)
+                         emptyHouseWorkImage)
         
         toolBarView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
