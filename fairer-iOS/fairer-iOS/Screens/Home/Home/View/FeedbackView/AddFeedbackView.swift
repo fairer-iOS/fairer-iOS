@@ -32,7 +32,7 @@ final class AddFeedbackView: BaseUIView {
         imageView.tintColor = .gray800
         return imageView
     }()
-    private let emojiCollectionView = EmojiCollectionView()
+    let emojiCollectionView = EmojiCollectionView()
     
     // MARK: - life cycle
     

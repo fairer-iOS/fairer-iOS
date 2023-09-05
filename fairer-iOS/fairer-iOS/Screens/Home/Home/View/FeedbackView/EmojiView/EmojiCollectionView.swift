@@ -21,6 +21,7 @@ final class EmojiCollectionView: BaseUIView {
             bottom: collectionVerticalSpacing,
             right: collectionHorizontalSpacing)
     }
+    var selectedEmojiList = [Int:Bool]()
     
     // MARK: - property
 
@@ -39,7 +40,6 @@ final class EmojiCollectionView: BaseUIView {
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
-        collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(EmojiCollectionViewCell.self, forCellWithReuseIdentifier: EmojiCollectionViewCell.className)
@@ -63,17 +63,11 @@ final class EmojiCollectionView: BaseUIView {
 
 // MARK: - extension
 
-extension EmojiCollectionView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-    }
-}
-
 extension EmojiCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ImageLiterals.emojiList.count
+        let emojiNum = ImageLiterals.emojiList.count
+        selectedEmojiList = Dictionary(uniqueKeysWithValues: (0..<emojiNum).map{($0, false)})
+        return emojiNum
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -84,6 +78,16 @@ extension EmojiCollectionView: UICollectionViewDataSource {
         
         cell.emojiImageView.image = ImageLiterals.emojiList[indexPath.item]
         
+        let action = UIAction { [weak self] _ in
+            self?.didTappedEmoji(indexPath.item)
+            cell.isSelected.toggle()
+        }
+        cell.backView.addAction(action, for: .touchUpInside)
+        
         return cell
+    }
+    
+    private func didTappedEmoji(_ index: Int) {
+        selectedEmojiList[index]?.toggle()
     }
 }

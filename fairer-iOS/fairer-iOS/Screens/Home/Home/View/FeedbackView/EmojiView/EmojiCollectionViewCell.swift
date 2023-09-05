@@ -19,8 +19,8 @@ final class EmojiCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    private let backView: UIView = {
-        let view = UIView()
+    let backView: UIButton = {
+        let view = UIButton()
         view.backgroundColor = .clear
         view.layer.cornerRadius = 8
         return view

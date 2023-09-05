@@ -254,10 +254,14 @@ final class HomeViewController: BaseViewController {
         }
         
         if homeView.addFeedbackView.isDescendant(of: homeView) {
+            // FIXME: - 선택된 이모지 피드백 post
+            print(homeView.addFeedbackView.emojiCollectionView.selectedEmojiList)
             homeView.addFeedbackView.removeFromSuperview()
         }
         
         if homeView.editFeedbackView.isDescendant(of: homeView) {
+            // FIXME: - 선택된 이모지 피드백 post
+            print(homeView.editFeedbackView.emojiCollectionView.selectedEmojiList)
             homeView.editFeedbackView.removeFromSuperview()
         }
         
