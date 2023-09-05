@@ -76,6 +76,13 @@ enum TextLiteral {
     static let homeCalendarViewTodayTitle: String = "오늘"
     static let homeCalendarViewDaysTitle: [String] = ["일","월","화","수","목","금","토"]
     
+    // MARK: - Feedback
+    
+    static let feedbackViewAddFeedbackLabel: String = "텍스트 피드백 작성"
+    static let feedbackViewEditFeedbackLabel: String = "텍스트 피드백 수정"
+    static let feedbackViewDeleteFeedbackLabel: String = "텍스트 피드백 삭제"
+    static let feedbackViewHurryLabel: String = "재촉하기"
+    
     // MARK: - HouseInviteCodeViewController
     
     static let houseInviteCodeViewControllerPrimaryLabel: String = "하우스에 사람을 초대해주세요."

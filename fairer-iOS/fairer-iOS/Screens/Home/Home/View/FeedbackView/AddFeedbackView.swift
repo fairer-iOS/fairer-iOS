@@ -21,7 +21,7 @@ final class AddFeedbackView: BaseUIView {
     }()
     private let addFeedbackLabel: UILabel = {
         let label = UILabel()
-        label.text = "텍스트 피드백 작성"
+        label.text = TextLiteral.feedbackViewAddFeedbackLabel
         label.font = .body1
         label.textColor = .gray800
         return label

@@ -27,7 +27,7 @@ final class EditFeedbackView: BaseUIView {
     }()
     private let editFeedbackLabel: UILabel = {
         let label = UILabel()
-        label.text = "텍스트 피드백 수정"
+        label.text = TextLiteral.feedbackViewEditFeedbackLabel
         label.font = .body1
         label.textColor = .gray800
         return label
@@ -50,7 +50,7 @@ final class EditFeedbackView: BaseUIView {
     }()
     private let deleteFeedbackLabel: UILabel = {
         let label = UILabel()
-        label.text = "텍스트 피드백 삭제"
+        label.text = TextLiteral.feedbackViewDeleteFeedbackLabel
         label.font = .body1
         label.textColor = .negative20
         return label

@@ -21,7 +21,7 @@ final class HurryView: BaseUIView {
     }()
     private let hurryLabel: UILabel = {
         let label = UILabel()
-        label.text = "재촉하기"
+        label.text = TextLiteral.feedbackViewHurryLabel
         label.font = .body1
         label.textColor = .gray800
         return label
