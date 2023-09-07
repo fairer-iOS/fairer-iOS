@@ -13,18 +13,21 @@ final class RankCollectionViewCell: BaseCollectionViewCell {
         let view = UIView()
         view.backgroundColor = .blue
         view.isHidden = true
+        view.layer.cornerRadius = 4
         return view
     }()
     private let secondRankerView: UIView = {
         let view = UIView()
         view.backgroundColor = .positive10
         view.isHidden = true
+        view.layer.cornerRadius = 4
         return view
     }()
     private let thirdRankerView: UIView = {
         let view = UIView()
         view.backgroundColor = .positive0
         view.isHidden = true
+        view.layer.cornerRadius = 4
         return view
     }()
     
@@ -44,9 +47,7 @@ final class RankCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setHierarchy() {
-        [memberView, firstRankerView, secondRankerView, thirdRankerView].forEach { view in
-            self.addSubviews(view)
-        }
+        self.addSubviews(memberView, firstRankerView, secondRankerView, thirdRankerView)
         
         self.bringSubviewToFront(memberView)
     }
@@ -64,7 +65,7 @@ final class RankCollectionViewCell: BaseCollectionViewCell {
         }
         
         secondRankerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(11)
+            make.top.equalToSuperview().inset(8)
             make.bottom.horizontalEdges.equalToSuperview()
         }
         

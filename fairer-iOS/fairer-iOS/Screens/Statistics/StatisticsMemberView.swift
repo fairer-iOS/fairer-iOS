@@ -19,10 +19,10 @@ final class StatisticsMemberView: BaseUIView {
     private var memberRankType: MemberRankType = .none
     
     private var memBerImageView: UIImageView = {
-        let v = UIImageView()
-        v.contentMode = .scaleAspectFit
-        v.backgroundColor = .black
-        return v
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        view.backgroundColor = .black
+        return view
     }()
     
     
@@ -39,7 +39,7 @@ final class StatisticsMemberView: BaseUIView {
         label.text = "12회"
         label.textColor = .gray600
         label.textAlignment = .left
-        label.font = .body1
+        label.font = .body2
         return label
     }()
     
@@ -63,9 +63,7 @@ final class StatisticsMemberView: BaseUIView {
     
     override func render() {
         
-        [memBerImageView, memberNameLabel, houseWorkCountLabel].forEach { view in
-            self.addSubview(view)
-        }
+        addSubviews(memBerImageView, memberNameLabel, houseWorkCountLabel)
         
         memBerImageView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
@@ -90,17 +88,21 @@ extension StatisticsMemberView {
     func setMemberRankTypeUI(_ memberRankType: MemberRankType) {
         switch memberRankType {
         case .first:
-            memberNameLabel.textColor = .white
-            houseWorkCountLabel.textColor = .white
-        case .second:
-            memberNameLabel.textColor = .black
-            houseWorkCountLabel.textColor = .black
-        case .third:
-            memberNameLabel.textColor = .black
-            houseWorkCountLabel.textColor = .black
-        case .none:
-            memberNameLabel.textColor = .gray800
-            houseWorkCountLabel.textColor = .gray600
+             memberNameLabel.textColor = .white
+             houseWorkCountLabel.textColor = .white
+             houseWorkCountLabel.font = .title2
+         case .second:
+             memberNameLabel.textColor = .gray800
+             houseWorkCountLabel.textColor = .gray800
+             houseWorkCountLabel.font = .title2
+         case .third:
+             memberNameLabel.textColor = .gray800
+             houseWorkCountLabel.textColor = .gray800
+             houseWorkCountLabel.font = .title2
+         case .none:
+             memberNameLabel.textColor = .gray800
+             houseWorkCountLabel.textColor = .gray600
+             houseWorkCountLabel.font = .body2
         }
     }
 }

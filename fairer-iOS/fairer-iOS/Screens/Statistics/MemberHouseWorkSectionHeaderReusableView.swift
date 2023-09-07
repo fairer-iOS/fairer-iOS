@@ -16,10 +16,10 @@ final class MemberHouseWorkSectionHeaderReusableView: UICollectionReusableView {
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "이번달 집안일 현황을 알아보세요."
-        label.textColor = .black
+        label.text = "이번달 집안일 현황을 확인해보세요."
+        label.textColor = .gray800
         label.textAlignment = .left
-        label.font = .h2
+        label.font = .title1
         return label
     }()
     private let subTitleLabel: UILabel = {
@@ -27,7 +27,7 @@ final class MemberHouseWorkSectionHeaderReusableView: UICollectionReusableView {
         label.text = "전체 가사 수행 16회"
         label.textColor = .gray600
         label.textAlignment = .left
-        label.font = .h3
+        label.font = .title2
         return label
     }()
     
@@ -42,22 +42,19 @@ final class MemberHouseWorkSectionHeaderReusableView: UICollectionReusableView {
     }
     
     private func setHierarchy() {
-        self.addSubviews(titleLabel)
-        self.addSubviews(subTitleLabel)
-        self.addSubviews(divider)
+        self.addSubviews(titleLabel, subTitleLabel, divider)
     }
     
     private func render() {
         
         divider.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(2)
         }
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(divider.snp.bottom).offset(26)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(subTitleLabel.snp.height)
         }
         
         subTitleLabel.snp.makeConstraints { make in

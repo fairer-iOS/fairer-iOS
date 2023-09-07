@@ -11,11 +11,11 @@ final class RankSectionHeaderReusableView: UICollectionReusableView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "이번달 김유나님이\n가장 많은 집안일을 완료했어요!"
-        label.textColor = .black
+        label.setTextWithLineHeight(text: "이번달 김유나님이\n가장 많은 집안일을 완료했어요!", lineHeight: 22)
+        label.textColor = .gray800
         label.textAlignment = .left
         label.numberOfLines = 2
-        label.font = .h2
+        label.font = .title1
         return label
     }()
     

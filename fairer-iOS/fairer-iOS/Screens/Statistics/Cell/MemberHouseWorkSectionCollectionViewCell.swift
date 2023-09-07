@@ -12,40 +12,38 @@ final class MemberHouseWorkSectionCollectionViewCell: BaseCollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "바닥 청소"
-        label.textColor = .black
+        label.textColor = .gray800
         label.textAlignment = .left
         label.numberOfLines = 2
-        label.font = .h2
+        label.font = .title1
         return label
     }()
     private let houseWorkCountLabel: UILabel = {
         let label = UILabel()
         label.text = "총 12회 완료"
-        label.textColor = .black
+        label.textColor = .gray800
         label.textAlignment = .left
         label.numberOfLines = 2
-        label.font = .title2
+        label.font = .caption1
         return label
     }()
     private let automaticSizebutton: UIButton = {
         let button = UIButton()
+        button.tintColor = .gray400
         button.setImage(ImageLiterals.moveToCalendarButton, for: .normal)
         return button
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .white
-        self.layer.borderColor = UIColor.positive10.cgColor
-        self.layer.borderWidth = 0.8
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+        
     override func layoutSubviews() {
-        self.layer.cornerRadius = 8
+        layer.shadowRadius = 8
+    }
+    
+    override func configUI() {
+        backgroundColor = .white
+        layer.borderColor = UIColor.positive10.cgColor
+        layer.borderWidth = 1
+        layer.shadowOpacity = 0.04
+        layer.shadowOffset = CGSize(width: 0, height: 2)
     }
     
     override func setHierarchy() {
@@ -66,7 +64,6 @@ final class MemberHouseWorkSectionCollectionViewCell: BaseCollectionViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().inset(16)
             make.trailing.equalToSuperview().inset(16).priority(.high)
-            make.bottom.equalToSuperview().inset(16)
         }
         
         automaticSizebutton.snp.makeConstraints { make in
@@ -78,6 +75,6 @@ final class MemberHouseWorkSectionCollectionViewCell: BaseCollectionViewCell {
         }
         
         automaticSizebutton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        automaticSizebutton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
     }
 }
