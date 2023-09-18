@@ -235,11 +235,11 @@ final class HomeViewController: BaseViewController {
             if let row = homeView.calendarDailyTableView.indexPathForRow(at: sender.location(in: self.homeView.calendarDailyTableView)) {
                 guard let houseWorkCard = self.pickDayWorkInfo?.houseWorks?[row[0]] else { return }
                 if houseWorkCard.success {
-                    addHurryView(row)
-                } else {
                     // FIXME: - 텍스트 피드백 ? addEditFeedback : addAddFeedback
-//                    addAddFeedbackView(row)
+                    // addAddFeedbackView(row)
                     addEditFeedbackView(row)
+                } else {
+                    addHurryView(row)
                 }
             }
         }
