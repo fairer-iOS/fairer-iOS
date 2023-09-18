@@ -83,6 +83,9 @@
 		52A7204A29E27DAD005E29C6 /* RepeatAlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */; };
 		52B6BD0D2A9F501000022A20 /* EmojiCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD0C2A9F501000022A20 /* EmojiCollectionView.swift */; };
 		52B6BD0F2A9F501F00022A20 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD0E2A9F501F00022A20 /* EmojiCollectionViewCell.swift */; };
+		52B6BD112A9FA2D100022A20 /* AddFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */; };
+		52B6BD132A9FACE000022A20 /* EditFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD122A9FACE000022A20 /* EditFeedbackView.swift */; };
+		52B6BD152A9FB20C00022A20 /* HurryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6BD142A9FB20C00022A20 /* HurryView.swift */; };
 		52C09CED29113D3500B46F15 /* HouseMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */; };
 		52C09CEF29113D3800B46F15 /* HouseMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */; };
 		52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C09CF229115FC300B46F15 /* SettingViewController.swift */; };
@@ -258,6 +261,9 @@
 		52A7204929E27DAD005E29C6 /* RepeatAlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatAlertTableViewCell.swift; sourceTree = "<group>"; };
 		52B6BD0C2A9F501000022A20 /* EmojiCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionView.swift; sourceTree = "<group>"; };
 		52B6BD0E2A9F501F00022A20 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
+		52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackView.swift; sourceTree = "<group>"; };
+		52B6BD122A9FACE000022A20 /* EditFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedbackView.swift; sourceTree = "<group>"; };
+		52B6BD142A9FB20C00022A20 /* HurryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HurryView.swift; sourceTree = "<group>"; };
 		52C09CEC29113D3500B46F15 /* HouseMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionView.swift; sourceTree = "<group>"; };
 		52C09CEE29113D3700B46F15 /* HouseMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C09CF229115FC300B46F15 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -777,32 +783,11 @@
 			isa = PBXGroup;
 			children = (
 				52B6BD0B2A9F4FF300022A20 /* EmojiView */,
-				52B6BD0A2A9F4FC700022A20 /* HurryView */,
-				52B6BD092A9F4FC000022A20 /* EditFeedbackView */,
-				52B6BD082A9F4FB300022A20 /* AddFeedbackView */,
+				52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */,
+				52B6BD122A9FACE000022A20 /* EditFeedbackView.swift */,
+				52B6BD142A9FB20C00022A20 /* HurryView.swift */,
 			);
 			path = FeedbackView;
-			sourceTree = "<group>";
-		};
-		52B6BD082A9F4FB300022A20 /* AddFeedbackView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AddFeedbackView;
-			sourceTree = "<group>";
-		};
-		52B6BD092A9F4FC000022A20 /* EditFeedbackView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = EditFeedbackView;
-			sourceTree = "<group>";
-		};
-		52B6BD0A2A9F4FC700022A20 /* HurryView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HurryView;
 			sourceTree = "<group>";
 		};
 		52B6BD0B2A9F4FF300022A20 /* EmojiView */ = {
@@ -1437,6 +1422,7 @@
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
 				52136FD4298299B90022D465 /* RepeatCycleView.swift in Sources */,
 				52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */,
+				52B6BD112A9FA2D100022A20 /* AddFeedbackView.swift in Sources */,
 				522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */,
 				52136FE1298A72130022D465 /* WriteHouseWorkViewController.swift in Sources */,
 				5204AAB929507319002FB6CA /* SettingAlarmTableViewCell.swift in Sources */,
@@ -1445,6 +1431,7 @@
 				5ACADCCC2A5559DA00B92C07 /* FCMTokenResponse.swift in Sources */,
 				914C69CC29AA0D17008EA9EE /* BaseURLConstant.swift in Sources */,
 				52D075662A53110300B5C692 /* AlarmRequest.swift in Sources */,
+				52B6BD132A9FACE000022A20 /* EditFeedbackView.swift in Sources */,
 				914C69CE29AA2F03008EA9EE /* ErrorResponse.swift in Sources */,
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
@@ -1543,6 +1530,7 @@
 				917D8B7329A633A200E26B73 /* MembersAPI.swift in Sources */,
 				917D8B5F29A632D000E26B73 /* HouseWorksRouter.swift in Sources */,
 				911455C0297E7FD7002CCDF9 /* WorkState.swift in Sources */,
+				52B6BD152A9FB20C00022A20 /* HurryView.swift in Sources */,
 				917D8B7129A6339700E26B73 /* HouseWorksAPI.swift in Sources */,
 				91CB591C29977B09002A3295 /* PickDateView.swift in Sources */,
 				5A80308C29925146005C7909 /* SettingHomeRuleTableViewCell.swift in Sources */,

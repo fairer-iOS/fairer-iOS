@@ -74,6 +74,9 @@ final class HomeView: BaseUIView {
         return view
     }()
     let emptyHouseWorkImage = UIImageView(image: ImageLiterals.emptyHouseWork)
+    let addFeedbackView = AddFeedbackView()
+    let editFeedbackView = EditFeedbackView()
+    let hurryView = HurryView()
     
     override func render() {
         self.addSubviews(toolBarView,
