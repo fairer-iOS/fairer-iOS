@@ -38,8 +38,6 @@ final class AddFeedbackView: BaseUIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        render()
-        configUI()
         setButtonAction()
     }
     
