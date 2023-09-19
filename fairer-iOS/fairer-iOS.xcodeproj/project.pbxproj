@@ -71,6 +71,7 @@
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
 		52893C752AB871190027BAC3 /* FeedbackCapsuleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52893C742AB871190027BAC3 /* FeedbackCapsuleCollectionView.swift */; };
 		52893C792AB953D50027BAC3 /* FeedbackCapsuleCollectionViewTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52893C782AB953D50027BAC3 /* FeedbackCapsuleCollectionViewTextCell.swift */; };
+		52893C7B2AB954CE0027BAC3 /* FeedbackCapsuleCollectionViewEmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52893C7A2AB954CE0027BAC3 /* FeedbackCapsuleCollectionViewEmojiCell.swift */; };
 		52A53DC929B06DF200C4BB4C /* TeamInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */; };
 		52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */; };
 		52A53DD029B0864500C4BB4C /* HouseWorksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */; };
@@ -250,6 +251,7 @@
 		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
 		52893C742AB871190027BAC3 /* FeedbackCapsuleCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCapsuleCollectionView.swift; sourceTree = "<group>"; };
 		52893C782AB953D50027BAC3 /* FeedbackCapsuleCollectionViewTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCapsuleCollectionViewTextCell.swift; sourceTree = "<group>"; };
+		52893C7A2AB954CE0027BAC3 /* FeedbackCapsuleCollectionViewEmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCapsuleCollectionViewEmojiCell.swift; sourceTree = "<group>"; };
 		52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoResponse.swift; sourceTree = "<group>"; };
 		52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksRequest.swift; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 			children = (
 				52893C742AB871190027BAC3 /* FeedbackCapsuleCollectionView.swift */,
 				52893C782AB953D50027BAC3 /* FeedbackCapsuleCollectionViewTextCell.swift */,
+				52893C7A2AB954CE0027BAC3 /* FeedbackCapsuleCollectionViewEmojiCell.swift */,
 			);
 			path = FeedbackCapsuleCollectionView;
 			sourceTree = "<group>";
@@ -1398,6 +1401,7 @@
 				917D8B8229A6355500E26B73 /* FCMRouter.swift in Sources */,
 				52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */,
 				5A9BD08829C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift in Sources */,
+				52893C7B2AB954CE0027BAC3 /* FeedbackCapsuleCollectionViewEmojiCell.swift in Sources */,
 				911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */,
 				917D8B7729A633B900E26B73 /* PresetsAPI.swift in Sources */,
 				5205055828E1C50600355055 /* InfoLabelView.swift in Sources */,
