@@ -32,7 +32,7 @@ final class FeedbackCapsuleCollectionViewTextCell: BaseCollectionViewCell {
         self.backgroundColor = .gray100
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.gray200.cgColor
-        self.layer.cornerRadius = 16
+        self.layer.cornerRadius = 14
     }
     
     override func render() {

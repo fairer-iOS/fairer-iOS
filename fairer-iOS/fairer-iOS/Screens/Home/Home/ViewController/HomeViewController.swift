@@ -70,6 +70,8 @@ final class HomeViewController: BaseViewController {
             }
         }
     }
+    // FIXME: - feedback 0개: 0.0, 1~4개: 36.0, 5~8개: 72.0
+    private var feedbackHeight: CGFloat = 72.0
     private let homeView = HomeView()
     
     // MARK: - life cycle
@@ -428,7 +430,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SizeLiteral.homeViewWorkCellHeight
+        return SizeLiteral.homeViewWorkCellHeight + feedbackHeight
     }
 }
 

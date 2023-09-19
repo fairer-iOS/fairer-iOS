@@ -34,6 +34,7 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     var houseWorkId = Int()
     var scheduledDate = String()
     var houseWorkCompleteId = Int()
+    var hasTextFeedback: Bool = false
     
     // MARK: - property
     
@@ -96,19 +97,64 @@ final class CalendarDailyTableViewCell: BaseTableViewCell {
     }()
     lazy var mainBackground = UIView()
     lazy var shadowLayer = UIView()
+    private lazy var feedbackCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewCompositionLayout)
+        collectionView.backgroundColor = .clear
+        collectionView.dataSource = self
+        collectionView.register(FeedbackCapsuleCollectionViewTextCell.self, forCellWithReuseIdentifier: FeedbackCapsuleCollectionViewTextCell.className)
+        collectionView.register(FeedbackCapsuleCollectionViewEmojiCell.self, forCellWithReuseIdentifier: FeedbackCapsuleCollectionViewEmojiCell.className)
+        return collectionView
+    }()
+    private let collectionViewCompositionLayout: UICollectionViewCompositionalLayout = {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(60),
+            heightDimension: .estimated(28)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(28)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+        group.interItemSpacing = .fixed(8)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 8
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+    }()
+    private lazy var cellStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [shadowLayer, feedbackCollectionView])
+        stackView.spacing = 8
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        return stackView
+    }()
 
     // MARK: - life cycle
     
     override func render(){
-        self.addSubview(shadowLayer)
+        self.addSubviews(cellStackView)
         shadowLayer.addSubview(mainBackground)
         mainBackground.addSubviews(workLabel,workerCollectionView,timeStackView,roomStackView)
 
-        mainBackground.snp.makeConstraints {
+        cellStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
         shadowLayer.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.height.equalTo(94)
+        }
+        
+        mainBackground.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -174,17 +220,44 @@ extension CalendarDailyTableViewCell: UICollectionViewDelegate {}
 extension CalendarDailyTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.memberListProfilePath.count
+        switch collectionView {
+        case workerCollectionView:
+            return self.memberListProfilePath.count
+        case feedbackCollectionView:
+            return 8
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkerCollectionViewCell.className, for: indexPath) as? WorkerCollectionViewCell else {
-            assert(false, "Wrong Cell")
+        switch collectionView {
+        case workerCollectionView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkerCollectionViewCell.className, for: indexPath) as? WorkerCollectionViewCell else {
+                assert(false, "Wrong Cell")
+                return UICollectionViewCell()
+            }
+            if let profile = self.memberListProfilePath[indexPath.row].profilePath {
+                cell.workerIconImage.load(from: profile)
+            }
+            return cell
+        case feedbackCollectionView:
+            if indexPath.item == 0 && hasTextFeedback {
+                guard let textCell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedbackCapsuleCollectionViewTextCell.className, for: indexPath) as? FeedbackCapsuleCollectionViewTextCell else {
+                    assert(false, "Wrong Cell")
+                    return UICollectionViewCell()
+                }
+                return textCell
+            } else {
+                guard let emojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedbackCapsuleCollectionViewEmojiCell.className, for: indexPath) as? FeedbackCapsuleCollectionViewEmojiCell else {
+                    assert(false, "Wrong Cell")
+                    return UICollectionViewCell()
+                }
+                return emojiCell
+            }
+        default:
             return UICollectionViewCell()
         }
-        if let profile = self.memberListProfilePath[indexPath.row].profilePath {
-            cell.workerIconImage.load(from: profile)
-        }
-        return cell
+        
     }
 }
