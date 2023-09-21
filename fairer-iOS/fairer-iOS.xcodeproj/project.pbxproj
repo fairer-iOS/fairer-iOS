@@ -71,7 +71,7 @@
 		5275397C28EC7619002D8280 /* HouseInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */; };
 		52893C792AB953D50027BAC3 /* FeedbackCapsuleCollectionViewTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52893C782AB953D50027BAC3 /* FeedbackCapsuleCollectionViewTextCell.swift */; };
 		52893C7B2AB954CE0027BAC3 /* FeedbackCapsuleCollectionViewEmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52893C7A2AB954CE0027BAC3 /* FeedbackCapsuleCollectionViewEmojiCell.swift */; };
-		52893C802ABC376C0027BAC3 /* TextFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52893C7F2ABC376C0027BAC3 /* TextFeedbackView.swift */; };
+		52893C822ABC6E7A0027BAC3 /* TextFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52893C812ABC6E7A0027BAC3 /* TextFeedbackViewController.swift */; };
 		52A53DC929B06DF200C4BB4C /* TeamInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */; };
 		52A53DCE29B0774200C4BB4C /* HouseWorksRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */; };
 		52A53DD029B0864500C4BB4C /* HouseWorksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DCF29B0864500C4BB4C /* HouseWorksResponse.swift */; };
@@ -251,7 +251,7 @@
 		5275397B28EC7618002D8280 /* HouseInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInviteCodeViewController.swift; sourceTree = "<group>"; };
 		52893C782AB953D50027BAC3 /* FeedbackCapsuleCollectionViewTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCapsuleCollectionViewTextCell.swift; sourceTree = "<group>"; };
 		52893C7A2AB954CE0027BAC3 /* FeedbackCapsuleCollectionViewEmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCapsuleCollectionViewEmojiCell.swift; sourceTree = "<group>"; };
-		52893C7F2ABC376C0027BAC3 /* TextFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFeedbackView.swift; sourceTree = "<group>"; };
+		52893C812ABC6E7A0027BAC3 /* TextFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFeedbackViewController.swift; sourceTree = "<group>"; };
 		52A53DC829B06DF200C4BB4C /* TeamInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoResponse.swift; sourceTree = "<group>"; };
 		52A53DCA29B06E9100C4BB4C /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		52A53DCD29B0774200C4BB4C /* HouseWorksRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseWorksRequest.swift; sourceTree = "<group>"; };
@@ -802,7 +802,6 @@
 				52B6BD102A9FA2D100022A20 /* AddFeedbackView.swift */,
 				52B6BD122A9FACE000022A20 /* EditFeedbackView.swift */,
 				52B6BD142A9FB20C00022A20 /* HurryView.swift */,
-				52893C7F2ABC376C0027BAC3 /* TextFeedbackView.swift */,
 			);
 			path = FeedbackView;
 			sourceTree = "<group>";
@@ -1035,6 +1034,7 @@
 			isa = PBXGroup;
 			children = (
 				39F1C12028D5A80400585B83 /* HomeViewController.swift */,
+				52893C812ABC6E7A0027BAC3 /* TextFeedbackViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1459,7 +1459,6 @@
 				917D8B6129A632EC00E26B73 /* MembersRouter.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
 				39F1C12128D5A80400585B83 /* HomeViewController.swift in Sources */,
-				52893C802ABC376C0027BAC3 /* TextFeedbackView.swift in Sources */,
 				5A8030822990D902005C7909 /* SettingHomeRuleViewController.swift in Sources */,
 				5205055128DCB63D00355055 /* LoginViewController.swift in Sources */,
 				5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */,
@@ -1509,6 +1508,7 @@
 				52FDBD4A29DD609100FE45CD /* EditHouseWorkRequest.swift in Sources */,
 				52A53DDE29BC5E0400C4BB4C /* UIImageView+Extension.swift in Sources */,
 				52CB11202A093131009E3646 /* EditHouseWorkViewController.swift in Sources */,
+				52893C822ABC6E7A0027BAC3 /* TextFeedbackViewController.swift in Sources */,
 				5204AAB629507238002FB6CA /* SettingAlarmViewController.swift in Sources */,
 				91D6870629E7DCC90046AAA8 /* UINavigationController+Extension.swift in Sources */,
 				39EEF66B28CBB59400437654 /* UITableView+Extension.swift in Sources */,

@@ -239,7 +239,7 @@ final class HomeViewController: BaseViewController {
                 if houseWorkCard.success {
                     // FIXME: - 텍스트 피드백 ? addEditFeedback : addAddFeedback
                     // addAddFeedbackView(row)
-                    addEditFeedbackView(row)
+                    addAddFeedbackView(row)
                 } else {
                     addHurryView(row)
                 }
@@ -296,6 +296,19 @@ final class HomeViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    private func showTextFeedbackView() {
+        let textFeedbackViewController = TextFeedbackViewController()
+        textFeedbackViewController.modalPresentationStyle = .pageSheet
+        textFeedbackViewController.textfield.becomeFirstResponder()
+                
+        if let sheet = textFeedbackViewController.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = true
+        }
+                
+        self.present(textFeedbackViewController, animated: true, completion: nil)
     }
 }
 
@@ -651,6 +664,10 @@ private extension HomeViewController {
         homeView.homeCalenderView.calendarMonthLabelButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
         homeView.homeCalenderView.calendarMonthPickButton.addAction(moveToTodayDatePickerButtonAction, for: .touchUpInside)
         homeView.profileButton.addAction(moveToSettingViewAction, for: .touchUpInside)
+
+        homeView.addFeedbackView.didTappedAddFeedbackButton = {
+            self.showTextFeedbackView()
+        }
     }
     
     func moveToTodayDate() {

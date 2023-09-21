@@ -1,5 +1,5 @@
 //
-//  TextFeedbackView.swift
+//  TextFeedbackViewController.swift
 //  fairer-iOS
 //
 //  Created by 김유나 on 2023/09/21.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class TextFeedbackView: BaseUIView {
+final class TextFeedbackViewController: BaseViewController {
     
     // MARK: - property
     
-    private let textfield: UITextField = {
+    let textfield: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .normal0
         textField.textColor = .gray800
@@ -34,18 +34,28 @@ final class TextFeedbackView: BaseUIView {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubview(textfield)
+        view.addSubview(textfield)
         
         textfield.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().inset(27)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(42)
         }
     }
     
     override func configUI() {
-        self.backgroundColor = .normal0
-        self.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        self.layer.cornerRadius = 10
+        view.backgroundColor = .normal0
+    }
+}
+
+// MARK: - textfield
+
+extension TextFeedbackViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        
     }
 }
