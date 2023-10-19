@@ -35,6 +35,7 @@ enum ImageLiterals {
     static var imgWelcomeHouse: UIImage { .load(name: "welcomehouse") }
     static var imgAlreadyHouse: UIImage { .load(name: "alreadyhouse") }
     static var imgBubble: UIImage { .load(name: "bubble") }
+    static var imgUnion: UIImage { .load(name: "Union") }
     
     
     // MARK: - profile

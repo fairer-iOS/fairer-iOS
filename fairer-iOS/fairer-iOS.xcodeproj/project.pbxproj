@@ -108,6 +108,13 @@
 		52FDBD5029DD96FE00FE45CD /* EditHouseWorkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FDBD4F29DD96FE00FE45CD /* EditHouseWorkResponse.swift */; };
 		52FFDFB228FA984200DE1AE8 /* EnterHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */; };
 		52FFDFB528FBF96900DE1AE8 /* HouseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */; };
+		5A320F9A2A9F48C7003A40BD /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A320F992A9F48C7003A40BD /* StatisticsViewController.swift */; };
+		5A320F9C2A9F5148003A40BD /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A320F9B2A9F5148003A40BD /* StatisticsView.swift */; };
+		5A320F9F2A9F5921003A40BD /* RankCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A320F9E2A9F5921003A40BD /* RankCollectionViewCell.swift */; };
+		5A320FA32A9F645E003A40BD /* RankSectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A320FA22A9F645E003A40BD /* RankSectionHeaderReusableView.swift */; };
+		5A320FA52A9F6C53003A40BD /* MemberHouseWorkSectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A320FA42A9F6C53003A40BD /* MemberHouseWorkSectionCollectionViewCell.swift */; };
+		5A320FCD2AA1B4B3003A40BD /* MemberHouseWorkSectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A320FCC2AA1B4B3003A40BD /* MemberHouseWorkSectionHeaderReusableView.swift */; };
+		5A320FCF2AA1C174003A40BD /* StatisticsMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A320FCE2AA1C174003A40BD /* StatisticsMemberView.swift */; };
 		5A4E711229BEF88B003FD32F /* BlankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E711129BEF88B003FD32F /* BlankResponse.swift */; };
 		5A6AAF1929E2A0970055BEE8 /* SettingInviteCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */; };
 		5A6AAF4C29EBE7810055BEE8 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */; };
@@ -286,6 +293,13 @@
 		52FDBD4F29DD96FE00FE45CD /* EditHouseWorkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHouseWorkResponse.swift; sourceTree = "<group>"; };
 		52FFDFB128FA984200DE1AE8 /* EnterHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterHouseViewController.swift; sourceTree = "<group>"; };
 		52FFDFB428FBF96900DE1AE8 /* HouseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseInfoViewController.swift; sourceTree = "<group>"; };
+		5A320F992A9F48C7003A40BD /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		5A320F9B2A9F5148003A40BD /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		5A320F9E2A9F5921003A40BD /* RankCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCollectionViewCell.swift; sourceTree = "<group>"; };
+		5A320FA22A9F645E003A40BD /* RankSectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankSectionHeaderReusableView.swift; sourceTree = "<group>"; };
+		5A320FA42A9F6C53003A40BD /* MemberHouseWorkSectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberHouseWorkSectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		5A320FCC2AA1B4B3003A40BD /* MemberHouseWorkSectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberHouseWorkSectionHeaderReusableView.swift; sourceTree = "<group>"; };
+		5A320FCE2AA1C174003A40BD /* StatisticsMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsMemberView.swift; sourceTree = "<group>"; };
 		5A4E711129BEF88B003FD32F /* BlankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankResponse.swift; sourceTree = "<group>"; };
 		5A6AAF1829E2A0970055BEE8 /* SettingInviteCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingInviteCodeViewController.swift; sourceTree = "<group>"; };
 		5A6AAF4B29EBE7810055BEE8 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
@@ -697,6 +711,7 @@
 		5227556C28B303370080DD65 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5A320F982A9F482D003A40BD /* Statistics */,
 				5A99A29C29A5FC21006FE9B2 /* Auth */,
 				5A99A29A29A5FB78006FE9B2 /* Setting */,
 				5A99A29829A5FA97006FE9B2 /* HouseWork */,
@@ -901,6 +916,36 @@
 				52C09CF029113D5C00B46F15 /* View */,
 			);
 			path = HouseInfo;
+			sourceTree = "<group>";
+		};
+		5A320F982A9F482D003A40BD /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				5A320FD02AA1D15B003A40BD /* View */,
+				5A320F9D2A9F58E3003A40BD /* Cell */,
+				5A320F992A9F48C7003A40BD /* StatisticsViewController.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		5A320F9D2A9F58E3003A40BD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5A320F9E2A9F5921003A40BD /* RankCollectionViewCell.swift */,
+				5A320FA42A9F6C53003A40BD /* MemberHouseWorkSectionCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		5A320FD02AA1D15B003A40BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5A320FCC2AA1B4B3003A40BD /* MemberHouseWorkSectionHeaderReusableView.swift */,
+				5A320FA22A9F645E003A40BD /* RankSectionHeaderReusableView.swift */,
+				5A320FCE2AA1C174003A40BD /* StatisticsMemberView.swift */,
+				5A320F9B2A9F5148003A40BD /* StatisticsView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		5A6AAF1529E27D220055BEE8 /* SettingInviteCode */ = {
@@ -1385,6 +1430,7 @@
 				52A673F62928956D00F3E6DA /* ManageHouseViewController.swift in Sources */,
 				5A9BD08829C1ECBE00ADD3CC /* SettingHomeRuleHeaderView.swift in Sources */,
 				911E967F29717F0E00F3AF35 /* CalendarDailyTableViewCell.swift in Sources */,
+				5A320F9F2A9F5921003A40BD /* RankCollectionViewCell.swift in Sources */,
 				917D8B7729A633B900E26B73 /* PresetsAPI.swift in Sources */,
 				5205055828E1C50600355055 /* InfoLabelView.swift in Sources */,
 				5A99A2DD29A8C42A006FE9B2 /* NetworkService.swift in Sources */,
@@ -1421,6 +1467,8 @@
 				5204AAC82963150F002FB6CA /* WriteHouseWorkButton.swift in Sources */,
 				39EEF68728CBB81600437654 /* BaseCollectionViewCell.swift in Sources */,
 				52136FD4298299B90022D465 /* RepeatCycleView.swift in Sources */,
+				5A320F9C2A9F5148003A40BD /* StatisticsView.swift in Sources */,
+				5A320FCF2AA1C174003A40BD /* StatisticsMemberView.swift in Sources */,
 				52136FD92983E87F0022D465 /* RepeatCycleCollectionViewCell.swift in Sources */,
 				52B6BD112A9FA2D100022A20 /* AddFeedbackView.swift in Sources */,
 				522714ED297922AA006BADBC /* SetHouseWorkCollectionViewCell.swift in Sources */,
@@ -1436,6 +1484,7 @@
 				5205054728D8626B00355055 /* OnboardingProfileGroupCollectionViewCell.swift in Sources */,
 				52E4C083297CE586002AC755 /* MemberCollectionViewCell.swift in Sources */,
 				5205055428E1BF6700355055 /* GroupMainViewController.swift in Sources */,
+				5A320FA32A9F645E003A40BD /* RankSectionHeaderReusableView.swift in Sources */,
 				522E88FF28EC854C000C65C8 /* InviteCodeView.swift in Sources */,
 				917D8B6129A632EC00E26B73 /* MembersRouter.swift in Sources */,
 				52C09CF329115FC300B46F15 /* SettingViewController.swift in Sources */,
@@ -1445,6 +1494,7 @@
 				5205054528D8624700355055 /* OnboardingProfileGroupCollectionView.swift in Sources */,
 				5AA510FD29DE6AF100C977EF /* InviteCodeInfoResponse.swift in Sources */,
 				5205053D28D7382900355055 /* UITextField+Extension.swift in Sources */,
+				5A320FCD2AA1B4B3003A40BD /* MemberHouseWorkSectionHeaderReusableView.swift in Sources */,
 				52E442A528F16A6400706A74 /* InviteCodeButtonView.swift in Sources */,
 				522714E8297917C3006BADBC /* SetHouseWorkViewController.swift in Sources */,
 				5205054B28DBF86700355055 /* SizeLiteral.swift in Sources */,
@@ -1512,11 +1562,13 @@
 				5AB8068629BEE842009EB243 /* UserErrorResponse.swift in Sources */,
 				39EEF66728CBB4ED00437654 /* UIFont+Extension.swift in Sources */,
 				39EEF67E28CBB66F00437654 /* MainButton.swift in Sources */,
+				5A320FA52A9F6C53003A40BD /* MemberHouseWorkSectionCollectionViewCell.swift in Sources */,
 				5204AABC2950BC50002FB6CA /* SettingInquiryViewController.swift in Sources */,
 				39EEF67128CBB5F600437654 /* Notification+Extension.swift in Sources */,
 				917D8B7929A633C500E26B73 /* RulesAPI.swift in Sources */,
 				52E4C088297CE8DC002AC755 /* GetManagerCollectionView.swift in Sources */,
 				5204AAB329379981002FB6CA /* ChangeHouseNameViewController.swift in Sources */,
+				5A320F9A2A9F48C7003A40BD /* StatisticsViewController.swift in Sources */,
 				52EBF04928E578850062EB41 /* HouseMakeNameViewController.swift in Sources */,
 				39F1C13028DABDE900585B83 /* HomeRuleView.swift in Sources */,
 				39EEF66528CBB4C800437654 /* UIColor+Extension.swift in Sources */,
