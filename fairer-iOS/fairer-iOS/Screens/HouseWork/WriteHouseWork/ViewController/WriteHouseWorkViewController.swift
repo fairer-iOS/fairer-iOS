@@ -173,16 +173,20 @@ final class WriteHouseWorkViewController: BaseViewController {
     
     required init?(coder: NSCoder) { nil }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setDatePicker()
+        getMyInfo()
+        getTeamInfo()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDatePicker()
         setupNotificationCenter()
         setupDelegation()
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
-        getMyInfo()
-        getTeamInfo()
         addButtonAction()
     }
     

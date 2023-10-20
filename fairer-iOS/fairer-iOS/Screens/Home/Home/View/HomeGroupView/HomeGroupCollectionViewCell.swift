@@ -49,7 +49,7 @@ final class HomeGroupCollectionViewCell: BaseCollectionViewCell {
         titleImage.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(47)
+            $0.width.equalTo(47)
         }
         checkCircleView.snp.makeConstraints {
             $0.top.equalToSuperview()

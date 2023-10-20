@@ -35,6 +35,7 @@ enum ImageLiterals {
     static var imgWelcomeHouse: UIImage { .load(name: "welcomehouse") }
     static var imgAlreadyHouse: UIImage { .load(name: "alreadyhouse") }
     static var imgBubble: UIImage { .load(name: "bubble") }
+    static var imgUnion: UIImage { .load(name: "Union") }
     
     
     // MARK: - profile
@@ -95,6 +96,9 @@ enum ImageLiterals {
     static var houseFill: UIImage { .load(systemName: "house.fill") }
     static var error: UIImage { .load(name: "error") }
     static var homeIcon: UIImage { .load(name: "home") }
+    static var pencil: UIImage { .load(systemName: "pencil") }
+    static var trash: UIImage { .load(systemName: "trash") }
+    static var hurry: UIImage { .load(systemName: "megaphone.fill") }
     
     // MARK: - dot
     
@@ -106,6 +110,18 @@ enum ImageLiterals {
     
     static var emptyHouseWork: UIImage { .load(name: "emptyHouseWork") }
     static var networkError: UIImage { .load(name: "networkError") }
+    
+    // MARK: - emojis
+    
+    static var emojiAngry: UIImage { .load(name: "angry") }
+    static var emojiSad: UIImage { .load(name: "sad") }
+    static var emojiSmile: UIImage { .load(name: "smile") }
+    static var emojiHappy: UIImage { .load(name: "happy") }
+    static var emojiHeart: UIImage { .load(name: "heart") }
+    static var emojiPerfect: UIImage { .load(name: "perfect") }
+    static var emojiBlue: UIImage { .load(name: "blue") }
+    static var emojiList: [UIImage] = [emojiAngry, emojiSad, emojiSmile, emojiHappy, emojiHeart, emojiPerfect, emojiBlue]
+    
 }
 
 extension UIImage {

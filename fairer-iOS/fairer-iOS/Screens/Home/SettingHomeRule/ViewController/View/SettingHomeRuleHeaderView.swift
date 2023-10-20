@@ -30,7 +30,7 @@ final class SettingHomeRuleHeaderView: UITableViewHeaderFooterView {
     var settingHomeRuleTextField = TextField(type: .medium, placeHolder: TextLiteral.settingHomeRuleTextFieldPlaceholder)
     private let settingHomeRuleTextFieldeWarningLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "텍스트는 16글자를 초과하여 입력하실 수 없어요.", lineHeight: 22)
+        label.setTextWithLineHeight(text: TextLiteral.textFieldWarningOverSixteen, lineHeight: 22)
         label.textColor = .negative20
         label.font = .body2
         return label
@@ -67,7 +67,7 @@ final class SettingHomeRuleHeaderView: UITableViewHeaderFooterView {
         addSubviews(settingHomeRulePrimaryLabel, settingHomeRuleTextFieldLabel, settingHomeRuleTextField, settingHomeRuleTextFieldeWarningLabel, settingHomeRuleInfoLabel, titleLabel)
         
         settingHomeRulePrimaryLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(40)
+            $0.top.equalToSuperview()
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         

@@ -179,9 +179,15 @@ final class EditHouseWorkViewController: BaseViewController {
     
     required init?(coder: NSCoder) { nil }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getHouseWorkById()
+        getMyInfo()
+        getTeamInfo()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        getHouseWorkById()
         setDeleteButton()
         setDatePicker()
         setupNotificationCenter()
@@ -189,8 +195,6 @@ final class EditHouseWorkViewController: BaseViewController {
         didTappedRepeatCycleMenuButton()
         didSelectDaysOfWeek()
         hidekeyboardWhenTappedAround()
-        getMyInfo()
-        getTeamInfo()
         addButtonAction()
         didConfirmRepeatAlertActionType()
     }

@@ -74,6 +74,9 @@ final class HomeView: BaseUIView {
         return view
     }()
     let emptyHouseWorkImage = UIImageView(image: ImageLiterals.emptyHouseWork)
+    let addFeedbackView = AddFeedbackView()
+    let editFeedbackView = EditFeedbackView()
+    let hurryView = HurryView()
     
     override func render() {
         self.addSubviews(toolBarView,
@@ -90,9 +93,8 @@ final class HomeView: BaseUIView {
                          emptyHouseWorkImage)
         
         toolBarView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(110)
+            $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.height.equalTo(76)
         }
         
         titleLabelStackView.addArrangedSubview(nameTitleLabel)
@@ -143,11 +145,11 @@ final class HomeView: BaseUIView {
         homeWeekCalendarCollectionView.snp.makeConstraints {
             $0.top.equalTo(homeCalenderView.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(95)
+            $0.height.equalTo(68)
         }
         
         calendarDailyTableView.snp.makeConstraints {
-            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(-15)
+            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(toolBarView.snp.top)
         }
@@ -157,10 +159,10 @@ final class HomeView: BaseUIView {
         }
         
         emptyHouseWorkImage.snp.makeConstraints {
-            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom)
+            $0.top.equalTo(homeWeekCalendarCollectionView.snp.bottom).offset(10)
+            $0.bottom.equalTo(toolBarView.snp.top).offset(-10)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(156)
-            $0.height.equalTo(240)
+            $0.width.equalTo(emptyHouseWorkImage.snp.height).multipliedBy(0.65)
         }
     }
 }

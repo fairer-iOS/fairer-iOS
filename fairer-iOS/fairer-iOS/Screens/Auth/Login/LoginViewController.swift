@@ -150,19 +150,37 @@ final class LoginViewController: BaseViewController {
                 }
                 UserDefaultHandler.isLogin = true
                 
-                guard let isNewMember = data.isNewMember, let hasTeam = data.hasTeam, let userName = data.memberName else { return }
+                guard let isNewMember = data.isNewMember, let hasTeam = data.hasTeam else { return }
                 
                 if !isNewMember && hasTeam {
                     UserDefaultHandler.hasTeam = true
                     RootHandler.shared.change(root: .Home)
                 } else if !isNewMember && !hasTeam {
                     let groupMainViewController = GroupMainViewController()
-                    groupMainViewController.setUserName(name: userName)
+                    if let userName = data.memberName {
+                        groupMainViewController.setUserName(name: userName)
+                    }
                     RootHandler.shared.change(root: .groupMain)
                 } else if isNewMember && !hasTeam  {
                     let onBoardingNameViewController = OnboardingNameViewController()
                     self?.navigationController?.setViewControllers([onBoardingNameViewController], animated: true)
                 }
+                self?.saveToken(UserDefaultHandler.fcmToken)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+                guard let data = errorResponse as? UserErrorResponse else { return }
+                print(data.errorMessage)
+            default:
+                print("sign in error")
+            }
+        }
+    }
+    
+    private func saveToken(_ fcmToken: String) {
+        NetworkService.shared.fcm.saveToken(token: fcmToken) { result in
+            switch result {
+            case .success(_):
+                break
             case .requestErr(let errorResponse):
                 dump(errorResponse)
                 guard let data = errorResponse as? UserErrorResponse else { return }

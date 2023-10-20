@@ -28,7 +28,7 @@ enum TextLiteral {
     
     // MARK: - OnboardingNameViewController
     
-    static let onboardingNameViewControllerNameLabel: String = "이름을 입력해주세요."
+    static let onboardingNameViewControllerNameLabel: String = "닉네임을 입력해주세요."
     static let onboardingNameViewControllerTextFieldPlaceholder: String = "예) 홍길동"
     
     // MARK: - OnboardingProfileViewController
@@ -76,6 +76,13 @@ enum TextLiteral {
     static let homeCalendarViewTodayTitle: String = "오늘"
     static let homeCalendarViewDaysTitle: [String] = ["일","월","화","수","목","금","토"]
     
+    // MARK: - Feedback
+    
+    static let feedbackViewAddFeedbackLabel: String = "텍스트 피드백 작성"
+    static let feedbackViewEditFeedbackLabel: String = "텍스트 피드백 수정"
+    static let feedbackViewDeleteFeedbackLabel: String = "텍스트 피드백 삭제"
+    static let feedbackViewHurryLabel: String = "재촉하기"
+    
     // MARK: - HouseInviteCodeViewController
     
     static let houseInviteCodeViewControllerPrimaryLabel: String = "하우스에 사람을 초대해주세요."
@@ -114,7 +121,7 @@ enum TextLiteral {
     static let settingViewControllerNavigationBarTitleLabel: String = "설정"
     static let settingViewControllerTableViewCellLabelList: [String] = ["계정", "하우스 관리", "알림", "문의하기", "정보"]
     static let settingViewControllerVersionLabel: String = "버전"
-    static let settingViewControllerVersionText: String = "1.0.0"
+    static let settingViewControllerVersionText: String = "1.1.0"
     static let settingViewControllerLogoutButtonText: String = "로그아웃"
     static let settingViewControllerLeaveButtonText: String = "회원탈퇴"
     static let settingViewControllerLogoutAlertTitle: String = "로그아웃 하시겠습니까?"
@@ -222,7 +229,7 @@ enum TextLiteral {
     // MARK: - SettingProfileViewController
     
     static let settingProfileViewControllerTitleLabel = "프로필을 설정해주세요."
-    static let settingProfileViewControllerProfileNameLabel = "이름"
+    static let settingProfileViewControllerProfileNameLabel = "닉네임"
     static let settingProfileViewControllerProfileStatusLabel = "상태 메세지"
     static let settingProfileViewControllerPlaceholderText = "Text"
     

@@ -1,0 +1,29 @@
+# This workflow will build a Swift project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: Fairer-Build-Tester
+
+on:
+  push:
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, release, feature, main ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Create and write BaseURLContent
+      run: echo -e "import Foundation\nstruct BaseURLConstant {\n    static let base = \"${{ secrets.BASE_URL_CONSTANT }}\"\n}" > BaseURLConstant.swift
+
+    - name: Move BaseURLConstant file to directory
+      run: mv BaseURLConstant.swift ./fairer-iOS/fairer-iOS/Network/Foundation/
+      
+    - name: 🚀 Start XCode Build 🚀
+      run: |
+        xcodebuild build -project ./fairer-iOS/fairer-iOS.xcodeproj -scheme fairer-iOS -destination "platform=iOS Simulator,name=iPhone 13,OS=latest"
+        xcpretty --color --simple
